@@ -1,0 +1,18 @@
+    .login_box {
+        padding: 60px 20px;
+    }
+    
+    .login_box img {
+        height: 60px;
+        width: auto;
+        margin: 40px auto 60px -12px
+    }
+    
+    .weui-label {
+        width: 80px;
+        color: #fff
+    }
+    
+    .weui-cells .weui-cell {
+        padding: 20px 0px
+    }

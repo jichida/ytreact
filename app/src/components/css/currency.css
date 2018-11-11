@@ -1,0 +1,468 @@
+    /*微信样式*/
+    
+    /* body {
+        background-image: url(http://www.1test.com.cn/yitaiapp/www/images/bg_bg.png);
+        background-position: center;
+        background-size: cover
+    } */
+    .bg_bg{
+        background-size: cover;
+        background-position: center;
+        position: fixed;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+    }
+    .am-navbar-left {
+        padding-left: 10px!important;
+    }
+    
+    .am-icon-md {
+        width: 32px!important;
+        height: 32px!important;
+    }
+    
+    .am-navbar {
+        padding-top: 20px;
+        height: 64px!important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1)!important;
+        background-color: #1a1a1a!important;
+    }
+    
+    .weui-tab {
+        position: fixed!important;
+        width: 100%;
+        top: 0px;
+        z-index: -1;
+    }
+    
+    .weui-tab__panel {
+        background-color: rgba(255, 255, 255, 0.1);
+        height: 100%;
+        padding-bottom: 0px!important;
+        padding-top: 64px
+    }
+    
+    .am-tab-bar-bar {
+        background-color: rgba(40, 40, 40, 0.8)!important;
+    }
+    
+    .am-tab-bar-bar::before {
+        height: 0px!important;
+    }
+    
+    .index_bg {
+        background-image: url(http://www.1test.com.cn/yitaiapp/www/images/index_bg.png);
+        background-position: center;
+        background-size: cover
+    }
+    
+    .weui-cell {
+        padding: 20px !important;
+    }
+    
+    .weui-cells {
+        background-color: transparent !important
+    }
+    
+    .weui-cells:before {
+        border: 0px !important
+    }
+    
+    .weui-cell:before {
+        left: 0px !important;
+    }
+    
+    .weui-cells:after,
+    .weui-cell:before {
+        border: 0px !important
+    }
+    /*ͨ通用细节样式*/
+    
+    .text_one {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+    }
+    
+    .text_two {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+    
+    .elastic_box {
+        display: flex;
+        display: -webkit-box;
+        display: -webkit-flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    
+    .elastic {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+    }
+    
+    .elastic_hw {
+        -webkit-flex-wrap: wrap;
+        -moz-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        -o-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+    
+    .flex_start {
+        -webkit-box-align: flex-start;
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+    }
+    
+    .maina-color {
+        color: #e63430 !important
+    }
+    
+    .mainb-color {
+        color: #333 !important
+    }
+    
+    .mainc-color {
+        color: #666 !important
+    }
+    
+    .gray {
+        color: #999 !important
+    }
+    
+    .text-right {
+        text-align: right!important
+    }
+    
+    .text-center {
+        text-align: center!important
+    }
+    
+    .fize16 {
+        font-size: 16px!important
+    }
+    
+    .fize14 {
+        font-size: 14px!important
+    }
+    
+    .fize12 {
+        font-size: 12px!important
+    }
+    
+    .fize10 {
+        font-size: 0.625em !important
+    }
+    
+    .pb0 {
+        padding-bottom: 0px
+    }
+    
+    .mt10 {
+        margin-top: 10px !important;
+    }
+    
+    .light_bg {
+        background-color: rgba(255, 255, 255, 0.1)
+    }
+    /*通用样式*/
+    
+    html {
+        box-sizing: border-box;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%
+    }
+    /* body {
+        color: #333;
+        font-size: 14px;
+        font-family: microsoft yahei, Arial, 'microsoft yahei';
+        line-height: inherit !important;
+        position: relative;
+        overflow: auto;
+        font-weight: normal
+    }
+     */
+    
+    label,
+    input,
+    select,
+    textarea {
+        line-height: normal;
+        outline: none;
+        -webkit-appearance: none;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        white-space: normal;
+        word-break: break-all;
+    }
+    
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    em {
+        margin: 0px;
+        padding: 0px;
+        line-height: 1.4;
+        font-weight: normal;
+        font-style: normal
+    }
+    
+    ul,
+    li {
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+    }
+    
+    input {
+        border: none;
+        outline: none
+    }
+    
+    a img {
+        border: 0;
+    }
+    
+    img {
+        width: 100%;
+        display: block;
+    }
+    
+    a {
+        text-decoration: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        color: #fff;
+    }
+    
+    .header_imgicon {
+        width: 24px;
+        display: inline-block;
+        vertical-align: middle
+    }
+    
+    .header_img {
+        width: 24px;
+        display: inline-block;
+        vertical-align: middle
+    }
+    /*按钮样式*/
+    
+    .weui-btn_primary {
+        background-color: transparent !important;
+        color: #7ac6eb !important;
+        border-radius: 50px !important;
+        box-shadow: 0px 0px 8px rgba(134, 219, 255, 0.5) !important;
+        border: 1px solid rgba(134, 219, 255, 0.5) !important
+    }
+    
+    .weui-btn_primary:not(.weui-btn_disabled):active {
+        background-color: #1b1b1b;
+        color: #7ac6eb;
+    }
+    
+    .weui-btn {
+        line-height: 48px;
+        font-size: 16px
+    }
+    
+    .weui-btn-area {
+        margin: 40px 40px!important
+    }
+    /*上传照片*/
+    
+    .weui-uploader__input-box {
+        text-align: center
+    }
+    
+    .weui-uploader__input-box p {
+        font-size: 12px;
+        color: #999
+    }
+    
+    .weui-uploader__files {
+        width: 100%
+    }
+    
+    .weui-uploader__file,
+    .weui-uploader__input-box {
+        width: 22%;
+        position: relative
+    }
+    
+    .weui-uploader__input-box {
+        text-align: center;
+        border: 0px;
+        border-radius: 4px
+    }
+    /*验证码弹框*/
+    
+    .yzm_img {
+        border: 1px solid #e5e5e5
+    }
+    
+    .yzm_img .img_btn {
+        width: 100%;
+        display: block
+    }
+    
+    .yzm_img .sx_btn {
+        display: inline-block;
+        padding: 5px 10px
+    }
+    
+    .tk_input,
+    .yzm_img {
+        margin: 0px 80px 10px;
+        display: block
+    }
+    
+    .tk_input {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    
+    .tk_input input {
+        width: 100%;
+        border-bottom: 1px solid #e5e5e5;
+        height: 32px;
+        outline: none;
+        border: none;
+        text-align: center
+    }
+    
+    .swiper-pagination-bullet-active {
+        background-color: #e63430
+    }
+    /* 按钮点击后样式 */
+    
+    .weui-actionsheet__cell:active {
+        background-color: inherit;
+    }
+    
+    input.weui-input {
+        color: #e5e5e5
+    }
+    /* 输入/选择表单 */
+    
+    .mt0 {
+        margin-top: 0px!important
+    }
+    
+    .weui-cells h2 {
+        padding: 20px 20px 0px;
+        font-size: 17px;
+        color: #fff
+    }
+    
+    .weui-cell__bd h4 {
+        color: #fff
+    }
+    
+    .weui-cell__bd p,
+    .weui-cell__ft {
+        color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .reveal-modal {
+        visibility: hidden;
+    }
+    
+    .weui-switch-cp__input:checked~.weui-switch-cp__box {
+        border-color: #37f073;
+        background-color: #37f073;
+    }
+    
+    .weui-switch:after,
+    .weui-switch-cp__box:after {
+        content: " ";
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: 20px;
+        height: 20px;
+        border-radius: 15px;
+    }
+    
+    .weui-btn_mini {
+        line-height: 25px;
+        font-size: 12px
+    }
+    
+    .weui-btn_primary.weui-btn_mini {
+        line-height: 24px;
+        font-size: 12px;
+        color: #fff
+    }
+    
+    .h20 {
+        height: 20px;
+        background: rgba(0, 0, 0, 0.5)
+    }
+    
+    .weui-cells h1 {
+        padding: 15px 20px;
+        background: rgba(0, 0, 0, 0.5);
+        font-size: 16px;
+        color: #fff
+    }
+    
+    .weui-btn_primary.weui-btn_mini {
+        line-height: 24px;
+        font-size: 12px;
+        color: #fff
+    }
+    
+    .weui-cells .weui-cell:after {
+        content: " ";
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        right: 0;
+        height: 1px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: #4d4d4d;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(0.5);
+        transform: scaleY(0.5);
+        z-index: 2;
+    }
+    
+    .weui-dialog {
+        width: 70%;
+    }
+    
+    .weui-dialog__bd {
+        font-size: 16px;
+        color: #1a1a1a
+    }
+    
+    .weui-dialog__bd {
+        padding: 0.5em 1.0em 1.2em;
+    }
+    
+    .weui-dialog__btn_default {
+        font-size: 14px;
+    }

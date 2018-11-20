@@ -26,7 +26,7 @@ class Setting extends PureComponent{
         const { history } = this.props;
 
         return (
-            <div>
+            <div className="setting_bg">
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}
@@ -37,7 +37,7 @@ class Setting extends PureComponent{
                 <TabBar
                     unselectedTintColor="#ffffff"
                     tintColor="#1796d5"
-                    barTintColor="#00000075"
+                    barTintColor="#ffffff20"
                     tabBarPosition="top"
                 >
                     <TabBar.Item

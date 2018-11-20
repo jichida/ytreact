@@ -4,6 +4,8 @@ import { createForm, createFormField } from 'rc-form';
 import moment from 'moment';
 import './index.less';
 
+const Item = List.Item;
+const Brief = Item.Brief;
  
 // 设备编号			deviceid
 // 购买日期			buydate
@@ -30,7 +32,7 @@ import './index.less';
 
 const basicData = {
     deviceid: {
-        value: '房间',
+        value: '',
     },
     buydate: {
         value: '',
@@ -171,87 +173,175 @@ const RenderForm = createForm({
         <React.Fragment>
         <form>
             <List>
-                <InputItem
-                    placeholder="设备编号"
-                    {...getFieldProps('deviceid',{
-                        rules: [{
-                            required: true,
-                            message: '请输入设备编号',
-                        }],
-                    })}
-                >设备编号：</InputItem>
-                <DatePicker
-                    mode="date"
-                    {...getFieldProps('buydate')}
-                    >
-                    <List.Item arrow="horizontal">购买日期</List.Item>
-                </DatePicker>
-                <DatePicker
-                    mode="date"
-                    {...getFieldProps('installdate')}
-                    >
-                    <List.Item arrow="horizontal">安装日期</List.Item>
-                </DatePicker>
-                <InputItem
-                    placeholder="安装人员"
-                    {...getFieldProps('installer',{
-                        rules: [{
-                            required: true,
-                            message: '请输入安装人员',
-                        }],
-                    })}
-                >安装人员：</InputItem>
-                <InputItem
-                    placeholder="时区"
-                    {...getFieldProps('timezone')}
-                >时区：</InputItem>
-                <DatePicker
-                    mode="date"
-                    {...getFieldProps('sdate')}
-                    >
-                    <List.Item arrow="horizontal">选择日期</List.Item>
-                </DatePicker>
-                <DatePicker
-                    mode="time"
-                    {...getFieldProps('stime')}
-                    >
-                    <List.Item arrow="horizontal">选择时间</List.Item>
-                </DatePicker>
-                <InputItem
-                    placeholder="出水水质"
-                    {...getFieldProps('quality',{
-                        rules: [{
-                            required: true,
-                            message: '请输入出水水质',
-                        }],
-                    })}
-                >出水水质：</InputItem>
-                <InputItem
-                    type="money"
-                    placeholder="滤芯"
-                    {...getFieldProps('frontfilter1')}
-                >前置滤芯1：</InputItem>
-                <InputItem
-                    type="money"
-                    placeholder="滤芯"
-                    {...getFieldProps('frontfilter2')}
-                >前置滤芯2：</InputItem>
-                <InputItem
-                    placeholder="滤芯"
-                    {...getFieldProps('frontfilter3')}
-                >前置滤芯3： </InputItem>
-                <InputItem
-                    placeholder="滤芯"
-                    {...getFieldProps('afterfilter1')}
-                >后置滤芯1</InputItem>
-                <InputItem
-                    placeholder="滤芯"
-                    {...getFieldProps('afterfilter2')}
-                >后置滤芯2</InputItem>
-                <InputItem
-                    placeholder="滤芯"
-                    {...getFieldProps('afterfilter3')}
-                >后置滤芯3</InputItem>
+                <Item arrow="horizontal">设备编号
+                    <Brief>
+                        <div className="item_children">
+                        <InputItem
+                            placeholder="扫一扫"
+                            {...getFieldProps('deviceid',{
+                                rules: [{
+                                    required: true,
+                                    message: '请输入设备编号',
+                                }],
+                            })}
+                        />
+                        </div>
+                    </Brief>
+                </Item>
+                <Item>购买日期
+                    <Brief>
+                        <div className="item_children">
+                        <DatePicker
+                            mode="date"
+                            extra=" "
+                            {...getFieldProps('buydate')}
+                            >
+                            <List.Item arrow="horizontal">请选择</List.Item>
+                        </DatePicker>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item>安装日期
+                    <Brief>
+                        <div className="item_children">
+                            <DatePicker
+                                mode="date"
+                                extra=" "
+                                {...getFieldProps('installdate')}
+                                >
+                                <List.Item arrow="horizontal">请选择</List.Item>
+                            </DatePicker>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item>安装人员
+                    <Brief>
+                        <div className="item_children">                
+                        <InputItem
+                            placeholder="安装人员"
+                            {...getFieldProps('installer',{
+                                rules: [{
+                                    required: true,
+                                    message: '请输入安装人员',
+                                }],
+                            })}
+                        ></InputItem>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item arrow="horizontal">选择时区
+                    <Brief>
+                        <div className="item_children">   
+                        <InputItem
+                            placeholder="选择时区"
+                            {...getFieldProps('timezone')}
+                        ></InputItem>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item>选择日期
+                    <Brief>
+                        <div className="item_children">
+                        <DatePicker
+                            mode="date"
+                            extra=" "
+                            {...getFieldProps('sdate')}
+                            >
+                            <List.Item arrow="horizontal">请选择</List.Item>
+                        </DatePicker>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item>选择时间
+                    <Brief>
+                        <div className="item_children">
+                            <DatePicker
+                                mode="time"
+                                extra=" "
+                                {...getFieldProps('stime')}
+                                >
+                                <List.Item arrow="horizontal">请选择</List.Item>
+                            </DatePicker>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item>出水水质（ppm）
+                    <Brief>
+                        <div className="item_children">
+                            <InputItem
+                                placeholder="出水水质"
+                                {...getFieldProps('quality',{
+                                    rules: [{
+                                        required: true,
+                                        message: '请输入出水水质',
+                                    }],
+                                })}
+                            ></InputItem>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item>前置滤芯1
+                    <Brief>
+                        <div className="item_children">
+                            <InputItem
+                                type="money"
+                                placeholder="滤芯"
+                                {...getFieldProps('frontfilter1')}
+                            ></InputItem>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item>前置滤芯2
+                    <Brief>
+                        <div className="item_children">
+                            <InputItem
+                                type="money"
+                                placeholder="滤芯"
+                                {...getFieldProps('frontfilter2')}
+                            ></InputItem>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item>前置滤芯3
+                    <Brief>
+                        <div className="item_children">
+                            <InputItem
+                                placeholder="滤芯"
+                                {...getFieldProps('frontfilter3')}
+                            ></InputItem>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item>后置滤芯1
+                    <Brief>
+                        <div className="item_children">
+                            <InputItem
+                                placeholder="滤芯"
+                                {...getFieldProps('afterfilter1')}
+                            ></InputItem>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item>后置滤芯2
+                    <Brief>
+                        <div className="item_children">
+                            <InputItem
+                                placeholder="滤芯"
+                                {...getFieldProps('afterfilter2')}
+                            ></InputItem>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item>后置滤芯3
+                    <Brief>
+                        <div className="item_children">
+                            <InputItem
+                                placeholder="滤芯"
+                                {...getFieldProps('afterfilter3')}
+                            ></InputItem>
+                        </div>
+                    </Brief>
+                </Item>
                 <List.Item
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" >重置</Button>
@@ -289,18 +379,32 @@ const RenderForm = createForm({
                         })}
                     />}
                 >休眠</List.Item>
-                <DatePicker
-                    mode="time"
-                    {...getFieldProps('dormancystart')}
-                    >
-                    <List.Item arrow="horizontal">休眠开始时间</List.Item>
-                </DatePicker>
-                <DatePicker
-                    mode="time"
-                    {...getFieldProps('dormancyend')}
-                    >
-                    <List.Item arrow="horizontal">休眠开始时间</List.Item>
-                </DatePicker>
+                <Item>休眠开始时间
+                    <Brief>
+                        <div className="item_children">
+                            <DatePicker
+                                mode="time"
+                                extra=" "
+                                {...getFieldProps('dormancystart')}
+                                >
+                                <List.Item arrow="horizontal">请选择</List.Item>
+                            </DatePicker>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item>休眠开始时间
+                    <Brief>
+                        <div className="item_children">
+                            <DatePicker
+                                mode="time"
+                                extra=" "
+                                {...getFieldProps('dormancyend')}
+                                >
+                                <List.Item arrow="horizontal">请选择</List.Item>
+                            </DatePicker>
+                        </div>
+                    </Brief>
+                </Item>
             </List>
         </form>
         <WingBlank style={{marginTop: 30}}>
@@ -321,7 +425,7 @@ class SettingSystem extends PureComponent{
     render () {
 
         return (
-            <div className="container">
+            <div style={{backgroundColor: '#ffffff20', paddingTop:10, paddingBottom:10}}>
                 { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
             </div>
         )

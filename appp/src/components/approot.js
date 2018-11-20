@@ -4,6 +4,7 @@ import { Route,Switch } from 'react-router-dom';
 import './common.less';
 
 import Index from './DeviceAdd';
+//import Index from './Setting';
 import WifiLogin from './WifiLogin';
 import WifiSuccess from './WifiSuccess';
 import DeviceSelect from './DeviceSelect';

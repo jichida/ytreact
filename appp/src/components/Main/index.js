@@ -21,7 +21,7 @@ class Home extends PureComponent{
                 <WingBlank style={{marginTop: "-140px"}}>
                     <Flex direction="column" className="monitor_container">
                         <div className="zhuyean">
-                            <img src={monitorBg} alt="" />
+                            <img src={monitorBg} alt="" style={{width: '100%', display: 'block'}} />
                             <div className="monitor">
                                 <h1>优</h1>
                                 <p>出水水质 TDS 100</p>

@@ -14,6 +14,9 @@ import wifi_img_selected from '../../assets/set3_1.png';
 import table_img_selected from '../../assets/set4_1.png';
 
 import System from '../SettingSystem';
+import Inlet from '../SettingInlet';
+import Wifi from '../SettingWifi';
+import Checklist from '../SettingChecklist'; 
  
 
 class Setting extends PureComponent{
@@ -37,7 +40,7 @@ class Setting extends PureComponent{
                 <TabBar
                     unselectedTintColor="#ffffff"
                     tintColor="#1796d5"
-                    barTintColor="#ffffff20"
+                    barTintColor="#ffffff18"
                     tabBarPosition="top"
                 >
                     <TabBar.Item
@@ -86,7 +89,7 @@ class Setting extends PureComponent{
                         });
                         }}
                     >
-                        {'b'}
+                        {<Inlet />}
                     </TabBar.Item>
                     <TabBar.Item
                         icon={<div style={{
@@ -110,7 +113,7 @@ class Setting extends PureComponent{
                         });
                         }}
                     >
-                        {'c'}
+                        {<Wifi />}
                     </TabBar.Item>
                     <TabBar.Item
                         icon={<div style={{
@@ -134,7 +137,7 @@ class Setting extends PureComponent{
                         });
                         }}
                     >
-                        {'d'}
+                        {<Checklist />}
                     </TabBar.Item>
                 </TabBar>   
             </div>

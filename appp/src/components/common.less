@@ -14,7 +14,7 @@
 
 .container {
     background-image: url(../assets/electricbg.png);
-    background-color: #000000;
+    // background-color: #000000;
     background-position: center;
     background-size: cover;
 }
@@ -28,22 +28,93 @@
         border-radius: 50px;
         color: #ffffff;
     }
+
+    .btn:active {
+        background-color: transparent;
+        border: 1px solid rgba(134, 219, 255, 0.5);
+        box-shadow: 0px 0px 8px rgba(134, 219, 255, 0.5);
+        border-radius: 50px;
+        color: #ffffff;
+    }
 }
 
+.sub_bg {
+    background-color: #000000e0;
+
+    .am-navbar {
+        background-color: #ffffff15 !important;
+    }
+
+    form {
+        background-color: #ffffff15;
+    }
+
+    .submit_area {
+        padding-top: 30px;
+        background-color: #ffffff15;
+    }
+
+    .am-list-extra {
+        width: 100% !important;
+        flex: 1 !important;
+        text-align: left !important;
+    }
+
+    .item_switch {
+        .am-list-extra {
+            width: 100% !important;
+            flex: 1 !important;
+            text-align: right !important;
+        }
+    }
+}
+
+.sub_setting_bg {
+    background-color: #ffffff10;
+    padding: 0 10px;
+
+    .am-list-extra {
+        width: 100% !important;
+        flex: 1 !important;
+        text-align: left !important;
+    }
+
+    .item_switch {
+        .am-list-extra {
+            width: 100% !important;
+            flex: 1 !important;
+            text-align: right !important;
+        }
+    }
+
+    // InputItem type="money"
+    .fake-input-container {
+        width: 100%;
+        
+        .fake-input {
+            text-align: left !important;
+        }
+    }
+}
+
+.am-tab-bar-bar {
+    border-top: 0 !important;
+}
+
+.am-accordion { 
+    border-top: 0 !important;
+}
 
 .am-navbar {
     background-color: #00000075 !important;
     border-bottom: 1px #ffffff31 solid;
+    height: 61px !important;
 }
 
 
 .am-list-body {
     background-color: transparent !important;
     border: 0 !important;
-
-    ::before {
-        height: 0;
-    }
 }
 
 .am-list-body ::before {
@@ -74,11 +145,6 @@
             .am-list-content {
                 color: #c2c1c1 !important;
             }
-        }
-
-        .am-list-line::after {
-            background-color: transparent;
-            height: 0;
         }
     }
     
@@ -188,4 +254,29 @@
         background-color: transparent !important;
         height: 0 !important;
     }
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+    html:not([data-scale]) .am-tabs-default-bar-top .am-tabs-default-bar-tab {
+      border-bottom: none;
+    }
+    html:not([data-scale]) .am-tabs-default-bar-top .am-tabs-default-bar-tab::after {
+        background-color: transparent !important;
+        height: 0 !important;
+    }
+
+    html:not([data-scale]) .am-tabs-default-bar-bottom .am-tabs-default-bar-tab::before {
+        background-color: transparent !important;
+        height: 0 !important;
+      }
+
+      html:not([data-scale]) .am-tabs-default-bar-left .am-tabs-default-bar-tab::after {
+        background-color: transparent !important;
+        height: 0 !important;
+      }
+
+      html:not([data-scale]) .am-tabs-default-bar-right .am-tabs-default-bar-tab::before {
+        background-color: transparent !important;
+        height: 0 !important;
+      }
   }

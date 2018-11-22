@@ -4,7 +4,6 @@ import { Route,Switch } from 'react-router-dom';
 import './common.less';
 
 import Index from './DeviceAdd';
-//import Index from './Setting';
 import WifiLogin from './WifiLogin';
 import WifiSuccess from './WifiSuccess';
 import DeviceSelect from './DeviceSelect';
@@ -13,6 +12,11 @@ import Home from './Layout';
 import BasicInfo from './DeviceBasic';
 import WaterInfo from './DeviceWater';
 import InstallInfo from './DeviceInstall';
+import EquipmentList from './EquipmentList';
+import FrontFilter from './FrontFilter';
+import AfterFilter from './AfterFilter';
+import Login from './Login';
+import PipeFittings from './PipeFittings';
 
 
 import {requireAuthentication} from './requireauthentication';
@@ -38,6 +42,11 @@ class AppRoot extends React.Component {
               <Route exact path="/basic" component={BasicInfo} />
               <Route exact path="/water" component={WaterInfo} />
               <Route exact path="/install" component={InstallInfo} />
+              <Route exact path="/equipmentlist" component={EquipmentList} />
+              <Route exact path="/frontfilter" component={FrontFilter} />
+              <Route exact path="/afterfilter" component={AfterFilter} />
+              <Route exact path="/pipefitting" component={PipeFittings} />
+              <Route exact path="/login" component={Login} />
             </Switch>
           </div>
       );

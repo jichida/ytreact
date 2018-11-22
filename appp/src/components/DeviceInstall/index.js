@@ -2,8 +2,12 @@ import React, { PureComponent } from 'react';
 import {  NavBar, Icon, List, InputItem, Button, WingBlank, Switch } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 import './index.less';
+
+const Item = List.Item;
+const Brief = Item.Brief;
  
 // 安装地点		position
 // 是否避光		avoidlight
@@ -110,102 +114,159 @@ const RenderForm = createForm({
         <React.Fragment>
         <form>
             <List>
-                <InputItem
-                    placeholder="安装地点"
-                    {...getFieldProps('position',{
-                        rules: [{
-                            required: true,
-                            message: '请输入安装地点',
-                        }],
-                    })}
-                >安装地点：</InputItem>
-                <List.Item
-                    extra={<Switch
-                        {...getFieldProps('avoidlight', {
-                            valuePropName: 'checked',
-                        })}
-                    />}
-                >是否避光</List.Item>
-                <InputItem
-                    placeholder="墙体材料"
-                    {...getFieldProps('wall',{
-                        rules: [{
-                            required: true,
-                            message: '请输入墙体材料',
-                        }],
-                    })}
-                >墙体材料：</InputItem>
-                <InputItem
-                    placeholder="主机安装方式"
-                    {...getFieldProps('method',{
-                        rules: [{
-                            required: true,
-                            message: '请输入主机安装方式',
-                        }],
-                    })}
-                >主机安装方式：</InputItem>
-                <InputItem
-                    placeholder="安装空间"
-                    {...getFieldProps('space',{
-                        rules: [{
-                            required: true,
-                            message: '请输入安装空间',
-                        }],
-                    })}
-                    extra="平方米"
-                >安装空间：</InputItem>
-                <InputItem
-                    type="money"
-                    placeholder="进水管径大小"
-                    {...getFieldProps('pipe',{
-                        rules: [{
-                            required: true,
-                            message: '请输入进水管径大小',
-                        }],
-                    })}
-                    extra="厘米"
-                >进水管径大小(个）：</InputItem>
-                <InputItem
-                    type="money"
-                    placeholder="排水距离"
-                    {...getFieldProps('drainage',{
-                        rules: [{
-                            required: true,
-                            message: '请输入排水距离',
-                        }],
-                    })}
-                    extra="米"
-                >排水距离：</InputItem>
-                <InputItem
-                    placeholder="管路材质"
-                    {...getFieldProps('pipematerials',{
-                        rules: [{
-                            required: true,
-                            message: '请输入管路材质',
-                        }],
-                    })}
-                >管路材质： </InputItem>
-                <List.Item
-                    extra={<Switch
-                        {...getFieldProps('wifi', {
-                            valuePropName: 'checked',
-                        })}
-                    />}
-                >有无WIFI</List.Item>
-                <List.Item
-                    extra={<Switch
-                        {...getFieldProps('power', {
-                            valuePropName: 'checked',
-                        })}
-                    />}
-                >有无电源</List.Item>
+                <Item><FormattedMessage id="install.position" defaultMessage="安装地点" />
+                        <Brief>
+                            <div className="item_children">
+                                <InputItem
+                                    placeholder={<FormattedMessage id="install.position" defaultMessage="安装地点" />}
+                                    {...getFieldProps('position',{
+                                        rules: [{
+                                            required: true,
+                                            message: <FormattedMessage id="install.position" defaultMessage="安装地点" />,
+                                        }],
+                                    })}
+                                />
+                            </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="install.avoidlight" defaultMessage="是否避光" />
+                    <Brief>
+                        <div className="item_children">
+                            <List.Item className="item_switch"
+                                extra={<Switch
+                                    {...getFieldProps('avoidlight', {
+                                        valuePropName: 'checked',
+                                    })}
+                                />}
+                            ></List.Item>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="install.wall" defaultMessage="墙体材料" />
+                        <Brief>
+                            <div className="item_children">
+                                <InputItem
+                                    placeholder={<FormattedMessage id="install.wall" defaultMessage="墙体材料" />}
+                                    {...getFieldProps('wall',{
+                                        rules: [{
+                                            required: true,
+                                            message: <FormattedMessage id="install.wall" defaultMessage="墙体材料" />,
+                                        }],
+                                    })}
+                                />
+                            </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="install.method" defaultMessage="主机安装方式" />
+                        <Brief>
+                            <div className="item_children">
+                                <InputItem
+                                    placeholder={<FormattedMessage id="install.method" defaultMessage="主机安装方式" />}
+                                    {...getFieldProps('method',{
+                                        rules: [{
+                                            required: true,
+                                            message: <FormattedMessage id="install.method" defaultMessage="主机安装方式" />,
+                                        }],
+                                    })}
+                                />
+                            </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="install.space" defaultMessage="安装空间" />
+                        <Brief>
+                            <div className="item_children">
+                                <InputItem
+                                    placeholder={<FormattedMessage id="install.space" defaultMessage="安装空间" />}
+                                    {...getFieldProps('space',{
+                                        rules: [{
+                                            required: true,
+                                            message: <FormattedMessage id="install.space" defaultMessage="安装空间" />,
+                                        }],
+                                    })}
+                                />
+                            </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="install.pipe" defaultMessage="进水管径大小" />
+                        <Brief>
+                            <div className="item_children">
+                                <InputItem
+                                    placeholder={<FormattedMessage id="install.pipe" defaultMessage="进水管径大小" />}
+                                    {...getFieldProps('pipe',{
+                                        rules: [{
+                                            required: true,
+                                            message: <FormattedMessage id="install.pipe" defaultMessage="进水管径大小" />,
+                                        }],
+                                    })}
+                                />
+                            </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="install.drainage" defaultMessage="排水距离" />
+                        <Brief>
+                            <div className="item_children">
+                                <InputItem
+                                    placeholder={<FormattedMessage id="install.drainage" defaultMessage="排水距离" />}
+                                    {...getFieldProps('drainage',{
+                                        rules: [{
+                                            required: true,
+                                            message: <FormattedMessage id="install.drainage" defaultMessage="排水距离" />,
+                                        }],
+                                    })}
+                                />
+                            </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="install.pipematerials" defaultMessage="管路材质" />
+                        <Brief>
+                            <div className="item_children">
+                                <InputItem
+                                    placeholder={<FormattedMessage id="install.pipematerials" defaultMessage="管路材质" />}
+                                    {...getFieldProps('pipematerials',{
+                                        rules: [{
+                                            required: true,
+                                            message: <FormattedMessage id="install.pipematerials" defaultMessage="管路材质" />,
+                                        }],
+                                    })}
+                                />
+                            </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="install.wifi" defaultMessage="有无WIFI" />
+                    <Brief>
+                        <div className="item_children">
+                            <List.Item className="item_switch"
+                                extra={<Switch
+                                    {...getFieldProps('wifi', {
+                                        valuePropName: 'checked',
+                                    })}
+                                />}
+                            ></List.Item>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="install.power" defaultMessage="有无电源" />
+                    <Brief>
+                        <div className="item_children">
+                            <List.Item className="item_switch"
+                                extra={<Switch
+                                    {...getFieldProps('power', {
+                                        valuePropName: 'checked',
+                                    })}
+                                />}
+                            ></List.Item>
+                        </div>
+                    </Brief>
+                </Item>
             </List>
         </form>
-        <WingBlank style={{marginTop: 30}}>
+        <div className="submit_area">
             <div className="add_btn" >
-                <Button type="ghost" className="btn" onClick={handleSubmit}>保存</Button>
+                <Button type="ghost" className="btn" onClick={handleSubmit}>
+                    <FormattedMessage id="submit.save" defaultMessage="保存" />
+                </Button>
             </div>
-        </WingBlank>
+        </div>
         </React.Fragment>
     )
 })
@@ -220,7 +281,7 @@ class DeviceInstall extends PureComponent{
         const { history } = this.props;
 
         return (
-            <div className="fh_container">
+            <div className="fp_container sub_bg">
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}

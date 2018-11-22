@@ -1,0 +1,144 @@
+import React, { PureComponent } from 'react';
+import {  NavBar, Icon, List, InputItem, Button, ActionSheet } from 'antd-mobile';
+import { createForm, createFormField } from 'rc-form';
+import { withRouter } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
+import moment from 'moment';
+
+import './index.less';
+
+const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
+let wrapProps;
+if (isIPhone) {
+  wrapProps = {
+    onTouchStart: e => e.preventDefault(),
+  };
+}
+
+const Item = List.Item;
+const Brief = Item.Brief;
+
+const Filters = [
+    '精滤滤芯',
+    '除菌滤芯',
+    'UV滤芯',
+    '无',
+]
+
+const basicData = {
+    filter: {
+        value: 'pp',
+    },
+    replacedate: {
+        value: moment.now(),
+    },
+}
+
+const RenderForm = createForm({
+    mapPropsToFields(props) {
+        return {
+          filter: createFormField({
+            ...props.filter,
+            value: props.filter.value,
+          }),
+          replacedate: createFormField({
+            ...props.replacedate,
+            value: props.replacedate.value,
+        }),
+        };
+    }
+})((props)=>{
+    const { getFieldProps, validateFields, setFieldsValue } = props.form;
+
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        validateFields((err, values)=>{
+            if(!err){
+                props.onSubmit(values);
+            }
+        })
+    }
+
+    const showActionSheet = () => {
+        const BUTTONS = Filters;
+        ActionSheet.showActionSheetWithOptions({
+          options: BUTTONS,
+          cancelButtonIndex: BUTTONS.length - 1,
+          message: '选择滤芯',
+          maskClosable: true,
+          wrapProps,
+        },
+        (buttonIndex) => {
+            if(buttonIndex!==BUTTONS.length -1){
+                setFieldsValue({filter:BUTTONS[buttonIndex]})
+            }
+        });
+    }
+
+    return (
+        <React.Fragment>
+        <form>
+            <List>
+                <Item><FormattedMessage id="filter.filter" defaultMessage="选择滤芯" />
+                        <Brief>
+                            <div className="item_children">
+                                <InputItem extra=">" onExtraClick={showActionSheet} editable={false}
+                                    placeholder={<FormattedMessage id="filter.filter" defaultMessage="选择滤芯" />}
+                                    {...getFieldProps('filter')}
+                                />
+                            </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="filter.replacedate" defaultMessage="上一次更换时间" />
+                        <Brief>
+                            <div className="item_children">
+                                <InputItem editable={false}
+                                    placeholder={<FormattedMessage id="filter.replacedate" defaultMessage="上一次更换时间" />}
+                                    {...getFieldProps('replacedate',{
+                                        rules: [{
+                                            required: true,
+                                            message: <FormattedMessage id="filter.replacedate" defaultMessage="上一次更换时间" />,
+                                        }],
+                                    })}
+                                />
+                            </div>
+                    </Brief>
+                </Item>
+            </List>
+        </form>
+        <div className="submit_area">
+            <div className="add_btn" >
+                <Button type="ghost" className="btn" onClick={handleSubmit}>
+                    <FormattedMessage id="submit.reset" defaultMessage="重置" />
+                </Button>
+            </div>
+        </div>
+        </React.Fragment>
+    )
+})
+
+class AfterFilter extends PureComponent{
+
+    handleSubmit = (values)=>{
+        console.log(values);
+    }
+
+    render () {
+        const { history } = this.props;
+
+        return (
+            <div className="fp_container sub_bg">
+                <NavBar
+                    className="nav"
+                    icon={<Icon type="left" />}
+                    onLeftClick={() => history.goBack()}
+                >
+                { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
+                </NavBar>
+                
+            </div>
+        )
+    }
+}
+
+export default withRouter(AfterFilter);

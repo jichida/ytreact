@@ -5,6 +5,8 @@ import Home from '../Home';
 import Device from '../Device';
 import Setting from '../Setting';
 
+import './index.less';
+
 import i_home from '../../assets/tab/icon1.png';
 import i_home_on from '../../assets/tab/icon1_on.png';
 import i_device from '../../assets/tab/icon2.png';
@@ -20,24 +22,24 @@ class Layout extends React.PureComponent {
 
   render() {
     return (
-      <div className="fh_container">
+      <div className="fh_container fp_container layout_bg">
         <TabBar
-          barTintColor="rgba(40, 40, 40, 0.8)"
+          barTintColor="#ffffff28"
           prerenderingSiblingsNumber={0}
         >
           <TabBar.Item
             key="Home"
-            icon={<div style={{
-              width: '22px',
-              height: '22px',
-              background: `url(${i_home}) center center /  21px 21px no-repeat` }}
-            />
+            icon={
+              <div className="navbar_item">
+                  <img src={i_home} alt="" className="navbar_icon" />
+                  <span></span>
+              </div>
             }
-            selectedIcon={<div style={{
-              width: '22px',
-              height: '22px',
-              background: `url(${i_home_on}) center center /  21px 21px no-repeat` }}
-            />
+            selectedIcon={
+              <div className="navbar_item_on">
+                  <img src={i_home_on} alt="" className="navbar_icon" />
+                  <span></span>
+              </div>
             }
             selected={this.state.selectedTab === 'Home'}
             onPress={() => {
@@ -51,18 +53,16 @@ class Layout extends React.PureComponent {
           <TabBar.Item
             key="Device"
             icon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: `url(${i_device}) center center /  21px 21px no-repeat` }}
-              />
+              <div className="navbar_item">
+                  <img src={i_device} alt="" className="navbar_icon" />
+                  <span></span>
+              </div>
             }
             selectedIcon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: `url(${i_device_on}) center center /  21px 21px no-repeat` }}
-              />
+              <div className="navbar_item_on">
+                  <img src={i_device_on} alt="" className="navbar_icon" />
+                  <span></span>
+              </div>
             }
             selected={this.state.selectedTab === 'Device'}
             onPress={() => {
@@ -76,18 +76,16 @@ class Layout extends React.PureComponent {
           <TabBar.Item
             key="Setting"
             icon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: `url(${i_setting}) center center /  21px 21px no-repeat` }}
-              />
+              <div className="navbar_item">
+                  <img src={i_setting} alt="" className="navbar_icon" />
+                  <span></span>
+              </div>
             }
             selectedIcon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: `url(${i_setting_on}) center center /  21px 21px no-repeat` }}
-              />
+              <div className="navbar_item_on">
+                  <img src={i_setting_on} alt="" className="navbar_icon" />
+                  <span></span>
+              </div>
             }
             selected={this.state.selectedTab === 'Setting'}
             onPress={() => {

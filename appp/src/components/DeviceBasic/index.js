@@ -2,8 +2,12 @@ import React, { PureComponent } from 'react';
 import {  NavBar, Icon, List, InputItem, Picker, Button,  WingBlank } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 import './index.less';
+
+const Item = List.Item;
+const Brief = Item.Brief;
  
 const basicData = {
     username: {
@@ -111,72 +115,117 @@ const RenderForm = createForm({
         <React.Fragment>
         <form>
             <List>
-                <InputItem
-                    placeholder="请输入用户名"
-                    {...getFieldProps('username',{
-                        rules: [{
-                            required: true,
-                            message: '请输入用户名',
-                        }],
-                    })}
-                >用户名：</InputItem>
-                <InputItem
-                    placeholder="请输入联系方式"
-                    {...getFieldProps('userphone',{
-                        rules: [{
-                            required: true,
-                            message: '请输入联系方式',
-                        }],
-                    })}
-                >联系方式：</InputItem>
-                <InputItem
-                    placeholder="请输入用户地址"
-                    {...getFieldProps('useraddress',{
-                        rules: [{
-                            required: true,
-                            message: '请输入用户地址',
-                        }],
-                    })}
-                >用户地址：</InputItem>
-                <Picker
-                    data={useproperty}
-                    cols={1}
-                    {...getFieldProps('useproperty')}
-                    >
-                    <List.Item arrow="horizontal">使用性质：</List.Item>
-                </Picker>
-                <Picker
-                    data={building}
-                    cols={1}
-                    {...getFieldProps('building')}
-                    >
-                    <List.Item arrow="horizontal">房屋类型：</List.Item>
-                </Picker>
-                <InputItem
-                    type="number"
-                    placeholder="请输入楼层高度"
-                    {...getFieldProps('floor',{
-                        rules: [{
-                            required: true,
-                            message: '请输入楼层高度',
-                        }],
-                    })}
-                    extra="楼"
-                >楼层高度：</InputItem>
-                <Picker
-                    data={model}
-                    cols={1}
-                    {...getFieldProps('model')}
-                    >
-                    <List.Item arrow="horizontal">预装型号：</List.Item>
-                </Picker>
+                <Item><FormattedMessage id="user.name" defaultMessage="用户名" />
+                    <Brief>
+                        <div className="item_children">
+                            <InputItem
+                                placeholder={<FormattedMessage id="user.name" defaultMessage="用户名" />}
+                                {...getFieldProps('username',{
+                                    rules: [{
+                                        required: true,
+                                    message: <FormattedMessage id="user.name" defaultMessage="用户名" />,
+                                    }],
+                                })}
+                            />
+                        </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="user.phone" defaultMessage="联系方式" />
+                    <Brief>
+                        <div className="item_children">
+                            <InputItem
+                                placeholder={<FormattedMessage id="user.phone" defaultMessage="联系方式" />}
+                                {...getFieldProps('userphone',{
+                                    rules: [{
+                                        required: true,
+                                        message: <FormattedMessage id="user.phone" defaultMessage="联系方式" />,
+                                    }],
+                                })}
+                            />
+                        </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="user.address" defaultMessage="用户地址" />
+                    <Brief>
+                        <div className="item_children">
+                            <InputItem
+                                placeholder={<FormattedMessage id="user.address" defaultMessage="用户地址" />}
+                                {...getFieldProps('useraddress',{
+                                    rules: [{
+                                        required: true,
+                                        message: <FormattedMessage id="user.address" defaultMessage="用户地址" />,
+                                    }],
+                                })}
+                            />
+                        </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="user.property" defaultMessage="使用性质" />
+                    <Brief>
+                        <div className="item_children">
+                            <Picker
+                                data={useproperty}
+                                cols={1}
+                                extra=" "
+                                {...getFieldProps('useproperty')}
+                                >
+                                <List.Item arrow="horizontal"></List.Item>
+                            </Picker>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="user.building" defaultMessage="房屋类型" />
+                    <Brief>
+                        <div className="item_children">
+                            <Picker
+                                data={building}
+                                cols={1}
+                                extra=" "
+                                {...getFieldProps('building')}
+                                >
+                                <List.Item arrow="horizontal"></List.Item>
+                            </Picker>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="user.floor" defaultMessage="楼层高度" />
+                    <Brief>
+                        <div className="item_children">
+                            <InputItem
+                                type="number"
+                                placeholder={<FormattedMessage id="user.floor" defaultMessage="楼层高度" />}
+                                {...getFieldProps('floor',{
+                                    rules: [{
+                                        required: true,
+                                        message: <FormattedMessage id="user.floor" defaultMessage="楼层高度" />,
+                                    }],
+                                })}
+                                extra="楼"
+                            />
+                            </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="user.model" defaultMessage="预装型号" />
+                    <Brief>
+                        <div className="item_children">
+                            <Picker
+                                data={model}
+                                cols={1}
+                                extra=" "
+                                {...getFieldProps('model')}
+                                >
+                                <List.Item arrow="horizontal"></List.Item>
+                            </Picker>
+                        </div>
+                    </Brief>
+                </Item>
             </List>
         </form>
-        <WingBlank style={{marginTop: 30}}>
+        <div className="submit_area">
             <div className="add_btn" >
                 <Button type="ghost" className="btn" onClick={handleSubmit}>保存</Button>
             </div>
-        </WingBlank>
+        </div>
         </React.Fragment>
     )
 })
@@ -192,6 +241,7 @@ class DeviceBasic extends PureComponent{
 
         return (
             <div className="fh_container">
+            <div className="fp_container sub_bg">
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}
@@ -200,6 +250,7 @@ class DeviceBasic extends PureComponent{
                 设备信息
                 </NavBar>
                 { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
+            </div>
             </div>
         )
     }

@@ -43,7 +43,7 @@ class Device extends PureComponent{
         const { history } = this.props;
 
         return (
-            <div>
+            <div className="device">
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}

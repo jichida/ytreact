@@ -87,6 +87,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
+                                extra=">"
                                 placeholder={<FormattedMessage id="setting.water.ph" defaultMessage="ph值" />}
                                 {...getFieldProps('ph',{
                                     rules: [{
@@ -103,6 +104,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
+                                extra=">"
                                 placeholder={<FormattedMessage id="setting.water.conductivity" defaultMessage="进水导电率" />}
                                 {...getFieldProps('conductivity',{
                                     rules: [{
@@ -119,6 +121,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
+                                extra=">"
                                 placeholder={<FormattedMessage id="setting.water.tds" defaultMessage="进水TDS值" />}
                                 {...getFieldProps('tds',{
                                     rules: [{
@@ -135,6 +138,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
+                                extra=">"
                                 placeholder={<FormattedMessage id="setting.water.hardness" defaultMessage="进水硬度" />}
                                 {...getFieldProps('hardness',{
                                     rules: [{
@@ -151,6 +155,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
+                                extra=">"
                                 placeholder={<FormattedMessage id="setting.water.alkalinity" defaultMessage="进水碱度" />}
                                 {...getFieldProps('alkalinity',{
                                     rules: [{
@@ -166,7 +171,6 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                type="money"
                                 placeholder={<FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />}
                                 {...getFieldProps('bucket',{
                                     rules: [{

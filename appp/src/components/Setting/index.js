@@ -30,6 +30,7 @@ class Setting extends PureComponent{
 
         return (
             <div className="setting_bg">
+                <div className="layout">
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}
@@ -39,24 +40,25 @@ class Setting extends PureComponent{
                 </NavBar>
                 <TabBar
                     unselectedTintColor="#ffffff"
-                    tintColor="#1796d5"
+                    tintColor="#ffffff"
                     barTintColor="#ffffff18"
                     tabBarPosition="top"
                 >
                     <TabBar.Item
-                        title="系统设置"
                         key="system"
-                        icon={<div style={{
-                            width: '40px',
-                            height: '40px',
-                            background: `url(${system_img}) center center /  35px 35px no-repeat` }}
-                            />
+                        icon={
+                            <div className="navbar_item">
+                                <p>系统设置</p>
+                                <img src={system_img} alt="" className="navbar_icon" />
+                                <span></span>
+                            </div>
                         }
-                        selectedIcon={<div style={{
-                            width: '40px',
-                            height: '40px',
-                            background: `url(${system_img_selected}) center center /  35px 35px no-repeat` }}
-                            />
+                        selectedIcon={
+                            <div className="navbar_item_on">
+                                <p>系统设置</p>
+                                <img src={system_img} alt="" className="navbar_icon" />
+                                <span></span>
+                            </div>
                         }
                         selected={this.state.selectedTab === 'system'}
                         onPress={() => {
@@ -68,19 +70,20 @@ class Setting extends PureComponent{
                         {<System />}
                     </TabBar.Item>
                     <TabBar.Item
-                        icon={<div style={{
-                            width: '40px',
-                            height: '40px',
-                            background: `url(${water_img}) center center /  35px 35px no-repeat` }}
-                            />
+                        icon={
+                            <div className="navbar_item">
+                                <p>进水设定</p>
+                                <img src={water_img} alt="" className="navbar_icon" />
+                                <span></span>
+                            </div>
                         }
-                        selectedIcon={<div style={{
-                            width: '40px',
-                            height: '40px',
-                            background: `url(${water_img_selected}) center center /  35px 35px no-repeat` }}
-                            />
+                        selectedIcon={
+                            <div className="navbar_item_on">
+                                <p>进水设定</p>
+                                <img src={system_img} alt="" className="navbar_icon" />
+                                <span></span>
+                            </div>
                         }
-                        title="进水设定"
                         key="water"
                         selected={this.state.selectedTab === 'water'}
                         onPress={() => {
@@ -92,19 +95,20 @@ class Setting extends PureComponent{
                         {<Inlet />}
                     </TabBar.Item>
                     <TabBar.Item
-                        icon={<div style={{
-                            width: '40px',
-                            height: '40px',
-                            background: `url(${wifi_img}) center center /  35px 35px no-repeat` }}
-                            />
+                        icon={
+                            <div className="navbar_item">
+                                <p>网络</p>
+                                <img src={wifi_img} alt="" className="navbar_icon" />
+                                <span></span>
+                            </div>
                         }
-                        selectedIcon={<div style={{
-                            width: '40px',
-                            height: '40px',
-                            background: `url(${wifi_img_selected}) center center /  35px 35px no-repeat` }}
-                            />
+                        selectedIcon={
+                            <div className="navbar_item_on">
+                                <p>网络</p>
+                                <img src={wifi_img} alt="" className="navbar_icon" />
+                                <span></span>
+                            </div>
                         }
-                        title="网络"
                         key="wifi"
                         selected={this.state.selectedTab === 'wifi'}
                         onPress={() => {
@@ -116,19 +120,20 @@ class Setting extends PureComponent{
                         {<Wifi />}
                     </TabBar.Item>
                     <TabBar.Item
-                        icon={<div style={{
-                            width: '40px',
-                            height: '40px',
-                            background: `url(${table_img}) center center /  35px 35px no-repeat` }}
-                            />
+                        icon={
+                            <div className="navbar_item">
+                                <p>安装检查表</p>
+                                <img src={table_img} alt="" className="navbar_icon" />
+                                <span></span>
+                            </div>
                         }
-                        selectedIcon={<div style={{
-                            width: '40px',
-                            height: '40px',
-                            background: `url(${table_img_selected}) center center /  35px 35px no-repeat` }}
-                            />
+                        selectedIcon={
+                            <div className="navbar_item_on">
+                                <p>安装检查表</p>
+                                <img src={table_img} alt="" className="navbar_icon" />
+                                <span></span>
+                            </div>
                         }
-                        title="安装检查表"
                         key="table"
                         selected={this.state.selectedTab === 'table'}
                         onPress={() => {
@@ -140,6 +145,7 @@ class Setting extends PureComponent{
                         {<Checklist />}
                     </TabBar.Item>
                 </TabBar>   
+                </div>
             </div>
         )
     }

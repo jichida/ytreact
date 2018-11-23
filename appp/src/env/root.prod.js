@@ -12,19 +12,22 @@ import {
 } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 import {history} from './store';
+import {IntlProvider, addLocaleData} from 'react-intl';
 
 
 import AppRoot from '../approot.js';
 
 let Root = (props)=>
     (
-        <Provider store={store}>
-            <div>
-                <ConnectedRouter history={history}>
-                    <Route path="/" component={AppRoot}/>
-                </ConnectedRouter>
-            </div>
-        </Provider>
+        <IntlProvider locale={locale} messages={langMap[locale]}>
+            <Provider store={store}>
+                <div>
+                    <ConnectedRouter history={history}>
+                        <Route path="/" component={AppRoot}/>
+                    </ConnectedRouter>
+                </div>
+            </Provider>
+        </IntlProvider>
     );
 
 

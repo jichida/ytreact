@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import {  NavBar, Icon, List, InputItem, Button, WingBlank, Switch } from 'antd-mobile';
+import {  List, InputItem, Button } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import Buckets from '../Buckets';
 
 import './index.less';
 
@@ -33,7 +34,7 @@ const basicData = {
         value: 0.02,
     },
     bucket: {
-        value: 1.02,
+        value: '50gal',
     },
 }
 
@@ -67,7 +68,7 @@ const RenderForm = createForm({
         };
     }
 })((props)=>{
-    const { getFieldProps, validateFields } = props.form;
+    const { getFieldProps, validateFields, setFieldsValue } = props.form;
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -76,6 +77,10 @@ const RenderForm = createForm({
                 props.onSubmit(values);
             }
         })
+    }
+
+    const handleBucketSelect = (value)=>{
+        setFieldsValue({bucket: value});
     }
 
     return (
@@ -170,7 +175,7 @@ const RenderForm = createForm({
                 <Item><FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />
                     <Brief>
                         <div className="item_children">
-                            <InputItem
+                            {/* <InputItem
                                 placeholder={<FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />}
                                 {...getFieldProps('bucket',{
                                     rules: [{
@@ -178,6 +183,15 @@ const RenderForm = createForm({
                                         message: <FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />,
                                     }],
                                 })}
+                            /> */}
+                            <Buckets 
+                                {...getFieldProps('bucket',{
+                                    rules: [{
+                                        required: true,
+                                        message: <FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />,
+                                    }],
+                                })}
+                                onChange={handleBucketSelect}
                             />
                         </div>
                     </Brief>
@@ -186,7 +200,7 @@ const RenderForm = createForm({
         </form>
         <div className="submit_area">
             <div className="add_btn" >
-                <Button type="ghost" className="btn" onClick={handleSubmit}><FormattedMessage id="submit.save" defaultMessage="保存" /></Button>
+                <Button type="ghost" className="btn" onClick={handleSubmit}><FormattedMessage id="form.save" defaultMessage="保存" /></Button>
             </div>
         </div>
         </React.Fragment>

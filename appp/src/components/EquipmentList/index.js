@@ -124,7 +124,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                // placeholder={ intl.formatMessage({id: 'equipment.frontfilter', defaultMessage: '前置滤芯'})}
+                                placeholder="请输入"
                                 {...getFieldProps('frontfilter',{
                                     rules: [{
                                         required: true,
@@ -139,7 +139,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="equipment.host" defaultMessage="主机" />}
+                                placeholder="请输入"
                                 {...getFieldProps('host',{
                                     rules: [{
                                         required: true,
@@ -154,7 +154,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="equipment.afterfilter" defaultMessage="后置滤芯" />}
+                                placeholder="请输入"
                                 {...getFieldProps('afterfilter',{
                                     rules: [{
                                         required: true,
@@ -202,7 +202,7 @@ const RenderForm = createForm({
                                 editable={false}
                                 onClick={handleFillClick}
                                 extra=">"
-                                placeholder={<FormattedMessage id="form.fillin" defaultMessage="去填写" />}
+                                placeholder="去填写"
                                 // {...getFieldProps('pipefittings',{
                                 //     rules: [{
                                 //         required: true,
@@ -218,7 +218,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="equipment.others" defaultMessage="其他" />}
+                                placeholder="请输入"
                                 {...getFieldProps('others',{
                                     rules: [{
                                         required: true,

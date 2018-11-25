@@ -27,7 +27,7 @@ const Filters = [
 
 const basicData = {
     filter: {
-        value: 'pp',
+        value: '',
     },
     replacedate: {
         value: moment.now(),
@@ -83,7 +83,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem extra=">" onExtraClick={showActionSheet} editable={false}
-                                    placeholder={<FormattedMessage id="filter.filter" defaultMessage="选择滤芯" />}
+                                    placeholder="选择滤芯"
                                     {...getFieldProps('filter')}
                                 />
                             </div>
@@ -93,7 +93,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem editable={false}
-                                    placeholder={<FormattedMessage id="filter.replacedate" defaultMessage="上一次更换时间" />}
+                                    placeholder="上一次更换时间"
                                     {...getFieldProps('replacedate',{
                                         rules: [{
                                             required: true,

@@ -22,34 +22,34 @@ const Brief = Item.Brief;
 
 const basicData = {
     position: {
-        value: '房间',
+        value: '',
     },
     avoidlight: {
-        value: false,
+        value: '',
     },
     wall: {
-        value: '白漆',
+        value: '',
     },
     method: {
-        value: '落地',
+        value: '',
     },
     space: { 
-        value: 5,
+        value: '',
     },
     pipe: {
-        value: 16,
+        value: '',
     },
     drainage: {
-        value: 8,
+        value: '',
     },
     pipematerials: {
-        value: '钢管',
+        value: '',
     },
     wifi: {
-        value: true,
+        value: '',
     },
     power: {
-        value: true,
+        value: '',
     },
 }
 
@@ -118,7 +118,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    placeholder={<FormattedMessage id="install.position" defaultMessage="安装地点" />}
+                                    placeholder="请输入"
                                     {...getFieldProps('position',{
                                         rules: [{
                                             required: true,
@@ -140,7 +140,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    placeholder={<FormattedMessage id="install.wall" defaultMessage="墙体材料" />}
+                                    placeholder="请输入"
                                     {...getFieldProps('wall',{
                                         rules: [{
                                             required: true,
@@ -155,7 +155,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    placeholder={<FormattedMessage id="install.method" defaultMessage="主机安装方式" />}
+                                    placeholder="请输入"
                                     {...getFieldProps('method',{
                                         rules: [{
                                             required: true,
@@ -170,7 +170,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    placeholder={<FormattedMessage id="install.space" defaultMessage="安装空间" />}
+                                    placeholder="请输入"
                                     {...getFieldProps('space',{
                                         rules: [{
                                             required: true,
@@ -185,7 +185,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    placeholder={<FormattedMessage id="install.pipe" defaultMessage="进水管径大小" />}
+                                    placeholder="请输入"
                                     {...getFieldProps('pipe',{
                                         rules: [{
                                             required: true,
@@ -200,7 +200,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    placeholder={<FormattedMessage id="install.drainage" defaultMessage="排水距离" />}
+                                    placeholder="请输入"
                                     {...getFieldProps('drainage',{
                                         rules: [{
                                             required: true,
@@ -215,7 +215,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    placeholder={<FormattedMessage id="install.pipematerials" defaultMessage="管路材质" />}
+                                    placeholder="请输入"
                                     {...getFieldProps('pipematerials',{
                                         rules: [{
                                             required: true,

@@ -11,25 +11,25 @@ const Brief = Item.Brief;
  
 const basicData = {
     username: {
-        value: 'benjycui',
+        value: '',
     },
     userphone: {
-        value: '1234567890',
+        value: '',
     },
     useraddress: {
-        value: '南京市玄武区珠江路1#',
+        value: '',
     },
     useproperty: { //使用性质
-        value: ['家用'],
+        value: [],
     },
     building: { // 房屋类型
-        value: ['住宅'],
+        value: [],
     },
     floor: { // 楼层
-        value: 1,
+        value: '',
     },
     model: { //预装型号
-        value: ['XXX型'],
+        value: [],
     }
 }
 
@@ -119,7 +119,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="user.name" defaultMessage="用户名" />}
+                                placeholder="请输入"
                                 {...getFieldProps('username',{
                                     rules: [{
                                         required: true,
@@ -134,7 +134,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="user.phone" defaultMessage="联系方式" />}
+                                placeholder="请输入"
                                 {...getFieldProps('userphone',{
                                     rules: [{
                                         required: true,
@@ -149,7 +149,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="user.address" defaultMessage="用户地址" />}
+                                placeholder="请输入"
                                 {...getFieldProps('useraddress',{
                                     rules: [{
                                         required: true,
@@ -166,7 +166,7 @@ const RenderForm = createForm({
                             <Picker
                                 data={useproperty}
                                 cols={1}
-                                extra=" "
+                                extra="请选择"
                                 {...getFieldProps('useproperty')}
                                 >
                                 <List.Item arrow="horizontal"></List.Item>
@@ -180,7 +180,7 @@ const RenderForm = createForm({
                             <Picker
                                 data={building}
                                 cols={1}
-                                extra=" "
+                                extra="请选择"
                                 {...getFieldProps('building')}
                                 >
                                 <List.Item arrow="horizontal"></List.Item>
@@ -193,14 +193,13 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="number"
-                                placeholder={<FormattedMessage id="user.floor" defaultMessage="楼层高度" />}
+                                placeholder="请输入"
                                 {...getFieldProps('floor',{
                                     rules: [{
                                         required: true,
                                         message: <FormattedMessage id="user.floor" defaultMessage="楼层高度" />,
                                     }],
                                 })}
-                                extra="楼"
                             />
                             </div>
                     </Brief>
@@ -211,7 +210,7 @@ const RenderForm = createForm({
                             <Picker
                                 data={model}
                                 cols={1}
-                                extra=" "
+                                extra="请选择"
                                 {...getFieldProps('model')}
                                 >
                                 <List.Item arrow="horizontal"></List.Item>

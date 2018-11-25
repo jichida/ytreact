@@ -19,19 +19,19 @@ const Brief = Item.Brief;
 
 const basicData = {
     tds: {
-        value: 1.02,
+        value: '',
     },
     conductivity: {
-        value: 1.32,
+        value: '',
     },
     hardness: {
-        value: 1.62,
+        value: '',
     },
     alkalinity: {
-        value: 3.02,
+        value: '',
     },
     ph: {
-        value: 0.02,
+        value: '',
     },
     bucket: {
         value: '50gal',
@@ -93,7 +93,7 @@ const RenderForm = createForm({
                             <InputItem
                                 type="money"
                                 extra=">"
-                                placeholder={<FormattedMessage id="setting.water.ph" defaultMessage="ph值" />}
+                                placeholder="请输入"
                                 {...getFieldProps('ph',{
                                     rules: [{
                                         required: true,
@@ -110,7 +110,7 @@ const RenderForm = createForm({
                             <InputItem
                                 type="money"
                                 extra=">"
-                                placeholder={<FormattedMessage id="setting.water.conductivity" defaultMessage="进水导电率" />}
+                                placeholder="请输入"
                                 {...getFieldProps('conductivity',{
                                     rules: [{
                                         required: true,
@@ -127,7 +127,7 @@ const RenderForm = createForm({
                             <InputItem
                                 type="money"
                                 extra=">"
-                                placeholder={<FormattedMessage id="setting.water.tds" defaultMessage="进水TDS值" />}
+                                placeholder="请输入"
                                 {...getFieldProps('tds',{
                                     rules: [{
                                         required: true,
@@ -144,7 +144,7 @@ const RenderForm = createForm({
                             <InputItem
                                 type="money"
                                 extra=">"
-                                placeholder={<FormattedMessage id="setting.water.hardness" defaultMessage="进水硬度" />}
+                                placeholder="请输入"
                                 {...getFieldProps('hardness',{
                                     rules: [{
                                         required: true,
@@ -161,7 +161,7 @@ const RenderForm = createForm({
                             <InputItem
                                 type="money"
                                 extra=">"
-                                placeholder={<FormattedMessage id="setting.water.alkalinity" defaultMessage="进水碱度" />}
+                                placeholder="请输入"
                                 {...getFieldProps('alkalinity',{
                                     rules: [{
                                         required: true,

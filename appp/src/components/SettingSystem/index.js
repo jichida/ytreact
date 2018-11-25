@@ -43,7 +43,7 @@ const basicData = {
         value: '',
     },
     installer: {
-        value: '白漆',
+        value: '',
     },
     timezone: {
         value: moment.now().timezone,
@@ -58,16 +58,16 @@ const basicData = {
         value: 5,
     },
     frontfilter1: {
-        value: 'PP滤芯',
+        value: '',
     },
     frontfilter2: {
         value: '',
     },
     frontfilter3: {
-        value: '滤芯',
+        value: '',
     },
     afterfilter1: {
-        value: 'PP滤芯',
+        value: '',
     },
     afterfilter2: {
         value: '',
@@ -221,7 +221,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">                
                         <InputItem
-                            placeholder={<FormattedMessage id="setting.system.installer" defaultMessage="安装人员" />}
+                            placeholder="请输入"
                             {...getFieldProps('installer',{
                                 rules: [{
                                     required: true,
@@ -236,7 +236,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">   
                         <InputItem
-                            placeholder={<FormattedMessage id="setting.system.timezone" defaultMessage="选择时区" />}
+                            placeholder="请输入"
                             {...getFieldProps('timezone')}
                         ></InputItem>
                         </div>
@@ -272,7 +272,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="setting.system.quality" defaultMessage="出水水质（ppm）" />}
+                                placeholder="请输入"
                                 {...getFieldProps('quality',{
                                     rules: [{
                                         required: true,
@@ -287,7 +287,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="setting.system.frontfilter1" defaultMessage="前置滤芯1" />}
+                                placeholder="请输入"
                                 {...getFieldProps('frontfilter1')}
                             ></InputItem>
                         </div>
@@ -297,7 +297,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="setting.system.frontfilter2" defaultMessage="前置滤芯2" />}
+                                placeholder="请输入"
                                 {...getFieldProps('frontfilter2')}
                             ></InputItem>
                         </div>
@@ -307,7 +307,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="setting.system.frontfilter3" defaultMessage="前置滤芯3" />}
+                                placeholder="请输入"
                                 {...getFieldProps('frontfilter3')}
                             ></InputItem>
                         </div>
@@ -317,7 +317,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="setting.system.afterfilter1" defaultMessage="后置滤芯1" />}
+                                placeholder="请输入"
                                 {...getFieldProps('afterfilter1')}
                             ></InputItem>
                         </div>
@@ -327,7 +327,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="setting.system.afterfilter2" defaultMessage="后置滤芯2" />}
+                                placeholder="请输入"
                                 {...getFieldProps('afterfilter2')}
                             ></InputItem>
                         </div>
@@ -337,7 +337,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="setting.system.afterfilter3" defaultMessage="后置滤芯3" />}
+                                placeholder="请输入"
                                 {...getFieldProps('afterfilter3')}
                             ></InputItem>
                         </div>

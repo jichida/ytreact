@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import {  NavBar, Icon, List, InputItem, Button, WingBlank, Switch } from 'antd-mobile';
+import {  NavBar, Icon, List, InputItem, Button, Switch } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -25,43 +25,43 @@ const Brief = Item.Brief;
 
 const basicData = {
     quantity: {
-        value: 10,
+        value: '',
     },
     persons: {
-        value: 60,
+        value: '',
     },
     spot: {
-        value: 8,
+        value: '',
     },
     watergage: { 
-        value: 87.6,
+        value: '',
     },
     booster: {
-        value: false,
+        value: '',
     },
     bathrooms: {
-        value: 6,
+        value: '',
     },
     shunt: {
-        value: true,
+        value: '',
     },
     tds: {
-        value: 1.02,
+        value: '',
     },
     conductivity: {
-        value: 1.32,
+        value: '',
     },
     hardness: {
-        value: 1.62,
+        value: '',
     },
     alkalinity: {
-        value: 3.02,
+        value: '',
     },
     ph: {
-        value: 0.02,
+        value: '',
     },
     usertds: {
-        value: 1.02,
+        value: '',
     },
 }
 
@@ -142,8 +142,9 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="water.quantity" defaultMessage="月用水量（吨）" />}
+                                placeholder="请输入"
                                 type="money"
+                                extra= {<Icon type="right" />}
                                 {...getFieldProps('quantity',{
                                     rules: [{
                                         required: true,
@@ -158,8 +159,9 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                            placeholder={<FormattedMessage id="water.persons" defaultMessage="用水人数（人）" />}
+                                placeholder="请输入"
                                 type="money"
+                                extra= {<Icon type="right" />}
                                 {...getFieldProps('persons',{
                                     rules: [{
                                         required: true,
@@ -174,8 +176,9 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="water.spot" defaultMessage="直饮水点（个）" />}
+                                placeholder="请输入"
                                 type="money"
+                                extra= {<Icon type="right" />}
                                 {...getFieldProps('spot',{
                                     rules: [{
                                         required: true,
@@ -190,8 +193,9 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="water.watergage" defaultMessage="水压" />}
+                                placeholder="请输入"
                                 type="money"
+                                extra= {<Icon type="right" />}
                                 {...getFieldProps('watergage',{
                                     rules: [{
                                         required: true,
@@ -215,7 +219,8 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
-                                placeholder={<FormattedMessage id="water.bathrooms" defaultMessage="卫浴间数量" />}
+                                placeholder="请输入"
+                                extra= {<Icon type="right" />}
                                 {...getFieldProps('bathrooms',{
                                     rules: [{
                                         required: true,
@@ -238,7 +243,8 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
-                                placeholder={<FormattedMessage id="water.tds" defaultMessage="原水TDS值" />}
+                                placeholder="请输入"
+                                extra= {<Icon type="right" />}
                                 {...getFieldProps('tds',{
                                     rules: [{
                                         required: true,
@@ -254,7 +260,8 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
-                                placeholder={<FormattedMessage id="water.conductivity" defaultMessage="原水导电率" />}
+                                placeholder="请输入"
+                                extra= {<Icon type="right" />}
                                 {...getFieldProps('conductivity',{
                                     rules: [{
                                         required: true,
@@ -270,7 +277,8 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
-                                placeholder={<FormattedMessage id="water.hardness" defaultMessage="原水硬度(ppm)" />}
+                                placeholder="请输入"
+                                extra= {<Icon type="right" />}
                                 {...getFieldProps('hardness',{
                                     rules: [{
                                         required: true,
@@ -286,7 +294,8 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
-                                placeholder={<FormattedMessage id="water.alkalinity" defaultMessage="原水碱度(ppm)" />}
+                                placeholder="请输入"
+                                extra= {<Icon type="right" />}
                                 {...getFieldProps('alkalinity',{
                                     rules: [{
                                         required: true,
@@ -302,7 +311,8 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
-                                placeholder={<FormattedMessage id="water.ph" defaultMessage="ph值" />}
+                                placeholder="请输入"
+                                extra= {<Icon type="right" />}
                                 {...getFieldProps('ph',{
                                     rules: [{
                                         required: true,
@@ -318,7 +328,8 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
-                                placeholder={<FormattedMessage id="water.usertds" defaultMessage="用户需求出水TDS值" />}
+                                placeholder="请输入"
+                                extra= {<Icon type="right" />}
                                 {...getFieldProps('usertds',{
                                     rules: [{
                                         required: true,

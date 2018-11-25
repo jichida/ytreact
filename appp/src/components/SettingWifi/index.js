@@ -19,25 +19,25 @@ const Brief = Item.Brief;
 
 const basicData = {
     ssid: {
-        value:100,
+        value:'',
     },
     password: {
-        value: 200,
+        value: '',
     },
     dhcp: {
-        value: 300,
+        value: '',
     },
     ip: {
-        value: 400,
+        value: '',
     },
     gatewary: {
-        value: 500,
+        value: '',
     },
     lan: {
-        value: 600,
+        value: '',
     },
     dns: {
-        value: 700,
+        value: '',
     }
 }
 
@@ -94,7 +94,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="setting.wifi.ssid" defaultMessage="WIFI SSID" />}
+                                placeholder="请输入"
                                 {...getFieldProps('ssid',{
                                     rules: [{
                                         required: true,
@@ -109,7 +109,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="setting.wifi.password" defaultMessage="WIFI 密码" />}
+                                placeholder="请输入"
                                 {...getFieldProps('password',{
                                     rules: [{
                                         required: true,
@@ -131,7 +131,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="setting.wifi.ip" defaultMessage="IP地址" />}
+                                placeholder="请输入"
                                 {...getFieldProps('ip',{
                                     rules: [{
                                         required: true,
@@ -146,7 +146,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="setting.wifi.gatewary" defaultMessage="网关" />}
+                                placeholder="请输入"
                                 {...getFieldProps('gatewary',{
                                     rules: [{
                                         required: true,
@@ -161,7 +161,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="setting.wifi.lan" defaultMessage="局域网" />}
+                                placeholder="请输入"
                                 {...getFieldProps('lan',{
                                     rules: [{
                                         required: true,
@@ -176,7 +176,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder={<FormattedMessage id="setting.wifi.dns" defaultMessage="主网域服务器" />}
+                                placeholder="请输入"
                                 {...getFieldProps('dns',{
                                     rules: [{
                                         required: true,

@@ -248,7 +248,8 @@ class PipeFittings extends PureComponent{
         const { history } = this.props;
 
         return (
-            <div className="fp_container sub_bg">
+            <div className="fp_container black_bg">
+            <div className="sub_bg">
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}
@@ -257,6 +258,7 @@ class PipeFittings extends PureComponent{
                     <FormattedMessage id="equipment.pipefittings" defaultMessage="主要管件" />
                 </NavBar>
                 { <RenderForm {...basicData} {...this.props} onSubmit={this.handleSubmit} />}
+            </div>
             </div>
         )
     }

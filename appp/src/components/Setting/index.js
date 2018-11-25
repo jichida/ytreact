@@ -8,10 +8,7 @@ import system_img from '../../assets/set1.png';
 import water_img from '../../assets/set2.png';
 import wifi_img from '../../assets/set3.png';
 import table_img from '../../assets/set4.png';
-import system_img_selected from '../../assets/set1_1.png';
-import water_img_selected from '../../assets/set2_1.png';
-import wifi_img_selected from '../../assets/set3_1.png';
-import table_img_selected from '../../assets/set4_1.png';
+
 
 import System from '../SettingSystem';
 import Inlet from '../SettingInlet';
@@ -80,7 +77,7 @@ class Setting extends PureComponent{
                         selectedIcon={
                             <div className="navbar_item_on">
                                 <p>进水设定</p>
-                                <img src={system_img} alt="" className="navbar_icon" />
+                                <img src={water_img} alt="" className="navbar_icon" />
                                 <span></span>
                             </div>
                         }

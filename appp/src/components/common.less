@@ -41,21 +41,25 @@
         background-color: transparent;
         border: 1px solid rgba(134, 219, 255, 0.5);
         box-shadow: 0px 0px 8px rgba(134, 219, 255, 0.5);
-        border-radius: 50px;
+        border-radius: 50px !important;
         color: #ffffff;
+
+            span {
+                font-size: 16px;
+            }
     }
 
     .btn:active {
         background-color: transparent;
         border: 1px solid rgba(134, 219, 255, 0.5);
         box-shadow: 0px 0px 8px rgba(134, 219, 255, 0.5);
-        border-radius: 50px;
+        border-radius: 50px !important;
         color: #ffffff;
     }
 }
 
 .sub_bg {
-    background-color: #000000d0;
+    background-color: #000000ce;
 
     .am-navbar {
         background-color: #ffffff15 !important;
@@ -348,4 +352,23 @@
         background-color: transparent !important;
         height: 0 !important;
       }
+  }
+
+//   .am-button-ghost {
+//     color: #108ee9;
+//     background-color: transparent;
+//     border: 1PX solid #108ee9;
+//     border-radius: 5px;
+//   }
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+    html:not([data-scale]) .am-button-ghost {
+      position: static !important;
+      border: 0 !important;
+    }
+}
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+    html:not([data-scale]) .am-button-ghost.am-button-active {
+      position: static !important;
+      border: 0 !important;
+    }
   }

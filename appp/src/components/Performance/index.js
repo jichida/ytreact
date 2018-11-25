@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Flex, Accordion } from 'antd-mobile';
+import { Flex, Accordion, WhiteSpace } from 'antd-mobile';
 
 
 import './index.less';
@@ -123,10 +123,17 @@ class Performance extends PureComponent{
 
     render () {
         return (
-            <div className="bg">
-                <Accordion accordion defaultActiveKey="0" className="pad">
-                    { this.renderList(data)}
-                </Accordion>
+            <div className="fh_container">
+                <div className="fp_container">
+                    <div className="panel">
+                        <div className="performance">
+                        <WhiteSpace />
+                        <Accordion accordion defaultActiveKey="0" className="pad">
+                            { this.renderList(data)}
+                        </Accordion>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

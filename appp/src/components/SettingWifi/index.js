@@ -120,21 +120,13 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="setting.wifi.dhcp" defaultMessage="动态主机设置协议" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                placeholder={<FormattedMessage id="setting.wifi.dhcp" defaultMessage="动态主机设置协议" />}
-                                {...getFieldProps('dhcp',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="setting.wifi.dhcp" defaultMessage="动态主机设置协议" />,
-                                    }],
-                                })}
-                            />
-                        </div>
-                    </Brief>
-                </Item>
+                <List.Item className="item_switch"
+                    extra={<Switch
+                        {...getFieldProps('dhcp', {
+                            valuePropName: 'checked',
+                        })}
+                    />}
+                ><FormattedMessage id="setting.wifi.dhcp" defaultMessage="动态主机设置协议" /></List.Item>
                 <Item><FormattedMessage id="setting.wifi.ip" defaultMessage="IP地址" />
                     <Brief>
                         <div className="item_children">
@@ -197,7 +189,7 @@ const RenderForm = createForm({
                 </Item>
             </List>
         </form>
-        <div className="submit_area">
+        <div className="submit_zone">
             <div className="add_btn" >
                 <Button type="ghost" className="btn" onClick={handleSubmit}><FormattedMessage id="submit.save" defaultMessage="保存" /></Button>
             </div>
@@ -214,7 +206,7 @@ class Wifi extends PureComponent{
 
     render () {
         return (
-            <div style={{backgroundColor: '#ffffff10',paddingTop:10, paddingBottom:10}}>
+            <div className="sub_setting_bg">
                 { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
             </div>
         )

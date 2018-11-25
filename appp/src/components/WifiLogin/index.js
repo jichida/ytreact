@@ -39,35 +39,37 @@ class WifiLogin extends PureComponent{
         const { history } = this.props;
 
         return (
-            <div className="fh_container">
+            <div className="fh_container black_bg">
                 <div className="fp_container">
-                <WingBlank>
-                    <Flex direction="column" className="wificontent container" >
-                        <WhiteSpace size="xl" />
-                        <div className="logo" >
-                            <div><img src={wifi} alt="" className="logo_img" /></div>
-                        </div>
-                        <WhiteSpace size="xl" />
-                        <Flex justify="start" className="loginform">
-                            <Flex.Item className="itemTitle"><span>网络</span></Flex.Item>
-                            <Flex.Item className="itemContent">
-                                <List.Item arrow="horizontal" className="input" onClick={this.showActionSheet}>选择的wifi网络</List.Item>
-                            </Flex.Item>
-                        </Flex>
-                        <WhiteSpace size="xl" />
-                        <Flex justify="start" className="loginform">
-                            <Flex.Item className="itemTitle"><span>密码</span></Flex.Item>
-                            <Flex.Item className="itemContent">
-                                <InputItem className="input" type="password" placeholder="请输入WIFI密码" />
-                            </Flex.Item>
-                        </Flex>
-                        <WhiteSpace size="xl" style={{ marginBottom: 30}} />
-                        <div className="add_btn" >
-                            <Button type="ghost" className="btn" onClick={()=>{history.push('/wifisucess')}}>通过</Button>
-                        </div>
-                        <WhiteSpace size="xl" />
-                    </Flex>
-                </WingBlank>
+                    <div class="panel">
+                        <WingBlank>
+                            <Flex direction="column" className="wifi_login container" >
+                                <WhiteSpace size="xl" />
+                                <div className="logo" >
+                                    <div><img src={wifi} alt="" className="logo_img" /></div>
+                                </div>
+                                <WhiteSpace size="xl" />
+                                <Flex justify="start" className="loginform">
+                                    <Flex.Item className="itemTitle"><span>网络</span></Flex.Item>
+                                    <Flex.Item className="itemContent">
+                                        <List.Item arrow="horizontal" className="input" onClick={this.showActionSheet}>选择的wifi网络</List.Item>
+                                    </Flex.Item>
+                                </Flex>
+                                <WhiteSpace size="xl" />
+                                <Flex justify="start" className="loginform">
+                                    <Flex.Item className="itemTitle"><span>密码</span></Flex.Item>
+                                    <Flex.Item className="itemContent">
+                                        <InputItem className="input" type="password" placeholder="请输入WIFI密码" />
+                                    </Flex.Item>
+                                </Flex>
+                                <WhiteSpace size="xl" style={{ marginBottom: 30}} />
+                                <div className="add_btn" >
+                                    <Button type="ghost" className="btn" onClick={()=>{history.push('/wifisucess')}}>通过</Button>
+                                </div>
+                                <WhiteSpace size="xl" />
+                            </Flex>
+                        </WingBlank>
+                    </div>
                 </div>
             </div>
         )

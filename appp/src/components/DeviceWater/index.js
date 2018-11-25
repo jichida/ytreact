@@ -150,7 +150,6 @@ const RenderForm = createForm({
                                         message: <FormattedMessage id="water.quantity" defaultMessage="月用水量（吨）" />,
                                     }],
                                 })}
-                                extra="吨"
                             />
                         </div>
                     </Brief>
@@ -167,7 +166,6 @@ const RenderForm = createForm({
                                         message: <FormattedMessage id="water.persons" defaultMessage="用水人数（人）" />,
                                     }],
                                 })}
-                                extra="人"
                             />
                         </div>
                     </Brief>
@@ -184,7 +182,6 @@ const RenderForm = createForm({
                                         message: <FormattedMessage id="water.spot" defaultMessage="直饮水点（个）" />,
                                     }],
                                 })}
-                                extra="个"
                             />
                         </div>
                     </Brief>
@@ -205,20 +202,14 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="water.booster" defaultMessage="需装增压泵" />
-                    <Brief>
-                        <div className="item_children">
-                            <List.Item
-                                className="item_switch"
-                                extra={<Switch
-                                    {...getFieldProps('booster', {
-                                        valuePropName: 'checked',
-                                    })}
-                                />}
-                            ></List.Item>
-                        </div>
-                    </Brief>
-                </Item>
+                <List.Item
+                    className="item_switch"
+                    extra={<Switch
+                        {...getFieldProps('booster', {
+                            valuePropName: 'checked',
+                        })}
+                    />}
+                ><FormattedMessage id="water.booster" defaultMessage="需装增压泵" /></List.Item>
                 <Item><FormattedMessage id="water.bathrooms" defaultMessage="卫浴间数量" />
                     <Brief>
                         <div className="item_children">
@@ -231,24 +222,17 @@ const RenderForm = createForm({
                                         message: <FormattedMessage id="water.bathrooms" defaultMessage="卫浴间数量" />,
                                     }],
                                 })}
-                                extra="个"
                             />
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="water.shunt" defaultMessage="是否分流" />
-                    <Brief>
-                        <div className="item_children">
-                            <List.Item className="item_switch"
-                                extra={<Switch
-                                    {...getFieldProps('shunt', {
-                                        valuePropName: 'checked',
-                                    })}
-                                />}
-                            ></List.Item>
-                        </div>
-                    </Brief>
-                </Item>
+                <List.Item className="item_switch"
+                    extra={<Switch
+                        {...getFieldProps('shunt', {
+                            valuePropName: 'checked',
+                        })}
+                    />}
+                ><FormattedMessage id="water.shunt" defaultMessage="是否分流" /></List.Item>
                 <Item><FormattedMessage id="water.tds" defaultMessage="原水TDS值" />
                     <Brief>
                         <div className="item_children">
@@ -347,7 +331,7 @@ const RenderForm = createForm({
                 </Item>
             </List>
         </form>
-        <div className="submit_area">
+        <div className="submit_zone">
             <div className="add_btn" >
                 <Button type="ghost" className="btn" onClick={handleSubmit}><FormattedMessage id="submit.save" defaultMessage="保存" /></Button>
             </div>

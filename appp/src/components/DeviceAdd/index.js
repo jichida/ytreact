@@ -13,17 +13,19 @@ import AddImg from '../../assets/addbtn.png';
 
     render () {
         return (
-            <div className="fh_container">
-                <div className="fp_container">
-                <Flex direction="column" justify="between" className="container">
-                    <WhiteSpace size="xl" />
-                    <div className="logo" ><img className="logo_img" alt="" src={logo} /></div>
-                    <div className="pimg" ><img alt="" src={ping} /></div>
-                    <div className="add_btn" >
-                        <Link to="/wifi"><img src={AddImg} alt="" /><FormattedMessage id="start.add" /></Link>
+            <div className="fp_container">
+                <div className="fh_container">
+                    <div className="panel">
+                        <Flex direction="column" justify="between">
+                            <WhiteSpace size="xl" />
+                            <div className="logo" ><img className="logo_img" alt="" src={logo} /></div>
+                            <div className="pimg" ><img alt="" src={ping} /></div>
+                            <div className="add_btn" >
+                                <Link to="/wifi"><img src={AddImg} alt="" /><FormattedMessage id="start.add" /></Link>
+                            </div>
+                            <WhiteSpace size="xl" />
+                        </Flex>
                     </div>
-                    <WhiteSpace size="xl" />
-                </Flex>
                 </div>
             </div>
         )

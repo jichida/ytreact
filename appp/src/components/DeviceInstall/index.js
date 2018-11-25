@@ -129,19 +129,13 @@ const RenderForm = createForm({
                             </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="install.avoidlight" defaultMessage="是否避光" />
-                    <Brief>
-                        <div className="item_children">
-                            <List.Item className="item_switch"
-                                extra={<Switch
-                                    {...getFieldProps('avoidlight', {
-                                        valuePropName: 'checked',
-                                    })}
-                                />}
-                            ></List.Item>
-                        </div>
-                    </Brief>
-                </Item>
+                <List.Item className="item_switch"
+                    extra={<Switch
+                        {...getFieldProps('avoidlight', {
+                            valuePropName: 'checked',
+                        })}
+                    />}
+                ><FormattedMessage id="install.avoidlight" defaultMessage="是否避光" /></List.Item>
                 <Item><FormattedMessage id="install.wall" defaultMessage="墙体材料" />
                         <Brief>
                             <div className="item_children">
@@ -232,35 +226,23 @@ const RenderForm = createForm({
                             </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="install.wifi" defaultMessage="有无WIFI" />
-                    <Brief>
-                        <div className="item_children">
-                            <List.Item className="item_switch"
-                                extra={<Switch
-                                    {...getFieldProps('wifi', {
-                                        valuePropName: 'checked',
-                                    })}
-                                />}
-                            ></List.Item>
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="install.power" defaultMessage="有无电源" />
-                    <Brief>
-                        <div className="item_children">
-                            <List.Item className="item_switch"
-                                extra={<Switch
-                                    {...getFieldProps('power', {
-                                        valuePropName: 'checked',
-                                    })}
-                                />}
-                            ></List.Item>
-                        </div>
-                    </Brief>
-                </Item>
+                <List.Item className="item_switch"
+                    extra={<Switch
+                        {...getFieldProps('wifi', {
+                            valuePropName: 'checked',
+                        })}
+                    />}
+                ><FormattedMessage id="install.wifi" defaultMessage="有无WIFI" /></List.Item>
+                <List.Item className="item_switch"
+                    extra={<Switch
+                        {...getFieldProps('power', {
+                            valuePropName: 'checked',
+                        })}
+                    />}
+                ><FormattedMessage id="install.power" defaultMessage="有无电源" /></List.Item>
             </List>
         </form>
-        <div className="submit_area">
+        <div className="submit_zone">
             <div className="add_btn" >
                 <Button type="ghost" className="btn" onClick={handleSubmit}>
                     <FormattedMessage id="submit.save" defaultMessage="保存" />

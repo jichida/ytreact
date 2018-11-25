@@ -32,7 +32,7 @@ class AppRoot extends React.Component {
     }
     render() {
       return (
-          <div className="container">
+          <div className="page">
             <Switch>
               <Route exact path="/" component={Index} />
               <Route exact path="/wifi" component={WifiLogin} />

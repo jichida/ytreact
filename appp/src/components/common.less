@@ -1,10 +1,7 @@
 @primaryColor: rgba(134, 219, 255, 0.5);
 
-.layout_container {
-    height: calc(90.7vh);
-}
-
 .fp_container {
+    position: relative;
     height: 100%;
 }
 
@@ -12,15 +9,34 @@
     height: 100vh;
 }
 
-.container {
+.layout_container {
+    height: calc(90.7vh);
+}
+
+.page {
     background-image: url(../assets/electricbg.png);
-    // background-color: #000000;
     background-position: center;
     background-size: cover;
 }
 
+.black_bg {
+    background-color: #000000e3;
+}
+
+.white_bg {
+    background-color: #ffffff1c;
+}
+
+.black_container {
+    background-color: #000000e3;
+}
+
+.white_container {
+    background-color: #ffffff1c;
+}
+
 .add_btn {
-    width: 100%;
+    width: 85%;
     .btn {
         background-color: transparent;
         border: 1px solid rgba(134, 219, 255, 0.5);
@@ -39,7 +55,7 @@
 }
 
 .sub_bg {
-    background-color: #000000e0;
+    background-color: #000000d0;
 
     .am-navbar {
         background-color: #ffffff15 !important;
@@ -49,9 +65,13 @@
         background-color: #ffffff15;
     }
 
-    .submit_area {
-        padding-top: 30px;
-        background-color: #ffffff15;
+    .submit_zone {
+        padding: 30px 0;
+        background-color: #ffffff15 !important;
+
+        .add_btn {
+            margin: 0 auto;
+        }
     }
 
     .am-list-extra {
@@ -67,10 +87,39 @@
             text-align: right !important;
         }
     }
+
+    // InputItem type="money"
+    .fake-input-container {
+        width: 100%;
+        
+        .fake-input {
+            text-align: left !important;
+        }
+    }
+    
+    .item_children {
+        
+        span {
+            color: #ffffff71;
+        }
+
+        input { 
+            color: #ffffff71 !important;
+        }
+
+        .am-list-extra {
+            color: #ffffff71 !important;
+        }
+
+        .fake-input {
+            color: #ffffff71 !important;
+        }
+        
+    }
 }
 
 .sub_setting_bg {
-    background-color: #ffffff03;
+    background-color: #ffffff00;
     padding: 0 10px;
 
     .am-list-extra {
@@ -93,6 +142,26 @@
         
         .fake-input {
             text-align: left !important;
+        }
+    }
+
+    .item_children {
+        
+        span {
+            color: #ffffff71;
+        }
+
+        input{ 
+            color: #ffffff71 !important;
+        }
+        
+    }
+
+    .submit_zone {
+        padding: 30px 0;
+
+        .add_btn {
+            margin: 0 auto;
         }
     }
 }

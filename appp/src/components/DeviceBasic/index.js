@@ -221,7 +221,7 @@ const RenderForm = createForm({
                 </Item>
             </List>
         </form>
-        <div className="submit_area">
+        <div className="submit_zone">
             <div className="add_btn" >
                 <Button type="ghost" className="btn" onClick={handleSubmit}>保存</Button>
             </div>
@@ -240,8 +240,7 @@ class DeviceBasic extends PureComponent{
         const { history } = this.props;
 
         return (
-            <div className="fh_container">
-            <div className="fp_container sub_bg">
+            <div className="sub_bg">
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}
@@ -250,7 +249,6 @@ class DeviceBasic extends PureComponent{
                 设备信息
                 </NavBar>
                 { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
-            </div>
             </div>
         )
     }

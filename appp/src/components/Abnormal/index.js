@@ -72,17 +72,22 @@ class Abnormal extends PureComponent{
 
     render () {
         return (
-            <div className="bg">
-                <Flex direction="column">
-                    <div style={{width: "100%"}}>
-                        {this.renderList(abnormal, 'red-circle')}
+            <div className="fh_container">
+                <div className="fp_container">
+                    <div className="panel">
+                        <div className="abnormal">
+                            <Flex direction="column">
+                                <div style={{width: "100%"}}>
+                                    {this.renderList(abnormal, 'red-circle')}
+                                </div>
+                                <p className="normal_title">正常</p>
+                                <div style={{width: "100%"}}>
+                                    {this.renderList(normal, 'green-circle')}
+                                </div>
+                            </Flex>
+                        </div>
                     </div>
-                    <WhiteSpace />
-                    <p className="normal_title">正常</p>
-                    <div style={{width: "100%"}}>
-                        {this.renderList(normal, 'green-circle')}
-                    </div>
-                </Flex>
+                </div>
             </div>
         )
     }

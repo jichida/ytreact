@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import {  List, InputItem, Button, WingBlank, Switch, DatePicker } from 'antd-mobile';
+import {  List, InputItem, Button, WingBlank, Switch, DatePicker, WhiteSpace } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
@@ -84,42 +84,42 @@ const RenderCheckForm = createForm({
         <React.Fragment>
         <form>
             <List>
-                <List.Item
+                <List.Item className="item_switch"
                     extra={<Switch
                         {...getFieldProps('washed', {
                             valuePropName: 'checked',
                         })}
                     />}
                 ><FormattedMessage id="setting.checklist.washed" defaultMessage="滤芯已冲洗" /></List.Item>
-                <List.Item
+                <List.Item className="item_switch"
                     extra={<Switch
                         {...getFieldProps('uptostandard', {
                             valuePropName: 'checked',
                         })}
                     />}
                 ><FormattedMessage id="setting.checklist.uptostandard" defaultMessage="进水压力已符合标准" /></List.Item>
-                <List.Item
+                <List.Item className="item_switch"
                     extra={<Switch
                         {...getFieldProps('bypassclosed', {
                             valuePropName: 'checked',
                         })}
                     />}
                 ><FormattedMessage id="setting.checklist.bypassclosed" defaultMessage="旁通已关闭" /></List.Item>
-                <List.Item
+                <List.Item className="item_switch"
                     extra={<Switch
                         {...getFieldProps('noleakage', {
                             valuePropName: 'checked',
                         })}
                     />}
                 ><FormattedMessage id="setting.checklist.noleakage" defaultMessage="系统无泄漏" /></List.Item>
-                <List.Item
+                <List.Item className="item_switch"
                     extra={<Switch
                         {...getFieldProps('wificonnected', {
                             valuePropName: 'checked',
                         })}
                     />}
                 ><FormattedMessage id="setting.checklist.wificonnected" defaultMessage="WIFI已连接" /></List.Item>
-                <List.Item
+                <List.Item className="item_switch"
                     extra={<Switch
                         {...getFieldProps('appset', {
                             valuePropName: 'checked',
@@ -128,13 +128,14 @@ const RenderCheckForm = createForm({
                 ><FormattedMessage id="setting.checklist.appset" defaultMessage="APP已设置" /></List.Item>
             </List>
         </form>
-        <WingBlank style={{marginTop: 30}}  className="dual_btn">
-            <div className="add_btn_left" style={{display: 'inlineBlock'}} >
+        <WingBlank  className="submit_zone dual_btn">
+            <div className="add_btn_left" style={{display: 'inline-block'}} >
                 <Button type="ghost" className="btn">
                     <FormattedMessage id="submit.decompression" defaultMessage="系统泄压" />
                 </Button>
             </div>
-            <div className="add_btn_right" style={{display: 'inlineBlock'}} >
+            <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
+            <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
                 <Button type="ghost" className="btn" onClick={onEnable}>
                     <FormattedMessage id="submit.enable" defaultMessage="启用" />
                 </Button>
@@ -214,35 +215,35 @@ const RenderResultForm = createForm({
         <React.Fragment>
         <form>
             <List>
-                <List.Item
+                <List.Item className="item_switch"
                     extra={<Switch
                         {...getFieldProps('discharge', {
                             valuePropName: 'checked',
                         })}
                     />}
                 ><FormattedMessage id="setting.checklist.discharge" defaultMessage="滤芯已冲洗" /></List.Item>
-                <List.Item
+                <List.Item className="item_switch"
                     extra={<Switch
                         {...getFieldProps('debugged', {
                             valuePropName: 'checked',
                         })}
                     />}
                 ><FormattedMessage id="setting.checklist.debugged" defaultMessage="进水压力已符合标准" /></List.Item>
-                <List.Item
+                <List.Item className="item_switch"
                     extra={<Switch
                         {...getFieldProps('quality', {
                             valuePropName: 'checked',
                         })}
                     />}
                 ><FormattedMessage id="setting.checklist.quality" defaultMessage="旁通已关闭" /></List.Item>
-                <List.Item
+                <List.Item className="item_switch"
                     extra={<Switch
                         {...getFieldProps('delivered', {
                             valuePropName: 'checked',
                         })}
                     />}
                 ><FormattedMessage id="setting.checklist.delivered" defaultMessage="系统无泄漏" /></List.Item>
-                <List.Item
+                <List.Item className="item_switch"
                     extra={<Switch
                         {...getFieldProps('picture', {
                             valuePropName: 'checked',
@@ -251,7 +252,7 @@ const RenderResultForm = createForm({
                 ><FormattedMessage id="setting.checklist.picture" defaultMessage="WIFI已连接" /></List.Item>
             </List>
         </form>
-        <WingBlank style={{marginTop: 30}}>
+        <WingBlank className="submit_zone">
             <div className="add_btn" >
                 <Button type="ghost" className="btn">
                     <FormattedMessage id="submit.ok" defaultMessage="OK" />
@@ -281,12 +282,14 @@ class SettingChecklist extends PureComponent{
     render () {
 
         return (
-            <div style={{backgroundColor: '#ffffff10',paddingTop:10, paddingBottom:10}}>
+            <div className="fh_container">
+            <div className="fp_container">
+            <div className="sub_setting_bg">
                 { this.state.checked ? 
                     <RenderResultForm {...resultData} onSubmit={this.handleSubmit} />
                     : <RenderCheckForm {...checkData} onSubmit={this.handleSubmit} onEnable={this.handleEnable} />
                 }
-            </div>
+            </div></div></div>
         )
     }
 }

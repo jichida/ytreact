@@ -43,6 +43,7 @@ class Device extends PureComponent{
         const { history } = this.props;
 
         return (
+            <div className="black_bg">
             <div className="device">
                 <NavBar
                     className="nav"
@@ -76,7 +77,7 @@ class Device extends PureComponent{
                         </Flex>
                     </div>
                 </WingBlank>
-            </div>
+            </div></div>
         )
     }
 }

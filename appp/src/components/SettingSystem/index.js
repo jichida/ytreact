@@ -179,7 +179,8 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                         <InputItem
-                            placeholder={<FormattedMessage id="setting.system.scan" defaultMessage="扫一扫" />}
+                            // placeholder={<FormattedMessage id="setting.system.scan" defaultMessage="扫一扫" />}
+                            placeholder= "扫一扫"
                             {...getFieldProps('deviceid',{
                                 rules: [{
                                     required: true,
@@ -417,7 +418,7 @@ const RenderForm = createForm({
                 </Item>
             </List>
         </form>
-        <WingBlank style={{marginTop: 30}}>
+        <WingBlank className="submit_zone" style={{padding: '30px 0px'}}>
             <div className="add_btn" >
                 <Button type="ghost" className="btn" onClick={handleSubmit}>
                     <FormattedMessage id="form.save" defaultMessage="保存" />

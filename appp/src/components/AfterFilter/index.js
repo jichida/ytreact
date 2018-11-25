@@ -106,7 +106,7 @@ const RenderForm = createForm({
                 </Item>
             </List>
         </form>
-        <div className="submit_area">
+        <div className="submit_zone">
             <div className="add_btn" >
                 <Button type="ghost" className="btn" onClick={handleSubmit}>
                     <FormattedMessage id="submit.reset" defaultMessage="重置" />
@@ -127,15 +127,18 @@ class AfterFilter extends PureComponent{
         const { history } = this.props;
 
         return (
-            <div className="fp_container sub_bg">
+            <div className="fh_container black_bg">
+            <div className="fp_container white_bg">
+            <div className="sub_bg">
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}
                     onLeftClick={() => history.goBack()}
                 >
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
                 </NavBar>
-                
+                { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
+            </div>
+            </div>
             </div>
         )
     }

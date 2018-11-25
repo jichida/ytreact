@@ -18,8 +18,7 @@ class Home extends PureComponent{
         return (
             <React.Fragment>
                 <div className="home_bg"></div>
-                <WingBlank style={{marginTop: "-140px"}}>
-                    <Flex direction="column" className="monitor_container">
+                    <WingBlank style={{marginTop: "-140px", display: "flex", justifyContent: 'center'}}>
                         <div className="zhuyean">
                             <img src={monitorBg} alt="" style={{width: '100%', display: 'block'}} />
                             <div className="monitor">
@@ -27,22 +26,21 @@ class Home extends PureComponent{
                                 <p>出水水质 TDS 100</p>
                             </div>
                         </div>
+                    </WingBlank>
+                    <Flex direction="column" className="monitor_container">
                         <div className="detail">
-                            <WingBlank>
-                            <Flex>
-                                <Flex.Item>进水水质 900 ppm</Flex.Item>
-                                <Flex.Item>总产水量 900 gal</Flex.Item>
-                            </Flex>
-                            <WhiteSpace size="lg" />
-                            <Flex>
-                                <Flex.Item>运行时间 20 天</Flex.Item>
-                                <Flex.Item>浓水出水量 600 gal</Flex.Item>
-                            </Flex>
-                            </WingBlank>
+                                <Flex>
+                                    <Flex.Item>进水水质 900 ppm</Flex.Item>
+                                    <Flex.Item>总产水量 900 gal</Flex.Item>
+                                </Flex>
+                                <WhiteSpace size="lg" style={{height: 30}} />
+                                <Flex>
+                                    <Flex.Item>运行时间 20 天</Flex.Item>
+                                    <Flex.Item>浓水出水量 600 gal</Flex.Item>
+                                </Flex>
                         </div>
-                        <WhiteSpace size="lg" />
+                        <WhiteSpace size="lg" style={{height: 50}} />
                         <div className="chart">
-                            <WingBlank>
                             <Flex>
                                 <Flex.Item>
                                     <HomeChart title="电离子膜寿命"
@@ -98,11 +96,10 @@ class Home extends PureComponent{
                                 <Flex.Item>
                                 </Flex.Item>
                             </Flex>
-                            <WhiteSpace style={{height:50}} />
-                            </WingBlank>
+                            <WhiteSpace style={{height:10}} />
                         </div>
                     </Flex>
-                </WingBlank>
+                
             </React.Fragment>
         )
     }

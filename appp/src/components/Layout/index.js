@@ -24,7 +24,7 @@ class Layout extends React.PureComponent {
     return (
       <div className="fh_container fp_container layout_bg">
         <TabBar
-          barTintColor="#ffffff28"
+          barTintColor="#000000e3"
           prerenderingSiblingsNumber={0}
         >
           <TabBar.Item

@@ -11,7 +11,7 @@ const initial = {
         title: '',
         msg: '',
         ispop: false,
-
+        locale:'zh-cn',
         //是否显示大图控件
         bigimgshow : false,
         bigimglist : [],

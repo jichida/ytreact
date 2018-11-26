@@ -1,13 +1,35 @@
 import React, { PureComponent } from 'react';
-import {  List, InputItem, Button, WingBlank, Switch, DatePicker } from 'antd-mobile';
+import {  List, InputItem, Button, WingBlank, Switch, DatePicker, Picker } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import moment from 'moment';
+import _ from 'lodash';
+import 'moment-timezone';
 import { FormattedMessage } from 'react-intl';
 import './index.less';
 
 
 const Item = List.Item;
 const Brief = Item.Brief;
+
+const timezoneOption = () => {
+    const timeZones = moment.tz.names();
+    const offsetTmz = [];
+
+    for (const i in timeZones) {
+      const tz = moment.tz(timeZones[i]).format('Z').replace(':00', '').replace(':30', '.5');
+      let x = (tz === 0) ? 0 : parseInt(tz).toFixed(2);
+
+      const timeZone = {
+        label: `(GMT${moment.tz(timeZones[i]).format('Z')})${timeZones[i]}`,
+        value: `${timeZones[i]}`,
+        time: `${x}`,
+      };
+      offsetTmz.push(timeZone);
+    }
+
+    return _.sortBy(offsetTmz, [function (el) { return -(el.time); }]);
+  }
+
  
 // 设备编号			deviceid
 // 购买日期			buydate
@@ -161,6 +183,7 @@ const RenderForm = createForm({
     }
 })((props)=>{
     const { getFieldProps, validateFields } = props.form;
+    const options = timezoneOption();
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -170,6 +193,7 @@ const RenderForm = createForm({
             }
         })
     }
+
 
     return (
         <React.Fragment>
@@ -234,11 +258,15 @@ const RenderForm = createForm({
                 </Item>
                 <Item arrow="horizontal"><FormattedMessage id="setting.system.timezone" defaultMessage="选择时区" />
                     <Brief>
-                        <div className="item_children">   
-                        <InputItem
-                            placeholder="请输入"
+                        <div className="item_children">
+                        <Picker
+                            data={options}
+                            cols={1}
+                            extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
                             {...getFieldProps('timezone')}
-                        ></InputItem>
+                            >
+                            <List.Item></List.Item>
+                        </Picker>
                         </div>
                     </Brief>
                 </Item>

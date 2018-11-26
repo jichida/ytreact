@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Flex, WhiteSpace } from 'antd-mobile';
+import { Flex } from 'antd-mobile';
 
 
 import './index.less';

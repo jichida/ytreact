@@ -39,10 +39,10 @@ const data = [
                                     afterChange={index => console.log('slide to', index)}
                                     >
                                     {data.map(val => (
-                                        <a key={val.name} href="#"  style={{ display: 'inline-block', width: '100%', height: "100%" }} >
+                                        <div key={val.name} href="#"  style={{ display: 'inline-block', width: '100%', height: "100%" }} >
                                             <img src={val.img} alt="" style={{ height: '100%' }}/>
                                             <p style={{color:"#cccccc", marginTop: "-25px", fontSize: 20}}>{val.name}</p>
-                                        </a>
+                                        </div>
                                     ))}
                                 </Carousel>
                             </div>

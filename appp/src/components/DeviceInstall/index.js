@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import {  NavBar, Icon, List, InputItem, Button, WingBlank, Switch } from 'antd-mobile';
+import {  NavBar, Icon, List, InputItem, Button, Switch } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';

@@ -1,13 +1,8 @@
 import React, { PureComponent } from 'react';
-import {  List, InputItem, Button, WingBlank, Switch, DatePicker, WhiteSpace } from 'antd-mobile';
+import {  List, Button, WingBlank, Switch, WhiteSpace } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
-import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import './index.less';
-
-
-const Item = List.Item;
-const Brief = Item.Brief;
  
 // 滤芯已冲洗	washed
 // 进水压力已符合标准	uptostandard

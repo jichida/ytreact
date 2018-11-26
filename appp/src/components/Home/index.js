@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { NavBar, Icon, Tabs } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 
@@ -8,31 +9,33 @@ import Performance from '../Performance';
 
 import './index.less';
 import '../../assets/wlimg.png';
-
+import {ui_home_selindex} from '../../actions';
 
 class Home extends PureComponent{
 
-    state = {
-        SelectKey: 0,
-    }
+    // state = {
+    //     SelectKey: 0,
+    // }
 
-    handleClick = ( key ) => {
-        this.setState({
-            SelectKey: key,
-        })
-    }
+    // handleClick = ( index ) => {
+    //     // this.setState({
+    //     //     SelectKey: key,
+    //     // })
+    //     this.props.dispatch(ui_home_selindex(index));
+    // }
 
-    hanleTabClick = (index)=>{
-        this.setState({
-            SelectKey: index,
-        })
+    onChangeTab = (index)=>{
+      this.props.dispatch(ui_home_selindex(index));
+        // this.setState({
+        //     SelectKey: index,
+        // })
     }
 
     render () {
         const { history } = this.props;
-        const { SelectKey } = this.state;
+        const { curtab } = this.props;
         let content;
-        switch (SelectKey) {
+        switch (curtab) {
             case 0:
                 content = <Main />;
                 break;
@@ -47,18 +50,18 @@ class Home extends PureComponent{
         }
 
         let tabs = [
-            { title: 
-                <div className={SelectKey===0 ? "navbar_item_on" : "navbar_item"}>
+            { title:
+                <div className={curtab===0 ? "navbar_item_on" : "navbar_item"}>
                     <h3>主页</h3>
-                    <span>{SelectKey}</span>
+                    <span>{curtab}</span>
                 </div>},
-            { title: 
-                <div className={SelectKey===1 ? "navbar_item_on" : "navbar_item"}>
+            { title:
+                <div className={curtab===1 ? "navbar_item_on" : "navbar_item"}>
                     <h3>异常</h3>
                     <span></span>
                 </div> },
-            { title: 
-                <div className={SelectKey===2 ? "navbar_item_on" : "navbar_item"}>
+            { title:
+                <div className={curtab===2 ? "navbar_item_on" : "navbar_item"}>
                     <h3>性能</h3>
                     <span></span>
                 </div> },
@@ -74,20 +77,23 @@ class Home extends PureComponent{
                 >
                     <Tabs
                         tabs={tabs}
-                        initialPage={0} 
-                        useOnPan={false} 
+                        initialPage={curtab}
+                        useOnPan={false}
                         tabBarBackgroundColor="transparent"
                         tabBarUnderlineStyle={{border: 0}}
                         tabBarActiveTextColor="#ffffff"
                         tabBarInactiveTextColorr="#ffffff"
-                        onTabClick={(tab, index)=>this.hanleTabClick(index)} 
+                        onChange={(tab, index)=>this.onChangeTab(index)}
                         tabBarTextStyle={{height:60}}
                     />
                 </NavBar>
-                { content }   
+                { content }
             </div>
         )
     }
 }
-
+const mapStateToProps =  ({app:{hometabindex}}) =>{
+  return {curtab:hometabindex};
+};
+Home = connect(mapStateToProps)(Home);
 export default withRouter(Home);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TabBar } from 'antd-mobile';
-
+import { connect } from 'react-redux';
 import Home from '../Home';
 import Device from '../Device';
 import Setting from '../Setting';
@@ -13,14 +13,21 @@ import i_device from '../../assets/tab/icon2.png';
 import i_device_on from '../../assets/tab/icon2_on.png';
 import i_setting from '../../assets/tab/icon3.png';
 import i_setting_on from '../../assets/tab/icon3_on.png';
+import {ui_main_selindex} from '../../actions';
 
 class Layout extends React.PureComponent {
 
-  state = {
-      selectedTab: 'Home',
+  // state = {
+  //     selectedTab: 'Home',
+  // }
+  onChangeTab = (index)=>{
+    this.props.dispatch(ui_main_selindex(index));
+      // this.setState({
+      //     SelectKey: index,
+      // })
   }
-
   render() {
+    const {curtab} = this.props;
     return (
       <div className="fh_container fp_container layout_bg">
         <TabBar
@@ -41,11 +48,9 @@ class Layout extends React.PureComponent {
                   <span></span>
               </div>
             }
-            selected={this.state.selectedTab === 'Home'}
+            selected={curtab === 0}
             onPress={() => {
-              this.setState({
-                selectedTab: 'Home',
-              });
+              this.onChangeTab(0);
             }}
           >
             {<Home />}
@@ -64,11 +69,9 @@ class Layout extends React.PureComponent {
                   <span></span>
               </div>
             }
-            selected={this.state.selectedTab === 'Device'}
+            selected={curtab === 1}
             onPress={() => {
-              this.setState({
-                selectedTab: 'Device',
-              });
+              this.onChangeTab(1);
             }}
           >
             {<Device />}
@@ -87,11 +90,9 @@ class Layout extends React.PureComponent {
                   <span></span>
               </div>
             }
-            selected={this.state.selectedTab === 'Setting'}
+            selected={curtab === 2}
             onPress={() => {
-              this.setState({
-                selectedTab: 'Setting',
-              });
+              this.onChangeTab(2);
             }}
           >
             {<Setting />}
@@ -101,5 +102,8 @@ class Layout extends React.PureComponent {
     );
   }
 }
-
+const mapStateToProps =  ({app:{maintabindex}}) =>{
+  return {curtab:maintabindex};
+};
+Layout = connect(mapStateToProps)(Layout);
 export default Layout;

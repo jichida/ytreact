@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import {  List, Button, WingBlank, Switch, WhiteSpace } from 'antd-mobile';
+import {  List, Button, WingBlank, Switch, WhiteSpace, ImagePicker } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { FormattedMessage } from 'react-intl';
 import './index.less';
@@ -30,7 +30,20 @@ const checkData = {
     appset: {
         value: true,
     },
+    pictures: {
+        value: [],
+    }
 }
+
+const data = [{
+    url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
+    id: '2121',
+  }, {
+    url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
+    id: '2122',
+  }
+]
+  
 
 const RenderCheckForm = createForm({
     mapPropsToFields(props) {
@@ -73,6 +86,10 @@ const RenderCheckForm = createForm({
                 props.onSubmit(values);
             }
         })
+    }
+
+    const  onChange = (files, type, index) => {
+        console.log(files, type, index);
     }
 
     return (
@@ -121,6 +138,18 @@ const RenderCheckForm = createForm({
                         })}
                     />}
                 ><FormattedMessage id="setting.checklist.appset" defaultMessage="APP已设置" /></List.Item>
+                <List.Item><FormattedMessage id="setting.checklist.pictures" defaultMessage="拍摄安装图，用于备份存档（至少上传四张）" />
+                    <List.Item.Brief>
+                        <div className="item_children">
+                            <ImagePicker
+                                files={data}
+                                onChange={onChange}
+                                selectable={data.length < 7}
+                                multiple={false}
+                            />
+                        </div>
+                    </List.Item.Brief>
+                </List.Item>
             </List>
         </form>
         <WingBlank  className="submit_zone dual_btn">

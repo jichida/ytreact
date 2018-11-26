@@ -8,30 +8,6 @@ import './index.less';
 
 const Item = List.Item;
 const Brief = Item.Brief;
- 
-const basicData = {
-    username: {
-        value: '',
-    },
-    userphone: {
-        value: '',
-    },
-    useraddress: {
-        value: '',
-    },
-    useproperty: { //使用性质
-        value: [],
-    },
-    building: { // 房屋类型
-        value: [],
-    },
-    floor: { // 楼层
-        value: '',
-    },
-    model: { //预装型号
-        value: [],
-    }
-}
 
 const useproperty = [
     {
@@ -237,6 +213,30 @@ class DeviceBasic extends PureComponent{
 
     render () {
         const { history } = this.props;
+
+         const basicData = {
+             username: {
+                 value: '王小庆',
+             },
+             userphone: {
+                 value: '15961125167',
+             },
+             useraddress: {
+                 value: '南京市建邺区金润大厦A座16楼',
+             },
+             useproperty: { //使用性质
+                 value: '家用',
+             },
+             building: { // 房屋类型
+                 value: '店铺',
+             },
+             floor: { // 楼层
+                 value: '19楼',
+             },
+             model: { //预装型号
+                 value: 'YYY型',
+             }
+         }
 
         return (
             <div className="sub_bg">

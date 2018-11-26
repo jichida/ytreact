@@ -14,7 +14,7 @@ import mgb from '../../assets/ljimgb.png';
         return (
             <div className="fh_container black_bg">
                 <div className="fp_container">
-                    <div class="panel">
+                    <div className="panel">
                         <WingBlank>
                             <Flex direction="column" justify="center" className="content container">
                                 <WhiteSpace size="xl" />

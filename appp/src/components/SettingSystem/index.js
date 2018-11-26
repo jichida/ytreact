@@ -11,6 +11,8 @@ import './index.less';
 const Item = List.Item;
 const Brief = Item.Brief;
 
+const curTZ = moment.tz.guess();
+
 const timezoneOption = () => {
     const timeZones = moment.tz.names();
     const offsetTmz = [];
@@ -56,7 +58,7 @@ const timezoneOption = () => {
 
 const basicData = {
     deviceid: {
-        value: '',
+        value: '123456789',
     },
     buydate: {
         value: '',
@@ -65,10 +67,10 @@ const basicData = {
         value: '',
     },
     installer: {
-        value: '',
+        value: '安装员工',
     },
     timezone: {
-        value: moment.now().timezone,
+        value: [`${curTZ}`],
     },
     sdate: {
         value: '',
@@ -106,7 +108,25 @@ const basicData = {
     dormancyend: {
         value: '',
     },
+    language: {
+        value:  ['中文简体'],
+    }
 }
+
+const languages = [
+    {
+        label: '英语',
+        value: '英语',
+    },
+    {
+        label: '中文简体',
+        value: '中文简体',
+    },
+    {
+        label: '中文繁体',
+        value: '中文繁体',
+    },
+]
 
 const RenderForm = createForm({
     mapPropsToFields(props) {
@@ -179,11 +199,17 @@ const RenderForm = createForm({
             ...props.dormancyend,
             value: props.dormancyend.value,
           }),
+          language: createFormField({
+            ...props.language,
+            value: props.language.value,
+          }),
         };
     }
 })((props)=>{
     const { getFieldProps, validateFields } = props.form;
     const options = timezoneOption();
+
+
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -263,7 +289,9 @@ const RenderForm = createForm({
                             data={options}
                             cols={1}
                             extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
-                            {...getFieldProps('timezone')}
+                            {...getFieldProps('timezone', {
+                                initialValue: [curTZ],
+                            })}
                             >
                             <List.Item></List.Item>
                         </Picker>
@@ -441,6 +469,22 @@ const RenderForm = createForm({
                                 >
                                 <List.Item arrow="horizontal"></List.Item>
                             </DatePicker>
+                        </div>
+                    </Brief>
+                </Item>
+                <Item><FormattedMessage id="setting.system.language" defaultMessage="语言" />
+                    <Brief>
+                        <div className="item_children">
+                            <Picker
+                                data={languages}
+                                cols={1}
+                                extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
+                                {...getFieldProps('language', {
+                                    initialValue: ['中文简体'],
+                                })}
+                                >
+                                <List.Item arrow="horizontal"></List.Item>
+                            </Picker>
                         </div>
                     </Brief>
                 </Item>

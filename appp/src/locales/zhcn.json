@@ -1,3 +1,17 @@
 {
-  "start.add": "添加设备开启智能生活！"
+  "start.add": "添加设备开启智能生活！",
+  "filter.filter":"选择滤芯",
+  "filter.replacedate":"上一次更换时间",
+  "submit.reset":"重置",
+  "user.name":"用户名",
+  "user.phone":"联系方式",
+  "user.address":"用户地址",
+  "user.property":"使用性质",
+  "user.building":"房屋类型",
+  "user.floor":"楼层高度",
+  "user.model":"预装型号",
+  "install.position":"安装地点",
+  "install.avoidlight":"是否避光",
+  "install.wall":"墙体材料",
+  "install.method":"主机安装方式"
 }

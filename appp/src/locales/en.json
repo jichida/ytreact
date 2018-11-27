@@ -1,3 +1,17 @@
 {
-  "start.add": "start a smart new life"
+  "start.add": "start a new life",
+  "filter.filter":"select filter",
+  "filter.replacedate":"last change time",
+  "submit.reset":"reset",
+  "user.name":"username",
+  "user.phone":"phone",
+  "user.address":"user address",
+  "user.property":"use for",
+  "user.building":"building",
+  "user.floor":"floor",
+  "user.model":"model",
+  "install.position":"install location",
+  "install.avoidlight":"is avoid light",
+  "install.wall":"wall",
+  "install.method":"install method"
 }

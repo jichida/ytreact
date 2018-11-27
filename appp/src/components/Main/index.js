@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Flex, WingBlank, WhiteSpace } from 'antd-mobile';
-
+import { connect } from 'react-redux';
 import HomeChart from '../HomeChart';
 import monitorBg from '../../assets/zhuye_an.png';
 import lodashmap from 'lodash.map';
@@ -16,15 +16,9 @@ const CBlue = '#38b4f2';
 class Home extends PureComponent{
 
     render () {
-      const mapfilternames = {
-        filterelements_modlife:'电离子膜',
-        filterelements_prefilter1:'前置PP',
-        filterelements_prefilter2:'前置2滤芯',
-        filterelements_prefilter3:'前置3滤芯',
-        filterelements_posfilter1:'后置活性炭滤芯',
-        filterelements_posfilter2:'后置2滤芯',
-        filterelements_posfilter3:'后置3滤芯',
-      };
+      const {mapname_filter} = this.props;
+      const mapfilternames = mapname_filter;
+      
       const devicedata = {
         main_outwater_quality:30,//出水水质,
         main_outwater_grade:'优',//出水等级,
@@ -152,5 +146,8 @@ class Home extends PureComponent{
         )
     }
 }
-
+const mapStateToProps =  ({app:{mapname_filter}}) =>{
+  return {mapname_filter};
+};
+Home = connect(mapStateToProps)(Home);
 export default Home;

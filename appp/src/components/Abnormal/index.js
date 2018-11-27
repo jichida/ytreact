@@ -1,30 +1,11 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { Flex } from 'antd-mobile';
 import lodashmap from 'lodash.map';
 // import lodashget from 'lodash.get';
 
 import './index.less';
 
-const mapname = {
-  error_partsfailure:'零件',
-  error_pumpfailure:'泵',//20	泵故障	ERROR2:0 无故障 1有故障
-  error_programfailure:'程序',//21	程序故障	ERROR3:0 无故障 1有故障
-  error_flowfailure:'流量',//22	流量故障	ERROR4:0 无故障 1有故障
-  error_leakagefault:'漏水',//23	漏水故障	ERROR5:0 无故障 1有故障
-  error_edicurrent:'EDI',//24	EDI电流	ERROR6:0 无故障 1有故障
-  error_modout:'MODOUT',//25	MODOUT  膜的去除效率	ERROR7:0 无故障 1有故障
-  error_intakesensorfault:'进水',//26	进水传感器故障	ERROR8 :0 无故障 1有故障
-  error_outflowsensorfault:'出水',//27	出水传感器故障	ERROR9:0 无故障 1有故障
-  error_cwatersensorfault:'浓水',//28	浓水传感器故障	ERROR10 :0 无故障 1有故障
-  error_wastewatersensorfault:'废水',//29	废水传感器故障	ERROR11:0 无故障 1有故障
-  error_outflowflowmeterfailure:'出水流量',//30	出水流量计故障	ERROR12:0 无故障 1有故障
-  error_wastewaterflowmeterfailure:'废水流量',//31	废水流量计故障	ERROR13:0 无故障 1有故障
-  error_clockfailure:'时钟',//32	时钟故障	ERROR14:0 无故障 1有故障
-  error_pressuresensor1failure:'压力1',//33	压力1传感器故障	ERROR15:0 无故障 1有故障
-  error_pressuresensor2failure:'压力2',//34	压力2传感器故障	ERROR16:0 无故障 1有故障
-  error_pressuresensor3failure:'压力3',//35	压力3传感器故障	ERROR17:0 无故障 1有故障
-  error_pressuresensor4failure:'压力4',//36	压力4传感器故障	ERROR18:0 无故障 1有故障
-};
 //
 // const abnormal = [
 //     {
@@ -93,6 +74,8 @@ class Abnormal extends PureComponent{
 
 
     render () {
+      const {mapname_err} = this.props;
+      const mapname = mapname_err;
       const errflag = {
         error_partsfailure:1,//零件故障
         error_pumpfailure:1,//20	泵故障	ERROR2:0 无故障 1有故障
@@ -149,4 +132,8 @@ class Abnormal extends PureComponent{
     }
 }
 
+const mapStateToProps =  ({app:{mapname_err}}) =>{
+  return {mapname_err};
+};
+Abnormal = connect(mapStateToProps)(Abnormal);
 export default Abnormal;

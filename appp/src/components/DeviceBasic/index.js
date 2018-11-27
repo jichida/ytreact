@@ -6,6 +6,8 @@ import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import {setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
+import { FormattedMessage, injectIntl } from 'react-intl';
+
 import './index.less';
 
 const Item = List.Item;
@@ -77,8 +79,9 @@ const RenderForm = createForm({
           })
         };
     }
-})((props)=>{
+})(injectIntl((props)=>{
     const { getFieldProps, validateFields } = props.form;
+    const { intl: { formatMessage }} = props;
 
     const handleSubmit = (e)=>{
         // e.preventDefault();
@@ -98,7 +101,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('username',{
                                     rules: [{
                                         required: true,
@@ -113,7 +116,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('userphone',{
                                     rules: [{
                                         required: true,
@@ -128,7 +131,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('useraddress',{
                                     rules: [{
                                         required: true,
@@ -145,7 +148,7 @@ const RenderForm = createForm({
                             <Picker
                                 data={useproperty}
                                 cols={1}
-                                extra="请选择"
+                                extra={formatMessage({id: "form.picker"})}
                                 {...getFieldProps('useproperty')}
                                 >
                                 <List.Item arrow="horizontal"></List.Item>
@@ -159,7 +162,7 @@ const RenderForm = createForm({
                             <Picker
                                 data={building}
                                 cols={1}
-                                extra="请选择"
+                                extra={formatMessage({id: "form.picker"})}
                                 {...getFieldProps('building')}
                                 >
                                 <List.Item arrow="horizontal"></List.Item>
@@ -172,7 +175,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="number"
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('floor',{
                                     rules: [{
                                         required: true,
@@ -189,7 +192,7 @@ const RenderForm = createForm({
                             <Picker
                                 data={model}
                                 cols={1}
-                                extra="请选择"
+                                extra={formatMessage({id: "form.picker"})}
                                 {...getFieldProps('model')}
                                 >
                                 <List.Item arrow="horizontal"></List.Item>
@@ -201,12 +204,14 @@ const RenderForm = createForm({
         </form>
         <div className="submit_zone">
             <div className="add_btn" >
-                <Button type="ghost" className="btn" onClick={handleSubmit}>保存</Button>
+                <Button type="ghost" className="btn" onClick={handleSubmit}>
+                    <FormattedMessage id="form.save" />
+                </Button>
             </div>
         </div>
         </React.Fragment>
     )
-})
+}))
 
 class DeviceBasic extends PureComponent{
 

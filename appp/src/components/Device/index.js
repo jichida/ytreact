@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Flex, NavBar, Icon, List, ActionSheet, WingBlank } from 'antd-mobile';
 import { Link, withRouter } from 'react-router-dom';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 import './index.less';
 import txImg from '../../assets/tx.png';
@@ -23,12 +24,12 @@ if (isIPhone) {
 
 class Device extends PureComponent{
 
-    showActionSheet = () => {
+    showActionSheet = (title) => {
         const BUTTONS = ['XXX服务商名称', 'YYY服务商名称', 'ZZZ服务商名称', '取消'];
         ActionSheet.showActionSheetWithOptions({
           options: BUTTONS,
           cancelButtonIndex: BUTTONS.length - 1,
-          title: '选择服务商',
+          title: title,
           //message: '描述',
           maskClosable: true,
           'data-seed': 'Id',
@@ -41,6 +42,8 @@ class Device extends PureComponent{
 
     render () {
         const { history } = this.props;
+        const { intl: { formatMessage }} = this.props;
+        const title = formatMessage({id: "device.privider.select"})
 
         return (
             <div className="black_bg">
@@ -50,28 +53,44 @@ class Device extends PureComponent{
                     icon={<Icon type="left" />}
                     onLeftClick={() => history.goBack()}
                 >
-                设备信息
+                <FormattedMessage id="device" />
                 </NavBar>
                 <List>
                     <Item
                         arrow="horizontal"
                         thumb={txImg}
                         multipleLine
-                        onClick={this.showActionSheet}
+                        onClick={()=>this.showActionSheet(title)}
                         >
                         <span style={{color: "#ffffff"}}>{'XXX服务商名称'}<Brief style={{color: "#ffffff"}}>{'TEL:400-000-1234'}</Brief></span>
                     </Item>
                 </List>  
                 <WingBlank>
-                    <p className="tools_title">常用工具</p>
+                    <p className="tools_title"><FormattedMessage id="device.tools" /></p>
                     <div className="tools_bg">
                         <Flex>
-                            <Flex.Item className="tools_con"><Link to="/basic"><div><img src={basic_img} alt="" /><p>基本信息</p></div></Link></Flex.Item>
-                            <Flex.Item className="tools_con"><Link to="/water"><div><img src={water_img} alt="" /><p>用水信息</p></div></Link></Flex.Item>
-                            <Flex.Item className="tools_con"><Link to="/install"><div><img src={install_img} alt="" /><p>安装环境</p></div></Link></Flex.Item>
+                            <Flex.Item className="tools_con">
+                                <Link to="/basic"><div><img src={basic_img} alt="" />
+                                    <p><FormattedMessage id="device.basic" /></p></div>
+                                </Link>
+                            </Flex.Item>
+                            <Flex.Item className="tools_con">
+                                <Link to="/water"><div><img src={water_img} alt="" />
+                                    <p><FormattedMessage id="device.water" /></p></div>
+                                </Link>
+                            </Flex.Item>
+                            <Flex.Item className="tools_con">
+                                <Link to="/install"><div><img src={install_img} alt="" />
+                                    <p><FormattedMessage id="device.install" /></p></div>
+                                </Link>
+                            </Flex.Item>
                         </Flex>
                         <Flex>
-                            <Flex.Item className="tools_con"><Link to="#"><div><img src={user_img} alt="" /><p>用户版入口</p></div></Link></Flex.Item>
+                            <Flex.Item className="tools_con">
+                                <Link to="#"><div><img src={user_img} alt="" />
+                                    <p><FormattedMessage id="device.userversion" /></p></div>
+                                </Link>
+                            </Flex.Item>
                             <Flex.Item className="tools_con"></Flex.Item>
                             <Flex.Item className="tools_con"></Flex.Item>
                         </Flex>
@@ -82,4 +101,4 @@ class Device extends PureComponent{
     }
 }
 
-export default withRouter(Device);
+export default withRouter(injectIntl(Device));

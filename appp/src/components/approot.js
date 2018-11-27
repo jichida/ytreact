@@ -26,7 +26,7 @@ class AppRoot extends React.Component {
     componentWillMount() {
 
     }
-   
+
     componentWillUnmount() {
 
     }
@@ -34,18 +34,18 @@ class AppRoot extends React.Component {
       return (
           <div className="page">
             <Switch>
-              <Route exact path="/" component={Index} />
-              <Route exact path="/wifi" component={WifiLogin} />
-              <Route exact path="/wifisucess" component={WifiSuccess} />
-              <Route exact path="/devices" component={DeviceSelect} />
-              <Route exact path="/home" component={Home} />
-              <Route exact path="/basic" component={BasicInfo} />
-              <Route exact path="/water" component={WaterInfo} />
-              <Route exact path="/install" component={InstallInfo} />
-              <Route exact path="/equipmentlist" component={EquipmentList} />
-              <Route exact path="/frontfilter" component={FrontFilter} />
-              <Route exact path="/afterfilter" component={AfterFilter} />
-              <Route exact path="/pipefitting" component={PipeFittings} />
+              <Route exact path="/" component={requireAuthentication(Index)} />
+              <Route exact path="/wifi" component={requireAuthentication(WifiLogin)} />
+              <Route exact path="/wifisucess" component={requireAuthentication(WifiSuccess)} />
+              <Route exact path="/devices" component={requireAuthentication(DeviceSelect)} />
+              <Route exact path="/home" component={requireAuthentication(Home)} />
+              <Route exact path="/basic" component={requireAuthentication(BasicInfo)} />
+              <Route exact path="/water" component={requireAuthentication(WaterInfo)} />
+              <Route exact path="/install" component={requireAuthentication(InstallInfo)} />
+              <Route exact path="/equipmentlist" component={requireAuthentication(EquipmentList)} />
+              <Route exact path="/frontfilter" component={requireAuthentication(FrontFilter)} />
+              <Route exact path="/afterfilter" component={requireAuthentication(AfterFilter)} />
+              <Route exact path="/pipefitting" component={requireAuthentication(PipeFittings)} />
               <Route exact path="/login" component={Login} />
             </Switch>
           </div>

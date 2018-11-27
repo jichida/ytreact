@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
 import { Flex, WhiteSpace, Button, WingBlank, InputItem, ActionSheet } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './index.less';
 
 import logo from '../../assets/logo.png';
+import {login_request} from '../../actions';
 
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
 let wrapProps;
@@ -30,8 +32,8 @@ const constrast = {
 class Login extends PureComponent{
 
     state = {
-        name: '',
-        password: '',
+        name: '15961125167',
+        password: 'admin',
     }
 
     handleNameChange = (value)=>{
@@ -48,6 +50,8 @@ class Login extends PureComponent{
 
     handleSubmit = ()=>{
         console.log(`账号：${this.state.name}，密码：${this.state.password}`);
+        const {dispatch} = this.props;
+        dispatch(login_request({username:this.state.name,password:this.state.password}));
     }
 
     showActionSheet = () => {
@@ -85,10 +89,10 @@ class Login extends PureComponent{
                         <Flex justify="start" className="loginform">
                             <Flex.Item className="itemTitle"><span>账号</span></Flex.Item>
                             <Flex.Item className="itemContent">
-                                <InputItem 
-                                    className="input" 
-                                    placeholder="请输入账号" 
-                                    value={this.state.name} 
+                                <InputItem
+                                    className="input"
+                                    placeholder="请输入账号"
+                                    value={this.state.name}
                                     onChange={this.handleNameChange}
                                 />
                             </Flex.Item>
@@ -97,11 +101,11 @@ class Login extends PureComponent{
                         <Flex justify="start" className="loginform">
                             <Flex.Item className="itemTitle"><span>密码</span></Flex.Item>
                             <Flex.Item className="itemContent">
-                                <InputItem 
-                                    className="input" 
-                                    type="password" 
-                                    placeholder="请输入密码" 
-                                    value={this.state.password} 
+                                <InputItem
+                                    className="input"
+                                    type="password"
+                                    placeholder="请输入密码"
+                                    value={this.state.password}
                                     onChange={this.handlePasswordChange}
                                 />
                             </Flex.Item>
@@ -118,5 +122,5 @@ class Login extends PureComponent{
         )
     }
 }
-
+Login = connect()(Login);
 export default withRouter(Login);

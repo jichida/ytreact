@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Flex } from 'antd-mobile';
 import lodashmap from 'lodash.map';
+import { FormattedMessage } from 'react-intl';
 // import lodashget from 'lodash.get';
 
 import './index.less';
@@ -119,7 +120,7 @@ class Abnormal extends PureComponent{
                                 <div style={{width: "100%"}}>
                                     {this.renderList(abnormal, 'red-circle')}
                                 </div>
-                                <p className="normal_title">正常</p>
+                                <p className="normal_title"><FormattedMessage id="status.normal" /></p>
                                 <div style={{width: "100%"}}>
                                     {this.renderList(normal, 'green-circle')}
                                 </div>

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import {  NavBar, Icon, List, InputItem, Button, ActionSheet } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import moment from 'moment';
 
 import './index.less';
@@ -47,8 +47,11 @@ const RenderForm = createForm({
         }),
         };
     }
-})((props)=>{
+})(injectIntl((props)=>{
     const { getFieldProps, validateFields, setFieldsValue } = props.form;
+    const { intl: {formatMessage }} = props;
+    const title = formatMessage({id: "filter.select"});
+
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -64,7 +67,7 @@ const RenderForm = createForm({
         ActionSheet.showActionSheetWithOptions({
           options: BUTTONS,
           cancelButtonIndex: BUTTONS.length - 1,
-          message: '选择滤芯',
+          message: title,
           maskClosable: true,
           wrapProps,
         },
@@ -83,7 +86,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem extra=">" onExtraClick={showActionSheet} editable={false}
-                                    placeholder="选择滤芯"
+                                    placeholder={formatMessage({id: "form.picker"})}
                                     {...getFieldProps('filter')}
                                 />
                             </div>
@@ -93,7 +96,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem editable={false}
-                                    placeholder="上一次更换时间"
+                                    placeholder={formatMessage({id: "form.input"})}
                                     {...getFieldProps('replacedate',{
                                         rules: [{
                                             required: true,
@@ -109,13 +112,13 @@ const RenderForm = createForm({
         <div className="submit_zone">
             <div className="add_btn" >
                 <Button type="ghost" className="btn" onClick={handleSubmit}>
-                    <FormattedMessage id="submit.reset" defaultMessage="重置" />
+                    <FormattedMessage id="form.reset" defaultMessage="重置" />
                 </Button>
             </div>
         </div>
         </React.Fragment>
     )
-})
+}))
 
 class FrontFilter extends PureComponent{
 

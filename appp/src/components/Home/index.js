@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { NavBar, Icon, Tabs } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
+import { FormattedMessage, injectIntl } from 'react-intl'
 
 import Main from '../Main';
 import Abnormal from '../Abnormal';
@@ -32,7 +33,7 @@ class Home extends PureComponent{
     }
 
     render () {
-        const { history } = this.props;
+        const { history, intl: { formatMessage } } = this.props;
         const { curtab } = this.props;
         let content;
         switch (curtab) {
@@ -52,17 +53,17 @@ class Home extends PureComponent{
         let tabs = [
             { title:
                 <div className={curtab===0 ? "navbar_item_on" : "navbar_item"}>
-                    <h3>主页</h3>
+                    <h3>{formatMessage({id: 'layout.home'})}</h3>
                     <span>{curtab}</span>
                 </div>},
             { title:
                 <div className={curtab===1 ? "navbar_item_on" : "navbar_item"}>
-                    <h3>异常</h3>
+                    <h3>{formatMessage({id: 'layout.abnormal'})}</h3>
                     <span></span>
                 </div> },
             { title:
                 <div className={curtab===2 ? "navbar_item_on" : "navbar_item"}>
-                    <h3>性能</h3>
+                    <h3>{formatMessage({id: 'layout.performance'})}</h3>
                     <span></span>
                 </div> },
           ];
@@ -96,4 +97,4 @@ const mapStateToProps =  ({app:{hometabindex}}) =>{
   return {curtab:hometabindex};
 };
 Home = connect(mapStateToProps)(Home);
-export default withRouter(Home);
+export default withRouter(injectIntl(Home));

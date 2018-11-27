@@ -3,21 +3,21 @@ import {
 
     loginwithtoken_request,
     login_request,
-    login_result,
+    // login_result,
 
     logout_request,
     logout_result,
 
     getsystemconfig_request,
     getsystemconfig_result,
-
+    md_login_result,
   } from '../../actions';
 
 //接收的对应关系
 const recvmessagetoresultpair = {
   'common_err':common_err,
 
-  'login_result':login_result,
+  'login_result':md_login_result,
   'logout_result':logout_result,
   'getsystemconfig_result':getsystemconfig_result,
 

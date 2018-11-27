@@ -34,7 +34,7 @@ class Setting extends PureComponent{
                     icon={<Icon type="left" />}
                     onLeftClick={() => history.goBack()}
                 >
-                设置
+                <FormattedMessage id="setting" />
                 </NavBar>
                 <TabBar
                     unselectedTintColor="#ffffff"

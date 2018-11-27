@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import {  NavBar, Icon, List, InputItem, Button, Switch } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 import './index.less';
 
@@ -98,8 +98,9 @@ const RenderForm = createForm({
           }),
         };
     }
-})((props)=>{
+})(injectIntl((props)=>{
     const { getFieldProps, validateFields } = props.form;
+    const { intl: { formatMessage }} = props;
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -118,7 +119,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    placeholder="请输入"
+                                    placeholder={formatMessage({id: "form.input"})}
                                     {...getFieldProps('position',{
                                         rules: [{
                                             required: true,
@@ -140,7 +141,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    placeholder="请输入"
+                                    placeholder={formatMessage({id: "form.input"})}
                                     {...getFieldProps('wall',{
                                         rules: [{
                                             required: true,
@@ -155,7 +156,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    placeholder="请输入"
+                                    placeholder={formatMessage({id: "form.input"})}
                                     {...getFieldProps('method',{
                                         rules: [{
                                             required: true,
@@ -170,7 +171,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    placeholder="请输入"
+                                    placeholder={formatMessage({id: "form.input"})}
                                     {...getFieldProps('space',{
                                         rules: [{
                                             required: true,
@@ -185,7 +186,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    placeholder="请输入"
+                                    placeholder={formatMessage({id: "form.input"})}
                                     {...getFieldProps('pipe',{
                                         rules: [{
                                             required: true,
@@ -200,7 +201,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    placeholder="请输入"
+                                    placeholder={formatMessage({id: "form.input"})}
                                     {...getFieldProps('drainage',{
                                         rules: [{
                                             required: true,
@@ -215,7 +216,7 @@ const RenderForm = createForm({
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    placeholder="请输入"
+                                    placeholder={formatMessage({id: "form.input"})}
                                     {...getFieldProps('pipematerials',{
                                         rules: [{
                                             required: true,
@@ -245,13 +246,13 @@ const RenderForm = createForm({
         <div className="submit_zone">
             <div className="add_btn" >
                 <Button type="ghost" className="btn" onClick={handleSubmit}>
-                    <FormattedMessage id="submit.save" defaultMessage="保存" />
+                    <FormattedMessage id="form.save" defaultMessage="保存" />
                 </Button>
             </div>
         </div>
         </React.Fragment>
     )
-})
+}))
 
 class DeviceInstall extends PureComponent{
 
@@ -269,7 +270,7 @@ class DeviceInstall extends PureComponent{
                     icon={<Icon type="left" />}
                     onLeftClick={() => history.goBack()}
                 >
-                安装环境
+                    <FormattedMessage id="device.install" />
                 </NavBar>
                 { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
             </div>

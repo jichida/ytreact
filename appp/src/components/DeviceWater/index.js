@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import {  NavBar, Icon, List, InputItem, Button, Switch } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 import './index.less';
 
@@ -122,8 +122,9 @@ const RenderForm = createForm({
           }),
         };
     }
-})((props)=>{
+})(injectIntl((props)=>{
     const { getFieldProps, validateFields } = props.form;
+    const { intl: { formatMessage }} = props;
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -142,7 +143,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 type="money"
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('quantity',{
@@ -159,7 +160,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 type="money"
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('persons',{
@@ -176,7 +177,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 type="money"
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('spot',{
@@ -193,7 +194,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 type="money"
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('watergage',{
@@ -219,7 +220,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('bathrooms',{
                                     rules: [{
@@ -243,7 +244,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('tds',{
                                     rules: [{
@@ -260,7 +261,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('conductivity',{
                                     rules: [{
@@ -277,7 +278,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('hardness',{
                                     rules: [{
@@ -294,7 +295,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('alkalinity',{
                                     rules: [{
@@ -311,7 +312,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('ph',{
                                     rules: [{
@@ -328,7 +329,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 type="money"
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('usertds',{
                                     rules: [{
@@ -344,12 +345,14 @@ const RenderForm = createForm({
         </form>
         <div className="submit_zone">
             <div className="add_btn" >
-                <Button type="ghost" className="btn" onClick={handleSubmit}><FormattedMessage id="submit.save" defaultMessage="保存" /></Button>
+                <Button type="ghost" className="btn" onClick={handleSubmit}>
+                    <FormattedMessage id="form.save" defaultMessage="保存" />
+                </Button>
             </div>
         </div>
         </React.Fragment>
     )
-})
+}))
 
 class DeviceWater extends PureComponent{
 
@@ -367,7 +370,7 @@ class DeviceWater extends PureComponent{
                     icon={<Icon type="left" />}
                     onLeftClick={() => history.goBack()}
                 >
-                用水信息
+                <FormattedMessage id="device.water" />
                 </NavBar>
                 { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
             </div>

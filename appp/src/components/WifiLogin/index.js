@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Flex, WhiteSpace, Button, WingBlank, List, InputItem, ActionSheet } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
-
+import { FormattedMessage, injectIntl } from 'react-intl';
 import './index.less';
 
 import wifi from '../../assets/wlimg.png';
@@ -19,13 +19,13 @@ class WifiLogin extends PureComponent{
     state = {
         clicked: 0,
     }
-    
-    showActionSheet = () => {
+    // 取消 id: form.cancel
+    showActionSheet = (title) => {
         const BUTTONS = ['无线网络1', '无线网络2', '无线网络3', '取消'];
         ActionSheet.showActionSheetWithOptions({
             options: BUTTONS,
             cancelButtonIndex: BUTTONS.length - 1,
-            title: '选择当前网络',
+            title: title,
             maskClosable: true,
             'data-seed': 'logId',
             wrapProps,
@@ -36,7 +36,8 @@ class WifiLogin extends PureComponent{
     }
 
     render () {
-        const { history } = this.props;
+        const { history, intl } = this.props;
+        const title = intl.formatMessage({id: 'start.wifi.select'});
 
         return (
             <div className="fh_container black_bg">
@@ -50,21 +51,31 @@ class WifiLogin extends PureComponent{
                                 </div>
                                 <WhiteSpace size="xl" />
                                 <Flex justify="start" className="loginform">
-                                    <Flex.Item className="itemTitle"><span>网络</span></Flex.Item>
+                                    <Flex.Item className="itemTitle">
+                                        <span><FormattedMessage id="start.wifi" /></span>
+                                    </Flex.Item>
                                     <Flex.Item className="itemContent">
-                                        <List.Item arrow="horizontal" className="input" onClick={this.showActionSheet}>选择的wifi网络</List.Item>
+                                        <List.Item arrow="horizontal" className="input" onClick={()=>this.showActionSheet(title)}>
+                                            <FormattedMessage id="start.wifi.selected" />
+                                        </List.Item>
                                     </Flex.Item>
                                 </Flex>
                                 <WhiteSpace size="xl" />
                                 <Flex justify="start" className="loginform">
-                                    <Flex.Item className="itemTitle"><span>密码</span></Flex.Item>
+                                    <Flex.Item className="itemTitle">
+                                        <span><FormattedMessage id="start.password" /></span>
+                                    </Flex.Item>
                                     <Flex.Item className="itemContent">
-                                        <InputItem className="input" type="password" placeholder="请输入WIFI密码" />
+                                        <InputItem className="input" type="password" 
+                                            placeholder={intl.formatMessage({id: 'start.wifi.password.input'})} 
+                                        />
                                     </Flex.Item>
                                 </Flex>
                                 <WhiteSpace size="xl" style={{ marginBottom: 30}} />
                                 <div className="add_btn" >
-                                    <Button type="ghost" className="btn" onClick={()=>{history.push('/wifisucess')}}>通过</Button>
+                                    <Button type="ghost" className="btn" onClick={()=>{history.push('/wifisucess')}}>
+                                        <FormattedMessage id="start.pass" />
+                                    </Button>
                                 </div>
                                 <WhiteSpace size="xl" />
                             </Flex>
@@ -76,4 +87,4 @@ class WifiLogin extends PureComponent{
     }
 }
 
-export default withRouter(WifiLogin);
+export default withRouter(injectIntl(WifiLogin));

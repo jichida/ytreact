@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import {  List, InputItem, Button, Switch } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 import './index.less';
 
@@ -13,7 +13,7 @@ const Brief = Item.Brief;
 // 密码		password
 // 动态主机设置协议	DHCP
 // IP地址		IP
-// 网关		gatewary
+// 网关		gateway
 // 局域网 		LAN
 // 主网域服务器	DNS
 
@@ -30,7 +30,7 @@ const basicData = {
     ip: {
         value: '',
     },
-    gatewary: {
+    gateway: {
         value: '',
     },
     lan: {
@@ -60,9 +60,9 @@ const RenderForm = createForm({
                 ...props.ip,
                 value: props.ip.value,
           }),
-          gatewary: createFormField({
-                ...props.gatewary,
-                value: props.gatewary.value,
+          gateway: createFormField({
+                ...props.gateway,
+                value: props.gateway.value,
           }),
           userssid: createFormField({
                 ...props.lan,
@@ -74,8 +74,9 @@ const RenderForm = createForm({
       }),
         };
     }
-})((props)=>{
+})(injectIntl((props)=>{
     const { getFieldProps, validateFields } = props.form;
+    const { intl: { formatMessage }} = props;
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -94,7 +95,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('ssid',{
                                     rules: [{
                                         required: true,
@@ -109,7 +110,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('password',{
                                     rules: [{
                                         required: true,
@@ -131,7 +132,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('ip',{
                                     rules: [{
                                         required: true,
@@ -142,15 +143,15 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="setting.wifi.gatewary" defaultMessage="网关" />
+                <Item><FormattedMessage id="setting.wifi.gateway" defaultMessage="网关" />
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
-                                {...getFieldProps('gatewary',{
+                                placeholder={formatMessage({id: "form.input"})}
+                                {...getFieldProps('gateway',{
                                     rules: [{
                                         required: true,
-                                        message: <FormattedMessage id="setting.wifi.gatewary" defaultMessage="网关" />,
+                                        message: <FormattedMessage id="setting.wifi.gateway" defaultMessage="网关" />,
                                     }],
                                 })}
                             />
@@ -161,7 +162,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('lan',{
                                     rules: [{
                                         required: true,
@@ -176,7 +177,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('dns',{
                                     rules: [{
                                         required: true,
@@ -191,12 +192,12 @@ const RenderForm = createForm({
         </form>
         <div className="submit_zone">
             <div className="add_btn" >
-                <Button type="ghost" className="btn" onClick={handleSubmit}><FormattedMessage id="submit.save" defaultMessage="保存" /></Button>
+                <Button type="ghost" className="btn" onClick={handleSubmit}><FormattedMessage id="form.save" defaultMessage="保存" /></Button>
             </div>
         </div>
         </React.Fragment>
     )
-})
+}))
 
 class Wifi extends PureComponent{
 

@@ -4,7 +4,7 @@ import { createForm, createFormField } from 'rc-form';
 import moment from 'moment';
 import _ from 'lodash';
 import 'moment-timezone';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
 
 
@@ -205,8 +205,9 @@ const RenderForm = createForm({
           }),
         };
     }
-})((props)=>{
+})(injectIntl((props)=>{
     const { getFieldProps, validateFields } = props.form;
+    const { intl:{ formatMessage } } = props;
     const options = timezoneOption();
 
 
@@ -229,8 +230,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                         <InputItem
-                            // placeholder={<FormattedMessage id="setting.system.scan" defaultMessage="扫一扫" />}
-                            placeholder= "扫一扫"
+                            placeholder={formatMessage({id: "setting.system.scan"})}
                             {...getFieldProps('deviceid',{
                                 rules: [{
                                     required: true,
@@ -271,7 +271,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">                
                         <InputItem
-                            placeholder="请输入"
+                            placeholder={formatMessage({id: "form.input"})}
                             {...getFieldProps('installer',{
                                 rules: [{
                                     required: true,
@@ -328,7 +328,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('quality',{
                                     rules: [{
                                         required: true,
@@ -343,7 +343,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('frontfilter1')}
                             ></InputItem>
                         </div>
@@ -353,7 +353,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('frontfilter2')}
                             ></InputItem>
                         </div>
@@ -363,7 +363,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('frontfilter3')}
                             ></InputItem>
                         </div>
@@ -373,7 +373,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id:"form.input"})}
                                 {...getFieldProps('afterfilter1')}
                             ></InputItem>
                         </div>
@@ -383,7 +383,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('afterfilter2')}
                             ></InputItem>
                         </div>
@@ -393,7 +393,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('afterfilter3')}
                             ></InputItem>
                         </div>
@@ -438,7 +438,7 @@ const RenderForm = createForm({
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.system.send" defaultMessage="发送设备运行记录" /></List.Item>
+                ><FormattedMessage id="setting.system.sendlog" defaultMessage="发送设备运行记录" /></List.Item>
                 <List.Item className="item_switch"
                     extra={<Switch
                         {...getFieldProps('dormancy', {
@@ -499,7 +499,7 @@ const RenderForm = createForm({
         </WingBlank>
         </React.Fragment>
     )
-})
+}))
 
 class SettingSystem extends PureComponent{
 

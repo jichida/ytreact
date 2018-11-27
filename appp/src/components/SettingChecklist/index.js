@@ -30,20 +30,7 @@ const checkData = {
     appset: {
         value: true,
     },
-    pictures: {
-        value: [],
-    }
 }
-
-const data = [{
-    url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
-    id: '2121',
-  }, {
-    url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
-    id: '2122',
-  }
-]
-  
 
 const RenderCheckForm = createForm({
     mapPropsToFields(props) {
@@ -86,10 +73,6 @@ const RenderCheckForm = createForm({
                 props.onSubmit(values);
             }
         })
-    }
-
-    const  onChange = (files, type, index) => {
-        console.log(files, type, index);
     }
 
     return (
@@ -138,30 +121,18 @@ const RenderCheckForm = createForm({
                         })}
                     />}
                 ><FormattedMessage id="setting.checklist.appset" defaultMessage="APP已设置" /></List.Item>
-                <List.Item><FormattedMessage id="setting.checklist.pictures" defaultMessage="拍摄安装图，用于备份存档（至少上传四张）" />
-                    <List.Item.Brief>
-                        <div className="item_children">
-                            <ImagePicker
-                                files={data}
-                                onChange={onChange}
-                                selectable={data.length < 7}
-                                multiple={false}
-                            />
-                        </div>
-                    </List.Item.Brief>
-                </List.Item>
             </List>
         </form>
         <WingBlank  className="submit_zone dual_btn">
             <div className="add_btn_left" style={{display: 'inline-block'}} >
                 <Button type="ghost" className="btn">
-                    <FormattedMessage id="submit.decompression" defaultMessage="系统泄压" />
+                    <FormattedMessage id="form.decompression" defaultMessage="系统泄压" />
                 </Button>
             </div>
             <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
             <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
                 <Button type="ghost" className="btn" onClick={onEnable}>
-                    <FormattedMessage id="submit.enable" defaultMessage="启用" />
+                    <FormattedMessage id="form.enable" defaultMessage="启用" />
                 </Button>
             </div>
         </WingBlank>
@@ -169,12 +140,20 @@ const RenderCheckForm = createForm({
     )
 })
 
+const data = [{
+    url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
+    id: '2121',
+  }, {
+    url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
+    id: '2122',
+  }
+]
 
 // 出水流量正常			discharge
 // 设备已调试			debugged
 // 出水水质正常			quality
 // 设备已交付使用			delivered
-// 拍摄安装图，用以备份存档（至少上传4张）	picture
+// 拍摄安装图，用以备份存档（至少上传4张）	pictures
 
 const resultData = {
     discharge: {
@@ -189,11 +168,8 @@ const resultData = {
     delivered: {
         value: true,
     },
-    picture: {
-        value: true,
-    },
-    appset: {
-        value: true,
+    pictures: {
+        value: [],
     },
 }
 
@@ -216,9 +192,9 @@ const RenderResultForm = createForm({
             ...props.delivered,
             value: props.delivered.value,
           }),
-          picture: createFormField({
-            ...props.picture,
-            value: props.picture.value,
+          pictures: createFormField({
+            ...props.pictures,
+            value: props.pictures.value,
           }),
         };
     }
@@ -234,6 +210,9 @@ const RenderResultForm = createForm({
         })
     }
     
+    const  onChange = (files, type, index) => {
+        console.log(files, type, index);
+    }
 
     return (
         <React.Fragment>
@@ -245,41 +224,46 @@ const RenderResultForm = createForm({
                             valuePropName: 'checked',
                         })}
                     />}
-                ><FormattedMessage id="setting.checklist.discharge" defaultMessage="滤芯已冲洗" /></List.Item>
+                ><FormattedMessage id="setting.checklist.discharge" /></List.Item>
                 <List.Item className="item_switch"
                     extra={<Switch
                         {...getFieldProps('debugged', {
                             valuePropName: 'checked',
                         })}
                     />}
-                ><FormattedMessage id="setting.checklist.debugged" defaultMessage="进水压力已符合标准" /></List.Item>
+                ><FormattedMessage id="setting.checklist.debugged" /></List.Item>
                 <List.Item className="item_switch"
                     extra={<Switch
                         {...getFieldProps('quality', {
                             valuePropName: 'checked',
                         })}
                     />}
-                ><FormattedMessage id="setting.checklist.quality" defaultMessage="旁通已关闭" /></List.Item>
+                ><FormattedMessage id="setting.checklist.quality" /></List.Item>
                 <List.Item className="item_switch"
                     extra={<Switch
                         {...getFieldProps('delivered', {
                             valuePropName: 'checked',
                         })}
                     />}
-                ><FormattedMessage id="setting.checklist.delivered" defaultMessage="系统无泄漏" /></List.Item>
-                <List.Item className="item_switch"
-                    extra={<Switch
-                        {...getFieldProps('picture', {
-                            valuePropName: 'checked',
-                        })}
-                    />}
-                ><FormattedMessage id="setting.checklist.picture" defaultMessage="WIFI已连接" /></List.Item>
+                ><FormattedMessage id="setting.checklist.delivered" /></List.Item>
+                <List.Item><FormattedMessage id="setting.checklist.pictures" defaultMessage="拍摄安装图，用于备份存档（至少上传四张）" />
+                    <List.Item.Brief>
+                        <div className="item_children">
+                            <ImagePicker
+                                files={data}
+                                onChange={onChange}
+                                selectable={data.length < 7}
+                                multiple={false}
+                            />
+                        </div>
+                    </List.Item.Brief>
+                </List.Item>            
             </List>
         </form>
         <WingBlank className="submit_zone">
             <div className="add_btn" >
                 <Button type="ghost" className="btn">
-                    <FormattedMessage id="submit.ok" defaultMessage="OK" />
+                    <FormattedMessage id="form.ok" defaultMessage="OK" />
                 </Button>
             </div>
         </WingBlank>

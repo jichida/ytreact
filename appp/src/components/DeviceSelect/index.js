@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Flex, WhiteSpace, Carousel } from 'antd-mobile';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 import './index.less';
 
@@ -47,7 +48,9 @@ const data = [
                                 </Carousel>
                             </div>
                             <div className="add_btn" >
-                                <Link to="/home"><img src={setup} alt="" /><span>请先进行设定</span></Link>
+                                <Link to="/home"><img src={setup} alt="" />
+                                    <span><FormattedMessage id="start.setting" /></span>
+                                </Link>
                             </div>
                             <WhiteSpace size="xl" />
                         </Flex>

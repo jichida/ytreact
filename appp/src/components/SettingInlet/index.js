@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import {  List, InputItem, Button } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import Buckets from '../Buckets';
 
 import './index.less';
@@ -67,8 +67,9 @@ const RenderForm = createForm({
           }),
         };
     }
-})((props)=>{
+})(injectIntl((props)=>{
     const { getFieldProps, validateFields, setFieldsValue } = props.form;
+    const { intl: { formatMessage }} = props;
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -93,7 +94,7 @@ const RenderForm = createForm({
                             <InputItem
                                 type="money"
                                 extra=">"
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('ph',{
                                     rules: [{
                                         required: true,
@@ -110,7 +111,7 @@ const RenderForm = createForm({
                             <InputItem
                                 type="money"
                                 extra=">"
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('conductivity',{
                                     rules: [{
                                         required: true,
@@ -127,7 +128,7 @@ const RenderForm = createForm({
                             <InputItem
                                 type="money"
                                 extra=">"
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('tds',{
                                     rules: [{
                                         required: true,
@@ -144,7 +145,7 @@ const RenderForm = createForm({
                             <InputItem
                                 type="money"
                                 extra=">"
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('hardness',{
                                     rules: [{
                                         required: true,
@@ -161,7 +162,7 @@ const RenderForm = createForm({
                             <InputItem
                                 type="money"
                                 extra=">"
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('alkalinity',{
                                     rules: [{
                                         required: true,
@@ -200,12 +201,14 @@ const RenderForm = createForm({
         </form>
         <div className="submit_zone">
             <div className="add_btn" >
-                <Button type="ghost" className="btn" onClick={handleSubmit}><FormattedMessage id="form.save" defaultMessage="保存" /></Button>
+                <Button type="ghost" className="btn" onClick={handleSubmit}>
+                    <FormattedMessage id="form.save" defaultMessage="保存" />
+                </Button>
             </div>
         </div>
         </React.Fragment>
     )
-})
+}))
 
 class Inlet extends PureComponent{
 

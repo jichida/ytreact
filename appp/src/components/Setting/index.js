@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { NavBar, Icon, TabBar } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 import './index.less';
 
@@ -44,15 +45,15 @@ class Setting extends PureComponent{
                     <TabBar.Item
                         key="system"
                         icon={
-                            <div className="navbar_item">
-                                <p>系统设置</p>
+                            <div className="tabbar_item">
+                                <p><FormattedMessage id="setting.system" /></p>
                                 <img src={system_img} alt="" className="navbar_icon" />
                                 <span></span>
                             </div>
                         }
                         selectedIcon={
-                            <div className="navbar_item_on">
-                                <p>系统设置</p>
+                            <div className="tabbar_item_on">
+                                <p><FormattedMessage id="setting.system" /></p>
                                 <img src={system_img} alt="" className="navbar_icon" />
                                 <span></span>
                             </div>
@@ -68,15 +69,15 @@ class Setting extends PureComponent{
                     </TabBar.Item>
                     <TabBar.Item
                         icon={
-                            <div className="navbar_item">
-                                <p>进水设定</p>
+                            <div className="tabbar_item">
+                                <p><FormattedMessage id="setting.water" /></p>
                                 <img src={water_img} alt="" className="navbar_icon" />
                                 <span></span>
                             </div>
                         }
                         selectedIcon={
-                            <div className="navbar_item_on">
-                                <p>进水设定</p>
+                            <div className="tabbar_item_on">
+                                <p><FormattedMessage id="setting.water" /></p>
                                 <img src={water_img} alt="" className="navbar_icon" />
                                 <span></span>
                             </div>
@@ -93,15 +94,15 @@ class Setting extends PureComponent{
                     </TabBar.Item>
                     <TabBar.Item
                         icon={
-                            <div className="navbar_item">
-                                <p>网络</p>
+                            <div className="tabbar_item">
+                                <p><FormattedMessage id="setting.wifi" /></p>
                                 <img src={wifi_img} alt="" className="navbar_icon" />
                                 <span></span>
                             </div>
                         }
                         selectedIcon={
-                            <div className="navbar_item_on">
-                                <p>网络</p>
+                            <div className="tabbar_item_on">
+                                <p><FormattedMessage id="setting.wifi" /></p>
                                 <img src={wifi_img} alt="" className="navbar_icon" />
                                 <span></span>
                             </div>
@@ -118,15 +119,15 @@ class Setting extends PureComponent{
                     </TabBar.Item>
                     <TabBar.Item
                         icon={
-                            <div className="navbar_item">
-                                <p>安装检查表</p>
+                            <div className="tabbar_item">
+                                <p><FormattedMessage id="setting.checklist" /></p>
                                 <img src={table_img} alt="" className="navbar_icon" />
                                 <span></span>
                             </div>
                         }
                         selectedIcon={
-                            <div className="navbar_item_on">
-                                <p>安装检查表</p>
+                            <div className="tabbar_item_on">
+                                <p><FormattedMessage id="setting.checklist" /></p>
                                 <img src={table_img} alt="" className="navbar_icon" />
                                 <span></span>
                             </div>

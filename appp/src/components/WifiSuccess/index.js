@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Flex, WhiteSpace, Button, WingBlank } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 import './index.less';
 
@@ -24,10 +25,12 @@ import mgb from '../../assets/ljimgb.png';
                                     <div><img src={mgb} alt="" className="logo_img" /></div>
                                 </div>
                                 <WhiteSpace size="xl" />
-                                <div className="status" >{"连接成功"}</div>
+                                <div className="status" ><FormattedMessage id="start.wifi.succeed" /></div>
                                 <WhiteSpace size="xl" />
                                 <div className="add_btn" >
-                                    <Button type="ghost" className="btn" onClick={()=>{history.push('/devices')}}>下一步</Button>
+                                    <Button type="ghost" className="btn" onClick={()=>{history.push('/devices')}}>
+                                        <FormattedMessage id="form.next" />
+                                    </Button>
                                 </div>
                                 <WhiteSpace size="xl" />
                             </Flex>

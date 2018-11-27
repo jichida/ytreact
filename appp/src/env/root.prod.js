@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by wangxiaoqing on 2017/3/27.
  */
 import React, { Component } from 'react';
@@ -10,7 +10,7 @@ import {
     HashRouter as Router,
     Route,
 } from 'react-router-dom';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import {history} from './store';
 import {IntlProvider, addLocaleData} from 'react-intl';
 

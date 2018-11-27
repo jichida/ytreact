@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import {  List, InputItem, Button, WingBlank, Switch, DatePicker, Picker } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import moment from 'moment';
 import _ from 'lodash';
 import 'moment-timezone';
+import {ui_set_language} from '../../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
 
@@ -32,12 +34,12 @@ const timezoneOption = () => {
     return _.sortBy(offsetTmz, [function (el) { return -(el.time); }]);
   }
 
- 
+
 // 设备编号			deviceid
 // 购买日期			buydate
 // 安装日期			installdate
 // 安装人员			installer
-// 选择时区			timezone		
+// 选择时区			timezone
 // 选择日期			sdate
 // 选择时间			stime
 // 出水水质（ppm)		quality
@@ -56,75 +58,18 @@ const timezoneOption = () => {
 // 休眠开始时间		dormancystart
 // 休眠结束时间		dormancyend
 
-const basicData = {
-    deviceid: {
-        value: '123456789',
-    },
-    buydate: {
-        value: '',
-    },
-    installdate: {
-        value: '',
-    },
-    installer: {
-        value: '安装员工',
-    },
-    timezone: {
-        value: [`${curTZ}`],
-    },
-    sdate: {
-        value: '',
-    },
-    stime: {
-        value: '',
-    },
-    quality: { 
-        value: 5,
-    },
-    frontfilter1: {
-        value: '',
-    },
-    frontfilter2: {
-        value: '',
-    },
-    frontfilter3: {
-        value: '',
-    },
-    afterfilter1: {
-        value: '',
-    },
-    afterfilter2: {
-        value: '',
-    },
-    afterfilter3: {
-        value: '',
-    },
-    dormancy: {
-        value: false,
-    },
-    dormancystart: {
-        value: '',
-    },
-    dormancyend: {
-        value: '',
-    },
-    language: {
-        value:  ['中文简体'],
-    }
-}
-
 const languages = [
     {
         label: '英语',
-        value: '英语',
+        value: 'en',
     },
     {
         label: '中文简体',
-        value: '中文简体',
+        value: 'zh-cn',
     },
     {
         label: '中文繁体',
-        value: '中文繁体',
+        value: 'zh-tw',
     },
 ]
 
@@ -269,7 +214,7 @@ const RenderForm = createForm({
                 </Item>
                 <Item><FormattedMessage id="setting.system.installer" defaultMessage="安装人员" />
                     <Brief>
-                        <div className="item_children">                
+                        <div className="item_children">
                         <InputItem
                             placeholder={formatMessage({id: "form.input"})}
                             {...getFieldProps('installer',{
@@ -480,7 +425,7 @@ const RenderForm = createForm({
                                 cols={1}
                                 extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
                                 {...getFieldProps('language', {
-                                    initialValue: ['中文简体'],
+                                    initialValue: ['zh-cn'],
                                 })}
                                 >
                                 <List.Item arrow="horizontal"></List.Item>
@@ -505,9 +450,68 @@ class SettingSystem extends PureComponent{
 
     handleSubmit = (values)=>{
         console.log(values);
+        const {dispatch} = this.props;
+        dispatch(ui_set_language(values['language'][0]));
     }
 
     render () {
+        const {locale} = this.props;
+        const basicData = {
+            deviceid: {
+                value: '123456789',
+            },
+            buydate: {
+                value: '',
+            },
+            installdate: {
+                value: '',
+            },
+            installer: {
+                value: '安装员工',
+            },
+            timezone: {
+                value: [`${curTZ}`],
+            },
+            sdate: {
+                value: '',
+            },
+            stime: {
+                value: '',
+            },
+            quality: {
+                value: 5,
+            },
+            frontfilter1: {
+                value: '',
+            },
+            frontfilter2: {
+                value: '',
+            },
+            frontfilter3: {
+                value: '',
+            },
+            afterfilter1: {
+                value: '',
+            },
+            afterfilter2: {
+                value: '',
+            },
+            afterfilter3: {
+                value: '',
+            },
+            dormancy: {
+                value: false,
+            },
+            dormancystart: {
+                value: '',
+            },
+            dormancyend: {
+                value: '',
+            },
+            language: {
+                value:  [locale],
+            }
+        }
 
         return (
             <div className="sub_setting_bg">
@@ -517,4 +521,9 @@ class SettingSystem extends PureComponent{
     }
 }
 
+const mapStateToProps =  ({app:{locale}}) =>{
+  return {locale};
+};
+
+SettingSystem = connect(mapStateToProps)(SettingSystem);
 export default SettingSystem;

@@ -1,14 +1,17 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import {  NavBar, Icon, List, InputItem, Button, Switch } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
+import {setuserdevice_request} from '../../actions';
+import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
 import './index.less';
 
 const Item = List.Item;
 const Brief = Item.Brief;
- 
+
 // 安装地点		position
 // 是否避光		avoidlight
 // 墙体材料		wall
@@ -19,39 +22,39 @@ const Brief = Item.Brief;
 // 管路材质		pipematerials
 // 有无WIFI		wifi
 // 有无电源		power
-
-const basicData = {
-    position: {
-        value: '',
-    },
-    avoidlight: {
-        value: '',
-    },
-    wall: {
-        value: '',
-    },
-    method: {
-        value: '',
-    },
-    space: { 
-        value: '',
-    },
-    pipe: {
-        value: '',
-    },
-    drainage: {
-        value: '',
-    },
-    pipematerials: {
-        value: '',
-    },
-    wifi: {
-        value: '',
-    },
-    power: {
-        value: '',
-    },
-}
+//
+// const basicData = {
+//     position: {
+//         value: '',
+//     },
+//     avoidlight: {
+//         value: '',
+//     },
+//     wall: {
+//         value: '',
+//     },
+//     method: {
+//         value: '',
+//     },
+//     space: {
+//         value: '',
+//     },
+//     pipe: {
+//         value: '',
+//     },
+//     drainage: {
+//         value: '',
+//     },
+//     pipematerials: {
+//         value: '',
+//     },
+//     wifi: {
+//         value: '',
+//     },
+//     power: {
+//         value: '',
+//     },
+// }
 
 const RenderForm = createForm({
     mapPropsToFields(props) {
@@ -258,11 +261,47 @@ class DeviceInstall extends PureComponent{
 
     handleSubmit = (values)=>{
         console.log(values);
+        const {dispatch,_id} = this.props;
+        dispatch(setuserdevice_request({_id,data:{install:values}}));
     }
 
     render () {
-        const { history } = this.props;
 
+        const { history,install}  = this.props;
+
+         const basicData = {
+           position: {
+               value: lodashget(install,'position','sample'),
+           },
+           avoidlight: {
+               value: lodashget(install,'avoidlight','sample'),
+           },
+           wall: {
+               value: lodashget(install,'wall','sample'),
+           },
+           method: {
+               value: lodashget(install,'method','sample'),
+           },
+           space: {
+               value: lodashget(install,'space','sample'),
+           },
+           pipe: {
+               value: lodashget(install,'pipe','sample'),
+           },
+           drainage: {
+               value: lodashget(install,'drainage','sample'),
+           },
+           pipematerials: {
+               value: lodashget(install,'pipematerials','sample'),
+           },
+           wifi: {
+               value: lodashget(install,'wifi','sample'),
+           },
+           power: {
+               value: lodashget(install,'power','sample'),
+           },
+         }
+         console.log(basicData);
         return (
             <div className="fp_container sub_bg">
                 <NavBar
@@ -277,5 +316,8 @@ class DeviceInstall extends PureComponent{
         )
     }
 }
-
+const mapStateToProps =  ({device:{install,_id}}) =>{
+  return {install,_id};
+};
+DeviceInstall = connect(mapStateToProps)(DeviceInstall);
 export default withRouter(DeviceInstall);

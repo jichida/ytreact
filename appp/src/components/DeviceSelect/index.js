@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import { Flex, WhiteSpace, Carousel } from 'antd-mobile';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-
+import {getdevice_request} from '../../actions';
 import './index.less';
 
 import logo from '../../assets/logo.png';
@@ -22,6 +23,11 @@ const data = [
 ]
 
  class DeviceSelect extends PureComponent{
+
+   componentDidMount () {
+     const {dispatch} = this.props;
+     dispatch(getdevice_request({}));
+   }
 
     render () {
         return (
@@ -61,4 +67,6 @@ const data = [
     }
 }
 
+
+DeviceSelect = connect()(DeviceSelect);
 export default DeviceSelect;

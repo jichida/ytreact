@@ -1,14 +1,17 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import {  NavBar, Icon, List, InputItem, Button, Switch } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
+import {setuserdevice_request} from '../../actions';
+import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
 import './index.less';
 
 const Item = List.Item;
 const Brief = Item.Brief;
- 
+
 // 月用水量（吨）  	quantity
 // 用水人数（人）  	persons
 // 直饮水点（个） 	 spot
@@ -22,48 +25,6 @@ const Brief = Item.Brief;
 // 原水碱度(ppm)	alkalinity
 // ph值		ph
 // 用户需求出水TDS值	usertds
-
-const basicData = {
-    quantity: {
-        value: '',
-    },
-    persons: {
-        value: '',
-    },
-    spot: {
-        value: '',
-    },
-    watergage: { 
-        value: '',
-    },
-    booster: {
-        value: '',
-    },
-    bathrooms: {
-        value: '',
-    },
-    shunt: {
-        value: '',
-    },
-    tds: {
-        value: '',
-    },
-    conductivity: {
-        value: '',
-    },
-    hardness: {
-        value: '',
-    },
-    alkalinity: {
-        value: '',
-    },
-    ph: {
-        value: '',
-    },
-    usertds: {
-        value: '',
-    },
-}
 
 const RenderForm = createForm({
     mapPropsToFields(props) {
@@ -358,10 +319,58 @@ class DeviceWater extends PureComponent{
 
     handleSubmit = (values)=>{
         console.log(values);
+        const {dispatch,_id} = this.props;
+        // values.useproperty = values.useproperty[0];
+        // values.building = values.building[0];
+        // values.model = values.model[0];
+        dispatch(setuserdevice_request({_id,data:{usewater:values}}));
+
     }
 
     render () {
-        const { history } = this.props;
+        const { history,usewater } = this.props;
+
+        const basicData = {
+            quantity: {
+                value: lodashget(usewater,'quantity','sample'),
+            },
+            persons: {
+                value: lodashget(usewater,'persons','sample'),
+            },
+            spot: {
+                value: lodashget(usewater,'spot','sample'),
+            },
+            watergage: {
+                value: lodashget(usewater,'watergage','sample'),
+            },
+            booster: {
+                value: lodashget(usewater,'booster','sample'),
+            },
+            bathrooms: {
+                value: lodashget(usewater,'bathrooms','sample'),
+            },
+            shunt: {
+                value: lodashget(usewater,'shunt','sample'),
+            },
+            tds: {
+                value: lodashget(usewater,'tds','sample'),
+            },
+            conductivity: {
+                value: lodashget(usewater,'conductivity','sample'),
+            },
+            hardness: {
+                value: lodashget(usewater,'hardness','sample'),
+            },
+            alkalinity: {
+                value: lodashget(usewater,'alkalinity','sample'),
+            },
+            ph: {
+                value: lodashget(usewater,'ph','sample'),
+            },
+            usertds: {
+                value: lodashget(usewater,'usertds','sample'),
+            },
+        }
 
         return (
             <div className="fp_container sub_bg">
@@ -377,5 +386,8 @@ class DeviceWater extends PureComponent{
         )
     }
 }
-
+const mapStateToProps =  ({device:{usewater,_id}}) =>{
+  return {usewater,_id};
+};
+DeviceWater = connect(mapStateToProps)(DeviceWater);
 export default withRouter(DeviceWater);

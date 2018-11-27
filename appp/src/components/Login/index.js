@@ -26,8 +26,8 @@ const languages = [
 
 const constrast = {
     English: 'en',
-    中文简体: 'zh_cn',
-    中文繁体: 'zh_tw'
+    中文简体: 'zh-cn',
+    中文繁体: 'zh-tw'
 }
 
 class Login extends PureComponent{

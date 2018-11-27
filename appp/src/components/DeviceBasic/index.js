@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
 import {  NavBar, Icon, List, InputItem, Picker, Button } from 'antd-mobile';
+import { connect } from 'react-redux';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
+import {setuserdevice_request} from '../../actions';
+import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
 import './index.less';
@@ -80,8 +83,9 @@ const RenderForm = createForm({
     const { intl: { formatMessage }} = props;
 
     const handleSubmit = (e)=>{
-        e.preventDefault();
+        // e.preventDefault();
         validateFields((err, values)=>{
+            console.log(values);
             if(!err){
                 props.onSubmit(values);
             }
@@ -212,35 +216,40 @@ class DeviceBasic extends PureComponent{
 
     handleSubmit = (values)=>{
         console.log(values);
+        const {dispatch,_id} = this.props;
+        values.useproperty = values.useproperty[0];
+        values.building = values.building[0];
+        values.model = values.model[0];
+        dispatch(setuserdevice_request({_id,data:{basicinfo:values}}));
     }
 
     render () {
-        const { history } = this.props;
+        const { history,basicinfo}  = this.props;
 
          const basicData = {
              username: {
-                 value: '王小庆',
+                 value: lodashget(basicinfo,'username','sample'),
              },
              userphone: {
-                 value: '15961125167',
+                 value: lodashget(basicinfo,'userphone','15961125167'),
              },
              useraddress: {
-                 value: '南京市建邺区金润大厦A座16楼',
+                 value: lodashget(basicinfo,'useraddress','南京市'),
              },
              useproperty: { //使用性质
-                 value: '家用',
+                 value: [lodashget(basicinfo,'useproperty','商用')],
              },
              building: { // 房屋类型
-                 value: '店铺',
+                 value: [lodashget(basicinfo,'building','')],
              },
              floor: { // 楼层
-                 value: '19楼',
+                 value: lodashget(basicinfo,'floor','1'),
              },
              model: { //预装型号
-                 value: 'YYY型',
+                 value: [lodashget(basicinfo,'model','XXX')],
              }
          }
-
+         console.log(basicData);
         return (
             <div className="sub_bg">
                 <NavBar
@@ -256,4 +265,8 @@ class DeviceBasic extends PureComponent{
     }
 }
 
+const mapStateToProps =  ({device:{basicinfo,_id}}) =>{
+  return {basicinfo,_id};
+};
+DeviceBasic = connect(mapStateToProps)(DeviceBasic);
 export default withRouter(DeviceBasic);

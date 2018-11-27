@@ -3,7 +3,6 @@ import {  NavBar, Icon, List, InputItem, Picker, Button } from 'antd-mobile';
 import { connect } from 'react-redux';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
 import {setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';

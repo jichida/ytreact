@@ -1,36 +1,11 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import {setuserdevice_request} from '../../actions';
+import lodashget from 'lodash.get';
 import {  List, Button, WingBlank, Switch, WhiteSpace, ImagePicker } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { FormattedMessage } from 'react-intl';
 import './index.less';
- 
-// 滤芯已冲洗	washed
-// 进水压力已符合标准	uptostandard
-// 旁通已关闭	bypassclosed
-// 系统无泄漏	noleakage
-// WIFI已连接	wificonnected
-// APP已设置		appset
-
-const checkData = {
-    washed: {
-        value: true,
-    },
-    uptostandard: {
-        value: true,
-    },
-    bypassclosed: {
-        value: true,
-    },
-    noleakage: {
-        value: true,
-    },
-    wificonnected: {
-        value: true,
-    },
-    appset: {
-        value: true,
-    },
-}
 
 const RenderCheckForm = createForm({
     mapPropsToFields(props) {
@@ -209,7 +184,7 @@ const RenderResultForm = createForm({
             }
         })
     }
-    
+
     const  onChange = (files, type, index) => {
         console.log(files, type, index);
     }
@@ -257,7 +232,7 @@ const RenderResultForm = createForm({
                             />
                         </div>
                     </List.Item.Brief>
-                </List.Item>            
+                </List.Item>
             </List>
         </form>
         <WingBlank className="submit_zone">
@@ -278,7 +253,9 @@ class SettingChecklist extends PureComponent{
     }
 
     handleSubmit = (values)=>{
-        console.log(values);
+      console.log(values);
+      const {dispatch,_id} = this.props;
+      dispatch(setuserdevice_request({_id,data:{checklist:values}}));
     }
 
     handleEnable = ()=>{
@@ -288,12 +265,40 @@ class SettingChecklist extends PureComponent{
     }
 
     render () {
+      const {checklist} = this.props;
+     // 滤芯已冲洗	washed
+     // 进水压力已符合标准	uptostandard
+     // 旁通已关闭	bypassclosed
+     // 系统无泄漏	noleakage
+     // WIFI已连接	wificonnected
+     // APP已设置		appset
+
+     const checkData = {
+         washed: {
+             value: lodashget(checklist,'washed',false),
+         },
+         uptostandard: {
+             value: lodashget(checklist,'uptostandard',false),
+         },
+         bypassclosed: {
+             value:  lodashget(checklist,'bypassclosed',false),
+         },
+         noleakage: {
+             value:  lodashget(checklist,'noleakage',false),
+         },
+         wificonnected: {
+             value: lodashget(checklist,'wificonnected',false),
+         },
+         appset: {
+             value: lodashget(checklist,'appset',false),
+         },
+     }
 
         return (
             <div className="fh_container">
             <div className="fp_container">
             <div className="sub_setting_bg">
-                { this.state.checked ? 
+                { this.state.checked ?
                     <RenderResultForm {...resultData} onSubmit={this.handleSubmit} />
                     : <RenderCheckForm {...checkData} onSubmit={this.handleSubmit} onEnable={this.handleEnable} />
                 }
@@ -302,4 +307,9 @@ class SettingChecklist extends PureComponent{
     }
 }
 
+const mapStateToProps =  ({device:{checklist,_id}}) =>{
+  return {checklist,_id};
+};
+
+SettingChecklist = connect(mapStateToProps)(SettingChecklist);
 export default SettingChecklist;

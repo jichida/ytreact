@@ -1,4 +1,7 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import {setuserdevice_request} from '../../actions';
+import lodashget from 'lodash.get';
 import {  List, InputItem, Button, Switch } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
@@ -8,38 +11,7 @@ import './index.less';
 
 const Item = List.Item;
 const Brief = Item.Brief;
- 
-// ssid		SSID
-// 密码		password
-// 动态主机设置协议	DHCP
-// IP地址		IP
-// 网关		gateway
-// 局域网 		LAN
-// 主网域服务器	DNS
 
-const basicData = {
-    ssid: {
-        value:'',
-    },
-    password: {
-        value: '',
-    },
-    dhcp: {
-        value: '',
-    },
-    ip: {
-        value: '',
-    },
-    gateway: {
-        value: '',
-    },
-    lan: {
-        value: '',
-    },
-    dns: {
-        value: '',
-    }
-}
 
 const RenderForm = createForm({
     mapPropsToFields(props) {
@@ -202,10 +174,44 @@ const RenderForm = createForm({
 class Wifi extends PureComponent{
 
     handleSubmit = (values)=>{
-        console.log(values);
+      console.log(values);
+      const {dispatch,_id} = this.props;
+      dispatch(setuserdevice_request({_id,data:{wifisettings:values}}));
     }
 
     render () {
+
+     // ssid		SSID
+     // 密码		password
+     // 动态主机设置协议	DHCP
+     // IP地址		IP
+     // 网关		gateway
+     // 局域网 		LAN
+     // 主网域服务器	DNS
+     const {wifisettings} = this.props;
+     const basicData = {
+         ssid: {
+             value:lodashget(wifisettings,'ssid','sample'),
+         },
+         password: {
+             value: lodashget(wifisettings,'password','sample'),
+         },
+         dhcp: {
+             value: lodashget(wifisettings,'dhcp','sample'),
+         },
+         ip: {
+             value: lodashget(wifisettings,'ip','sample'),
+         },
+         gateway: {
+             value: lodashget(wifisettings,'gateway','sample'),
+         },
+         lan: {
+             value: lodashget(wifisettings,'lan','sample'),
+         },
+         dns: {
+             value: lodashget(wifisettings,'dns','sample'),
+         }
+     }
         return (
             <div className="sub_setting_bg">
                 { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
@@ -213,5 +219,9 @@ class Wifi extends PureComponent{
         )
     }
 }
+const mapStateToProps =  ({device:{wifisettings,_id}}) =>{
+  return {wifisettings,_id};
+};
 
+Wifi = connect(mapStateToProps)(Wifi);
 export default withRouter(Wifi);

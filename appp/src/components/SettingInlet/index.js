@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import {  List, InputItem, Button } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
+import {setuserdevice_request} from '../../actions';
+import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import Buckets from '../Buckets';
 
@@ -9,7 +12,7 @@ import './index.less';
 
 const Item = List.Item;
 const Brief = Item.Brief;
- 
+
 // 进水TDS值(mg/l)	tds
 // 进水导电率(us/cm)	conductivity
 // 进水硬度	hardness
@@ -17,26 +20,6 @@ const Brief = Item.Brief;
 // ph值		ph
 // 用户需求出水TDS值	usertds
 
-const basicData = {
-    tds: {
-        value: '',
-    },
-    conductivity: {
-        value: '',
-    },
-    hardness: {
-        value: '',
-    },
-    alkalinity: {
-        value: '',
-    },
-    ph: {
-        value: '',
-    },
-    bucket: {
-        value: '50gal',
-    },
-}
 
 const RenderForm = createForm({
     mapPropsToFields(props) {
@@ -185,7 +168,7 @@ const RenderForm = createForm({
                                     }],
                                 })}
                             /> */}
-                            <Buckets 
+                            <Buckets
                                 {...getFieldProps('bucket',{
                                     rules: [{
                                         required: true,
@@ -214,9 +197,33 @@ class Inlet extends PureComponent{
 
     handleSubmit = (values)=>{
         console.log(values);
+        const {dispatch,_id} = this.props;
+        dispatch(setuserdevice_request({_id,data:{inwatersettings:values}}));
     }
 
     render () {
+        const {inwatersettings} = this.props;
+
+        const basicData = {
+            tds: {
+                value:lodashget(inwatersettings,'tds','sample'),
+            },
+            conductivity: {
+                value:lodashget(inwatersettings,'conductivity','sample'),
+            },
+            hardness: {
+                value: lodashget(inwatersettings,'hardness','sample'),
+            },
+            alkalinity: {
+                value: lodashget(inwatersettings,'alkalinity','sample'),
+            },
+            ph: {
+                value: lodashget(inwatersettings,'ph','sample'),
+            },
+            bucket: {
+                value:lodashget(inwatersettings,'bucket','50gal'),
+            },
+        }
         return (
             <div className="sub_setting_bg">
                 { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
@@ -225,4 +232,9 @@ class Inlet extends PureComponent{
     }
 }
 
+const mapStateToProps =  ({device:{inwatersettings,_id}}) =>{
+  return {inwatersettings,_id};
+};
+
+Inlet = connect(mapStateToProps)(Inlet);
 export default withRouter(Inlet);

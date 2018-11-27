@@ -4,6 +4,8 @@ import {  List, InputItem, Button, WingBlank, Switch, DatePicker, Picker } from 
 import { createForm, createFormField } from 'rc-form';
 import moment from 'moment';
 import _ from 'lodash';
+import {setuserdevice_request} from '../../actions';
+import lodashget from 'lodash.get';
 import 'moment-timezone';
 import {ui_set_language} from '../../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
@@ -450,69 +452,72 @@ class SettingSystem extends PureComponent{
 
     handleSubmit = (values)=>{
         console.log(values);
-        const {dispatch} = this.props;
+        const {dispatch,_id} = this.props;
+        dispatch(setuserdevice_request({_id,data:{syssettings:values}}));
+
         dispatch(ui_set_language(values['language'][0]));
     }
 
     render () {
-        const {locale} = this.props;
+        const {locale,syssettings} = this.props;
+        const timezone = `${lodashget(syssettings,'timezone',`${curTZ}`)}`;
         const basicData = {
             deviceid: {
-                value: '123456789',
+                value: lodashget(syssettings,'deviceid','sample'),
             },
             buydate: {
-                value: '',
+                value: '',//lodashget(syssettings,'buydate',new Date()),
             },
             installdate: {
-                value: '',
+                value: '',//lodashget(syssettings,'installdate',new Date()),
             },
             installer: {
-                value: '安装员工',
+                value: lodashget(syssettings,'installer','sample'),
             },
             timezone: {
-                value: [`${curTZ}`],
+                value: [timezone]
             },
             sdate: {
-                value: '',
+                value: '',//lodashget(syssettings,'sdate',''),
             },
             stime: {
-                value: '',
+                value: '',//lodashget(syssettings,'stime',''),
             },
             quality: {
-                value: 5,
+                value: lodashget(syssettings,'quality','sample'),
             },
             frontfilter1: {
-                value: '',
+                value: lodashget(syssettings,'frontfilter1','sample'),
             },
             frontfilter2: {
-                value: '',
+                value: lodashget(syssettings,'frontfilter2','sample'),
             },
             frontfilter3: {
-                value: '',
+                value: lodashget(syssettings,'frontfilter3','sample'),
             },
             afterfilter1: {
-                value: '',
+                value: lodashget(syssettings,'afterfilter1','sample'),
             },
             afterfilter2: {
-                value: '',
+                value: lodashget(syssettings,'afterfilter2','sample'),
             },
             afterfilter3: {
-                value: '',
+                value: lodashget(syssettings,'afterfilter3','sample'),
             },
             dormancy: {
-                value: false,
+                value: lodashget(syssettings,'dormancy',false),
             },
             dormancystart: {
-                value: '',
+                value: '',//lodashget(syssettings,'dormancystart','sample'),
             },
             dormancyend: {
-                value: '',
+                value: '',//lodashget(syssettings,'dormancyend','sample'),
             },
             language: {
                 value:  [locale],
             }
         }
-
+        console.log(basicData)
         return (
             <div className="sub_setting_bg">
                 { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
@@ -521,8 +526,8 @@ class SettingSystem extends PureComponent{
     }
 }
 
-const mapStateToProps =  ({app:{locale}}) =>{
-  return {locale};
+const mapStateToProps =  ({device:{locale,syssettings,_id}}) =>{
+  return {locale,syssettings,_id};
 };
 
 SettingSystem = connect(mapStateToProps)(SettingSystem);

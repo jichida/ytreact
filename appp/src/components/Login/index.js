@@ -7,6 +7,7 @@ import './index.less';
 
 import logo from '../../assets/logo.png';
 import {login_request} from '../../actions';
+import {ui_set_language} from '../../actions';
 
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
 let wrapProps;
@@ -55,6 +56,7 @@ class Login extends PureComponent{
     }
 
     showActionSheet = () => {
+        const {dispatch} = this.props;
         const BUTTONS = languages;
         ActionSheet.showActionSheetWithOptions({
           options: BUTTONS,
@@ -65,6 +67,7 @@ class Login extends PureComponent{
         },
         (buttonIndex) => {
             if(buttonIndex!==BUTTONS.length -1){
+                dispatch(ui_set_language(constrast[BUTTONS[buttonIndex]]));
                 console.log(constrast[BUTTONS[buttonIndex]]);
             }
         });

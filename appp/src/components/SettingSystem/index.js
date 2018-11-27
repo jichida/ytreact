@@ -157,8 +157,6 @@ const RenderForm = createForm({
     const { intl:{ formatMessage } } = props;
     const options = timezoneOption();
 
-
-
     const handleSubmit = (e)=>{
         e.preventDefault();
         validateFields((err, values)=>{
@@ -466,7 +464,7 @@ class SettingSystem extends PureComponent{
                 value: lodashget(syssettings,'deviceid','sample'),
             },
             buydate: {
-                value: '',//lodashget(syssettings,'buydate',new Date()),
+                value: new Date(),//lodashget(syssettings,'buydate',new Date()),
             },
             installdate: {
                 value: '',//lodashget(syssettings,'installdate',new Date()),

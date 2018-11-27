@@ -1,5 +1,5 @@
 import store from './store';
-import { goBack  } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
+import { goBack  } from 'connected-react-router';//https://github.com/reactjs/react-router-redux
 
 let handlerbackfn;
 export const setbackhandler=(fn)=>{

@@ -1,14 +1,7 @@
-/**
- * Created by wangxiaoqing on 2017/3/25.
- */
 import { createAction } from 'redux-act';
 
-export const startofflinemode = createAction('startofflinemode');
+export const wifi_getssidlist_request = createAction('wifi_getssidlist_request');
+export const wifi_getssidlist_result = createAction('wifi_getssidlist_result');
 
-export const getcurwifi_request = createAction('getcurwifi_request');
-export const getcurwifi_result = createAction('getcurwifi_result');
-
-export const getcurwifi_devicelist_request = createAction('getcurwifi_devicelist_request');
-export const getcurwifi_devicelist_result = createAction('getcurwifi_devicelist_result');
-
-export const leave_finished_device = createAction('leave_finished_device');
+export const wifi_setcurwifi_request = createAction('wifi_setcurwifi_request');
+export const wifi_setcurwifi_result = createAction('wifi_setcurwifi_result');

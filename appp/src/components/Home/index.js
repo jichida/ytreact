@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { NavBar, Icon, Tabs } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage, injectIntl } from 'react-intl'
+import { injectIntl } from 'react-intl'
 
 import Main from '../Main';
 import Abnormal from '../Abnormal';

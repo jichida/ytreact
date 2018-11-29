@@ -191,25 +191,25 @@ class Wifi extends PureComponent{
      const {wifisettings} = this.props;
      const basicData = {
          ssid: {
-             value:lodashget(wifisettings,'ssid','sample'),
+             value:lodashget(wifisettings,'ssid',''),
          },
          password: {
-             value: lodashget(wifisettings,'password','sample'),
+             value: lodashget(wifisettings,'password',''),
          },
          dhcp: {
-             value: lodashget(wifisettings,'dhcp','sample'),
+             value: lodashget(wifisettings,'dhcp',''),
          },
          ip: {
-             value: lodashget(wifisettings,'ip','sample'),
+             value: lodashget(wifisettings,'ip',''),
          },
          gateway: {
-             value: lodashget(wifisettings,'gateway','sample'),
+             value: lodashget(wifisettings,'gateway',''),
          },
          lan: {
-             value: lodashget(wifisettings,'lan','sample'),
+             value: lodashget(wifisettings,'lan',''),
          },
          dns: {
-             value: lodashget(wifisettings,'dns','sample'),
+             value: lodashget(wifisettings,'dns',''),
          }
      }
         return (

@@ -332,43 +332,43 @@ class DeviceWater extends PureComponent{
 
         const basicData = {
             quantity: {
-                value: lodashget(usewater,'quantity','sample'),
+                value: lodashget(usewater,'quantity',''),
             },
             persons: {
-                value: lodashget(usewater,'persons','sample'),
+                value: lodashget(usewater,'persons',''),
             },
             spot: {
-                value: lodashget(usewater,'spot','sample'),
+                value: lodashget(usewater,'spot',''),
             },
             watergage: {
-                value: lodashget(usewater,'watergage','sample'),
+                value: lodashget(usewater,'watergage',''),
             },
             booster: {
-                value: lodashget(usewater,'booster','sample'),
+                value: lodashget(usewater,'booster',false),
             },
             bathrooms: {
-                value: lodashget(usewater,'bathrooms','sample'),
+                value: lodashget(usewater,'bathrooms',''),
             },
             shunt: {
-                value: lodashget(usewater,'shunt','sample'),
+                value: lodashget(usewater,'shunt',false),
             },
             tds: {
-                value: lodashget(usewater,'tds','sample'),
+                value: lodashget(usewater,'tds',''),
             },
             conductivity: {
-                value: lodashget(usewater,'conductivity','sample'),
+                value: lodashget(usewater,'conductivity',''),
             },
             hardness: {
-                value: lodashget(usewater,'hardness','sample'),
+                value: lodashget(usewater,'hardness',''),
             },
             alkalinity: {
-                value: lodashget(usewater,'alkalinity','sample'),
+                value: lodashget(usewater,'alkalinity',''),
             },
             ph: {
-                value: lodashget(usewater,'ph','sample'),
+                value: lodashget(usewater,'ph',''),
             },
             usertds: {
-                value: lodashget(usewater,'usertds','sample'),
+                value: lodashget(usewater,'usertds',''),
             },
         }
 

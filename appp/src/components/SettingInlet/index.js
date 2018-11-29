@@ -206,19 +206,19 @@ class Inlet extends PureComponent{
 
         const basicData = {
             tds: {
-                value:lodashget(inwatersettings,'tds','sample'),
+                value:lodashget(inwatersettings,'tds',''),
             },
             conductivity: {
-                value:lodashget(inwatersettings,'conductivity','sample'),
+                value:lodashget(inwatersettings,'conductivity',''),
             },
             hardness: {
-                value: lodashget(inwatersettings,'hardness','sample'),
+                value: lodashget(inwatersettings,'hardness',''),
             },
             alkalinity: {
-                value: lodashget(inwatersettings,'alkalinity','sample'),
+                value: lodashget(inwatersettings,'alkalinity',''),
             },
             ph: {
-                value: lodashget(inwatersettings,'ph','sample'),
+                value: lodashget(inwatersettings,'ph',''),
             },
             bucket: {
                 value:lodashget(inwatersettings,'bucket','50gal'),

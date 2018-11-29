@@ -461,7 +461,7 @@ class SettingSystem extends PureComponent{
         const timezone = `${lodashget(syssettings,'timezone',`${curTZ}`)}`;
         const basicData = {
             deviceid: {
-                value: lodashget(syssettings,'deviceid','sample'),
+                value: lodashget(syssettings,'deviceid',''),
             },
             buydate: {
                 value: new Date(),//lodashget(syssettings,'buydate',new Date()),
@@ -470,7 +470,7 @@ class SettingSystem extends PureComponent{
                 value: '',//lodashget(syssettings,'installdate',new Date()),
             },
             installer: {
-                value: lodashget(syssettings,'installer','sample'),
+                value: lodashget(syssettings,'installer',''),
             },
             timezone: {
                 value: [timezone]
@@ -482,25 +482,25 @@ class SettingSystem extends PureComponent{
                 value: '',//lodashget(syssettings,'stime',''),
             },
             quality: {
-                value: lodashget(syssettings,'quality','sample'),
+                value: lodashget(syssettings,'quality',''),
             },
             frontfilter1: {
-                value: lodashget(syssettings,'frontfilter1','sample'),
+                value: lodashget(syssettings,'frontfilter1',''),
             },
             frontfilter2: {
-                value: lodashget(syssettings,'frontfilter2','sample'),
+                value: lodashget(syssettings,'frontfilter2',''),
             },
             frontfilter3: {
-                value: lodashget(syssettings,'frontfilter3','sample'),
+                value: lodashget(syssettings,'frontfilter3',''),
             },
             afterfilter1: {
-                value: lodashget(syssettings,'afterfilter1','sample'),
+                value: lodashget(syssettings,'afterfilter1',''),
             },
             afterfilter2: {
-                value: lodashget(syssettings,'afterfilter2','sample'),
+                value: lodashget(syssettings,'afterfilter2',''),
             },
             afterfilter3: {
-                value: lodashget(syssettings,'afterfilter3','sample'),
+                value: lodashget(syssettings,'afterfilter3',''),
             },
             dormancy: {
                 value: lodashget(syssettings,'dormancy',false),

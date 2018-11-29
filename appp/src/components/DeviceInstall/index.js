@@ -271,34 +271,34 @@ class DeviceInstall extends PureComponent{
 
          const basicData = {
            position: {
-               value: lodashget(install,'position','sample'),
+               value: lodashget(install,'position',''),
            },
            avoidlight: {
-               value: lodashget(install,'avoidlight','sample'),
+               value: lodashget(install,'avoidlight',false),
            },
            wall: {
-               value: lodashget(install,'wall','sample'),
+               value: lodashget(install,'wall',''),
            },
            method: {
-               value: lodashget(install,'method','sample'),
+               value: lodashget(install,'method',''),
            },
            space: {
-               value: lodashget(install,'space','sample'),
+               value: lodashget(install,'space',''),
            },
            pipe: {
-               value: lodashget(install,'pipe','sample'),
+               value: lodashget(install,'pipe',''),
            },
            drainage: {
-               value: lodashget(install,'drainage','sample'),
+               value: lodashget(install,'drainage',''),
            },
            pipematerials: {
-               value: lodashget(install,'pipematerials','sample'),
+               value: lodashget(install,'pipematerials',''),
            },
            wifi: {
-               value: lodashget(install,'wifi','sample'),
+               value: lodashget(install,'wifi',false),
            },
            power: {
-               value: lodashget(install,'power','sample'),
+               value: lodashget(install,'power',false),
            },
          }
          console.log(basicData);

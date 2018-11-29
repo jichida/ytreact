@@ -23,9 +23,9 @@ const initial = {
           persons:'',
           spot:'',
           watergage:'',
-          booster:'',
+          booster:false,
           bathrooms:'',
-          shunt:'',
+          shunt:false,
           tds:'',
           conductivity:'',
           hardness:'',
@@ -35,15 +35,15 @@ const initial = {
       },
       install:{
         position:'',
-        avoidlight:'',
+        avoidlight:false,
         wall:'',
         method:'',
         space:'',
         pipe:'',
         drainage:'',
         pipematerials:'',
-        wifi:'',
-        power:''
+        wifi:false,
+        power:false
       },
       syssettings:{//系统设置
           deviceid:'',//设备编号
@@ -71,7 +71,7 @@ const initial = {
       wifisettings:{
         ssid:'',
         password:'',
-        dhcp:'',
+        dhcp:false,
         ip:'',
         gatewary:'',
         lan:'',

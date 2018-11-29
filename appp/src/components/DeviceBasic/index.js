@@ -228,13 +228,13 @@ class DeviceBasic extends PureComponent{
 
          const basicData = {
              username: {
-                 value: lodashget(basicinfo,'username','sample'),
+                 value: lodashget(basicinfo,'username',''),
              },
              userphone: {
-                 value: lodashget(basicinfo,'userphone','15961125167'),
+                 value: lodashget(basicinfo,'userphone',''),
              },
              useraddress: {
-                 value: lodashget(basicinfo,'useraddress','南京市'),
+                 value: lodashget(basicinfo,'useraddress',''),
              },
              useproperty: { //使用性质
                  value: [lodashget(basicinfo,'useproperty','商用')],
@@ -243,7 +243,7 @@ class DeviceBasic extends PureComponent{
                  value: [lodashget(basicinfo,'building','')],
              },
              floor: { // 楼层
-                 value: lodashget(basicinfo,'floor','1'),
+                 value: lodashget(basicinfo,'floor',''),
              },
              model: { //预装型号
                  value: [lodashget(basicinfo,'model','XXX')],

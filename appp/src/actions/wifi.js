@@ -3,6 +3,8 @@
  */
 import { createAction } from 'redux-act';
 
+export const startofflinemode = createAction('startofflinemode');
+
 export const getcurwifi_request = createAction('getcurwifi_request');
 export const getcurwifi_result = createAction('getcurwifi_result');
 

@@ -4,7 +4,7 @@ import { Flex } from 'antd-mobile';
 import lodashmap from 'lodash.map';
 import { FormattedMessage } from 'react-intl';
 // import lodashget from 'lodash.get';
-
+import { injectIntl } from 'react-intl';
 import './index.less';
 
 //
@@ -73,10 +73,14 @@ class Abnormal extends PureComponent{
         return items;
     }
 
+    geterrtext = (k)=>{
+      const {intl} = this.props;
+      return intl.formatMessage({id:`home.show.err.${k}`});
+    }
 
     render () {
-      const {mapname_err} = this.props;
-      const mapname = mapname_err;
+      // const {mapname_err} = this.props;
+      // const mapname = mapname_err;
       const errflag = {
         error_partsfailure:1,//零件故障
         error_pumpfailure:1,//20	泵故障	ERROR2:0 无故障 1有故障
@@ -100,13 +104,14 @@ class Abnormal extends PureComponent{
       const abnormal = [];
       const normal = [];
       lodashmap(errflag,(v,k)=>{
-        if(!!mapname[k]){
+        const text = this.geterrtext(k);
+        if(!!text){
           if(v === 1){
             //有故障
-            abnormal.push({text:mapname[k]});
+            abnormal.push({text});
           }
           else if(v === 0){
-            normal.push({text:mapname[k]});
+            normal.push({text});
           }
         }
 
@@ -137,4 +142,4 @@ const mapStateToProps =  ({app:{mapname_err}}) =>{
   return {mapname_err};
 };
 Abnormal = connect(mapStateToProps)(Abnormal);
-export default Abnormal;
+export default injectIntl(Abnormal);

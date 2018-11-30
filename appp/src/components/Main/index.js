@@ -3,9 +3,9 @@ import { Flex, WingBlank, WhiteSpace } from 'antd-mobile';
 import { connect } from 'react-redux';
 import HomeChart from '../HomeChart';
 import monitorBg from '../../assets/zhuye_an.png';
-import lodashmap from 'lodash.map';
+// import lodashmap from 'lodash.map';
 import lodashget from 'lodash.get';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 import './index.less';
 import '../../assets/wlimg.png';

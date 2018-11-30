@@ -284,66 +284,59 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="setting.system.frontfilter1" defaultMessage="前置滤芯1" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('frontfilter1')}
-                            ></InputItem>
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="setting.system.frontfilter2" defaultMessage="前置滤芯2" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('frontfilter2')}
-                            ></InputItem>
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="setting.system.frontfilter3" defaultMessage="前置滤芯3" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('frontfilter3')}
-                            ></InputItem>
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="setting.system.afterfilter1" defaultMessage="后置滤芯1" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                placeholder={formatMessage({id:"form.input"})}
-                                {...getFieldProps('afterfilter1')}
-                            ></InputItem>
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="setting.system.afterfilter2" defaultMessage="后置滤芯2" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('afterfilter2')}
-                            ></InputItem>
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="setting.system.afterfilter3" defaultMessage="后置滤芯3" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('afterfilter3')}
-                            ></InputItem>
-                        </div>
-                    </Brief>
-                </Item>
+
+                <List.Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn" >
+                                <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.system.frontfilter1" defaultMessage="前置滤芯1" /></List.Item>
+
+                <List.Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn" >
+                                <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.system.frontfilter2" defaultMessage="前置滤芯2" /></List.Item>
+
+                <List.Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn" >
+                                <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.system.frontfilter3" defaultMessage="前置滤芯3" /></List.Item>
+                <List.Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn" >
+                                <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.system.afterfilter1" defaultMessage="后置滤芯1" /></List.Item>
+
+                <List.Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn" >
+                                <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.system.afterfilter2" defaultMessage="后置滤芯2" /></List.Item>
+
+                <List.Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn" >
+                                <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.system.afterfilter3" defaultMessage="后置滤芯3" /></List.Item>
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" >

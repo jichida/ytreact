@@ -57,6 +57,11 @@ class WifiLogin extends PureComponent{
         /*
           问题:wifissid如何设置显示？
         */
+        let wifiidtxt = wifissid;
+        if(wifiidtxt === ''){
+          wifiidtxt = intl.formatMessage({id: 'start.wifi.selected'});
+        }
+
         return (
             <div className="fh_container black_bg">
                 <div className="fp_container">
@@ -75,7 +80,7 @@ class WifiLogin extends PureComponent{
                                     <Flex.Item className="itemContent">
                                         <List.Item arrow="horizontal" className="input"
                                           onClick={()=>this.showActionSheet(title)}>
-                                            <FormattedMessage id="start.wifi.selected" />
+                                            {wifiidtxt}
                                         </List.Item>
                                     </Flex.Item>
                                 </Flex>

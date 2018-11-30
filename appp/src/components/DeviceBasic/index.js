@@ -257,7 +257,7 @@ class DeviceBasic extends PureComponent{
                     icon={<Icon type="left" />}
                     onLeftClick={() => history.goBack()}
                 >
-                设备信息
+                <FormattedMessage id="device" />
                 </NavBar>
                 { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
             </div>

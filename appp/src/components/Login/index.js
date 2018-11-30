@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Flex, WhiteSpace, Button, WingBlank, InputItem, ActionSheet } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
 
 import logo from '../../assets/logo.png';
@@ -57,11 +57,13 @@ class Login extends PureComponent{
 
     showActionSheet = () => {
         const {dispatch} = this.props;
+        const {intl} = this.props;
+
         const BUTTONS = languages;
         ActionSheet.showActionSheetWithOptions({
           options: BUTTONS,
           cancelButtonIndex: BUTTONS.length - 1,
-          message: '选择当前使用的语言',
+          message: intl.formatMessage({id:`login.selectlanguage`}),
           maskClosable: true,
           wrapProps,
         },
@@ -78,7 +80,7 @@ class Login extends PureComponent{
     }
 
     render () {
-
+        const {intl} = this.props;
         return (
             <div className="fh_container black_bg">
                 <div className="fp_container white_bg">
@@ -90,11 +92,11 @@ class Login extends PureComponent{
                         </div>
                         <WhiteSpace size="xl" />
                         <Flex justify="start" className="loginform">
-                            <Flex.Item className="itemTitle"><span>账号</span></Flex.Item>
+                            <Flex.Item className="itemTitle"><span><FormattedMessage id="login.account" defaultMessage="账号" /></span></Flex.Item>
                             <Flex.Item className="itemContent">
                                 <InputItem
                                     className="input"
-                                    placeholder="请输入账号"
+                                    placeholder={intl.formatMessage({id:`login.inputaccount`})}
                                     value={this.state.name}
                                     onChange={this.handleNameChange}
                                 />
@@ -102,12 +104,12 @@ class Login extends PureComponent{
                         </Flex>
                         <WhiteSpace size="xl" />
                         <Flex justify="start" className="loginform">
-                            <Flex.Item className="itemTitle"><span>密码</span></Flex.Item>
+                            <Flex.Item className="itemTitle"><span><FormattedMessage id="login.password" defaultMessage="密码" /></span></Flex.Item>
                             <Flex.Item className="itemContent">
                                 <InputItem
                                     className="input"
                                     type="password"
-                                    placeholder="请输入密码"
+                                    placeholder={intl.formatMessage({id:`login.inputpassword`})}
                                     value={this.state.password}
                                     onChange={this.handlePasswordChange}
                                 />
@@ -115,7 +117,7 @@ class Login extends PureComponent{
                         </Flex>
                         <WhiteSpace size="xl" style={{ marginBottom: 30}} />
                         <div className="add_btn" >
-                            <Button type="ghost" className="btn" onClick={this.handleSubmit}>登录</Button>
+                            <Button type="ghost" className="btn" onClick={this.handleSubmit}><FormattedMessage id="login.login" defaultMessage="登录" /></Button>
                         </div>
                         <WhiteSpace size="xl" />
                     </Flex>
@@ -126,4 +128,4 @@ class Login extends PureComponent{
     }
 }
 Login = connect()(Login);
-export default withRouter(Login);
+export default withRouter(injectIntl(Login));

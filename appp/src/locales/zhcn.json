@@ -1,4 +1,10 @@
 {
+  "login.account":"账号",
+  "login.password":"密码",
+  "login.login":"登录",
+  "login.selectlanguage":"选择当前使用的语言",
+  "login.inputaccount":"请输入账号",
+  "login.inputpassword":"请输入密码",
   "layout.home": "主页",
   "layout.abnormal": "异常",
   "layout.performance": "性能",

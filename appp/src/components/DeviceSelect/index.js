@@ -23,13 +23,19 @@ const data = [
 ]
 
  class DeviceSelect extends PureComponent{
-
+   constructor(props, context) {
+        super(props, context);
+        this.state = {
+            imgHeight: 176,
+        }
+    }
    componentDidMount () {
      const {dispatch} = this.props;
      dispatch(getdevice_request({}));
    }
 
     render () {
+        console.log('render')
         return (
             <div className="fh_container">
                 <div className="fp_container">
@@ -46,8 +52,12 @@ const data = [
                                     afterChange={index => console.log('slide to', index)}
                                     >
                                     {data.map(val => (
-                                        <div key={val.name} href="#"  style={{ display: 'inline-block', width: '100%', height: "100%" }} >
-                                            <img src={val.img} alt="" style={{ height: '100%' }}/>
+                                        <div key={val.name} href="#"  style={{ display: 'inline-block', width: '100%' , height: this.state.imgHeight}} >
+                                            <img src={val.img} alt="" style={{ height: '100%' }}  onLoad={() => {
+                                                // fire window resize event to change height
+                                                window.dispatchEvent(new Event('resize'));
+                                                this.setState({ imgHeight: 'auto' });
+                                            }}/>
                                             <p style={{color:"#cccccc", marginTop: "-25px", fontSize: 20}}>{val.name}</p>
                                         </div>
                                     ))}

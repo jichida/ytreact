@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {  List, InputItem, Button, WingBlank, Switch, DatePicker, Picker } from 'antd-mobile';
+import {  List, InputItem, Button, WingBlank, Switch, DatePicker, Picker, Modal, WhiteSpace } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import moment from 'moment';
 import _ from 'lodash';
@@ -166,6 +166,16 @@ const RenderForm = createForm({
         })
     }
 
+    const showQualitySetup = (e)=> {
+        e.preventDefault();
+        props.showModal('modal1');
+    }
+
+    const showDormancySetup = (e)=> {
+        e.preventDefault();
+        props.showModal('modal2');
+    }
+
 
     return (
         <React.Fragment>
@@ -269,21 +279,14 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="setting.system.quality" defaultMessage="出水水质（ppm）" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('quality',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="setting.system.quality" defaultMessage="出水水质（ppm）" />,
-                                    }],
-                                })}
-                            ></InputItem>
-                        </div>
-                    </Brief>
-                </Item>
+                <List.Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn" onClick={showQualitySetup} >
+                                <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.system.quality" defaultMessage="出水水质（ppm）" /></List.Item>
 
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
@@ -378,38 +381,13 @@ const RenderForm = createForm({
                         }
                 ><FormattedMessage id="setting.system.sendlog" defaultMessage="发送设备运行记录" /></List.Item>
                 <List.Item className="item_switch"
-                    extra={<Switch
-                        {...getFieldProps('dormancy', {
-                            valuePropName: 'checked',
-                        })}
-                    />}
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn" onClick={showDormancySetup} >
+                                <FormattedMessage id="setting.system.dormancy" defaultMessage="休眠" />
+                            </Button>
+                            </div>
+                        }
                 ><FormattedMessage id="setting.system.dormancy" defaultMessage="休眠" /></List.Item>
-                <Item><FormattedMessage id="setting.system.dormancystart" defaultMessage="休眠开始时间" />
-                    <Brief>
-                        <div className="item_children">
-                            <DatePicker
-                                mode="time"
-                                extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
-                                {...getFieldProps('dormancystart')}
-                                >
-                                <List.Item arrow="horizontal"></List.Item>
-                            </DatePicker>
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="setting.system.dormancyend" defaultMessage="休眠开始时间" />
-                    <Brief>
-                        <div className="item_children">
-                            <DatePicker
-                                mode="time"
-                                extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
-                                {...getFieldProps('dormancyend')}
-                                >
-                                <List.Item arrow="horizontal"></List.Item>
-                            </DatePicker>
-                        </div>
-                    </Brief>
-                </Item>
                 <Item><FormattedMessage id="setting.system.language" defaultMessage="语言" />
                     <Brief>
                         <div className="item_children">
@@ -441,6 +419,15 @@ const RenderForm = createForm({
 
 class SettingSystem extends PureComponent{
 
+    state = {
+        Modal1: false,
+        modal2: false,
+        quality: 0,
+        isdormancy: false,
+        dormancystart: '',
+        dormancyend: '',
+    }
+
     handleSubmit = (values)=>{
         console.log(values);
         const {dispatch,_id} = this.props;
@@ -449,8 +436,50 @@ class SettingSystem extends PureComponent{
         dispatch(ui_set_language(values['language'][0]));
     }
 
+    showModal = (key) => {
+        this.setState({
+          [key]: true,
+        });
+    }
+
+    onCloseQuality = (e) => {
+        e.preventDefault();
+        this.setState({
+            modal1: false,
+        })
+    }
+
+    onQualityChange = (val) => {
+        console.log(val);
+        this.setState({
+            quality: val,
+        })
+    }
+
+    onQualityClick = () =>{
+        console.log(this.state.quality);
+    }
+
+    onCloseDormancy = (e) => {
+        e.preventDefault();
+        this.setState({
+            modal2: false,
+        })
+    }
+
+    onDormancyClick = () =>{
+        let dormancy = {
+            isdormancy: this.state.isdormancy,
+            dormancystart: this.state.dormancystart,
+            dormancyend: this.state.dormancyend,
+        }
+        console.log(dormancy.isdormancy);
+        console.log(dormancy.dormancystart);
+        console.log(dormancy.dormancyend);
+    }
+
     render () {
-        const {locale,syssettings} = this.props;
+        const {locale,syssettings, intl:{ formatMessage }} = this.props;
         const timezone = `${lodashget(syssettings,'timezone',`${curTZ}`)}`;
         const basicData = {
             deviceid: {
@@ -511,7 +540,106 @@ class SettingSystem extends PureComponent{
         console.log(basicData)
         return (
             <div className="sub_setting_bg">
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
+                { <RenderForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} />}
+                <Modal
+                    popup
+                    visible={this.state.modal1}
+                    animationType="slide-up"
+                    >
+                    <div className="setting-modal">
+                        <WingBlank className="wb_margin">
+                            <List>
+                            <Item><FormattedMessage id="setting.system.qualitysetup" />
+                                <Brief>
+                                    <div className="item_children">
+                                    <InputItem
+                                        placeholder={formatMessage({id: "form.input"})}
+                                        value={this.state.quality}
+                                        onChange={(val)=>{this.setState({quality: val})}}
+                                    />
+                                    </div>
+                                </Brief>
+                            </Item>
+                            </List>
+                            <WingBlank  className="submit_zone dual_btn">
+                                <div className="add_btn_left" style={{display: 'inline-block'}} >
+                                    <Button type="ghost" className="btn" onClick={this.onCloseQuality}>
+                                        <FormattedMessage id="form.cancel" defaultMessage="取消" />
+                                    </Button>
+                                </div>
+                                <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
+                                <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
+                                    <Button type="ghost" className="btn" onClick={this.onQualityClick}>
+                                        <FormattedMessage id="setting.system.send" defaultMessage="发送" />
+                                    </Button>
+                                </div>
+                            </WingBlank>
+                        </WingBlank>
+                    </div>
+                </Modal>
+                <Modal
+                    popup
+                    visible={this.state.modal2}
+                    animationType="slide-up"
+                    >
+                    <div className="setting-modal">
+                        <WingBlank className="wb_margin">
+                            <List>
+                                <List.Item
+                                    extra={<Switch
+                                            checked={this.state.isdormancy}
+                                            onChange={() => {
+                                                this.setState({
+                                                    isdormancy: !this.state.isdormancy,
+                                                });
+                                        }}
+                                    />}
+                                >{formatMessage({id: "setting.system.isdormancy"})}</List.Item>
+                                <Item><FormattedMessage id="setting.system.dormancystart" defaultMessage="休眠开始时间" />
+                                    <Brief>
+                                        <div className="item_children">
+                                            <DatePicker
+                                                mode="time"
+                                                extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
+                                                value={this.state.dormancystart}
+                                                onChange={date => this.setState({ dormancystart:date })}
+                                                >
+                                                <List.Item arrow="horizontal"></List.Item>
+                                            </DatePicker>
+                                        </div>
+                                    </Brief>
+                                </Item>
+                                <Item><FormattedMessage id="setting.system.dormancyend" defaultMessage="休眠开始时间" />
+                                    <Brief>
+                                        <div className="item_children">
+                                            <DatePicker
+                                                mode="time"
+                                                extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
+                                                value={this.state.dormancyend}
+                                                onChange={date => this.setState({ dormancyend:date })}
+                                                >
+                                                <List.Item arrow="horizontal"></List.Item>
+                                            </DatePicker>
+                                        </div>
+                                    </Brief>
+                                </Item>
+                                <WingBlank  className="submit_zone dual_btn wb_margin">
+                                    <div className="add_btn_left" style={{display: 'inline-block'}} >
+                                        <Button type="ghost" className="btn" onClick={this.onCloseDormancy}>
+                                            <FormattedMessage id="form.cancel" defaultMessage="取消" />
+                                        </Button>
+                                    </div>
+                                <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
+                                    <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
+                                        <Button type="ghost" className="btn" onClick={this.onDormancyClick}>
+                                            <FormattedMessage id="setting.system.send" defaultMessage="发送" />
+                                        </Button>
+                                    </div>
+                                </WingBlank>
+                            </List>
+                        </WingBlank>
+                    </div>
+                </Modal>
             </div>
         )
     }
@@ -521,5 +649,5 @@ const mapStateToProps =  ({device:{locale,syssettings,_id}}) =>{
   return {locale,syssettings,_id};
 };
 
-SettingSystem = connect(mapStateToProps)(SettingSystem);
+SettingSystem = connect(mapStateToProps)(injectIntl(SettingSystem));
 export default SettingSystem;

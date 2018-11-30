@@ -6,7 +6,7 @@ import monitorBg from '../../assets/zhuye_an.png';
 // import lodashmap from 'lodash.map';
 import lodashget from 'lodash.get';
 import { injectIntl } from 'react-intl';
-
+import Waterwave from './waterwave.js';
 import './index.less';
 import '../../assets/wlimg.png';
 
@@ -194,6 +194,7 @@ class Home extends PureComponent{
                     <WingBlank style={{marginTop: "-140px", display: "flex", justifyContent: 'center'}}>
                         <div className="zhuyean">
                             <img src={monitorBg} alt="" style={{width: '100%', display: 'block'}} />
+                            {/* <Waterwave style={{width: '100%', display: 'block'}} />*/}
                             <div className="monitor">
                                 <h1>{lodashget(devicedata,'main_outwater_grade','优')}</h1>
                                 <p>{title_main_outwater_quality}</p>

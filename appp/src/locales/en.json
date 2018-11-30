@@ -1,6 +1,6 @@
 {
-  "login.account":"账号",
-  "login.password":"密码",
+  "login.account":"account",
+  "login.password":"password",
   "login.login":"登录",
   "login.selectlanguage":"选择当前使用的语言",
   "login.inputaccount":"请输入账号",

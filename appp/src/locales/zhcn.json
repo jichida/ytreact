@@ -148,5 +148,13 @@
   "home.show.err.error_pressuresensor1failure":"压力1",
   "home.show.err.error_pressuresensor2failure":"压力2",
   "home.show.err.error_pressuresensor3failure":"压力3",
-  "home.show.err.error_pressuresensor4failure":"压力4"
+  "home.show.err.error_pressuresensor4failure":"压力4",
+  "home.show.performance.averagecurrent_600":"平均电流@600",
+  "home.show.performance.average":"平均",
+  "home.show.performance.max":"最大",
+  "home.show.performance.min":"最小",
+  "home.show.performance.averagecurrent_300":"平均电流@300",
+  "home.show.performance.averagecut_600":"平均cut@600",
+  "home.show.performance.averagecut_300":"平均cut@300",
+  "home.show.performance.waterpurificationrate":"净水率"
 }

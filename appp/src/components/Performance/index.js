@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Flex, Accordion, WhiteSpace } from 'antd-mobile';
-
+import { injectIntl } from 'react-intl';
 
 import './index.less';
 
@@ -21,9 +21,9 @@ class Performance extends PureComponent{
     }
 
     renderSub = (subdata)=>{
-        return subdata.map((item)=>{
+        return subdata.map((item,k)=>{
             return (
-                <Flex.Item key={item.title} className="item_container">
+                <Flex.Item key={k} className="item_container">
                     <div>
                         <p className="title">{item.title}</p>
                         <p className="content">{item.content}</p>
@@ -54,90 +54,90 @@ class Performance extends PureComponent{
             min_averagecut_300:3,// 17	平均cut@300	300电导率时的cut	1 word
             min_waterpurificationrate:2,//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
           };
-
+          const {intl} = this.props;
 
           const data = [
               {
-                  title: "平均电流@600",
+                  title: intl.formatMessage({id:`home.show.performance.averagecurrent_600`}),
                   sub: [
                       {
-                          title: '平均',
+                          title: intl.formatMessage({id:`home.show.performance.average`}),
                           content: `${devicedata.averagecurrent_600}`,
                       },
                       {
-                          title: '最小',
+                          title: intl.formatMessage({id:`home.show.performance.min`}),
                           content:  `${devicedata.min_averagecurrent_600}`,
                       },
                       {
-                          title: '最大',
+                          title: intl.formatMessage({id:`home.show.performance.max`}),
                           content:  `${devicedata.max_averagecurrent_600}`,
                       },
                   ],
               },
               {
-                  title: "平均电流@300",
+                  title: intl.formatMessage({id:`home.show.performance.averagecurrent_300`}),
                   sub: [
                       {
-                          title: '平均',
+                          title: intl.formatMessage({id:`home.show.performance.average`}),
                           content: `${devicedata.averagecurrent_300}`,
                       },
                       {
-                          title: '最小',
+                          title: intl.formatMessage({id:`home.show.performance.min`}),
                           content: `${devicedata.min_averagecurrent_300}`,
                       },
                       {
-                          title: '最大',
+                          title: intl.formatMessage({id:`home.show.performance.max`}),
                           content: `${devicedata.max_averagecurrent_300}`,
                       },
                   ],
               },
               {
-                  title: "平均CUT@600",
+                  title: intl.formatMessage({id:`home.show.performance.averagecut_600`}),
                   sub: [
                     {
-                        title: '平均',
+                        title: intl.formatMessage({id:`home.show.performance.average`}),
                         content: `${devicedata.averagecut_600}`,
                     },
                     {
-                        title: '最小',
+                        title: intl.formatMessage({id:`home.show.performance.min`}),
                         content:  `${devicedata.min_averagecut_600}`,
                     },
                     {
-                        title: '最大',
+                        title: intl.formatMessage({id:`home.show.performance.max`}),
                         content:  `${devicedata.max_averagecut_600}`,
                     },
                   ],
               },
               {
-                  title: "平均CUT@300",
+                  title:intl.formatMessage({id:`home.show.performance.averagecut_300`}),
                   sub: [
                     {
-                        title: '平均',
+                        title: intl.formatMessage({id:`home.show.performance.average`}),
                         content: `${devicedata.averagecut_300}`,
                     },
                     {
-                        title: '最小',
+                        title: intl.formatMessage({id:`home.show.performance.min`}),
                         content:  `${devicedata.min_averagecut_300}`,
                     },
                     {
-                        title: '最大',
+                        title: intl.formatMessage({id:`home.show.performance.max`}),
                         content:  `${devicedata.max_averagecut_300}`,
                     },
                   ],
               },
               {
-                  title: "净水率",
+                  title:intl.formatMessage({id:`home.show.performance.waterpurificationrate`}),
                   sub: [
                     {
-                        title: '平均',
+                        title: intl.formatMessage({id:`home.show.performance.average`}),
                         content: `${devicedata.waterpurificationrate}`,
                     },
                     {
-                        title: '最小',
+                        title: intl.formatMessage({id:`home.show.performance.min`}),
                         content:  `${devicedata.min_waterpurificationrate}`,
                     },
                     {
-                        title: '最大',
+                        title: intl.formatMessage({id:`home.show.performance.max`}),
                         content:  `${devicedata.max_waterpurificationrate}`,
                     },
                   ],
@@ -160,4 +160,4 @@ class Performance extends PureComponent{
     }
 }
 
-export default Performance;
+export default injectIntl(Performance);

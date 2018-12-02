@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {  NavBar, Icon, List, InputItem, Button, Switch } from 'antd-mobile';
+import {  NavBar, Icon, List, InputItem } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
 import {setuserdevice_request} from '../../actions';
@@ -102,168 +102,71 @@ const RenderForm = createForm({
         };
     }
 })(injectIntl((props)=>{
-    const { getFieldProps, validateFields } = props.form;
-    const { intl: { formatMessage }} = props;
-
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        validateFields((err, values)=>{
-            if(!err){
-                props.onSubmit(values);
-            }
-        })
-    }
+    const { getFieldProps } = props.form;
 
     return (
         <React.Fragment>
         <form>
             <List>
-                <Item><FormattedMessage id="install.position" defaultMessage="安装地点" />
-                        <Brief>
-                            <div className="item_children">
-                                <InputItem
-                                    placeholder={formatMessage({id: "form.input"})}
-                                    {...getFieldProps('position',{
-                                        rules: [{
-                                            required: true,
-                                            message: <FormattedMessage id="install.position" defaultMessage="安装地点" />,
-                                        }],
-                                    })}
-                                />
-                            </div>
-                    </Brief>
-                </Item>
-                <List.Item className="item_switch"
-                    extra={<Switch
-                        {...getFieldProps('avoidlight', {
-                            valuePropName: 'checked',
-                        })}
-                    />}
-                ><FormattedMessage id="install.avoidlight" defaultMessage="是否避光" /></List.Item>
-                <Item><FormattedMessage id="install.wall" defaultMessage="墙体材料" />
-                        <Brief>
-                            <div className="item_children">
-                                <InputItem
-                                    placeholder={formatMessage({id: "form.input"})}
-                                    {...getFieldProps('wall',{
-                                        rules: [{
-                                            required: true,
-                                            message: <FormattedMessage id="install.wall" defaultMessage="墙体材料" />,
-                                        }],
-                                    })}
-                                />
-                            </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="install.method" defaultMessage="主机安装方式" />
-                        <Brief>
-                            <div className="item_children">
-                                <InputItem
-                                    placeholder={formatMessage({id: "form.input"})}
-                                    {...getFieldProps('method',{
-                                        rules: [{
-                                            required: true,
-                                            message: <FormattedMessage id="install.method" defaultMessage="主机安装方式" />,
-                                        }],
-                                    })}
-                                />
-                            </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="install.space" defaultMessage="安装空间" />
-                        <Brief>
-                            <div className="item_children">
-                                <InputItem
-                                    placeholder={formatMessage({id: "form.input"})}
-                                    {...getFieldProps('space',{
-                                        rules: [{
-                                            required: true,
-                                            message: <FormattedMessage id="install.space" defaultMessage="安装空间" />,
-                                        }],
-                                    })}
-                                />
-                            </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="install.pipe" defaultMessage="进水管径大小" />
-                        <Brief>
-                            <div className="item_children">
-                                <InputItem
-                                    placeholder={formatMessage({id: "form.input"})}
-                                    {...getFieldProps('pipe',{
-                                        rules: [{
-                                            required: true,
-                                            message: <FormattedMessage id="install.pipe" defaultMessage="进水管径大小" />,
-                                        }],
-                                    })}
-                                />
-                            </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="install.drainage" defaultMessage="排水距离" />
-                        <Brief>
-                            <div className="item_children">
-                                <InputItem
-                                    placeholder={formatMessage({id: "form.input"})}
-                                    {...getFieldProps('drainage',{
-                                        rules: [{
-                                            required: true,
-                                            message: <FormattedMessage id="install.drainage" defaultMessage="排水距离" />,
-                                        }],
-                                    })}
-                                />
-                            </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="install.pipematerials" defaultMessage="管路材质" />
-                        <Brief>
-                            <div className="item_children">
-                                <InputItem
-                                    placeholder={formatMessage({id: "form.input"})}
-                                    {...getFieldProps('pipematerials',{
-                                        rules: [{
-                                            required: true,
-                                            message: <FormattedMessage id="install.pipematerials" defaultMessage="管路材质" />,
-                                        }],
-                                    })}
-                                />
-                            </div>
-                    </Brief>
-                </Item>
-                <List.Item className="item_switch"
-                    extra={<Switch
-                        {...getFieldProps('wifi', {
-                            valuePropName: 'checked',
-                        })}
-                    />}
-                ><FormattedMessage id="install.wifi" defaultMessage="有无WIFI" /></List.Item>
-                <List.Item className="item_switch"
-                    extra={<Switch
-                        {...getFieldProps('power', {
-                            valuePropName: 'checked',
-                        })}
-                    />}
-                ><FormattedMessage id="install.power" defaultMessage="有无电源" /></List.Item>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    extra=""
+                    {...getFieldProps('position')}
+                ><FormattedMessage id="install.position" defaultMessage="安装地点" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    {...getFieldProps('avoidlight')}
+                ><FormattedMessage id="install.avoidlight" defaultMessage="是否避光" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    {...getFieldProps('wall')}
+                ><FormattedMessage id="install.wall" defaultMessage="墙体材料" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    {...getFieldProps('method')}
+                ><FormattedMessage id="install.method" defaultMessage="主机安装方式" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    {...getFieldProps('space')}
+                ><FormattedMessage id="install.space" defaultMessage="安装空间" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    {...getFieldProps('pipe')}
+                ><FormattedMessage id="install.pipe" defaultMessage="进水管径大小" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    extra="m"
+                    {...getFieldProps('drainage')}
+                ><FormattedMessage id="install.drainage" defaultMessage="排水距离" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    {...getFieldProps('pipematerials')}
+                ><FormattedMessage id="install.pipematerials" defaultMessage="管路材质" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    {...getFieldProps('wifi')}
+                ><FormattedMessage id="install.wifi" defaultMessage="有无WIFI" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    {...getFieldProps('power')}
+                ><FormattedMessage id="install.power" defaultMessage="有无电源" /></InputItem>
             </List>
         </form>
-        <div className="submit_zone">
-            <div className="add_btn" >
-                <Button type="ghost" className="btn" onClick={handleSubmit}>
-                    <FormattedMessage id="form.save" defaultMessage="保存" />
-                </Button>
-            </div>
-        </div>
         </React.Fragment>
     )
 }))
 
 class DeviceInstall extends PureComponent{
-
-    handleSubmit = (values)=>{
-        console.log(values);
-        const {dispatch,_id} = this.props;
-        dispatch(setuserdevice_request({_id,data:{install:values}}));
-    }
 
     render () {
 
@@ -274,7 +177,7 @@ class DeviceInstall extends PureComponent{
                value: lodashget(install,'position',''),
            },
            avoidlight: {
-               value: lodashget(install,'avoidlight',false),
+               value: lodashget(install,'avoidlight',false)?'是':'否',
            },
            wall: {
                value: lodashget(install,'wall',''),
@@ -295,10 +198,10 @@ class DeviceInstall extends PureComponent{
                value: lodashget(install,'pipematerials',''),
            },
            wifi: {
-               value: lodashget(install,'wifi',false),
+               value: lodashget(install,'wifi',false)?'有':'无',
            },
            power: {
-               value: lodashget(install,'power',false),
+               value: lodashget(install,'power',false)?'有':'无',
            },
          }
          console.log(basicData);

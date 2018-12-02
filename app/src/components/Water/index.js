@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {  NavBar, Icon, List, InputItem, Button, Switch } from 'antd-mobile';
+import {  NavBar, Icon, List, InputItem } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
 import {setuserdevice_request} from '../../actions';
@@ -84,248 +84,94 @@ const RenderForm = createForm({
         };
     }
 })(injectIntl((props)=>{
-    const { getFieldProps, validateFields } = props.form;
-    const { intl: { formatMessage }} = props;
-
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        validateFields((err, values)=>{
-            if(!err){
-                props.onSubmit(values);
-            }
-        })
-    }
+    const { getFieldProps } = props.form;
 
     return (
         <React.Fragment>
         <form>
             <List>
-            <Item><FormattedMessage id="water.quantity" defaultMessage="月用水量（吨）" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                placeholder={formatMessage({id: "form.input"})}
-                                type="money"
-                                extra= {<Icon type="right" />}
-                                {...getFieldProps('quantity',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="water.quantity" defaultMessage="月用水量（吨）" />,
-                                    }],
-                                })}
-                            />
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="water.persons" defaultMessage="用水人数（人）" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                placeholder={formatMessage({id: "form.input"})}
-                                type="money"
-                                extra= {<Icon type="right" />}
-                                {...getFieldProps('persons',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="water.persons" defaultMessage="用水人数（人）" />,
-                                    }],
-                                })}
-                            />
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="water.spot" defaultMessage="直饮水点（个）" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                placeholder={formatMessage({id: "form.input"})}
-                                type="money"
-                                extra= {<Icon type="right" />}
-                                {...getFieldProps('spot',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="water.spot" defaultMessage="直饮水点（个）" />,
-                                    }],
-                                })}
-                            />
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="water.watergage" defaultMessage="水压" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                placeholder={formatMessage({id: "form.input"})}
-                                type="money"
-                                extra= {<Icon type="right" />}
-                                {...getFieldProps('watergage',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="water.watergage" defaultMessage="水压" />,
-                                    }],
-                                })}
-                            />
-                        </div>
-                    </Brief>
-                </Item>
-                <List.Item
-                    className="item_switch"
-                    extra={<Switch
-                        {...getFieldProps('booster', {
-                            valuePropName: 'checked',
-                        })}
-                    />}
-                ><FormattedMessage id="water.booster" defaultMessage="需装增压泵" /></List.Item>
-                <Item><FormattedMessage id="water.bathrooms" defaultMessage="卫浴间数量" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                type="money"
-                                placeholder={formatMessage({id: "form.input"})}
-                                extra= {<Icon type="right" />}
-                                {...getFieldProps('bathrooms',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="water.bathrooms" defaultMessage="卫浴间数量" />,
-                                    }],
-                                })}
-                            />
-                        </div>
-                    </Brief>
-                </Item>
-                <List.Item className="item_switch"
-                    extra={<Switch
-                        {...getFieldProps('shunt', {
-                            valuePropName: 'checked',
-                        })}
-                    />}
-                ><FormattedMessage id="water.shunt" defaultMessage="是否分流" /></List.Item>
-                <Item><FormattedMessage id="water.tds" defaultMessage="原水TDS值" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                type="money"
-                                placeholder={formatMessage({id: "form.input"})}
-                                extra= {<Icon type="right" />}
-                                {...getFieldProps('tds',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="water.tds" defaultMessage="原水TDS值" />,
-                                    }],
-                                })}
-                            />
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="water.conductivity" defaultMessage="原水导电率" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                type="money"
-                                placeholder={formatMessage({id: "form.input"})}
-                                extra= {<Icon type="right" />}
-                                {...getFieldProps('conductivity',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="water.conductivity" defaultMessage="原水导电率" />,
-                                    }],
-                                })}
-                            />
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="water.hardness" defaultMessage="原水硬度(ppm)" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                type="money"
-                                placeholder={formatMessage({id: "form.input"})}
-                                extra= {<Icon type="right" />}
-                                {...getFieldProps('hardness',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="water.hardness" defaultMessage="原水硬度(ppm)" />,
-                                    }],
-                                })}
-                            />
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="water.alkalinity" defaultMessage="原水碱度(ppm)" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                type="money"
-                                placeholder={formatMessage({id: "form.input"})}
-                                extra= {<Icon type="right" />}
-                                {...getFieldProps('alkalinity',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="water.alkalinity" defaultMessage="原水碱度(ppm)" />,
-                                    }],
-                                })}
-                            />
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="water.ph" defaultMessage="ph值" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                type="money"
-                                placeholder={formatMessage({id: "form.input"})}
-                                extra= {<Icon type="right" />}
-                                {...getFieldProps('ph',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="water.ph" defaultMessage="ph值" />,
-                                    }],
-                                })}
-                            />
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="water.usertds" defaultMessage="出水TDS值(mg/l)" />
-                    <Brief>
-                        <div className="item_children">
-                            <InputItem
-                                type="money"
-                                placeholder={formatMessage({id: "form.input"})}
-                                extra= {<Icon type="right" />}
-                                {...getFieldProps('usertds',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="water.usertds" defaultMessage="出水TDS值(mg/l)" />,
-                                    }],
-                                })}
-                            />
-                        </div>
-                    </Brief>
-                </Item>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    extra="吨"
+                    {...getFieldProps('quantity')}
+                ><FormattedMessage id="water.quantity" defaultMessage="月用水量（吨）" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    extra="人"
+                    {...getFieldProps('persons')}
+                ><FormattedMessage id="water.persons" defaultMessage="用水人数（人）" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    extra="个"
+                    {...getFieldProps('spot')}
+                ><FormattedMessage id="water.spot" defaultMessage="直饮水点（个）" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    extra="公斤"
+                    {...getFieldProps('watergage')}
+                ><FormattedMessage id="water.watergage" defaultMessage="水压" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    {...getFieldProps('booster')}
+                ><FormattedMessage id="water.booster" defaultMessage="需装增压泵" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    extra="个"
+                    {...getFieldProps('bathrooms')}
+                ><FormattedMessage id="water.bathrooms" defaultMessage="卫浴间数量" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    {...getFieldProps('shunt')}
+                ><FormattedMessage id="water.shunt" defaultMessage="是否分流" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    extra="mg/l"
+                    {...getFieldProps('tds')}
+                ><FormattedMessage id="water.tds" defaultMessage="原水TDS值" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    extra="uS/cm"
+                    {...getFieldProps('conductivity')}
+                ><FormattedMessage id="water.conductivity" defaultMessage="原水导电率" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    extra="ppm"
+                    {...getFieldProps('hardness')}
+                ><FormattedMessage id="water.hardness" defaultMessage="原水硬度(ppm)" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    extra="ppm"
+                    {...getFieldProps('alkalinity')}
+                ><FormattedMessage id="water.alkalinity" defaultMessage="原水碱度(ppm)" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    {...getFieldProps('ph')}
+                ><FormattedMessage id="water.ph" defaultMessage="ph值" /></InputItem>
+                <InputItem
+                    className="right-input"
+                    editable={false}
+                    extra="mg/l"
+                    {...getFieldProps('usertds')}
+                ><FormattedMessage id="water.usertds" defaultMessage="出水TDS值(mg/l)" /></InputItem>
             </List>
         </form>
-        <div className="submit_zone">
-            <div className="add_btn" >
-                <Button type="ghost" className="btn" onClick={handleSubmit}>
-                    <FormattedMessage id="form.save" defaultMessage="保存" />
-                </Button>
-            </div>
-        </div>
         </React.Fragment>
     )
 }))
 
 class DeviceWater extends PureComponent{
-
-    handleSubmit = (values)=>{
-        console.log(values);
-        const {dispatch,_id} = this.props;
-        // values.useproperty = values.useproperty[0];
-        // values.building = values.building[0];
-        // values.model = values.model[0];
-        dispatch(setuserdevice_request({_id,data:{usewater:values}}));
-
-    }
 
     render () {
         const { history,usewater } = this.props;
@@ -344,13 +190,13 @@ class DeviceWater extends PureComponent{
                 value: lodashget(usewater,'watergage',''),
             },
             booster: {
-                value: lodashget(usewater,'booster',false),
+                value: lodashget(usewater,'booster',false)?'是':'否',
             },
             bathrooms: {
                 value: lodashget(usewater,'bathrooms',''),
             },
             shunt: {
-                value: lodashget(usewater,'shunt',false),
+                value: lodashget(usewater,'shunt',false)?'是':'否',
             },
             tds: {
                 value: lodashget(usewater,'tds',''),
@@ -383,7 +229,7 @@ class DeviceWater extends PureComponent{
                 <FormattedMessage id="device.water" />
                 </NavBar>
                 <div className="sub_setting_bg">
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
+                { <RenderForm {...basicData} />}
                 </div>
                 </div>
             </div>

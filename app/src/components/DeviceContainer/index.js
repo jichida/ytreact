@@ -22,7 +22,7 @@ class Setting extends PureComponent{
                     icon={<Icon type="left" />}
                     onLeftClick={() => history.goBack()}
                 >
-                <FormattedMessage id="setting" />
+                <FormattedMessage id="device" />
                 </NavBar>
                 <DeviceInfo />
                 </div>

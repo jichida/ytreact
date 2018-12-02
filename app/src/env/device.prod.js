@@ -12,8 +12,6 @@ export const getssid = (fncallback)=>{
           if(typeof data === 'string'){
               data = JSON.parse(data);
           }
-
-
           fncallback(data);
         }
         catch(e){
@@ -38,7 +36,7 @@ export const senddata = (values,fncallback)=>{
           if(typeof data === 'string'){
               data = JSON.parse(data);
           }
-          
+
 
           fncallback(data);
         }

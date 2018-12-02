@@ -18,7 +18,7 @@ export function requireAuthentication(Component) {
     };
 
     const mapStateToProps =  ({userlogin}) =>{
-      return userlogin;
+      return {...userlogin};
     };
 
     return connect(mapStateToProps)(AuthenticatedComponent);

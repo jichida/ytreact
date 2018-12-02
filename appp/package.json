@@ -1,6 +1,7 @@
 {
-  "name": "appc",
+  "name": "appp",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@babel/core": "7.1.0",
@@ -85,6 +86,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "buildcp": "node scripts/build.js && scp -r build/. /home/ubuntu/yt/deploy/dist/appp",
+    "buildcpr": "node scripts/build.js && scp -r build/. ubuntu@yt.i2u.top:/home/ubuntu/yt/deploy/dist/appp",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {

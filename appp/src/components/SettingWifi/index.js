@@ -36,7 +36,7 @@ const RenderForm = createForm({
                 ...props.gateway,
                 value: props.gateway.value,
           }),
-          userssid: createFormField({
+          lan: createFormField({
                 ...props.lan,
                 value: props.lan.value,
           }),

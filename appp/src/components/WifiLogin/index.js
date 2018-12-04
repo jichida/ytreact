@@ -24,7 +24,7 @@ class WifiLogin extends PureComponent{
     // 取消 id: form.cancel
     showActionSheet = (title) => {
         const {intl,wifilist,wifipassword,dispatch} = this.props;
-        const canceltext = intl.formatMessage({id: 'orm.cancel'});
+        const canceltext = intl.formatMessage({id: 'form.cancel'});
         let BUTTONS = [...wifilist,canceltext];//"form.cancel"
 
         ActionSheet.showActionSheetWithOptions({

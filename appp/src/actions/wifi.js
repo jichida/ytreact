@@ -11,3 +11,5 @@ export const wifi_sendcmd_result = createAction('wifi_sendcmd_result');
 
 export const wifi_recvcmd_request = createAction('wifi_recvcmd_request');
 export const wifi_recvcmd_result = createAction('wifi_recvcmd_result');
+
+export const wifi_getdata = createAction('wifi_getdata');

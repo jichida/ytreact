@@ -7,7 +7,7 @@ import _ from 'lodash';
 import {setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import 'moment-timezone';
-import {ui_set_language} from '../../actions';
+import {ui_set_language,wifi_sendcmd_request} from '../../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
 
@@ -176,6 +176,11 @@ const RenderForm = createForm({
         props.showModal('modal2');
     }
 
+    const onClickCmd = (cmd)=>{
+      const {dispatch} = props;
+      dispatch(wifi_sendcmd_request({cmd}));
+    }
+
 
     return (
         <React.Fragment>
@@ -290,7 +295,9 @@ const RenderForm = createForm({
 
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
-                            <Button size="small" type="ghost" className="btn" >
+                            <Button size="small" type="ghost" className="btn"  onClick={()=>{
+                              onClickCmd(`$res_prefilter1%`);//1	前置滤芯1 复位	滤芯寿命复位
+                            }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>
@@ -299,7 +306,9 @@ const RenderForm = createForm({
 
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
-                            <Button size="small" type="ghost" className="btn" >
+                            <Button size="small" type="ghost" className="btn" onClick={()=>{
+                              onClickCmd(`$res_prefilter2%`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
+                            }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>
@@ -308,15 +317,20 @@ const RenderForm = createForm({
 
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
-                            <Button size="small" type="ghost" className="btn" >
+                            <Button size="small" type="ghost" className="btn" onClick={()=>{
+                              onClickCmd(`$res_prefilter3%`);//3	前置滤芯3 复位	滤芯寿命复位
+                            }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>
                         }
                 ><FormattedMessage id="setting.system.frontfilter3" defaultMessage="前置滤芯3" /></List.Item>
+
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
-                            <Button size="small" type="ghost" className="btn" >
+                            <Button size="small" type="ghost" className="btn"  onClick={()=>{
+                              onClickCmd(`$res_posfilter1%`);//4	后置滤芯1 复位	滤芯寿命复位
+                            }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>
@@ -325,7 +339,9 @@ const RenderForm = createForm({
 
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
-                            <Button size="small" type="ghost" className="btn" >
+                            <Button size="small" type="ghost" className="btn"   onClick={()=>{
+                              onClickCmd(`$res_posfilter2%`);//5	后置滤芯2 复位	滤芯寿命复位
+                            }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>
@@ -334,44 +350,61 @@ const RenderForm = createForm({
 
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
-                            <Button size="small" type="ghost" className="btn" >
+                            <Button size="small" type="ghost" className="btn"   onClick={()=>{
+                              onClickCmd(`$res_posfilter3%`);//4	后置滤芯1 复位	滤芯寿命复位
+                            }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>
                         }
                 ><FormattedMessage id="setting.system.afterfilter3" defaultMessage="后置滤芯3" /></List.Item>
+
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
-                            <Button size="small" type="ghost" className="btn" >
+                            <Button size="small" type="ghost" className="btn"  onClick={()=>{
+                              onClickCmd(`$decpression%`);//20	废水阀泄压	整机泄压	$decpression%
+                            }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>
                         }
                 ><FormattedMessage id="setting.system.decompression" defaultMessage="废水阀泄压" /></List.Item>
+
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
-                            <Button size="small" type="ghost" className="btn" >
+                            <Button size="small" type="ghost" className="btn"  onClick={()=>{
+                              onClickCmd(`$sysreset 1%`);//重置重启系统	重启系统	$sysreset 1%
+                            }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>
                         }
                 ><FormattedMessage id="setting.system.resetsystem" defaultMessage="重置并重启系统" /></List.Item>
+
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
-                            <Button size="small" type="ghost" className="btn" >
+                            <Button size="small" type="ghost" className="btn" onClick={()=>{
+                              //获取当前时间
+                              const curdate = moment().format('date %YY.mm.dd.HH.ss');
+                              onClickCmd(`${curdate}%`);//11	重置时间	同步系统时间	$date 18.11.30.13.20% 意思是年.月.日.时.分
+                            }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>
                         }
                 ><FormattedMessage id="setting.system.resettime" defaultMessage="重置时间" /></List.Item>
+
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
-                            <Button size="small" type="ghost" className="btn" >
+                            <Button size="small" type="ghost" className="btn"  onClick={()=>{
+                              onClickCmd(`$sysinit%`);//12	恢复出厂设置	恢复出厂时的状态	$sysinit%
+                            }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>
                         }
                 ><FormattedMessage id="setting.system.restore" defaultMessage="恢复出厂设置" /></List.Item>
+
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" >
@@ -380,6 +413,7 @@ const RenderForm = createForm({
                             </div>
                         }
                 ><FormattedMessage id="setting.system.sendlog" defaultMessage="发送设备运行记录" /></List.Item>
+
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={showDormancySetup} >
@@ -479,7 +513,7 @@ class SettingSystem extends PureComponent{
     }
 
     render () {
-        const {locale,syssettings, intl:{ formatMessage }} = this.props;
+        const {locale,syssettings,dispatch, intl:{ formatMessage }} = this.props;
         const timezone = `${lodashget(syssettings,'timezone',`${curTZ}`)}`;
         const basicData = {
             deviceid: {
@@ -540,7 +574,7 @@ class SettingSystem extends PureComponent{
         console.log(basicData)
         return (
             <div className="sub_setting_bg">
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} />}
+                { <RenderForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} dispatch={dispatch}/>}
                 <Modal
                     popup
                     visible={this.state.modal1}

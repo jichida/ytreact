@@ -14,6 +14,9 @@ import {
   wifi_setcurwifi_request,
   wifi_setcurwifi_result,
 
+  wifi_sendcmd_request,
+
+  common_err,
   set_weui
 } from '../../actions/index.js';
 import { push } from 'connected-react-router';//https://github.com/reactjs/connected-react-router
@@ -37,6 +40,22 @@ function setwifi(values){
 export function* wififlow() {
     console.log(`wififlow======>`);
 
+    yield takeLatest(`${wifi_sendcmd_request}`, function*(action) {
+      try{
+        const {payload} = action;
+        yield put(set_weui({
+          toast:{
+          text:`发送给硬件命令:\n${payload.cmd}`,
+          show: true,
+          type:'success'
+        }}));
+      }
+      catch(e){
+        console.log(e);
+      }
+
+    });
+
     yield takeLatest(`${wifi_getssidlist_request}`, function*(action) {
       try{
         let {payload:result} = action;
@@ -46,7 +65,7 @@ export function* wififlow() {
            timeout: call(delay, 2000)
         });
         if(!!timeout){
-          yield put(set_weui({type:'getcurwifi',errmsg:`获取wifi信息超时`}));
+          yield put(common_err({type:'getcurwifi',errmsg:`获取wifi信息超时`}));
         }
         else{
           yield put(wifi_getssidlist_result(wifiresult));
@@ -67,7 +86,7 @@ export function* wififlow() {
            timeout: call(delay, 2000)
         });
         if(!!timeout){
-          yield put(set_weui({type:'wifi_setcurwifi',errmsg:`设置wifi超时`}));
+          yield put(common_err({type:'wifi_setcurwifi',errmsg:`设置wifi超时`}));
         }
         else{
           yield put(wifi_setcurwifi_result(wifiresult));

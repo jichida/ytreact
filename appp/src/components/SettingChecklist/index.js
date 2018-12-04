@@ -39,7 +39,7 @@ const RenderCheckForm = createForm({
 })((props)=>{
     const { getFieldProps, validateFields } = props.form;
 
-    const { onEnable } = props;
+    const { onEnable,isEnableBtnVisible,onClickSysXY } = props;
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -100,16 +100,20 @@ const RenderCheckForm = createForm({
         </form>
         <WingBlank  className="submit_zone dual_btn">
             <div className="add_btn_left" style={{display: 'inline-block'}} >
-                <Button type="ghost" className="btn">
+                <Button type="ghost" className="btn" onClick={
+                  ()=>{onClickSysXY()}
+                }>
                     <FormattedMessage id="form.decompression" defaultMessage="系统泄压" />
                 </Button>
             </div>
             <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
-            <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
-                <Button type="ghost" className="btn" onClick={onEnable}>
-                    <FormattedMessage id="form.enable" defaultMessage="启用" />
-                </Button>
-            </div>
+            {
+              isEnableBtnVisible && (  <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
+                    <Button type="ghost" className="btn" onClick={onEnable}>
+                        <FormattedMessage id="form.enable" defaultMessage="启用" />
+                    </Button>
+                </div>)
+            }
         </WingBlank>
         </React.Fragment>
     )
@@ -263,6 +267,10 @@ class SettingChecklist extends PureComponent{
             checked: true,
         })
     }
+    onClickSysXY = ()=>{
+      //click xy
+      console.log(`click xy`)
+    }
 
     render () {
       const {checklist} = this.props;
@@ -293,12 +301,19 @@ class SettingChecklist extends PureComponent{
              value: lodashget(checklist,'appset',false),
          },
      }
-
+        const isEnableBtnVisible = (checkData.washed.value) &&
+        (checkData.uptostandard.value) &&
+        (checkData.bypassclosed.value) &&
+        (checkData.noleakage.value) &&
+        (checkData.wificonnected.value) && (checkData.appset.value);
+        console.log(isEnableBtnVisible)
         return (
             <div className="checklist_bg">
                 { this.state.checked ?
                     <RenderResultForm {...resultData} onSubmit={this.handleSubmit} />
-                    : <RenderCheckForm {...checkData} onSubmit={this.handleSubmit} onEnable={this.handleEnable} />
+                    : <RenderCheckForm {...checkData} onSubmit={this.handleSubmit} isEnableBtnVisible={isEnableBtnVisible}
+                      onClickSysXY={this.onClickSysXY}
+                      onEnable={this.handleEnable} />
                 }
             </div>
         )

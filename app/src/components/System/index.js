@@ -125,7 +125,7 @@ const RenderForm = createForm({
                 ><FormattedMessage id="login.changepassword" /></List.Item>
             </List>
         </form>
-        <WingBlank className="submit_zone" style={{padding: '30px 0px'}}>
+        <WingBlank className="submit_zone">
             <div className="add_btn" >
                 <Button type="ghost" className="btn" onClick={handleSubmit}>
                     <FormattedMessage id="form.save" defaultMessage="保存" />

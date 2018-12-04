@@ -41,7 +41,6 @@ const data = [
                 <div className="fp_container">
                     <div className="panel">
                         <Flex direction="column" justify="between" className="container">
-                            <WhiteSpace size="xl" />
                             <div className="logo" ><img className="logo_img" alt="" src={logo} /></div>
                             <div className="pimg" >
                                 <Carousel
@@ -68,7 +67,6 @@ const data = [
                                     <span><FormattedMessage id="start.setting" /></span>
                                 </Link>
                             </div>
-                            <WhiteSpace size="xl" />
                         </Flex>
                     </div>
                 </div>

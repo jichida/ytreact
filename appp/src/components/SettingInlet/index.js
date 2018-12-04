@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {  List, InputItem, Button } from 'antd-mobile';
+import {  List, InputItem, Button, Modal, WingBlank, WhiteSpace } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
 import {setuserdevice_request} from '../../actions';
@@ -109,8 +109,10 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                type="money"
                                 extra=">"
+                                editable={false}
+                                onFocus={props.showModal}
+                                onExtraClick={props.showModal}
                                 placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('tds',{
                                     rules: [{
@@ -193,12 +195,81 @@ const RenderForm = createForm({
     )
 }))
 
+const InputModal = ({isVisual, title_key, value, onValueChange, onClose, onSubmit, inputPlaceholder})=>{
+    return (
+        <Modal
+            popup
+            visible={isVisual}
+            animationType="slide-up"
+        >
+            <div className="setting-modal">
+                <WingBlank className="wb_margin">
+                    <List>
+                    <Item>
+                        <FormattedMessage id={title_key} />
+                        <Brief>
+                            <div className="item_children">
+                            <InputItem
+                                placeholder={inputPlaceholder}
+                                value={value}
+                                onChange={(val)=>{onValueChange(val)}}
+                            />
+                            </div>
+                        </Brief>
+                    </Item>
+                    </List>
+                    <WingBlank  className="submit_zone dual_btn">
+                        <div className="add_btn_left" style={{display: 'inline-block'}} >
+                            <Button type="ghost" className="btn" onClick={onClose}>
+                                <FormattedMessage id="form.cancel" defaultMessage="取消" />
+                            </Button>
+                        </div>
+                        <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
+                        <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
+                            <Button type="ghost" className="btn" onClick={onSubmit}>
+                                <FormattedMessage id="setting.system.send" defaultMessage="发送" />
+                            </Button>
+                        </div>
+                    </WingBlank>
+                </WingBlank>
+            </div>
+        </Modal>
+    )
+}
+
 class Inlet extends PureComponent{
+
+    state = {
+        modalVisual: false,
+        tds: '',
+    }
 
     handleSubmit = (values)=>{
         console.log(values);
         const {dispatch,_id} = this.props;
         dispatch(setuserdevice_request({_id,data:{inwatersettings:values}}));
+    }
+
+    showModal = () => {
+        this.setState({
+          modalVisual: true,
+        });
+    }
+
+    handleTDSChange = (val) =>{
+        this.setState({
+            tds: val,
+        })
+    }
+
+    handleTDSClose = () => {
+        this.setState({
+            modalVisual: false,
+        })
+    }
+
+    handleTDSSubmit = () => {
+        console.log(this.state.tds);
     }
 
     render () {
@@ -226,8 +297,18 @@ class Inlet extends PureComponent{
         }
         return (
             <div className="sub_setting_bg">
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
+                { <RenderForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} />}
+                { <InputModal 
+                    isVisual={this.state.modalVisual} 
+                    title_key="setting.water.tds" 
+                    value={this.state.tds} 
+                    onValueChange={this.handleTDSChange} 
+                    onClose={this.handleTDSClose} 
+                    onSubmit={this.handleTDSSubmit}
+                    inputPlaceholder={this.props.intl.formatMessage({id: "form.input"})} />
+                }
             </div>
+            
         )
     }
 }
@@ -237,4 +318,4 @@ const mapStateToProps =  ({device:{inwatersettings,_id}}) =>{
 };
 
 Inlet = connect(mapStateToProps)(Inlet);
-export default withRouter(Inlet);
+export default withRouter(injectIntl(Inlet));

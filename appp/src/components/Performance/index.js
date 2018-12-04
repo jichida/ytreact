@@ -144,16 +144,12 @@ class Performance extends PureComponent{
               }
           ]
           return (
-            <div className="fh_container">
-                <div className="fp_container">
-                    <div className="panel">
-                        <div className="performance">
-                        <WhiteSpace />
-                        <Accordion accordion defaultActiveKey="0" className="pad">
-                            { this.renderList(data)}
-                        </Accordion>
-                        </div>
-                    </div>
+            <div className="panel">
+                <div className="performance">
+                <WhiteSpace />
+                <Accordion accordion defaultActiveKey="0" className="pad">
+                    { this.renderList(data)}
+                </Accordion>
                 </div>
             </div>
         )

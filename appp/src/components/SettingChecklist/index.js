@@ -295,14 +295,12 @@ class SettingChecklist extends PureComponent{
      }
 
         return (
-            <div className="fh_container">
-            <div className="fp_container">
-            <div className="sub_setting_bg">
+            <div className="checklist_bg">
                 { this.state.checked ?
                     <RenderResultForm {...resultData} onSubmit={this.handleSubmit} />
                     : <RenderCheckForm {...checkData} onSubmit={this.handleSubmit} onEnable={this.handleEnable} />
                 }
-            </div></div></div>
+            </div>
         )
     }
 }

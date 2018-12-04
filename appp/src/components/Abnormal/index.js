@@ -117,8 +117,6 @@ class Abnormal extends PureComponent{
 
       })
         return (
-            <div className="fh_container">
-                <div className="fp_container">
                     <div className="panel">
                         <div className="abnormal">
                             <Flex direction="column">
@@ -132,8 +130,6 @@ class Abnormal extends PureComponent{
                             </Flex>
                         </div>
                     </div>
-                </div>
-            </div>
         )
     }
 }

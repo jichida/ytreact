@@ -42,7 +42,7 @@ const RenderCheckForm = createForm({
     const { onEnable,isEnableBtnVisible,onClickSysXY } = props;
 
     const handleSubmit = (e)=>{
-        e.preventDefault();
+        //e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
                 props.onSubmit(values);
@@ -109,7 +109,11 @@ const RenderCheckForm = createForm({
             <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
             {
               isEnableBtnVisible && (  <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
-                    <Button type="ghost" className="btn" onClick={onEnable}>
+                    <Button type="ghost" className="btn" onClick={()=>{
+                      validateFields((err, values)=>{
+                          onEnable(values);
+                      });
+                    }}>
                         <FormattedMessage id="form.enable" defaultMessage="启用" />
                     </Button>
                 </div>)
@@ -181,7 +185,7 @@ const RenderResultForm = createForm({
     const { getFieldProps, validateFields } = props.form;
 
     const handleSubmit = (e)=>{
-        e.preventDefault();
+        //e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
                 props.onSubmit(values);
@@ -262,7 +266,8 @@ class SettingChecklist extends PureComponent{
       dispatch(setuserdevice_request({_id,data:{checklist:values}}));
     }
 
-    handleEnable = ()=>{
+    handleEnable = (values)=>{
+        console.log(values);
         this.setState({
             checked: true,
         })
@@ -301,12 +306,13 @@ class SettingChecklist extends PureComponent{
              value: lodashget(checklist,'appset',false),
          },
      }
-        const isEnableBtnVisible = (checkData.washed.value) &&
-        (checkData.uptostandard.value) &&
-        (checkData.bypassclosed.value) &&
-        (checkData.noleakage.value) &&
-        (checkData.wificonnected.value) && (checkData.appset.value);
-        console.log(isEnableBtnVisible)
+        // const isEnableBtnVisible = (checkData.washed.value) &&
+        // (checkData.uptostandard.value) &&
+        // (checkData.bypassclosed.value) &&
+        // (checkData.noleakage.value) &&
+        // (checkData.wificonnected.value) && (checkData.appset.value);
+        // console.log(isEnableBtnVisible)
+        const isEnableBtnVisible = true;
         return (
             <div className="checklist_bg">
                 { this.state.checked ?

@@ -54,7 +54,7 @@ const RenderForm = createForm({
 
 
     const handleSubmit = (e)=>{
-        e.preventDefault();
+        //e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
                 props.onSubmit(values);

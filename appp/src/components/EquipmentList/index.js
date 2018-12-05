@@ -104,7 +104,7 @@ const RenderForm = createForm({
     const { history } = props;
 
     const handleSubmit = (e)=>{
-        e.preventDefault();
+        //e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
                 props.onSubmit(values);

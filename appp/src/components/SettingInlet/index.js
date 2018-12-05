@@ -109,10 +109,8 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
+                                type="money"
                                 extra=">"
-                                editable={false}
-                                onFocus={props.showModal}
-                                onExtraClick={props.showModal}
                                 placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('tds',{
                                     rules: [{
@@ -297,18 +295,18 @@ class Inlet extends PureComponent{
         }
         return (
             <div className="sub_setting_bg">
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} />}
-                { <InputModal 
-                    isVisual={this.state.modalVisual} 
-                    title_key="setting.water.tds" 
-                    value={this.state.tds} 
-                    onValueChange={this.handleTDSChange} 
-                    onClose={this.handleTDSClose} 
+                <RenderForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} />
+                {/* { <InputModal
+                    isVisual={this.state.modalVisual}
+                    title_key="setting.water.tds"
+                    value={this.state.tds}
+                    onValueChange={this.handleTDSChange}
+                    onClose={this.handleTDSClose}
                     onSubmit={this.handleTDSSubmit}
                     inputPlaceholder={this.props.intl.formatMessage({id: "form.input"})} />
-                }
+                } */}
             </div>
-            
+
         )
     }
 }

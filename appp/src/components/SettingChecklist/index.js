@@ -104,27 +104,16 @@ const RenderCheckForm = createForm({
         </form>
         <WingBlank className="submit_zone dual_btn" style={{marginTop: '20px'}}>
             <div className="add_btn_left" style={{display: 'inline-block'}} >
-<<<<<<< HEAD
-                <Button type="ghost" className="btn"  style={{color: '#7ac7e5'}} onClick={handleSubmit}>
-=======
-                <Button type="ghost" className="btn" onClick={
+                <Button type="ghost" className="btn" style={{color: '#7ac7e5'}} onClick={
                   ()=>{onClickSysXY()}
                 }>
->>>>>>> ad0930ac86cbc5dd9d198307fa652c9e2a4bf5e6
                     <FormattedMessage id="form.decompression" defaultMessage="系统泄压" />
                 </Button>
             </div>
             <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
-<<<<<<< HEAD
-            <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
-                <Button type="ghost" className="btn" onClick={onEnable} style={{color: '#7ac7e5'}}>
-                    <FormattedMessage id="form.enable" defaultMessage="启用" />
-                </Button>
-            </div>
-=======
             {
               isEnableBtnVisible && (  <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
-                    <Button type="ghost" className="btn" onClick={()=>{
+                    <Button type="ghost" className="btn" style={{color: '#7ac7e5'}} onClick={()=>{
                       validateFields((err, values)=>{
                           onEnable(values);
                       });
@@ -133,7 +122,6 @@ const RenderCheckForm = createForm({
                     </Button>
                 </div>)
             }
->>>>>>> ad0930ac86cbc5dd9d198307fa652c9e2a4bf5e6
         </WingBlank>
         </React.Fragment>
     )

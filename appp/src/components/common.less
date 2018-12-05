@@ -13,6 +13,16 @@
     height: calc(90.7vh);
 }
 
+.pannel {
+    box-sizing: border-box;
+    height: 100%;
+    // padding-bottom: 53px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    background-color: rgba(255, 255, 255, 0.1);
+    min-height: 100vh;
+  }
+
 .page {
     background-image: url(../assets/electricbg.png);
     background-position: center;
@@ -80,7 +90,8 @@ form {
     background-color: #000000ce;
 
     .am-navbar {
-        background-color: #ffffff15 !important;
+        background-color:fade(#ffffff,11) !important;
+        padding-top: 10px;
     }
 
     form {

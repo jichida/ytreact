@@ -39,7 +39,7 @@ const data = [
         return (
             <div className="fh_container">
                 <div className="fp_container">
-                    <div className="panel">
+                    <div className="pannel">
                         <Flex direction="column" justify="between" className="container">
                             <div className="logo" ><img className="logo_img" alt="" src={logo} /></div>
                             <div className="pimg" >

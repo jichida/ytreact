@@ -15,7 +15,7 @@ import AddImg from '../../assets/addbtn.png';
         return (
             <div className="fp_container">
                 <div className="fh_container">
-                    <div className="panel">
+                    <div className="pannel">
                         <Flex direction="column" justify="between">
                             <WhiteSpace size="xl" />
                             <div className="logo" ><img className="logo_img" alt="" src={logo} /></div>

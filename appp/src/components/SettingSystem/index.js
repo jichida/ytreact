@@ -7,6 +7,7 @@ import _ from 'lodash';
 import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import 'moment-timezone';
+import {scanbarcode} from '../../env/scanbarcode';
 import {ui_set_language,wifi_sendcmd_request} from '../../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
@@ -190,6 +191,16 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                         <InputItem
+                            onClick={()=>{
+                             scanbarcode((result)=>{
+                              // {
+                              // "code": "0/-1",
+                              // "data": "扫描结果/失败原因",
+                              // "message": "扫描结果/失败原因"
+                              // }
+                               alert(JSON.stringify(result));//<---这里判断code是否为0，如果为0，表示成功；去取data的值
+                             });
+                           }}
                             placeholder={formatMessage({id: "setting.system.scan"})}
                             {...getFieldProps('deviceid',{
                                 rules: [{

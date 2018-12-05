@@ -37,13 +37,13 @@ class Layout extends React.PureComponent {
           <TabBar.Item
             key="Home"
             icon={
-              <div className="navbar_item">
+              <div className="navbar_item layout">
                   <img src={i_home} alt="" className="navbar_icon" />
                   <span></span>
               </div>
             }
             selectedIcon={
-              <div className="navbar_item_on">
+              <div className="navbar_item_on layout">
                   <img src={i_home_on} alt="" className="navbar_icon" />
                   <span></span>
               </div>
@@ -58,13 +58,13 @@ class Layout extends React.PureComponent {
           <TabBar.Item
             key="Device"
             icon={
-              <div className="navbar_item">
+              <div className="navbar_item layout">
                   <img src={i_device} alt="" className="navbar_icon" />
                   <span></span>
               </div>
             }
             selectedIcon={
-              <div className="navbar_item_on">
+              <div className="navbar_item_on layout">
                   <img src={i_device_on} alt="" className="navbar_icon" />
                   <span></span>
               </div>
@@ -79,13 +79,13 @@ class Layout extends React.PureComponent {
           <TabBar.Item
             key="Setting"
             icon={
-              <div className="navbar_item">
+              <div className="navbar_item layout">
                   <img src={i_setting} alt="" className="navbar_icon" />
                   <span></span>
               </div>
             }
             selectedIcon={
-              <div className="navbar_item_on">
+              <div className="navbar_item_on layout">
                   <img src={i_setting_on} alt="" className="navbar_icon" />
                   <span></span>
               </div>

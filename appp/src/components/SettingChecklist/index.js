@@ -53,6 +53,7 @@ const RenderCheckForm = createForm({
     //     })
     // }
 
+
     return (
         <React.Fragment>
         <form>
@@ -101,9 +102,9 @@ const RenderCheckForm = createForm({
                 ><FormattedMessage id="setting.checklist.appset" defaultMessage="APP已设置" /></List.Item>
             </List>
         </form>
-        <WingBlank  className="submit_zone dual_btn">
+        <WingBlank className="submit_zone dual_btn" style={{marginTop: '20px'}}>
             <div className="add_btn_left" style={{display: 'inline-block'}} >
-                <Button type="ghost" className="btn" onClick={
+                <Button type="ghost" className="btn" style={{color: '#7ac7e5'}} onClick={
                   ()=>{onClickSysXY()}
                 }>
                     <FormattedMessage id="form.decompression" defaultMessage="系统泄压" />
@@ -112,7 +113,7 @@ const RenderCheckForm = createForm({
             <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
             {
               isEnableBtnVisible && (  <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
-                    <Button type="ghost" className="btn" onClick={()=>{
+                    <Button type="ghost" className="btn" style={{color: '#7ac7e5'}} onClick={()=>{
                       validateFields((err, values)=>{
                           onEnable(values);
                       });

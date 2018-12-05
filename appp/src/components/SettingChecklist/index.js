@@ -5,6 +5,8 @@ import lodashget from 'lodash.get';
 import {  List, Button, WingBlank, Switch, WhiteSpace, ImagePicker } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { FormattedMessage } from 'react-intl';
+import {set_weui} from '../../actions';
+
 import './index.less';
 
 const RenderCheckForm = createForm({
@@ -267,10 +269,27 @@ class SettingChecklist extends PureComponent{
     }
 
     handleEnable = (values)=>{
-        console.log(values);
+      const {dispatch} = this.props;
+      const isEnableBtnVisible = values.washed &&
+      (values.uptostandard) &&
+      (values.bypassclosed) &&
+      (values.noleakage) &&
+      (values.wificonnected) && (values.appset);
+      if(isEnableBtnVisible){
         this.setState({
             checked: true,
-        })
+        });
+      }
+      else{
+        //提示：需要全部检查完毕才能启用
+        dispatch(set_weui({
+          toast:{
+          text:`需全部检查完毕才能启用`,
+          show: true,
+          type:'warning'
+        }}));
+      }
+
     }
     onClickSysXY = ()=>{
       //click xy

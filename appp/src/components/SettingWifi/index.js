@@ -36,7 +36,7 @@ const RenderForm = createForm({
                 ...props.gateway,
                 value: props.gateway.value,
           }),
-          userssid: createFormField({
+          lan: createFormField({
                 ...props.lan,
                 value: props.lan.value,
           }),
@@ -51,7 +51,7 @@ const RenderForm = createForm({
     const { intl: { formatMessage }} = props;
 
     const handleSubmit = (e)=>{
-        e.preventDefault();
+        //e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
                 props.onSubmit(values);

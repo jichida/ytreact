@@ -5,6 +5,9 @@ import lodashget from 'lodash.get';
 import {  List, Button, WingBlank, Switch, WhiteSpace, ImagePicker } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { FormattedMessage } from 'react-intl';
+import {wifi_sendcmd_request} from '../../actions';
+import {set_weui} from '../../actions';
+
 import './index.less';
 
 const RenderCheckForm = createForm({
@@ -38,11 +41,11 @@ const RenderCheckForm = createForm({
     }
 })((props)=>{
     const { getFieldProps, validateFields } = props.form;
-    const { onEnable } = props;
+
+    const { onEnable,isEnableBtnVisible,onClickSysXY } = props;
 
     const handleSubmit = (e)=>{
-        e.preventDefault();
-        //console.log(props.form.getFieldsValue());
+        //e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
                 props.onSubmit(values);
@@ -101,16 +104,36 @@ const RenderCheckForm = createForm({
         </form>
         <WingBlank className="submit_zone dual_btn" style={{marginTop: '20px'}}>
             <div className="add_btn_left" style={{display: 'inline-block'}} >
+<<<<<<< HEAD
                 <Button type="ghost" className="btn"  style={{color: '#7ac7e5'}} onClick={handleSubmit}>
+=======
+                <Button type="ghost" className="btn" onClick={
+                  ()=>{onClickSysXY()}
+                }>
+>>>>>>> ad0930ac86cbc5dd9d198307fa652c9e2a4bf5e6
                     <FormattedMessage id="form.decompression" defaultMessage="系统泄压" />
                 </Button>
             </div>
             <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
+<<<<<<< HEAD
             <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
                 <Button type="ghost" className="btn" onClick={onEnable} style={{color: '#7ac7e5'}}>
                     <FormattedMessage id="form.enable" defaultMessage="启用" />
                 </Button>
             </div>
+=======
+            {
+              isEnableBtnVisible && (  <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
+                    <Button type="ghost" className="btn" onClick={()=>{
+                      validateFields((err, values)=>{
+                          onEnable(values);
+                      });
+                    }}>
+                        <FormattedMessage id="form.enable" defaultMessage="启用" />
+                    </Button>
+                </div>)
+            }
+>>>>>>> ad0930ac86cbc5dd9d198307fa652c9e2a4bf5e6
         </WingBlank>
         </React.Fragment>
     )
@@ -177,14 +200,14 @@ const RenderResultForm = createForm({
 })((props)=>{
     const { getFieldProps, validateFields } = props.form;
 
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        validateFields((err, values)=>{
-            if(!err){
-                props.onSubmit(values);
-            }
-        })
-    }
+    // const handleSubmit = (e)=>{
+    //     //e.preventDefault();
+    //     validateFields((err, values)=>{
+    //         if(!err){
+    //             props.onSubmit(values);
+    //         }
+    //     })
+    // }
 
     const  onChange = (files, type, index) => {
         console.log(files, type, index);
@@ -259,10 +282,34 @@ class SettingChecklist extends PureComponent{
       dispatch(setuserdevice_request({_id,data:{checklist:values}}));
     }
 
-    handleEnable = ()=>{
+    handleEnable = (values)=>{
+      const {dispatch} = this.props;
+      const isEnableBtnVisible = values.washed &&
+      (values.uptostandard) &&
+      (values.bypassclosed) &&
+      (values.noleakage) &&
+      (values.wificonnected) && (values.appset);
+      if(isEnableBtnVisible){
         this.setState({
             checked: true,
-        })
+        });
+      }
+      else{
+        //提示：需要全部检查完毕才能启用
+        dispatch(set_weui({
+          toast:{
+          text:`需全部检查完毕才能启用`,
+          show: true,
+          type:'warning'
+        }}));
+      }
+
+    }
+    onClickSysXY = ()=>{
+      //click xy
+      console.log(`click xy`)
+      const {dispatch} = this.props;
+      dispatch(wifi_sendcmd_request({cmd:`$decpression%`}));
     }
 
     render () {
@@ -294,12 +341,20 @@ class SettingChecklist extends PureComponent{
              value: lodashget(checklist,'appset',false),
          },
      }
-
+        // const isEnableBtnVisible = (checkData.washed.value) &&
+        // (checkData.uptostandard.value) &&
+        // (checkData.bypassclosed.value) &&
+        // (checkData.noleakage.value) &&
+        // (checkData.wificonnected.value) && (checkData.appset.value);
+        // console.log(isEnableBtnVisible)
+        const isEnableBtnVisible = true;
         return (
             <div className="checklist_bg">
                 { this.state.checked ?
                     <RenderResultForm {...resultData} onSubmit={this.handleSubmit} />
-                    : <RenderCheckForm {...checkData} onSubmit={this.handleSubmit} onEnable={this.handleEnable} />
+                    : <RenderCheckForm {...checkData} onSubmit={this.handleSubmit} isEnableBtnVisible={isEnableBtnVisible}
+                      onClickSysXY={this.onClickSysXY}
+                      onEnable={this.handleEnable} />
                 }
             </div>
         )

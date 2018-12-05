@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { Flex, Accordion, WhiteSpace } from 'antd-mobile';
 import { injectIntl } from 'react-intl';
 
@@ -35,25 +36,8 @@ class Performance extends PureComponent{
 
 
     render () {
-          const devicedata = {
-            averagecurrent_600:300,//平均电流@600	600电导率时的电流:mA	1 word
-            averagecurrent_300:200,//300电导率时的电流:mA	1 word
-            averagecut_600:350,//16	平均cut@600	600电导率时的cut	1 word
-            averagecut_300:150,// 17	平均cut@300	300电导率时的cut	1 word
-            waterpurificationrate:90,//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
-
-            max_averagecurrent_600:120,//平均电流@600	600电导率时的电流:mA	1 word
-            max_averagecurrent_300:100,//300电导率时的电流:mA	1 word
-            max_averagecut_600:170,//16	平均cut@600	600电导率时的cut	1 word
-            max_averagecut_300:70,// 17	平均cut@300	300电导率时的cut	1 word
-            max_waterpurificationrate:19,//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
-
-            min_averagecurrent_600:6,//平均电流@600	600电导率时的电流:mA	1 word
-            min_averagecurrent_300:5,//300电导率时的电流:mA	1 word
-            min_averagecut_600:4,//16	平均cut@600	600电导率时的cut	1 word
-            min_averagecut_300:3,// 17	平均cut@300	300电导率时的cut	1 word
-            min_waterpurificationrate:2,//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
-          };
+          const {performancedata} = this.props;
+          const devicedata = performancedata;
           const {intl} = this.props;
 
           const data = [
@@ -155,5 +139,8 @@ class Performance extends PureComponent{
         )
     }
 }
-
+const mapStateToProps =  ({devicedata:{performancedata}}) =>{
+  return {performancedata};
+};
+Performance = connect(mapStateToProps)(Performance);
 export default injectIntl(Performance);

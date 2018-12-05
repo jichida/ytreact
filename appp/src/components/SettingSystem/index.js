@@ -158,7 +158,7 @@ const RenderForm = createForm({
     const options = timezoneOption();
 
     const handleSubmit = (e)=>{
-        e.preventDefault();
+        //e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
                 props.onSubmit(values);
@@ -167,12 +167,12 @@ const RenderForm = createForm({
     }
 
     const showQualitySetup = (e)=> {
-        e.preventDefault();
+        //e.preventDefault();
         props.showModal('modal1');
     }
 
     const showDormancySetup = (e)=> {
-        e.preventDefault();
+        //e.preventDefault();
         props.showModal('modal2');
     }
 
@@ -477,7 +477,7 @@ class SettingSystem extends PureComponent{
     }
 
     onCloseQuality = (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         this.setState({
             modal1: false,
         })
@@ -495,7 +495,7 @@ class SettingSystem extends PureComponent{
     }
 
     onCloseDormancy = (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         this.setState({
             modal2: false,
         })
@@ -679,7 +679,7 @@ class SettingSystem extends PureComponent{
     }
 }
 
-const mapStateToProps =  ({device:{locale,syssettings,_id}}) =>{
+const mapStateToProps =  ({device:{syssettings,_id},app:{locale}}) =>{
   return {locale,syssettings,_id};
 };
 

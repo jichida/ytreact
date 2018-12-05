@@ -6,7 +6,7 @@ import monitorBg from '../../assets/zhuye_an.png';
 // import lodashmap from 'lodash.map';
 import lodashget from 'lodash.get';
 import { injectIntl } from 'react-intl';
-import Waterwave from './waterwave.js';
+// import Waterwave from './waterwave.js';
 import './index.less';
 import '../../assets/wlimg.png';
 
@@ -17,41 +17,10 @@ const CBlue = '#38b4f2';
 class Home extends PureComponent{
 
     render () {
-      const {intl} = this.props;
+      const {intl,homedata} = this.props;
       // const mapfilternames = mapname_filter;
 
-      const devicedata = {
-        main_outwater_quality:30,//出水水质,
-        main_outwater_grade:'优',//出水等级,
-        main_inwater_quality:32,//进水水质,
-        main_totalwatervol:29993,//总产水量
-        main_runtime:23,//运行时间
-        main_outcwatervol:322,//浓水出水量
-        //以下是滤芯部分
-        filterelements_modlife_leftvol:39,//电离子膜寿命剩余流量
-        filterelements_prefilter1_leftvol:29,//前置PP寿命剩余流量
-        filterelements_prefilter2_leftvol:30,//前置2滤芯寿命剩余流量
-        filterelements_prefilter3_leftvol:9,//前置3滤芯寿命剩余流量
-        filterelements_posfilter1_leftvol:70,//后置活性炭寿命剩余流量
-        filterelements_posfilter2_leftvol:90,//电离子膜寿命剩余流量
-        filterelements_posfilter3_leftvol:100,//电离子膜寿命剩余流量
-        filterelements_modlife_leftday:20,//电离子膜寿命剩余天数
-        filterelements_prefilter1_leftday:1,//前置PP寿命剩余天数
-        filterelements_prefilter2_leftday:24,//前置2寿命剩余天数
-        filterelements_prefilter3_leftday:41,//前置3寿命剩余天数
-        filterelements_posfilter1_leftday:5,//后置活性炭寿命剩余天数
-        filterelements_posfilter2_leftday:23,//后置2滤芯寿命剩余天数
-        filterelements_posfilter3_leftday:46,//后置2滤芯寿命剩余天数
-        filterelements:[
-          'filterelements_modlife',
-          'filterelements_prefilter1',
-          'filterelements_prefilter2',
-          'filterelements_prefilter3',
-          'filterelements_posfilter1',
-          'filterelements_posfilter2',
-          'filterelements_posfilter3',
-        ],//滤芯的顺序
-      };
+      const devicedata = homedata;
 
       // const CoFlex_FEs = [];
       // lodashmap(devicedata.filterelements,(fename)=>{
@@ -278,8 +247,8 @@ class Home extends PureComponent{
         )
     }
 }
-const mapStateToProps =  ({app:{mapname_filter}}) =>{
-  return {mapname_filter};
+const mapStateToProps =  ({devicedata:{homedata}}) =>{
+  return {homedata};
 };
 Home = connect(mapStateToProps)(Home);
 export default injectIntl(Home);

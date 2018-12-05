@@ -53,7 +53,7 @@ const RenderForm = createForm({
     const title = formatMessage({id: "filter.select"});
 
     const handleSubmit = (e)=>{
-        e.preventDefault();
+        //e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
                 props.onSubmit(values);

@@ -88,7 +88,7 @@ const RenderForm = createForm({
     const { intl: { formatMessage }} = props;
 
     const handleSubmit = (e)=>{
-        e.preventDefault();
+        //e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
                 props.onSubmit(values);

@@ -154,7 +154,7 @@ const RenderForm = createForm({
         };
     }
 })(injectIntl((props)=>{
-    const { getFieldProps, validateFields } = props.form;
+    const { getFieldProps, validateFields,setFieldsValue } = props.form;
     const { intl:{ formatMessage } } = props;
     const options = timezoneOption();
 
@@ -198,7 +198,10 @@ const RenderForm = createForm({
                               // "data": "扫描结果/失败原因",
                               // "message": "扫描结果/失败原因"
                               // }
-                               alert(JSON.stringify(result));//<---这里判断code是否为0，如果为0，表示成功；去取data的值
+                              if(result.code === '0'){
+                                setFieldsValue({deviceid:result.data})
+                              }
+                              //  alert(JSON.stringify(result));//<---这里判断code是否为0，如果为0，表示成功；去取data的值
                              });
                            }}
                             placeholder={formatMessage({id: "setting.system.scan"})}

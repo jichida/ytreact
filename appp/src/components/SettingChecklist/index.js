@@ -38,17 +38,18 @@ const RenderCheckForm = createForm({
     }
 })((props)=>{
     const { getFieldProps, validateFields } = props.form;
-
     const { onEnable } = props;
 
     const handleSubmit = (e)=>{
         e.preventDefault();
+        //console.log(props.form.getFieldsValue());
         validateFields((err, values)=>{
             if(!err){
                 props.onSubmit(values);
             }
         })
     }
+
 
     return (
         <React.Fragment>
@@ -98,15 +99,15 @@ const RenderCheckForm = createForm({
                 ><FormattedMessage id="setting.checklist.appset" defaultMessage="APP已设置" /></List.Item>
             </List>
         </form>
-        <WingBlank  className="submit_zone dual_btn">
+        <WingBlank className="submit_zone dual_btn" style={{marginTop: '20px'}}>
             <div className="add_btn_left" style={{display: 'inline-block'}} >
-                <Button type="ghost" className="btn">
+                <Button type="ghost" className="btn"  style={{color: '#7ac7e5'}} onClick={handleSubmit}>
                     <FormattedMessage id="form.decompression" defaultMessage="系统泄压" />
                 </Button>
             </div>
             <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
             <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
-                <Button type="ghost" className="btn" onClick={onEnable}>
+                <Button type="ghost" className="btn" onClick={onEnable} style={{color: '#7ac7e5'}}>
                     <FormattedMessage id="form.enable" defaultMessage="启用" />
                 </Button>
             </div>

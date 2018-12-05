@@ -4,7 +4,7 @@ import {  List, InputItem, Button, WingBlank, Switch, DatePicker, Picker, Modal,
 import { createForm, createFormField } from 'rc-form';
 import moment from 'moment';
 import _ from 'lodash';
-import {setuserdevice_request} from '../../actions';
+import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import 'moment-timezone';
 import {ui_set_language,wifi_sendcmd_request} from '../../actions';
@@ -465,7 +465,7 @@ class SettingSystem extends PureComponent{
     handleSubmit = (values)=>{
         console.log(values);
         const {dispatch,_id} = this.props;
-        dispatch(setuserdevice_request({_id,data:{syssettings:values}}));
+        dispatch(ui_setuserdevice_request({_id,data:{syssettings:values}}));
 
         dispatch(ui_set_language(values['language'][0]));
     }

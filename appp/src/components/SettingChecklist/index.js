@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {setuserdevice_request} from '../../actions';
+import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import {  List, Button, WingBlank, Switch, WhiteSpace, ImagePicker } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
@@ -273,7 +273,7 @@ class SettingChecklist extends PureComponent{
       values.noleakage = true;
       values.wificonnected = true;
       values.appset = true;
-      dispatch(setuserdevice_request({_id,data:{checklist:values}}));
+      dispatch(ui_setuserdevice_request({_id,data:{checklist:values}}));
     }
 
     handleEnable = (values)=>{
@@ -292,7 +292,7 @@ class SettingChecklist extends PureComponent{
         values.quality = false;
         values.delivered = false;
         values.pictures= [];
-        dispatch(setuserdevice_request({_id,data:{checklist:values}}));
+        dispatch(ui_setuserdevice_request({_id,data:{checklist:values}}));
       }
       else{
         //提示：需要全部检查完毕才能启用

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {  List, InputItem, Button, Modal, WingBlank, WhiteSpace } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import {setuserdevice_request} from '../../actions';
+import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import Buckets from '../Buckets';
@@ -247,7 +247,7 @@ class Inlet extends PureComponent{
     handleSubmit = (values)=>{
         console.log(values);
         const {dispatch,_id} = this.props;
-        dispatch(setuserdevice_request({_id,data:{inwatersettings:values}}));
+        dispatch(ui_setuserdevice_request({_id,data:{inwatersettings:values}}));
     }
 
     showModal = () => {

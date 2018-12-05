@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {  NavBar, Icon, List, InputItem, Button, Switch } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import {setuserdevice_request} from '../../actions';
+import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
@@ -262,7 +262,7 @@ class DeviceInstall extends PureComponent{
     handleSubmit = (values)=>{
         console.log(values);
         const {dispatch,_id} = this.props;
-        dispatch(setuserdevice_request({_id,data:{install:values}}));
+        dispatch(ui_setuserdevice_request({_id,data:{install:values}}));
     }
 
     render () {

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {setuserdevice_request} from '../../actions';
+import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import {  List, InputItem, Button, Switch } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
@@ -176,7 +176,7 @@ class Wifi extends PureComponent{
     handleSubmit = (values)=>{
       console.log(values);
       const {dispatch,_id} = this.props;
-      dispatch(setuserdevice_request({_id,data:{wifisettings:values}}));
+      dispatch(ui_setuserdevice_request({_id,data:{wifisettings:values}}));
     }
 
     render () {

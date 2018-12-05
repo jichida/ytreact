@@ -3,7 +3,7 @@ import {  NavBar, Icon, List, InputItem, Picker, Button } from 'antd-mobile';
 import { connect } from 'react-redux';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import {setuserdevice_request} from '../../actions';
+import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
@@ -220,7 +220,7 @@ class DeviceBasic extends PureComponent{
         values.useproperty = values.useproperty[0];
         values.building = values.building[0];
         values.model = values.model[0];
-        dispatch(setuserdevice_request({_id,data:{basicinfo:values}}));
+        dispatch(ui_setuserdevice_request({_id,data:{basicinfo:values}}));
     }
 
     render () {

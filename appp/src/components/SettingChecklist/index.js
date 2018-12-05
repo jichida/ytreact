@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {setuserdevice_request} from '../../actions';
+import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import {  List, Button, WingBlank, Switch, WhiteSpace, ImagePicker } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
@@ -44,14 +44,14 @@ const RenderCheckForm = createForm({
 
     const { onEnable,isEnableBtnVisible,onClickSysXY } = props;
 
-    const handleSubmit = (e)=>{
-        //e.preventDefault();
-        validateFields((err, values)=>{
-            if(!err){
-                props.onSubmit(values);
-            }
-        })
-    }
+    // const handleSubmit = (e)=>{
+    //     //e.preventDefault();
+    //     validateFields((err, values)=>{
+    //         if(!err){
+    //             props.onSubmit(values);
+    //         }
+    //     })
+    // }
 
 
     return (
@@ -188,14 +188,14 @@ const RenderResultForm = createForm({
 })((props)=>{
     const { getFieldProps, validateFields } = props.form;
 
-    // const handleSubmit = (e)=>{
-    //     //e.preventDefault();
-    //     validateFields((err, values)=>{
-    //         if(!err){
-    //             props.onSubmit(values);
-    //         }
-    //     })
-    // }
+    const handleSubmit = (e)=>{
+        //e.preventDefault();
+        validateFields((err, values)=>{
+            if(!err){
+                props.onSubmit(values);
+            }
+        })
+    }
 
     const  onChange = (files, type, index) => {
         console.log(files, type, index);
@@ -249,7 +249,7 @@ const RenderResultForm = createForm({
         </form>
         <WingBlank className="submit_zone">
             <div className="add_btn" >
-                <Button type="ghost" className="btn">
+                <Button type="ghost" className="btn" onClick={handleSubmit}>
                     <FormattedMessage id="form.ok" defaultMessage="OK" />
                 </Button>
             </div>
@@ -267,11 +267,17 @@ class SettingChecklist extends PureComponent{
     handleSubmit = (values)=>{
       console.log(values);
       const {dispatch,_id} = this.props;
-      dispatch(setuserdevice_request({_id,data:{checklist:values}}));
+      values.washed = true;
+      values.uptostandard = true;
+      values.bypassclosed = true;
+      values.noleakage = true;
+      values.wificonnected = true;
+      values.appset = true;
+      dispatch(ui_setuserdevice_request({_id,data:{checklist:values}}));
     }
 
     handleEnable = (values)=>{
-      const {dispatch} = this.props;
+      const {dispatch,_id} = this.props;
       const isEnableBtnVisible = values.washed &&
       (values.uptostandard) &&
       (values.bypassclosed) &&
@@ -281,6 +287,12 @@ class SettingChecklist extends PureComponent{
         this.setState({
             checked: true,
         });
+        values.discharge = false;
+        values.debugged = false;
+        values.quality = false;
+        values.delivered = false;
+        values.pictures= [];
+        dispatch(ui_setuserdevice_request({_id,data:{checklist:values}}));
       }
       else{
         //提示：需要全部检查完毕才能启用

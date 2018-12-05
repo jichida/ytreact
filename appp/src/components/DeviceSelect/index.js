@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
-import { Flex, WhiteSpace, Carousel } from 'antd-mobile';
+import { Flex,  Carousel } from 'antd-mobile';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import {getdevice_request} from '../../actions';
+// import {getdevice_request} from '../../actions';
 import './index.less';
 
 import logo from '../../assets/logo.png';
@@ -30,8 +30,8 @@ const data = [
         }
     }
    componentDidMount () {
-     const {dispatch} = this.props;
-     dispatch(getdevice_request({}));
+    //  const {dispatch} = this.props;
+    //  dispatch(getdevice_request({}));
    }
 
     render () {

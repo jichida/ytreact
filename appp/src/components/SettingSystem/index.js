@@ -4,9 +4,10 @@ import {  List, InputItem, Button, WingBlank, Switch, DatePicker, Picker, Modal,
 import { createForm, createFormField } from 'rc-form';
 import moment from 'moment';
 import _ from 'lodash';
-import {setuserdevice_request} from '../../actions';
+import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import 'moment-timezone';
+import {scanbarcode} from '../../env/scanbarcode';
 import {ui_set_language,wifi_sendcmd_request} from '../../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
@@ -153,7 +154,7 @@ const RenderForm = createForm({
         };
     }
 })(injectIntl((props)=>{
-    const { getFieldProps, validateFields } = props.form;
+    const { getFieldProps, validateFields,setFieldsValue } = props.form;
     const { intl:{ formatMessage } } = props;
     const options = timezoneOption();
 
@@ -190,6 +191,19 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                         <InputItem
+                            onClick={()=>{
+                             scanbarcode((result)=>{
+                              // {
+                              // "code": "0/-1",
+                              // "data": "扫描结果/失败原因",
+                              // "message": "扫描结果/失败原因"
+                              // }
+                              if(result.code === '0'){
+                                setFieldsValue({deviceid:result.data})
+                              }
+                              //  alert(JSON.stringify(result));//<---这里判断code是否为0，如果为0，表示成功；去取data的值
+                             });
+                           }}
                             placeholder={formatMessage({id: "setting.system.scan"})}
                             {...getFieldProps('deviceid',{
                                 rules: [{
@@ -465,7 +479,7 @@ class SettingSystem extends PureComponent{
     handleSubmit = (values)=>{
         console.log(values);
         const {dispatch,_id} = this.props;
-        dispatch(setuserdevice_request({_id,data:{syssettings:values}}));
+        dispatch(ui_setuserdevice_request({_id,data:{syssettings:values}}));
 
         dispatch(ui_set_language(values['language'][0]));
     }

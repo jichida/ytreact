@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {  List, InputItem, Button, Modal, WingBlank, WhiteSpace } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import {setuserdevice_request} from '../../actions';
+import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import Buckets from '../Buckets';
@@ -109,10 +109,8 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
+                                type="money"
                                 extra=">"
-                                editable={false}
-                                onFocus={props.showModal}
-                                onExtraClick={props.showModal}
                                 placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('tds',{
                                     rules: [{
@@ -247,7 +245,7 @@ class Inlet extends PureComponent{
     handleSubmit = (values)=>{
         console.log(values);
         const {dispatch,_id} = this.props;
-        dispatch(setuserdevice_request({_id,data:{inwatersettings:values}}));
+        dispatch(ui_setuserdevice_request({_id,data:{inwatersettings:values}}));
     }
 
     showModal = () => {
@@ -297,18 +295,18 @@ class Inlet extends PureComponent{
         }
         return (
             <div className="sub_setting_bg">
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} />}
-                { <InputModal 
-                    isVisual={this.state.modalVisual} 
-                    title_key="setting.water.tds" 
-                    value={this.state.tds} 
-                    onValueChange={this.handleTDSChange} 
-                    onClose={this.handleTDSClose} 
+                <RenderForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} />
+                {/* { <InputModal
+                    isVisual={this.state.modalVisual}
+                    title_key="setting.water.tds"
+                    value={this.state.tds}
+                    onValueChange={this.handleTDSChange}
+                    onClose={this.handleTDSClose}
                     onSubmit={this.handleTDSSubmit}
                     inputPlaceholder={this.props.intl.formatMessage({id: "form.input"})} />
-                }
+                } */}
             </div>
-            
+
         )
     }
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {  NavBar, Icon, List, InputItem, Button, Switch } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import {setuserdevice_request} from '../../actions';
+import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
@@ -323,7 +323,7 @@ class DeviceWater extends PureComponent{
         // values.useproperty = values.useproperty[0];
         // values.building = values.building[0];
         // values.model = values.model[0];
-        dispatch(setuserdevice_request({_id,data:{usewater:values}}));
+        dispatch(ui_setuserdevice_request({_id,data:{usewater:values}}));
 
     }
 

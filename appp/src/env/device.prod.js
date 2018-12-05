@@ -8,4 +8,8 @@ const setcurwifi = (values,fncallback)=>{
   fncallback('ok');
 }
 
-export {getssidlist,setcurwifi}
+const setsocketrecvcallback = (fncallback)=>{
+    fncallback(`$ok%`)
+}
+
+export {getssidlist,setcurwifi,setsocketrecvcallback}

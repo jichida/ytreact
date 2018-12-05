@@ -49,7 +49,7 @@ export function* userloginflow() {
             });
             yield put(login_result(result));
 
-            yield put(getdevice_request({}));
+            // yield put(getdevice_request({}));
             // debugger;
             if(!loginsuccess && result.loginsuccess){
               //switch

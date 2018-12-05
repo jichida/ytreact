@@ -5,6 +5,7 @@ import lodashget from 'lodash.get';
 import {  List, Button, WingBlank, Switch, WhiteSpace, ImagePicker } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { FormattedMessage } from 'react-intl';
+import {wifi_sendcmd_request} from '../../actions';
 import {set_weui} from '../../actions';
 
 import './index.less';
@@ -186,14 +187,14 @@ const RenderResultForm = createForm({
 })((props)=>{
     const { getFieldProps, validateFields } = props.form;
 
-    const handleSubmit = (e)=>{
-        //e.preventDefault();
-        validateFields((err, values)=>{
-            if(!err){
-                props.onSubmit(values);
-            }
-        })
-    }
+    // const handleSubmit = (e)=>{
+    //     //e.preventDefault();
+    //     validateFields((err, values)=>{
+    //         if(!err){
+    //             props.onSubmit(values);
+    //         }
+    //     })
+    // }
 
     const  onChange = (files, type, index) => {
         console.log(files, type, index);
@@ -294,6 +295,8 @@ class SettingChecklist extends PureComponent{
     onClickSysXY = ()=>{
       //click xy
       console.log(`click xy`)
+      const {dispatch} = this.props;
+      dispatch(wifi_sendcmd_request({cmd:`$decpression%`}));
     }
 
     render () {

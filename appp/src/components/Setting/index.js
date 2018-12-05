@@ -39,7 +39,7 @@ class Setting extends PureComponent{
                 <TabBar
                     unselectedTintColor="#ffffff"
                     tintColor="#ffffff"
-                    barTintColor="#ffffff1e"
+                    barTintColor="rgba(255, 255, 255, 0.118)"
                     tabBarPosition="top"
                 >
                     <TabBar.Item

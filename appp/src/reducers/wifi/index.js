@@ -13,6 +13,7 @@ import {
 const initial = {
     wifi: {
         wifissid:'',
+        wifiCipher:'',
         wifipassword: '',
         wifilist:[],
     },
@@ -25,8 +26,8 @@ const wifi = createReducer({
         return { ...state,wifilist};
     },
     [ui_setcurwifi]: (state, payload) => {
-        const {wifissid,wifipassword} = payload;
-        return { ...state,wifissid,wifipassword};
+        const {wifissid,wifipassword,wifiCipher} = payload;
+        return { ...state,wifissid,wifipassword,wifiCipher};
     },
 }, initial.wifi);
 

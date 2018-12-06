@@ -207,12 +207,13 @@ const RenderForm = createForm({
                         <InputItem
                             onClick={()=>{
                              scanbarcode((result)=>{
+                              //  alert(JSON.stringify(result));
                               // {
                               // "code": "0/-1",
                               // "data": "扫描结果/失败原因",
                               // "message": "扫描结果/失败原因"
                               // }
-                              if(result.code === '0'){
+                              if(result.code == 0){
                                 setFieldsValue({deviceid:result.data})
                                 dispatch(getdevice_request({'syssettings.deviceid':result.data}));
                               }

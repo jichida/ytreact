@@ -4,7 +4,9 @@ import { Flex, WhiteSpace, Button, WingBlank, List, InputItem, ActionSheet } fro
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import './index.less';
-import {ui_setcurwifi,wifi_getssidlist_request,wifi_setcurwifi_request} from '../../actions';
+import {ui_setcurwifi,wifi_open_reqeust,wifi_setcurwifi_request,
+  wifi_getssidlist_request,wifi_getssidlist_result} from '../../actions';
+import {callthen} from '../../sagas/pagination';
 import wifi from '../../assets/wlimg.png';
 
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
@@ -18,39 +20,52 @@ if (isIPhone) {
 class WifiLogin extends PureComponent{
     componentDidMount(){
         const {dispatch} = this.props;
-        dispatch(wifi_getssidlist_request({}));
+        dispatch(wifi_open_reqeust({}));
     }
 
     // 取消 id: form.cancel
     showActionSheet = (title) => {
-        const {intl,wifilist,wifipassword,dispatch} = this.props;
-        const canceltext = intl.formatMessage({id: 'form.cancel'});
-        let BUTTONS = [...wifilist,canceltext];//"form.cancel"
-
-        ActionSheet.showActionSheetWithOptions({
-            options: BUTTONS,
-            cancelButtonIndex: BUTTONS.length - 1,
-            title: title,
-            maskClosable: true,
-            'data-seed': 'logId',
-            wrapProps,
-        },
-        (buttonIndex) => {
-          if(buttonIndex !== wifilist.length){
-            // debugger;
-            dispatch(ui_setcurwifi({ wifissid: wifilist[buttonIndex],wifipassword}));
+        const {intl,wifipassword,dispatch} = this.props;
+        dispatch(callthen(wifi_getssidlist_request,wifi_getssidlist_result,{}))
+        .then((wifilist)=>{
+          // debugger;
+          const canceltext = intl.formatMessage({id: 'form.cancel'});
+          let wifitxtlist = [];
+          for(let i = 0 ;i < wifilist.length; i++){
+            wifitxtlist.push(wifilist[i].ssid)
           }
-            // this.setState({ clicked: BUTTONS[buttonIndex] });
-        });
+          let BUTTONS = [...wifitxtlist,canceltext];//"form.cancel"
+
+          ActionSheet.showActionSheetWithOptions({
+              options: BUTTONS,
+              cancelButtonIndex: BUTTONS.length - 1,
+              title: title,
+              maskClosable: true,
+              'data-seed': 'logId',
+              wrapProps,
+          },
+          (buttonIndex) => {
+            if(buttonIndex !== wifilist.length){
+              // debugger;
+              dispatch(ui_setcurwifi({ wifissid: wifilist[buttonIndex].ssid,
+                wifiCipher:wifilist[buttonIndex].wifiCipher,
+                wifipassword}));
+            }
+              // this.setState({ clicked: BUTTONS[buttonIndex] });
+          });
+        }).catch((e)=>{
+          console.log(e);
+        });//refresh
+
     }
     onClickPass =()=>{
       // history.push('/wifisucess')
-      const {dispatch,wifissid,wifipassword} = this.props;
-      dispatch(wifi_setcurwifi_request({wifissid,wifipassword}));
+      const {dispatch,wifissid,wifipassword,wifiCipher} = this.props;
+      dispatch(wifi_setcurwifi_request({wifissid,wifipassword,wifiCipher}));
     }
     handleWifiPasswordChange = (value)=>{
-      const {wifissid,dispatch} = this.props;
-      dispatch(ui_setcurwifi({ wifissid,wifipassword:value}));
+      const {wifissid,wifiCipher,dispatch} = this.props;
+      dispatch(ui_setcurwifi({ wifissid,wifipassword:value,wifiCipher:wifiCipher}));
     }
     render () {
         const {  intl,wifissid,wifipassword } = this.props;
@@ -116,8 +131,8 @@ class WifiLogin extends PureComponent{
     }
 }
 
-const mapStateToProps =  ({wifi:{wifissid,wifipassword,wifilist}}) =>{
-  return {wifissid,wifipassword,wifilist};
+const mapStateToProps =  ({wifi:{wifissid,wifipassword,wifiCipher,wifilist}}) =>{
+  return {wifissid,wifipassword,wifiCipher,wifilist};
 };
 WifiLogin = connect(mapStateToProps)(WifiLogin);
 export default withRouter(injectIntl(WifiLogin));

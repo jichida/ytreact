@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {  NavBar, Icon, List, InputItem, Button, Switch } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import {ui_setuserdevice_request} from '../../actions';
+import {common_err,ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
@@ -55,7 +55,9 @@ const Brief = Item.Brief;
 //         value: '',
 //     },
 // }
-
+const dispatch_form_err = (dispatch,errs)=>{
+  dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
+}
 const RenderForm = createForm({
     mapPropsToFields(props) {
         return {
@@ -103,13 +105,17 @@ const RenderForm = createForm({
     }
 })(injectIntl((props)=>{
     const { getFieldProps, validateFields } = props.form;
-    const { intl: { formatMessage }} = props;
+    const { intl: { formatMessage },dispatch} = props;
 
     const handleSubmit = (e)=>{
         //e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
                 props.onSubmit(values);
+            }
+            else{
+              console.log(err)
+              dispatch_form_err(dispatch,err);
             }
         })
     }
@@ -267,7 +273,7 @@ class DeviceInstall extends PureComponent{
 
     render () {
 
-        const { history,install}  = this.props;
+        const { history,install,dispatch}  = this.props;
 
          const basicData = {
            position: {
@@ -311,7 +317,7 @@ class DeviceInstall extends PureComponent{
                 >
                     <FormattedMessage id="device.install" />
                 </NavBar>
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
+                { <RenderForm {...basicData} onSubmit={this.handleSubmit} dispatch={dispatch}/>}
             </div>
         )
     }

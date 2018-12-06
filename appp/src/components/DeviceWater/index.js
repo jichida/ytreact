@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {  NavBar, Icon, List, InputItem, Button, Switch } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import {ui_setuserdevice_request} from '../../actions';
+import {common_err,ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
@@ -25,7 +25,9 @@ const Brief = Item.Brief;
 // 原水碱度(ppm)	alkalinity
 // ph值		ph
 // 用户需求出水TDS值	usertds
-
+const dispatch_form_err = (dispatch,errs)=>{
+  dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
+}
 const RenderForm = createForm({
     mapPropsToFields(props) {
         return {
@@ -85,13 +87,17 @@ const RenderForm = createForm({
     }
 })(injectIntl((props)=>{
     const { getFieldProps, validateFields } = props.form;
-    const { intl: { formatMessage }} = props;
+    const { intl: { formatMessage },dispatch} = props;
 
     const handleSubmit = (e)=>{
         //e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
                 props.onSubmit(values);
+            }
+            else{
+              console.log(err)
+              dispatch_form_err(dispatch,err);
             }
         })
     }
@@ -328,7 +334,7 @@ class DeviceWater extends PureComponent{
     }
 
     render () {
-        const { history,usewater } = this.props;
+        const { history,usewater,dispatch } = this.props;
 
         const basicData = {
             quantity: {
@@ -381,7 +387,7 @@ class DeviceWater extends PureComponent{
                 >
                 <FormattedMessage id="device.water" />
                 </NavBar>
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
+                { <RenderForm {...basicData} onSubmit={this.handleSubmit} dispatch={dispatch}/>}
             </div>
         )
     }

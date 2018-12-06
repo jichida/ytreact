@@ -165,7 +165,7 @@ export function* wififlow() {
         let {payload:result} = action;
         console.log(`getcurwifi_request:${JSON.stringify(result)}`);
         const { wifiresult, timeout } = yield race({
-           wifiresult: call(setwifi),
+           wifiresult: call(setwifi,result),
            timeout: call(delay, 2000)
         });
         if(!!timeout){

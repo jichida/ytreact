@@ -5,6 +5,7 @@ const getssidlist = (fncallback)=>{
 }
 
 const setcurwifi = (values,fncallback)=>{
+  console.log(values);
   fncallback('ok');
 }
 

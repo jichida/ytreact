@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { Flex, WhiteSpace, Button, WingBlank } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -11,7 +12,21 @@ import mgb from '../../assets/ljimgb.png';
  class WifiSuccess extends PureComponent{
 
     render () {
-        const { history } = this.props;
+        ///0为打开未连接  -1  未打开  1  已连接 2 密码错误}
+        const { history,wifiStatus } = this.props;
+        let startwifiid = "start.wifi.succeed";
+        if(wifiStatus === -1){
+          startwifiid = 'start.wifi.notconnected';
+        }
+        else if(wifiStatus === 0){
+          startwifiid = 'start.wifi.notopened';
+        }
+        else if(wifiStatus === 1){
+          startwifiid = 'start.wifi.succeed';
+        }
+        else if(wifiStatus === 2){
+          startwifiid = 'start.wifi.wrongpassword';
+        }
         return (
             <div className="fh_container black_bg">
                 <div className="fp_container">
@@ -25,7 +40,7 @@ import mgb from '../../assets/ljimgb.png';
                                     <div><img src={mgb} alt="" className="logo_img" /></div>
                                 </div>
                                 <WhiteSpace size="xl" />
-                                <div className="status" ><FormattedMessage id="start.wifi.succeed" /></div>
+                                <div className="status" ><FormattedMessage id={startwifiid} /></div>
                                 <WhiteSpace size="xl" />
                                 <div className="add_btn" >
                                     <Button type="ghost" className="btn" onClick={()=>{history.push('/devices')}}>
@@ -41,5 +56,8 @@ import mgb from '../../assets/ljimgb.png';
         )
     }
 }
-
+const mapStateToProps =  ({wifi:{wifiStatus}}) =>{
+  return {wifiStatus};
+};
+WifiSuccess = connect(mapStateToProps)(WifiSuccess);
 export default withRouter(WifiSuccess);

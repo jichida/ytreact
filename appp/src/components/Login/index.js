@@ -117,7 +117,7 @@ class Login extends PureComponent{
                         </Flex>
                         <WhiteSpace size="xl" style={{ marginBottom: 30}} />
                         <div className="add_btn" >
-                            <Button type="ghost" className="btn" onClick={this.handleSubmit}><FormattedMessage id="login.login" defaultMessage="登录" /></Button>
+                            <Button type="ghost" className="btn" onClick={this.handleSubmit}><FormattedMessage id="start.pass" /></Button>
                         </div>
                         <WhiteSpace size="xl" />
                     </Flex>

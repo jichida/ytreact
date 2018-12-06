@@ -53,24 +53,33 @@ import './index.less';
 class Abnormal extends PureComponent{
 
     renderList = (arr, style)=>{
-        let items=[];
-        let sub = [];
-        let i=0;
-        while(i<arr.length-1)
-        {
-            for(let j=0;j<3;j++)
-            {
-                if(i<=arr.length-1)
-                {
-                    sub.push(<Flex.Item key={arr[i].text} className="item-container"><div className={style}><span>{arr[i].text}</span></div></Flex.Item>)
-                }
-                i++;
-            }
-            items.push(<Flex key={i}>{sub}</Flex>);
-            sub = [];
+        // let items=[];
+        // let sub = [];
+        // let i=0;
+        // while(i<arr.length-1)
+        // {
+        //     for(let j=0;j<3;j++)
+        //     {
+        //         if(i<=arr.length-1)
+        //         {
+        //             sub.push(<Flex.Item key={arr[i].text} className="item-container"><div className={style}><span>{arr[i].text}</span></div></Flex.Item>)
+        //         }
+        //         i++;
+        //     }
+        //     items.push(<Flex key={i}>{sub}</Flex>);
+        //     sub = [];
 
-        }
-        return items;
+        // }
+
+        // return items;
+        console.log(arr);
+        return (
+            lodashmap(arr, (item)=>{
+                return (
+                <Flex.Item key={item.text} className="item-container"><div className={style}><span>{item.text}</span></div></Flex.Item>
+                )
+            })
+        )
     }
 
     geterrtext = (k)=>{
@@ -101,12 +110,14 @@ class Abnormal extends PureComponent{
                     <div className="panel">
                         <div className="abnormal">
                             <Flex direction="column">
-                                <div style={{width: "100%"}}>
+                                    <Flex wrap="wrap">
                                     {this.renderList(abnormal, 'red-circle')}
-                                </div>
+                                    </Flex>
                                 <p className="normal_title"><FormattedMessage id="status.normal" /></p>
                                 <div style={{width: "100%"}}>
+                                    <Flex wrap="wrap">
                                     {this.renderList(normal, 'green-circle')}
+                                    </Flex>
                                 </div>
                             </Flex>
                         </div>

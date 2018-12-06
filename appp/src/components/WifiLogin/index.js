@@ -85,7 +85,6 @@ class WifiLogin extends PureComponent{
                                         </List.Item>
                                     </Flex.Item>
                                 </Flex>
-                                <WhiteSpace size="xl" />
                                 <Flex justify="start" className="loginform">
                                     <Flex.Item className="itemTitle">
                                         <span><FormattedMessage id="start.password" /></span>

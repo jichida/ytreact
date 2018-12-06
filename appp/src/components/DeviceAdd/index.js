@@ -17,13 +17,12 @@ import AddImg from '../../assets/addbtn.png';
                 <div className="fh_container">
                     <div className="pannel">
                         <Flex direction="column" justify="between">
-                            <WhiteSpace size="xl" />
                             <div className="logo" ><img className="logo_img" alt="" src={logo} /></div>
                             <div className="pimg" ><img alt="" src={ping} /></div>
+                            <WhiteSpace size="xl" />
                             <div className="add_btn" >
                                 <Link to="/wifi"><img src={AddImg} alt="" /><FormattedMessage id="start.add" /></Link>
                             </div>
-                            <WhiteSpace size="xl" />
                         </Flex>
                     </div>
                 </div>

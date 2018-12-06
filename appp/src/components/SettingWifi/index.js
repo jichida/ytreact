@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {ui_setuserdevice_request} from '../../actions';
+import {common_err,ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import {  List, InputItem, Button, Switch } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
@@ -11,7 +11,9 @@ import './index.less';
 
 const Item = List.Item;
 const Brief = Item.Brief;
-
+const dispatch_form_err = (dispatch,errs)=>{
+  dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
+}
 
 const RenderForm = createForm({
     mapPropsToFields(props) {
@@ -48,13 +50,17 @@ const RenderForm = createForm({
     }
 })(injectIntl((props)=>{
     const { getFieldProps, validateFields } = props.form;
-    const { intl: { formatMessage }} = props;
+    const { intl: { formatMessage },dispatch} = props;
 
     const handleSubmit = (e)=>{
         //e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
                 props.onSubmit(values);
+            }
+            else{
+              console.log(err)
+              dispatch_form_err(dispatch,err);
             }
         })
     }
@@ -188,7 +194,7 @@ class Wifi extends PureComponent{
      // 网关		gateway
      // 局域网 		LAN
      // 主网域服务器	DNS
-     const {wifisettings} = this.props;
+     const {wifisettings,dispatch} = this.props;
      const basicData = {
          ssid: {
              value:lodashget(wifisettings,'ssid',''),
@@ -214,7 +220,7 @@ class Wifi extends PureComponent{
      }
         return (
             <div className="sub_setting_bg">
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
+                { <RenderForm {...basicData} onSubmit={this.handleSubmit} dispatch={dispatch}/>}
             </div>
         )
     }

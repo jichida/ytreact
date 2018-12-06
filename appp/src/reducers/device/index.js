@@ -4,8 +4,9 @@ import {
   getdevice_result,
   setuserdevice_result
 } from '../../actions/index.js';
-// import moment from 'moment';
-
+import moment from 'moment';
+import 'moment-timezone';
+const curTZ = moment.tz.guess();
 const initial = {
     device: {
       _id:'',
@@ -50,9 +51,9 @@ const initial = {
           buydate:new Date(),//购买日期
           installdate:new Date(),//安装日期
           installer:'',//安装人员姓名
-          timezone:'',
-          sdate:'',
-          stime:'',
+          timezone:`${curTZ}`,
+          sdate:new Date(),
+          stime:new Date(),
           quality:'',
           //《-----
           dormancy:false,

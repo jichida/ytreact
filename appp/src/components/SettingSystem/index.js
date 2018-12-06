@@ -8,9 +8,10 @@ import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import 'moment-timezone';
 import {scanbarcode} from '../../env/scanbarcode';
-import {ui_set_language,wifi_sendcmd_request} from '../../actions';
+import {common_err,ui_set_language,wifi_sendcmd_request} from '../../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
+import {stringtodate} from '../../util/dateutil';
 
 
 const Item = List.Item;
@@ -75,6 +76,14 @@ const languages = [
         value: 'zh-tw',
     },
 ]
+
+const dispatch_form_err = (dispatch,errs)=>{
+  if(!!errs.deviceid){
+    dispatch(common_err({type:'form_err',errmsg:`请先扫描设备二维码`}))
+    return;
+  }
+  dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
+}
 
 const RenderForm = createForm({
     mapPropsToFields(props) {
@@ -154,8 +163,9 @@ const RenderForm = createForm({
         };
     }
 })(injectIntl((props)=>{
-    const { getFieldProps, validateFields,setFieldsValue } = props.form;
-    const { intl:{ formatMessage } } = props;
+
+    const { getFieldProps, validateFields,setFieldsValue} = props.form;
+    const { intl:{ formatMessage } ,dispatch} = props;
     const options = timezoneOption();
 
     const handleSubmit = (e)=>{
@@ -163,6 +173,10 @@ const RenderForm = createForm({
         validateFields((err, values)=>{
             if(!err){
                 props.onSubmit(values);
+            }
+            else{
+              console.log(err)
+              dispatch_form_err(dispatch,err);
             }
         })
     }
@@ -534,10 +548,10 @@ class SettingSystem extends PureComponent{
                 value: lodashget(syssettings,'deviceid',''),
             },
             buydate: {
-                value: new Date(),//lodashget(syssettings,'buydate',new Date()),
+                value: stringtodate(lodashget(syssettings,'buydate',new Date())),
             },
             installdate: {
-                value: '',//lodashget(syssettings,'installdate',new Date()),
+                value: stringtodate(lodashget(syssettings,'installdate',new Date())),
             },
             installer: {
                 value: lodashget(syssettings,'installer',''),
@@ -546,10 +560,10 @@ class SettingSystem extends PureComponent{
                 value: [timezone]
             },
             sdate: {
-                value: '',//lodashget(syssettings,'sdate',''),
+                value: stringtodate(lodashget(syssettings,'sdate',new Date())),
             },
             stime: {
-                value: '',//lodashget(syssettings,'stime',''),
+                value: stringtodate(lodashget(syssettings,'stime',new Date())),
             },
             quality: {
                 value: lodashget(syssettings,'quality',''),

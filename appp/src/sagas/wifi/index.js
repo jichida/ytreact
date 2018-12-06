@@ -210,6 +210,7 @@ export function* wififlow() {
         }
         else{
           if(wifiresult.code === 0){
+            console.log(wifiresult.data);
             yield put(wifi_getssidlist_result(wifiresult.data));
           }
 

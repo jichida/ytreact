@@ -7,6 +7,7 @@
 import { createReducer } from 'redux-act';
 import {
     wifi_getssidlist_result,
+    wifi_setstatus,
     ui_setcurwifi,
 } from '../../actions/index.js';
 
@@ -16,6 +17,7 @@ const initial = {
         wifiCipher:'',
         wifipassword: '',
         wifilist:[],
+        wifiStatus:-1
     },
 };
 
@@ -24,6 +26,10 @@ const wifi = createReducer({
     [wifi_getssidlist_result]:(state, payload)=>{
         let wifilist = [...payload];
         return { ...state,wifilist};
+    },
+    [wifi_setstatus]: (state, payload) => {
+        const {wifiStatus} = payload;
+        return { ...state,wifiStatus};
     },
     [ui_setcurwifi]: (state, payload) => {
         const {wifissid,wifipassword,wifiCipher} = payload;

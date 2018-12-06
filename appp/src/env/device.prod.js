@@ -51,8 +51,21 @@ const getssidlist = (fncallback)=>{
 }
 
 const setcurwifi = (values,fncallback)=>{
-  console.log(values);
-  fncallback('ok');
+
+  const xviewData = {
+    componentName:"ComponentUtil",
+    action:"connectWifi",
+    callback:"getWifiListCallback",
+    data:{
+      ssid:values.wifissid,
+      passWord:values.wifipassword,
+      wifiCipher:values.wifiCipher
+    }
+  }
+  if(!!window["xview"]){
+    window["xview"].callNativeXView(JSON.stringify(xviewData));
+  }
+
 }
 
 const setsocketrecvcallback = (fncallback)=>{

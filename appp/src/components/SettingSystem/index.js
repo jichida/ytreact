@@ -8,7 +8,7 @@ import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import 'moment-timezone';
 import {scanbarcode} from '../../env/scanbarcode';
-import {common_err,ui_set_language,wifi_sendcmd_request} from '../../actions';
+import {common_err,ui_set_language,wifi_sendcmd_request,getdevice_request} from '../../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
 import {stringtodate} from '../../util/dateutil';
@@ -214,6 +214,7 @@ const RenderForm = createForm({
                               // }
                               if(result.code === '0'){
                                 setFieldsValue({deviceid:result.data})
+                                dispatch(getdevice_request({'syssettings.deviceid':result.data}));
                               }
                               //  alert(JSON.stringify(result));//<---这里判断code是否为0，如果为0，表示成功；去取data的值
                              });

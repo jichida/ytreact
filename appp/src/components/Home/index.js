@@ -9,7 +9,8 @@ import Abnormal from '../Abnormal';
 import Performance from '../Performance';
 
 import './index.less';
-import '../../assets/wlimg.png';
+import wifi_img from '../../assets/wlimg.png';
+import nowifi_img from '../../assets/no-wifi.png';
 import {ui_home_selindex} from '../../actions';
 
 class Home extends PureComponent{
@@ -79,7 +80,8 @@ class Home extends PureComponent{
                     className="nav"
                     icon={<Icon type="left" />}
                     onLeftClick={() => history.goBack()}
-                    rightContent={[<div key="0" className="nav-wifi-icon" onClick={this.onClickWifi}/>]}
+                    // rightContent={[<div key="0" className="nav-wifi-icon" onClick={this.onClickWifi}><img src={wifi_img} alt=''/></div>]}
+                    rightContent={[<div key="0" className="nav-wifi-icon" onClick={this.onClickWifi}><img src={nowifi_img} alt=''/></div>]}
                 >
                     <Tabs
                         tabs={tabs}

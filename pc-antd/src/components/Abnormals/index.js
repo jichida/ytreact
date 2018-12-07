@@ -107,7 +107,7 @@ class Machines extends React.PureComponent {
         return (
             <GridContent>
                 <Card bordered={false} className="main-card">
-                <Row style={{marginBottom: 30}}>
+                <Row style={{marginBottom: 5}}>
                     <Col span={24} className="title">
                         <img src={sb_icon} alt="" /><span>异常机器</span>
                     </Col>

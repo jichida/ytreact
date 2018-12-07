@@ -179,7 +179,7 @@ class SearchForm extends React.PureComponent{
                         })(<Input size="large" placeholder="请输入客户名称" />)}
                     </Form.Item>
                     <Form.Item {...tailFormItemLayout}>
-                        <Button type="primary" onClick={onValidateForm} size="large" style={{width: '100%'}}>立即搜索</Button>
+                        <Button type="primary" onClick={onValidateForm} size="large" className="search_btn" style={{width: '100%'}}>立即搜索</Button>
                     </Form.Item>
                 </Form>
             </Card>

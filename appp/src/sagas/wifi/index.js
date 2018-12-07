@@ -45,55 +45,55 @@ const parsedata = (stringbody,callbackfn)=>{
   stringbody = lodash_replace(stringbody, '%', '');
   const dataz = lodash_split(stringbody, ',');
   const mapdatafieldname = [
-    'main_outwater_quality',
-    'main_outwater_grade',//出水等级,
-    'main_inwater_quality',//出水水质,
-    'main_inwater_grade',//出水等级,
-    'main_totalwatervol',//总产水量
-    'main_runtime',//总产水量
-    'main_outcwatervol',//浓水出水量
-    'filterelements_modlife_leftvol',//电离子膜寿命剩余流量
-    'filterelements_prefilter1_leftvol',//前置PP寿命
-    'filterelements_prefilter2_leftvol',//前置2滤芯寿命
-    'filterelements_prefilter3_leftvol',//前置3滤芯寿命
-    'filterelements_posfilter1_leftvol',//后置活性炭寿命
-    'filterelements_posfilter2_leftvol',//电离子膜寿命
-    'filterelements_posfilter3_leftvol',//电离子膜寿命
-    'filterelements_modlife_leftday',//电离子膜寿命
-    'filterelements_prefilter1_leftday',//电离子膜寿命
-    'filterelements_prefilter2_leftday',//电离子膜寿命
-    'filterelements_prefilter3_leftday',//电离子膜寿命
-    'filterelements_posfilter1_leftday',//电离子膜寿命
-    'filterelements_posfilter2_leftday',//电离子膜寿命
-    'filterelements_posfilter3_leftday',//电离子膜寿命
-    'filterelements',//滤芯的顺序
-    'averagecurrent_600',//平均电流@600	600电导率时的电流:mA	1 word
-    'averagecurrent_300',//300电导率时的电流:mA	1 word
-    'averagecut_600',//16	平均cut@600	600电导率时的cut	1 word
-    'averagecut_300',// 17	平均cut@300	300电导率时的cut	1 word
-    'waterpurificationrate',//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
-    'error_partsfailure',//零件故障
-    'error_pumpfailure',//20	泵故障	ERROR2:0 无故障 1有故障
-    'error_programfailure',//21	程序故障	ERROR3:0 无故障 1有故障
-    'error_flowfailure',//22	流量故障	ERROR4:0 无故障 1有故障
-    'error_leakagefault',//23	漏水故障	ERROR5:0 无故障 1有故障
-    'error_edicurrent',//24	EDI电流	ERROR6:0 无故障 1有故障
-    'error_modout',//25	MODOUT  膜的去除效率	ERROR7:0 无故障 1有故障
-    'error_intakesensorfault',//26	进水传感器故障	ERROR8 :0 无故障 1有故障
-    'error_outflowsensorfault',//27	出水传感器故障	ERROR9:0 无故障 1有故障
-    'error_cwatersensorfault',//28	浓水传感器故障	ERROR10 :0 无故障 1有故障
-    'error_wastewatersensorfault',//29	废水传感器故障	ERROR11:0 无故障 1有故障
-    'error_outflowflowmeterfailure',//30	出水流量计故障	ERROR12:0 无故障 1有故障
-    'error_wastewaterflowmeterfailure',//31	废水流量计故障	ERROR13:0 无故障 1有故障
-    'error_clockfailure',//32	时钟故障	ERROR14:0 无故障 1有故障
-    'error_pressuresensor1failure',//33	压力1传感器故障	ERROR15:0 无故障 1有故障
-    'error_pressuresensor2failure',//34	压力2传感器故障	ERROR16:0 无故障 1有故障
-    'error_pressuresensor3failure',//35	压力3传感器故障	ERROR17:0 无故障 1有故障
-    'error_pressuresensor4failure',//36	压力4传感器故障	ERROR18:0 无故障 1有故障
+    'homedata.main_outwater_quality',
+    'homedata.main_outwater_grade',//出水等级,
+    'homedata.main_inwater_quality',//出水水质,
+    'homedata.main_inwater_grade',//出水等级,
+    'homedata.main_totalwatervol',//总产水量
+    'homedata.main_runtime',//总产水量
+    'homedata.main_outcwatervol',//浓水出水量
+    'homedata.filterelements_modlife_leftvol',//电离子膜寿命剩余流量
+    'homedata.filterelements_prefilter1_leftvol',//前置PP寿命
+    'homedata.filterelements_prefilter2_leftvol',//前置2滤芯寿命
+    'homedata.filterelements_prefilter3_leftvol',//前置3滤芯寿命
+    'homedata.filterelements_posfilter1_leftvol',//后置活性炭寿命
+    'homedata.filterelements_posfilter2_leftvol',//电离子膜寿命
+    'homedata.filterelements_posfilter3_leftvol',//电离子膜寿命
+    'homedata.filterelements_modlife_leftday',//电离子膜寿命
+    'homedata.filterelements_prefilter1_leftday',//电离子膜寿命
+    'homedata.filterelements_prefilter2_leftday',//电离子膜寿命
+    'homedata.filterelements_prefilter3_leftday',//电离子膜寿命
+    'homedata.filterelements_posfilter1_leftday',//电离子膜寿命
+    'homedata.filterelements_posfilter2_leftday',//电离子膜寿命
+    'homedata.filterelements_posfilter3_leftday',//电离子膜寿命
+    'homedata.filterelements',//滤芯的顺序
+    'performancedata.averagecurrent_600',//平均电流@600	600电导率时的电流:mA	1 word
+    'performancedata.averagecurrent_300',//300电导率时的电流:mA	1 word
+    'performancedata.averagecut_600',//16	平均cut@600	600电导率时的cut	1 word
+    'performancedata.averagecut_300',// 17	平均cut@300	300电导率时的cut	1 word
+    'performancedata.waterpurificationrate',//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
+    'errordata.error_partsfailure',//零件故障
+    'errordata.error_pumpfailure',//20	泵故障	ERROR2:0 无故障 1有故障
+    'errordata.error_programfailure',//21	程序故障	ERROR3:0 无故障 1有故障
+    'errordata.error_flowfailure',//22	流量故障	ERROR4:0 无故障 1有故障
+    'errordata.error_leakagefault',//23	漏水故障	ERROR5:0 无故障 1有故障
+    'errordata.error_edicurrent',//24	EDI电流	ERROR6:0 无故障 1有故障
+    'errordata.error_modout',//25	MODOUT  膜的去除效率	ERROR7:0 无故障 1有故障
+    'errordata.error_intakesensorfault',//26	进水传感器故障	ERROR8 :0 无故障 1有故障
+    'errordata.error_outflowsensorfault',//27	出水传感器故障	ERROR9:0 无故障 1有故障
+    'errordata.error_cwatersensorfault',//28	浓水传感器故障	ERROR10 :0 无故障 1有故障
+    'errordata.error_wastewatersensorfault',//29	废水传感器故障	ERROR11:0 无故障 1有故障
+    'errordata.error_outflowflowmeterfailure',//30	出水流量计故障	ERROR12:0 无故障 1有故障
+    'errordata.error_wastewaterflowmeterfailure',//31	废水流量计故障	ERROR13:0 无故障 1有故障
+    'errordata.error_clockfailure',//32	时钟故障	ERROR14:0 无故障 1有故障
+    'errordata.error_pressuresensor1failure',//33	压力1传感器故障	ERROR15:0 无故障 1有故障
+    'errordata.error_pressuresensor2failure',//34	压力2传感器故障	ERROR16:0 无故障 1有故障
+    'errordata.error_pressuresensor3failure',//35	压力3传感器故障	ERROR17:0 无故障 1有故障
+    'errordata.error_pressuresensor4failure',//36	压力4传感器故障	ERROR18:0 无故障 1有故障
   ];
   let result = {};
   for(let i = 0;i < mapdatafieldname.length; i++){
-    const value = dataz.length >i ?dataz[i]:'0';
+    const value = dataz.length >i ?dataz[i]:0;
     lodash_set(result,mapdatafieldname[i],value);
   }
   callbackfn(result);
@@ -107,7 +107,7 @@ const socket_recvdata_promise = (data)=>{
           if(recvbuf !== '$ok%'){
             parsedata(recvbuf,(result)=>{
               resolve({cmd:'data',data:result});
-              resolve(result);
+              // resolve(result);
               // socket_send(`$ok%`,()=>{
               //
               // });
@@ -224,7 +224,7 @@ export function* wififlow() {
     yield takeLatest(`${ui_wifisuccess_tonext}`,function*(action){
       try{
         //for test--->
-        yield put(socket_recvdata({code:0,data:`$504,0,503,0,0,0,720,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,300,0,7,22,0,7,1007,503,20,%`}));
+        // yield put(socket_recvdata({code:0,data:`$504,0,503,0,0,0,720,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,300,0,7,22,0,7,1007,503,20,%`}));
 
         //开始连接socket,进入下一个页面
         yield call(socket_connnect_promise,{

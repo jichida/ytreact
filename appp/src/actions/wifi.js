@@ -17,6 +17,10 @@ export const wifi_recvcmd_request = createAction('wifi_recvcmd_request');
 export const wifi_recvcmd_result = createAction('wifi_recvcmd_result');
 
 export const wifi_setstatus = createAction('wifi_setstatus');
+export const socket_setstatus = createAction('socket_setstatus');
+export const socket_recvdata = createAction('socket_recvdata');
+
+export const ui_wifisuccess_tonext = createAction('ui_wifisuccess_tonext');
 export const wifi_getdata = createAction('wifi_getdata');
 
 export const wifi_recvcmd = createAction('wifi_recvcmd');

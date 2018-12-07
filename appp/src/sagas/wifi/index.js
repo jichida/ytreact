@@ -7,8 +7,9 @@ import {
   getssidlist,
   openwifi,
   setcurwifi,
-  setsocketrecvcallback,
-  setsocketsend
+  socket_setrecvcallback,
+  socket_connnect,
+  socket_send,
 } from '../../env/device.js';
 import {
   wifi_open_reqeust,
@@ -25,8 +26,10 @@ import {
   common_err,
   set_weui,
   wifi_setstatus,
+  ui_wifisuccess_tonext,
 
-  wifi_recvcmd,
+  socket_setstatus,
+  socket_recvdata,
   wifi_getdata
 } from '../../actions/index.js';
 import { push } from 'connected-react-router';//https://github.com/reactjs/connected-react-router
@@ -96,18 +99,51 @@ const parsedata = (stringbody,callbackfn)=>{
   callbackfn(result);
 };
 
-setsocketrecvcallback(()=>{
-  if(lodash_startsWith(recvbuf,'$')){
-    if(lodash_endWith(recvbuf,'%')){
-      if(recvbuf !== '$ok%'){
-        parsedata(recvbuf,(result)=>{
-          setsocketsend(`$ok%`);
-        });
+const socket_recvdata_promise = (data)=>{
+  recvbuf += data;
+  return new Promise(resolve => {
+      if(lodash_startsWith(recvbuf,'$')){
+        if(lodash_endWith(recvbuf,'%')){
+          if(recvbuf !== '$ok%'){
+            parsedata(recvbuf,(result)=>{
+              resolve({cmd:'data',data:result});
+              resolve(result);
+              // socket_send(`$ok%`,()=>{
+              //
+              // });
+            });
+          }
+          else{
+            resolve({cmd:'ok',data:recvbuf});
+          }
+          recvbuf = '';
+        }
       }
-      recvbuf = '';
-    }
-  }
-});
+  });
+}
+
+const socket_send_promise = (data)=>{
+  return new Promise(resolve => {
+      socket_send(data,()=>{
+
+      });
+      resolve({});
+  });
+}
+// socket_setrecvcallback(()=>{
+//   if(lodash_startsWith(recvbuf,'$')){
+//     if(lodash_endWith(recvbuf,'%')){
+//       if(recvbuf !== '$ok%'){
+//         parsedata(recvbuf,(result)=>{
+//           socket_send(`$ok%`,()=>{
+//
+//           });
+//         });
+//       }
+//       recvbuf = '';
+//     }
+//   }
+// });
 
 function getwifilist() {
     return new Promise(resolve => {
@@ -133,8 +169,71 @@ function openwifi_promise(){
   });
 }
 
+function socket_connnect_promise(values){
+  return new Promise(resolve => {
+    socket_connnect(values,(retdata)=>{
+
+    });
+    resolve({});
+  });
+}
+
 export function* wififlow() {
     console.log(`wififlow======>`);
+    yield takeLatest(`${socket_setstatus}`,function*(action){
+      //连接&发送状态回调
+      const {payload} = action;
+      try{
+        yield put(set_weui({
+          toast:{
+          text:`socket连接&发送状态回调-->socket_setstatus--->${JSON.stringify(payload)}`,
+          show: true,
+          type:'success'
+        }}));
+      }
+      catch(e){
+        console.log(e);
+      }
+    });
+
+    yield takeLatest(`${socket_recvdata}`,function*(action){
+      const {payload} = action;
+      try{
+        yield put(set_weui({
+          toast:{
+          text:`socket接收到数据--->socket_recvdata--->${JSON.stringify(payload)}`,
+          show: true,
+          type:'success'
+        }}));
+        const result = yield put(socket_recvdata_promise,payload);
+        if(result.cmd === 'data'){
+          //get result.data
+          yield put(wifi_getdata(result.data));
+        }
+        //result is to data
+        yield call(socket_send_promise,'$ok%');
+      }
+      catch(e){
+        console.log(e);
+      }
+    });
+
+    yield takeLatest(`${ui_wifisuccess_tonext}`,function*(action){
+      try{
+        //开始连接socket,进入下一个页面
+        yield call(socket_connnect_promise,{
+          host:"yt.i2u.top",
+          port:4102
+        });
+        yield put(push('/devices'));
+        console.log('to next page')
+      }
+      catch(e){
+        console.log(e);
+      }
+
+    });
+
     yield takeLatest(`${wifi_setstatus}`, function*(action) {
       try{
         const {payload} = action;
@@ -166,7 +265,7 @@ export function* wififlow() {
         }}));
       }
       catch(e){
-
+        console.log(e);
       }
     });
     yield takeLatest(`${wifi_open_reqeust}`, function*(action) {
@@ -188,6 +287,7 @@ export function* wififlow() {
     yield takeLatest(`${wifi_sendcmd_request}`, function*(action) {
       try{
         const {payload} = action;
+        yield call(socket_send_promise,payload.cmd);
         yield put(set_weui({
           toast:{
           text:`发送给硬件命令:\n${payload.cmd}`,
@@ -242,7 +342,7 @@ export function* wififlow() {
         }
         //跳转到下一个页面
         yield put(push('/wifisucess'));
-
+        yield call(socket_connnect_promise,{})
       }
       catch(e){
         console.log(e);

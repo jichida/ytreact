@@ -124,7 +124,7 @@ const socket_recvdata_promise = (data)=>{
 
 const socket_send_promise = (data)=>{
   return new Promise(resolve => {
-      socket_send(data,()=>{
+      socket_send({'sendMessage':data},()=>{
 
       });
       resolve({});
@@ -205,13 +205,15 @@ export function* wififlow() {
           show: true,
           type:'success'
         }}));
-        const result = yield put(socket_recvdata_promise,payload);
-        if(result.cmd === 'data'){
-          //get result.data
-          yield put(wifi_getdata(result.data));
+        if(payload.code === 0){
+          const result = yield put(socket_recvdata_promise,payload.data);
+          if(result.cmd === 'data'){
+            //get result.data
+            yield put(wifi_getdata(result.data));
+          }
+          //result is to data
+          yield call(socket_send_promise,'$ok%');
         }
-        //result is to data
-        yield call(socket_send_promise,'$ok%');
       }
       catch(e){
         console.log(e);

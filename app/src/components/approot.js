@@ -24,6 +24,7 @@ import ChangePassword from './ChangePassword';
 
 
 import {requireAuthentication} from './requireauthentication';
+import gobal_bg from '../assets/electricbg.png';
 
 
 class AppRoot extends React.Component {
@@ -36,7 +37,7 @@ class AppRoot extends React.Component {
     }
     render() {
       return (
-          <div className="page">
+          <div className="page" style={{backgroundImage: `url(${gobal_bg})`}}>
             <Switch>
               <Route exact path="/" component={Index} />
               <Route exact path="/home" component={Home} />

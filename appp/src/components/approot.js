@@ -21,6 +21,8 @@ import PipeFittings from './PipeFittings';
 
 import {requireAuthentication} from './requireauthentication';
 
+import gobal_bg from '../assets/electricbg.png';
+
 
 class AppRoot extends React.Component {
     componentWillMount() {
@@ -32,7 +34,7 @@ class AppRoot extends React.Component {
     }
     render() {
       return (
-          <div className="page">
+          <div className="page" style={{backgroundImage: `url(${gobal_bg})`}}>
             <Switch>
               <Route exact path="/" component={requireAuthentication(Index)} />
               <Route exact path="/wifi" component={requireAuthentication(WifiLogin)} />

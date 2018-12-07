@@ -9,6 +9,7 @@ import { injectIntl } from 'react-intl';
 import Waterwave from './waterwave.js';
 import './index.less';
 import '../../assets/wlimg.png';
+import home_bgimg from '../../assets/zhuye_bg.png';
 
 const CRed = '#ff2728';
 const CGreen = '#3eef7d';
@@ -190,7 +191,7 @@ class Home extends PureComponent{
 
         return (
             <React.Fragment>
-                <div className="home_bg"></div>
+                <div className="home_bg" style={{backgroundImage: `url(${home_bgimg})`}}></div>
                     <WingBlank style={{marginTop: "-140px", display: "flex", justifyContent: 'center'}}>
                         <div className="zhuyean">
                             <img src={monitorBg} alt="" style={{width: '100%', display: 'block'}} />

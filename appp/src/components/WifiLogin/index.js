@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Flex, WhiteSpace, Button, WingBlank, List, InputItem, ActionSheet } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
+import BounceSpace from '../BounceSpace';
 import './index.less';
 import {ui_setcurwifi,wifi_open_reqeust,wifi_setcurwifi_request,
   wifi_getssidlist_request,wifi_getssidlist_result} from '../../actions';
@@ -18,6 +19,11 @@ if (isIPhone) {
 }
 
 class WifiLogin extends PureComponent{
+
+    state={
+        isShowBounce: false,
+    }
+
     componentDidMount(){
         const {dispatch} = this.props;
         dispatch(wifi_open_reqeust({}));
@@ -108,6 +114,8 @@ class WifiLogin extends PureComponent{
                                         <InputItem className="input" type="password"
                                             value={wifipassword}
                                             onChange={this.handleWifiPasswordChange}
+                                            onFocus={()=>{this.setState({isShowBounce: true})}}
+                                            onBlur={()=>{this.setState({isShowBounce: false})}}
                                             placeholder={intl.formatMessage({id: 'start.wifi.password.input'})}
                                         />
                                     </Flex.Item>
@@ -122,6 +130,7 @@ class WifiLogin extends PureComponent{
                                     </Button>
                                 </div>
                                 <WhiteSpace size="xl" />
+                                <BounceSpace isShowBounce={this.state.isShowBounce} />
                             </Flex>
                         </WingBlank>
                     </div>

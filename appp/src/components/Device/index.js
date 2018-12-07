@@ -8,7 +8,7 @@ import txImg from '../../assets/tx.png';
 import basic_img from '../../assets/sy2.png';
 import water_img from '../../assets/sy3.png';
 import install_img from '../../assets/sy4.png';
-import user_img from '../../assets/sy5.png';
+// import user_img from '../../assets/sy5.png';
  
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -85,7 +85,7 @@ class Device extends PureComponent{
                                 </Link>
                             </Flex.Item>
                         </Flex>
-                        <Flex>
+                        {/* <Flex>
                             <Flex.Item className="tools_con">
                                 <Link to="#"><div><img src={user_img} alt="" />
                                     <p><FormattedMessage id="device.userversion" /></p></div>
@@ -93,7 +93,7 @@ class Device extends PureComponent{
                             </Flex.Item>
                             <Flex.Item className="tools_con"></Flex.Item>
                             <Flex.Item className="tools_con"></Flex.Item>
-                        </Flex>
+                        </Flex> */}
                     </div>
                 </WingBlank>
             </div></div>

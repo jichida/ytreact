@@ -206,7 +206,8 @@ export function* wififlow() {
           type:'success'
         }}));
         if(payload.code === 0){
-          const result = yield put(socket_recvdata_promise,payload.data);
+          const result = yield call(socket_recvdata_promise,payload.data);
+          debugger;
           if(result.cmd === 'data'){
             //get result.data
             yield put(wifi_getdata(result.data));
@@ -222,6 +223,9 @@ export function* wififlow() {
 
     yield takeLatest(`${ui_wifisuccess_tonext}`,function*(action){
       try{
+        //for test--->
+        yield put(socket_recvdata({code:0,data:`$504,0,503,0,0,0,720,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,300,0,7,22,0,7,1007,503,20,%`}));
+
         //开始连接socket,进入下一个页面
         yield call(socket_connnect_promise,{
           host:"yt.i2u.top",

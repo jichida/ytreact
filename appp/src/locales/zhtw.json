@@ -124,7 +124,7 @@
   "water.alkalinity": "原水鹼度（ppm）",
   "water.ph": "PH值",
   "water.usertds": "用戶需求出水TDS值",
-  "home.show.title_main_outwater_quality":"出水水質 {value} ppm",
+  "home.show.title_main_outwater_quality":"出水水質 TDS {value}",
   "home.show.title_main_inwater_quality":"進水水質 {value} ppm",
   "home.show.title_main_totalwatervol":"總產水量 {value} gal",
   "home.show.title_main_runtime":"運行時間 {value} 天",

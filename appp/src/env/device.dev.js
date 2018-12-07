@@ -10,7 +10,7 @@ const setwifistatuscallback = ()=>{
   fncallback = window.wifistatuscallback;
 }
 
-setwifistatuscallback();
+
 
 const openwifi =  (fncallback)=>{
   window.setTimeout(()=>{
@@ -42,4 +42,4 @@ const setsocketrecvcallback = (fncallback)=>{
     fncallback(`$ok%`)
 }
 
-export {openwifi,getssidlist,setcurwifi,setsocketrecvcallback}
+export {openwifi,getssidlist,setcurwifi,setsocketrecvcallback,setwifistatuscallback}

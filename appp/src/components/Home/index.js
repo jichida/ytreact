@@ -24,7 +24,12 @@ class Home extends PureComponent{
     //     // })
     //     this.props.dispatch(ui_home_selindex(index));
     // }
-
+    onClickWifi =()=>{
+      const {history} = this.props;
+      history.push(`/wifi`);
+      console.log('onClickWifi');
+      // /wifi
+    }
     onChangeTab = (index)=>{
       this.props.dispatch(ui_home_selindex(index));
         // this.setState({
@@ -74,7 +79,7 @@ class Home extends PureComponent{
                     className="nav"
                     icon={<Icon type="left" />}
                     onLeftClick={() => history.goBack()}
-                    rightContent={[<div key="0" className="nav-wifi-icon"/>]}
+                    rightContent={[<div key="0" className="nav-wifi-icon" onClick={this.onClickWifi}/>]}
                 >
                     <Tabs
                         tabs={tabs}

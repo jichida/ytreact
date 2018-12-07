@@ -45,6 +45,7 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+const lessRegex = /\.less$/;
 
 // common function to get style loaders
 const getStyleLoaders = (cssOptions, preProcessor) => {
@@ -89,6 +90,47 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
         sourceMap: shouldUseSourceMap,
       },
     });
+  }
+  return loaders;
+};
+
+// common function to get style loaders
+const getLessStyleLoaders = (cssOptions, preProcessor) => {
+  const loaders = [
+    require.resolve('style-loader'),
+    {
+      loader: require.resolve('css-loader'),
+      options: cssOptions,
+    },
+    {
+      // Options for PostCSS as we reference these options twice
+      // Adds vendor prefixing based on your specified browser support in
+      // package.json
+      loader: require.resolve('postcss-loader'),
+      options: {
+        // Necessary for external CSS imports to work
+        // https://github.com/facebook/create-react-app/issues/2677
+        ident: 'postcss',
+        plugins: () => [
+          require('postcss-flexbugs-fixes'),
+          require('postcss-preset-env')({
+            autoprefixer: {
+              flexbox: 'no-2009',
+            },
+            stage: 3,
+          }),
+        ],
+      },
+    },
+    {
+      loader:require.resolve('less-loader'),
+      options: {
+        modules: false,
+      }
+    }
+  ];
+  if (preProcessor) {
+    loaders.push(require.resolve(preProcessor));
   }
   return loaders;
 };
@@ -283,6 +325,7 @@ module.exports = {
               ),
               
               plugins: [
+                ['import',{libraryName:'antd', style:true}],
                 [
                   require.resolve('babel-plugin-named-asset-import'),
                   {
@@ -326,6 +369,19 @@ module.exports = {
               // being evaluated would be much more helpful.
               sourceMaps: false,
             },
+          },
+          // "postcss" loader applies autoprefixer to our leSS.
+          // "css" loader resolves paths in CSS and adds assets as dependencies.
+          // "style" loader turns CSS into JS modules that inject <style> tags.
+          // In production, we use a plugin to extract that CSS to a file, but
+          // in development "style" loader enables hot editing of CSS.
+          // By default we support CSS Modules with the extension .module.css
+          {
+            test: lessRegex,
+            exclude: cssModuleRegex,
+            use: getLessStyleLoaders({
+              importLoaders: 1,
+            }),
           },
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.

@@ -146,6 +146,10 @@ export function* wififlow() {
             //为打开
             text = 'Wi-Fi未打开';
           }
+          if(wifiStatus === 0){
+            //为打开
+            text = 'Wi-Fi未打开';
+          }
           else if(wifiStatus === 1){
             type = 'success';
             text = 'Wi-Fi已连接';
@@ -156,7 +160,7 @@ export function* wififlow() {
         }
         yield put(set_weui({
           toast:{
-          text,
+          text:text,
           show: true,
           type
         }}));
@@ -235,9 +239,9 @@ export function* wififlow() {
         }
         else{
           yield put(wifi_setcurwifi_result(wifiresult));
-          //跳转到下一个页面
-          yield put(push('/wifisucess'));
         }
+        //跳转到下一个页面
+        yield put(push('/wifisucess'));
 
       }
       catch(e){

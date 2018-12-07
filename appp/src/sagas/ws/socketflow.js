@@ -7,6 +7,7 @@ import {
 } from '../../actions';
 import config from '../../env/config';
 
+console.log(config.appversion);
 //获取地理位置信息，封装为promise
 export function* socketflow(){//仅执行一次
    yield takeLatest(`${notify_socket_connected}`, function*(action) {

@@ -16,7 +16,6 @@ const setwifistatuscallback = ()=>{
   }
 }
 
-setwifistatuscallback();
 
 const openwifi =  ()=>{
   const xviewData = {
@@ -74,4 +73,4 @@ const setsocketrecvcallback = (fncallback)=>{
 
 
 
-export {getssidlist,setcurwifi,setsocketrecvcallback,openwifi}
+export {getssidlist,setcurwifi,setsocketrecvcallback,openwifi,setwifistatuscallback}

@@ -24,3 +24,4 @@ export const ui_wifisuccess_tonext = createAction('ui_wifisuccess_tonext');
 export const wifi_getdata = createAction('wifi_getdata');
 
 export const wifi_recvcmd = createAction('wifi_recvcmd');
+export const wifi_init = createAction('wifi_init');

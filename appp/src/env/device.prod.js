@@ -1,7 +1,7 @@
 import store from './store';
 import {wifi_setstatus,socket_setstatus,socket_recvdata} from '../actions';
 
-window.wifistatuscallback = (result)=>{
+window.wifistatuscallback_yt = (result)=>{
   store.dispatch(wifi_setstatus(result));
 }
 window.socketstatuscallback = (result)=>{
@@ -15,7 +15,7 @@ const setwifistatuscallback = ()=>{
   const xviewData = {
     componentName:"ComponentUtil",
     action:"getWifiStatus",
-    callback:"wifistatuscallback"
+    callback:"wifistatuscallback_yt"
   }
   if(!!window["xview"]){
     window["xview"].callNativeXView(JSON.stringify(xviewData));
@@ -37,11 +37,7 @@ const openwifi =  ()=>{
 
 const getssidlist = (fncallback)=>{
   window.getWifiListCallback = (result)=>{
-    let wifilist = [];
-    if(result.code === 0){
-      wifilist = result.data;
-    }
-    fncallback(wifilist);
+    fncallback(result);
   };
   const xviewData = {
     componentName:"ComponentUtil",
@@ -56,11 +52,13 @@ const getssidlist = (fncallback)=>{
 }
 
 const setcurwifi = (values,fncallback)=>{
-
+  window.connectWifi = (result)=>{
+    fncallback(result);
+  };
   const xviewData = {
     componentName:"ComponentUtil",
     action:"connectWifi",
-    callback:"getWifiListCallback",
+    callback:"connectWifi",
     data:{
       ssid:values.wifissid,
       passWord:values.wifipassword,

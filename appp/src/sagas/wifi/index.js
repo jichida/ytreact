@@ -7,7 +7,7 @@ import {
   getssidlist,
   openwifi,
   setcurwifi,
-  socket_setrecvcallback,
+  setwifistatuscallback,
   socket_connnect,
   socket_send,
 } from '../../env/device.js';
@@ -30,7 +30,9 @@ import {
 
   socket_setstatus,
   socket_recvdata,
-  wifi_getdata
+  wifi_getdata,
+  wifi_init,
+
 } from '../../actions/index.js';
 import { push } from 'connected-react-router';//https://github.com/reactjs/connected-react-router
 import lodash_startsWith from 'lodash.startswith';
@@ -39,7 +41,7 @@ import lodash_replace from 'lodash.replace';
 import lodash_split from 'lodash.split';
 import lodash_set from 'lodash.set';
 let recvbuf = '';
-
+setwifistatuscallback();
 const parsedata = (stringbody,callbackfn)=>{
   stringbody = lodash_replace(stringbody, '$', '');
   stringbody = lodash_replace(stringbody, '%', '');
@@ -145,7 +147,7 @@ const socket_send_promise = (data)=>{
 //   }
 // });
 
-function getwifilist() {
+function getwifilist_promise() {
     return new Promise(resolve => {
       getssidlist((result)=>{
         resolve(result);
@@ -180,6 +182,22 @@ function socket_connnect_promise(values){
 
 export function* wififlow() {
     console.log(`wififlow======>`);
+
+
+
+    yield takeLatest(`${wifi_init}`,function*(action){
+      //连接&发送状态回调
+      // const {payload} = action;
+      try{
+        setwifistatuscallback();
+        yield call(delay, 100);
+        yield put(wifi_open_reqeust({}));
+      }
+      catch(e){
+        console.log(e);
+      }
+    });
+
     yield takeLatest(`${socket_setstatus}`,function*(action){
       //连接&发送状态回调
       const {payload} = action;
@@ -244,7 +262,7 @@ export function* wififlow() {
       try{
         const {payload} = action;
         const {code,wifiStatus} = payload;
-        let text = '其他错误';
+        let text = '未知状态';
         let type = 'warning';
         if(code === 0){
           if(wifiStatus === -1){
@@ -265,7 +283,7 @@ export function* wififlow() {
         }
         yield put(set_weui({
           toast:{
-          text:text,
+          text:`${JSON.stringify(payload)}`,
           show: true,
           type
         }}));
@@ -310,21 +328,29 @@ export function* wififlow() {
     yield takeLatest(`${wifi_getssidlist_request}`, function*(action) {
       try{
         let {payload:result} = action;
+        const delaytime = 5000;
         console.log(`wifi_getssidlist_request:${JSON.stringify(result)}`);
-        const { wifiresult, timeout } = yield race({
-           wifiresult: call(getwifilist),
-           timeout: call(delay, 2000)
+        const raceresult = yield race({
+           wifiresult: call(getwifilist_promise),
+           timeout: call(delay, delaytime)
         });
+        yield put(set_weui({
+          toast:{
+          text:`${JSON.stringify(raceresult)}`,
+          show: true,
+          type:'success'
+        }}));
+        const { wifiresult, timeout } = raceresult;
         if(!!timeout){
-          yield put(common_err({type:'getcurwifi',errmsg:`获取wifi信息超时`}));
+          yield put(common_err({type:'wifi_getssidlist',errmsg:`获取wifi信息超时,${delaytime}毫秒`}));
         }
         else{
           if(wifiresult.code === 0){
             console.log(wifiresult.data);
             yield put(wifi_getssidlist_result(wifiresult.data));
           }
-
         }
+
 
       }
       catch(e){

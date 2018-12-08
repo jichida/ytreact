@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Flex, WhiteSpace, Button, WingBlank } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-
+import {ui_wifisuccess_tonext} from '../../actions';
 import './index.less';
 
 import mga from '../../assets/ljimga.png';
@@ -13,7 +13,7 @@ import mgb from '../../assets/ljimgb.png';
 
     render () {
         ///0为打开未连接  -1  未打开  1  已连接 2 密码错误}
-        const { history,wifiStatus } = this.props;
+        const { history,wifiStatus,dispatch } = this.props;
         let startwifiid = "start.wifi.succeed";
         if(wifiStatus === -1){
           startwifiid = 'start.wifi.notconnected';
@@ -43,7 +43,10 @@ import mgb from '../../assets/ljimgb.png';
                                 <div className="status" ><FormattedMessage id={startwifiid} /></div>
                                 <WhiteSpace size="xl" />
                                 <div className="add_btn" >
-                                    <Button type="ghost" className="btn" onClick={()=>{history.push('/devices')}}>
+                                    <Button type="ghost" className="btn" onClick={()=>{
+                                      dispatch(ui_wifisuccess_tonext({}));
+                                      // history.push('/devices')
+                                    }}>
                                         <FormattedMessage id="form.next" />
                                     </Button>
                                 </div>

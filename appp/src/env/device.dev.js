@@ -38,8 +38,22 @@ const setcurwifi = (values,fncallback)=>{
   fncallback('ok');
 }
 
-const setsocketrecvcallback = (fncallback)=>{
-    fncallback(`$ok%`)
+
+const socket_send = (values,fncallback)=>{
+  console.log(`socket_send`);
+  console.log(values);
 }
 
-export {openwifi,getssidlist,setcurwifi,setsocketrecvcallback,setwifistatuscallback}
+const socket_connnect = (values)=>{
+  console.log(`socket_connnect`);
+  console.log(values);
+}
+
+const socket_close = ()=>{
+  console.log(`socket_close`);
+}
+
+
+
+export {socket_connnect,socket_send,socket_close,
+  getssidlist,setcurwifi,openwifi,setwifistatuscallback}

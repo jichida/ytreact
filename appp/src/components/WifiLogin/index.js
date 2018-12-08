@@ -4,7 +4,7 @@ import { Flex, WhiteSpace, Button, WingBlank, List, InputItem, ActionSheet } fro
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import './index.less';
-import {ui_setcurwifi,wifi_open_reqeust,wifi_setcurwifi_request,
+import {wifi_init,ui_setcurwifi,wifi_open_reqeust,wifi_setcurwifi_request,
   wifi_getssidlist_request,wifi_getssidlist_result} from '../../actions';
 import {callthen} from '../../sagas/pagination';
 import wifi from '../../assets/wlimg.png';
@@ -18,10 +18,10 @@ if (isIPhone) {
 }
 
 class WifiLogin extends PureComponent{
-
     componentDidMount(){
         const {dispatch} = this.props;
-        dispatch(wifi_open_reqeust({}));
+        dispatch(wifi_init({}));
+        // dispatch(wifi_open_reqeust({}));
     }
 
     // 取消 id: form.cancel

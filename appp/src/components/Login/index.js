@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
 
+import gobal_bg from '../../assets/electricbg.png';
+
 import logo from '../../assets/logo.png';
 import {login_request} from '../../actions';
 import {ui_set_language} from '../../actions';
@@ -82,9 +84,10 @@ class Login extends PureComponent{
     render () {
         const {intl} = this.props;
         return (
-            <div className="fh_container black_bg">
+                <WingBlank className="black_bg" style={{marginLeft:0, marginRight:0}}>
+                                {/* <div className="fh_container black_bg" style={{backgroundImage: `url(${gobal_bg})`}}> */}
                 <div className="fp_container white_bg">
-                <WingBlank>
+
                     <Flex direction="column" className="logincontent" >
                         <WhiteSpace size="xl" />
                         <div className="logo" >
@@ -121,9 +124,10 @@ class Login extends PureComponent{
                         </div>
                         <WhiteSpace size="xl" />
                     </Flex>
+                    </div>
+            {/* </div> */}
+
                 </WingBlank>
-                </div>
-            </div>
         )
     }
 }

@@ -80,10 +80,11 @@ class WifiLogin extends PureComponent{
         }
 
         return (
-            <div className="fh_container black_bg">
+            // <div className="fh_container black_bg">
+            <WingBlank style={{marginLeft:0, marginRight:0}}>
                 <div className="fp_container">
                     <div className="pannel">
-                        <WingBlank>
+                        
                             <Flex direction="column" className="wifi_login container" >
                                 <WhiteSpace size="xl" />
                                 <div className="logo" >
@@ -124,10 +125,11 @@ class WifiLogin extends PureComponent{
                                 </div>
                                 <WhiteSpace size="xl" />
                             </Flex>
-                        </WingBlank>
+                        
                     </div>
                 </div>
-            </div>
+            </WingBlank>
+            // </div>
         )
     }
 }

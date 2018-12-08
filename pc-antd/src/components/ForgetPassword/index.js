@@ -1,7 +1,7 @@
 import React from 'react'
 import Login from '../AntdLogin';
 import { Alert, Card, Select, Row } from 'antd';
-
+import { injectIntl } from 'react-intl';
 import logo from '../../assets/title.png';
 import language_icon from '../../assets/login_iconc.png';
 
@@ -23,7 +23,7 @@ class ForgetPassword extends React.Component {
         if(!err){
             if(values.password !== values.confirm){
                 this.setState({
-                    notice: '新密码与确认的密码不区配！',
+                    notice: this.props.intl.formatMessage({id: 'user.password.confirm.err'}),
                 });
             }
             else {
@@ -44,6 +44,7 @@ class ForgetPassword extends React.Component {
 
 
   render() {
+    const { formatMessage } = this.props.intl;
     return (
       <React.Fragment>
         <Row>
@@ -69,11 +70,11 @@ class ForgetPassword extends React.Component {
                       this.state.notice &&
                       <Alert style={{ marginBottom: 24 }} message={this.state.notice} type="error" showIcon closable />
                   }
-                  <Mobile name="mobile"  placeholder="手机号" />
-                  <Captcha name="captcha"  placeholder="验证码" onGetCaptcha={this.handleGetCaptcha} />
-                  <Password name="password" placeholder="新密码" />
-                  <Password name="confirm" placeholder="再次输入新密码" />
-                  <Submit>重设密码</Submit>
+                  <Mobile name="mobile"  placeholder={formatMessage({id: 'user.phone'})} />
+                  <Captcha name="captcha"  placeholder={formatMessage({id: 'user.captcha'})} buttonText={formatMessage({id: 'user.captcha.get'})} onGetCaptcha={this.handleGetCaptcha} />
+                  <Password name="password" placeholder={formatMessage({id: 'user.password.new'})} />
+                  <Password name="confirm" placeholder={formatMessage({id: 'user.password.confirm'})} />
+                  <Submit>{formatMessage({id: 'user.password.reset'})}</Submit>
                   <div className="forget">
                   </div>
               </Login>
@@ -85,4 +86,4 @@ class ForgetPassword extends React.Component {
   }
 }
 
-export default ForgetPassword;
+export default injectIntl(ForgetPassword);

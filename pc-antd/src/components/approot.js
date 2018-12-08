@@ -17,6 +17,8 @@ import {requireAuthentication} from './requireauthentication';
 
 import './common.less';
 
+import gobal_bg from '../assets/bg2.png';
+
 
 const Layout = (Component)=>{
   const LayoutComponent = (props)=>{
@@ -35,7 +37,7 @@ class AppRoot extends React.Component {
     }
     render() {
       return (
-        <div className="global_bg">
+        <div className="global_bg" style={{backgroundImage: `url(${gobal_bg})`}}>
           <Switch>
             <Route exact path="/" component={Login} /> 
             <Route path="/search" component={Layout(Search)} />

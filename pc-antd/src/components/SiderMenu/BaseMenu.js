@@ -145,16 +145,6 @@ export default class BaseMenu extends PureComponent {
     );
   };
 
-  // permission to check 权限控制
-  // checkPermissionItem = (authority, ItemDom) => {
-  //   const { Authorized } = this.props;
-  //   if (Authorized && Authorized.check) {
-  //     const { check } = Authorized;
-  //     return check(authority, ItemDom);
-  //   }
-  //   return ItemDom;
-  // };
-
   conversionPath = path => {
     if (path && path.indexOf('http') === 0) {
       return path;

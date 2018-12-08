@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Card, Row, Col, Button, List } from 'antd';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import GridContent from '../GridContent';
 import './index.less';
 
@@ -89,12 +90,12 @@ const MachineItem = ({iserr, address, reportdate, id, name, runtime, mode, histo
             className="child-card"
             title={<p><img src={iserr?sb_err:sb_normal} alt="" /><span>{address} {reportdate}</span></p>}
         >
-            <p>识别编号：{id}</p>
-            <p>设备名称：{name}</p>
-            <p>运行时间：{runtime}</p>
+            <p><FormattedMessage id="machine.id" />：{id}</p>
+            <p><FormattedMessage id="machine.name" />：{name}</p>
+            <p><FormattedMessage id="machine.runtime" />：{runtime}</p>
             <p>
                 <span style={{color: '#6ba4e7'}}>{mode}</span>
-                <Button style={{float: "right", color: '#6ba4e7'}} onClick={()=>{history.push(`/details/${id}`)}}>显示详情</Button>
+                <Button style={{float: "right", color: '#6ba4e7'}} onClick={()=>{history.push(`/details/${id}`)}}><FormattedMessage id="machine.detail" /></Button>
             </p>
         </Card>
     )
@@ -109,7 +110,7 @@ class Machines extends React.PureComponent {
                 <Card bordered={false} className="main-card">
                 <Row style={{marginBottom: 5}}>
                     <Col span={24} className="title">
-                        <img src={sb_icon} alt="" /><span>异常机器</span>
+                        <img src={sb_icon} alt="" /><span>{this.props.intl.formatMessage({id: 'machine.abnormal'})}</span>
                     </Col>
                 </Row>
                 <List
@@ -133,4 +134,4 @@ class Machines extends React.PureComponent {
     }
 }
 
-export default withRouter(Machines);
+export default withRouter(injectIntl(Machines));

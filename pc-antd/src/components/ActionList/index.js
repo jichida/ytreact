@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Card, Row, Col, Table, Popover, DatePicker, Button } from 'antd';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import GridContent from '../GridContent';
 import './index.less';
 
@@ -20,21 +21,19 @@ const data = [
 ]
 
 const columns = [{
-    title: '类型',
+    title: <FormattedMessage id="machine.mode.type" />,
     dataIndex: 'type',
     key: 'type',
   }, {
-    title: '主体',
+    title: <FormattedMessage id="machine.mode.body" />,
     dataIndex: 'body',
     key: 'body',
   }, {
-    title: '时间',
+    title: <FormattedMessage id="machine.mode.occurstime" />,
     dataIndex: 'occurstime',
     key: 'occurstime',
   }
 ]
-
-
 
 class RegionalDisplay extends React.PureComponent {
 
@@ -58,6 +57,7 @@ class RegionalDisplay extends React.PureComponent {
 
     render() {
         const { history } = this.props;
+        const { formatMessage } = this.props.intl;
         let { start, end } = this.state;
 
         const content = (
@@ -69,11 +69,11 @@ class RegionalDisplay extends React.PureComponent {
                 <Card bordered={false} className="main-card">
                 <Row style={{marginBottom: 30}} className="title">
                     <Col span={24}>
-                        <img src={sb_icon} alt="" /><span>操作指令</span>
-                        <Popover content={content} title="选择时间" trigger="click">
+                        <img src={sb_icon} alt="" /><span>{formatMessage({id: 'machine.mode'})}</span>
+                        <Popover content={content} title={formatMessage({id: 'app.datepicker'})} trigger="click">
                             <Button className="picker"><span>{start.format('l')}-{end.format('l')}</span><img src={rl_icon} alt="" /></Button>
                         </Popover>
-                        <span className="right-Link" onClick={()=>{history.goBack()}}>&lt; 返回上一页</span>
+                        <span className="right-Link" onClick={()=>{history.goBack()}}>&lt; {formatMessage({id: 'app.return'})}</span>
                     </Col>
                 </Row>
                 <Row>
@@ -89,4 +89,4 @@ class RegionalDisplay extends React.PureComponent {
     }
 }
 
-export default withRouter(RegionalDisplay);
+export default withRouter(injectIntl(RegionalDisplay));

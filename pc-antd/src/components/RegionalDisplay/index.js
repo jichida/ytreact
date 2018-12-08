@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, List, Divider } from 'antd';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import GridContent from '../GridContent';
 import './index.less';
 
@@ -68,31 +69,32 @@ const data = [
     },
 ]
 
-const RegionalItem = ({regional,total, normal, abnormal, offline})=>{
+const RegionalItem = injectIntl(({regional,total, normal, abnormal, offline, intl})=>{
+    const { formatMessage } = intl;
     return (
         <Card
             className="child-card"
-            title={<p><span>{regional}地区</span></p>}
+            title={<p><span>{regional}{formatMessage({id: 'machine.regional'})}</span></p>}
         >
             <Row gutter={8}>
                 <Col span={10}>
                     <div className="total">
                         <h1>{total}</h1>
-                        <h3>总设备数量</h3>
+                        <h3>{formatMessage({id: 'machine.total'})}</h3>
                     </div>
                 </Col>
                 <Col span={2}>
                     <Divider type="vertical" className="split" />
                 </Col>
                 <Col span={12}>
-                    <p className="detail"><img src={sb_normal} alt="" /><span>正常运行：{normal}</span></p>
-                    <p className="detail"><img src={sb_err} alt="" /><span>异常运行：{abnormal}</span></p>
-                    <p className="detail"><img src={sb_off} alt="" /><span>未联网设备：{offline}</span></p>
+                    <p className="detail"><img src={sb_normal} alt="" /><span>{formatMessage({id: 'machine.runing.normal'})}：{normal}</span></p>
+                    <p className="detail"><img src={sb_err} alt="" /><span>{formatMessage({id: 'machine.runing.abnormal'})}：{abnormal}</span></p>
+                    <p className="detail"><img src={sb_off} alt="" /><span>{formatMessage({id: 'machine.runing.offline'})}：{offline}</span></p>
                 </Col>
             </Row>
         </Card>
     )
-}
+})
 
 
 class RegionalDisplay extends React.PureComponent {
@@ -104,8 +106,8 @@ class RegionalDisplay extends React.PureComponent {
                 <Card bordered={false} className="main-card">
                 <Row style={{marginBottom: 30}} className="title">
                     <Col span={24}>
-                        <img src={sb_icon} alt="" /><span>中国区域展示</span>
-                        <Link to="#" className="right-Link">&lt; 返回上一页</Link>
+                        <img src={sb_icon} alt="" /><span><FormattedMessage id="machine.regional.china" /></span>
+                        <Link to="#" className="right-Link">&lt; <FormattedMessage id="app.return" /></Link>
                     </Col>
                 </Row>
                 <List

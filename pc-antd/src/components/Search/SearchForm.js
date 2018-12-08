@@ -1,5 +1,6 @@
 import React from 'react'
 import {Card, Form, Select, Input, Button, Row, Col } from 'antd';
+import { injectIntl } from 'react-intl';
 import _ from 'lodash';
 import provinces from '../provinces.js';
 
@@ -103,6 +104,7 @@ class SearchForm extends React.PureComponent{
 
     render(){
         const { form, onSubmit } = this.props;
+        const { formatMessage } = this.props.intl;
         const { getFieldDecorator, validateFields } = form;
         const onValidateForm = () => {
           validateFields((err, values) => {
@@ -115,17 +117,17 @@ class SearchForm extends React.PureComponent{
         return (
             <Card bordered={false}>
                 <Form layout="horizontal" hideRequiredMark>
-                    <Row span={16} style={{marginBottom: '30px'}}>
-                        <Col span={5} style={{textAlign: 'right'}}><span style={{fontSize: '14px', lineHeight: '40px'}}>选择省市区：</span></Col>
+                    <Row span={16} style={{marginBottom: '24px'}}>
+                        <Col span={5} style={{textAlign: 'right'}}><span style={{fontSize: '14px', lineHeight: '40px'}}>{formatMessage({id: 'app.search.choose'})}：</span></Col>
                         <Col span={19}>
                         <Row gutter={24}>
                             <Col span={8}>
                             {getFieldDecorator('province', {
                                 rules: [{ 
-                                    required: true, message: '请选择省',
+                                    required: true, message: `${formatMessage({id: 'app.search.province'})}`,
                                 }],
                             })(
-                                <Select placeholder="选择省" size="large" onChange={this.handleProvinceChange} style={{width: '100%'}}>
+                                <Select placeholder={formatMessage({id: 'app.search.province'})} size="large" onChange={this.handleProvinceChange} style={{width: '100%'}}>
                                 {   _.map(provinces, (item)=>(
                                         <Option key={item.name}>{item.name}</Option>
                                     ))
@@ -136,10 +138,10 @@ class SearchForm extends React.PureComponent{
                             <Col span={8}>
                             {getFieldDecorator('city', {
                                 rules: [{ 
-                                    required: true, message: '请选择市', 
+                                    required: true, message: `${formatMessage({id: 'app.search.city'})}`, 
                                 }],
                             })(
-                                <Select placeholder="选择市" size="large" onChange={this.handleCityChange} style={{width: '100%'}}>
+                                <Select placeholder={formatMessage({id: 'app.search.city'})} size="large" onChange={this.handleCityChange} style={{width: '100%'}}>
                                     {this.state.citys}
                                 </Select>
                             )}
@@ -147,10 +149,10 @@ class SearchForm extends React.PureComponent{
                             <Col span={8}>
                             {getFieldDecorator('area', {
                                 rules: [{ 
-                                    required: true, message: '请选择区', 
+                                    required: true, message: `${formatMessage({id: 'app.search.area'})}`, 
                                 }],
                             })(
-                                <Select placeholder="选择区" size="large" onChange={this.handleAreaChange} style={{width: '100%'}}>
+                                <Select placeholder={formatMessage({id: 'app.search.area'})} size="large" onChange={this.handleAreaChange} style={{width: '100%'}}>
                                     {this.state.areas}
                                 </Select>
                             )}
@@ -158,28 +160,28 @@ class SearchForm extends React.PureComponent{
                         </Row>
                         </Col>
                     </Row>
-                    <Form.Item {...formItemLayout} label="经销商名称">
+                    <Form.Item {...formItemLayout} label={formatMessage({id: 'app.search.distributor'})}>
                         {getFieldDecorator('distributor', {
                             rules: [{ 
-                                required: true, message: '请选择经销商名称', 
+                                required: true, message: `${formatMessage({id: 'app.search.distributor.choose'})}`, 
                             }],
                         })(
-                            <Select placeholder="请输入经销商名称" size="large">
+                            <Select placeholder={formatMessage({id: 'app.search.distributor.choose'})} size="large">
                                 <Option key="经销商1">经销商1</Option>
                                 <Option key="经销商2">经销商2</Option>
                                 <Option key="经销商3">经销商3</Option>
                             </Select>
                         )}
                     </Form.Item>
-                    <Form.Item {...formItemLayout} label="客户名称">
+                    <Form.Item {...formItemLayout} label={formatMessage({id: 'app.search.curstomer'})}>
                         {getFieldDecorator('customer', {
                             rules: [{ 
-                                required: true, message: '请输入客户名称', 
+                                required: true, message: `${formatMessage({id: 'app.search.curstomer.input'})}`, 
                             }],
-                        })(<Input size="large" placeholder="请输入客户名称" />)}
+                        })(<Input size="large" placeholder={formatMessage({id: 'app.search.curstomer.input'})} />)}
                     </Form.Item>
                     <Form.Item {...tailFormItemLayout}>
-                        <Button type="primary" onClick={onValidateForm} size="large" className="search_btn" style={{width: '100%'}}>立即搜索</Button>
+                        <Button type="primary" onClick={onValidateForm} size="large" className="search_btn" style={{width: '100%'}}>{formatMessage({id: 'app.search'})}</Button>
                     </Form.Item>
                 </Form>
             </Card>
@@ -187,4 +189,4 @@ class SearchForm extends React.PureComponent{
     }
 }
 
-export default Form.create()(SearchForm)
+export default Form.create()(injectIntl(SearchForm))

@@ -2,7 +2,7 @@ import React from 'react'
 import Login from '../AntdLogin';
 import { Alert, Card, Select, Row } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
-
+import { injectIntl } from 'react-intl';
 import logo from '../../assets/title.png';
 import language_icon from '../../assets/login_iconc.png';
 
@@ -23,7 +23,7 @@ class LoginPage extends React.Component {
       }, () => {
         if(err){
           this.setState({
-              notice: '用户名/密码错误！',
+              notice: this.props.intl.formatMessage({id: 'user.login.err'}),
           });
         }
         else {
@@ -43,6 +43,8 @@ class LoginPage extends React.Component {
 
 
   render() {
+    const { formatMessage } = this.props.intl;
+
     return (
       <React.Fragment>
         <Row>
@@ -67,16 +69,16 @@ class LoginPage extends React.Component {
             </Row>
             <Row>
               <Login onSubmit={this.onSubmit} className="login">
-                  <h1>海诺帝管理系统</h1>
+                  <h1>{formatMessage({id: 'app.name'})}</h1>
                   {
                       this.state.notice &&
                       <Alert style={{ marginBottom: 24 }} message={this.state.notice} type="error" showIcon closable />
                   }
                   <UserName name="username" />
                   <Password name="password" />
-                  <Submit>登录</Submit>
+                  <Submit>{formatMessage({id: 'user.login'})}</Submit>
                   <div className="forget">
-                      <Link to="/forget">忘记密码？</Link>
+                      <Link to="/forget">{formatMessage({id: 'user.forget'})}</Link>
                   </div>
               </Login>
             </Row>
@@ -87,4 +89,4 @@ class LoginPage extends React.Component {
   }
 }
 
-export default withRouter(LoginPage);
+export default withRouter(injectIntl(LoginPage));

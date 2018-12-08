@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Button, List } from 'antd';
+import { injectIntl } from 'react-intl';
 import GridContent from '../GridContent';
 import './index.less';
 
@@ -16,6 +17,8 @@ class Distribution extends React.PureComponent {
 
 
     render() {
+        const { formatMessage } = this.props.intl;
+
         return (
             <GridContent>
                 <Card bordered={false} className="main-card">
@@ -69,7 +72,7 @@ class Distribution extends React.PureComponent {
                             </Card>
                         </Col>
                         <Col span={24}>
-                            <p className="total">全球共 <span>{total.total}</span> 台设备 正常 <span>{total.normal}</span> 台 异常 <span>{total.abnormal}</span> 台</p>
+                            <p className="total">{formatMessage({id: 'machine.distribution.para1'})} <span>{total.total}</span> {formatMessage({id: 'machine.distribution.para2'})} <span>{total.normal}</span> {formatMessage({id: 'machine.distribution.para3'})} <span>{total.abnormal}</span> {formatMessage({id: 'machine.distribution.para4'})}</p>
                         </Col>
                     </Row>
                 </Card>
@@ -78,4 +81,4 @@ class Distribution extends React.PureComponent {
     }
 }
 
-export default Distribution;
+export default injectIntl(Distribution);

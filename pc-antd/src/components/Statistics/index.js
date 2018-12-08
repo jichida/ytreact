@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Card, Row, Col, DatePicker, Radio } from 'antd';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import ReactEcharts from 'echarts-for-react';
 import _ from 'lodash';
 import GridContent from '../GridContent';
@@ -15,19 +16,19 @@ const dateFormat = 'YYYY-MM-DD';
 
 const cycleAction = [
     {
-      name: '日报',
+      name: <FormattedMessage id="machine.report.day" />,
       action: 'day',
     },
     {
-        name: '周报',
+        name: <FormattedMessage id="machine.report.week" />,
         action: 'week',
     },
     {
-        name: '月报',
+        name: <FormattedMessage id="machine.report.month" />,
         action: 'month',
     },
     {
-        name: '年报',
+        name: <FormattedMessage id="machine.report.year" />,
         action: 'year',
     },
 ];
@@ -38,23 +39,23 @@ const typeAction = [
       action: 'mod in/out',
     },
     {
-        name: '出水水质',
+        name: <FormattedMessage id="machine.report.quality" />,
         action: 'quality',
     },
     {
-        name: '压力',
+        name: <FormattedMessage id="machine.report.pressure" />,
         action: 'pressure',
     },
     {
-        name: '废水排放量',
+        name: <FormattedMessage id="machine.report.drainage" />,
         action: 'drainage',
     },
     {
-        name: '总进水量',
+        name: <FormattedMessage id="machine.report.totalinlet" />,
         action: 'totalinlet',
     },
     {
-        name: '总产水量',
+        name: <FormattedMessage id="machine.report.totaleffluent" />,
         action: 'totaleffluent',
     },
 ];
@@ -86,7 +87,7 @@ class Statistics extends React.PureComponent {
         return ({
             color: ['#83b9ed'],
             title: {
-               text: 'mod in/out数据统计',// title 数据统计类目
+               text: `mod in/out${this.props.intl.formatMessage({id: 'machine.statistic'})}`,// title 数据统计类目
                left: 'center'
             },
             tooltip: {
@@ -172,8 +173,8 @@ class Statistics extends React.PureComponent {
                 <Card bordered={false} className="main-card">
                     <Row style={{marginBottom: 30}} className="title">
                         <Col span={24}>
-                            <img src={sb_icon} alt="" /><span>数据详情</span>
-                            <span className="right-Link" onClick={()=>{history.goBack()}}>&lt; 返回上一页</span>
+                            <img src={sb_icon} alt="" /><span><FormattedMessage id="machine.datadetail" /></span>
+                            <span className="right-Link" onClick={()=>{history.goBack()}}>&lt; <FormattedMessage id="app.return" /></span>
                         </Col>
                     </Row>
                     <Row gutter={24} style={{marginBottom: 30}} className="statistic_radio" onChange={this.onCycleChange}>
@@ -204,4 +205,4 @@ class Statistics extends React.PureComponent {
     }
 }
 
-export default withRouter(Statistics);
+export default withRouter(injectIntl(Statistics));

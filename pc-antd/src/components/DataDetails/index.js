@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Card, Row, Col, Table, Button, Select, Input, Progress } from 'antd';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import _ from 'lodash';
 import moment from 'moment';
 import 'moment-timezone';
@@ -13,31 +14,53 @@ const curTZ = moment.tz.guess();
 
 const Option = Select.Option;
 
-
-
 // 顶部数据
-const topData = [
-    {
-        title: '进水水质',
-        unit: 'uS/cm',
-        data: '1000',
+const monitorData = {
+    quality: 1000,
+    consumption: 1000,
+    runtime: '02:10:20',
+    recovery: 1000,
+}
+
+// 进度数据
+const chartData = {
+    average: {
+        data: 90,
+        warring: true,
     },
-    {
-        title: '每日用水量',
-        unit: '吨',
-        data: '1000',
+    ionmembrance: {
+        data: 60,
+        warring: false,
     },
-    {
-        title: '运行时间',
-        unit: '时/分/秒',
-        data: '02:10:20',
+    frontfilter1: {
+        data: 1000,
+        warring: false,
     },
-    {
-        title: '回收率',
-        unit: 'uS/cm',
-        data: '1000',
+    frontfilter2: {
+        data: 1000,
+        warring: false,
+    },
+    frontfilter3: {
+        data: 10,
+        warring: true,
+    },
+    afterfilter1: {
+        data: 100,
+        warring: false,
+    },
+    afterfilter2: {
+        data: 1000,
+        warring: false,
+    },
+    afterfilter3: {
+        data: 1000,
+        warring: false,
+    },
+    uvlife: {
+        data: 10,
+        warring: true,
     }
-]
+}
 
 // 操作指令数据
 const dataMode = [
@@ -46,64 +69,6 @@ const dataMode = [
         type: 'message',
         body: 'ModinUs: 353 , 303',
         occurstime: '2018-05-05 3:21:00 PM'
-    },
-]
-
-// 顶部图表数据
-const chartData = [
-    {
-        title: '平均出水水质',
-        unit: 'uS/cm',
-        data: '90',
-        warring: true,
-    },
-    {
-        title: '电离子膜寿命',
-        unit: '剩余天数',
-        data: '60',
-        warring: false,
-    },
-    {
-        title: '前置滤芯1',
-        unit: '剩余天数',
-        data: '1000',
-        warring: false,
-    },
-    {
-        title: '前置滤芯2',
-        unit: '剩余天数',
-        data: '10',
-        warring: true,
-    },
-    {
-        title: '前置滤芯3',
-        unit: '剩余天数',
-        data: '1000',
-        warring: false,
-    },
-    {
-        title: '后置滤芯1',
-        unit: '剩余天数',
-        data: '1000',
-        warring: false,
-    },
-    {
-        title: '后置滤芯2',
-        unit: '剩余天数',
-        data: '1000',
-        warring: false,
-    },
-    {
-        title: '后置滤芯3',
-        unit: '剩余天数',
-        data: '1000',
-        warring: false,
-    },
-    {
-        title: 'UV寿命',
-        unit: '剩余天数',
-        data: '1000',
-        warring: false,
     },
 ]
 
@@ -128,6 +93,127 @@ const data_spot = [
     },
 ]
 
+const TopMonitor = injectIntl(({quality, consumption, runtime, recovery, intl})=>{
+
+    const { formatMessage } = intl;
+    // 顶部数据
+    const topData = [
+        {
+            title: `${formatMessage({id: 'machine.data.quality'})}`,//quality
+            unit: 'uS/cm',
+            data: `${quality}`,
+        },
+        {
+            title: `${formatMessage({id: 'machine.data.consumption'})}`,//consumption
+            unit: '吨',
+            data: `${consumption}`,
+        },
+        {
+            title: `${formatMessage({id: 'machine.data.runtime'})}`,//runtime
+            unit: '时/分/秒',
+            data: `${runtime}`,
+        },
+        {
+            title: `${formatMessage({id: 'machine.data.recovery'})}`,//recovery
+            unit: 'uS/cm',
+            data: `${recovery}`,
+        }
+    ]
+
+    const topList = _.map(topData, (item)=>{
+        return (
+            <Col span={6}>
+                <div className="number-info">
+                    <span className="title">{item.title}</span>
+                    <span className="unit">{item.unit}</span>
+                    <span className="data">{item.data}</span>
+                </div>
+            </Col>
+        )
+    })
+
+    return (
+        <Row gutter={24}>
+            { topList }
+        </Row>
+    )
+})
+
+
+const TopChart = injectIntl(({average, ionmembrance, frontfilter1, frontfilter2, frontfilter3, afterfilter1,  afterfilter2, afterfilter3, uvlife, intl})=>{
+    const { formatMessage } = intl;
+
+    const chartData = [
+        {
+            title: `${formatMessage({id: 'machine.data.average'})}`,
+            unit: 'uS/cm',
+            data: average.data,
+            warring: average.warring,
+        },
+        {
+            title:  `${formatMessage({id: 'machine.data.ionmembrance'})}`,
+            unit: `${formatMessage({id: 'machine.data.life'})}`,
+            data: ionmembrance.data,
+            warring: ionmembrance.warring,
+        },
+        {
+            title:  `${formatMessage({id: 'machine.data.frontfilter1'})}`,
+            unit: `${formatMessage({id: 'machine.data.life'})}`,
+            data: frontfilter1.data,
+            warring: frontfilter1.warring,
+        },
+        {
+            title: `${formatMessage({id: 'machine.data.frontfilter1'})}`,
+            unit: `${formatMessage({id: 'machine.data.life'})}`,
+            data: frontfilter2.data,
+            warring: frontfilter2.warring,
+        },
+        {
+            title: `${formatMessage({id: 'machine.data.frontfilter1'})}`,
+            unit: `${formatMessage({id: 'machine.data.life'})}`,
+            data: frontfilter3.data,
+            warring: frontfilter3.warring,
+        },
+        {
+            title: `${formatMessage({id: 'machine.data.afterfilter1'})}`,
+            unit: `${formatMessage({id: 'machine.data.life'})}`,
+            data: afterfilter1.data,
+            warring: afterfilter1.warring,
+        },
+        {
+            title:  `${formatMessage({id: 'machine.data.afterfilter2'})}`,
+            unit: `${formatMessage({id: 'machine.data.life'})}`,
+            data: afterfilter2.data,
+            warring: afterfilter2.warring,
+        },
+        {
+            title:  `${formatMessage({id: 'machine.data.afterfilter3'})}`,
+            unit: `${formatMessage({id: 'machine.data.life'})}`,
+            data: afterfilter3.data,
+            warring: afterfilter3.warring,
+        },
+        {
+            title:  `${formatMessage({id: 'machine.data.uvlife'})}`,
+            unit: `${formatMessage({id: 'machine.data.life'})}`,
+            data: uvlife.data,
+            warring: uvlife.warring,
+        }
+    ]
+
+    return (
+        <Row gutter={24} style={{marginTop: 30}}>
+            <Col span={24} style={{textAlign: 'center'}}>
+                {   
+                     _.map(chartData, (item)=>{
+                        return (
+                            <Chart {...item} />
+                        )
+                    })
+                }
+            </Col>
+        </Row>
+    )
+})
 
 const Chart = ({title, unit, data, warring})=>{
     return (
@@ -143,15 +229,15 @@ const Chart = ({title, unit, data, warring})=>{
 }
 
 const Mode_columns = [{
-    title: '类型',
+    title: <FormattedMessage id="machine.mode.type" />,
     dataIndex: 'type',
     key: 'type',
   }, {
-    title: '主体',
+    title: <FormattedMessage id="machine.mode.body" />,
     dataIndex: 'body',
     key: 'body',
   }, {
-    title: '时间',
+    title: <FormattedMessage id="machine.mode.occurstime" />,
     dataIndex: 'occurstime',
     key: 'occurstime',
   }
@@ -260,25 +346,8 @@ class DataDetails extends React.PureComponent {
 
     render() {
         const { history } = this.props;
+        const { formatMessage } = this.props.intl;
         const tzs = timezoneOption();
-
-        const topList = _.map(topData, (item)=>{
-            return (
-                <Col span={6}>
-                    <div className="number-info">
-                        <span className="title">{item.title}</span>
-                        <span className="unit">{item.unit}</span>
-                        <span className="data">{item.data}</span>
-                    </div>
-                </Col>
-            )
-        })
-
-        const topChart = _.map(chartData, (item)=>{
-            return (
-                <Chart {...item} />
-            )
-        })
 
         const tzOptions = _.map(tzs, (item)=>{
             return (
@@ -291,33 +360,27 @@ class DataDetails extends React.PureComponent {
                 <Card bordered={false} className="main-card">
                 <Row style={{marginBottom: 30}} className="title">
                     <Col span={24}>
-                        <img src={sb_icon} alt="" /><span>数据详情</span>
-                        <span className="right-Link" onClick={()=>{history.goBack()}}>&lt; 返回上一页</span>
+                        <img src={sb_icon} alt="" /><span>{formatMessage({id: 'machine.datadetail'})}</span>
+                        <span className="right-Link" onClick={()=>{history.goBack()}}>&lt; {formatMessage({id: 'app.return'})}</span>
                     </Col>
                 </Row>
-                <Row gutter={24}>
-                    { topList }
-                </Row>
-                <Row gutter={24} style={{marginTop: 30}}>
-                    <Col span={24} style={{textAlign: 'center'}}>
-                        { topChart }
-                    </Col>
-                </Row>
+                <TopMonitor {...monitorData} />
+                <TopChart {...chartData} />
                 <Row gutter={24} style={{marginTop: 30}}>
                     <Col span={2}></Col>
                     <Col span={10} className="sub-title">
-                        <p><h2>操作指令</h2><span className="right-Link" onClick={()=>{history.push('/actions')}}>Mode&gt;</span></p>
+                        <p><h2>{formatMessage({id: 'machine.mode'})}</h2><span className="right-Link" onClick={()=>{history.push('/actions')}}>Mode&gt;</span></p>
                         <Table columns={Mode_columns} dataSource={dataMode} className="table-list" pagination={false} />
                     </Col>
                     <Col span={2}></Col>
                     <Col span={8} className="sub-title">
-                        <p><h2>输入指令</h2></p>
+                        <p><h2>{formatMessage({id: 'machine.mode.input'})}</h2></p>
                         <div className="command">
                             <h4>Send a Command</h4>
                             <div className="send">
                                 <Input value={this.state.action} 
                                     onChange={(e)=>{this.setState({action: e.target.value})}} 
-                                    style={{ width: '80%', marginRight:'14px' }}/>
+                                    style={{ width: '80%', marginRight:'10px' }}/>
                                 <Button onClick={this.handleSend}>send</Button></div>
                             <h4>Timezone</h4>
                             <div><Select
@@ -333,8 +396,8 @@ class DataDetails extends React.PureComponent {
                                 </Select>
                             </div>
                             <div style={{marginTop:'50px'}}>
-                                <Button type="primary" size="large" style={{ marginRight:'20px' }} onClick={this.handleStatistic}>数据统计</Button>
-                                <Button size="large" onClick={this.handleDownload}>下载数据</Button>
+                                <Button type="primary" size="large" style={{ marginRight:'20px' }} onClick={this.handleStatistic}>{formatMessage({id: 'machine.statistic'})}</Button>
+                                <Button size="large" onClick={this.handleDownload}>{formatMessage({id: 'machine.download'})}</Button>
                             </div>
                         </div>
                     </Col>
@@ -351,4 +414,4 @@ class DataDetails extends React.PureComponent {
     }
 }
 
-export default withRouter(DataDetails);
+export default withRouter(injectIntl(DataDetails));

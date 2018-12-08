@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-// import { FormattedMessage, formatMessage } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 import { Spin, Menu, Icon, Dropdown, Avatar, Badge } from 'antd';
 import { Link } from 'react-router-dom';
@@ -30,7 +29,7 @@ export default class GlobalHeaderRight extends PureComponent {
       <Menu className="menu" selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item key="logout">
           <Icon type="logout" />
-          <FormattedMessage id="menu.account.logout" defaultMessage="logout" />
+          <FormattedMessage id="user.logout" defaultMessage="logout" />
         </Menu.Item>
       </Menu>
     );

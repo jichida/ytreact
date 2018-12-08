@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Card, Row, Col, Table, Button, message, Upload } from 'antd';
+import { FormattedMessage } from 'react-intl';
 import GridContent from '../GridContent';
 import './index.less';
 
@@ -72,7 +73,9 @@ const columns = [{
     width: '200px',
     render: (text, record) => (
       <span>
-        <Button type="primary" ghost style={{border: 0}}>下载</Button>
+        <Button type="primary" ghost style={{border: 0}}>
+            <FormattedMessage id="machine.notice.download" />
+        </Button>
       </span>
     ),
   }]
@@ -107,10 +110,10 @@ class Notice extends React.PureComponent {
                 <Card bordered={false} className="main-card">
                 <Row style={{marginBottom: 30}} className="title">
                     <Col span={24}>
-                        <img src={sb_icon} alt="" /><span>通知公告</span>
+                        <img src={sb_icon} alt="" /><span><FormattedMessage id="machine.notice" /></span>
                         <span className="right-Link">
                             <Upload {...uploadprops}>
-                                <Button type="primary" icon="upload" size="large">上传</Button>
+                                <Button type="primary" icon="upload" size="large"><FormattedMessage id="machine.notice.upload" /></Button>
                             </Upload>
                         </span>
                     </Col>

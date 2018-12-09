@@ -39,7 +39,7 @@ class Home extends PureComponent{
     }
 
     render () {
-        const { history, intl: { formatMessage } } = this.props;
+        const { history, intl: { formatMessage },wifiStatus } = this.props;
         const { curtab } = this.props;
         let content;
         switch (curtab) {
@@ -73,7 +73,7 @@ class Home extends PureComponent{
                     <span></span>
                 </div> },
           ];
-
+        const wifiimage = wifiStatus === 1?wifi_img:nowifi_img;
         return (
             <div className="home">
                 <NavBar
@@ -81,7 +81,7 @@ class Home extends PureComponent{
                     icon={<Icon type="left" />}
                     onLeftClick={() => history.goBack()}
                     // rightContent={[<div key="0" className="nav-wifi-icon" onClick={this.onClickWifi}><img src={wifi_img} alt=''/></div>]}
-                    rightContent={[<div key="0" className="nav-wifi-icon" onClick={this.onClickWifi}><img src={nowifi_img} alt=''/></div>]}
+                    rightContent={[<div key="0" className="nav-wifi-icon" onClick={this.onClickWifi}><img src={wifiimage} alt=''/></div>]}
                 >
                     <Tabs
                         tabs={tabs}
@@ -100,8 +100,8 @@ class Home extends PureComponent{
         )
     }
 }
-const mapStateToProps =  ({app:{hometabindex}}) =>{
-  return {curtab:hometabindex};
+const mapStateToProps =  ({app:{hometabindex},wifi:{wifiStatus}}) =>{
+  return {curtab:hometabindex,wifiStatus};
 };
 Home = connect(mapStateToProps)(Home);
 export default withRouter(injectIntl(Home));

@@ -13,7 +13,7 @@ import mgb from '../../assets/ljimgb.png';
 
     render () {
         ///0为打开未连接  -1  未打开  1  已连接 2 密码错误}
-        const { history,wifiStatus,dispatch } = this.props;
+        const { wifiStatus,dispatch } = this.props;
         let startwifiid = "start.wifi.succeed";
         if(wifiStatus === -1){
           startwifiid = 'start.wifi.notconnected';

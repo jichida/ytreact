@@ -1,7 +1,7 @@
 /**
  * Created by wangxiaoqing on 2017/3/25.
  */
-import { put,takeLatest,call,race} from 'redux-saga/effects';
+import { put,takeLatest,call,take,race} from 'redux-saga/effects';
 import {delay} from 'redux-saga';
 import {
   getssidlist,
@@ -22,6 +22,7 @@ import {
   wifi_setcurwifi_result,
 
   wifi_sendcmd_request,
+  wifi_sendcmd_result,
 
   common_err,
   set_weui,
@@ -40,6 +41,7 @@ import lodash_endWith from 'lodash.endswith';
 import lodash_replace from 'lodash.replace';
 import lodash_split from 'lodash.split';
 import lodash_set from 'lodash.set';
+import config from '../../env/config';
 let recvbuf = '';
 setwifistatuscallback();
 const parsedata = (stringbody,callbackfn)=>{
@@ -198,37 +200,40 @@ export function* wififlow() {
       }
     });
 
-    yield takeLatest(`${socket_setstatus}`,function*(action){
-      //连接&发送状态回调
-      const {payload} = action;
-      try{
-        yield put(set_weui({
-          toast:{
-          text:`socket连接&发送状态回调-->socket_setstatus--->${JSON.stringify(payload)}`,
-          show: true,
-          type:'success'
-        }}));
-      }
-      catch(e){
-        console.log(e);
-      }
-    });
+    // yield takeLatest(`${socket_setstatus}`,function*(action){
+    //   //连接&发送状态回调
+    //   const {payload} = action;
+    //   try{
+    //     // yield put(set_weui({
+    //     //   toast:{
+    //     //   text:`socket连接&发送状态回调-->socket_setstatus--->${JSON.stringify(payload)}`,
+    //     //   show: true,
+    //     //   type:'success'
+    //     // }}));
+    //   }
+    //   catch(e){
+    //     console.log(e);
+    //   }
+    // });
 
     yield takeLatest(`${socket_recvdata}`,function*(action){
       const {payload} = action;
       try{
-        yield put(set_weui({
-          toast:{
-          text:`socket接收到数据--->socket_recvdata--->${JSON.stringify(payload)}`,
-          show: true,
-          type:'success'
-        }}));
+        // yield put(set_weui({
+        //   toast:{
+        //   text:`socket接收到数据--->socket_recvdata--->${JSON.stringify(payload)}`,
+        //   show: true,
+        //   type:'success'
+        // }}));
         if(payload.code === 0){
           const result = yield call(socket_recvdata_promise,payload.data);
-          debugger;
+          // debugger;
           if(result.cmd === 'data'){
             //get result.data
             yield put(wifi_getdata(result.data));
+          }
+          else if(result.cmd === 'ok'){
+            yield put(wifi_sendcmd_result({}));
           }
           //result is to data
           yield call(socket_send_promise,'$ok%');
@@ -246,8 +251,8 @@ export function* wififlow() {
 
         //开始连接socket,进入下一个页面
         yield call(socket_connnect_promise,{
-          host:"yt.i2u.top",
-          port:4102
+          host:config.sockethost,
+          port:config.socketport
         });
         yield put(push('/devices'));
         console.log('to next page')
@@ -312,12 +317,29 @@ export function* wififlow() {
       try{
         const {payload} = action;
         yield call(socket_send_promise,payload.cmd);
-        yield put(set_weui({
-          toast:{
-          text:`发送给硬件命令:\n${payload.cmd}`,
-          show: true,
-          type:'success'
-        }}));
+
+        const delaytime = 5000;
+        const raceresult = yield race({
+           wifiresult: take(`${wifi_sendcmd_result}`),
+           timeout: call(delay, delaytime)
+        });
+        const { wifiresult, timeout } = raceresult;
+        if(!!timeout){
+          yield put(set_weui({
+            toast:{
+            text:`发送给硬件命令返回超时,${delaytime}毫秒`,
+            show: true,
+            type:'success'
+          }}));
+        }
+        else{
+          yield put(set_weui({
+            toast:{
+            text:`发送给硬件命令成功`,
+            show: true,
+            type:'success'
+          }}));
+        }
       }
       catch(e){
         console.log(e);

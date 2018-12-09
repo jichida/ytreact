@@ -263,51 +263,52 @@ export function* wififlow() {
 
     });
 
-    yield takeLatest(`${wifi_setstatus}`, function*(action) {
-      try{
-        const {payload} = action;
-        const {code,wifiStatus} = payload;
-        let text = '未知状态';
-        let type = 'warning';
-        if(code === 0){
-          if(wifiStatus === -1){
-            //为打开
-            text = 'Wi-Fi未打开';
-          }
-          if(wifiStatus === 0){
-            //为打开
-            text = 'Wi-Fi未打开';
-          }
-          else if(wifiStatus === 1){
-            type = 'success';
-            text = 'Wi-Fi已连接';
-          }
-          else if(wifiStatus === 2){
-            text = 'Wi-Fi 密码错误';
-          }
-        }
-        yield put(set_weui({
-          toast:{
-          text,//`${JSON.stringify(payload)}`,
-          show: true,
-          type
-        }}));
-      }
-      catch(e){
-        console.log(e);
-      }
-    });
+    // yield takeLatest(`${wifi_setstatus}`, function*(action) {
+    //   try{
+    //     const {payload} = action;
+    //     const {code,wifiStatus} = payload;
+    //     let text = '未知状态';
+    //     let type = 'warning';
+    //     if(code === 0){
+    //       if(wifiStatus === -1){
+    //         //为打开
+    //         text = 'Wi-Fi未打开';
+    //       }
+    //       if(wifiStatus === 0){
+    //         //为打开
+    //         text = 'Wi-Fi未打开';
+    //       }
+    //       else if(wifiStatus === 1){
+    //         type = 'success';
+    //         text = 'Wi-Fi已连接';
+    //       }
+    //       else if(wifiStatus === 2){
+    //         text = 'Wi-Fi 密码错误';
+    //       }
+    //     }
+    //     console.log(text);
+    //     // yield put(set_weui({
+    //     //   toast:{
+    //     //   text,//`${JSON.stringify(payload)}`,
+    //     //   show: true,
+    //     //   type
+    //     // }}));
+    //   }
+    //   catch(e){
+    //     console.log(e);
+    //   }
+    // });
     yield takeLatest(`${wifi_open_reqeust}`, function*(action) {
       try{
         // const {payload} = action;
         const result = yield call(openwifi_promise);
         yield put(wifi_open_result(result));
-        yield put(set_weui({
-          toast:{
-          text:`打开wifi成功${JSON.stringify(result)}`,
-          show: true,
-          type:'success'
-        }}));
+        // yield put(set_weui({
+        //   toast:{
+        //   text:`打开wifi成功${JSON.stringify(result)}`,
+        //   show: true,
+        //   type:'success'
+        // }}));
       }
       catch(e){
         console.log(e);

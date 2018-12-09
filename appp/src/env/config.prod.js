@@ -4,8 +4,8 @@ const serverurlrestful = islocalhost?`${serverurl}/api`:`${serverurl}/api`;
 const wspath = islocalhost?'/socket.io':'/socket.io';
 
 let config = {
-    sockethost:'yt.i2u.top',
-    socketport:4102,
+    sockethost:'10.10.100.254',
+    socketport:8899,
     ispopalarm:false,
     serverurlrestful,
     serverurl:`${serverurl}`,

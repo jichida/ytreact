@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
 
-import gobal_bg from '../../assets/electricbg.png';
+// import gobal_bg from '../../assets/electricbg.png';
 
 import logo from '../../assets/logo.png';
 import {login_request} from '../../actions';

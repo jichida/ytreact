@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import {  NavBar, Icon, List, InputItem, Picker, Button } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, } from 'react-intl';
 
 import './index.less';
 
@@ -16,7 +16,7 @@ const Brief = Item.Brief;
 // 对丝	silkpair
 // 丝转	silkspin
 // 其他	others
- 
+
 const basicData = {
     valve: {
         value: '',
@@ -27,16 +27,16 @@ const basicData = {
     elbow: {
         value: '',
     },
-    triplet: { 
+    triplet: {
         value: [],
     },
-    silkpair: { 
+    silkpair: {
         value: [],
     },
-    silkspin: { 
+    silkspin: {
         value: [],
     },
-    others: { 
+    others: {
         value: '',
     }
 }

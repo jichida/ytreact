@@ -1,7 +1,7 @@
 /**
  * Created by wangxiaoqing on 2017/3/25.
  */
-import { put,takeLatest,call,race} from 'redux-saga/effects';
+import { put,takeLatest,call,take,race} from 'redux-saga/effects';
 import {delay} from 'redux-saga';
 import {
   getssidlist,
@@ -22,13 +22,14 @@ import {
   wifi_setcurwifi_result,
 
   wifi_sendcmd_request,
+  wifi_sendcmd_result,
 
   common_err,
   set_weui,
   wifi_setstatus,
   ui_wifisuccess_tonext,
 
-  socket_setstatus,
+  // socket_setstatus,
   socket_recvdata,
   wifi_getdata,
   wifi_init,
@@ -40,6 +41,7 @@ import lodash_endWith from 'lodash.endswith';
 import lodash_replace from 'lodash.replace';
 import lodash_split from 'lodash.split';
 import lodash_set from 'lodash.set';
+import config from '../../env/config';
 let recvbuf = '';
 setwifistatuscallback();
 const parsedata = (stringbody,callbackfn)=>{
@@ -198,37 +200,40 @@ export function* wififlow() {
       }
     });
 
-    yield takeLatest(`${socket_setstatus}`,function*(action){
-      //连接&发送状态回调
-      const {payload} = action;
-      try{
-        yield put(set_weui({
-          toast:{
-          text:`socket连接&发送状态回调-->socket_setstatus--->${JSON.stringify(payload)}`,
-          show: true,
-          type:'success'
-        }}));
-      }
-      catch(e){
-        console.log(e);
-      }
-    });
+    // yield takeLatest(`${socket_setstatus}`,function*(action){
+    //   //连接&发送状态回调
+    //   const {payload} = action;
+    //   try{
+    //     // yield put(set_weui({
+    //     //   toast:{
+    //     //   text:`socket连接&发送状态回调-->socket_setstatus--->${JSON.stringify(payload)}`,
+    //     //   show: true,
+    //     //   type:'success'
+    //     // }}));
+    //   }
+    //   catch(e){
+    //     console.log(e);
+    //   }
+    // });
 
     yield takeLatest(`${socket_recvdata}`,function*(action){
       const {payload} = action;
       try{
-        yield put(set_weui({
-          toast:{
-          text:`socket接收到数据--->socket_recvdata--->${JSON.stringify(payload)}`,
-          show: true,
-          type:'success'
-        }}));
+        // yield put(set_weui({
+        //   toast:{
+        //   text:`socket接收到数据--->socket_recvdata--->${JSON.stringify(payload)}`,
+        //   show: true,
+        //   type:'success'
+        // }}));
         if(payload.code === 0){
           const result = yield call(socket_recvdata_promise,payload.data);
-          debugger;
+          // debugger;
           if(result.cmd === 'data'){
             //get result.data
             yield put(wifi_getdata(result.data));
+          }
+          else if(result.cmd === 'ok'){
+            yield put(wifi_sendcmd_result({}));
           }
           //result is to data
           yield call(socket_send_promise,'$ok%');
@@ -246,8 +251,8 @@ export function* wififlow() {
 
         //开始连接socket,进入下一个页面
         yield call(socket_connnect_promise,{
-          host:"yt.i2u.top",
-          port:4102
+          host:config.sockethost,
+          port:config.socketport
         });
         yield put(push('/devices'));
         console.log('to next page')
@@ -258,51 +263,52 @@ export function* wififlow() {
 
     });
 
-    yield takeLatest(`${wifi_setstatus}`, function*(action) {
-      try{
-        const {payload} = action;
-        const {code,wifiStatus} = payload;
-        let text = '未知状态';
-        let type = 'warning';
-        if(code === 0){
-          if(wifiStatus === -1){
-            //为打开
-            text = 'Wi-Fi未打开';
-          }
-          if(wifiStatus === 0){
-            //为打开
-            text = 'Wi-Fi未打开';
-          }
-          else if(wifiStatus === 1){
-            type = 'success';
-            text = 'Wi-Fi已连接';
-          }
-          else if(wifiStatus === 2){
-            text = 'Wi-Fi 密码错误';
-          }
-        }
-        yield put(set_weui({
-          toast:{
-          text:`${JSON.stringify(payload)}`,
-          show: true,
-          type
-        }}));
-      }
-      catch(e){
-        console.log(e);
-      }
-    });
+    // yield takeLatest(`${wifi_setstatus}`, function*(action) {
+    //   try{
+    //     const {payload} = action;
+    //     const {code,wifiStatus} = payload;
+    //     let text = '未知状态';
+    //     let type = 'warning';
+    //     if(code === 0){
+    //       if(wifiStatus === -1){
+    //         //为打开
+    //         text = 'Wi-Fi未打开';
+    //       }
+    //       if(wifiStatus === 0){
+    //         //为打开
+    //         text = 'Wi-Fi未打开';
+    //       }
+    //       else if(wifiStatus === 1){
+    //         type = 'success';
+    //         text = 'Wi-Fi已连接';
+    //       }
+    //       else if(wifiStatus === 2){
+    //         text = 'Wi-Fi 密码错误';
+    //       }
+    //     }
+    //     console.log(text);
+    //     // yield put(set_weui({
+    //     //   toast:{
+    //     //   text,//`${JSON.stringify(payload)}`,
+    //     //   show: true,
+    //     //   type
+    //     // }}));
+    //   }
+    //   catch(e){
+    //     console.log(e);
+    //   }
+    // });
     yield takeLatest(`${wifi_open_reqeust}`, function*(action) {
       try{
         // const {payload} = action;
         const result = yield call(openwifi_promise);
         yield put(wifi_open_result(result));
-        yield put(set_weui({
-          toast:{
-          text:`打开wifi成功${JSON.stringify(result)}`,
-          show: true,
-          type:'success'
-        }}));
+        // yield put(set_weui({
+        //   toast:{
+        //   text:`打开wifi成功${JSON.stringify(result)}`,
+        //   show: true,
+        //   type:'success'
+        // }}));
       }
       catch(e){
         console.log(e);
@@ -312,12 +318,29 @@ export function* wififlow() {
       try{
         const {payload} = action;
         yield call(socket_send_promise,payload.cmd);
-        yield put(set_weui({
-          toast:{
-          text:`发送给硬件命令:\n${payload.cmd}`,
-          show: true,
-          type:'success'
-        }}));
+
+        const delaytime = 5000;
+        const raceresult = yield race({
+           wifiresult: take(`${wifi_sendcmd_result}`),
+           timeout: call(delay, delaytime)
+        });
+        const { timeout } = raceresult;
+        if(!!timeout){
+          yield put(set_weui({
+            toast:{
+            text:`发送给硬件命令返回超时,${delaytime}毫秒`,
+            show: true,
+            type:'success'
+          }}));
+        }
+        else{
+          yield put(set_weui({
+            toast:{
+            text:`发送给硬件命令成功`,
+            show: true,
+            type:'success'
+          }}));
+        }
       }
       catch(e){
         console.log(e);

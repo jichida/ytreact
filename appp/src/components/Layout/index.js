@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabBar } from 'antd-mobile';
+import { TabBar, WingBlank } from 'antd-mobile';
 import { connect } from 'react-redux';
 import Home from '../Home';
 import Device from '../Device';
@@ -15,11 +15,41 @@ import i_setting from '../../assets/tab/icon3.png';
 import i_setting_on from '../../assets/tab/icon3_on.png';
 import {ui_main_selindex} from '../../actions';
 
+let initHeight;
+let resizetimecontent;
+
 class Layout extends React.PureComponent {
+
+  constructor(props) {
+    super(props);
+    initHeight = window.innerHeight;
+    this.state = {
+      innerHeight : window.innerHeight,
+    };
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.onWindowResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onWindowResize);
+  }
+
+  onWindowResize=()=> {
+    window.clearTimeout(resizetimecontent);
+    resizetimecontent = window.setTimeout(()=>{
+        this.setState({
+            innerHeight: window.innerHeight,
+        });
+    },10)
+  }
 
   // state = {
   //     selectedTab: 'Home',
   // }
+
+
   onChangeTab = (index)=>{
     this.props.dispatch(ui_main_selindex(index));
       // this.setState({
@@ -28,8 +58,9 @@ class Layout extends React.PureComponent {
   }
   render() {
     const {curtab} = this.props;
+    console.log(this.state.innerHeight);
     return (
-      <div className="fh_container fp_container layout_bg">
+      <div className={`${this.state.innerHeight===initHeight&&'fh_container'} fp_container layout_bg`}>
         <TabBar
           barTintColor="#000000e3"
           prerenderingSiblingsNumber={0}

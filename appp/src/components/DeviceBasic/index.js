@@ -11,6 +11,7 @@ import './index.less';
 
 const Item = List.Item;
 const Brief = Item.Brief;
+let initHeight;
 
 const useproperty = [
     {
@@ -220,6 +221,11 @@ const RenderForm = createForm({
 
 class DeviceBasic extends PureComponent{
 
+    constructor(props) {
+        super(props);
+        initHeight = window.innerHeight;
+    }
+
     handleSubmit = (values)=>{
         console.log(values);
         const {dispatch,_id} = this.props;
@@ -261,7 +267,7 @@ class DeviceBasic extends PureComponent{
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}
-                    onLeftClick={() => history.goBack()}
+                    onLeftClick={() => { window.innerHeight=initHeight; history.goBack()}}                
                 >
                 <FormattedMessage id="device" />
                 </NavBar>

@@ -28,7 +28,7 @@ import mgb from '../../assets/ljimgb.png';
           startwifiid = 'start.wifi.wrongpassword';
         }
         return (
-            <div className="fh_container black_bg">
+            <WingBlank className="black_bg" style={{marginLeft:0, marginRight:0}}>
                 <div className="fp_container">
                     <div className="pannel">
                         <WingBlank>
@@ -55,7 +55,7 @@ import mgb from '../../assets/ljimgb.png';
                         </WingBlank>
                     </div>
                 </div>
-            </div>
+            </WingBlank>
         )
     }
 }

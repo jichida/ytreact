@@ -11,6 +11,7 @@ import './index.less';
 
 const Item = List.Item;
 const Brief = Item.Brief;
+let initHeight;
 
 // 月用水量（吨）  	quantity
 // 用水人数（人）  	persons
@@ -323,6 +324,11 @@ const RenderForm = createForm({
 
 class DeviceWater extends PureComponent{
 
+    constructor(props) {
+        super(props);
+        initHeight = window.innerHeight;
+    }
+
     handleSubmit = (values)=>{
         console.log(values);
         const {dispatch,_id} = this.props;
@@ -383,7 +389,7 @@ class DeviceWater extends PureComponent{
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}
-                    onLeftClick={() => history.goBack()}
+                    onLeftClick={() => { window.innerHeight=initHeight; history.goBack()}}
                 >
                 <FormattedMessage id="device.water" />
                 </NavBar>

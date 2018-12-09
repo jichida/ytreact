@@ -11,6 +11,7 @@ import './index.less';
 
 const Item = List.Item;
 const Brief = Item.Brief;
+let initHeight;
 
 // 安装地点		position
 // 是否避光		avoidlight
@@ -265,6 +266,11 @@ const RenderForm = createForm({
 
 class DeviceInstall extends PureComponent{
 
+    constructor(props) {
+        super(props);
+        initHeight = window.innerHeight;
+    }
+
     handleSubmit = (values)=>{
         console.log(values);
         const {dispatch,_id} = this.props;
@@ -313,7 +319,7 @@ class DeviceInstall extends PureComponent{
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}
-                    onLeftClick={() => history.goBack()}
+                    onLeftClick={() => { window.innerHeight=initHeight; history.goBack()}}
                 >
                     <FormattedMessage id="device.install" />
                 </NavBar>

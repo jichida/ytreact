@@ -41,13 +41,14 @@ class Device extends PureComponent{
     }
 
     render () {
+        console.log(window.innerHeight);
         const { history } = this.props;
         const { intl: { formatMessage }} = this.props;
         const title = formatMessage({id: "device.privider.select"})
 
         return (
             <div className="black_bg">
-            <div className="device">
+            <div className="device" style={{height: `${window.innerHeight-57}px`}}>
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}
@@ -85,15 +86,6 @@ class Device extends PureComponent{
                                 </Link>
                             </Flex.Item>
                         </Flex>
-                        {/* <Flex>
-                            <Flex.Item className="tools_con">
-                                <Link to="#"><div><img src={user_img} alt="" />
-                                    <p><FormattedMessage id="device.userversion" /></p></div>
-                                </Link>
-                            </Flex.Item>
-                            <Flex.Item className="tools_con"></Flex.Item>
-                            <Flex.Item className="tools_con"></Flex.Item>
-                        </Flex> */}
                     </div>
                 </WingBlank>
             </div></div>

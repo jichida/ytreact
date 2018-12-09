@@ -85,9 +85,7 @@ class Login extends PureComponent{
         const {intl} = this.props;
         return (
                 <WingBlank className="black_bg" style={{marginLeft:0, marginRight:0}}>
-                                {/* <div className="fh_container black_bg" style={{backgroundImage: `url(${gobal_bg})`}}> */}
                 <div className="fp_container white_bg">
-
                     <Flex direction="column" className="logincontent" >
                         <WhiteSpace size="xl" />
                         <div className="logo" >
@@ -125,8 +123,6 @@ class Login extends PureComponent{
                         <WhiteSpace size="xl" />
                     </Flex>
                     </div>
-            {/* </div> */}
-
                 </WingBlank>
         )
     }

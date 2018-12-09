@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Flex,  Carousel } from 'antd-mobile';
+import { Flex,  Carousel, WingBlank } from 'antd-mobile';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -37,7 +37,7 @@ const data = [
     render () {
         console.log('render')
         return (
-            <div className="fh_container">
+            <WingBlank style={{marginLeft:0, marginRight:0}}>
                 <div className="fp_container">
                     <div className="pannel">
                         <Flex direction="column" justify="between" className="container">
@@ -70,7 +70,7 @@ const data = [
                         </Flex>
                     </div>
                 </div>
-            </div>
+            </WingBlank>
         )
     }
 }

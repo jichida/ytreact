@@ -2,13 +2,13 @@ import React, { PureComponent } from 'react';
 import {  NavBar, Icon, List, InputItem, Picker, Button } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, } from 'react-intl';
 
 import './index.less';
 
 const Item = List.Item;
 const Brief = Item.Brief;
- 
+
 const basicData = {
     frontfilter: {
         value: '',
@@ -54,17 +54,17 @@ const materials = [
         value: '吕',
     }
 ]
-
-const others = [
-    {
-        label: 'XXX型',
-        value: 'XXX型',
-    },
-    {
-        label: 'YYY型',
-        value: 'YYY型',
-    }
-]
+// 
+// const others = [
+//     {
+//         label: 'XXX型',
+//         value: 'XXX型',
+//     },
+//     {
+//         label: 'YYY型',
+//         value: 'YYY型',
+//     }
+// ]
 
 const RenderForm = createForm({
     mapPropsToFields(props) {

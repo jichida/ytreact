@@ -1,13 +1,13 @@
 import store from './store';
 import {wifi_setstatus} from '../actions';
 
-let fncallback;
+// let fncallback;
 window.wifistatuscallback = (result)=>{
   store.dispatch(wifi_setstatus(result));
 }
 
 const setwifistatuscallback = ()=>{
-  fncallback = window.wifistatuscallback;
+  // fncallback = window.wifistatuscallback;
 }
 
 

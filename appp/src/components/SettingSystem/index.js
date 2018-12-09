@@ -213,7 +213,7 @@ const RenderForm = createForm({
                               // "data": "扫描结果/失败原因",
                               // "message": "扫描结果/失败原因"
                               // }
-                              if(result.code == 0){
+                              if(result.code === 0){
                                 setFieldsValue({deviceid:result.data})
                                 dispatch(getdevice_request({'syssettings.deviceid':result.data}));
                               }

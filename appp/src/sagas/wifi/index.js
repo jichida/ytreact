@@ -29,7 +29,7 @@ import {
   wifi_setstatus,
   ui_wifisuccess_tonext,
 
-  socket_setstatus,
+  // socket_setstatus,
   socket_recvdata,
   wifi_getdata,
   wifi_init,
@@ -288,7 +288,7 @@ export function* wififlow() {
         }
         yield put(set_weui({
           toast:{
-          text:`${JSON.stringify(payload)}`,
+          text,//`${JSON.stringify(payload)}`,
           show: true,
           type
         }}));
@@ -323,7 +323,7 @@ export function* wififlow() {
            wifiresult: take(`${wifi_sendcmd_result}`),
            timeout: call(delay, delaytime)
         });
-        const { wifiresult, timeout } = raceresult;
+        const { timeout } = raceresult;
         if(!!timeout){
           yield put(set_weui({
             toast:{

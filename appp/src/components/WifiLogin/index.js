@@ -4,7 +4,7 @@ import { Flex, WhiteSpace, Button, WingBlank, List, InputItem, ActionSheet } fro
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import './index.less';
-import {wifi_init,ui_setcurwifi,wifi_open_reqeust,wifi_setcurwifi_request,
+import {wifi_init,ui_setcurwifi,wifi_setcurwifi_request,
   wifi_getssidlist_request,wifi_getssidlist_result} from '../../actions';
 import {callthen} from '../../sagas/pagination';
 import wifi from '../../assets/wlimg.png';
@@ -84,7 +84,7 @@ class WifiLogin extends PureComponent{
             <WingBlank style={{marginLeft:0, marginRight:0}}>
                 <div className="fp_container">
                     <div className="pannel">
-                        
+
                             <Flex direction="column" className="wifi_login container" >
                                 <WhiteSpace size="xl" />
                                 <div className="logo" >
@@ -125,7 +125,7 @@ class WifiLogin extends PureComponent{
                                 </div>
                                 <WhiteSpace size="xl" />
                             </Flex>
-                        
+
                     </div>
                 </div>
             </WingBlank>

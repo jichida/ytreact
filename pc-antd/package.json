@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "appc",
   "version": "0.1.0",
   "private": true,
@@ -65,7 +65,7 @@
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-router-redux": "^5.0.0-alpha.9",
+    "connected-react-router": "^5.0.1",
     "redux": "^4.0.0",
     "redux-act": "^1.7.4",
     "redux-form": "^7.4.2",
@@ -74,7 +74,7 @@
     "resolve": "1.8.1",
     "rmc-list-view": "^0.8.3",
     "sass-loader": "7.1.0",
-    "socket.io-client": "^2.1.1",
+    "socket.io-client": "^2.2.0",
     "style-loader": "0.23.0",
     "terser-webpack-plugin": "1.1.0",
     "url-loader": "1.1.1",

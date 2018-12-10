@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Menu, Icon } from 'antd';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import isEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
 import pathToRegexp from 'path-to-regexp';
@@ -139,7 +140,7 @@ export default class BaseMenu extends PureComponent {
         }
       >
         {icon}
-        <span>{name}</span>
+        <span><FormattedMessage id={name} /></span>
         <span className="dot"></span>
       </Link>
     );

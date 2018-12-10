@@ -1,5 +1,6 @@
 {
   "app.name": "海诺帝管理系统",
+  "app.searchpage": "搜索页",
   "app.return": "返回上一页",
   "app.datepicker": "选择时间",
   "user.login": "登录",

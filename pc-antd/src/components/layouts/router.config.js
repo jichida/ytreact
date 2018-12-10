@@ -2,18 +2,18 @@ export default [
       { path: '/', redirect: '/search' },
       {
         path: '/search',
-        name: '搜索页',
+        name: 'app.searchpage',
       },
       {
         path: '/abnormals',
-        name: '异常机器',
+        name: 'machine.abnormal',
       },
       {
         path: '/machines',
-        name: '全部设备',
+        name: 'machine.all',
       },
       {
         path: '/distribution',
-        name: '全球分布',
+        name: 'machine.distribution',
       },
 ];

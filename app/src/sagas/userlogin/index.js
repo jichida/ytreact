@@ -4,12 +4,12 @@ import {
   common_err,
   md_login_result,
   login_result,
-
+  findpwd_result,
   set_weui,
-
+  getdevice_request,
 } from '../../actions';
-import {getdevice_request} from '../../actions';
-import { replace} from 'connected-react-router';//https://github.com/reactjs/connected-react-router
+// import {getdevice_request} from '../../actions';
+import { replace,goBack} from 'connected-react-router';//https://github.com/reactjs/connected-react-router
 
 // import { goBack } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
 // import config from '../../env/config.js';
@@ -35,6 +35,21 @@ export function* userloginflow() {
   //   yield put(goBack());
   // });
 
+  yield takeLatest(`${findpwd_result}`, function*(action) {
+      try{
+        yield put(set_weui({
+          toast:{
+            text:'修改密码成功',
+            show: true,
+            type:'success'
+        }}));
+        yield put(goBack());
+      }
+      catch(e){
+        console.log(e);
+      }
+  });
+
 
 
   yield takeLatest(`${md_login_result}`, function*(action) {
@@ -49,9 +64,13 @@ export function* userloginflow() {
             });
             yield put(login_result(result));
 
-            yield put(getdevice_request({}));
+            // yield put(getdevice_request({}));
             // debugger;
             if(!loginsuccess && result.loginsuccess){
+                if(!!result._id){
+                  //get device
+                  yield put(getdevice_request({'_id':result._id}));
+                }
               //switch
                 const fdStart = search.indexOf("?next=");
                 if(fdStart === 0){
@@ -61,7 +80,6 @@ export function* userloginflow() {
                 else{
                     yield put(replace('/'));
                 }
-
             }
         }
 

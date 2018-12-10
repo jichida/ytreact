@@ -39,19 +39,19 @@ class AppRoot extends React.Component {
       return (
           <div className="page" style={{backgroundImage: `url(${gobal_bg})`}}>
             <Switch>
-              <Route exact path="/" component={Index} />
-              <Route exact path="/home" component={Home} />
-              <Route exact path="/deviceinfo" component={DeviceInfo} />
-              <Route exact path="/basic" component={BasicInfo} />
-              <Route exact path="/water" component={WaterInfo} />
-              <Route exact path="/install" component={InstallInfo} />
-              <Route exact path="/equipmentlist" component={List} />
-              <Route exact path="/setting" component={Setting} />
-              <Route exact path="/frontfilter" component={FrontFilter} />
-              <Route exact path="/afterfilter" component={AfterFilter} />
+              <Route exact path="/" component={requireAuthentication(Home)} />
+              <Route exact path="/home" component={requireAuthentication(Home)} />
+              <Route exact path="/deviceinfo" component={requireAuthentication(DeviceInfo)} />
+              <Route exact path="/basic" component={requireAuthentication(BasicInfo)} />
+              <Route exact path="/water" component={requireAuthentication(WaterInfo)} />
+              <Route exact path="/install" component={requireAuthentication(InstallInfo)} />
+              <Route exact path="/equipmentlist" component={requireAuthentication(List)} />
+              <Route exact path="/setting" component={requireAuthentication(Setting)} />
+              <Route exact path="/frontfilter" component={requireAuthentication(FrontFilter)} />
+              <Route exact path="/afterfilter" component={requireAuthentication(AfterFilter)} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/forget" component={Forget} />
-              <Route exact path="/change" component={ChangePassword} />
+              <Route exact path="/change" component={requireAuthentication(ChangePassword)} />
             </Switch>
           </div>
       );

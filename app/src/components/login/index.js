@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
 import { Flex, WhiteSpace, Button, WingBlank, InputItem, ActionSheet } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
 
 import logo from '../../assets/logo.png';
-// import {login_request} from '../../actions';
-// import {ui_set_language} from '../../actions';
+import {login_request} from '../../actions';
+import {ui_set_language} from '../../actions';
 
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
 let wrapProps;
@@ -51,14 +51,14 @@ class Login extends PureComponent{
 
     handleSubmit = ()=>{
         console.log(`账号：${this.state.name}，密码：${this.state.password}`);
-        this.props.history.push('/home');
-        // const {dispatch} = this.props;
-        // dispatch(login_request({username:this.state.name,password:this.state.password}));
+        // this.props.history.push('/home');
+        const {dispatch} = this.props;
+        dispatch(login_request({username:this.state.name,password:this.state.password}));
     }
 
     showActionSheet = () => {
         // const {dispatch} = this.props;
-        const {intl} = this.props;
+        const {intl,dispatch} = this.props;
 
         const BUTTONS = languages;
         ActionSheet.showActionSheetWithOptions({
@@ -70,7 +70,7 @@ class Login extends PureComponent{
         },
         (buttonIndex) => {
             if(buttonIndex!==BUTTONS.length -1){
-                // dispatch(ui_set_language(constrast[BUTTONS[buttonIndex]]));
+                dispatch(ui_set_language(constrast[BUTTONS[buttonIndex]]));
                 console.log(constrast[BUTTONS[buttonIndex]]);
             }
         });
@@ -81,6 +81,7 @@ class Login extends PureComponent{
     }
 
     render () {
+
         const {intl, history} = this.props;
         return (
             <WingBlank className="black_bg" style={{marginLeft:0, marginRight:0}}>
@@ -137,5 +138,5 @@ class Login extends PureComponent{
         )
     }
 }
-// Login = connect()(Login);
+Login = connect()(Login);
 export default withRouter(injectIntl(Login));

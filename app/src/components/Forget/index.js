@@ -1,22 +1,30 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import {  NavBar, Icon, List, InputItem, Button, WhiteSpace, Toast } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import Captcha from '../Captcha';
-
+import {sendauth_request,sendauth_result,findpwd_request} from '../../actions';
+import {callthen} from '../../sagas/pagination';
 import './index.less';
 
 const Item = List.Item;
 const Brief = Item.Brief;
- 
+
 class ForgetPassword extends PureComponent{
 
     handleSubmit = (e)=>{
-        e.preventDefault();
+        // e.preventDefault();
+        const {dispatch} = this.props;
         this.props.form.validateFields((err, values)=>{
             if(!err){
                 console.log(values);
+                dispatch(findpwd_request({
+                    username:values.deviceid,
+                    authcode:values.verification,
+                    password:values.pwdconfirm
+                }));
                 // {
                 // deviceid: ""
                 // pwdconfirm: ""
@@ -29,12 +37,20 @@ class ForgetPassword extends PureComponent{
 
     onGetCaptcha = () =>
     new Promise((resolve, reject) => {
+      const {dispatch} = this.props;
       this.props.form.validateFields(['deviceid'], {}, (err, values) => {
         if (err) {
             Toast.fail(this.props.intl.formatMessage({id: 'login.inputdeviceid'}));
             reject();
         } else {
-        //   const { dispatch } = this.props;
+          dispatch(callthen(sendauth_request,sendauth_result,{
+            username:values.deviceid,
+            reason:'findpwd'
+          })).then(()=>{
+            resolve();
+          }).catch((e)=>{
+            reject();
+          });
         //   dispatch({
         //     type: 'login/getCaptcha',
         //     payload: values.mobile,
@@ -171,5 +187,5 @@ class ForgetPassword extends PureComponent{
         )
     }
 }
-
+ForgetPassword = connect()(ForgetPassword);
 export default withRouter(createForm()(injectIntl(ForgetPassword)));

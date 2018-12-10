@@ -357,12 +357,12 @@ export function* wififlow() {
            wifiresult: call(getwifilist_promise),
            timeout: call(delay, delaytime)
         });
-        yield put(set_weui({
-          toast:{
-          text:`${JSON.stringify(raceresult)}`,
-          show: true,
-          type:'success'
-        }}));
+        // yield put(set_weui({
+        //   toast:{
+        //   text:`${JSON.stringify(raceresult)}`,
+        //   show: true,
+        //   type:'success'
+        // }}));
         const { wifiresult, timeout } = raceresult;
         if(!!timeout){
           yield put(common_err({type:'wifi_getssidlist',errmsg:`获取wifi信息超时,${delaytime}毫秒`}));

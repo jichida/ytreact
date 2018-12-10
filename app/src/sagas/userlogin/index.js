@@ -8,7 +8,7 @@ import {
   set_weui,
 
 } from '../../actions';
-import {getdevice_request} from '../../actions';
+// import {getdevice_request} from '../../actions';
 import { replace} from 'connected-react-router';//https://github.com/reactjs/connected-react-router
 
 // import { goBack } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
@@ -49,7 +49,7 @@ export function* userloginflow() {
             });
             yield put(login_result(result));
 
-            yield put(getdevice_request({}));
+            // yield put(getdevice_request({}));
             // debugger;
             if(!loginsuccess && result.loginsuccess){
               //switch

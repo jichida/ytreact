@@ -206,7 +206,7 @@ class DeviceInstall extends PureComponent{
          }
          console.log(basicData);
         return (
-            <div className="black_bg">
+            <div className="fp_container black_bg">
                 <div className="setting">
                 <NavBar
                     className="nav"

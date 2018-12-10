@@ -83,7 +83,7 @@ class Login extends PureComponent{
     render () {
         const {intl, history} = this.props;
         return (
-            <div className="fh_container black_bg">
+            <WingBlank className="black_bg" style={{marginLeft:0, marginRight:0}}>
                 <div className="fp_container white_bg">
                 <WingBlank>
                     <Flex direction="column" className="logincontent" >
@@ -133,7 +133,7 @@ class Login extends PureComponent{
                     </Flex>
                 </WingBlank>
                 </div>
-            </div>
+            </WingBlank>
         )
     }
 }

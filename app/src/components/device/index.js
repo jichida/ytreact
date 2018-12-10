@@ -87,7 +87,7 @@ class Device extends PureComponent{
                                 </Link>
                             </Flex.Item>
                         </Flex>
-                        <hr style={{borderColor: '#ffffff20'}} />
+                        <hr style={{borderColor: 'rgba(255, 255, 255, 0.08)'}} />
                         <Flex>
                             <Flex.Item className="tools_con">
                                 <Link to="/install"><div><img src={install_img} alt="" />

@@ -3,6 +3,11 @@ import {
 
     loginwithtoken_request,
     login_request,
+
+    findpwd_request,
+    findpwd_result,
+    sendauth_request,
+    sendauth_result,
     // login_result,
 
     logout_request,
@@ -23,6 +28,8 @@ import {
 //接收的对应关系
 const recvmessagetoresultpair = {
   'common_err':common_err,
+  'findpwd_result':findpwd_result,
+  'sendauth_result':sendauth_result,
 
   'login_result':md_login_result,
   'logout_result':logout_result,
@@ -39,7 +46,8 @@ const sendmessagefnsz = {
   'logout':`${logout_request}`,
   'loginwithtoken':`${loginwithtoken_request}`,
   'login':`${login_request}`,
-
+  'findpwd':`${findpwd_request}`,
+  'sendauth':`${sendauth_request}`,
   'getsystemconfig':`${getsystemconfig_request}`,
 
 };

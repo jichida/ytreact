@@ -4,12 +4,12 @@ import {
   common_err,
   md_login_result,
   login_result,
-
+  findpwd_result,
   set_weui,
 
 } from '../../actions';
 // import {getdevice_request} from '../../actions';
-import { replace} from 'connected-react-router';//https://github.com/reactjs/connected-react-router
+import { replace,goBack} from 'connected-react-router';//https://github.com/reactjs/connected-react-router
 
 // import { goBack } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
 // import config from '../../env/config.js';
@@ -34,6 +34,21 @@ export function* userloginflow() {
   //   }}));
   //   yield put(goBack());
   // });
+
+  yield takeLatest(`${findpwd_result}`, function*(action) {
+      try{
+        yield put(set_weui({
+          toast:{
+            text:'修改密码成功',
+            show: true,
+            type:'success'
+        }}));
+        yield put(goBack());
+      }
+      catch(e){
+        console.log(e);
+      }
+  });
 
 
 

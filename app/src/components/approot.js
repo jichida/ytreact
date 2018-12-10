@@ -39,7 +39,7 @@ class AppRoot extends React.Component {
       return (
           <div className="page" style={{backgroundImage: `url(${gobal_bg})`}}>
             <Switch>
-              <Route exact path="/" component={requireAuthentication(Index)} />
+              <Route exact path="/" component={requireAuthentication(Home)} />
               <Route exact path="/home" component={requireAuthentication(Home)} />
               <Route exact path="/deviceinfo" component={requireAuthentication(DeviceInfo)} />
               <Route exact path="/basic" component={requireAuthentication(BasicInfo)} />

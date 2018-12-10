@@ -13,7 +13,7 @@ let config = {
     requesttimeout:5000,
     appversion:'1.2.5(build1209)',
     sendlocationinterval:20000,
-    softmode:'appp'
+    softmode:'pc'
 };
 
 

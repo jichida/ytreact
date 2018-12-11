@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Created by wangxiaoqing on 2017/3/26.
  */
 import {requestpostdatawithtoken} from '../util/util.js';
@@ -7,7 +7,7 @@ import _ from 'lodash';
 
 export function fileupload(e,config,callbackfn){
     const {usertoken,...restconfig} = config;
-    //e.preventDefault();
+    e.preventDefault();
     let files;
     if (e.dataTransfer) {
         files = e.dataTransfer.files;

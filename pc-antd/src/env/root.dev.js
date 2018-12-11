@@ -2,14 +2,15 @@
  * Created by wangxiaoqing on 2017/3/27.
  */
 import React from 'react';
-import { Provider } from 'react-redux';
-import { connect } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import DevTools from './devtools';
 import store from './store';
 import { Route } from 'react-router-dom';
-import { ConnectedRouter } from 'connected-react-router';
+import { ConnectedRouter } from 'react-router-redux';
 import {history} from './store';
+
 import AppRoot from '../components/approot.js';
+
 
 //react 国际化
 import {IntlProvider,addLocaleData} from 'react-intl';
@@ -36,16 +37,20 @@ let ChildRoot = (props)=>{
     </div>
   </IntlProvider>);
 }
+
 const mapStateToProps =  ({app:{locale}}) =>{
   return {locale};
-};
+}
+
 ChildRoot = connect(mapStateToProps)(ChildRoot);
 
 const Root = (props)=>
     (
-            <Provider store={store}>
-                <ChildRoot />
-            </Provider>
+
+        <Provider store={store}>
+            <ChildRoot />
+        </Provider>
+
     );
 
 

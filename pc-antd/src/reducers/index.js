@@ -1,20 +1,15 @@
-﻿import { combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import { connectRouter } from 'connected-react-router'
+import { routerReducer } from 'react-router-redux';
+
 
 import userlogin from './userlogin';
 import app from './app';
-import device from './device';
-import wifi from './wifi';
-import devicedata from './devicedata';
 
-export default (history)=>combineReducers(
+export default combineReducers(
   {
     app,
-    device,
-    devicedata,
-    wifi,
     userlogin,
     form: formReducer,
-    router: connectRouter(history),
+    router: routerReducer,
   });

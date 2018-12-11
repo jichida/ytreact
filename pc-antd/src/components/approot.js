@@ -16,9 +16,7 @@ import Forget from './ForgetPassword';
 import {requireAuthentication} from './requireauthentication';
 
 import './common.less';
-
-import gobal_bg from '../assets/bg2.png';
-
+import gobal_bg from '../assets/bg2.png'
 
 const Layout = (Component)=>{
   const LayoutComponent = (props)=>{
@@ -41,7 +39,7 @@ class AppRoot extends React.Component {
           <Switch>
             <Route exact path="/" component={Login} /> 
             <Route path="/search" component={Layout(Search)} />
-            <Route path="/abnormals" component={Layout(Abnormals)} /> {/* :param  全部 / 异常 */}
+            <Route path='/abnormals' component={Layout(Abnormals)} />
             <Route path="/machines" component={Layout(Machines)} /> {/* :param  全部 / 异常 */}
             <Route path="/distribution" component={Layout(Distribution)} />
             <Route path="/statistics" component={Layout(Statistics)} />

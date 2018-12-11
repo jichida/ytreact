@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
 import thunk from 'redux-thunk';
-import { routerMiddleware } from 'connected-react-router';
+import { routerMiddleware } from 'react-router-redux';
 import reducer from '../reducers';
 import DevTools from './devtools';
 import createHistory from 'history/createHashHistory';
@@ -22,7 +22,7 @@ const sagaMiddleware = createSagaMiddleware();
 let configureStore = (initialState)=> {
 
     const store = createStore(
-        reducer(history), initialState,
+        reducer, initialState,
         compose(
             applyMiddleware(thunk,sagaMiddleware,middleware),
             DevTools.instrument()

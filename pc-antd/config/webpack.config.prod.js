@@ -370,7 +370,7 @@ module.exports = {
               sourceMaps: false,
             },
           },
-          // "postcss" loader applies autoprefixer to our leSS.
+           // "postcss" loader applies autoprefixer to our leSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
           // "style" loader turns CSS into JS modules that inject <style> tags.
           // In production, we use a plugin to extract that CSS to a file, but

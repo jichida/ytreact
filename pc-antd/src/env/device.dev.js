@@ -1,59 +1,33 @@
-import store from './store';
-import {wifi_setstatus} from '../actions';
-
-// let fncallback;
-window.wifistatuscallback = (result)=>{
-  store.dispatch(wifi_setstatus(result));
+export const getssid = (fncallback)=>{
+   fncallback({
+       code:'0',
+       message:'WB123',
+   });
 }
 
-const setwifistatuscallback = ()=>{
-  // fncallback = window.wifistatuscallback;
-}
-
-
-
-const openwifi =  (fncallback)=>{
+export const senddata = (values,fncallback)=>{
+  /*
+  values期望格式：ssid，password
+  */
+  console.log(`values:${JSON.stringify(values)}`);
+  let retjson = {
+    code:'0',
+    messgae:'获取成功',
+    data:[
+      {
+        name:'测试模块',
+        mac:'3C:2C:94:22:B9:E4',
+        ip:'192.168.9.3'
+      },
+      {
+        name:'Wi-Fi模块2',
+        mac:'08:00:20:0A:8C:4C',
+        ip:'192.168.9.4'
+      },
+    ]
+  };
   window.setTimeout(()=>{
-    fncallback({
-      code:0,
-      wifiStatus:1
-    });
-  },100);
-}
+    fncallback(retjson);
+  },5000);
 
-const getssidlist = (fncallback)=>{
-  window.setTimeout(()=>{
-    fncallback({
-      "code":0,
-      "data":[
-        {"mac":"3c:46:d8:14:8f:54","ssid":"yikuaiqian2018","wifiCipher":2},
-        {"mac":"78:44:fd:c8:7b:39","ssid":"QianMianYuJia","wifiCipher":2}
-      ]
-    })
-  },100);
-}
-
-const setcurwifi = (values,fncallback)=>{
-  console.log(values);
-  fncallback('ok');
-}
-
-
-const socket_send = (values,fncallback)=>{
-  console.log(`socket_send`);
-  console.log(values);
-}
-
-const socket_connnect = (values)=>{
-  console.log(`socket_connnect`);
-  console.log(values);
-}
-
-const socket_close = ()=>{
-  console.log(`socket_close`);
-}
-
-
-
-export {socket_connnect,socket_send,socket_close,
-  getssidlist,setcurwifi,openwifi,setwifistatuscallback}
+};

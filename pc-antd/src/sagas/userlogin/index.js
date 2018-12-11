@@ -1,4 +1,4 @@
-import { put,takeLatest,select,} from 'redux-saga/effects';
+import { put,takeLatest,} from 'redux-saga/effects';
 // import {delay} from 'redux-saga';
 import {
   common_err,
@@ -8,11 +8,8 @@ import {
   set_weui,
 
 } from '../../actions';
-// import {getdevice_request} from '../../actions';
-import { replace} from 'connected-react-router';//https://github.com/reactjs/connected-react-router
-
 // import { goBack } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
-// import config from '../../env/config.js';
+import config from '../../env/config.js';
 // import  {
 //   getrandom
 // } from '../test/bmsdata.js';
@@ -42,26 +39,9 @@ export function* userloginflow() {
       let {payload:result} = action;
         console.log(`md_login_result==>${JSON.stringify(result)}`);
         if(!!result){
-            const {loginsuccess,search} = yield select((state)=>{
-              const loginsuccess = state.userlogin.success;
-              const search = state.router.location.search;
-              return {loginsuccess,search};
-            });
             yield put(login_result(result));
-
-            // yield put(getdevice_request({}));
-            // debugger;
-            if(!loginsuccess && result.loginsuccess){
-              //switch
-                const fdStart = search.indexOf("?next=");
-                if(fdStart === 0){
-                    const redirectRoute = search.substring(6);
-                    yield put(replace(redirectRoute));
-                }
-                else{
-                    yield put(replace('/'));
-                }
-
+            if(result.loginsuccess){
+              localStorage.setItem(`asmb2c_${config.softmode}_token`,result.token);
             }
         }
 
@@ -71,6 +51,7 @@ export function* userloginflow() {
       }
 
   });
+
 
   yield takeLatest(`${common_err}`, function*(action) {
         let {payload:result} = action;

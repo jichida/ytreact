@@ -2,16 +2,15 @@ import {takeLatest,call} from 'redux-saga/effects';
 import {set_weui} from '../../actions';
 // import Toast from 'antd-mobile/lib/toast';  // 加载 JS
 // import 'antd-mobile/lib/toast/style/css';        // 加载 CSS
-import { message } from 'antd';
 
 const popdialog = ({text,type})=>{
   return new Promise(resolve => {
-      if(type === 'success'){
-        message.success(text, 1);
-      }
-      if(type === 'warning'){
-        message.error(text, 1);
-      }
+      // if(type === 'success'){
+      //   Toast.success(text, 1);
+      // }
+      // if(type === 'warning'){
+      //   Toast.fail(text, 1);
+      // }
       resolve();
     });
 }

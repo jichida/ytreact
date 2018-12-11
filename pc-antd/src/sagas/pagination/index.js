@@ -1,4 +1,3 @@
-
 import { createAction } from 'redux-act';
 import { take,put, call,race,takeLatest } from 'redux-saga/effects';
 import {delay} from 'redux-saga';
@@ -7,6 +6,7 @@ import {delay} from 'redux-saga';
 // import lodashincludes from 'lodash.includes';
 
 const synccallreq = createAction('synccallreq');
+
 
 //以下导出放在视图
 export function callthen(actionreq,actionres,payload){
@@ -30,12 +30,12 @@ export function* createsagacallbackflow(){
         reject('请求超时!');
       }
       else{
-        let {payload} = response;
-        if (!!payload.err) {
-          reject(payload);
+        let {payload:{err,result}} = response;
+        if (!!err) {
+          reject(err);
         }
         else{
-          resolve(payload);
+          resolve({result});
         }
       }
     }

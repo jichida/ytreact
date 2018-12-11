@@ -28,7 +28,7 @@ class Search extends React.PureComponent {
             <GridContent iswide>
                 <Row gutter={48} style={{marginLeft:-24, marginRight:-48}}>
                     <Col span={8}>
-                        <Link to="/machines/abnormal">
+                        <Link to="/abnormals">
                             <Card
                                 hoverable
                                 style={{ width: 346, height: 140, border: 0 }}
@@ -41,7 +41,7 @@ class Search extends React.PureComponent {
                             <Card
                                 hoverable
                                 style={{ width: 346, height: 140, border: 0 }}
-                                cover={<img alt="" src={all_img} />}
+                                cover={<NavCard img={all_img} title={<FormattedMessage id="machine.all" />} />}
                             />
                         </Link>
                     </Col>
@@ -50,7 +50,7 @@ class Search extends React.PureComponent {
                             <Card
                                 hoverable
                                 style={{ width: 346, height: 140, border: 0 }}
-                                cover={<img alt="" src={global_img} />}
+                                cover={<NavCard img={global_img} title={<FormattedMessage id="machine.distribution" />} />}
                             />
                         </Link>
                     </Col>

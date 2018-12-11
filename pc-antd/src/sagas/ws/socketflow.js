@@ -7,13 +7,14 @@ import {
 } from '../../actions';
 import config from '../../env/config';
 
+console.log(config.appversion);
 //获取地理位置信息，封装为promise
 export function* socketflow(){//仅执行一次
    yield takeLatest(`${notify_socket_connected}`, function*(action) {
       let {payload:issocketconnected} = action;
       if(issocketconnected){
         yield put(getsystemconfig_request({}));
-        const token = localStorage.getItem(`asmb2c_${config.softmode}_token`);
+        const token = localStorage.getItem(`yt_${config.softmode}_token`);
         if (!!token) {
           yield put(loginwithtoken_request({token}));
         }

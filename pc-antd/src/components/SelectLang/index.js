@@ -6,11 +6,11 @@ import { Menu, Icon, Dropdown } from 'antd';
 import './index.less';
 import language_img from '../../assets/login_iconc.png';
 
-// const language = {
-//   'zh-CN': '简体中文',
-//   'zh-TW': '繁体中文',
-//   'en-US': 'English',
-// }
+const language = {
+  'zh-cn': '简体中文',
+  'zh-tw': '繁体中文',
+  'en': 'English',
+}
 
 class SelectLang extends PureComponent {
   changLang = ({ key }) => {
@@ -51,7 +51,7 @@ class SelectLang extends PureComponent {
       <Dropdown overlay={langMenu} placement="bottomRight">
         <span>
           <img src={language_img} alt="" />
-          <span style={{color: '#fff',marginLeft: '5px', marginRight:'5px'}}>简体中文</span>
+          <span style={{color: '#fff',marginLeft: '5px', marginRight:'5px'}}>{language[selectedLang]}</span>
           <Icon type="down" style={{color: '#fff'}} />
         </span>
       </Dropdown>

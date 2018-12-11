@@ -1,9 +1,9 @@
-let islocalhost = false;
+const islocalhost = false;
 const serverurl = islocalhost?'http://localhost:4101':'http://tx.i2u.top:4101';
 const serverurlrestful = islocalhost?`${serverurl}/api`:`${serverurl}/api`;
 const wspath = islocalhost?'/socket.io':'/socket.io';
 
-let config = {
+const config = {
     sockethost:'yt.i2u.top',
     socketport:4102,
     ispopalarm:false,

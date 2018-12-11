@@ -1,10 +1,13 @@
 import React from 'react'
 import Login from '../AntdLogin';
+import { connect } from 'react-redux';
 import { Alert, Card, Select, Row } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import { injectIntl } from 'react-intl';
 import logo from '../../assets/title.png';
 import language_icon from '../../assets/login_iconc.png';
+import {login_request} from '../../actions';
+import {ui_set_language} from '../../actions';
 
 import './index.less';
 
@@ -21,24 +24,29 @@ class LoginPage extends React.Component {
       this.setState({
         notice: '',
       }, () => {
-        if(err){
+        if(!!err){
           this.setState({
               notice: this.props.intl.formatMessage({id: 'user.login.err'}),
           });
         }
         else {
           console.log(values);
+          const {dispatch} = this.props;
+          dispatch(login_request({username:values.username,password:values.password}));
+
           // values{
           //   username;
           //   password;
           // }
-          this.props.history.push('/search');
+          // this.props.history.push('/search');
         }
       });
   }
 
   handleChange = (value)=>{
     console.log(value);
+    const {dispatch} = this.props;
+    dispatch(ui_set_language(value));
   }
 
 
@@ -58,14 +66,14 @@ class LoginPage extends React.Component {
               <div className="languages">
                 <img src={language_icon} alt="" />
                 <Select defaultValue="简体中文" className="select" style={{ width: 120 }} onChange={this.handleChange}>
-                  <Option value="简体中文">简体中文</Option>
-                  <Option value="繁体中文">繁体中文</Option>
-                  <Option value="English">English</Option>
+                  <Option value="zh-cn">简体中文</Option>
+                  <Option value="zh-tw">繁体中文</Option>
+                  <Option value="en">English</Option>
                 </Select>
               </div>
             </Row>
             <Row>
-              
+
             </Row>
             <Row>
               <Login onSubmit={this.onSubmit} className="login">
@@ -89,4 +97,5 @@ class LoginPage extends React.Component {
   }
 }
 
+LoginPage = connect()(LoginPage);
 export default withRouter(injectIntl(LoginPage));

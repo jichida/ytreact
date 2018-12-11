@@ -22,7 +22,7 @@ const Layout = (Component)=>{
   const LayoutComponent = (props)=>{
     return (<BasicLayout><Component {...props}/></BasicLayout>);
   }
-  return LayoutComponent;
+  return requireAuthentication(LayoutComponent);
 }
 
 class AppRoot extends React.Component {
@@ -37,7 +37,7 @@ class AppRoot extends React.Component {
       return (
         <div className="global_bg" style={{backgroundImage: `url(${gobal_bg})`}}>
           <Switch>
-            <Route exact path="/" component={Login} /> 
+            <Route exact path="/" component={Layout(Search)}  />
             <Route path="/search" component={Layout(Search)} />
             <Route path='/abnormals' component={Layout(Abnormals)} />
             <Route path="/machines" component={Layout(Machines)} /> {/* :param  全部 / 异常 */}
@@ -45,7 +45,7 @@ class AppRoot extends React.Component {
             <Route path="/statistics" component={Layout(Statistics)} />
             <Route path="/regional" component={Layout(RegionalDisplay)} /> {/* :param  区域 */}
             <Route path="/details" component={Layout(DataDetails)} />
-            <Route path="/notice" component={Layout(Notice)} /> 
+            <Route path="/notice" component={Layout(Notice)} />
             <Route path="/actions" component={Layout(ActionList)} />
             <Route path="/login" component={Login}/>
             <Route path="/forget" component={Forget}/>

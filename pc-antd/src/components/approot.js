@@ -5,6 +5,7 @@ import BasicLayout from './layouts/BasicLayout.js'
 import Search from './Search';
 import RegionalDisplay from './RegionalDisplay'; // 区域展示/中国区域展示
 import Notice from './Notice'; // 通知公告
+import SearchResult from './SearchResult';
 import Abnormals from './Abnormals';
 import Machines from './Machines'; // 全部机器/异常机器
 import Distribution from './Distribution'; // 全球分布
@@ -39,6 +40,7 @@ class AppRoot extends React.Component {
           <Switch>
             <Route exact path="/" component={Login} /> 
             <Route path="/search" component={Layout(Search)} />
+            <Route path="/result" component={Layout(SearchResult)} />
             <Route path='/abnormals' component={Layout(Abnormals)} />
             <Route path="/machines" component={Layout(Machines)} /> {/* :param  全部 / 异常 */}
             <Route path="/distribution" component={Layout(Distribution)} />

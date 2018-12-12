@@ -16,6 +16,7 @@
   "user.password.reset": "重设密码",
   "user.password.confirm.err": "新密码两次输入不匹配",
   "app.search": "立即搜索",
+  "app.search.result": "搜索结果",
   "app.search.choose": "选择省市区",
   "app.search.province": "选择省",
   "app.search.city": "选择市",

@@ -10,7 +10,7 @@ import PageList from './index';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import sb_err from '../../assets/sb_yc.png';
 import sb_normal from '../../assets/sb_zc.png';
-
+import lodashget from 'lodash.get';
 let g_querysaved;
 
 const MachineItem = ({iserr, address, reportdate, id, name, runtime, mode, history})=>{
@@ -43,21 +43,21 @@ class DeviceList extends PureComponent {
 
   componentDidMount() {
   }
-  onItemConvert(item){
+  onItemConvert(iteminput){
+    const item =  {
+            iserr: true,
+            address: '北京翡翠山',
+            reportdate: '20171116',
+            id: lodashget(iteminput,'syssettings.deviceid',''),
+            name: 'HHBJ25018',
+            runtime: '02:10:10',
+            mode:' Active Mode',
+    };
     return item;
   }
 
   render() {
-    const renderItem = (iteminput)=>{
-      const item =  {
-              iserr: true,
-              address: '北京翡翠山',
-              reportdate: '20171116',
-              id: '125445554511112254444',
-              name: 'HHBJ25018',
-              runtime: '02:10:10',
-              mode:' Active Mode',
-      };
+    const renderItem = (item)=>{
       return (
         <List.Item>
             <MachineItem {...item} {...this.props} />
@@ -75,7 +75,7 @@ class DeviceList extends PureComponent {
               usecache = {!!g_querysaved}
               ref='antdtablealarm'
               onItemConvert={this.onItemConvert.bind(this)}
-              pagenumber={5}
+              pagenumber={8}
               query={this.state.query}
               sort={{_id: -1}}
               queryfun={(payload)=>{

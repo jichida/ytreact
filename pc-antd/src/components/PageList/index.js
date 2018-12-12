@@ -33,9 +33,18 @@ class AntdTable extends PureComponent {
     // componentWillUnmount() {
     //   this.mounted = false;
     // }
-    handleTableChange = (pagination, filters, sorter) => {
+    // handleTableChange = (pagination, filters, sorter) => {
+    //   const pager = { ...this.state.pagination };
+    //   pager.current = pagination.current;
+    //   this.setState({
+    //     pagination: pager,
+    //   });
+    //   this.onAjax(this.props.query,this.props.sort,this.props.pagenumber,pager.current);
+    // }
+
+    onChangePage = (curpage)=>{
       const pager = { ...this.state.pagination };
-      pager.current = pagination.current;
+      pager.current = curpage;
       this.setState({
         pagination: pager,
       });
@@ -145,7 +154,15 @@ class AntdTable extends PureComponent {
                 {...tableprops}
                 ref='antdtable'
                 dataSource={this.state.dataSource}
-                pagination={this.state.pagination}
+                pagination={{
+                  onChange: (page) => {   // 分页逻辑
+                    console.log(page);
+                    this.onChangePage(page);
+                  },
+                  pageSize: this.state.pagination.pageSize,
+                  current:this.state.pagination.current,
+                  total:this.state.pagination.total,
+                }}
                 renderItem={this.props.renderItem}
             />
         );

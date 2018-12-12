@@ -5,39 +5,24 @@ import { createReducer } from 'redux-act';
 import {
     //登录
     login_result,
-    fillprofile_result,
     logout_result,
 } from '../../actions/index.js';
 
 
 const initial = {
     userlogin: {
-        editusername:'',
         loginsuccess:false,
-        username:'',
         userid:'',
         token:'',
-        profile:{},
-        invitecode:'',
-        defaultaddress:{},
-        balance:0,
-        point:0,
-        isusergetpointsigntoday:true,
-        bindtype:'',
-        openid:'',
-        orderstatus: {},
     },
 };
 
 const userlogin = createReducer({
     [logout_result]:(state, payload)=>{
-        return { ...initial.userlogin,defaultaddress:{}};
-    },
-    [fillprofile_result]: (state, {profile}) => {
-        return { ...state, profile,editusername:profile.nickname};
+        return { ...initial.userlogin};
     },
     [login_result]: (state, payload) => {
-        return { ...state, ...payload,loginsuccess:true ,editusername:payload.profile.nickname};
+        return { ...state, ...payload,loginsuccess:true };
     },
 }, initial.userlogin);
 

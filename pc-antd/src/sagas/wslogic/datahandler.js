@@ -16,6 +16,8 @@ import {
     adddevice_result,
     getdevice_request,
     getdevice_result,
+    page_getdevice_request,
+    page_getdevice_result,
     setuserdevice_request,
     setuserdevice_result,
   } from '../../actions';
@@ -31,7 +33,7 @@ const recvmessagetoresultpair = {
   'adddevice_result':adddevice_result,
   'getdevice_result':getdevice_result,
   'setuserdevice_result':setuserdevice_result,
-
+  'page_getdevice_result':page_getdevice_result,
 };
 
 //非验证发送接口
@@ -46,6 +48,7 @@ const sendmessagefnsz = {
 
 //验证发送接口
 const sendmessageauthfnsz = {
+  'page_getdevice':`${page_getdevice_request}`,
   'adddevice':`${adddevice_request}`,
   'getdevice':`${getdevice_request}`,
   'setuserdevice':`${setuserdevice_request}`,

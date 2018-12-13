@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Admin, Resource } from "react-admin";
+import { Admin, Resource, ListGuesser } from "react-admin";
 
 import dataProvider from './dataProvider.js';
 import authProvider from './authProvider.js';
@@ -21,8 +21,8 @@ import systemconfigreducer from './components/systemconfig/reducer';
 import Widgets from '@material-ui/icons/Widgets' //系统设置
 import { SystemconfigList } from './components/systemconfig/index.js';
 import {AddressconstCreate,AddressconstList,AddressconstEdit} from './components/addressconst';
-import {DistributorList,DistributorEdit} from './components/distributors';
-import {InstallerList,InstallerEdit} from './components/installers';
+import {DistributorList,DistributorEdit,DistributorCreate} from './components/distributors';
+import {InstallerList,InstallerEdit,InstallerCreate} from './components/installers';
 // import {UserlistList,UserlistEdit} from './components/user/index.js';
 // import {AboutlistList,AboutlistEdit,AboutlistCreate} from './components/abouts/index.js';
 import {DeviceuserList,DeviceuserEdit} from './components/deviceuser/index';
@@ -56,8 +56,8 @@ class App extends Component {
           return [
             <Resource name="systemconfig" icon={Widgets} list={SystemconfigList} />,
             <Resource name="addressconst"  icon={Widgets} list={AddressconstList} edit={AddressconstEdit} create={AddressconstCreate}  />,
-            <Resource name="installer"  icon={Widgets} list={InstallerList} edit={InstallerEdit}  />,
-            <Resource name="distributor"  icon={Widgets} list={DistributorList} edit={DistributorEdit}  />,
+            <Resource name="installer"  icon={Widgets} list={InstallerList} edit={InstallerEdit} create={InstallerCreate} />,
+            <Resource name="distributor"  icon={Widgets} list={DistributorList} edit={DistributorEdit} create={DistributorCreate} />,
             <Resource name="deviceuser"  icon={Widgets} list={DeviceuserList} edit={DeviceuserEdit}  />,
           ]}
       }

@@ -2,6 +2,7 @@ import React from 'react';
 import { List } from 'react-admin';
 
 import {
+  BooleanField,
   Edit,
   SimpleForm,
   TextInput,
@@ -61,16 +62,14 @@ const DeviceuserEdit = (props) => {
 const DeviceuserList = (props) => (//
      <List title="设备列表" {...props} filters={<DeviceFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid>
-            <TextField label="设备名字" source="devicename" />
-            <TextField label="是否获取到数据" source="getdata" />
-            <ReferenceField label="用户" source="creator" reference="user" addLabel={false} allowEmpty>
-              <TextField source="username" />
-            </ReferenceField>
-            <TextField label="设备ID" source="deviceid" />
-            <ReferenceField label="设备实时数据" source="realtimedata" reference="realtimedata" addLabel={false}  allowEmpty>
-               <DateField label="最后更新时间" source="updated_at" showTime />
-            </ReferenceField>
-            <DateField label="新建时间" source="created_at" showTime />
+          <TextField source="syssettings.deviceid" />
+           <TextField source="wifisettings.ssid" />
+           <DateField source="inwatersettings.ph" />
+           <BooleanField source="checklist.discharge" />
+           <TextField source="basicinfo.username" />
+           <DateField source="usewater.quantity" />
+           <TextField source="install.position" />
+           <DateField source="username" />
           <EditButton />
         </Datagrid>
     </List>

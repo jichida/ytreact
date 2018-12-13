@@ -13,7 +13,7 @@ import {
   TextInput,
   // Show,
   // SimpleShowLayout,
-  SelectField,
+  // SelectField,
   Datagrid,
   // DeleteButton,
   TextField,
@@ -39,17 +39,10 @@ const AddressconstcreateTitle = ({ record }) => {
 const AddressconstCreate = (props) => (
        <Create {...props} title={<AddressconstcreateTitle />} >
            <SimpleForm>
-             <TextInput label="编码" source="adcode" validation={{ required: true }}/>
              <TextInput label="名字" source="name" validation={{ required: true }}/>
              <ReferenceInput label="上级" source="parent_id" reference="addressconst" allowEmpty>
                  <SelectInput optionText="name" />
              </ReferenceInput>
-             <SelectInput label="类型"  source="type" choices={[
-                 { id: 'province', name: '省' },
-                 { id: 'city', name: '市' },
-                 { id: 'county', name: '区' },
-             ]} />
-             <TextInput label="层级" source="level" validation={{ required: true }}/>
            </SimpleForm>
        </Create>
 );
@@ -62,17 +55,10 @@ const AddressconstTitle = ({ record }) => {
 const AddressconstEdit = (props) => {
       return (<Edit title={<AddressconstTitle />} {...props}>
           <SimpleForm>
-            <TextInput label="编码" source="adcode" validation={{ required: true }}/>
             <TextInput label="名字" source="name" validation={{ required: true }}/>
             <ReferenceInput  label="上级"  source="parent_id" reference="addressconst" allowEmpty>
                 <SelectInput optionText="name" />
             </ReferenceInput>
-            <SelectInput label="类型"  source="type" choices={[
-                { id: 'province', name: '省' },
-                { id: 'city', name: '市' },
-                { id: 'county', name: '区' },
-            ]} />
-             <TextInput label="层级" source="level" validation={{ required: true }}/>
           </SimpleForm>
       </Edit>);
 
@@ -82,13 +68,7 @@ const AddressconstEdit = (props) => {
 const AddressconstList = (props) => (//
      <List {...props} >
        <Datagrid>
-       <TextField label="编码" source="adcode" />
        <TextField label="名字" source="name" />
-       <SelectField label="类型"  source="type" choices={[
-           { id: 'province', name: '省' },
-           { id: 'city', name: '市' },
-           { id: 'county', name: '区' },
-       ]} />
        <ReferenceField label="上级" source="parent_id" reference="addressconst" addLabel={false} allowEmpty>
           <TextField source="name" />
        </ReferenceField>

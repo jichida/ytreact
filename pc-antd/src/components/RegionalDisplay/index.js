@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Card, Row, Col, List, Divider } from 'antd';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import GridContent from '../GridContent';
@@ -101,13 +102,14 @@ class RegionalDisplay extends React.PureComponent {
 
 
     render() {
+        const {history} = this.props;
         return (
             <GridContent>
                 <Card bordered={false} className="main-card">
                 <Row style={{marginBottom: 30}} className="title">
                     <Col span={24}>
                         <img src={sb_icon} alt="" /><span><FormattedMessage id="machine.regional.china" /></span>
-                        <Link to="#" className="right-Link">&lt; <FormattedMessage id="app.return" /></Link>
+                        <div className="right-Link" onClick={()=>{history.goBack()}}>&lt; <FormattedMessage id="app.return" /></div>
                     </Col>
                 </Row>
                 <List
@@ -130,5 +132,4 @@ class RegionalDisplay extends React.PureComponent {
         )
     }
 }
-
-export default RegionalDisplay;
+export default withRouter(injectIntl(RegionalDisplay));

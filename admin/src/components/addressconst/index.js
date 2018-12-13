@@ -11,6 +11,7 @@ import {
   SimpleForm,
 
   TextInput,
+  FormDataConsumer,
   // Show,
   // SimpleShowLayout,
   // SelectField,
@@ -59,6 +60,14 @@ const AddressconstEdit = (props) => {
             <ReferenceInput  label="上级"  source="parent_id" reference="addressconst" allowEmpty>
                 <SelectInput optionText="name" />
             </ReferenceInput>
+            <FormDataConsumer>
+               {({ formData, ...rest }) => formData.parent_id === '5c11e0d340dc7d07eacf33a6' &&
+                  [
+                    <TextInput label="高"  source="top" {...rest} />,
+                    <TextInput label="左"  source="left" {...rest} />
+                  ]
+               }
+           </FormDataConsumer>
           </SimpleForm>
       </Edit>);
 

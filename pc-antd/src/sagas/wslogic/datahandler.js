@@ -20,6 +20,9 @@ import {
     page_getdevice_result,
     setuserdevice_request,
     setuserdevice_result,
+
+    getaddressconstlist_request,
+    getaddressconstlist_result
   } from '../../actions';
 
 //接收的对应关系
@@ -29,7 +32,7 @@ const recvmessagetoresultpair = {
   'login_result':md_login_result,
   'logout_result':logout_result,
   'getsystemconfig_result':getsystemconfig_result,
-
+  'getaddressconstlist_result':getaddressconstlist_result,
   'adddevice_result':adddevice_result,
   'getdevice_result':getdevice_result,
   'setuserdevice_result':setuserdevice_result,
@@ -41,7 +44,7 @@ const sendmessagefnsz = {
   'logout':`${logout_request}`,
   'loginwithtoken':`${loginwithtoken_request}`,
   'login':`${login_request}`,
-
+  'getaddressconstlist':`${getaddressconstlist_request}`,
   'getsystemconfig':`${getsystemconfig_request}`,
 
 };

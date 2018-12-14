@@ -1,12 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import Login from '../AntdLogin';
 import { Alert, Card, Select, Row } from 'antd';
+import {sendauth_request,sendauth_result,findpwd_request} from '../../actions';
+import {callthen} from '../../sagas/pagination';
 import { injectIntl } from 'react-intl';
 import logo from '../../assets/title.png';
 import language_icon from '../../assets/login_iconc.png';
 
 import './index.less';
-
 const { Mobile, Captcha, Password, Submit } = Login;
 const { Option } = Select;
 
@@ -17,6 +19,7 @@ class ForgetPassword extends React.Component {
   }
 
   onSubmit = (err, values) => {
+      const {dispatch} = this.props;
       this.setState({
         notice: '',
       }, () => {
@@ -28,6 +31,11 @@ class ForgetPassword extends React.Component {
             }
             else {
                 console.log(values);
+                dispatch(findpwd_request({
+                    username:values.mobile,
+                    authcode:values.captcha,
+                    password:values.password
+                }));
                 // {mobile: "13861271530", captcha: "1234", password: "1234", confirm: "1234"}
             }
         }
@@ -38,9 +46,32 @@ class ForgetPassword extends React.Component {
     console.log(value);
   }
 
-  handleGetCaptcha = ()=>{
-      console.log('发送验证码！')
-  }
+  onGetCaptcha = ()=>{
+    new Promise((resolve, reject) => {
+      const {dispatch} = this.props;
+      this.props.form.validateFields(['mobile'], {}, (err, values) => {
+        if (err) {
+            // Toast.fail(this.props.intl.formatMessage({id: 'login.inputdeviceid'}));
+            reject();
+        } else {
+          dispatch(callthen(sendauth_request,sendauth_result,{
+            username:values.mobile,
+            reason:'findpwd'
+          })).then(()=>{
+            resolve();
+          }).catch((e)=>{
+            reject();
+          });
+        //   dispatch({
+        //     type: 'login/getCaptcha',
+        //     payload: values.mobile,
+        //   })
+        //     .then(resolve)
+        //     .catch(reject);
+        }
+      });
+    });
+  };
 
 
   render() {
@@ -71,7 +102,7 @@ class ForgetPassword extends React.Component {
                       <Alert style={{ marginBottom: 24 }} message={this.state.notice} type="error" showIcon closable />
                   }
                   <Mobile name="mobile"  placeholder={formatMessage({id: 'user.phone'})} />
-                  <Captcha name="captcha"  placeholder={formatMessage({id: 'user.captcha'})} buttonText={formatMessage({id: 'user.captcha.get'})} onGetCaptcha={this.handleGetCaptcha} />
+                  <Captcha name="captcha"  placeholder={formatMessage({id: 'user.captcha'})} buttonText={formatMessage({id: 'user.captcha.get'})} onGetCaptcha={this.onGetCaptcha} />
                   <Password name="password" placeholder={formatMessage({id: 'user.password.new'})} />
                   <Password name="confirm" placeholder={formatMessage({id: 'user.password.confirm'})} />
                   <Submit>{formatMessage({id: 'user.password.reset'})}</Submit>
@@ -85,5 +116,5 @@ class ForgetPassword extends React.Component {
     );
   }
 }
-
+ForgetPassword = connect()(ForgetPassword);
 export default injectIntl(ForgetPassword);

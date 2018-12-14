@@ -118,14 +118,11 @@ const DeviceuserEdit = (props) => {
 const DeviceuserList = (props) => (//
      <List title="设备列表" {...props} filters={<DeviceFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid>
-          <TextField source="syssettings.deviceid" />
-           <TextField source="wifisettings.ssid" />
-           <DateField source="inwatersettings.ph" />
-           <BooleanField source="checklist.discharge" />
-           <TextField source="basicinfo.username" />
-           <DateField source="usewater.quantity" />
-           <TextField source="install.position" />
-           <DateField source="username" />
+          <TextField label="设备ID" source="syssettings.deviceid" />
+          <ReferenceField label="经销商" source="distributorid" reference="distributor" allowEmpty>
+              <TextField source="name" />
+          </ReferenceField>
+           <DateField label="用户名" source="username" />
           <EditButton />
         </Datagrid>
     </List>

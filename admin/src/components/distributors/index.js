@@ -54,7 +54,7 @@ const DistributorCreate = (props) => {
 const DistributorEdit = (props) => {
       return (<Edit {...props}>
           <SimpleForm>
-              <TextField label="名字" source="name"/>
+              <TextInput label="名字" source="name" validation={{ required: true }}/>
               <ReferenceInput label="所属区域" source="addresslevel1" reference="addressconst" allowEmpty
                 filter={{ parent_id: "5c11e0d340dc7d07eacf33a6" }}>
                   <SelectInput optionText="name" />

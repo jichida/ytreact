@@ -1,8 +1,11 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Card, Row, Col, List, Divider } from 'antd';
 import { injectIntl, FormattedMessage } from 'react-intl';
+import {getdeviceaddressstats_request,getdeviceaddressstats_result} from '../../actions';
+import {callthen} from '../../sagas/pagination';
 import GridContent from '../GridContent';
 import './index.less';
 
@@ -99,7 +102,18 @@ const RegionalItem = injectIntl(({regional,total, normal, abnormal, offline, int
 
 
 class RegionalDisplay extends React.PureComponent {
+    componentDidMount(){
+      // getdeviceaddressstats_request
+      const {dispatch,match} = this.props;
+      const addresslevel1 = match.params.addresslevel1;
+      debugger;
+      dispatch(callthen(getdeviceaddressstats_request,getdeviceaddressstats_result,{query:{addresslevel1}})).then((result)=>{
 
+      }).catch((e)=>{
+
+      });
+
+    }
 
     render() {
         const {history} = this.props;
@@ -132,4 +146,6 @@ class RegionalDisplay extends React.PureComponent {
         )
     }
 }
+
+RegionalDisplay = connect()(RegionalDisplay);
 export default withRouter(injectIntl(RegionalDisplay));

@@ -122,7 +122,7 @@ const TopMonitor = injectIntl(({quality, consumption, runtime, recovery, intl})=
 
     const topList = _.map(topData, (item)=>{
         return (
-            <Col span={6}>
+            <Col span={6} key={item.title}>
                 <div className="number-info">
                     <span className="title">{item.title}</span>
                     <span className="unit">{item.unit}</span>
@@ -163,13 +163,13 @@ const TopChart = injectIntl(({average, ionmembrance, frontfilter1, frontfilter2,
             warring: frontfilter1.warring,
         },
         {
-            title: `${formatMessage({id: 'machine.data.frontfilter1'})}`,
+            title: `${formatMessage({id: 'machine.data.frontfilter2'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
             data: frontfilter2.data,
             warring: frontfilter2.warring,
         },
         {
-            title: `${formatMessage({id: 'machine.data.frontfilter1'})}`,
+            title: `${formatMessage({id: 'machine.data.frontfilter3'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
             data: frontfilter3.data,
             warring: frontfilter3.warring,
@@ -206,7 +206,7 @@ const TopChart = injectIntl(({average, ionmembrance, frontfilter1, frontfilter2,
                 {   
                      _.map(chartData, (item)=>{
                         return (
-                            <Chart {...item} />
+                            <Chart {...item} key={item.title} />
                         )
                     })
                 }
@@ -221,7 +221,7 @@ const Chart = ({title, unit, data, warring})=>{
             <Progress type="circle" 
                 percent={data} 
                 width={100}
-                status={warring&&"exception"}
+                status={warring?"exception":"active"}
                 format={() => <React.Fragment><p className="data">{data}</p><p className="unit">{unit}</p></React.Fragment>} />
             <p>{title}</p>
         </div>
@@ -351,7 +351,7 @@ class DataDetails extends React.PureComponent {
 
         const tzOptions = _.map(tzs, (item)=>{
             return (
-                <Option value={item.value}>{item.label}</Option>
+                <Option key={item.value} value={item.value}>{item.label}</Option>
             )
         })
 
@@ -369,12 +369,12 @@ class DataDetails extends React.PureComponent {
                 <Row gutter={24} style={{marginTop: 30}}>
                     <Col span={2}></Col>
                     <Col span={10} className="sub-title">
-                        <p><h2>{formatMessage({id: 'machine.mode'})}</h2><span className="right-Link" onClick={()=>{history.push('/actions')}}>Mode&gt;</span></p>
+                        <div><h2>{formatMessage({id: 'machine.mode'})}</h2><span className="right-Link" onClick={()=>{history.push('/actions')}}>Mode&gt;</span></div>
                         <Table columns={Mode_columns} dataSource={dataMode} className="table-list" pagination={false} />
                     </Col>
                     <Col span={2}></Col>
                     <Col span={8} className="sub-title">
-                        <p><h2>{formatMessage({id: 'machine.mode.input'})}</h2></p>
+                        <div><h2>{formatMessage({id: 'machine.mode.input'})}</h2></div>
                         <div className="command">
                             <h4>Send a Command</h4>
                             <div className="send">

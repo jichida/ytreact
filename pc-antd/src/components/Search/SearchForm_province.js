@@ -1,8 +1,7 @@
 import React from 'react'
 import {Card, Form, Select, Input, Button, Row, Col } from 'antd';
 import { injectIntl } from 'react-intl';
-import lodashmap from 'lodash.map';
-import lodashfind from 'lodash.find';
+import _ from 'lodash';
 import provinces from '../provinces.js';
 
 const Option = Select.Option;
@@ -32,14 +31,15 @@ const tailFormItemLayout = {
 class SearchForm extends React.PureComponent{
 
     state = {
-        selectedCountry: {},
-        selectedRegion: {},
+        selectedProvince: {},
+        selectedCity: {},
+        selectedArea: {},
         citys:[],
         areas:[],
     }
 
     handleProvinceChange = (value)=>{
-        let cur = lodashfind(provinces, (item)=>(
+        let cur = _.find(provinces, (item)=>(
             item.name === value
         ));
         console.log('当前省份');
@@ -52,7 +52,7 @@ class SearchForm extends React.PureComponent{
 
                 this.props.form.resetFields(['city','area']);
 
-                let citys = lodashmap(cur.city, (item)=>(
+                let citys = _.map(cur.city, (item)=>(
                     <Option key={item.name}>{item.name}</Option>
                 ));
 
@@ -61,7 +61,7 @@ class SearchForm extends React.PureComponent{
                     areas:[],
                 });
                 if(citys.length===1){
-                    let areas = lodashmap(cur.city, (item)=>(
+                    let areas = _.map(cur.city, (item)=>(
                         <Option key={item.name}>{item.name}</Option>
                     ));
                     this.setState({
@@ -74,9 +74,31 @@ class SearchForm extends React.PureComponent{
         
     }
 
-    handleRegionChange = (value)=>{
+    handleCityChange = (value)=> {
+        let curCity = _.find(this.state.selectedProvince.city, (item)=>(
+            item.name === value
+        ));
+        if(curCity){
+            if(this.state.selectedCity!==curCity){
+                this.setState({
+                    selectedCity: curCity
+                });
+
+                this.props.form.resetFields(['area']);
+
+                let areas = _.map(curCity.area, (item)=>(
+                    <Option key={item}>{item}</Option>
+                ));
+                this.setState({
+                    areas
+                });
+            }
+        }
+    }
+
+    handleAreaChange = (value)=>{
         this.setState({
-            selectedRegion: value,
+            selectedArea: value,
         });
     }
 
@@ -99,27 +121,38 @@ class SearchForm extends React.PureComponent{
                         <Col span={5} style={{textAlign: 'right'}}><span style={{fontSize: '14px', lineHeight: '40px'}}>{formatMessage({id: 'app.search.choose'})}：</span></Col>
                         <Col span={19}>
                         <Row gutter={24}>
-                            <Col span={12}>
-                            {getFieldDecorator('country', {
+                            <Col span={8}>
+                            {getFieldDecorator('province', {
                                 rules: [{ 
-                                    required: true, message: `${formatMessage({id: 'app.search.country'})}`,
+                                    required: true, message: `${formatMessage({id: 'app.search.province'})}`,
                                 }],
                             })(
-                                <Select placeholder={formatMessage({id: 'app.search.country'})} size="large" onChange={this.handleCountryChange} style={{width: '100%'}}>
-                                {   lodashmap(provinces, (item)=>(
+                                <Select placeholder={formatMessage({id: 'app.search.province'})} size="large" onChange={this.handleProvinceChange} style={{width: '100%'}}>
+                                {   _.map(provinces, (item)=>(
                                         <Option key={item.name}>{item.name}</Option>
                                     ))
                                 }
                                 </Select>
                             )}
                             </Col>
-                            <Col span={12}>
-                            {getFieldDecorator('area', {
+                            <Col span={8}>
+                            {getFieldDecorator('city', {
                                 rules: [{ 
-                                    required: true, message: `${formatMessage({id: 'app.search.region'})}`, 
+                                    required: true, message: `${formatMessage({id: 'app.search.city'})}`, 
                                 }],
                             })(
-                                <Select placeholder={formatMessage({id: 'app.search.region'})} size="large" onChange={this.handleRegionChange} style={{width: '100%'}}>
+                                <Select placeholder={formatMessage({id: 'app.search.city'})} size="large" onChange={this.handleCityChange} style={{width: '100%'}}>
+                                    {this.state.citys}
+                                </Select>
+                            )}
+                            </Col>
+                            <Col span={8}>
+                            {getFieldDecorator('area', {
+                                rules: [{ 
+                                    required: true, message: `${formatMessage({id: 'app.search.area'})}`, 
+                                }],
+                            })(
+                                <Select placeholder={formatMessage({id: 'app.search.area'})} size="large" onChange={this.handleAreaChange} style={{width: '100%'}}>
                                     {this.state.areas}
                                 </Select>
                             )}

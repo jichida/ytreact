@@ -42,6 +42,7 @@
     "layzr.js": "^2.2.2",
     "less": "2.7.3",
     "less-loader": "^4.1.0",
+    "lodash.find": "^4.6.0",
     "lodash.get": "^4.4.2",
     "lodash.map": "^4.6.0",
     "memoize-one": "^4.0.3",

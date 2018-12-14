@@ -8,7 +8,7 @@ import message_img from '../../assets/message.png';
 import user_img from '../../assets/tx.png';
 
 const currentUser = {
-  name: '华为',
+  name: '华为华为华为',
   avatar: user_img,
 }
 

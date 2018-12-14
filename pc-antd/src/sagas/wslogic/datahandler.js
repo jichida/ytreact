@@ -4,6 +4,10 @@ import {
     loginwithtoken_request,
     login_request,
     // login_result,
+    findpwd_request,
+    findpwd_result,
+    sendauth_request,
+    sendauth_result,
 
     logout_request,
     logout_result,
@@ -31,7 +35,8 @@ import {
 //接收的对应关系
 const recvmessagetoresultpair = {
   'common_err':common_err,
-
+  'findpwd_result':findpwd_result,
+  'sendauth_result':sendauth_result,
   'login_result':md_login_result,
   'logout_result':logout_result,
   'getsystemconfig_result':getsystemconfig_result,
@@ -45,6 +50,8 @@ const recvmessagetoresultpair = {
 
 //非验证发送接口
 const sendmessagefnsz = {
+  'findpwd':`${findpwd_request}`,
+  'sendauth':`${sendauth_request}`,
   'logout':`${logout_request}`,
   'loginwithtoken':`${loginwithtoken_request}`,
   'login':`${login_request}`,

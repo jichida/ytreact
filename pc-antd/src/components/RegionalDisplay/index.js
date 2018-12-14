@@ -130,14 +130,16 @@ class RegionalDisplay extends React.PureComponent {
     }
 
     render() {
-        const {history} = this.props;
+        const {history,match,mapaddress,intl} = this.props;
+        const addresslevel1 = match.params.addresslevel1;
+        const regionalname = intl.formatMessage({id:`machine.regional.china`},{value:mapaddress[addresslevel1]});
         console.log(this.state.data);
         return (
             <GridContent>
                 <Card bordered={false} className="main-card">
                 <Row style={{marginBottom: 30}} className="title">
                     <Col span={24}>
-                        <img src={sb_icon} alt="" /><span><FormattedMessage id="machine.regional.china" /></span>
+                        <img src={sb_icon} alt="" /><span><FormattedMessage id={`${regionalname}`} /></span>
                         <div className="right-Link" onClick={()=>{history.goBack()}}>&lt; <FormattedMessage id="app.return" /></div>
                     </Col>
                 </Row>

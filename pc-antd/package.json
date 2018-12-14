@@ -86,7 +86,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "buildcp": "react-scripts build && scp -r build/. /home/ubuntu/yt/deploy/dist/pc",
+    "buildcpr": "react-scripts build && scp -r build/. ubuntu@yt.i2u.top:/home/ubuntu/yt/deploy/dist/pc"
   },
   "eslintConfig": {
     "extends": "react-app"

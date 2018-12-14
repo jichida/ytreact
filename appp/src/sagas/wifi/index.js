@@ -248,12 +248,18 @@ export function* wififlow() {
       try{
         //for test--->
         // yield put(socket_recvdata({code:0,data:`$504,0,503,0,0,0,720,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,300,0,7,22,0,7,1007,503,20,%`}));
-
         //开始连接socket,进入下一个页面
         yield call(socket_connnect_promise,{
           host:config.sockethost,
           port:config.socketport
         });
+
+        yield put(set_weui({
+          toast:{
+          text:`【${config.sockethost}:${config.socketport}】开始连接`,
+          show: true,
+          type:'success'
+        }}));
         yield put(push('/devices'));
         console.log('to next page')
       }
@@ -318,7 +324,12 @@ export function* wififlow() {
       try{
         const {payload} = action;
         yield call(socket_send_promise,payload.cmd);
-
+        yield put(set_weui({
+          toast:{
+          text:`【${payload.cmd}】命令发送`,
+          show: true,
+          type:'success'
+        }}));
         const delaytime = 5000;
         const raceresult = yield race({
            wifiresult: take(`${wifi_sendcmd_result}`),

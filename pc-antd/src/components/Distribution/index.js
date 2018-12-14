@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Row, Col, Button, List } from 'antd';
+import { connect } from 'react-redux';
+import { Card, Row, Col,  } from 'antd';
 import { injectIntl } from 'react-intl';
 import GridContent from '../GridContent';
 import './index.less';
-
+import lodashmap from 'lodash.map';
 import global_img from '../../assets/qqfb_bg.png';
-
+import config from '../../env/config';
 const total = {
     total: 960,
     normal: 500,
@@ -18,57 +19,26 @@ class Distribution extends React.PureComponent {
 
     render() {
         const { formatMessage } = this.props.intl;
-
+        const {level1address} = this.props;
         return (
             <GridContent>
                 <Card bordered={false} className="main-card">
                     <Row>
                         <Col span={24}>
-                            <Card 
+                            <Card
                                 className="map-card"
                                 cover={<img src={global_img} alt="" className="map" />}
                             >
-                                <Link to="/regional">
-                                    <div className="dt_dian" style={{left: 410, top:220}}>
-                                        <span>北美洲</span>
-                                    </div>
-                                </Link>
-                                <Link to="/regional">
-                                    <div className="dt_dian" style={{left: 450, top:407}}>
-                                        <span>南美洲</span>
-                                    </div>
-                                </Link>
-                                <Link to="/regional">
-                                    <div className="dt_dian" style={{left: 700, top:200}}>
-                                        <span>欧洲</span>
-                                    </div>
-                                </Link>
-                                <Link to="/regional">
-                                    <div className="dt_dian" style={{left:200, top:120}}>
-                                        <span>美国阿里斯加</span>
-                                    </div>
-                                </Link>
-
-                                <Link to="/regional">
-                                    <div className="dt_dian" style={{left:400, top:150}}>
-                                        <span>加拿大</span>
-                                    </div>
-                                </Link>
-                                <Link to="/regional">
-                                    <div className="dt_dian" style={{left:800, top:150}}>
-                                        <span>俄罗斯</span>
-                                    </div>
-                                </Link>
-                                <Link to="/regional">
-                                    <div className="dt_dian" style={{left:1000, top:200}}>
-                                        <span>中国</span>
-                                    </div>
-                                </Link>
-                                <Link to="/regional">
-                                    <div className="dt_dian" style={{left:1050, top:400}}>
-                                        <span>澳大利亚</span>
-                                    </div>
-                                </Link>
+                              {
+                                lodashmap(level1address,(v)=>{
+                                  return (<Link to={`/regional/${v._id}`} key={v._id}>
+                                      <div className="dt_dian" style={{left: v.left, top:v.top}}>
+                                          <span>{v.name}</span>
+                                      </div>
+                                  </Link>);
+                                })
+                              }
+                              
                             </Card>
                         </Col>
                         <Col span={24}>
@@ -81,4 +51,14 @@ class Distribution extends React.PureComponent {
     }
 }
 
+const mapStateToProps =  ({addressconst:{addressconsts}}) =>{
+  let level1address = [];
+  lodashmap(addressconsts,(v,k)=>{
+    if(config.rootaddressconst === v.parent_id){
+      level1address.push(v);
+    }
+  });
+  return {level1address};
+};
+Distribution = connect(mapStateToProps)(Distribution);
 export default injectIntl(Distribution);

@@ -46,10 +46,10 @@ class DeviceList extends PureComponent {
   onItemConvert(iteminput){
     const item =  {
             iserr: true,
-            address: '北京翡翠山',
+            address: lodashget(iteminput,'basicinfo.useraddress',''),
             reportdate: '20171116',
-            id: lodashget(iteminput,'syssettings.deviceid',''),
-            name: 'HHBJ25018',
+            id:lodashget(iteminput,'_id',''),
+            name: lodashget(iteminput,'syssettings.deviceid',''),
             runtime: '02:10:10',
             mode:' Active Mode',
     };

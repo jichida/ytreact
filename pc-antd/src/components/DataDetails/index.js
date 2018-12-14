@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Card, Row, Col, Table, Button, Select, Input, Progress } from 'antd';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import _ from 'lodash';
+import lodashget from 'lodash.get';
 import moment from 'moment';
 import 'moment-timezone';
 import GridContent from '../GridContent';
@@ -203,7 +205,7 @@ const TopChart = injectIntl(({average, ionmembrance, frontfilter1, frontfilter2,
     return (
         <Row gutter={24} style={{marginTop: 30}}>
             <Col span={24} style={{textAlign: 'center'}}>
-                {   
+                {
                      _.map(chartData, (item)=>{
                         return (
                             <Chart {...item} key={item.title} />
@@ -218,8 +220,8 @@ const TopChart = injectIntl(({average, ionmembrance, frontfilter1, frontfilter2,
 const Chart = ({title, unit, data, warring})=>{
     return (
         <div className="chart">
-            <Progress type="circle" 
-                percent={data} 
+            <Progress type="circle"
+                percent={data}
                 width={100}
                 status={warring?"exception":"active"}
                 format={() => <React.Fragment><p className="data">{data}</p><p className="unit">{unit}</p></React.Fragment>} />
@@ -349,9 +351,9 @@ class DataDetails extends React.PureComponent {
         const { formatMessage } = this.props.intl;
         const tzs = timezoneOption();
 
-        const tzOptions = _.map(tzs, (item)=>{
+        const tzOptions = _.map(tzs, (item,key)=>{
             return (
-                <Option key={item.value} value={item.value}>{item.label}</Option>
+                <Option value={item.value} key={key}>{item.label}</Option>
             )
         })
 
@@ -378,8 +380,8 @@ class DataDetails extends React.PureComponent {
                         <div className="command">
                             <h4>Send a Command</h4>
                             <div className="send">
-                                <Input value={this.state.action} 
-                                    onChange={(e)=>{this.setState({action: e.target.value})}} 
+                                <Input value={this.state.action}
+                                    onChange={(e)=>{this.setState({action: e.target.value})}}
                                     style={{ width: '80%', marginRight:'10px' }}/>
                                 <Button onClick={this.handleSend}>send</Button></div>
                             <h4>Timezone</h4>
@@ -413,5 +415,10 @@ class DataDetails extends React.PureComponent {
         )
     }
 }
-
+const mapStateToProps =  ({device:{devices}},props) =>{
+  let curdevice = lodashget(devices,`${props.match.params.id}`,{});
+  console.log(curdevice)
+  return {curdevice};
+};
+DataDetails = connect(mapStateToProps)(DataDetails);
 export default withRouter(injectIntl(DataDetails));

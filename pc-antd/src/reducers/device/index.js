@@ -2,12 +2,14 @@ import { createReducer } from 'redux-act';
 import {
   adddevice_result,
   getdevice_result,
-  setuserdevice_result
+  setuserdevice_result,
+  page_getdevice_result
 } from '../../actions/index.js';
 import moment from 'moment';
 import 'moment-timezone';
 const curTZ = moment.tz.guess();
 const initial = {
+    devices:{},
     device: {
       _id:'',
       basicinfo:{
@@ -92,6 +94,15 @@ const initial = {
 };
 
 const device = createReducer({
+    [page_getdevice_result]:(state,payload)=>{
+      console.log(payload);
+      const {result:{docs}} = payload;
+      let devices = {};
+      for(let i= 0;i < docs.length; i++){
+        devices[docs[i]._id] = docs[i];
+      }
+      return {...state,devices};
+    },
     [adddevice_result]: (state, payload) => {
         return { ...state, ...payload };
     },

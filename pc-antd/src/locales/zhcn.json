@@ -68,7 +68,7 @@
   "machine.runing.normal": "正常运行",
   "machine.runing.abnormal": "异常运行",
   "machine.runing.offline": "未联网设备",
-  "machine.regional.china": "中国区域展示",
+  "machine.regional.china": "{value}",
   "machine.report.day": "日报",
   "machine.report.month": "日报",
   "machine.report.week": "日报",

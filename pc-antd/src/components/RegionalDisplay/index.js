@@ -1,7 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Card, Row, Col, List, Divider } from 'antd';
 import { injectIntl, FormattedMessage } from 'react-intl';
+import {getdeviceaddressstats_request,getdeviceaddressstats_result} from '../../actions';
+import {callthen} from '../../sagas/pagination';
+import lodashmap from 'lodash.map';
 import GridContent from '../GridContent';
 import './index.less';
 
@@ -98,21 +103,49 @@ const RegionalItem = injectIntl(({regional,total, normal, abnormal, offline, int
 
 
 class RegionalDisplay extends React.PureComponent {
+    state = {
+      data:[]
+    };
+    componentDidMount(){
+      // getdeviceaddressstats_request
+      const {dispatch,match,mapaddress} = this.props;
+      const addresslevel1 = match.params.addresslevel1;
+      // console.log(`start...`);
+      dispatch(callthen(getdeviceaddressstats_request,getdeviceaddressstats_result,{query:{addresslevel1}})).then((result)=>{
+        let resultdata = result.data;
+        let data = [];
+        for(let i = 0 ;i < resultdata.length; i++){
+          const {addresslevel1,...rest} = resultdata[i];
+          data.push({
+            regional:mapaddress[addresslevel1],
+            ...rest
+          });
+        }
+        console.log(resultdata);
+        this.setState({data:data});
+      }).catch((e)=>{
 
+      });
+
+    }
 
     render() {
+        const {history,match,mapaddress,intl} = this.props;
+        const addresslevel1 = match.params.addresslevel1;
+        const regionalname = intl.formatMessage({id:`machine.regional.china`},{value:mapaddress[addresslevel1]});
+        console.log(this.state.data);
         return (
             <GridContent>
                 <Card bordered={false} className="main-card">
                 <Row style={{marginBottom: 30}} className="title">
                     <Col span={24}>
-                        <img src={sb_icon} alt="" /><span><FormattedMessage id="machine.regional.china" /></span>
-                        <Link to="#" className="right-Link">&lt; <FormattedMessage id="app.return" /></Link>
+                        <img src={sb_icon} alt="" /><span><FormattedMessage id={`${regionalname}`} /></span>
+                        <div className="right-Link" onClick={()=>{history.goBack()}}>&lt; <FormattedMessage id="app.return" /></div>
                     </Col>
                 </Row>
                 <List
                     grid={{ gutter: 24, column: 4 }}
-                    dataSource={data}
+                    dataSource={this.state.data}
                     pagination={{
                         onChange: (page) => {
                           console.log(page);
@@ -130,5 +163,15 @@ class RegionalDisplay extends React.PureComponent {
         )
     }
 }
+const mapStateToProps =  ({addressconst:{addressconsts}}) =>{
+  let mapaddress = {};
+  // console.log(JSON.stringify(mapaddress));
+  lodashmap(addressconsts,(v,k)=>{
+    mapaddress[k] = v.name;
+  });
+  console.log(JSON.stringify(mapaddress));
+  return {mapaddress};
+};
 
-export default RegionalDisplay;
+RegionalDisplay = connect(mapStateToProps)(RegionalDisplay);
+export default withRouter(injectIntl(RegionalDisplay));

@@ -20,9 +20,10 @@ export default class GlobalHeaderRight extends PureComponent {
       // currentUser,
       onMenuClick,
       theme,
+      name
     } = this.props;
 
-    
+    console.log(name)
 
     // 用户登录信息菜单
     const menu = (
@@ -61,14 +62,14 @@ export default class GlobalHeaderRight extends PureComponent {
                 src={currentUser.avatar}
                 alt="avatar"
               />
-              <span className="name">{currentUser.name}</span>
+              <span className="name">{name}</span>
               <Icon type="down" />
             </span>
           </Dropdown>
         ) : (
           <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
         )}
-       
+
       </div>
     );
   }

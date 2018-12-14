@@ -6,6 +6,7 @@ import { Card, Row, Col, List, Divider } from 'antd';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import {getdeviceaddressstats_request,getdeviceaddressstats_result} from '../../actions';
 import {callthen} from '../../sagas/pagination';
+import lodashmap from 'lodash.map';
 import GridContent from '../GridContent';
 import './index.less';
 
@@ -102,13 +103,26 @@ const RegionalItem = injectIntl(({regional,total, normal, abnormal, offline, int
 
 
 class RegionalDisplay extends React.PureComponent {
+    state = {
+      data:[]
+    };
     componentDidMount(){
       // getdeviceaddressstats_request
-      const {dispatch,match} = this.props;
+      const {dispatch,match,mapaddress} = this.props;
       const addresslevel1 = match.params.addresslevel1;
-      debugger;
+      // console.log(`start...`);
       dispatch(callthen(getdeviceaddressstats_request,getdeviceaddressstats_result,{query:{addresslevel1}})).then((result)=>{
-
+        let resultdata = result.data;
+        let data = [];
+        for(let i = 0 ;i < resultdata.length; i++){
+          const {addresslevel1,...rest} = resultdata[i];
+          data.push({
+            regional:mapaddress[addresslevel1],
+            ...rest
+          });
+        }
+        console.log(resultdata);
+        this.setState({data:data});
       }).catch((e)=>{
 
       });
@@ -117,6 +131,7 @@ class RegionalDisplay extends React.PureComponent {
 
     render() {
         const {history} = this.props;
+        console.log(this.state.data);
         return (
             <GridContent>
                 <Card bordered={false} className="main-card">
@@ -128,7 +143,7 @@ class RegionalDisplay extends React.PureComponent {
                 </Row>
                 <List
                     grid={{ gutter: 24, column: 4 }}
-                    dataSource={data}
+                    dataSource={this.state.data}
                     pagination={{
                         onChange: (page) => {
                           console.log(page);
@@ -146,6 +161,15 @@ class RegionalDisplay extends React.PureComponent {
         )
     }
 }
+const mapStateToProps =  ({addressconst:{addressconsts}}) =>{
+  let mapaddress = {};
+  // console.log(JSON.stringify(mapaddress));
+  lodashmap(addressconsts,(v,k)=>{
+    mapaddress[k] = v.name;
+  });
+  console.log(JSON.stringify(mapaddress));
+  return {mapaddress};
+};
 
-RegionalDisplay = connect()(RegionalDisplay);
+RegionalDisplay = connect(mapStateToProps)(RegionalDisplay);
 export default withRouter(injectIntl(RegionalDisplay));

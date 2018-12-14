@@ -16,14 +16,14 @@ class SelectLang extends PureComponent {
   changLang = ({ key }) => {
     // setLocale(key);
     // console.log(key)
-    debugger;
+    // debugger;
     const {dispatch} = this.props;
     dispatch(ui_set_language(key));
   };
 
   render() {
     const selectedLang = this.props.locale;
-    debugger;
+    // debugger;
     const langMenu = (
       <Menu className="menu" selectedKeys={[selectedLang]} onClick={(v)=>{this.changLang(v)}}>
         <Menu.Item key="zh-cn">

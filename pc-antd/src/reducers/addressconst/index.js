@@ -17,9 +17,9 @@ const addressconst = createReducer({
         const {data} = payload;
         let addressconsts = {};
         lodashmap(data,(v,k)=>{
-          addressconsts[k] = v;
+          addressconsts[v._id] = v;
         })
-        return { ...state, addressconsts:{...addressconsts} };
+        return { ...state, addressconsts };
     },
 }, initial.addressconst);
 

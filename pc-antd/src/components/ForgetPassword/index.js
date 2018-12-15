@@ -48,12 +48,14 @@ class ForgetPassword extends React.Component {
 
   onGetCaptcha = ()=>{
     new Promise((resolve, reject) => {
-      const {dispatch} = this.props;
-      this.props.form.validateFields(['mobile'], {}, (err, values) => {
+      this.loginForm.validateFields(['mobile'], {}, (err, values) => {        
         if (err) {
+            console.log(err)
             // Toast.fail(this.props.intl.formatMessage({id: 'login.inputdeviceid'}));
             reject();
         } else {
+          console.log(values)
+          const {dispatch} = this.props;
           dispatch(callthen(sendauth_request,sendauth_result,{
             username:values.mobile,
             reason:'findpwd'
@@ -96,7 +98,12 @@ class ForgetPassword extends React.Component {
               </div>
             </Row>
             <Row>
-              <Login onSubmit={this.onSubmit} className="login">
+              <Login onSubmit={this.onSubmit} 
+                className="login"
+                ref={form => {
+                  this.loginForm = form;
+                }}
+              >
                   {
                       this.state.notice &&
                       <Alert style={{ marginBottom: 24 }} message={this.state.notice} type="error" showIcon closable />

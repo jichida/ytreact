@@ -46,35 +46,22 @@ class ForgetPassword extends React.Component {
     console.log(value);
   }
 
-  onGetCaptcha = ()=>{
+  onGetCaptcha = () =>
     new Promise((resolve, reject) => {
-      this.loginForm.validateFields(['mobile'], {}, (err, values) => {        
+      this.loginForm.validateFields(['mobile'], {}, (err, values) => {
         if (err) {
-            console.log(err)
-            // Toast.fail(this.props.intl.formatMessage({id: 'login.inputdeviceid'}));
-            reject();
+          reject(err);
         } else {
-          console.log(values)
-          const {dispatch} = this.props;
+          const { dispatch } = this.props;
           dispatch(callthen(sendauth_request,sendauth_result,{
             username:values.mobile,
             reason:'findpwd'
-          })).then(()=>{
-            resolve();
-          }).catch((e)=>{
-            reject();
-          });
-        //   dispatch({
-        //     type: 'login/getCaptcha',
-        //     payload: values.mobile,
-        //   })
-        //     .then(resolve)
-        //     .catch(reject);
+          }))
+            .then(resolve)
+            .catch(reject);
         }
       });
     });
-  };
-
 
   render() {
     const { formatMessage } = this.props.intl;

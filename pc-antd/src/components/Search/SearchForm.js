@@ -34,43 +34,39 @@ class SearchForm extends React.PureComponent{
     state = {
         selectedCountry: {},
         selectedRegion: {},
-        citys:[],
-        areas:[],
     }
 
-    handleProvinceChange = (value)=>{
-        let cur = lodashfind(provinces, (item)=>(
-            item.name === value
-        ));
-        console.log('当前省份');
-        console.log(cur);
-        if(cur){
-            if(this.state.selectedProvince!==cur){
-                this.setState({
-                    selectedProvince: cur,
-                });
+    handleCountryChange = (value)=>{
+        // let cur = lodashfind(provinces, (item)=>(
+        //     item.name === value
+        // ));
+        // if(cur){
+        //     if(this.state.selectedProvince!==cur){
+        //         this.setState({
+        //             selectedProvince: cur,
+        //         });
 
-                this.props.form.resetFields(['city','area']);
+        //         this.props.form.resetFields(['city','area']);
 
-                let citys = lodashmap(cur.city, (item)=>(
-                    <Option key={item.name}>{item.name}</Option>
-                ));
+        //         let citys = lodashmap(cur.city, (item)=>(
+        //             <Option key={item.name}>{item.name}</Option>
+        //         ));
 
-                this.setState({
-                    citys,
-                    areas:[],
-                });
-                if(citys.length===1){
-                    let areas = lodashmap(cur.city, (item)=>(
-                        <Option key={item.name}>{item.name}</Option>
-                    ));
-                    this.setState({
-                        selectedCity: cur.city,
-                        areas
-                    })
-                }
-            }
-        }
+        //         this.setState({
+        //             citys,
+        //             areas:[],
+        //         });
+        //         if(citys.length===1){
+        //             let areas = lodashmap(cur.city, (item)=>(
+        //                 <Option key={item.name}>{item.name}</Option>
+        //             ));
+        //             this.setState({
+        //                 selectedCity: cur.city,
+        //                 areas
+        //             })
+        //         }
+        //     }
+        // }
         
     }
 
@@ -106,10 +102,10 @@ class SearchForm extends React.PureComponent{
                                 }],
                             })(
                                 <Select placeholder={formatMessage({id: 'app.search.country'})} size="large" onChange={this.handleCountryChange} style={{width: '100%'}}>
-                                {   lodashmap(provinces, (item)=>(
+                                {/* {   lodashmap(provinces, (item)=>(
                                         <Option key={item.name}>{item.name}</Option>
                                     ))
-                                }
+                                } */}
                                 </Select>
                             )}
                             </Col>
@@ -120,7 +116,7 @@ class SearchForm extends React.PureComponent{
                                 }],
                             })(
                                 <Select placeholder={formatMessage({id: 'app.search.region'})} size="large" onChange={this.handleRegionChange} style={{width: '100%'}}>
-                                    {this.state.areas}
+                                    {/* {this.state.areas} */}
                                 </Select>
                             )}
                             </Col>

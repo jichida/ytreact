@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Login from '../AntdLogin';
 import { Alert, Card, Select, Row } from 'antd';
 import {sendauth_request,sendauth_result,findpwd_request} from '../../actions';
+import {ui_set_language} from '../../actions';
 import {callthen} from '../../sagas/pagination';
 import { injectIntl } from 'react-intl';
 import logo from '../../assets/title.png';
@@ -44,6 +45,9 @@ class ForgetPassword extends React.Component {
 
   handleChange = (value)=>{
     console.log(value);
+    const {dispatch} = this.props;
+    dispatch(ui_set_language(value));
+
   }
 
   onGetCaptcha = () =>
@@ -78,14 +82,14 @@ class ForgetPassword extends React.Component {
               <div className="languages">
                 <img src={language_icon} alt="" />
                 <Select defaultValue="简体中文" className="select" style={{ width: 120 }} onChange={this.handleChange}>
-                  <Option value="简体中文">简体中文</Option>
-                  <Option value="繁体中文">繁体中文</Option>
-                  <Option value="English">English</Option>
+                  <Option value="zh-cn">简体中文</Option>
+                  <Option value="zh-tw">繁体中文</Option>
+                  <Option value="en">English</Option>
                 </Select>
               </div>
             </Row>
             <Row>
-              <Login onSubmit={this.onSubmit} 
+              <Login onSubmit={this.onSubmit}
                 className="login"
                 ref={form => {
                   this.loginForm = form;

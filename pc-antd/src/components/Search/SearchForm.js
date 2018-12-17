@@ -1,6 +1,8 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
 import {Card, Form, Select, Input, Button, Row, Col } from 'antd';
 import { injectIntl } from 'react-intl';
+import config from '../../env/config';
 import lodashmap from 'lodash.map';
 import lodashfind from 'lodash.find';
 import provinces from '../provinces.js';
@@ -33,7 +35,8 @@ class SearchForm extends React.PureComponent{
 
     state = {
         selectedCountry: {},
-        selectedRegion: {},
+        selectedRegion: '5c11df1d34f6297e19e3bfbe',
+        areas:[]
     }
 
     handleCountryChange = (value)=>{
@@ -67,17 +70,18 @@ class SearchForm extends React.PureComponent{
         //         }
         //     }
         // }
-        
+
     }
 
     handleRegionChange = (value)=>{
         this.setState({
             selectedRegion: value,
         });
+        console.log(value);
     }
 
     render(){
-        const { form, onSubmit } = this.props;
+        const { form, onSubmit,provinces } = this.props;
         const { formatMessage } = this.props.intl;
         const { getFieldDecorator, validateFields } = form;
         const onValidateForm = () => {
@@ -87,7 +91,7 @@ class SearchForm extends React.PureComponent{
             }
           });
         };
-
+        console.log(this.state.selectedRegion);
         return (
             <Card bordered={false}>
                 <Form layout="horizontal" hideRequiredMark>
@@ -97,26 +101,28 @@ class SearchForm extends React.PureComponent{
                         <Row gutter={24}>
                             <Col span={12}>
                             {getFieldDecorator('country', {
-                                rules: [{ 
+                                rules: [{
                                     required: true, message: `${formatMessage({id: 'app.search.country'})}`,
                                 }],
                             })(
-                                <Select placeholder={formatMessage({id: 'app.search.country'})} size="large" onChange={this.handleCountryChange} style={{width: '100%'}}>
-                                {/* {   lodashmap(provinces, (item)=>(
-                                        <Option key={item.name}>{item.name}</Option>
+                                <Select placeholder={formatMessage({id: 'app.search.country'})} size="large"
+                                  onChange={this.handleCountryChange} style={{width: '100%'}} value={this.state.selectedRegion}>
+                                {
+                                  lodashmap(provinces, (item)=>(
+                                        <Option key={item._id} value={item._id}>{item.name}</Option>
                                     ))
-                                } */}
+                                }
                                 </Select>
                             )}
                             </Col>
                             <Col span={12}>
                             {getFieldDecorator('area', {
-                                rules: [{ 
-                                    required: true, message: `${formatMessage({id: 'app.search.region'})}`, 
+                                rules: [{
+                                    required: true, message: `${formatMessage({id: 'app.search.region'})}`,
                                 }],
                             })(
                                 <Select placeholder={formatMessage({id: 'app.search.region'})} size="large" onChange={this.handleRegionChange} style={{width: '100%'}}>
-                                    {/* {this.state.areas} */}
+                                    {this.state.areas}
                                 </Select>
                             )}
                             </Col>
@@ -125,8 +131,8 @@ class SearchForm extends React.PureComponent{
                     </Row>
                     <Form.Item {...formItemLayout} label={formatMessage({id: 'app.search.distributor'})}>
                         {getFieldDecorator('distributor', {
-                            rules: [{ 
-                                required: true, message: `${formatMessage({id: 'app.search.distributor.choose'})}`, 
+                            rules: [{
+                                required: true, message: `${formatMessage({id: 'app.search.distributor.choose'})}`,
                             }],
                         })(
                             <Select placeholder={formatMessage({id: 'app.search.distributor.choose'})} size="large">
@@ -138,8 +144,8 @@ class SearchForm extends React.PureComponent{
                     </Form.Item>
                     <Form.Item {...formItemLayout} label={formatMessage({id: 'app.search.curstomer'})}>
                         {getFieldDecorator('customer', {
-                            rules: [{ 
-                                required: true, message: `${formatMessage({id: 'app.search.curstomer.input'})}`, 
+                            rules: [{
+                                required: true, message: `${formatMessage({id: 'app.search.curstomer.input'})}`,
                             }],
                         })(<Input size="large" placeholder={formatMessage({id: 'app.search.curstomer.input'})} />)}
                     </Form.Item>
@@ -152,4 +158,19 @@ class SearchForm extends React.PureComponent{
     }
 }
 
+const mapStateToProps =  ({addressconst:{addressconsts}}) =>{
+  let mapaddress = {};
+  let provinces = [];
+  // console.log(JSON.stringify(mapaddress));
+  lodashmap(addressconsts,(v,k)=>{
+    if(v.parent_id === config.rootaddressconst){
+      provinces.push(v);
+    }
+    mapaddress[k] = v.name;
+  });
+  // console.log(JSON.stringify(mapaddress));
+  return {mapaddress,provinces};
+};
+
+SearchForm = connect(mapStateToProps)(SearchForm);
 export default Form.create()(injectIntl(SearchForm))

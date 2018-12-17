@@ -38,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <Admin dataProvider = {dataProvider}
-      title = "益泰管理后台"
+      title = "溢泰管理后台"
       authProvider = {authProvider}
       customReducers = {{
         tree,

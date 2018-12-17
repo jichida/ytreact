@@ -9,6 +9,8 @@ import provinces from '../provinces.js';
 
 const Option = Select.Option;
 
+const defaultCountry = '5c11df1d34f6297e19e3bfbe'
+
 const formItemLayout = {
     labelCol: {
       span: 5,
@@ -32,45 +34,32 @@ const tailFormItemLayout = {
   };
 
 class SearchForm extends React.PureComponent{
+    constructor(props) {
+        super(props);
+        this.setAreasOption(defaultCountry);
+    }
+
+    setAreasOption = (country)=> {
+        lodashmap(this.props.areas, (v, k)=>{
+            if(v.parent_id === country) {
+                this.state.areasOptions.push( <Option key={v._id} value={v._id}>{v.name}</Option> )
+            }
+        })
+    }
 
     state = {
-        selectedCountry: {},
-        selectedRegion: '5c11df1d34f6297e19e3bfbe',
-        areas:[]
+        selectedCountry: '',
+        selectedRegion: '' ,
+        areasOptions:[]
     }
 
     handleCountryChange = (value)=>{
-        // let cur = lodashfind(provinces, (item)=>(
-        //     item.name === value
-        // ));
-        // if(cur){
-        //     if(this.state.selectedProvince!==cur){
-        //         this.setState({
-        //             selectedProvince: cur,
-        //         });
+        this.setState({
+            selectedCountry: value,
+        });
+        console.log(value);
 
-        //         this.props.form.resetFields(['city','area']);
-
-        //         let citys = lodashmap(cur.city, (item)=>(
-        //             <Option key={item.name}>{item.name}</Option>
-        //         ));
-
-        //         this.setState({
-        //             citys,
-        //             areas:[],
-        //         });
-        //         if(citys.length===1){
-        //             let areas = lodashmap(cur.city, (item)=>(
-        //                 <Option key={item.name}>{item.name}</Option>
-        //             ));
-        //             this.setState({
-        //                 selectedCity: cur.city,
-        //                 areas
-        //             })
-        //         }
-        //     }
-        // }
-
+        this.setAreasOption(value);
     }
 
     handleRegionChange = (value)=>{
@@ -91,6 +80,7 @@ class SearchForm extends React.PureComponent{
             }
           });
         };
+        
         console.log(this.state.selectedRegion);
         return (
             <Card bordered={false}>
@@ -101,12 +91,14 @@ class SearchForm extends React.PureComponent{
                         <Row gutter={24}>
                             <Col span={12}>
                             {getFieldDecorator('country', {
+                                initialValue: defaultCountry,
                                 rules: [{
                                     required: true, message: `${formatMessage({id: 'app.search.country'})}`,
                                 }],
                             })(
                                 <Select placeholder={formatMessage({id: 'app.search.country'})} size="large"
-                                  onChange={this.handleCountryChange} style={{width: '100%'}} value={this.state.selectedRegion}>
+                                  onChange={this.handleCountryChange} style={{width: '100%'}} 
+                                >
                                 {
                                   lodashmap(provinces, (item)=>(
                                         <Option key={item._id} value={item._id}>{item.name}</Option>
@@ -122,7 +114,7 @@ class SearchForm extends React.PureComponent{
                                 }],
                             })(
                                 <Select placeholder={formatMessage({id: 'app.search.region'})} size="large" onChange={this.handleRegionChange} style={{width: '100%'}}>
-                                    {this.state.areas}
+                                    {this.state.areasOptions}
                                 </Select>
                             )}
                             </Col>
@@ -161,15 +153,18 @@ class SearchForm extends React.PureComponent{
 const mapStateToProps =  ({addressconst:{addressconsts}}) =>{
   let mapaddress = {};
   let provinces = [];
+  let areas = [];
   // console.log(JSON.stringify(mapaddress));
   lodashmap(addressconsts,(v,k)=>{
     if(v.parent_id === config.rootaddressconst){
       provinces.push(v);
+    } else {
+        areas.push(v)
     }
     mapaddress[k] = v.name;
   });
   // console.log(JSON.stringify(mapaddress));
-  return {mapaddress,provinces};
+  return {mapaddress,provinces, areas};
 };
 
 SearchForm = connect(mapStateToProps)(SearchForm);

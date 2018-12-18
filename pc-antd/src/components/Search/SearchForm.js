@@ -34,17 +34,22 @@ const tailFormItemLayout = {
   };
 
 class SearchForm extends React.PureComponent{
-    constructor(props) {
-        super(props);
-        this.setAreasOption(defaultCountry);
+    // constructor(props) {
+    //     super(props);
+    //
+    // }
+    componentDidMount(){
+      this.setAreasOption(defaultCountry);
     }
 
     setAreasOption = (country)=> {
+        let areasOptions = [];
         lodashmap(this.props.areas, (v, k)=>{
             if(v.parent_id === country) {
-                this.state.areasOptions.push( <Option key={v._id} value={v._id}>{v.name}</Option> )
+                areasOptions.push( <Option key={v._id} value={v._id}>{v.name}</Option> )
             }
-        })
+        });
+        this.setState({areasOptions});
     }
 
     state = {
@@ -80,7 +85,7 @@ class SearchForm extends React.PureComponent{
             }
           });
         };
-        
+
         console.log(this.state.selectedRegion);
         return (
             <Card bordered={false}>
@@ -97,7 +102,7 @@ class SearchForm extends React.PureComponent{
                                 }],
                             })(
                                 <Select placeholder={formatMessage({id: 'app.search.country'})} size="large"
-                                  onChange={this.handleCountryChange} style={{width: '100%'}} 
+                                  onChange={this.handleCountryChange} style={{width: '100%'}}
                                 >
                                 {
                                   lodashmap(provinces, (item)=>(

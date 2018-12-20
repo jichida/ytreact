@@ -5,7 +5,9 @@ import { injectIntl } from 'react-intl';
 import config from '../../env/config';
 import lodashmap from 'lodash.map';
 import lodashfind from 'lodash.find';
-import provinces from '../provinces.js';
+
+import { getdistributorlist_request, getdistributorlist_result } from '../../actions';
+import {callthen} from '../../sagas/pagination';
 
 const Option = Select.Option;
 
@@ -52,10 +54,27 @@ class SearchForm extends React.PureComponent{
         this.setState({areasOptions});
     }
 
+    setDistributorOption = (country, area) => {
+        const { dispatch } = this.props;
+        dispatch(callthen(getdistributorlist_request, getdistributorlist_result, {query:{ country, area }})).then((result)=>{
+            let resultdata = result.data;
+            let distributorOptions = [];
+            lodashmap(resultdata, (item)=>{
+                distributorOptions.push( 
+                    <Option key={item._id} value={item._id}>{item.name}</Option>
+                )
+            })
+
+            this.setState({ distributorOptions });
+          }).catch((e)=>{
+    
+          });
+    }
+
     state = {
         selectedCountry: '',
-        selectedRegion: '' ,
-        areasOptions:[]
+        areasOptions:[],
+        distributorOptions: [],
     }
 
     handleCountryChange = (value)=>{
@@ -72,6 +91,7 @@ class SearchForm extends React.PureComponent{
             selectedRegion: value,
         });
         console.log(value);
+        this.setDistributorOption(this.state.selectedCountry, value);
     }
 
     render(){
@@ -133,6 +153,7 @@ class SearchForm extends React.PureComponent{
                             }],
                         })(
                             <Select placeholder={formatMessage({id: 'app.search.distributor.choose'})} size="large">
+                                    {/* {this.state.distributorOptions} */}
                                 <Option key="经销商1">经销商1</Option>
                                 <Option key="经销商2">经销商2</Option>
                                 <Option key="经销商3">经销商3</Option>

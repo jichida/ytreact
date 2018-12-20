@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col } from 'antd';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
 import GridContent from '../GridContent';
 import SearchForm from './SearchForm';
 import abnormal_img from '../../assets/search_a.png';
 import all_img from '../../assets/search_b.png';
 import global_img from '../../assets/search_c.png';
+import { search_setquery } from '../../actions';
 import './index.less';
 
 const NavCard = ({img, title})=> { 
@@ -22,6 +24,8 @@ class Search extends React.PureComponent {
     handleSubmit = (values)=>{
         console.log(values)
         // 结果： {country: "5c11df1d34f6297e19e3bfbe", area: "5c11e40534f6297e19e3bfc6", distributor: "经销商1", customer: "abc"}
+        this.props.dispatch(search_setquery(values));
+        
     }
 
     render() {
@@ -65,4 +69,4 @@ class Search extends React.PureComponent {
     }
 }
 
-export default Search;
+export default connect()(Search)

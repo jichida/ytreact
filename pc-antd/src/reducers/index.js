@@ -8,6 +8,7 @@ import device from './device';
 import wifi from './wifi';
 import devicedata from './devicedata';
 import addressconst from './addressconst';
+import searchquery from './searchquery'
 
 export default (history)=>combineReducers(
   {
@@ -17,6 +18,7 @@ export default (history)=>combineReducers(
     devicedata,
     wifi,
     userlogin,
+    searchquery,
     form: formReducer,
     router: connectRouter(history),
   });

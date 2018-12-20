@@ -6,3 +6,4 @@ export * from './ui.js';
 export * from './device.js';
 export * from './distributor';
 export * from './addressconst';
+export * from './searchquery';

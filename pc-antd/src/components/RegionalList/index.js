@@ -23,7 +23,7 @@ class Machines extends React.PureComponent {
     componentDidMount(){
       const { match } = this.props;
       const addresslevel2 = match.params.addresslevel2;
-      this.props.dispatch(callthen(getdistributorlist_request,getdistributorlist_result,{addresslevel2})).then((result) => {
+      this.props.dispatch(callthen(getdistributorlist_request,getdistributorlist_result,{ query:{ addresslevel2 }})).then((result) => {
 
         let distributorids = [];
         lodashmap(result.data,(v)=>{
@@ -31,6 +31,12 @@ class Machines extends React.PureComponent {
         });
         console.log(distributorids);
         this.setState({distributorids})
+
+        window.setTimeout(()=>{
+          console.log(this.refs);
+            // this.refs.listviewpage.onRefresh();
+        },10);
+
       }).catch((err) => {
         console.log(err);
       })
@@ -50,6 +56,7 @@ class Machines extends React.PureComponent {
                     </Col>
                 </Row>
                 <DeviceList
+                    ref='listviewpage'
                     query={{distributorid:{$in:this.state.distributorids}}}
                 />
                 </Card>

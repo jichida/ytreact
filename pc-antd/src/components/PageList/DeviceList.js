@@ -31,8 +31,10 @@ const MachineItem = ({iserr, address, reportdate, id, name, runtime, mode, histo
 }
 
 
-class DeviceList extends PureComponent {
-
+class DeviceList extends React.Component {
+  onRefresh(){
+    this.refs.antdtablealarm.getWrappedInstance().onRefresh();
+  }
   componentDidMount() {
   }
   onItemConvert(iteminput){
@@ -47,13 +49,27 @@ class DeviceList extends PureComponent {
     };
     return item;
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    const nextData = lodashget(nextProps,'query',{});
+    const curData = lodashget(this.props,'query',{});
+    if( nextData.length === curData.length ){
+      if(JSON.stringify(nextData) === JSON.stringify(curData)){
+        return false;
+      }
+    }
+    window.setTimeout(()=>{
+      this.onRefresh();
+    },0);
 
+    return true;//render
+  }
   render() {
     let query = this.props.query || {};
     const renderItem = (item)=>{
+      console.log(item)
       return (
         <List.Item>
-            <MachineItem {...item} {...this.props} />
+            <MachineItem {...item} history={this.props.history} />
         </List.Item>
       );
     };

@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { PureComponent }  from 'react';
 import { List } from 'antd';
 import map from 'lodash.map';
 import get from 'lodash.get';
@@ -14,7 +14,7 @@ const listtypeiddata = {
     currentpage
 }
 */
-class AntdTable extends React.Component {
+class AntdTable extends PureComponent {
 
     constructor(props) {
         super(props);

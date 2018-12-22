@@ -127,13 +127,15 @@ export default class BaseMenu extends PureComponent {
     }
     const { location, isMobile, onCollapse, match } = this.props;
     let dotClass = 'dot';
+
     if((itemPath==='/search'&&match.path==='/result')
       ||(itemPath==='/distribution'&&match.path==='/regional/:addresslevel1')
       ||(itemPath==='/distribution'&&match.path==='/regional_list/:addresslevel2')
       ||(itemPath==='/distribution'&&match.path==='/distribution_list')){
+
       dotClass='selected-dot';
     }
-      
+
     return (
       <Link
         className="except"

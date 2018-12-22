@@ -15,73 +15,17 @@ import sb_err from '../../assets/sb_yc.png';
 import sb_normal from '../../assets/sb_zc.png';
 import sb_off from '../../assets/sb_wlw.png';
 
-const data = [
-    {
-        regional: '东北',
-        total: '970',
-        normal: 10,
-        abnormal: 6,
-        offline: 10,
-    },
-    {
-        regional: '东北',
-        total: '970',
-        normal: 10,
-        abnormal: 6,
-        offline: 10,
-    },
-    {
-        regional: '东北',
-        total: '970',
-        normal: 10,
-        abnormal: 6,
-        offline: 10,
-    },
-    {
-        regional: '东北',
-        total: '970',
-        normal: 10,
-        abnormal: 6,
-        offline: 10,
-    },
-    {
-        regional: '东北',
-        total: '970',
-        normal: 10,
-        abnormal: 6,
-        offline: 10,
-    },
-    {
-        regional: '东北',
-        total: '970',
-        normal: 10,
-        abnormal: 6,
-        offline: 10,
-    },
-    {
-        regional: '东北',
-        total: '970',
-        normal: 10,
-        abnormal: 6,
-        offline: 10,
-    },
-    {
-        regional: '东北',
-        total: '970',
-        normal: 10,
-        abnormal: 6,
-        offline: 10,
-    },
-]
 
-const RegionalItem = withRouter(injectIntl(({regional,total, normal, abnormal, offline, intl, history})=>{
+const RegionalItem = withRouter(injectIntl((props)=>{
+    console.log(props);
+    const {addresslevel2,regional,total, normal, abnormal, offline, intl, history} = props;
     const { formatMessage } = intl;
     return (
         <Card
             className="child-card"
             title={<p>
                 <span>{regional}{formatMessage({id: 'machine.regional'})}</span>
-                <span className="regional-detail" onClick={()=>{history.push(`/regional_list/${regional}`)}}>{formatMessage({id: 'machine.detail'})}</span>
+                <span className="regional-detail" onClick={()=>{history.push(`/regional_list/${addresslevel2}`)}}>{formatMessage({id: 'machine.detail'})}</span>
             </p>}
         >
             <Row gutter={8}>
@@ -118,9 +62,10 @@ class RegionalDisplay extends React.PureComponent {
         let resultdata = result.data;
         let data = [];
         for(let i = 0 ;i < resultdata.length; i++){
-          const {addresslevel1,...rest} = resultdata[i];
+          const {addresslevel2,...rest} = resultdata[i];
           data.push({
-            regional:mapaddress[addresslevel1],
+            regional:mapaddress[addresslevel2],
+            addresslevel2,
             ...rest
           });
         }

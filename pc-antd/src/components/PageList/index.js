@@ -30,6 +30,21 @@ class AntdTable extends PureComponent {
         }
     }
 
+    // shouldComponentUpdate(nextProps, nextState) {
+    //   const nextData = get(nextProps,'query',{});
+    //   const curData = get(this.props,'query',{});
+    //   if( nextData.length === curData.length ){
+    //     if(JSON.stringify(nextData) === JSON.stringify(curData)){
+    //       return false;
+    //     }
+    //   }
+    //   window.setTimeout(()=>{
+    //     this.onRefresh();
+    //   },0);
+    //
+    //   return true;//render
+    // }
+
     // componentWillUnmount() {
     //   this.mounted = false;
     // }

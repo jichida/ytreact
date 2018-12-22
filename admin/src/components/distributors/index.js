@@ -33,7 +33,9 @@ export const UserFilter = props => (
 const DistributorCreate = (props) => {
       return (<Create {...props} >
            <SimpleForm redirect="list">
+             <TextInput label="登录名" source="username" validation={{ required: true }}/>
              <TextInput label="名字" source="name" validation={{ required: true }}/>
+             <TextInput label="简称" source="logname" validation={{ required: true }}/>
              <ReferenceInput label="所属区域" source="addresslevel1" reference="addressconst" allowEmpty
                filter={{ parent_id: "5c11e0d340dc7d07eacf33a6" }}>
                  <SelectInput optionText="name" />
@@ -54,8 +56,10 @@ const DistributorCreate = (props) => {
 const DistributorEdit = (props) => {
       return (<Edit {...props}>
           <SimpleForm>
-              <TextInput label="名字" source="name" validation={{ required: true }}/>
-              <ReferenceInput label="所属区域" source="addresslevel1" reference="addressconst" allowEmpty
+            <TextInput label="登录名" source="username" validation={{ required: true }}/>
+            <TextInput label="名字" source="name" validation={{ required: true }}/>
+            <TextInput label="简称" source="logname" validation={{ required: true }}/>
+            <ReferenceInput label="所属区域" source="addresslevel1" reference="addressconst" allowEmpty
                 filter={{ parent_id: "5c11e0d340dc7d07eacf33a6" }}>
                   <SelectInput optionText="name" />
               </ReferenceInput>
@@ -77,7 +81,9 @@ const DistributorEdit = (props) => {
 const DistributorList = (props) => (//
      <List title="经销商列表" {...props}  filters={<UserFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid>
+        <TextField label="登录名" source="username"/>
         <TextField label="名字" source="name"/>
+        <TextField label="简称" source="logname"/>
         <ReferenceField label="所属区域" source="addresslevel1" reference="addressconst" allowEmpty>
             <TextField source="name" />
         </ReferenceField>

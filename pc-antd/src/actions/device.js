@@ -14,3 +14,6 @@ export const ui_setuserdevice_request = createAction('ui_setuserdevice_request')
 
 export const page_getdevice_request = createAction('page_getdevice_request');
 export const page_getdevice_result = createAction('page_getdevice_result');
+
+export const getdevicecount_request = createAction('getdevicecount_request');
+export const getdevicecount_result = createAction('getdevicecount_result');

@@ -45,7 +45,7 @@ class DeviceList extends PureComponent {
   }
   onItemConvert(iteminput){
     const item =  {
-            iserr: true,
+            iserr: iteminput.iserr,
             address: lodashget(iteminput,'basicinfo.useraddress',''),
             reportdate: '20171116',
             id:lodashget(iteminput,'_id',''),

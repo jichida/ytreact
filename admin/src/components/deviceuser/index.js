@@ -122,7 +122,7 @@ const DeviceuserList = (props) => (//
           <ReferenceField label="经销商" source="distributorid" reference="distributor" allowEmpty>
               <TextField source="name" />
           </ReferenceField>
-           <DateField label="用户名" source="username" />
+          <TextField label="用户名" source="username" />
           <EditButton />
         </Datagrid>
     </List>

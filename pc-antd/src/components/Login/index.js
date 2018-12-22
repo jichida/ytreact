@@ -13,6 +13,11 @@ import './index.less';
 
 const { UserName, Password, Submit } = Login;
 const { Option } = Select;
+const language = {
+  'zh-cn': '简体中文',
+  'zh-tw': '繁体中文',
+  'en': 'English',
+}
 
 class LoginPage extends React.Component {
 
@@ -65,10 +70,10 @@ class LoginPage extends React.Component {
             <Row>
               <div className="languages">
                 <img src={language_icon} alt="" />
-                <Select defaultValue="简体中文" className="select" style={{ width: 120 }} onChange={this.handleChange}>
-                  <Option value="zh-cn">简体中文</Option>
-                  <Option value="zh-tw">繁体中文</Option>
-                  <Option value="en">English</Option>
+                <Select defaultValue={`${language[this.props.locale]}`} className="select" style={{ width: 120 }} onChange={this.handleChange}>
+                  <Option value="zh-cn">{`${language['zh-cn']}`}</Option>
+                  <Option value="zh-tw">{`${language['zh-tw']}`}</Option>
+                  <Option value="en">{`${language['en']}`}</Option>
                 </Select>
               </div>
             </Row>
@@ -96,6 +101,8 @@ class LoginPage extends React.Component {
     );
   }
 }
-
-LoginPage = connect()(LoginPage);
+const mapStateToProps =  ({app:{locale}}) =>{
+  return {locale};
+};
+LoginPage = connect(mapStateToProps)(LoginPage);
 export default withRouter(injectIntl(LoginPage));

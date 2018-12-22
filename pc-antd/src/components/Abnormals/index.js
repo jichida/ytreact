@@ -20,7 +20,7 @@ class Machines extends React.PureComponent {
                     </Col>
                 </Row>
                 <DeviceList
-                    query={{}}
+                    query={{iserr:true}}
                 />
                 </Card>
             </GridContent>

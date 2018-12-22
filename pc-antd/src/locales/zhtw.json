@@ -29,6 +29,8 @@
 "app.search.curstomer.input": "請輸入客戶名稱",
 "machine.abnormal": "異常機器",
 "machine.all": "全部設備",
+"machine.all.normal": "全部正常設備",
+"machine.all.abnormal": "全部異常設備",
 "machine.distribution": "全球分佈",
 "machine.id": "識別編號",
 "machine.name": "設備名稱",

@@ -29,6 +29,8 @@
   "app.search.curstomer.input": "请输入客户名称",
   "machine.abnormal": "异常机器",
   "machine.all": "全部设备",
+  "machine.all.normal": "全部正常设备",
+  "machine.all.abnormal": "全部异常设备",
   "machine.distribution": "全球分布",
   "machine.id": "识别编号",
   "machine.name": "设备名称",

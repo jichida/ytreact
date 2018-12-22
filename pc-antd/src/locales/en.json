@@ -29,6 +29,8 @@
 "app.search.curstomer.input": "Please enter a customer name",
 "machine.abnormal": "Exception machine",
 "machine.all": "all devices",
+"machine.all.normal": "all normal devices",
+"machine.all.abnormal": "all abnormal devices",
 "machine.distribution": "global distribution",
 "machine.id": "identification number",
 "machine.name": "device name",

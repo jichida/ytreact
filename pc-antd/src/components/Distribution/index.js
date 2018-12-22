@@ -41,7 +41,7 @@ class Distribution extends React.PureComponent {
     } else {
       this.props.dispatch(search_setquery({query: {iserr: false}}));
     }
-    this.props.history.push('/result');
+    this.props.history.push('/distribution_list');
   }
 
     render() {

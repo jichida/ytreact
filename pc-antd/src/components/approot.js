@@ -10,6 +10,7 @@ import SearchResult from './SearchResult';
 import Abnormals from './Abnormals';
 import Machines from './Machines'; // 全部机器/异常机器
 import Distribution from './Distribution'; // 全球分布
+import DistributionList from './DistributionList';
 import ActionList from './ActionList';  // 操作指令
 import Statistics from './Statistics';  // 数据统计
 import DataDetails from './DataDetails'; // 数据详情
@@ -45,6 +46,7 @@ class AppRoot extends React.Component {
             <Route path='/abnormals' component={Layout(Abnormals)} />
             <Route path="/machines" component={Layout(Machines)} /> {/* :param  全部 / 异常 */}
             <Route path="/distribution" component={Layout(Distribution)} />
+            <Route path="/distribution_list" component={Layout(DistributionList)} />
             <Route path="/statistics" component={Layout(Statistics)} />
             <Route path="/regional/:addresslevel1" component={Layout(RegionalDisplay)} /> {/* :param  区域 */}
             <Route path="/regional_list/:addresslevel2" component={Layout(RegionalList)} />

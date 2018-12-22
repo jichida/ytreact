@@ -6,7 +6,7 @@ import {
 
 const initial = {
     distributor: {
-
+      distributors:{}
     },
 
 };

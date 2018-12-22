@@ -1,4 +1,4 @@
-import React, { PureComponent }  from 'react';
+import React  from 'react';
 import { List } from 'antd';
 import map from 'lodash.map';
 import get from 'lodash.get';
@@ -14,7 +14,7 @@ const listtypeiddata = {
     currentpage
 }
 */
-class AntdTable extends PureComponent {
+class AntdTable extends React.Component {
 
     constructor(props) {
         super(props);
@@ -29,6 +29,21 @@ class AntdTable extends PureComponent {
           pos:0
         }
     }
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //   const nextData = get(nextProps,'query',{});
+    //   const curData = get(this.props,'query',{});
+    //   if( nextData.length === curData.length ){
+    //     if(JSON.stringify(nextData) === JSON.stringify(curData)){
+    //       return false;
+    //     }
+    //   }
+    //   window.setTimeout(()=>{
+    //     this.onRefresh();
+    //   },0);
+    //
+    //   return true;//render
+    // }
 
     // componentWillUnmount() {
     //   this.mounted = false;

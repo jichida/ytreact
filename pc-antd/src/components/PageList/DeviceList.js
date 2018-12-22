@@ -32,14 +32,6 @@ const MachineItem = ({iserr, address, reportdate, id, name, runtime, mode, histo
 
 
 class DeviceList extends PureComponent {
-  constructor(props) {
-      super(props);
-      this.state = {
-        query:props.query || {}
-      };
-  }
-
-
 
   componentDidMount() {
   }
@@ -57,6 +49,7 @@ class DeviceList extends PureComponent {
   }
 
   render() {
+    let query = this.props.query || {};
     const renderItem = (item)=>{
       return (
         <List.Item>
@@ -67,6 +60,7 @@ class DeviceList extends PureComponent {
     const tableprops = {
       grid:{ gutter: 24, column: 4 }
     };
+    console.log(query);
     return (
             <PageList
               tableprops={tableprops}
@@ -76,7 +70,7 @@ class DeviceList extends PureComponent {
               ref='antdtablealarm'
               onItemConvert={this.onItemConvert.bind(this)}
               pagenumber={8}
-              query={this.state.query}
+              query={query}
               sort={{_id: -1}}
               queryfun={(payload)=>{
                 return callthen(page_getdevice_request,page_getdevice_result,payload);

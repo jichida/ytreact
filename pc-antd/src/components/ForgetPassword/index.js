@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import Login from '../AntdLogin';
-import { Alert, Card, Select, Row } from 'antd';
+import { Alert, Card, Select, Row, Button, Col } from 'antd';
+import { withRouter } from 'react-router-dom';
 import {sendauth_request,sendauth_result,findpwd_request} from '../../actions';
 import {ui_set_language} from '../../actions';
 import {callthen} from '../../sagas/pagination';
@@ -103,7 +104,11 @@ class ForgetPassword extends React.Component {
                   <Captcha name="captcha"  placeholder={formatMessage({id: 'user.captcha'})} buttonText={formatMessage({id: 'user.captcha.get'})} onGetCaptcha={this.onGetCaptcha} />
                   <Password name="password" placeholder={formatMessage({id: 'user.password.new'})} />
                   <Password name="confirm" placeholder={formatMessage({id: 'user.password.confirm'})} />
-                  <Submit>{formatMessage({id: 'user.password.reset'})}</Submit>
+                  <Row gutter={24}>
+                    <Col span={18}><Submit>{formatMessage({id: 'user.password.reset'})}</Submit></Col>
+                    <Col span={6}><Button size="large" onClick={()=>{this.props.history.goBack()}} style={{width: '100%'}}>返回</Button></Col>
+                  </Row>
+                  
                   <div className="forget">
                   </div>
               </Login>
@@ -115,4 +120,4 @@ class ForgetPassword extends React.Component {
   }
 }
 ForgetPassword = connect()(ForgetPassword);
-export default injectIntl(ForgetPassword);
+export default withRouter(injectIntl(ForgetPassword));

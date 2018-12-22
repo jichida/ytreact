@@ -8,14 +8,28 @@ import './index.less';
 import lodashmap from 'lodash.map';
 import global_img from '../../assets/qqfb_bg.png';
 import config from '../../env/config';
-const total = {
-    total: 960,
-    normal: 500,
-    abnormal: 460,
-}
+import {getdevicecount_request,getdevicecount_result} from '../../actions';
+import {callthen} from '../../sagas/pagination';
+
 
 class Distribution extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      total: 0,
+      normal: 0,
+      abnormal: 0,
+    };
+  }
 
+  componentDidMount(){
+    this.props.dispatch(callthen(getdevicecount_request,getdevicecount_result,{})).then((result) => {
+      console.log(result);
+      this.setState(result.data)
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
 
     render() {
         const { formatMessage } = this.props.intl;
@@ -38,11 +52,14 @@ class Distribution extends React.PureComponent {
                                   </Link>);
                                 })
                               }
-                              
+
                             </Card>
                         </Col>
                         <Col span={24}>
-                            <p className="total">{formatMessage({id: 'machine.distribution.para1'})} <span>{total.total}</span> {formatMessage({id: 'machine.distribution.para2'})} <span>{total.normal}</span> {formatMessage({id: 'machine.distribution.para3'})} <span>{total.abnormal}</span> {formatMessage({id: 'machine.distribution.para4'})}</p>
+                            <p className="total">{formatMessage({id: 'machine.distribution.para1'})} <span>{this.state.total}</span>
+                             {formatMessage({id: 'machine.distribution.para2'})} <span>{this.state.normal}</span>
+                             {formatMessage({id: 'machine.distribution.para3'})} <span>{this.state.abnormal}</span>
+                             {formatMessage({id: 'machine.distribution.para4'})}</p>
                         </Col>
                     </Row>
                 </Card>

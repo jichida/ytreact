@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout } from 'antd';
 import isEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
@@ -88,7 +88,7 @@ class BasicLayout extends React.PureComponent {
 
   state = {
     rendering: true,
-    isMobile: false, 
+    isMobile: false,
     menuData: this.getMenuData(),
   };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Card, Row, Col } from 'antd';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -11,7 +12,7 @@ import global_img from '../../assets/search_c.png';
 import { search_setquery } from '../../actions';
 import './index.less';
 
-const NavCard = ({img, title})=> { 
+const NavCard = ({img, title})=> {
     return (
         <div className="nav_pannel" style={{backgroundImage: `url(${img})`}}>
             <div><span className="nav_title">{title}</span><span className="nav_subtitle"><FormattedMessage id="machine.detail" /></span></div>
@@ -24,8 +25,11 @@ class Search extends React.PureComponent {
     handleSubmit = (values)=>{
         console.log(values)
         // 结果： {country: "5c11df1d34f6297e19e3bfbe", area: "5c11e40534f6297e19e3bfc6", distributor: "经销商1", customer: "abc"}
-        this.props.dispatch(search_setquery(values));
-        
+        const query = {
+          "distributorid" : values.distributor
+        };
+        this.props.dispatch(search_setquery({query,selectDistributor:values.distributor,customerName:values.customer}));
+        this.props.history.push('/result');
     }
 
     render() {
@@ -68,5 +72,5 @@ class Search extends React.PureComponent {
         )
     }
 }
-
+Search = withRouter(Search);
 export default connect()(Search)

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import Login from '../AntdLogin';
-import { Alert, Card, Select, Row, Button, Col } from 'antd';
+import { Alert, Card, Select, Row, Button, Col, Icon } from 'antd';
 import { withRouter } from 'react-router-dom';
 import {sendauth_request,sendauth_result,findpwd_request} from '../../actions';
 import {ui_set_language} from '../../actions';
@@ -78,15 +78,10 @@ class ForgetPassword extends React.Component {
           </div>
         </Row>
         <Row>
-          <Card className="login_panel">
+          <Card className="login_panel" >
             <Row>
-              <div className="languages">
-                <img src={language_icon} alt="" />
-                <Select defaultValue="简体中文" className="select" style={{ width: 120 }} onChange={this.handleChange}>
-                  <Option value="zh-cn">简体中文</Option>
-                  <Option value="zh-tw">繁体中文</Option>
-                  <Option value="en">English</Option>
-                </Select>
+              <div className="languages" onClick={()=>{this.props.history.goBack()}} style={{textAlign: 'center', color: '#ffff'}}>
+                <span style={{cursor: 'pointer', lineHeight: '14px'}}><Icon type="left" />  {formatMessage({id: 'app.return'})}</span>
               </div>
             </Row>
             <Row>
@@ -104,11 +99,7 @@ class ForgetPassword extends React.Component {
                   <Captcha name="captcha"  placeholder={formatMessage({id: 'user.captcha'})} buttonText={formatMessage({id: 'user.captcha.get'})} onGetCaptcha={this.onGetCaptcha} />
                   <Password name="password" placeholder={formatMessage({id: 'user.password.new'})} />
                   <Password name="confirm" placeholder={formatMessage({id: 'user.password.confirm'})} />
-                  <Row gutter={24}>
-                    <Col span={18}><Submit>{formatMessage({id: 'user.password.reset'})}</Submit></Col>
-                    <Col span={6}><Button size="large" onClick={()=>{this.props.history.goBack()}} style={{width: '100%'}}>返回</Button></Col>
-                  </Row>
-                  
+                  <Submit>{formatMessage({id: 'user.password.reset'})}</Submit>
                   <div className="forget">
                   </div>
               </Login>

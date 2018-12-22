@@ -4,6 +4,7 @@ import { Route,Switch } from 'react-router-dom';
 import BasicLayout from './layouts/BasicLayout.js'
 import Search from './Search';
 import RegionalDisplay from './RegionalDisplay'; // 区域展示/中国区域展示
+import RegionalList from './RegionalList';
 import Notice from './Notice'; // 通知公告
 import SearchResult from './SearchResult';
 import Abnormals from './Abnormals';
@@ -46,6 +47,7 @@ class AppRoot extends React.Component {
             <Route path="/distribution" component={Layout(Distribution)} />
             <Route path="/statistics" component={Layout(Statistics)} />
             <Route path="/regional/:addresslevel1" component={Layout(RegionalDisplay)} /> {/* :param  区域 */}
+            <Route path="/regional_list/:addresslevel2" component={Layout(RegionalList)} />
             <Route path="/details/:id" component={Layout(DataDetails)} />
             <Route path="/notice" component={Layout(Notice)} />
             <Route path="/actions" component={Layout(ActionList)} />

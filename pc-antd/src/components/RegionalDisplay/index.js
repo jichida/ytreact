@@ -74,12 +74,15 @@ const data = [
     },
 ]
 
-const RegionalItem = injectIntl(({regional,total, normal, abnormal, offline, intl})=>{
+const RegionalItem = withRouter(injectIntl(({regional,total, normal, abnormal, offline, intl, history})=>{
     const { formatMessage } = intl;
     return (
         <Card
             className="child-card"
-            title={<p><span>{regional}{formatMessage({id: 'machine.regional'})}</span></p>}
+            title={<p>
+                <span>{regional}{formatMessage({id: 'machine.regional'})}</span>
+                <span className="regional-detail" onClick={()=>{history.push(`/regional_list/${regional}`)}}>{formatMessage({id: 'machine.detail'})}</span>
+            </p>}
         >
             <Row gutter={8}>
                 <Col span={10}>
@@ -99,7 +102,7 @@ const RegionalItem = injectIntl(({regional,total, normal, abnormal, offline, int
             </Row>
         </Card>
     )
-})
+}))
 
 
 class RegionalDisplay extends React.PureComponent {

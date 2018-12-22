@@ -125,9 +125,17 @@ export default class BaseMenu extends PureComponent {
         </a>
       );
     }
-    const { location, isMobile, onCollapse } = this.props;
+    const { location, isMobile, onCollapse, match } = this.props;
+    let dotClass = 'dot';
+    if(itemPath==='/search'&&match.path==='/result'
+      ||itemPath==='/distribution'&&match.path==='/regional/:addresslevel1'
+      ||itemPath==='/distribution'&&match.path==='/regional_list/:addresslevel2'){
+      dotClass='selected-dot';
+    }
+      
     return (
       <Link
+        className="except"
         to={itemPath}
         target={target}
         replace={itemPath === location.pathname}
@@ -141,7 +149,7 @@ export default class BaseMenu extends PureComponent {
       >
         {icon}
         <span><FormattedMessage id={name} /></span>
-        <span className="dot"></span>
+        <span className={dotClass}></span>
       </Link>
     );
   };

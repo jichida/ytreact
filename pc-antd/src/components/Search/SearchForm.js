@@ -169,9 +169,6 @@ class SearchForm extends React.PureComponent{
                     <Form.Item {...formItemLayout} label={formatMessage({id: 'app.search.curstomer'})}>
                         {getFieldDecorator('customer', {
                             initialValue: searchquery.customerName,
-                            rules: [{
-                                required: true, message: `${formatMessage({id: 'app.search.curstomer.input'})}`,
-                            }],
                         })(<Input size="large" placeholder={formatMessage({id: 'app.search.curstomer.input'})} />)}
                     </Form.Item>
                     <Form.Item {...tailFormItemLayout}>

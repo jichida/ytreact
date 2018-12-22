@@ -29,12 +29,16 @@ import {
     getaddressconstlist_result,
 
     getdeviceaddressstats_request,
-    getdeviceaddressstats_result
+    getdeviceaddressstats_result,
+
+    getdistributorlist_request,
+    getdistributorlist_result,
   } from '../../actions';
 
 //接收的对应关系
 const recvmessagetoresultpair = {
   'common_err':common_err,
+  'getdistributorlist_result':getdistributorlist_result,
   'findpwd_result':findpwd_result,
   'sendauth_result':sendauth_result,
   'login_result':md_login_result,
@@ -62,6 +66,7 @@ const sendmessagefnsz = {
 
 //验证发送接口
 const sendmessageauthfnsz = {
+  'getdistributorlist':`${getdistributorlist_request}`,
   'getdeviceaddressstats':`${getdeviceaddressstats_request}`,
   'page_getdevice':`${page_getdevice_request}`,
   'adddevice':`${adddevice_request}`,

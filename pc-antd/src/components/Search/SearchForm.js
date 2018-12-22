@@ -1,17 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import {Card, Form, Select, Input, Button, Row, Col } from 'antd';
 import { injectIntl } from 'react-intl';
 import config from '../../env/config';
 import lodashmap from 'lodash.map';
-import lodashfind from 'lodash.find';
+// import lodashfind from 'lodash.find';
 
 import { getdistributorlist_request, getdistributorlist_result } from '../../actions';
+import { search_setquery } from '../../actions';
 import {callthen} from '../../sagas/pagination';
 
 const Option = Select.Option;
 
-const defaultCountry = '5c11df1d34f6297e19e3bfbe'
+
 
 const formItemLayout = {
     labelCol: {
@@ -38,64 +40,70 @@ const tailFormItemLayout = {
 class SearchForm extends React.PureComponent{
     // constructor(props) {
     //     super(props);
-    //
+        // this.state = {
+        //     selectedCountry,
+        //     selectedArea: '',
+        //     selectDistributor:'',
+        //     customerName:'',
+        //     areasOptions:[],
+        //     distributorOptions: [],
+        // }
     // }
     componentDidMount(){
-      this.setAreasOption(defaultCountry);
+      this.setAreasOption(this.props.searchquery.selectedCountry);
     }
 
     setAreasOption = (country)=> {
+        const { dispatch } = this.props;
         let areasOptions = [];
         lodashmap(this.props.areas, (v, k)=>{
             if(v.parent_id === country) {
                 areasOptions.push( <Option key={v._id} value={v._id}>{v.name}</Option> )
             }
         });
-        this.setState({areasOptions});
+        dispatch(search_setquery({areasOptions,selectedCountry:country}));
     }
 
     setDistributorOption = (country, area) => {
         const { dispatch } = this.props;
-        dispatch(callthen(getdistributorlist_request, getdistributorlist_result, {query:{ country, area }})).then((result)=>{
+        dispatch(callthen(getdistributorlist_request, getdistributorlist_result, {query:{ addresslevel2: area }})).then((result)=>{
             let resultdata = result.data;
             let distributorOptions = [];
             lodashmap(resultdata, (item)=>{
-                distributorOptions.push( 
+                distributorOptions.push(
                     <Option key={item._id} value={item._id}>{item.name}</Option>
                 )
             })
 
-            this.setState({ distributorOptions });
+            dispatch(search_setquery({ distributorOptions,selectedArea:area }));
           }).catch((e)=>{
-    
+
           });
     }
 
-    state = {
-        selectedCountry: '',
-        areasOptions:[],
-        distributorOptions: [],
-    }
+
 
     handleCountryChange = (value)=>{
-        this.setState({
+        const { dispatch } = this.props;
+        dispatch(search_setquery({
             selectedCountry: value,
-        });
+        }));
         console.log(value);
 
         this.setAreasOption(value);
     }
 
     handleRegionChange = (value)=>{
-        this.setState({
-            selectedRegion: value,
-        });
+        const { dispatch,searchquery } = this.props;
+        dispatch(search_setquery({
+            selectedArea: value,
+        }));
         console.log(value);
-        this.setDistributorOption(this.state.selectedCountry, value);
+        this.setDistributorOption(searchquery.selectedCountry, value);
     }
 
     render(){
-        const { form, onSubmit,provinces } = this.props;
+        const { form, onSubmit,provinces,searchquery } = this.props;
         const { formatMessage } = this.props.intl;
         const { getFieldDecorator, validateFields } = form;
         const onValidateForm = () => {
@@ -106,7 +114,6 @@ class SearchForm extends React.PureComponent{
           });
         };
 
-        console.log(this.state.selectedRegion);
         return (
             <Card bordered={false}>
                 <Form layout="horizontal" hideRequiredMark>
@@ -116,7 +123,7 @@ class SearchForm extends React.PureComponent{
                         <Row gutter={24}>
                             <Col span={12}>
                             {getFieldDecorator('country', {
-                                initialValue: defaultCountry,
+                                initialValue: searchquery.selectedCountry,
                                 rules: [{
                                     required: true, message: `${formatMessage({id: 'app.search.country'})}`,
                                 }],
@@ -134,12 +141,13 @@ class SearchForm extends React.PureComponent{
                             </Col>
                             <Col span={12}>
                             {getFieldDecorator('area', {
+                                initialValue: searchquery.selectedArea,
                                 rules: [{
                                     required: true, message: `${formatMessage({id: 'app.search.region'})}`,
                                 }],
                             })(
                                 <Select placeholder={formatMessage({id: 'app.search.region'})} size="large" onChange={this.handleRegionChange} style={{width: '100%'}}>
-                                    {this.state.areasOptions}
+                                    {searchquery.areasOptions}
                                 </Select>
                             )}
                             </Col>
@@ -148,20 +156,19 @@ class SearchForm extends React.PureComponent{
                     </Row>
                     <Form.Item {...formItemLayout} label={formatMessage({id: 'app.search.distributor'})}>
                         {getFieldDecorator('distributor', {
+                            initialValue: searchquery.selectDistributor,
                             rules: [{
                                 required: true, message: `${formatMessage({id: 'app.search.distributor.choose'})}`,
                             }],
                         })(
                             <Select placeholder={formatMessage({id: 'app.search.distributor.choose'})} size="large">
-                                    {/* {this.state.distributorOptions} */}
-                                <Option key="经销商1">经销商1</Option>
-                                <Option key="经销商2">经销商2</Option>
-                                <Option key="经销商3">经销商3</Option>
+                                    {searchquery.distributorOptions}
                             </Select>
                         )}
                     </Form.Item>
                     <Form.Item {...formItemLayout} label={formatMessage({id: 'app.search.curstomer'})}>
                         {getFieldDecorator('customer', {
+                            initialValue: searchquery.customerName,
                             rules: [{
                                 required: true, message: `${formatMessage({id: 'app.search.curstomer.input'})}`,
                             }],
@@ -176,7 +183,7 @@ class SearchForm extends React.PureComponent{
     }
 }
 
-const mapStateToProps =  ({addressconst:{addressconsts}}) =>{
+const mapStateToProps =  ({addressconst:{addressconsts},searchquery}) =>{
   let mapaddress = {};
   let provinces = [];
   let areas = [];
@@ -190,8 +197,9 @@ const mapStateToProps =  ({addressconst:{addressconsts}}) =>{
     mapaddress[k] = v.name;
   });
   // console.log(JSON.stringify(mapaddress));
-  return {mapaddress,provinces, areas};
+  return {mapaddress,provinces, areas,searchquery};
 };
 
 SearchForm = connect(mapStateToProps)(SearchForm);
+
 export default Form.create()(injectIntl(SearchForm))

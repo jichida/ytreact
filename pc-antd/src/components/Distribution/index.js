@@ -34,12 +34,10 @@ class Distribution extends React.PureComponent {
   }
 
   redirect=(iserr)=>{
-    if(!iserr){
+    if(typeof(iserr)== undefined){
       this.props.dispatch(search_setquery({query: {}}));
-    } else if(iserr){
-      this.props.dispatch(search_setquery({query: {iserr: true}}));
     } else {
-      this.props.dispatch(search_setquery({query: {iserr: false}}));
+      this.props.dispatch(search_setquery({query: {iserr}}));
     }
     this.props.history.push('/distribution_list');
   }

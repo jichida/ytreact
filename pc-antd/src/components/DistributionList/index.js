@@ -16,12 +16,11 @@ class Machines extends React.PureComponent {
         const { history, intl, query } = this.props;
         const { formatMessage } = intl;
         let title;
-        if(!query.iserr){
+        console.log(query.iserr);
+        if(typeof(query.iserr) == undefined){
             title = formatMessage({id: 'machine.all'});
-        } else if (query.iserr){
-            title = formatMessage({id: 'machine.all.abnormal'});
         } else {
-            title = formatMessage({id: 'machine.all.normal'});
+            title = query.iserr ? formatMessage({id: 'machine.all.abnormal'}) : formatMessage({id: 'machine.all.normal'});
         }
         return (
             <GridContent>

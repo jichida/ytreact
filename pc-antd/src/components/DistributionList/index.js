@@ -17,7 +17,7 @@ class Machines extends React.PureComponent {
         const { formatMessage } = intl;
         let title;
         console.log(query.iserr);
-        if(typeof(query.iserr) == undefined){
+        if(typeof(query.iserr) === 'undefined'){
             title = formatMessage({id: 'machine.all'});
         } else {
             title = query.iserr ? formatMessage({id: 'machine.all.abnormal'}) : formatMessage({id: 'machine.all.normal'});

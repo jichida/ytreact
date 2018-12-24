@@ -34,7 +34,7 @@ class Distribution extends React.PureComponent {
   }
 
   redirect=(iserr)=>{
-    if(typeof(iserr)== undefined){
+    if(typeof(iserr) === 'undefined'){
       this.props.dispatch(search_setquery({query: {}}));
     } else {
       this.props.dispatch(search_setquery({query: {iserr}}));

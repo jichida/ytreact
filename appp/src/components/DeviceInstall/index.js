@@ -7,6 +7,7 @@ import {common_err,ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import  SpaceInput from '../SpaceInput';
+import PickerAndInput from '../PickerAndInpput';
 
 import './index.less';
 
@@ -69,8 +70,8 @@ const pipeOptions = [
         value: '四分管',
     },
     {
-        label: '其他',
-        value: '其他',
+        label: '其他(自己填写)',
+        value: '其他(自己填写)',
     },
 ]
 
@@ -92,8 +93,8 @@ const pipematerialsOptions = [
         value: 'PVC',
     },
     {
-        label: '其他',
-        value: '其他',
+        label: '其他(自己填写)',
+        value: '其他(自己填写)',
     },
 ]
 
@@ -210,6 +211,15 @@ const RenderForm = createForm({
         setFieldsValue({space: value});
     }
 
+    const handlePipeChange = (value)=> {
+        console.log(value)
+        setFieldsValue({pipe: value});
+    }
+
+    const handlePipematerialsChange = (value)=> {
+        setFieldsValue({pipematerials: value});
+    }
+
     return (
         <React.Fragment>
         <form>
@@ -263,21 +273,6 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                {/* <Item><FormattedMessage id="install.space" defaultMessage="安装空间" />
-                        <Brief>
-                            <div className="item_children">
-                                <InputItem
-                                    placeholder={formatMessage({id: "form.input"})}
-                                    {...getFieldProps('space',{
-                                        rules: [{
-                                            required: true,
-                                            message: <FormattedMessage id="install.space" defaultMessage="安装空间" />,
-                                        }],
-                                    })}
-                                />
-                            </div>
-                    </Brief>
-                </Item> */}
                 <Item><FormattedMessage id="install.space" defaultMessage="安装空间" />  ( cm )
                     <Brief>
                         <div className="item_children">
@@ -290,7 +285,7 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="install.pipe" defaultMessage="进水管径大小" />
+                {/* <Item><FormattedMessage id="install.pipe" defaultMessage="进水管径大小" />
                     <Brief>
                         <div className="item_children">
                             <Picker
@@ -303,13 +298,26 @@ const RenderForm = createForm({
                             </Picker>
                         </div>
                     </Brief>
+                </Item> */}
+                <Item><FormattedMessage id="install.pipe" defaultMessage="进水管径大小" />
+                    <Brief>
+                        <div className="item_children">
+                            <PickerAndInput
+                                options={pipeOptions}
+                                cols={1}
+                                inputPlaceholder={formatMessage({id: "form.input"})}
+                                pickerExtra={formatMessage({id: "form.picker"})}
+                                onChange={handlePipeChange}
+                                {...getFieldProps('pipe')}
+                            />
+                        </div>
+                    </Brief>
                 </Item>
-                <Item><FormattedMessage id="install.drainage" defaultMessage="排水距离" />
+                <Item><FormattedMessage id="install.drainage" defaultMessage="排水距离" />  ( cm )
                         <Brief>
                             <div className="item_children">
                                 <InputItem
                                     placeholder={formatMessage({id: "form.input"})}
-                                    extra="cm"
                                     {...getFieldProps('drainage',{
                                         rules: [{
                                             required: true,
@@ -320,7 +328,7 @@ const RenderForm = createForm({
                             </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="install.pipematerials" defaultMessage="管路材质" />
+                {/* <Item><FormattedMessage id="install.pipematerials" defaultMessage="管路材质" />
                     <Brief>
                         <div className="item_children">
                             <Picker
@@ -331,6 +339,20 @@ const RenderForm = createForm({
                                 >
                                 <List.Item arrow="horizontal"></List.Item>
                             </Picker>
+                        </div>
+                    </Brief>
+                </Item> */}
+                <Item><FormattedMessage id="install.pipematerials" defaultMessage="管路材质" />
+                    <Brief>
+                        <div className="item_children">
+                            <PickerAndInput
+                                options={pipematerialsOptions}
+                                cols={1}
+                                inputPlaceholder={formatMessage({id: "form.input"})}
+                                pickerExtra={formatMessage({id: "form.picker"})}
+                                {...getFieldProps('pipematerials')}
+                                onChange={handlePipematerialsChange}
+                            />
                         </div>
                     </Brief>
                 </Item>

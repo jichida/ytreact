@@ -34,13 +34,13 @@ class HeaderView extends PureComponent {
 
 
   render() {
-    const { setting,name } = this.props;
+    const { setting,logname } = this.props;
     const { navTheme, fixedHeader } = setting;
     const width = this.getHeadWidth();
     const HeaderDom = (
       <Header style={{ padding: 0, width }} className={fixedHeader ? styles.fixedHeader : ''}>
           <TopNavHeader
-            name={name}
+            name={logname}
             theme={navTheme}
             mode="horizontal"
             onMenuClick={this.handleMenuClick}
@@ -56,8 +56,8 @@ class HeaderView extends PureComponent {
     );
   }
 }
-const mapStateToProps =  ({userlogin:{name}}) =>{
-  return {name};
+const mapStateToProps =  ({userlogin:{logname}}) =>{
+  return {logname};
 };
 HeaderView = connect(mapStateToProps)(HeaderView);
 export default HeaderView;

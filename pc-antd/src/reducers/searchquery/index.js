@@ -1,10 +1,9 @@
 import { createReducer } from 'redux-act'
-import { search_setquery } from '../../actions'
+import { search_setquery,logout_result } from '../../actions'
 
-const defaultCountry = '5c11df1d34f6297e19e3bfbe';
 const initial = {
     searchquery : {
-        selectedCountry: defaultCountry,
+        selectedCountry: '',
         selectedArea: '',
         selectDistributor:'',
         customerName:'',
@@ -15,6 +14,9 @@ const initial = {
 }
 
 const searchquery =  createReducer({
+    [logout_result]:(state, payload)=>{
+        return { ...initial.searchquery};
+    },
     [search_setquery]: (state, payload)=> {
         return { ...state, ...payload  }
     },

@@ -26,24 +26,40 @@ const useproperty = [
 
 const building = [
     {
-        label: '店铺',
-        value: '店铺',
+        label: '独立别墅',
+        value: '独立别墅',
     },
     {
-        label: '住宅',
-        value: '住宅',
-    }
+        label: '公寓',
+        value: '公寓',
+    },
+    {
+        label: '商用',
+        value: '商用',
+    },
+    {
+        label: '企事业单位',
+        value: '企事业单位',
+    },
+    {
+        label: '其他',
+        value: '其他',
+    },
 ]
 
 const model = [
     {
-        label: 'XXX型',
-        value: 'XXX型',
+        label: 'HYDRODI-G2',
+        value: 'HYDRODI-G2',
     },
     {
-        label: 'YYY型',
-        value: 'YYY型',
-    }
+        label: 'HYDRODI-280',
+        value: 'HYDRODI-280',
+    },
+    {
+        label: 'HYDRODI-250',
+        value: 'HYDRODI-250',
+    },
 ]
 const dispatch_form_err = (dispatch,errs)=>{
   dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
@@ -148,7 +164,7 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="user.property" defaultMessage="使用性质" />
+                <Item><FormattedMessage id="user.property" defaultMessage="使用环境" />
                     <Brief>
                         <div className="item_children">
                             <Picker

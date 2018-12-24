@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {  NavBar, Icon, List, InputItem, Button, Switch } from 'antd-mobile';
+import {  NavBar, Icon, List, InputItem, Button, Switch, Picker } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
 import {common_err,ui_setuserdevice_request} from '../../actions';
@@ -13,11 +13,23 @@ const Item = List.Item;
 const Brief = Item.Brief;
 let initHeight;
 
+const source = [
+    {
+        label: '市政水',
+        value: '市政水',
+    },
+    {
+        label: '地下水',
+        value: '地下水',
+    },
+]
+
 // 月用水量（吨）  	quantity
 // 用水人数（人）  	persons
 // 直饮水点（个） 	 spot
 // 水压  	watergage
 // 需装增压泵 	booster
+// 进水水源  source
 // 卫浴间数量 (个）	bathrooms
 // 是否分流		shunt
 // 原水TDS值(mg/l)	tds
@@ -52,6 +64,10 @@ const RenderForm = createForm({
               ...props.booster,
               value: props.booster.value,
           }),
+          source: createFormField({
+            ...props.source,
+            value: props.source.value,
+        }),
           bathrooms: createFormField({
               ...props.bathrooms,
               value: props.bathrooms.value,
@@ -182,7 +198,21 @@ const RenderForm = createForm({
                             valuePropName: 'checked',
                         })}
                     />}
-                ><FormattedMessage id="water.booster" defaultMessage="需装增压泵" /></List.Item>
+                ><FormattedMessage id="water.booster" defaultMessage="是否需装增压泵" /></List.Item>
+                <Item><FormattedMessage id="water.source" defaultMessage="进水水源" />
+                    <Brief>
+                        <div className="item_children">
+                            <Picker
+                                data={source}
+                                cols={1}
+                                extra={formatMessage({id: "form.picker"})}
+                                {...getFieldProps('source')}
+                                >
+                                <List.Item arrow="horizontal"></List.Item>
+                            </Picker>
+                        </div>
+                    </Brief>
+                </Item>
                 <Item><FormattedMessage id="water.bathrooms" defaultMessage="卫浴间数量" />
                     <Brief>
                         <div className="item_children">
@@ -357,6 +387,9 @@ class DeviceWater extends PureComponent{
             },
             booster: {
                 value: lodashget(usewater,'booster',false),
+            },
+            source: {
+                value: lodashget(usewater, 'source', ''),
             },
             bathrooms: {
                 value: lodashget(usewater,'bathrooms',''),

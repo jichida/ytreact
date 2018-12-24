@@ -1,17 +1,101 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {  NavBar, Icon, List, InputItem, Button, Switch } from 'antd-mobile';
+import {  NavBar, Icon, List, InputItem, Button, Switch, Picker } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
 import {common_err,ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
+import  SpaceInput from '../SpaceInput';
 
 import './index.less';
 
 const Item = List.Item;
 const Brief = Item.Brief;
 let initHeight;
+
+const positionOptions = [
+    {
+        label: '设备间',
+        value: '设备间',
+    },
+    {
+        label: '室内',
+        value: '室内',
+    },
+    {
+        label: '室外',
+        value: '室外',
+    },
+]
+
+const wallOptions = [
+    {
+        label: '水泥墙',
+        value: '水泥墙',
+    },
+    {
+        label: '空心砖',
+        value: '空心砖',
+    },
+    {
+        label: '隔板',
+        value: '隔板',
+    },
+]
+
+const methodOptions = [
+    {
+        label: '落地',
+        value: '落地',
+    },
+    {
+        label: '壁挂',
+        value: '壁挂',
+    },
+]
+
+const pipeOptions = [
+    {
+        label: '一寸管',
+        value: '一寸管',
+    },
+    {
+        label: '六分管',
+        value: '六分管',
+    },
+    {
+        label: '四分管',
+        value: '四分管',
+    },
+    {
+        label: '其他',
+        value: '其他',
+    },
+]
+
+const pipematerialsOptions = [
+    {
+        label: '镀锌钢',
+        value: '镀锌钢',
+    },
+    {
+        label: '不锈钢',
+        value: '不锈钢',
+    },
+    {
+        label: 'PPR',
+        value: 'PPR',
+    },
+    {
+        label: 'PVC',
+        value: 'PVC',
+    },
+    {
+        label: '其他',
+        value: '其他',
+    },
+]
 
 // 安装地点		position
 // 是否避光		avoidlight
@@ -105,7 +189,7 @@ const RenderForm = createForm({
         };
     }
 })(injectIntl((props)=>{
-    const { getFieldProps, validateFields } = props.form;
+    const { getFieldProps, validateFields, setFieldsValue } = props.form;
     const { intl: { formatMessage },dispatch} = props;
 
     const handleSubmit = (e)=>{
@@ -121,23 +205,27 @@ const RenderForm = createForm({
         })
     }
 
+    const handleSpaceInput = (value)=>{
+        console.log(value);
+        setFieldsValue({space: value});
+    }
+
     return (
         <React.Fragment>
         <form>
             <List>
                 <Item><FormattedMessage id="install.position" defaultMessage="安装地点" />
-                        <Brief>
-                            <div className="item_children">
-                                <InputItem
-                                    placeholder={formatMessage({id: "form.input"})}
-                                    {...getFieldProps('position',{
-                                        rules: [{
-                                            required: true,
-                                            message: <FormattedMessage id="install.position" defaultMessage="安装地点" />,
-                                        }],
-                                    })}
-                                />
-                            </div>
+                    <Brief>
+                        <div className="item_children">
+                            <Picker
+                                data={positionOptions}
+                                cols={1}
+                                extra={formatMessage({id: "form.picker"})}
+                                {...getFieldProps('position')}
+                                >
+                                <List.Item arrow="horizontal"></List.Item>
+                            </Picker>
+                        </div>
                     </Brief>
                 </Item>
                 <List.Item className="item_switch"
@@ -148,36 +236,34 @@ const RenderForm = createForm({
                     />}
                 ><FormattedMessage id="install.avoidlight" defaultMessage="是否避光" /></List.Item>
                 <Item><FormattedMessage id="install.wall" defaultMessage="墙体材料" />
-                        <Brief>
-                            <div className="item_children">
-                                <InputItem
-                                    placeholder={formatMessage({id: "form.input"})}
-                                    {...getFieldProps('wall',{
-                                        rules: [{
-                                            required: true,
-                                            message: <FormattedMessage id="install.wall" defaultMessage="墙体材料" />,
-                                        }],
-                                    })}
-                                />
-                            </div>
+                    <Brief>
+                        <div className="item_children">
+                            <Picker
+                                data={wallOptions}
+                                cols={1}
+                                extra={formatMessage({id: "form.picker"})}
+                                {...getFieldProps('wall')}
+                                >
+                                <List.Item arrow="horizontal"></List.Item>
+                            </Picker>
+                        </div>
                     </Brief>
                 </Item>
                 <Item><FormattedMessage id="install.method" defaultMessage="主机安装方式" />
-                        <Brief>
-                            <div className="item_children">
-                                <InputItem
-                                    placeholder={formatMessage({id: "form.input"})}
-                                    {...getFieldProps('method',{
-                                        rules: [{
-                                            required: true,
-                                            message: <FormattedMessage id="install.method" defaultMessage="主机安装方式" />,
-                                        }],
-                                    })}
-                                />
-                            </div>
+                    <Brief>
+                        <div className="item_children">
+                            <Picker
+                                data={methodOptions}
+                                cols={1}
+                                extra={formatMessage({id: "form.picker"})}
+                                {...getFieldProps('method')}
+                                >
+                                <List.Item arrow="horizontal"></List.Item>
+                            </Picker>
+                        </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="install.space" defaultMessage="安装空间" />
+                {/* <Item><FormattedMessage id="install.space" defaultMessage="安装空间" />
                         <Brief>
                             <div className="item_children">
                                 <InputItem
@@ -191,20 +277,31 @@ const RenderForm = createForm({
                                 />
                             </div>
                     </Brief>
+                </Item> */}
+                <Item><FormattedMessage id="install.space" defaultMessage="安装空间" />  ( cm )
+                    <Brief>
+                        <div className="item_children">
+                            <SpaceInput
+                            {...getFieldProps('space',{
+                                rules: [],
+                            })}
+                            onChange={handleSpaceInput}
+                            />
+                        </div>
+                    </Brief>
                 </Item>
                 <Item><FormattedMessage id="install.pipe" defaultMessage="进水管径大小" />
-                        <Brief>
-                            <div className="item_children">
-                                <InputItem
-                                    placeholder={formatMessage({id: "form.input"})}
-                                    {...getFieldProps('pipe',{
-                                        rules: [{
-                                            required: true,
-                                            message: <FormattedMessage id="install.pipe" defaultMessage="进水管径大小" />,
-                                        }],
-                                    })}
-                                />
-                            </div>
+                    <Brief>
+                        <div className="item_children">
+                            <Picker
+                                data={pipeOptions}
+                                cols={1}
+                                extra={formatMessage({id: "form.picker"})}
+                                {...getFieldProps('pipe')}
+                                >
+                                <List.Item arrow="horizontal"></List.Item>
+                            </Picker>
+                        </div>
                     </Brief>
                 </Item>
                 <Item><FormattedMessage id="install.drainage" defaultMessage="排水距离" />
@@ -212,6 +309,7 @@ const RenderForm = createForm({
                             <div className="item_children">
                                 <InputItem
                                     placeholder={formatMessage({id: "form.input"})}
+                                    extra="cm"
                                     {...getFieldProps('drainage',{
                                         rules: [{
                                             required: true,
@@ -223,18 +321,17 @@ const RenderForm = createForm({
                     </Brief>
                 </Item>
                 <Item><FormattedMessage id="install.pipematerials" defaultMessage="管路材质" />
-                        <Brief>
-                            <div className="item_children">
-                                <InputItem
-                                    placeholder={formatMessage({id: "form.input"})}
-                                    {...getFieldProps('pipematerials',{
-                                        rules: [{
-                                            required: true,
-                                            message: <FormattedMessage id="install.pipematerials" defaultMessage="管路材质" />,
-                                        }],
-                                    })}
-                                />
-                            </div>
+                    <Brief>
+                        <div className="item_children">
+                            <Picker
+                                data={pipematerialsOptions}
+                                cols={1}
+                                extra={formatMessage({id: "form.picker"})}
+                                {...getFieldProps('pipematerials')}
+                                >
+                                <List.Item arrow="horizontal"></List.Item>
+                            </Picker>
+                        </div>
                     </Brief>
                 </Item>
                 <List.Item className="item_switch"

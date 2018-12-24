@@ -2,7 +2,8 @@ import { createReducer } from 'redux-act';
 import {
   adddevice_result,
   getdevice_result,
-  setuserdevice_result
+  setuserdevice_result,
+  ui_setcurwifi
 } from '../../actions/index.js';
 import moment from 'moment';
 import 'moment-timezone';
@@ -94,6 +95,13 @@ const initial = {
 const device = createReducer({
     [adddevice_result]: (state, payload) => {
         return { ...state, ...payload };
+    },
+    [ui_setcurwifi]: (state, payload) => {
+        const {wifissid,wifipassword,wifiCipher} = payload;
+        let wifisettings = state.wifisettings;
+        wifisettings.ssid  = wifissid;
+        wifisettings.password  = wifipassword;
+        return { ...state,wifisettings};
     },
     [getdevice_result]: (state, payload) => {
       const {_id,basicinfo:basicinfonew, usewater:usewaternew,install:installnew,

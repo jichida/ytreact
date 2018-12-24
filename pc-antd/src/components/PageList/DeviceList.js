@@ -2,6 +2,7 @@ import React, { PureComponent }  from 'react';
 import { Card, Button, List } from 'antd';
 import { withRouter } from 'react-router-dom';
 // import { connect } from 'react-redux';
+import moment from 'moment';
 import {
   callthen,
 } from '../../sagas/pagination';
@@ -40,10 +41,10 @@ class DeviceList extends React.Component {
   onItemConvert(iteminput){
     const item =  {
             iserr: iteminput.iserr,
-            address: lodashget(iteminput,'basicinfo.useraddress',''),
-            reportdate: '20171116',
-            id:lodashget(iteminput,'_id',''),
-            name: lodashget(iteminput,'syssettings.deviceid',''),
+            address: lodashget(iteminput,'basicinfo.username',''),
+            reportdate: moment(lodashget(iteminput,'syssettings.installdate','')).format('YYYYMMDD'),
+            id:lodashget(iteminput,'syssettings.deviceid',''),
+            name: lodashget(iteminput,'basicinfo.model',''),
             runtime: '02:10:10',
             mode:' Active Mode',
     };

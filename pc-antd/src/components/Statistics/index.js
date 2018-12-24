@@ -173,7 +173,7 @@ class Statistics extends React.PureComponent {
                 <Card bordered={false} className="main-card">
                     <Row style={{marginBottom: 30}} className="title">
                         <Col span={24}>
-                            <img src={sb_icon} alt="" /><span><FormattedMessage id="machine.datadetail" /></span>
+                            <img src={sb_icon} alt="" /><span><FormattedMessage id="machine.report" /></span>
                             <span className="right-Link" onClick={()=>{history.goBack()}}>&lt; <FormattedMessage id="app.return" /></span>
                         </Col>
                     </Row>

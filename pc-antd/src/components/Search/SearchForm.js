@@ -38,6 +38,25 @@ const tailFormItemLayout = {
     },
   };
 
+const createFormOption = {
+  mapPropsToFields(props) {
+      return {
+        country: Form.createFormField({
+          ...props.searchquery,
+          value: props.searchquery.addresslevel1,
+        }),
+        area: Form.createFormField({
+          ...props.searchquery,
+          value: props.searchquery.addresslevel2,
+        }),
+        distributor: Form.createFormField({
+          ...props.searchquery,
+          value: props.searchquery.selectDistributor,
+        }),
+      };
+  }
+}
+
 class SearchForm extends React.PureComponent{
     // constructor(props) {
     //     super(props);
@@ -291,6 +310,10 @@ const mapStateToProps =  ({addressconst:{addressconsts},searchquery,userlogin}) 
   return {mapaddress,provinces, areas,searchquery,addresslevel1,addresslevel2};
 };
 
-SearchForm = connect(mapStateToProps)(SearchForm);
+SearchForm = Form.create(createFormOption)(injectIntl(SearchForm));
+export default connect(mapStateToProps)(SearchForm);
 
-export default Form.create()(injectIntl(SearchForm))
+
+// SearchForm = connect(mapStateToProps)(SearchForm);
+
+// export default Form.create()(injectIntl(SearchForm))

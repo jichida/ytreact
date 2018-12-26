@@ -1,13 +1,23 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {common_err,ui_setuserdevice_request} from '../../actions';
+import {common_err,ui_setuserdevice_request,
+    wifi_getssidlist_request,wifi_getssidlist_result} from '../../actions';
+import {callthen} from '../../sagas/pagination';
 import lodashget from 'lodash.get';
-import {  List, InputItem, Button, Switch } from 'antd-mobile';
+import {  List, InputItem, Button, Switch, ActionSheet } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
-
 import './index.less';
+const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
+let wrapProps;
+if (isIPhone) {
+  wrapProps = {
+    onTouchStart: e => e.preventDefault(),
+  };
+}
+
+
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -49,8 +59,9 @@ const RenderForm = createForm({
         };
     }
 })(injectIntl((props)=>{
-    const { getFieldProps, validateFields } = props.form;
+    const { getFieldProps, validateFields, setFieldsValue } = props.form;
     const { intl: { formatMessage },dispatch} = props;
+    const title = formatMessage({id: 'start.wifi.select'});
 
     const handleSubmit = (e)=>{
         //e.preventDefault();
@@ -65,6 +76,36 @@ const RenderForm = createForm({
         })
     }
 
+    const showActionSheet = (title) => {
+        dispatch(callthen(wifi_getssidlist_request,wifi_getssidlist_result,{}))
+        .then((wifilist)=>{
+          // debugger;
+          const canceltext = formatMessage({id: 'form.cancel'});
+          let wifitxtlist = [];
+          for(let i = 0 ;i < wifilist.length; i++){
+            wifitxtlist.push(wifilist[i].ssid)
+          }
+          let BUTTONS = [...wifitxtlist,canceltext];//"form.cancel"
+
+          ActionSheet.showActionSheetWithOptions({
+              options: BUTTONS,
+              cancelButtonIndex: BUTTONS.length - 1,
+              title: title,
+              maskClosable: true,
+              'data-seed': 'logId',
+              wrapProps,
+          },
+          (buttonIndex) => {
+            if(buttonIndex !== wifilist.length){
+                setFieldsValue({ssid:  wifilist[buttonIndex].ssid})
+            }
+          });
+        }).catch((e)=>{
+          console.log(e);
+        });//refresh
+
+    }
+
     return (
         <React.Fragment>
         <form>
@@ -73,6 +114,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
+                                onClick={()=>showActionSheet(title)}
                                 placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('ssid',{
                                     rules: [{

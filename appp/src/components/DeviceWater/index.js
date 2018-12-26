@@ -362,6 +362,7 @@ class DeviceWater extends PureComponent{
     handleSubmit = (values)=>{
         console.log(values);
         const {dispatch,_id} = this.props;
+        values.source = values.source[0];
         // values.useproperty = values.useproperty[0];
         // values.building = values.building[0];
         // values.model = values.model[0];

@@ -43,11 +43,11 @@ const createFormOption = {
       return {
         country: Form.createFormField({
           ...props.searchquery,
-          value: props.searchquery.addresslevel1,
+          value: props.searchquery.selectedCountry,
         }),
         area: Form.createFormField({
           ...props.searchquery,
-          value: props.searchquery.addresslevel2,
+          value: props.searchquery.selectedArea,
         }),
         distributor: Form.createFormField({
           ...props.searchquery,

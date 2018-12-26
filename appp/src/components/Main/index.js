@@ -8,6 +8,7 @@ import lodashget from 'lodash.get';
 import { injectIntl } from 'react-intl';
 // import Waterwave from './waterwave.js';
 import './index.less';
+import reflesh_icon from '../../assets/reflesh.png';
 import '../../assets/wlimg.png';
 import home_bgimg from '../../assets/zhuye_bg.png';
 
@@ -16,6 +17,11 @@ const CGreen = '#3eef7d';
 const CBlue = '#38b4f2';
 
 class Home extends PureComponent{
+
+    handleReflesh = ()=> {
+        // reflesh
+        console.log('Reflesh')
+    }
 
     render () {
       const {intl,homedata} = this.props;
@@ -170,6 +176,10 @@ class Home extends PureComponent{
                                 <p>{title_main_outwater_quality}</p>
                             </div>
                         </div>
+                        <img src={reflesh_icon} alt="" 
+                            style={{width: '20px', height: '20px', marginTop: '20px'}}
+                            onClick={this.handleReflesh} 
+                        />
                     </WingBlank>
                     <Flex direction="column" className="monitor_container">
                         <div className="detail">

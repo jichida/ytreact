@@ -11,6 +11,7 @@ const curTZ = moment.tz.guess();
 const initial = {
     device: {
       _id:'',
+      distributorid:{},
       basicinfo:{
           username:'',
           userphone:'',
@@ -97,7 +98,7 @@ const device = createReducer({
         return { ...state, ...payload };
     },
     [ui_setcurwifi]: (state, payload) => {
-        const {wifissid,wifipassword,wifiCipher} = payload;
+        const {wifissid,wifipassword} = payload;
         let wifisettings = state.wifisettings;
         wifisettings.ssid  = wifissid;
         wifisettings.password  = wifipassword;

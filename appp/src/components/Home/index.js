@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { NavBar, Icon, Tabs, WingBlank } from 'antd-mobile';
+import { NavBar, Icon, Tabs,  } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { injectIntl } from 'react-intl'
 

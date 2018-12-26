@@ -12,7 +12,6 @@ import {
 const initial = {
     userlogin: {
         loginsuccess:false,
-        userid:'',
         token:'',
     },
 };

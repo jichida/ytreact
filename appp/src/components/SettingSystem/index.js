@@ -709,7 +709,10 @@ class SettingSystem extends PureComponent{
     }
 }
 
-const mapStateToProps =  ({device:{syssettings,_id},app:{locale}}) =>{
+const mapStateToProps =  ({device:{syssettings,_id},app:{locale},userlogin:{truename}}) =>{
+  if(!syssettings.installer){
+    syssettings.installer = truename;
+  }
   return {locale,syssettings,_id};
 };
 

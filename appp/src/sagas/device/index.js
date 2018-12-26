@@ -1,11 +1,12 @@
-import {takeLatest,put} from 'redux-saga/effects';
+import {select,takeLatest,put} from 'redux-saga/effects';
 import {
   set_weui,
   ui_setuserdevice_request,
   setuserdevice_request,
   setuserdevice_result,
   getdevice_result,
-  adddevice_request} from '../../actions';
+  adddevice_request
+} from '../../actions';
 import lodashget from 'lodash.get';
 
 export function* deviceflow(){//仅执行一次
@@ -43,6 +44,13 @@ export function* deviceflow(){//仅执行一次
       if(_id === '' || !_id){
         const deviceid = lodashget(data,'syssettings.deviceid','');
         if(deviceid !== ''){
+          const {installerid,distributorid} = yield select((state)=>{
+            const distributorid = state.userlogin.distributor._id;
+            const installerid = state.userlogin._id;
+            return {installerid,distributorid};
+          });
+          data.distributorid = distributorid;
+          data.installerid = installerid;
           yield put(adddevice_request({data}));
           return;
         }

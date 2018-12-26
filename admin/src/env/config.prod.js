@@ -7,5 +7,4 @@ export default {
     admincustomapi:`${serverurl}/admincustomapi/v1`,
     serverurl:`${serverurl}`,
     appversion:'1.1.1(build0801)',
-    shopid:'5bd12be97ed9b65f0fff9edb'
 };

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { Flex, NavBar, Icon, List, ActionSheet, WingBlank } from 'antd-mobile';
 import { Link, withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -9,7 +10,7 @@ import basic_img from '../../assets/sy2.png';
 import water_img from '../../assets/sy3.png';
 import install_img from '../../assets/sy4.png';
 // import user_img from '../../assets/sy5.png';
- 
+
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -42,9 +43,9 @@ class Device extends PureComponent{
 
     render () {
         console.log(window.innerHeight);
-        const { history } = this.props;
-        const { intl: { formatMessage }} = this.props;
-        const title = formatMessage({id: "device.privider.select"})
+        const { history,distributor } = this.props;
+        // const { intl: { formatMessage }} = this.props;
+        // const title = formatMessage({id: "device.privider.select"})
 
         return (
             <div className="black_bg">
@@ -61,11 +62,11 @@ class Device extends PureComponent{
                         arrow="horizontal"
                         thumb={txImg}
                         multipleLine
-                        onClick={()=>this.showActionSheet(title)}
                         >
-                        <span style={{color: "#ffffff"}}>{'XXX服务商名称'}<Brief style={{color: "#ffffff"}}>{'TEL:400-000-1234'}</Brief></span>
+                        <span style={{color: "#ffffff"}}>{`${distributor.name}`}<Brief style={{color: "#ffffff"}}>
+                          {`TEL:${distributor.username}`}</Brief></span>
                     </Item>
-                </List>  
+                </List>
                 <WingBlank>
                     <p className="tools_title"><FormattedMessage id="device.tools" /></p>
                     <div className="tools_bg">
@@ -92,5 +93,13 @@ class Device extends PureComponent{
         )
     }
 }
-
+const mapStateToProps =  ({userlogin:{distributor},device:{distributorid}}) =>{
+  if(!!distributorid._id){
+    console.log(distributorid);
+    distributor = distributorid;
+  }
+  // debugger;
+  return {distributor};
+};
+Device = connect(mapStateToProps)(Device);
 export default withRouter(injectIntl(Device));

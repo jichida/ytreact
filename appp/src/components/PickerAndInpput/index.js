@@ -12,7 +12,9 @@ class PickerAndInput extends React.Component {
             optionsValues.push(options[i].value)
         }
 
-        if(!value||optionsValues.includes(value)){
+        console.log(optionsValues);
+
+        if(!value[0]||optionsValues.includes(value[0])){
             this.state = { 
                 isInput: false,
                 optionsValues,
@@ -32,14 +34,14 @@ class PickerAndInput extends React.Component {
         if(optionsValues.includes(value[0])){
             onChange(value)
         } else {
-            onChange('')
+            onChange([''])
             this.setState({ isInput: true })
         }
     }
 
     handleInputChange = (value)=> {
         const { onChange } = this.props
-        onChange(value)
+        onChange([value])
     }
 
     render() {
@@ -50,7 +52,7 @@ class PickerAndInput extends React.Component {
                 (
                     <InputItem
                         placeholder={inputPlaceholder}
-                        value={value}
+                        value={value[0]}
                         onChange={(value)=>{this.handleInputChange(value)}}
                     />
                 )

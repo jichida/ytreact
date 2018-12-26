@@ -391,6 +391,14 @@ class DeviceInstall extends PureComponent{
     }
 
     handleSubmit = (values)=>{
+        console.log('first:')
+        console.log(values);
+        values.position = values.position[0];
+        values.wall = values.wall[0];
+        values.method = values.method[0];
+        values.pipe = values.pipe[0];
+        values.pipematerials = values.pipematerials[0];
+        console.log('after:')
         console.log(values);
         const {dispatch,_id} = this.props;
         dispatch(ui_setuserdevice_request({_id,data:{install:values}}));
@@ -402,28 +410,28 @@ class DeviceInstall extends PureComponent{
 
          const basicData = {
            position: {
-               value: lodashget(install,'position',''),
+               value: [lodashget(install,'position','')],
            },
            avoidlight: {
                value: lodashget(install,'avoidlight',false),
            },
            wall: {
-               value: lodashget(install,'wall',''),
+               value: [lodashget(install,'wall','')],
            },
            method: {
-               value: lodashget(install,'method',''),
+               value: [lodashget(install,'method','')],
            },
            space: {
                value: lodashget(install,'space',''),
            },
            pipe: {
-               value: lodashget(install,'pipe',''),
+               value: [lodashget(install,'pipe','')],
            },
            drainage: {
                value: lodashget(install,'drainage',''),
            },
            pipematerials: {
-               value: lodashget(install,'pipematerials',''),
+               value: [lodashget(install,'pipematerials','')],
            },
            wifi: {
                value: lodashget(install,'wifi',false),

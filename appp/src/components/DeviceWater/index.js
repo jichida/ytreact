@@ -389,7 +389,7 @@ class DeviceWater extends PureComponent{
                 value: lodashget(usewater,'booster',false),
             },
             source: {
-                value: lodashget(usewater, 'source', ''),
+                value: [lodashget(usewater, 'source', '')],
             },
             bathrooms: {
                 value: lodashget(usewater,'bathrooms',''),

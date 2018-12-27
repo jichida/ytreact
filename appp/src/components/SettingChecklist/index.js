@@ -142,23 +142,6 @@ const data = [{
 // 设备已交付使用			delivered
 // 拍摄安装图，用以备份存档（至少上传4张）	pictures
 
-const resultData = {
-    discharge: {
-        value: true,
-    },
-    debugged: {
-        value: true,
-    },
-    quality: {
-        value: true,
-    },
-    delivered: {
-        value: true,
-    },
-    pictures: {
-        value: [],
-    },
-}
 
 const RenderResultForm = createForm({
     mapPropsToFields(props) {
@@ -341,12 +324,25 @@ class SettingChecklist extends PureComponent{
              value: lodashget(checklist,'appset',false),
          },
      }
-        // const isEnableBtnVisible = (checkData.washed.value) &&
-        // (checkData.uptostandard.value) &&
-        // (checkData.bypassclosed.value) &&
-        // (checkData.noleakage.value) &&
-        // (checkData.wificonnected.value) && (checkData.appset.value);
-        // console.log(isEnableBtnVisible)
+
+     const resultData = {
+         discharge: {
+             value: lodashget(checklist,'discharge',false),
+         },
+         debugged: {
+             value: lodashget(checklist,'debugged',false),
+         },
+         quality: {
+             value: lodashget(checklist,'quality',false),
+         },
+         delivered: {
+             value: lodashget(checklist,'delivered',false),
+         },
+         pictures: {
+             value: lodashget(checklist,'pictures',[]),
+         },
+     }
+
         const isEnableBtnVisible = true;
         return (
             <div className="checklist_bg">

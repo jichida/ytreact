@@ -5,7 +5,7 @@ import Icon from 'antd/lib/icon';
 import Modal from 'antd/lib/modal';
 import {newtopicfileuploadsetpreview,newtopicfileuploadreset} from '../../actions/index.js';
 import './pictureswall.css';
-import 'antd/dist/antd.css'; //样式需要调整
+// import 'antd/dist/antd.css'; //样式需要调整
 import config from '../../env/config.js';
 import PicaDisposePhoto from '../../util/pica_dispose_photo';
 

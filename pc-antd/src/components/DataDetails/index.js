@@ -16,53 +16,6 @@ const curTZ = moment.tz.guess();
 
 const Option = Select.Option;
 
-// 顶部数据
-const monitorData = {
-    quality: 1000,
-    consumption: 1000,
-    runtime: '02:10:20',
-    recovery: 1000,
-}
-
-// 进度数据
-const chartData = {
-    average: {
-        data: 90,
-        warring: true,
-    },
-    ionmembrance: {
-        data: 60,
-        warring: false,
-    },
-    frontfilter1: {
-        data: 1000,
-        warring: false,
-    },
-    frontfilter2: {
-        data: 1000,
-        warring: false,
-    },
-    frontfilter3: {
-        data: 10,
-        warring: true,
-    },
-    afterfilter1: {
-        data: 100,
-        warring: false,
-    },
-    afterfilter2: {
-        data: 1000,
-        warring: false,
-    },
-    afterfilter3: {
-        data: 1000,
-        warring: false,
-    },
-    uvlife: {
-        data: 10,
-        warring: true,
-    }
-}
 
 // 操作指令数据
 const dataMode = [
@@ -95,30 +48,44 @@ const data_spot = [
     },
 ]
 
-const TopMonitor = injectIntl(({quality, consumption, runtime, recovery, intl})=>{
+const TopMonitor = injectIntl((props)=>{
+    const {homedata, intl} = props;
+    const {main_inwater_quality,main_runtime} = homedata;
+    // main_outwater_quality:30,//出水水质,
+    // main_outwater_grade:'优',//出水等级,
+    // main_inwater_quality:32,//进水水质,
+    // main_totalwatervol:29993,//总产水量
+    // main_runtime:23,//运行时间
+    // main_outcwatervol:322,//浓水出水量
 
+    // 顶部数据
+    const monitorData = {
+        consumption: 1000,
+        runtime: '02:10:20',
+        recovery: 1000,
+    };//<-----每日用水量吨&回收率uS/cm 从哪里来？
     const { formatMessage } = intl;
     // 顶部数据
     const topData = [
         {
             title: `${formatMessage({id: 'machine.data.quality'})}`,//quality
             unit: 'uS/cm',
-            data: `${quality}`,
+            data: `${main_inwater_quality}`,
         },
         {
             title: `${formatMessage({id: 'machine.data.consumption'})}`,//consumption
             unit: '吨',
-            data: `${consumption}`,
+            data: `${monitorData.consumption}`,
         },
         {
             title: `${formatMessage({id: 'machine.data.runtime'})}`,//runtime
             unit: '时/分/秒',
-            data: `${runtime}`,
+            data: `${main_runtime}`,
         },
         {
             title: `${formatMessage({id: 'machine.data.recovery'})}`,//recovery
             unit: 'uS/cm',
-            data: `${recovery}`,
+            data: `${monitorData.recovery}`,
         }
     ]
 
@@ -142,63 +109,120 @@ const TopMonitor = injectIntl(({quality, consumption, runtime, recovery, intl})=
 })
 
 
-const TopChart = injectIntl(({average, ionmembrance, frontfilter1, frontfilter2, frontfilter3, afterfilter1,  afterfilter2, afterfilter3, uvlife, intl})=>{
+const TopChart = injectIntl((props)=>{
+    const {homedata, intl} = props;
     const { formatMessage } = intl;
+    const {main_inwater_quality,main_runtime} = homedata;
+    //以下是滤芯部分
+    // filterelements_modlife_leftvol:39,//电离子膜寿命剩余流量
+    // filterelements_prefilter1_leftvol:29,//前置PP寿命剩余流量
+    // filterelements_prefilter2_leftvol:30,//前置2滤芯寿命剩余流量
+    // filterelements_prefilter3_leftvol:9,//前置3滤芯寿命剩余流量
+    // filterelements_posfilter1_leftvol:70,//后置活性炭寿命剩余流量
+    // filterelements_posfilter2_leftvol:90,//电离子膜寿命剩余流量
+    // filterelements_posfilter3_leftvol:100,//电离子膜寿命剩余流量
+    // filterelements_modlife_leftday:20,//电离子膜寿命剩余天数
+    // filterelements_prefilter1_leftday:1,//前置PP寿命剩余天数
+    // filterelements_prefilter2_leftday:24,//前置2寿命剩余天数
+    // filterelements_prefilter3_leftday:41,//前置3寿命剩余天数
+    // filterelements_posfilter1_leftday:5,//后置活性炭寿命剩余天数
+    // filterelements_posfilter2_leftday:23,//后置2滤芯寿命剩余天数
+    // filterelements_posfilter3_leftday:46,//后置2滤芯寿命剩余天数
+    //
+    // 进度数据
+    const chartDataConst = {
+        average: {
+            data: 90,
+            warring: true,
+        },
+        ionmembrance: {
+            data: 60,
+            warring: false,
+        },
+        frontfilter1: {
+            data: 1000,
+            warring: false,
+        },
+        frontfilter2: {
+            data: 1000,
+            warring: false,
+        },
+        frontfilter3: {
+            data: 10,
+            warring: true,
+        },
+        afterfilter1: {
+            data: 100,
+            warring: false,
+        },
+        afterfilter2: {
+            data: 1000,
+            warring: false,
+        },
+        afterfilter3: {
+            data: 1000,
+            warring: false,
+        },
+        uvlife: {
+            data: 10,
+            warring: true,
+        }
+    }
 
     const chartData = [
         {
             title: `${formatMessage({id: 'machine.data.average'})}`,
             unit: 'uS/cm',
-            data: average.data,
-            warring: average.warring,
+            data: chartDataConst.average.data,
+            warring: chartDataConst.average.warring,
         },
         {
             title:  `${formatMessage({id: 'machine.data.ionmembrance'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: ionmembrance.data,
-            warring: ionmembrance.warring,
+            data: chartDataConst.ionmembrance.data,
+            warring: chartDataConst.ionmembrance.warring,
         },
         {
             title:  `${formatMessage({id: 'machine.data.frontfilter1'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: frontfilter1.data,
-            warring: frontfilter1.warring,
+            data: chartDataConst.frontfilter1.data,
+            warring: chartDataConst.frontfilter1.warring,
         },
         {
             title: `${formatMessage({id: 'machine.data.frontfilter2'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: frontfilter2.data,
-            warring: frontfilter2.warring,
+            data: chartDataConst.frontfilter2.data,
+            warring: chartDataConst.frontfilter2.warring,
         },
         {
             title: `${formatMessage({id: 'machine.data.frontfilter3'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: frontfilter3.data,
-            warring: frontfilter3.warring,
+            data: chartDataConst.frontfilter3.data,
+            warring: chartDataConst.frontfilter3.warring,
         },
         {
             title: `${formatMessage({id: 'machine.data.afterfilter1'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: afterfilter1.data,
-            warring: afterfilter1.warring,
+            data: chartDataConst.afterfilter1.data,
+            warring: chartDataConst.afterfilter1.warring,
         },
         {
             title:  `${formatMessage({id: 'machine.data.afterfilter2'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: afterfilter2.data,
-            warring: afterfilter2.warring,
+            data: chartDataConst.afterfilter2.data,
+            warring: chartDataConst.afterfilter2.warring,
         },
         {
             title:  `${formatMessage({id: 'machine.data.afterfilter3'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: afterfilter3.data,
-            warring: afterfilter3.warring,
+            data: chartDataConst.afterfilter3.data,
+            warring: chartDataConst.afterfilter3.warring,
         },
         {
             title:  `${formatMessage({id: 'machine.data.uvlife'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: uvlife.data,
-            warring: uvlife.warring,
+            data: chartDataConst.uvlife.data,
+            warring: chartDataConst.uvlife.warring,
         }
     ]
 
@@ -357,6 +381,72 @@ class DataDetails extends React.PureComponent {
             )
         })
 
+        const realtimedata = {
+          homedata:{
+            main_outwater_quality:30,//出水水质,
+            main_outwater_grade:'优',//出水等级,
+            main_inwater_quality:32,//进水水质,
+            main_totalwatervol:29993,//总产水量
+            main_runtime:23,//运行时间
+            main_outcwatervol:322,//浓水出水量
+            //以下是滤芯部分
+            filterelements_modlife_leftvol:39,//电离子膜寿命剩余流量
+            filterelements_prefilter1_leftvol:29,//前置PP寿命剩余流量
+            filterelements_prefilter2_leftvol:30,//前置2滤芯寿命剩余流量
+            filterelements_prefilter3_leftvol:9,//前置3滤芯寿命剩余流量
+            filterelements_posfilter1_leftvol:70,//后置活性炭寿命剩余流量
+            filterelements_posfilter2_leftvol:90,//电离子膜寿命剩余流量
+            filterelements_posfilter3_leftvol:100,//电离子膜寿命剩余流量
+            filterelements_modlife_leftday:20,//电离子膜寿命剩余天数
+            filterelements_prefilter1_leftday:1,//前置PP寿命剩余天数
+            filterelements_prefilter2_leftday:24,//前置2寿命剩余天数
+            filterelements_prefilter3_leftday:41,//前置3寿命剩余天数
+            filterelements_posfilter1_leftday:5,//后置活性炭寿命剩余天数
+            filterelements_posfilter2_leftday:23,//后置2滤芯寿命剩余天数
+            filterelements_posfilter3_leftday:46,//后置2滤芯寿命剩余天数
+          },
+          // errordata:{
+          //   error_partsfailure:1,//零件故障
+          //   error_pumpfailure:1,//20	泵故障	ERROR2:0 无故障 1有故障
+          //   error_programfailure:1,//21	程序故障	ERROR3:0 无故障 1有故障
+          //   error_flowfailure:1,//22	流量故障	ERROR4:0 无故障 1有故障
+          //   error_leakagefault:1,//23	漏水故障	ERROR5:0 无故障 1有故障
+          //   error_edicurrent:1,//24	EDI电流	ERROR6:0 无故障 1有故障
+          //   error_modout:1,//25	MODOUT  膜的去除效率	ERROR7:0 无故障 1有故障
+          //   error_intakesensorfault:1,//26	进水传感器故障	ERROR8 :0 无故障 1有故障
+          //   error_outflowsensorfault:1,//27	出水传感器故障	ERROR9:0 无故障 1有故障
+          //   error_cwatersensorfault:1,//28	浓水传感器故障	ERROR10 :0 无故障 1有故障
+          //   error_wastewatersensorfault:1,//29	废水传感器故障	ERROR11:0 无故障 1有故障
+          //   error_outflowflowmeterfailure:1,//30	出水流量计故障	ERROR12:0 无故障 1有故障
+          //   error_wastewaterflowmeterfailure:1,//31	废水流量计故障	ERROR13:0 无故障 1有故障
+          //   error_clockfailure:1,//32	时钟故障	ERROR14:0 无故障 1有故障
+          //   error_pressuresensor1failure:0,//33	压力1传感器故障	ERROR15:0 无故障 1有故障
+          //   error_pressuresensor2failure:0,//34	压力2传感器故障	ERROR16:0 无故障 1有故障
+          //   error_pressuresensor3failure:0,//35	压力3传感器故障	ERROR17:0 无故障 1有故障
+          //   error_pressuresensor4failure:0,//36	压力4传感器故障	ERROR18:0 无故障 1有故障
+          // },
+          // performancedata:{
+          //   averagecurrent_600:300,//平均电流@600	600电导率时的电流:mA	1 word
+          //   averagecurrent_300:200,//300电导率时的电流:mA	1 word
+          //   averagecut_600:350,//16	平均cut@600	600电导率时的cut	1 word
+          //   averagecut_300:150,// 17	平均cut@300	300电导率时的cut	1 word
+          //   waterpurificationrate:90,//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
+          //
+          //   max_averagecurrent_600:120,//平均电流@600	600电导率时的电流:mA	1 word
+          //   max_averagecurrent_300:100,//300电导率时的电流:mA	1 word
+          //   max_averagecut_600:170,//16	平均cut@600	600电导率时的cut	1 word
+          //   max_averagecut_300:70,// 17	平均cut@300	300电导率时的cut	1 word
+          //   max_waterpurificationrate:19,//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
+          //
+          //   min_averagecurrent_600:6,//平均电流@600	600电导率时的电流:mA	1 word
+          //   min_averagecurrent_300:5,//300电导率时的电流:mA	1 word
+          //   min_averagecut_600:4,//16	平均cut@600	600电导率时的cut	1 word
+          //   min_averagecut_300:3,// 17	平均cut@300	300电导率时的cut	1 word
+          //   min_waterpurificationrate:2,//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
+          // }
+
+        };
+
         return (
             <GridContent>
                 <Card bordered={false} className="main-card">
@@ -366,8 +456,8 @@ class DataDetails extends React.PureComponent {
                         <span className="right-Link" onClick={()=>{history.goBack()}}>&lt; {formatMessage({id: 'app.return'})}</span>
                     </Col>
                 </Row>
-                <TopMonitor {...monitorData} />
-                <TopChart {...chartData} />
+                <TopMonitor {...realtimedata} />
+                <TopChart {...realtimedata} />
                 <Row gutter={24} style={{marginTop: 30}}>
                     <Col span={2}></Col>
                     <Col span={10} className="sub-title">

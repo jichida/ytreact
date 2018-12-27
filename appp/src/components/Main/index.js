@@ -8,9 +8,10 @@ import lodashget from 'lodash.get';
 import { injectIntl } from 'react-intl';
 // import Waterwave from './waterwave.js';
 import './index.less';
-import reflesh_icon from '../../assets/reflesh.png';
+import refresh_icon from '../../assets/refresh.png';
 import '../../assets/wlimg.png';
 import home_bgimg from '../../assets/zhuye_bg.png';
+import {wifi_sendcmd_request} from '../../actions';
 
 const CRed = '#ff2728';
 const CGreen = '#3eef7d';
@@ -18,9 +19,13 @@ const CBlue = '#38b4f2';
 
 class Home extends PureComponent{
 
-    handleReflesh = ()=> {
-        // reflesh
-        console.log('Reflesh')
+    handleRefresh = ()=> {
+        // refresh
+        const cmd = `$data%`;
+        const {dispatch} = this.props;
+        dispatch(wifi_sendcmd_request({cmd}));
+
+        console.log('Refresh')
     }
 
     render () {
@@ -176,9 +181,9 @@ class Home extends PureComponent{
                                 <p>{title_main_outwater_quality}</p>
                             </div>
                         </div>
-                        <img src={reflesh_icon} alt="" 
+                        <img src={refresh_icon} alt=""
                             style={{width: '20px', height: '20px', marginTop: '20px'}}
-                            onClick={this.handleReflesh} 
+                            onClick={this.handleRefresh}
                         />
                     </WingBlank>
                     <Flex direction="column" className="monitor_container">

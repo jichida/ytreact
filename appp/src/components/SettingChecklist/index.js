@@ -179,7 +179,9 @@ const RenderResultForm = createForm({
             }
         })
     }
-
+    const onChange = (value)=>{
+      console.log(value);
+    }
     return (
         <React.Fragment>
         <form>
@@ -215,9 +217,8 @@ const RenderResultForm = createForm({
                 <List.Item><FormattedMessage id="setting.checklist.pictures" defaultMessage="拍摄安装图，用于备份存档（至少上传四张）" />
                     <List.Item.Brief>
                         <div className="item_children">
-                            <PicturesWall   {...getFieldProps('pictures', {
-                                  valuePropName: 'pictures',
-                            })} />
+                            <PicturesWall value={['https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg','https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg']}
+                          onChange={onChange}/>
                         </div>
                     </List.Item.Brief>
                 </List.Item>

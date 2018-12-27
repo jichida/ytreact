@@ -7,7 +7,7 @@ import { createForm, createFormField } from 'rc-form';
 import { FormattedMessage } from 'react-intl';
 import {wifi_sendcmd_request} from '../../actions';
 import {set_weui} from '../../actions';
-
+import PicturesWall  from '../Controls/pictureswall.js';
 import './index.less';
 
 const RenderCheckForm = createForm({
@@ -126,15 +126,15 @@ const RenderCheckForm = createForm({
         </React.Fragment>
     )
 })
-
-const data = [{
-    url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
-    id: '2121',
-  }, {
-    url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
-    id: '2122',
-  }
-]
+//
+// const data = [{
+//     url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
+//     id: '2121',
+//   }, {
+//     url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
+//     id: '2122',
+//   }
+// ]
 
 // 出水流量正常			discharge
 // 设备已调试			debugged
@@ -180,10 +180,6 @@ const RenderResultForm = createForm({
         })
     }
 
-    const  onChange = (files, type, index) => {
-        console.log(files, type, index);
-    }
-
     return (
         <React.Fragment>
         <form>
@@ -219,12 +215,9 @@ const RenderResultForm = createForm({
                 <List.Item><FormattedMessage id="setting.checklist.pictures" defaultMessage="拍摄安装图，用于备份存档（至少上传四张）" />
                     <List.Item.Brief>
                         <div className="item_children">
-                            <ImagePicker
-                                files={data}
-                                onChange={onChange}
-                                selectable={data.length < 7}
-                                multiple={false}
-                            />
+                            <PicturesWall   {...getFieldProps('pictures', {
+                                  valuePropName: 'pictures',
+                            })} />
                         </div>
                     </List.Item.Brief>
                 </List.Item>

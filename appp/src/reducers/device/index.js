@@ -87,7 +87,7 @@ const initial = {
         noleakage:false,
         wificonnected:false,
         appset:false,
-        pictures:[]
+        pictures:['https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg','https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg']
       },
     },
 

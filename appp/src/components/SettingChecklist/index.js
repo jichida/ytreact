@@ -169,7 +169,7 @@ const RenderResultForm = createForm({
         };
     }
 })((props)=>{
-    const { getFieldProps, validateFields } = props.form;
+    const { getFieldProps, validateFields, setFieldsValue } = props.form;
 
     const handleSubmit = (e)=>{
         //e.preventDefault();
@@ -179,6 +179,11 @@ const RenderResultForm = createForm({
                 //props.onSubmit(values);
             }
         })
+    }
+
+    const handlePicturesChange = (pictures)=> {
+        console.log(`pictures:${pictures}`)
+        setFieldsValue({pictures})
     }
 
     return (
@@ -216,9 +221,12 @@ const RenderResultForm = createForm({
                 <List.Item><FormattedMessage id="setting.checklist.pictures" defaultMessage="拍摄安装图，用于备份存档（至少上传四张）" />
                     <List.Item.Brief>
                         <div className="item_children">
-                            <PicturesWall   {...getFieldProps('pictures', {
-                                  valuePropName: 'pictures',
-                            })} />
+                            <PicturesWall   
+                                {...getFieldProps('pictures', {
+                                    valuePropName: 'pictures',
+                                })} 
+                                onChange={handlePicturesChange}
+                            />
                         </div>
                     </List.Item.Brief>
                 </List.Item>

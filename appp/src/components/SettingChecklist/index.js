@@ -192,7 +192,8 @@ const RenderResultForm = createForm({
         //e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
-                props.onSubmit(values);
+                console.log(values)
+                //props.onSubmit(values);
             }
         })
     }

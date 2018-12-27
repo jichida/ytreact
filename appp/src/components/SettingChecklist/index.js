@@ -7,7 +7,7 @@ import { createForm, createFormField } from 'rc-form';
 import { FormattedMessage } from 'react-intl';
 import {wifi_sendcmd_request} from '../../actions';
 import {set_weui} from '../../actions';
-
+import PicturesWall  from '../Controls/pictureswall.js';
 import './index.less';
 
 const RenderCheckForm = createForm({
@@ -126,15 +126,15 @@ const RenderCheckForm = createForm({
         </React.Fragment>
     )
 })
-
-const data = [{
-    url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
-    id: '2121',
-  }, {
-    url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
-    id: '2122',
-  }
-]
+//
+// const data = [{
+//     url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
+//     id: '2121',
+//   }, {
+//     url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
+//     id: '2122',
+//   }
+// ]
 
 // 出水流量正常			discharge
 // 设备已调试			debugged
@@ -142,23 +142,6 @@ const data = [{
 // 设备已交付使用			delivered
 // 拍摄安装图，用以备份存档（至少上传4张）	pictures
 
-const resultData = {
-    discharge: {
-        value: true,
-    },
-    debugged: {
-        value: true,
-    },
-    quality: {
-        value: true,
-    },
-    delivered: {
-        value: true,
-    },
-    pictures: {
-        value: [],
-    },
-}
 
 const RenderResultForm = createForm({
     mapPropsToFields(props) {
@@ -198,10 +181,6 @@ const RenderResultForm = createForm({
         })
     }
 
-    const  onChange = (files, type, index) => {
-        console.log(files, type, index);
-    }
-
     return (
         <React.Fragment>
         <form>
@@ -237,12 +216,9 @@ const RenderResultForm = createForm({
                 <List.Item><FormattedMessage id="setting.checklist.pictures" defaultMessage="拍摄安装图，用于备份存档（至少上传四张）" />
                     <List.Item.Brief>
                         <div className="item_children">
-                            <ImagePicker
-                                files={data}
-                                onChange={onChange}
-                                selectable={data.length < 7}
-                                multiple={false}
-                            />
+                            <PicturesWall   {...getFieldProps('pictures', {
+                                  valuePropName: 'pictures',
+                            })} />
                         </div>
                     </List.Item.Brief>
                 </List.Item>
@@ -342,12 +318,25 @@ class SettingChecklist extends PureComponent{
              value: lodashget(checklist,'appset',false),
          },
      }
-        // const isEnableBtnVisible = (checkData.washed.value) &&
-        // (checkData.uptostandard.value) &&
-        // (checkData.bypassclosed.value) &&
-        // (checkData.noleakage.value) &&
-        // (checkData.wificonnected.value) && (checkData.appset.value);
-        // console.log(isEnableBtnVisible)
+
+     const resultData = {
+         discharge: {
+             value: lodashget(checklist,'discharge',false),
+         },
+         debugged: {
+             value: lodashget(checklist,'debugged',false),
+         },
+         quality: {
+             value: lodashget(checklist,'quality',false),
+         },
+         delivered: {
+             value: lodashget(checklist,'delivered',false),
+         },
+         pictures: {
+             value: lodashget(checklist,'pictures',[]),
+         },
+     }
+
         const isEnableBtnVisible = true;
         return (
             <div className="checklist_bg">

@@ -261,6 +261,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                         <InputItem
+                            editable={false}
                             placeholder={formatMessage({id: "form.input"})}
                             {...getFieldProps('installer',{
                                 rules: [{

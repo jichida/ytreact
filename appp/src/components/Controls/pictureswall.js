@@ -1,11 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Upload from 'antd/lib/upload';
-import Icon from 'antd/lib/icon';
-import Modal from 'antd/lib/modal';
+import { Upload, Icon, Modal } from 'antd';
 import {newtopicfileuploadsetpreview,newtopicfileuploadreset} from '../../actions/index.js';
-import './pictureswall.css';
-// import 'antd/dist/antd.css';
+import './pictureswall.less';
 import config from '../../env/config.js';
 import PicaDisposePhoto from '../../util/pica_dispose_photo';
 
@@ -121,7 +118,7 @@ class PicturesWall extends React.Component {
 
 
     return (
-      <div className="clearfix">
+      <div className="pictureswall clearfix">
         <Upload
           beforeUpload={beforeUpload}
           action={config.serverurl + "/uploadavatar"}

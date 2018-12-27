@@ -16,7 +16,11 @@ import {
   EditButton,
 
   // ImageField,
-  Filter
+  Filter,
+
+  ReferenceInput,
+  SelectInput,
+  ReferenceField
 } from 'react-admin';
 
 // import {Titlewithimage} from '../controls/Titlewithimage';
@@ -37,6 +41,10 @@ const InstallerCreate = (props) => {
       return (<Create {...props} >
            <SimpleForm redirect="list">
             <TextInput label="手机号"  source="username" />
+            <TextInput label="真实姓名"  source="truename" />
+            <ReferenceInput label="经销商" source="distributorid" reference="distributor" allowEmpty>
+                <SelectInput optionText="name" />
+            </ReferenceInput>
            </SimpleForm>
        </Create>);
 };
@@ -45,6 +53,10 @@ const InstallerEdit = (props) => {
       return (<Edit title={<UserriderlistTitle />} {...props}>
           <SimpleForm>
               <TextInput label="手机号"  source="username" />
+              <TextInput label="真实姓名"  source="truename" />
+              <ReferenceInput label="经销商" source="distributorid" reference="distributor" allowEmpty>
+                  <SelectInput optionText="name" />
+              </ReferenceInput>
           </SimpleForm>
       </Edit>);
 
@@ -55,6 +67,10 @@ const InstallerList = (props) => (//
      <List title="用户列表" {...props}  filters={<UserFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid>
           <TextField source="username"  label="登录名"/>
+          <TextField label="真实姓名"  source="truename"/>
+          <ReferenceField label="经销商" source="distributorid" reference="distributor" allowEmpty>
+              <TextField source="name" />
+          </ReferenceField>
         <EditButton />
         </Datagrid>
     </List>

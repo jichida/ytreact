@@ -147,6 +147,9 @@ class SearchForm extends React.PureComponent{
             if (!err) {
               onSubmit(values);
             }
+            else{
+              console.log(err);
+            }
           });
         };
         console.log(this.props);
@@ -160,9 +163,9 @@ class SearchForm extends React.PureComponent{
                             <Col span={12}>
                             {getFieldDecorator('country', {
                                 Value: searchquery.selectedCountry,
-                                rules: [{
-                                    required: true, message: `${formatMessage({id: 'app.search.country'})}`,
-                                }],
+                                // rules: [{
+                                //     required: true, message: `${formatMessage({id: 'app.search.country'})}`,
+                                // }],
                             })(
                                 <Select placeholder={formatMessage({id: 'app.search.country'})} size="large"
                                   onChange={this.handleCountryChange} style={{width: '100%'}}
@@ -178,9 +181,9 @@ class SearchForm extends React.PureComponent{
                             <Col span={12}>
                             {getFieldDecorator('area', {
                                 Value: searchquery.selectedArea,
-                                rules: [{
-                                    required: true, message: `${formatMessage({id: 'app.search.region'})}`,
-                                }],
+                                // rules: [{
+                                //     required: true, message: `${formatMessage({id: 'app.search.region'})}`,
+                                // }],
                             })(
                                 <Select placeholder={formatMessage({id: 'app.search.region'})} size="large" onChange={this.handleRegionChange} style={{width: '100%'}}>
 
@@ -274,10 +277,13 @@ const mapStateToProps =  ({addressconst:{addressconsts},searchquery,userlogin}) 
     if(addresslevel2.length === 0){
       //一级区域总部
       lodashmap(addressconsts,(v,k)=>{
+        if(k === addresslevel1){
+          provinces.push(v);
+        }
         if(v.parent_id !== config.rootaddressconst){
           areas.push(v);
-          mapaddress[k] = v.name;
         }
+        mapaddress[k] = v.name;
       });
     }
     else{

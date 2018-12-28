@@ -169,7 +169,7 @@ const RenderResultForm = createForm({
         };
     }
 })((props)=>{
-    const { getFieldProps, validateFields, setFieldsValue } = props.form;
+    const { getFieldProps, validateFields,  } = props.form;
 
     const handleSubmit = (e)=>{
         //e.preventDefault();

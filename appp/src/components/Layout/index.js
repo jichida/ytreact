@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabBar, WingBlank } from 'antd-mobile';
+import { TabBar } from 'antd-mobile';
 import { connect } from 'react-redux';
 import Home from '../Home';
 import Device from '../Device';

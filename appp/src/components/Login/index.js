@@ -6,7 +6,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
 
 // import gobal_bg from '../../assets/electricbg.png';
-
+import config from '../../env/config';
 import logo from '../../assets/logo.png';
 import {login_request} from '../../actions';
 import {ui_set_language} from '../../actions';
@@ -121,6 +121,7 @@ class Login extends PureComponent{
                             <Button type="ghost" className="btn" onClick={this.handleSubmit}><FormattedMessage id="start.pass" /></Button>
                         </div>
                         <WhiteSpace size="xl" />
+                        <div>{config.appversion}</div>
                     </Flex>
                     </div>
                 </WingBlank>

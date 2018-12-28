@@ -26,7 +26,7 @@ import {
 
   common_err,
   set_weui,
-  wifi_setstatus,
+  // wifi_setstatus,
   ui_wifisuccess_tonext,
 
   // socket_setstatus,

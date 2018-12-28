@@ -9,13 +9,13 @@ import {wifi_init,ui_setcurwifi,wifi_setcurwifi_request,
 import {callthen} from '../../sagas/pagination';
 import wifi from '../../assets/wlimg.png';
 
-const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
-let wrapProps;
-if (isIPhone) {
-  wrapProps = {
-    onTouchStart: e => e.preventDefault(),
-  };
-}
+// const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
+// let wrapProps;
+// if (isIPhone) {
+//   wrapProps = {
+//     onTouchStart: e => e.preventDefault(),
+//   };
+// }
 
 class WifiLogin extends PureComponent{
     componentDidMount(){
@@ -43,7 +43,7 @@ class WifiLogin extends PureComponent{
               title: title,
               maskClosable: true,
               'data-seed': 'logId',
-              wrapProps,
+              // wrapProps,
           },
           (buttonIndex) => {
             if(buttonIndex !== wifilist.length){

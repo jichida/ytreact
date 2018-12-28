@@ -9,13 +9,13 @@ import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import './index.less';
-const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
-let wrapProps;
-if (isIPhone) {
-  wrapProps = {
-    onTouchStart: e => e.preventDefault(),
-  };
-}
+// const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
+// let wrapProps;
+// if (isIPhone) {
+//   wrapProps = {
+//     onTouchStart: e => e.preventDefault(),
+//   };
+// }
 
 
 
@@ -93,7 +93,7 @@ const RenderForm = createForm({
               title: title,
               maskClosable: true,
               'data-seed': 'logId',
-              wrapProps,
+              // wrapProps,
           },
           (buttonIndex) => {
             if(buttonIndex !== wifilist.length){

@@ -11,13 +11,13 @@ import logo from '../../assets/logo.png';
 import {login_request} from '../../actions';
 import {ui_set_language} from '../../actions';
 
-const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
-let wrapProps;
-if (isIPhone) {
-  wrapProps = {
-    onTouchStart: e => e.preventDefault(),
-  };
-}
+// const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
+// let wrapProps;
+// if (isIPhone) {
+//   wrapProps = {
+//     onTouchStart: e => e.preventDefault(),
+//   };
+// }
 
 const languages = [
     'English',
@@ -67,7 +67,7 @@ class Login extends PureComponent{
           cancelButtonIndex: BUTTONS.length - 1,
           message: intl.formatMessage({id:`login.selectlanguage`}),
           maskClosable: true,
-          wrapProps,
+          // wrapProps,
         },
         (buttonIndex) => {
             if(buttonIndex!==BUTTONS.length -1){

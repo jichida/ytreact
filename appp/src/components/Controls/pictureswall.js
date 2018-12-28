@@ -17,6 +17,21 @@ class PicturesWall extends React.Component {
   //     url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
   //   }],
   // };
+  componentDidMount(){
+    //init
+    if(this.props.value.length > 0){
+      let filelistnew = [];
+      for(let i=0 ;i < this.props.value.length; i++){
+        const url = this.props.value[i];
+        filelistnew.push({
+          uid:`uid_${i}`,
+          status: 'done',
+          url: url
+        });
+      }
+      this.props.dispatch(newtopicfileuploadsetpreview({ fileList:filelistnew }));
+    }
+  }
   componentWillUnmount() {
     this.props.dispatch(newtopicfileuploadreset());
   }

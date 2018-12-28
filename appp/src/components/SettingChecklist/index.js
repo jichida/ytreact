@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
-import {  List, Button, WingBlank, Switch, WhiteSpace, ImagePicker } from 'antd-mobile';
+import {  List, Button, WingBlank, Switch, WhiteSpace,  } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { FormattedMessage } from 'react-intl';
 import {wifi_sendcmd_request} from '../../actions';
@@ -176,13 +176,13 @@ const RenderResultForm = createForm({
         validateFields((err, values)=>{
             if(!err){
                 console.log(values)
-                //props.onSubmit(values);
+                props.onSubmit(values);
             }
         })
     }
-    const onChange = (value)=>{
-      console.log(value);
-    }
+
+    console.log(getFieldProps('pictures',{valuePropName: 'value'}))
+    console.log(getFieldProps('discharge',{valuePropName: 'checked'}))
     return (
         <React.Fragment>
         <form>
@@ -218,8 +218,7 @@ const RenderResultForm = createForm({
                 <List.Item><FormattedMessage id="setting.checklist.pictures" defaultMessage="拍摄安装图，用于备份存档（至少上传四张）" />
                     <List.Item.Brief>
                         <div className="item_children">
-                            <PicturesWall value={['https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg','https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg']}
-                          onChange={onChange}/>
+                            <PicturesWall {...getFieldProps('pictures',{valuePropName: 'value'})}/>
                         </div>
                     </List.Item.Brief>
                 </List.Item>
@@ -255,7 +254,7 @@ class SettingChecklist extends PureComponent{
     }
 
     handleEnable = (values)=>{
-      const {dispatch,_id} = this.props;
+      const {dispatch} = this.props;
       const isEnableBtnVisible = values.washed &&
       (values.uptostandard) &&
       (values.bypassclosed) &&
@@ -265,12 +264,12 @@ class SettingChecklist extends PureComponent{
         this.setState({
             checked: true,
         });
-        values.discharge = false;
-        values.debugged = false;
-        values.quality = false;
-        values.delivered = false;
-        values.pictures= [];
-        dispatch(ui_setuserdevice_request({_id,data:{checklist:values}}));
+        // values.discharge = false;
+        // values.debugged = false;
+        // values.quality = false;
+        // values.delivered = false;
+        // values.pictures= [];
+        // dispatch(ui_setuserdevice_request({_id,data:{checklist:values}}));
       }
       else{
         //提示：需要全部检查完毕才能启用

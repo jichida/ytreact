@@ -522,6 +522,7 @@ class SettingSystem extends PureComponent{
     }
 
     onQualityClick = () =>{
+      //8	出水水质  设置	0~200  ppm	$prodtrigger 120%
         console.log(this.state.quality);
     }
 
@@ -533,6 +534,10 @@ class SettingSystem extends PureComponent{
     }
 
     onDormancyClick = () =>{
+      // 14	休眠状态	休眠使能：1 使能 0关闭	$fidle 1%
+      // 15	休眠开始时间	开始休眠 如：22	$hroff 22%
+      // 16	休眠结束时间	退出休眠 如：6	$hron 22%
+
         let dormancy = {
             isdormancy: this.state.isdormancy,
             dormancystart: this.state.dormancystart,

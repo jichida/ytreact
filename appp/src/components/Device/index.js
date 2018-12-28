@@ -15,13 +15,13 @@ const Item = List.Item;
 const Brief = Item.Brief;
 
 // fix touch to scroll background page on iOS
-const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
-let wrapProps;
-if (isIPhone) {
-  wrapProps = {
-    onTouchStart: e => e.preventDefault(),
-  };
-}
+// const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
+// let wrapProps;
+// if (isIPhone) {
+//   wrapProps = {
+//     onTouchStart: e => e.preventDefault(),
+//   };
+// }
 
 class Device extends PureComponent{
 
@@ -34,7 +34,7 @@ class Device extends PureComponent{
           //message: '描述',
           maskClosable: true,
           'data-seed': 'Id',
-          wrapProps,
+          // wrapProps,
         },
         (buttonIndex) => {
           console.log(BUTTONS[buttonIndex]);

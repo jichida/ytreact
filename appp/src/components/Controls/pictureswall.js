@@ -23,7 +23,7 @@ class PicturesWall extends React.Component {
 
   handleCancel = () =>{
     this.props.dispatch(newtopicfileuploadsetpreview({ previewVisible: false }));
-  } //this.setState({ previewVisible: false })
+  } 
 
   handlePreview = (file) => {
     let fileobj = file;
@@ -47,10 +47,6 @@ class PicturesWall extends React.Component {
       previewImage: fileobj.url || fileobj.thumbUrl,
       previewVisible: true,
     }));
-    // this.setState({
-    //   previewImage: file.url || file.thumbUrl,
-    //   previewVisible: true,
-    // });
   }
 
   handleChange = ({ fileList }) => {
@@ -59,7 +55,7 @@ class PicturesWall extends React.Component {
     let uploadedfiles =[ ];
     fileList.forEach((fileobj)=>{
       if (fileobj.status === 'done') {
-        if(fileobj.hasOwnProperty('url')){//已经处理过了!
+        if(fileobj.hasOwnProperty('url')){
           uploadedfiles.push(fileobj.url);
           filelistnew.push(fileobj);
         }
@@ -84,15 +80,13 @@ class PicturesWall extends React.Component {
 
     console.log('uploadedfiles:' + JSON.stringify(uploadedfiles));
     this.props.onChange(uploadedfiles);
-  }//this.setState({ fileList })
+  }
 
   render() {
-    //
-    console.log('props' + JSON.stringify(this.props));
+    const { previewVisible, previewImage, fileList, width, height } = this.props;
 
-    const { previewVisible, previewImage, fileList,width,height } = this.props;
     const uploadButton = (
-      <div>
+      <div onClick={()=>{console.log('Click')}}>
         <Icon type="plus" />
         <div className="ant-upload-text">上传</div>
       </div>

@@ -19,6 +19,8 @@ import AfterFilter from './AfterFilter';
 import Login from './Login';
 import PipeFittings from './PipeFittings';
 
+import TestCo from './TestCo';
+
 
 import {requireAuthentication} from './requireauthentication';
 
@@ -38,6 +40,7 @@ class AppRoot extends React.Component {
           <div className="page" style={{backgroundImage: `url(${gobal_bg})`}}>
             <Switch>
               <Route exact path="/" component={requireAuthentication(Index)} />
+              <Route exact path="/test" component={requireAuthentication(TestCo)} />
               <Route exact path="/wifi" component={requireAuthentication(WifiLogin)} />
               <Route exact path="/wifisucess" component={requireAuthentication(WifiSuccess)} />
               <Route exact path="/devices" component={requireAuthentication(DeviceSelect)} />

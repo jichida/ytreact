@@ -1,5 +1,6 @@
 import React from 'react'
-import PicturesWall from '../Controls/pictureswall'
+import ImageUpload from 'antd-mobile-upload/lib/ImageUpload'
+import config from '../../env/config.js';
 
 
 class TestCo extends React.Component {
@@ -12,8 +13,9 @@ class TestCo extends React.Component {
 
         return (
             <div className="item_children">
-                <PicturesWall value={['https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg','https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg']}
-                onChange={onChange}/>
+                {/* <PicturesWall value={['https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg','https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg']}
+                onChange={onChange}/> */}
+                <ImageUpload multiple action={config.serverurl + "/uploadavatar"} />
             </div>
         )
     }

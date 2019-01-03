@@ -508,8 +508,21 @@ class SettingSystem extends PureComponent{
         console.log(values);
         const {dispatch,_id} = this.props;
         dispatch(ui_setuserdevice_request({_id,data:{syssettings:values}}));
-
-        dispatch(ui_set_language(values['language'][0]));
+        const language = values['language'][0];
+        dispatch(ui_set_language(language));
+        if(language === 'en'){
+          // 语言选择：0 ：中文简体，1：中文繁体，2：英语	$charact 0%
+          const cmd = `$charact 2%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
+        else if(language === 'zh-cn'){
+          const cmd = `$charact 0%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
+        else if(language === 'zh-tw'){
+          const cmd = `$charact 1%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
     }
 
     showModal = (key) => {
@@ -535,6 +548,12 @@ class SettingSystem extends PureComponent{
     onQualityClick = () =>{
       //8	出水水质  设置	0~200  ppm	$prodtrigger 120%
         console.log(this.state.quality);
+        //
+        if(this.state.quality.length > 0){
+          const {dispatch} = this.props;
+          const cmd = `$prodtrigger ${this.state.quality}%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
     }
 
     onCloseDormancy = (e) => {
@@ -548,6 +567,7 @@ class SettingSystem extends PureComponent{
       // 14	休眠状态	休眠使能：1 使能 0关闭	$fidle 1%
       // 15	休眠开始时间	开始休眠 如：22	$hroff 22%
       // 16	休眠结束时间	退出休眠 如：6	$hron 22%
+      // $fidleoffon 1.22.6%意思是 休眠.开始时间.结束时间
 
         let dormancy = {
             isdormancy: this.state.isdormancy,
@@ -557,6 +577,18 @@ class SettingSystem extends PureComponent{
         console.log(dormancy.isdormancy);
         console.log(dormancy.dormancystart);
         console.log(dormancy.dormancyend);
+
+        const {dispatch} = this.props;
+        if(dormancy.isdormancy){
+          const start = moment(dormancy.dormancystart).format('HH');
+          const end = moment(dormancy.dormancyend).format('HH');
+          const cmd = `$fidleoffon 1.${start}.${end}%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
+        else{
+          const cmd = `$fidle 0%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
     }
 
     render () {

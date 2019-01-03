@@ -227,6 +227,13 @@ export function* wififlow() {
         // }}));
         if(payload.code === 0){
           const result = yield call(socket_recvdata_promise,payload.data);
+          let showdata = result.cmd === 'data'?`${result.data}`:'ok';
+          yield put(set_weui({
+            toast:{
+            text:`【接收到数据】:${showdata}`,
+            show: true,
+            type:'success'
+          }}));
           // debugger;
           if(result.cmd === 'data'){
             //get result.data

@@ -61,6 +61,8 @@
   "setting.system.decompression": "废水阀泄压",
   "setting.system.resetsystem": "重置并重启系统",
   "setting.system.resettime": "重置时间",
+  "setting.system.Citric": "柠檬酸冲洗",
+  "setting.system.rinse": "冲洗",
   "setting.system.restore": "恢复出厂设置",
   "setting.system.sendlog": "发送设备运行记录",
   "setting.system.dormancy": "休眠",

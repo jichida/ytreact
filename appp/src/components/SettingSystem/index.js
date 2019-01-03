@@ -428,6 +428,17 @@ const RenderForm = createForm({
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
+                              onClickCmd(`$sysinit%`);//12	柠檬酸冲洗
+                            }}>
+                                <FormattedMessage id="setting.system.rinse" defaultMessage="冲洗" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.system.Citric" defaultMessage="柠檬酸冲洗" /></List.Item>
+
+                <List.Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn"  onClick={()=>{
                               onClickCmd(`$sysinit%`);//12	恢复出厂设置	恢复出厂时的状态	$sysinit%
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />

@@ -61,6 +61,8 @@
   "setting.system.decompression": "Drainage valve relief",
   "setting.system.resetsystem": "Reset and restart the system",
   "setting.system.resettime": "Reset time",
+  "setting.system.Citric": "Citric acid rinse",
+  "setting.system.rinse": "Rinse",
   "setting.system.restore": "Restore factory settings",
   "setting.system.sendlog": "Send device run record",
   "setting.system.dormancy": "Sleep",

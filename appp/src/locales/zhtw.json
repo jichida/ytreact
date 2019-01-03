@@ -60,6 +60,8 @@
   "setting.system.decompression": "廢水閥洩壓",
   "setting.system.resetsystem": "重置並重啟系統",
   "setting.system.resettime": "重置時間",
+  "setting.system.Citric": "檸檬酸沖洗",
+  "setting.system.rinse": "冲洗",
   "setting.system.restore": "恢復出廠設置",
   "setting.system.sendlog": "發送設備運行記錄",
   "setting.system.dormancy": "休眠",

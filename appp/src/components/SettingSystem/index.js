@@ -6,6 +6,7 @@ import moment from 'moment';
 import _ from 'lodash';
 import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
+import lodashmap from 'lodash.map';
 import 'moment-timezone';
 import {scanbarcode} from '../../env/scanbarcode';
 import {common_err,ui_set_language,wifi_sendcmd_request,getdevice_request} from '../../actions';
@@ -37,6 +38,16 @@ const timezoneOption = () => {
 
     return _.sortBy(offsetTmz, [function (el) { return -(el.time); }]);
   }
+
+const hours = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
+
+const hoursList = lodashmap(hours, (item)=> {
+    return {
+        label: `${item}时`,
+        value: item,
+    }
+})
+
 
 
 // 设备编号			deviceid
@@ -580,9 +591,10 @@ class SettingSystem extends PureComponent{
 
         const {dispatch} = this.props;
         if(dormancy.isdormancy){
-          const start = moment(dormancy.dormancystart).format('HH');
-          const end = moment(dormancy.dormancyend).format('HH');
-          const cmd = `$fidleoffon 1.${start}.${end}%`;
+        //   const start = moment(dormancy.dormancystart).format('HH');
+        //   const end = moment(dormancy.dormancyend).format('HH');
+        //   const cmd = `$fidleoffon 1.${start}.${end}%`;
+          const cmd = `$fidleoffon 1.${dormancy.dormancystart}.${dormancy.dormancyend}%`;
           dispatch(wifi_sendcmd_request({cmd}));
         }
         else{
@@ -708,11 +720,12 @@ class SettingSystem extends PureComponent{
                                         }}
                                     />}
                                 >{formatMessage({id: "setting.system.isdormancy"})}</List.Item>
-                                <Item><FormattedMessage id="setting.system.dormancystart" defaultMessage="休眠开始时间" />
+                                {/* <Item><FormattedMessage id="setting.system.dormancystart" defaultMessage="休眠开始时间" />
                                     <Brief>
                                         <div className="item_children">
                                             <DatePicker
                                                 mode="time"
+                                                format="HH"
                                                 extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
                                                 value={this.state.dormancystart}
                                                 onChange={date => this.setState({ dormancystart:date })}
@@ -733,6 +746,36 @@ class SettingSystem extends PureComponent{
                                                 >
                                                 <List.Item arrow="horizontal"></List.Item>
                                             </DatePicker>
+                                        </div>
+                                    </Brief>
+                                </Item> */}
+                                <Item><FormattedMessage id="setting.system.dormancystart" defaultMessage="休眠开始时间" />
+                                    <Brief>
+                                        <div className="item_children">
+                                            <Picker
+                                                data={hoursList}
+                                                cols={1}
+                                                extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
+                                                value={this.state.dormancystart}
+                                                onChange={val => this.setState({ dormancystart:val })}
+                                                >
+                                                <List.Item></List.Item>
+                                            </Picker>
+                                        </div>
+                                    </Brief>
+                                </Item>
+                                <Item><FormattedMessage id="setting.system.dormancyend" defaultMessage="休眠开始时间" />
+                                    <Brief>
+                                        <div className="item_children">
+                                            <Picker
+                                                data={hoursList}
+                                                cols={1}
+                                                extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
+                                                value={this.state.dormancyend}
+                                                onChange={val => this.setState({ dormancyend:val })}
+                                                >
+                                                <List.Item></List.Item>
+                                            </Picker>
                                         </div>
                                     </Brief>
                                 </Item>

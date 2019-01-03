@@ -59,7 +59,7 @@ const RenderForm = createForm({
         };
     }
 })(injectIntl((props)=>{
-    const { getFieldProps, validateFields, setFieldsValue } = props.form;
+    const { getFieldProps, validateFields, setFieldsValue, getFieldValue } = props.form;
     const { intl: { formatMessage },dispatch} = props;
     const title = formatMessage({id: 'start.wifi.select'});
 
@@ -148,10 +148,11 @@ const RenderForm = createForm({
                         })}
                     />}
                 ><FormattedMessage id="setting.wifi.dhcp" defaultMessage="动态主机设置协议" /></List.Item>
-                <Item><FormattedMessage id="setting.wifi.ip" defaultMessage="IP地址" />
+                <Item><span style={{color: !getFieldValue('dhcp')&&'#a0a0a2'}}><FormattedMessage id="setting.wifi.ip" defaultMessage="IP地址" /></span>
                     <Brief>
                         <div className="item_children">
                             <InputItem
+                                disabled={!getFieldValue('dhcp')}
                                 placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('ip',{
                                     rules: [{
@@ -163,10 +164,11 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="setting.wifi.gateway" defaultMessage="网关" />
+                <Item><span style={{color: !getFieldValue('dhcp')&&'#a0a0a2'}}><FormattedMessage id="setting.wifi.gateway" defaultMessage="网关" /></span>
                     <Brief>
                         <div className="item_children">
                             <InputItem
+                                disabled={!getFieldValue('dhcp')}
                                 placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('gateway',{
                                     rules: [{
@@ -178,10 +180,11 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="setting.wifi.lan" defaultMessage="局域网" />
+                <Item><span style={{color: !getFieldValue('dhcp')&&'#a0a0a2'}}><FormattedMessage id="setting.wifi.lan" defaultMessage="局域网" /></span>
                     <Brief>
                         <div className="item_children">
                             <InputItem
+                                disabled={!getFieldValue('dhcp')}
                                 placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('lan',{
                                     rules: [{
@@ -193,10 +196,11 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="setting.wifi.dns" defaultMessage="主网域服务器" />
+                <Item><span style={{color: !getFieldValue('dhcp')&&'#a0a0a2'}}><FormattedMessage id="setting.wifi.dns" defaultMessage="主网域服务器" /></span>
                     <Brief>
                         <div className="item_children">
                             <InputItem
+                                disabled={!getFieldValue('dhcp')}
                                 placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('dns',{
                                     rules: [{

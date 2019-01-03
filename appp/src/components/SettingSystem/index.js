@@ -721,35 +721,6 @@ class SettingSystem extends PureComponent{
                                         }}
                                     />}
                                 >{formatMessage({id: "setting.system.isdormancy"})}</List.Item>
-                                {/* <Item><FormattedMessage id="setting.system.dormancystart" defaultMessage="休眠开始时间" />
-                                    <Brief>
-                                        <div className="item_children">
-                                            <DatePicker
-                                                mode="time"
-                                                format="HH"
-                                                extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
-                                                value={this.state.dormancystart}
-                                                onChange={date => this.setState({ dormancystart:date })}
-                                                >
-                                                <List.Item arrow="horizontal"></List.Item>
-                                            </DatePicker>
-                                        </div>
-                                    </Brief>
-                                </Item>
-                                <Item><FormattedMessage id="setting.system.dormancyend" defaultMessage="休眠开始时间" />
-                                    <Brief>
-                                        <div className="item_children">
-                                            <DatePicker
-                                                mode="time"
-                                                extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
-                                                value={this.state.dormancyend}
-                                                onChange={date => this.setState({ dormancyend:date })}
-                                                >
-                                                <List.Item arrow="horizontal"></List.Item>
-                                            </DatePicker>
-                                        </div>
-                                    </Brief>
-                                </Item> */}
                                 <Item><FormattedMessage id="setting.system.dormancystart" defaultMessage="休眠开始时间" />
                                     <Brief>
                                         <div className="item_children">

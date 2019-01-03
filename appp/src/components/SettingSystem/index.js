@@ -524,6 +524,12 @@ class SettingSystem extends PureComponent{
     onQualityClick = () =>{
       //8	出水水质  设置	0~200  ppm	$prodtrigger 120%
         console.log(this.state.quality);
+        //
+        if(this.state.quality.length > 0){
+          const {dispatch} = this.props;
+          const cmd = `$prodtrigger ${this.state.quality}%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
     }
 
     onCloseDormancy = (e) => {
@@ -546,6 +552,18 @@ class SettingSystem extends PureComponent{
         console.log(dormancy.isdormancy);
         console.log(dormancy.dormancystart);
         console.log(dormancy.dormancyend);
+
+        const {dispatch} = this.props;
+        if(dormancy.isdormancy){
+          const start = moment(dormancy.dormancystart).format('HHmm');
+          const end = moment(dormancy.dormancyend).format('HHmm');
+          const cmd = `$fidle 1%$hron ${start}%$hroff ${end}%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
+        else{
+          const cmd = `$fidle 0%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
     }
 
     render () {

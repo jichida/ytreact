@@ -49,51 +49,54 @@ const parsedata = (stringbody,callbackfn)=>{
   stringbody = lodash_replace(stringbody, '%', '');
   const dataz = lodash_split(stringbody, ',');
   const mapdatafieldname = [
-    'homedata.main_outwater_quality',
-    'homedata.main_outwater_grade',//出水等级,
-    'homedata.main_inwater_quality',//出水水质,
-    'homedata.main_inwater_grade',//出水等级,
-    'homedata.main_totalwatervol',//总产水量
-    'homedata.main_runtime',//总产水量
-    'homedata.main_outcwatervol',//浓水出水量
-    'homedata.filterelements_modlife_leftvol',//电离子膜寿命剩余流量
-    'homedata.filterelements_prefilter1_leftvol',//前置PP寿命
-    'homedata.filterelements_prefilter2_leftvol',//前置2滤芯寿命
-    'homedata.filterelements_prefilter3_leftvol',//前置3滤芯寿命
-    'homedata.filterelements_posfilter1_leftvol',//后置活性炭寿命
-    'homedata.filterelements_posfilter2_leftvol',//电离子膜寿命
-    'homedata.filterelements_posfilter3_leftvol',//电离子膜寿命
-    'homedata.filterelements_modlife_leftday',//电离子膜寿命
-    'homedata.filterelements_prefilter1_leftday',//电离子膜寿命
-    'homedata.filterelements_prefilter2_leftday',//电离子膜寿命
-    'homedata.filterelements_prefilter3_leftday',//电离子膜寿命
-    'homedata.filterelements_posfilter1_leftday',//电离子膜寿命
-    'homedata.filterelements_posfilter2_leftday',//电离子膜寿命
-    'homedata.filterelements_posfilter3_leftday',//电离子膜寿命
-    'homedata.filterelements',//滤芯的顺序
-    'performancedata.averagecurrent_600',//平均电流@600	600电导率时的电流:mA	1 word
-    'performancedata.averagecurrent_300',//300电导率时的电流:mA	1 word
-    'performancedata.averagecut_600',//16	平均cut@600	600电导率时的cut	1 word
-    'performancedata.averagecut_300',// 17	平均cut@300	300电导率时的cut	1 word
-    'performancedata.waterpurificationrate',//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
-    'errordata.error_partsfailure',//零件故障
-    'errordata.error_pumpfailure',//20	泵故障	ERROR2:0 无故障 1有故障
-    'errordata.error_programfailure',//21	程序故障	ERROR3:0 无故障 1有故障
-    'errordata.error_flowfailure',//22	流量故障	ERROR4:0 无故障 1有故障
-    'errordata.error_leakagefault',//23	漏水故障	ERROR5:0 无故障 1有故障
-    'errordata.error_edicurrent',//24	EDI电流	ERROR6:0 无故障 1有故障
-    'errordata.error_modout',//25	MODOUT  膜的去除效率	ERROR7:0 无故障 1有故障
-    'errordata.error_intakesensorfault',//26	进水传感器故障	ERROR8 :0 无故障 1有故障
-    'errordata.error_outflowsensorfault',//27	出水传感器故障	ERROR9:0 无故障 1有故障
-    'errordata.error_cwatersensorfault',//28	浓水传感器故障	ERROR10 :0 无故障 1有故障
-    'errordata.error_wastewatersensorfault',//29	废水传感器故障	ERROR11:0 无故障 1有故障
-    'errordata.error_outflowflowmeterfailure',//30	出水流量计故障	ERROR12:0 无故障 1有故障
-    'errordata.error_wastewaterflowmeterfailure',//31	废水流量计故障	ERROR13:0 无故障 1有故障
-    'errordata.error_clockfailure',//32	时钟故障	ERROR14:0 无故障 1有故障
-    'errordata.error_pressuresensor1failure',//33	压力1传感器故障	ERROR15:0 无故障 1有故障
-    'errordata.error_pressuresensor2failure',//34	压力2传感器故障	ERROR16:0 无故障 1有故障
-    'errordata.error_pressuresensor3failure',//35	压力3传感器故障	ERROR17:0 无故障 1有故障
-    'errordata.error_pressuresensor4failure',//36	压力4传感器故障	ERROR18:0 无故障 1有故障
+    'homedata.main_outwater_quality',//1、出水水质 :PPM
+    'homedata.main_outwater_grade',//2、出水等级,
+    'homedata.main_inwater_quality',//3、进水水质	进水水质 ：PPM
+    // 'homedata.main_inwater_grade',//4、出水等级,
+    'homedata.main_totalwatervol',//4、总产水量	用水总量 ：GAL
+    'homedata.main_runtime',//5、运行时间	运行时间：天	1 word
+    'homedata.main_outcwatervol',//6、浓水出水量	浓水出水量：GAL	2 word
+    'homedata.filterelements_modlife_leftday',//7、电离子膜寿命
+    'homedata.filterelements_prefilter1_leftday',//8、前置PP寿命	前置PP剩余天数： 天
+    'homedata.filterelements_prefilter2_leftday',//9、前置2滤芯寿命
+    'homedata.filterelements_prefilter3_leftday',//10、前置3滤芯寿命
+    'homedata.filterelements_posfilter1_leftday',//11、后置活性炭寿命
+    'homedata.filterelements_posfilter2_leftday',//12、后置2滤芯寿命
+    'homedata.filterelements_posfilter3_leftday',//13、后置3滤芯寿命
+
+    'performancedata.averagecurrent_600',//14、平均电流@600	600电导率时的电流:mA	1 word
+    'homedata.filterelements_modlife_leftvol',//15、电离子膜寿命剩余流量
+
+    'homedata.filterelements_prefilter1_leftvol',//16、前置PP剩余流量
+    'homedata.filterelements_prefilter2_leftvol',//17、前置2滤芯寿命
+    'homedata.filterelements_prefilter3_leftvol',//18、前置3滤芯寿命
+    'homedata.filterelements_posfilter1_leftvol',//19、后置活性炭寿命
+    'homedata.filterelements_posfilter2_leftvol',//20、后置2滤芯剩余流量
+    'homedata.filterelements_posfilter3_leftvol',//21、后置3滤芯剩余流量
+
+    'performancedata.averagecurrent_300',//22、300电导率时的电流:mA	1 word
+    'performancedata.averagecut_600',//23、	平均cut@600	600电导率时的cut	1 word
+    'performancedata.averagecut_300',//24、	平均cut@300	300电导率时的cut	1 word
+    'performancedata.waterpurificationrate',//25、	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
+
+    'errordata.error_partsfailure',//26、零件故障
+    'errordata.error_pumpfailure',//27、泵故障	ERROR2:0 无故障 1有故障
+    'errordata.error_programfailure',//28、	程序故障	ERROR3:0 无故障 1有故障
+    'errordata.error_flowfailure',//29、	流量故障	ERROR4:0 无故障 1有故障
+    'errordata.error_leakagefault',//30	漏水故障	ERROR5:0 无故障 1有故障
+    'errordata.error_edicurrent',//31、	EDI电流	ERROR6:0 无故障 1有故障
+    'errordata.error_modout',//32、	MODOUT  膜的去除效率	ERROR7:0 无故障 1有故障
+    'errordata.error_intakesensorfault',//33、	进水传感器故障	ERROR8 :0 无故障 1有故障
+    'errordata.error_outflowsensorfault',//34、	出水传感器故障	ERROR9:0 无故障 1有故障
+    'errordata.error_cwatersensorfault',//35、	浓水传感器故障	ERROR10 :0 无故障 1有故障
+    'errordata.error_wastewatersensorfault',//36、	废水传感器故障	ERROR11:0 无故障 1有故障
+    'errordata.error_outflowflowmeterfailure',//37、	出水流量计故障	ERROR12:0 无故障 1有故障
+    'errordata.error_wastewaterflowmeterfailure',//38、	废水流量计故障	ERROR13:0 无故障 1有故障
+    'errordata.error_clockfailure',//39、	时钟故障	ERROR14:0 无故障 1有故障
+    'errordata.error_pressuresensor1failure',//40	压力1传感器故障	ERROR15:0 无故障 1有故障
+    'errordata.error_pressuresensor2failure',//41	压力2传感器故障	ERROR16:0 无故障 1有故障
+    'errordata.error_pressuresensor3failure',//42	压力3传感器故障	ERROR17:0 无故障 1有故障
+    'errordata.error_pressuresensor4failure',//43	压力4传感器故障	ERROR18:0 无故障 1有故障
   ];
   let result = {};
   for(let i = 0;i < mapdatafieldname.length; i++){
@@ -122,7 +125,7 @@ const socket_recvdata_promise = (data)=>{
   return new Promise((resolve,reject) => {
         if(lodash_startsWith(objstring,'$')
           && lodash_endWith(objstring,'%')){
-          if(objstring !== '$ok%'){
+          if(!lodash_endWith(objstring,'ok%')){
             parsedata(objstring,(result)=>{
               resolve({cmd:'data',data:result});
             });

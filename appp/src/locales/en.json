@@ -69,7 +69,7 @@
   "setting.system.isdormancy": "Sleeping",
   "setting.system.dormancystart": "sleep start time",
   "setting.system.dormancyend": "Hibernate End Time",
-  "setting.system.language": "Language",
+  "setting.system.language": "Host language selection",
   "setting.system.resetbt": "Reset",
   "setting.system.send": "send",
   "setting.system.setup": "Setup",

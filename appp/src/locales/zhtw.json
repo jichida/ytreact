@@ -67,7 +67,7 @@
   "setting.system.dormancy": "休眠",
   "setting.system.dormancystart": "休眠開始時間",
   "setting.system.dormancyend": "休眠結束時間",
-  "setting.system.language": "語言",
+  "setting.system.language": "主機語言選擇",
   "setting.system.resetbt": "重置",
   "setting.system.send": "發送",
   "setting.checklist.discharge": "進水流量正常",

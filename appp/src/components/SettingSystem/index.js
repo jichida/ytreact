@@ -482,6 +482,26 @@ const RenderForm = createForm({
                             <Picker
                                 data={languages}
                                 cols={1}
+                                onChange={
+                                  (v)=>{
+                                    // const language = values['language'][0];
+                                    // dispatch(ui_set_language(language));
+                                    // if(language === 'en'){
+                                    //   // 语言选择：0 ：中文简体，1：中文繁体，2：英语	$charact 0%
+                                    //   const cmd = `$charact 2%`;
+                                    //   dispatch(wifi_sendcmd_request({cmd}));
+                                    // }
+                                    // else if(language === 'zh-cn'){
+                                    //   const cmd = `$charact 0%`;
+                                    //   dispatch(wifi_sendcmd_request({cmd}));
+                                    // }
+                                    // else if(language === 'zh-tw'){
+                                    //   const cmd = `$charact 1%`;
+                                    //   dispatch(wifi_sendcmd_request({cmd}));
+                                    // }
+                                    console.log(v);
+                                  }
+                                }
                                 extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
                                 {...getFieldProps('language', {
                                     initialValue: ['zh-cn'],
@@ -520,21 +540,21 @@ class SettingSystem extends PureComponent{
         console.log(values);
         const {dispatch,_id} = this.props;
         dispatch(ui_setuserdevice_request({_id,data:{syssettings:values}}));
-        const language = values['language'][0];
-        dispatch(ui_set_language(language));
-        if(language === 'en'){
-          // 语言选择：0 ：中文简体，1：中文繁体，2：英语	$charact 0%
-          const cmd = `$charact 2%`;
-          dispatch(wifi_sendcmd_request({cmd}));
-        }
-        else if(language === 'zh-cn'){
-          const cmd = `$charact 0%`;
-          dispatch(wifi_sendcmd_request({cmd}));
-        }
-        else if(language === 'zh-tw'){
-          const cmd = `$charact 1%`;
-          dispatch(wifi_sendcmd_request({cmd}));
-        }
+        // const language = values['language'][0];
+        // dispatch(ui_set_language(language));
+        // if(language === 'en'){
+        //   // 语言选择：0 ：中文简体，1：中文繁体，2：英语	$charact 0%
+        //   const cmd = `$charact 2%`;
+        //   dispatch(wifi_sendcmd_request({cmd}));
+        // }
+        // else if(language === 'zh-cn'){
+        //   const cmd = `$charact 0%`;
+        //   dispatch(wifi_sendcmd_request({cmd}));
+        // }
+        // else if(language === 'zh-tw'){
+        //   const cmd = `$charact 1%`;
+        //   dispatch(wifi_sendcmd_request({cmd}));
+        // }
     }
 
     showModal = (key) => {

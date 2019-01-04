@@ -156,7 +156,6 @@ const RenderForm = createForm({
                                 placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('ip',{
                                     rules: [{
-                                        required: true,
                                         message: <FormattedMessage id="setting.wifi.ip" defaultMessage="IP地址" />,
                                     }],
                                 })}
@@ -172,7 +171,6 @@ const RenderForm = createForm({
                                 placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('gateway',{
                                     rules: [{
-                                        required: true,
                                         message: <FormattedMessage id="setting.wifi.gateway" defaultMessage="网关" />,
                                     }],
                                 })}
@@ -188,7 +186,6 @@ const RenderForm = createForm({
                                 placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('lan',{
                                     rules: [{
-                                        required: true,
                                         message: <FormattedMessage id="setting.wifi.lan" defaultMessage="局域网" />,
                                     }],
                                 })}
@@ -204,7 +201,6 @@ const RenderForm = createForm({
                                 placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('dns',{
                                     rules: [{
-                                        required: true,
                                         message: <FormattedMessage id="setting.wifi.dns" defaultMessage="主网域服务器" />,
                                     }],
                                 })}

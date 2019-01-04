@@ -14,18 +14,18 @@ const initial = {
         main_runtime:23,//运行时间
         main_outcwatervol:322,//浓水出水量
         //以下是滤芯部分
-        filterelements_modlife_leftvol:39,//电离子膜寿命剩余流量
-        filterelements_prefilter1_leftvol:29,//前置PP寿命剩余流量
+        filterelements_modlife_leftvol:390,//电离子膜寿命剩余流量
+        filterelements_prefilter1_leftvol:980,//前置PP寿命剩余流量
         filterelements_prefilter2_leftvol:30,//前置2滤芯寿命剩余流量
         filterelements_prefilter3_leftvol:9,//前置3滤芯寿命剩余流量
-        filterelements_posfilter1_leftvol:70,//后置活性炭寿命剩余流量
+        filterelements_posfilter1_leftvol:700,//后置活性炭寿命剩余流量
         filterelements_posfilter2_leftvol:90,//电离子膜寿命剩余流量
         filterelements_posfilter3_leftvol:100,//电离子膜寿命剩余流量
-        filterelements_modlife_leftday:20,//电离子膜寿命剩余天数
-        filterelements_prefilter1_leftday:1,//前置PP寿命剩余天数
+        filterelements_modlife_leftday:500,//电离子膜寿命剩余天数
+        filterelements_prefilter1_leftday:88,//前置PP寿命剩余天数
         filterelements_prefilter2_leftday:24,//前置2寿命剩余天数
         filterelements_prefilter3_leftday:41,//前置3寿命剩余天数
-        filterelements_posfilter1_leftday:5,//后置活性炭寿命剩余天数
+        filterelements_posfilter1_leftday:50,//后置活性炭寿命剩余天数
         filterelements_posfilter2_leftday:23,//后置2滤芯寿命剩余天数
         filterelements_posfilter3_leftday:46,//后置2滤芯寿命剩余天数
       },

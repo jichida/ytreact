@@ -8,7 +8,7 @@ import lodashget from 'lodash.get';
 import moment from 'moment';
 import 'moment-timezone';
 import GridContent from '../GridContent';
-import warringConfig from './chartConfig';
+import config from './config';
 import './index.less';
 
 import sb_icon from '../../assets/sj_icon.png';
@@ -109,10 +109,36 @@ const TopMonitor = injectIntl((props)=>{
     )
 })
 
+const getPercent = (id,value) => {
+    console.log('GetPercent:')
+    console.log(value);
+    let cf = config[id];
+    let warring = false;
+    console.log(id);
+    let percent = Math.round(value/cf.value * 100) ;
+    if(percent <= cf.warringPercent){
+        warring = true;
+    }
+    return {
+        value,
+        percent,
+        warring
+    }
+}
 
 const TopChart = injectIntl((props)=>{
     const {homedata, intl} = props;
+    console.log(homedata)
     const { formatMessage } = intl;
+    const outwater_quality = getPercent('main_outwater_quality', homedata.main_outwater_quality);
+    const modlife_leftday = getPercent('filterelements_modlife_leftday', homedata.filterelements_modlife_leftday);
+    const prefilter1_leftday = getPercent('filterelements_prefilter1_leftday', homedata.filterelements_prefilter1_leftday);
+    const prefilter2_leftday = getPercent('filterelements_prefilter2_leftday', homedata.filterelements_prefilter2_leftday);
+    const prefilter3_leftday = getPercent('filterelements_prefilter3_leftday', homedata.filterelements_prefilter3_leftday);
+    const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', homedata.filterelements_posfilter1_leftday);
+    const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', homedata.filterelements_posfilter2_leftday);
+    const posfilter3_leftday = getPercent('filterelements_posfilter3_leftday', homedata.filterelements_posfilter3_leftday);
+    const uvfilter_leftday = getPercent('filterelements_uvfilter_leftday', homedata.filterelements_uvfilter_leftday);
     //以下是滤芯部分
     // filterelements_modlife_leftvol:39,//电离子膜寿命剩余流量
     // filterelements_prefilter1_leftvol:29,//前置PP寿命剩余流量
@@ -173,56 +199,65 @@ const TopChart = injectIntl((props)=>{
         {
             title: `${formatMessage({id: 'machine.data.average'})}`,
             unit: 'uS/cm',
-            data: homedata.main_outwater_quality,
-            warring: homedata.main_outwater_quality >= warringConfig.main_outwater_quality,
+            data: outwater_quality.value,
+            percent: outwater_quality.percent,
+            warring: outwater_quality.warring,
         },
         {
             title:  `${formatMessage({id: 'machine.data.ionmembrance'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: homedata.filterelements_modlife_leftday,
-            warring: homedata.filterelements_modlife_leftday <= warringConfig.filterelements_modlife_leftday ,
+            data: modlife_leftday.value,
+            percent: modlife_leftday.percent,
+            warring: modlife_leftday.warring ,
         },
         {
             title:  `${formatMessage({id: 'machine.data.frontfilter1'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: homedata.filterelements_prefilter1_leftday,
-            warring: homedata.filterelements_prefilter1_leftday <= warringConfig.filterelements_prefilter1_leftday,
+            data: prefilter1_leftday.value,
+            percent: prefilter1_leftday.percent,
+            warring: prefilter1_leftday.warring,
         },
         {
             title: `${formatMessage({id: 'machine.data.frontfilter2'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: homedata.filterelements_prefilter2_leftday,
-            warring: homedata.filterelements_prefilter2_leftday <= warringConfig.filterelements_prefilter2_leftday,
+            data: prefilter2_leftday.value,
+            percent: prefilter2_leftday.percent,
+            warring: prefilter2_leftday.warring,
         },
         {
             title: `${formatMessage({id: 'machine.data.frontfilter3'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: homedata.filterelements_prefilter3_leftday,
-            warring: homedata.filterelements_prefilter3_leftday <= warringConfig.filterelements_prefilter3_leftday,
+            data: prefilter3_leftday.value,
+            percent: prefilter3_leftday.percent,
+            warring: prefilter3_leftday.warring,
         },
         {
             title: `${formatMessage({id: 'machine.data.afterfilter1'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: homedata.filterelements_posfilter1_leftday,
-            warring: homedata.filterelements_posfilter1_leftday <= warringConfig.filterelements_posfilter1_leftday,
+            data: posfilter1_leftday.value,
+            percent: posfilter1_leftday.percent,
+            warring: posfilter1_leftday.warring,
         },
         {
             title:  `${formatMessage({id: 'machine.data.afterfilter2'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: homedata.filterelements_posfilter2_leftday,
-            warring: homedata.filterelements_posfilter2_leftday <= warringConfig.filterelements_posfilter2_leftday,
+            data: posfilter2_leftday.value,
+            percent: posfilter2_leftday.percent,
+            warring: posfilter2_leftday.warring,
         },
         {
             title:  `${formatMessage({id: 'machine.data.afterfilter3'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: homedata.filterelements_posfilter3_leftday,
-            warring: homedata.filterelements_posfilter3_leftday <= warringConfig.filterelements_posfilter3_leftday,
+            data: posfilter3_leftday.value,
+            percent: posfilter3_leftday.percent,
+            warring: posfilter3_leftday.warring,
         },
         {
             title:  `${formatMessage({id: 'machine.data.uvlife'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: homedata.filterelements_uvfilter_leftday,
-            warring: homedata.filterelements_uvfilter_leftday <= warringConfig.filterelements_uvfilter_leftday,
+            data: uvfilter_leftday.value,
+            percent: uvfilter_leftday.percent,
+            warring: uvfilter_leftday.warring,
         }
     ]
 
@@ -241,11 +276,11 @@ const TopChart = injectIntl((props)=>{
     )
 })
 
-const Chart = ({title, unit, data, warring})=>{
+const Chart = ({title, unit, data, percent, warring})=>{
     return (
         <div className="chart">
             <Progress type="circle"
-                percent={data}
+                percent={percent}
                 width={100}
                 status={warring?"exception":"active"}
                 format={() => <React.Fragment><p className="data">{data}</p><p className="unit">{unit}</p></React.Fragment>} />

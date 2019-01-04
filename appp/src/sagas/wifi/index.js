@@ -104,25 +104,37 @@ const parsedata = (stringbody,callbackfn)=>{
 };
 
 const socket_recvdata_promise = (data)=>{
+  // console.log(data);
   recvbuf += data;
-  return new Promise(resolve => {
-      if(lodash_startsWith(recvbuf,'$')){
-        if(lodash_endWith(recvbuf,'%')){
-          if(recvbuf !== '$ok%'){
-            parsedata(recvbuf,(result)=>{
+  let objstring = '';
+  const istart = recvbuf.indexOf('$',0);
+  if(istart >= 0){
+    const iend = recvbuf.indexOf('%',istart);
+    if(iend >= 0){
+      objstring = recvbuf.substr(istart,iend - istart + 1);
+      recvbuf = recvbuf.substr(iend+1)
+    }
+  }
+  else{
+    recvbuf = '';
+  }
+  // debugger;
+  return new Promise((resolve,reject) => {
+        if(lodash_startsWith(objstring,'$')
+          && lodash_endWith(objstring,'%')){
+          if(objstring !== '$ok%'){
+            parsedata(objstring,(result)=>{
               resolve({cmd:'data',data:result});
-              // resolve(result);
-              // socket_send(`$ok%`,()=>{
-              //
-              // });
             });
           }
           else{
-            resolve({cmd:'ok',data:recvbuf});
+            resolve({cmd:'ok',data:objstring});
           }
-          recvbuf = '';
         }
-      }
+        else{
+          reject('数据有问题');
+        }
+
   });
 }
 
@@ -219,12 +231,13 @@ export function* wififlow() {
     yield takeLatest(`${socket_recvdata}`,function*(action){
       const {payload} = action;
       try{
-        // yield put(set_weui({
-        //   toast:{
-        //   text:`socket接收到数据--->socket_recvdata--->${JSON.stringify(payload)}`,
-        //   show: true,
-        //   type:'success'
-        // }}));
+        console.log(payload);
+        yield put(set_weui({
+          toast:{
+          text:`socket接收到数据--->socket_recvdata--->${JSON.stringify(payload)}`,
+          show: true,
+          type:'success'
+        }}));
         if(payload.code === 0){
           const result = yield call(socket_recvdata_promise,payload.data);
           let showdata = result.cmd === 'data'?`${result.data}`:'ok';
@@ -238,12 +251,13 @@ export function* wififlow() {
           if(result.cmd === 'data'){
             //get result.data
             yield put(wifi_getdata(result.data));
+            yield call(socket_send_promise,'$dataok%');
           }
           else if(result.cmd === 'ok'){
             yield put(wifi_sendcmd_result({}));
           }
           //result is to data
-          yield call(socket_send_promise,'$ok%');
+
         }
       }
       catch(e){

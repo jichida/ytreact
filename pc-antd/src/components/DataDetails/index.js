@@ -8,6 +8,7 @@ import lodashget from 'lodash.get';
 import moment from 'moment';
 import 'moment-timezone';
 import GridContent from '../GridContent';
+import warringConfig from './chartConfig';
 import './index.less';
 
 import sb_icon from '../../assets/sj_icon.png';
@@ -112,7 +113,6 @@ const TopMonitor = injectIntl((props)=>{
 const TopChart = injectIntl((props)=>{
     const {homedata, intl} = props;
     const { formatMessage } = intl;
-    const {main_inwater_quality,main_runtime} = homedata;
     //以下是滤芯部分
     // filterelements_modlife_leftvol:39,//电离子膜寿命剩余流量
     // filterelements_prefilter1_leftvol:29,//前置PP寿命剩余流量
@@ -128,101 +128,101 @@ const TopChart = injectIntl((props)=>{
     // filterelements_posfilter1_leftday:5,//后置活性炭寿命剩余天数
     // filterelements_posfilter2_leftday:23,//后置2滤芯寿命剩余天数
     // filterelements_posfilter3_leftday:46,//后置2滤芯寿命剩余天数
-    //
+    // filterelements_uvfilter_leftday: 46, //UV滤芯剩余天数
     // 进度数据
-    const chartDataConst = {
-        average: {
-            data: 90,
-            warring: true,
-        },
-        ionmembrance: {
-            data: 60,
-            warring: false,
-        },
-        frontfilter1: {
-            data: 1000,
-            warring: false,
-        },
-        frontfilter2: {
-            data: 1000,
-            warring: false,
-        },
-        frontfilter3: {
-            data: 10,
-            warring: true,
-        },
-        afterfilter1: {
-            data: 100,
-            warring: false,
-        },
-        afterfilter2: {
-            data: 1000,
-            warring: false,
-        },
-        afterfilter3: {
-            data: 1000,
-            warring: false,
-        },
-        uvlife: {
-            data: 10,
-            warring: true,
-        }
-    }
+    // const chartDataConst = {
+    //     average: {
+    //         data: 90,
+    //         warring: true,
+    //     },
+    //     ionmembrance: {
+    //         data: 60,
+    //         warring: false,
+    //     },
+    //     frontfilter1: {
+    //         data: 1000,
+    //         warring: false,
+    //     },
+    //     frontfilter2: {
+    //         data: 1000,
+    //         warring: false,
+    //     },
+    //     frontfilter3: {
+    //         data: 10,
+    //         warring: true,
+    //     },
+    //     afterfilter1: {
+    //         data: 100,
+    //         warring: false,
+    //     },
+    //     afterfilter2: {
+    //         data: 1000,
+    //         warring: false,
+    //     },
+    //     afterfilter3: {
+    //         data: 1000,
+    //         warring: false,
+    //     },
+    //     uvlife: {
+    //         data: 10,
+    //         warring: true,
+    //     }
+    // }
 
     const chartData = [
         {
             title: `${formatMessage({id: 'machine.data.average'})}`,
             unit: 'uS/cm',
-            data: chartDataConst.average.data,
-            warring: chartDataConst.average.warring,
+            data: homedata.main_outwater_quality,
+            warring: homedata.main_outwater_quality >= warringConfig.main_outwater_quality,
         },
         {
             title:  `${formatMessage({id: 'machine.data.ionmembrance'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: chartDataConst.ionmembrance.data,
-            warring: chartDataConst.ionmembrance.warring,
+            data: homedata.filterelements_modlife_leftday,
+            warring: homedata.filterelements_modlife_leftday <= warringConfig.filterelements_modlife_leftday ,
         },
         {
             title:  `${formatMessage({id: 'machine.data.frontfilter1'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: chartDataConst.frontfilter1.data,
-            warring: chartDataConst.frontfilter1.warring,
+            data: homedata.filterelements_prefilter1_leftday,
+            warring: homedata.filterelements_prefilter1_leftday <= warringConfig.filterelements_prefilter1_leftday,
         },
         {
             title: `${formatMessage({id: 'machine.data.frontfilter2'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: chartDataConst.frontfilter2.data,
-            warring: chartDataConst.frontfilter2.warring,
+            data: homedata.filterelements_prefilter2_leftday,
+            warring: homedata.filterelements_prefilter2_leftday <= warringConfig.filterelements_prefilter2_leftday,
         },
         {
             title: `${formatMessage({id: 'machine.data.frontfilter3'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: chartDataConst.frontfilter3.data,
-            warring: chartDataConst.frontfilter3.warring,
+            data: homedata.filterelements_prefilter3_leftday,
+            warring: homedata.filterelements_prefilter3_leftday <= warringConfig.filterelements_prefilter3_leftday,
         },
         {
             title: `${formatMessage({id: 'machine.data.afterfilter1'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: chartDataConst.afterfilter1.data,
-            warring: chartDataConst.afterfilter1.warring,
+            data: homedata.filterelements_posfilter1_leftday,
+            warring: homedata.filterelements_posfilter1_leftday <= warringConfig.filterelements_posfilter1_leftday,
         },
         {
             title:  `${formatMessage({id: 'machine.data.afterfilter2'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: chartDataConst.afterfilter2.data,
-            warring: chartDataConst.afterfilter2.warring,
+            data: homedata.filterelements_posfilter2_leftday,
+            warring: homedata.filterelements_posfilter2_leftday <= warringConfig.filterelements_posfilter2_leftday,
         },
         {
             title:  `${formatMessage({id: 'machine.data.afterfilter3'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: chartDataConst.afterfilter3.data,
-            warring: chartDataConst.afterfilter3.warring,
+            data: homedata.filterelements_posfilter3_leftday,
+            warring: homedata.filterelements_posfilter3_leftday <= warringConfig.filterelements_posfilter3_leftday,
         },
         {
             title:  `${formatMessage({id: 'machine.data.uvlife'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: chartDataConst.uvlife.data,
-            warring: chartDataConst.uvlife.warring,
+            data: homedata.filterelements_uvfilter_leftday,
+            warring: homedata.filterelements_uvfilter_leftday <= warringConfig.filterelements_uvfilter_leftday,
         }
     ]
 
@@ -404,6 +404,7 @@ class DataDetails extends React.PureComponent {
             filterelements_posfilter1_leftday:5,//后置活性炭寿命剩余天数
             filterelements_posfilter2_leftday:23,//后置2滤芯寿命剩余天数
             filterelements_posfilter3_leftday:46,//后置2滤芯寿命剩余天数
+            filterelements_uvfilter_leftday:46,//UV滤芯寿命剩余天数
           },
           // errordata:{
           //   error_partsfailure:1,//零件故障

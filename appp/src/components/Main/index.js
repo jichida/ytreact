@@ -339,7 +339,7 @@ class Home extends PureComponent{
                                     <HomeChart title={title_main_filterelements_prefilter2}
                                       firsttitle={title_filterelements_prefilter2_leftday} firstpercent={value_filterelements_prefilter2_leftday} firstcolor={icon_filterelements_prefilter2_leftday}
                                       secondtitle={title_filterelements_prefilter2_leftvol} secondpercent={value_filterelements_prefilter2_leftvol} secondcolor={icon_filterelements_prefilter2_leftvol}
-                          />
+                                />
                                 </Flex.Item>
                                 <Flex.Item>
                                     <HomeChart title={title_main_filterelements_prefilter3}

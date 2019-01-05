@@ -25,24 +25,24 @@ class Detail extends React.PureComponent {
                         </Col>
                     </Row>
                     <Row gutter={48} className="items">
-                        <Col span={4} className="item-title">标题:</Col>
+                        <Col span={4} className="item-title"><FormattedMessage id="machine.notice.title" />:</Col>
                         <Col span={16}  className="item-content">标题在这里</Col>
                     </Row>
                     <Row gutter={48} className="items">
-                        <Col span={4} className="item-title">经销商:</Col>
+                        <Col span={4} className="item-title"><FormattedMessage id="machine.notice.distributor" />:</Col>
                         <Col span={16}  className="item-content">经销商在这里</Col>
                     </Row>
                     <Row gutter={48} className="items">
-                        <Col span={4} className="item-title">内容:</Col>
+                        <Col span={4} className="item-title"><FormattedMessage id="machine.notice.content" />:</Col>
                         <Col span={16}  className="item-content">内容在这里</Col>
                     </Row>
                     <Row gutter={48} className="items">
-                        <Col span={4} className="item-title">附件:</Col>
+                        <Col span={4} className="item-title"><FormattedMessage id="machine.notice.enclosure" />:</Col>
                         <Col span={16}  className="item-content">附件在这里</Col>
                     </Row>
                     <Row gutter={48} className="items">
                         <Col span={16} offset={4}  style={{textAlign: 'center'}}>
-                            <Button type="primary" onClick={this.handleCancel}>返回</Button>
+                            <Button type="primary" onClick={this.handleCancel}><FormattedMessage id="form.return" /></Button>
                         </Col>
                     </Row>
                 </Card>

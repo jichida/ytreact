@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Card, Row, Col, Table, Button, message, Form, Input, Select, Upload } from 'antd';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import GridContent from '../GridContent';
 import './new.less';
 
@@ -61,7 +61,8 @@ class New extends React.PureComponent {
     }
 
     render() {
-        const { getFieldDecorator } = this.props.form;
+        const { getFieldDecorator} = this.props.form;
+        const { intl } = this.props;
 
         return (
             <GridContent>
@@ -75,11 +76,11 @@ class New extends React.PureComponent {
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Item
                                 {...formItemLayout}
-                                label="标题"
+                                label={intl.formatMessage({id: 'machine.notice.title'})}
                             >
                                 {getFieldDecorator('title', {
                                     rules: [{
-                                        required: true, message: 'Please input your Notice Title!',
+                                        required: true, message: intl.formatMessage({id: 'machine.notice.title.required'}),
                                     }],
                                 })(
                                     <Input />
@@ -87,17 +88,17 @@ class New extends React.PureComponent {
                             </Form.Item>
                             <Form.Item
                                 {...formItemLayout}
-                                label="经销商"
+                                label={intl.formatMessage({id: 'machine.notice.distributor'})}
                             >
                                 {getFieldDecorator('distributor', {
                                     rules: [{
-                                        required: true, message: 'Please select your Notice Title!',
+                                        required: true, message: intl.formatMessage({id: 'machine.notice.distributor.required'}),
                                     }],
                                 })(
                                     <Select
                                         showSearch
                                         style={{ width: '100%' }}
-                                        placeholder="选择经销商"
+                                        placeholder= {intl.formatMessage({id: 'machine.notice.distributor.required'})}
                                         optionFilterProp="children"
                                         filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                                     >
@@ -109,11 +110,11 @@ class New extends React.PureComponent {
                             </Form.Item>
                             <Form.Item
                                 {...formItemLayout}
-                                label="内容"
+                                label={intl.formatMessage({id: 'machine.notice.content'})}
                             >
                                 {getFieldDecorator('content', {
                                     rules: [{
-                                        required: true, message: 'Please input your Notice Content!',
+                                        required: true, message: intl.formatMessage({id: 'machine.notice.content.required'}),
                                     }],
                                 })(
                                     <Input.TextArea rows={4} />
@@ -121,7 +122,7 @@ class New extends React.PureComponent {
                             </Form.Item>
                             <Form.Item
                                 {...formItemLayout}
-                                label="附件"
+                                label={intl.formatMessage({id: 'machine.notice.enclosure'})}
                             >
                                 {getFieldDecorator('file', {
                                     valuePropName: 'fileList',
@@ -134,8 +135,8 @@ class New extends React.PureComponent {
                             </Form.Item>
                             <Form.Item {...tailFormItemLayout}>
                                 <Row gutter={48}>
-                                    <Col span={12} style={{textAlign: 'right'}}><Button type="primary" htmlType="submit">确定</Button></Col>
-                                    <Col span={12} style={{textAlign: 'left'}}><Button onClick={this.handleCancel}>取消</Button></Col>
+                                    <Col span={12} style={{textAlign: 'right'}}><Button type="primary" htmlType="submit">{intl.formatMessage({id: 'form.submit'})}</Button></Col>
+                                    <Col span={12} style={{textAlign: 'left'}}><Button onClick={this.handleCancel}>{intl.formatMessage({id: 'form.cancel'})}</Button></Col>
                                 </Row>
                                 
                             </Form.Item>
@@ -147,4 +148,4 @@ class New extends React.PureComponent {
     }
 }
 
-export default Form.create()(withRouter(New));
+export default Form.create()(withRouter(injectIntl(New)));

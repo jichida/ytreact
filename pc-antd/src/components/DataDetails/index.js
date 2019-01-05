@@ -398,6 +398,9 @@ class DataDetails extends React.PureComponent {
     }
 
     handleStatistic = () => {
+        const { history } = this.props;
+        history.push(`/statistics`);
+
         console.log('数据统计');
     }
 

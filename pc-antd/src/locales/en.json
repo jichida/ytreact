@@ -65,6 +65,8 @@
 "machine.notice": "Notice Announcement",
 "machine.notice.download": "Download",
 "machine.notice.upload": "Upload",
+"machine.notice.new": "New",
+"machine.notice.detail": "Detail",
 "machine.total": "total number of devices",
 "machine.regional": "region",
 "machine.runing.normal": "normal operation",

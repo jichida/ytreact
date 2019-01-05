@@ -6,6 +6,8 @@ import Search from './Search';
 import RegionalDisplay from './RegionalDisplay'; // 区域展示/中国区域展示
 import RegionalList from './RegionalList';
 import Notice from './Notice'; // 通知公告
+import NoticeNew from './Notice/new';
+import NoticeDetail from './Notice/detail';
 import SearchResult from './SearchResult';
 import Abnormals from './Abnormals';
 import Machines from './Machines'; // 全部机器/异常机器
@@ -52,6 +54,8 @@ class AppRoot extends React.Component {
             <Route path="/regional_list/:addresslevel2" component={Layout(RegionalList)} />
             <Route path="/details/:id" component={Layout(DataDetails)} />
             <Route path="/notice" component={Layout(Notice)} />
+            <Route path="/noticenew" component={Layout(NoticeNew)} />
+            <Route path="/noticedetail" component={Layout(NoticeDetail)} />
             <Route path="/actions" component={Layout(ActionList)} />
             <Route path="/login" component={Login}/>
             <Route path="/forget" component={Forget}/>

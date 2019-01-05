@@ -65,6 +65,8 @@
   "machine.notice": "通知公告",
   "machine.notice.download": "下载",
   "machine.notice.upload": "上传",
+  "machine.notice.new": "新建",
+  "machine.notice.detail": "详情",
   "machine.total": "总设备数量",
   "machine.regional": "地区",
   "machine.runing.normal": "正常运行",

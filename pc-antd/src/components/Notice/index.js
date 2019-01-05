@@ -56,54 +56,37 @@ const data = [
     },
 ]
 
-const columns = [{
-    dataIndex: 'title',
-    key: 'title',
-    render: (text, record) => (
-        <span>
-          <div className="dian" />{text}
-        </span>
-      ),
-  }, {
-    dataIndex: 'occurstime',
-    key: 'occurstime',
-    width: '200px',
-  }, {
-    key: 'action',
-    width: '200px',
-    render: (text, record) => (
-      <span>
-        <Button type="primary" ghost style={{border: 0}}>
-            <FormattedMessage id="machine.notice.download" />
-        </Button>
-      </span>
-    ),
-  }]
-
-  const uploadprops = {
-    name: 'file',
-    action: '',
-    // headers: {
-    //   authorization: 'authorization-text',
-    // },
-    onChange(info) {
-      if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
-
-
 
 class Notice extends React.PureComponent {
 
 
     render() {
+
+        const { history } = this.props;
+
+        const columns = [{
+            dataIndex: 'title',
+            key: 'title',
+            render: (text, record) => (
+                <span>
+                  <div className="dian" />{text}
+                </span>
+              ),
+          }, {
+            dataIndex: 'occurstime',
+            key: 'occurstime',
+            width: '200px',
+          }, {
+            key: 'action',
+            width: '200px',
+            render: (text, record) => (
+              <span>
+                <Button type="primary" ghost style={{border: 0}} onClick={(record)=>{history.push(`/noticedetail`)}}>
+                    <FormattedMessage id="machine.notice.detail" />
+                </Button>
+              </span>
+            ),
+        }] 
 
         return (
             <GridContent>
@@ -112,9 +95,10 @@ class Notice extends React.PureComponent {
                     <Col span={24}>
                         <img src={sb_icon} alt="" /><span><FormattedMessage id="machine.notice" /></span>
                         <span className="right-Link">
-                            <Upload {...uploadprops}>
+                            <Button type="primary"  icon="edit" size="large" onClick={()=>{history.push('/noticenew')}}><FormattedMessage id="machine.notice.new" /></Button>
+                            {/* <Upload {...uploadprops}>
                                 <Button type="primary" icon="upload" size="large"><FormattedMessage id="machine.notice.upload" /></Button>
-                            </Upload>
+                            </Upload> */}
                         </span>
                     </Col>
                 </Row>
@@ -129,4 +113,4 @@ class Notice extends React.PureComponent {
     }
 }
 
-export default Notice;
+export default withRouter(Notice);

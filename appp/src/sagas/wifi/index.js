@@ -97,6 +97,19 @@ const parsedata = (stringbody,callbackfn)=>{
     'errordata.error_pressuresensor2failure',//41	压力2传感器故障	ERROR16:0 无故障 1有故障
     'errordata.error_pressuresensor3failure',//42	压力3传感器故障	ERROR17:0 无故障 1有故障
     'errordata.error_pressuresensor4failure',//43	压力4传感器故障	ERROR18:0 无故障 1有故障
+
+    'syssettings.quality',// 44	出水水质设置值	setlo  	1 word
+    'syssettings.dormancy',// 45	休眠状态	目前设备的休眠状态	1 byte
+    'syssettings.dormancystart',// 46	休眠开始时间	开始休眠 如：22	1 byte
+    'syssettings.dormancyend',// 47	休眠结束时间	退出休眠 如：6	1 byte
+
+    'wifi.singal',// 48	网络信号	主机目前与外网的连接强度	1 byte
+    'inwatersettings.ph',// 49	进水PH	进水的PH值  byte	1 byte
+    'inwatersettings.conductivity',// 50	进水电导率	进水电导率  word	1 word
+    'inwatersettings.tds',// 51	进水TDS	进水TDS  word	1 word
+    'inwatersettings.hardness',// 52	进水硬度	进水硬度  word	1 word
+    'inwatersettings.alkalinity',// 53	进水碱度	进水碱度  word	1 word
+
   ];
   let result = {};
   for(let i = 0;i < mapdatafieldname.length; i++){

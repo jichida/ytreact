@@ -1,5 +1,6 @@
 import { createReducer } from 'redux-act';
 import {
+  wifi_getdata,
   adddevice_result,
   getdevice_result,
   setuserdevice_result,
@@ -94,6 +95,26 @@ const initial = {
 };
 
 const device = createReducer({
+    [wifi_getdata]: (state, payload) => {
+        // let homedata = state.homedata;
+        // let errordata = state.errordata;
+        // let performancedata = state.performancedata;
+        const {inwatersettings:inwatersettingsnew,syssettings:syssettingsnew} = payload;
+        const inwatersettings = state.inwatersettings;
+        const syssettings = state.syssettings;
+        syssettings.quality = syssettingsnew.quality;
+        syssettings.dormancy = syssettingsnew.dormancy === 0?false:true;
+        syssettings.dormancystart = syssettingsnew.dormancystart;
+        syssettings.dormancyend = syssettingsnew.dormancyend;
+
+        inwatersettings.ph = inwatersettingsnew.ph;
+        inwatersettings.conductivity = inwatersettingsnew.conductivity;
+        inwatersettings.tds = inwatersettingsnew.tds;
+        inwatersettings.hardness = inwatersettingsnew.hardness;
+        inwatersettings.alkalinity = inwatersettingsnew.alkalinity;
+
+        return { ...state, inwatersettings,syssettings };
+    },
     [adddevice_result]: (state, payload) => {
         return { ...state, ...payload };
     },

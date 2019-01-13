@@ -153,7 +153,7 @@
 }
 
 .react-fine-uploader-gallery-thumbnail-container {
-    display: block;
+    display: flex;
     height: 74px;
     text-align: center;
 }

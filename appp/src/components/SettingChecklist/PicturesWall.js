@@ -49,12 +49,14 @@ class Index extends React.Component {
         const { previewVisible, previewImage, fileList } = this.state;
 
         return (
+            <div>
                 <Gallery uploader={ uploader }
                     files={fileList}
                     onChange={this.handleChange}
                     // onPreview={this.handlePreview}
                     xviewUploadImage={xviewUploadImage}
                 />
+            </div>
         )
     }
 }

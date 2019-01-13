@@ -216,7 +216,7 @@ const RenderResultForm = createForm({
                     />}
                 ><FormattedMessage id="setting.checklist.delivered" /></List.Item>
                 <List.Item><FormattedMessage id="setting.checklist.pictures" defaultMessage="拍摄安装图，用于备份存档（至少上传四张）" />
-                    <List.Item.Brief>
+                    <List.Item.Brief style={{whiteSpace: 'normal'}}>
                         <div className="item_children">
                             <PicturesWall {...getFieldProps('pictures',{valuePropName: 'value'})}/>
                         </div>

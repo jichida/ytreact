@@ -7,7 +7,7 @@ import { createForm, createFormField } from 'rc-form';
 import { FormattedMessage } from 'react-intl';
 import {wifi_sendcmd_request} from '../../actions';
 import {set_weui} from '../../actions';
-import PicturesWall  from '../Controls/pictureswall.js';
+import PicturesWall  from './PicturesWall';
 import './index.less';
 
 const RenderCheckForm = createForm({

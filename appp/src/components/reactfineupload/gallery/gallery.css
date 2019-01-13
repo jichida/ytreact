@@ -5,7 +5,7 @@
 .react-fine-uploader-gallery-nodrop-container,
 .react-fine-uploader-gallery-dropzone {
     border-radius: 6px;
-    background-color: #FAFAFA;
+    /* background-color: #FAFAFA; */
     /* max-height: 490px;
     min-height: 310px; */
     overflow-y: hidden;
@@ -28,7 +28,7 @@
 }
 
 .react-fine-uploader-gallery-dropzone-active  {
-    background: #FDFDFD;
+    /* background: #FDFDFD; */
     border: 2px solid #00ABC7;
 }
 
@@ -155,7 +155,8 @@
 .react-fine-uploader-gallery-thumbnail-container {
     display: flex;
     height: 74px;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 .react-fine-uploader-gallery-thumbnail {
     position: relative;

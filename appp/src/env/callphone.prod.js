@@ -6,5 +6,5 @@ export const jsCallPhone=(phonenumber)=>{
     action:"callPhone",
     data:{ tel: phonenumber}
   }
-  getxviewfun().callNativeXView(JSON.stringify(xviewData));
+  getxviewfun()(JSON.stringify(xviewData));
 }

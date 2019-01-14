@@ -43,7 +43,7 @@ const getssidlist = (fncallback)=>{
     action:"getWifiList",
     callback:"getWifiListCallback"
   }
-  getxviewfun().callNativeXView(JSON.stringify(xviewData));
+  getxviewfun()(JSON.stringify(xviewData));
   // {"code":0,"data":[{"mac":"3c:46:d8:14:8f:54","ssid":"yikuaiqian2018","wifiCipher":2},{"mac":"78:44:fd:c8:7b:39","ssid":"QianMianYuJia","wifiCipher":2}],
 
 }
@@ -62,7 +62,7 @@ const setcurwifi = (values,fncallback)=>{
       wifiCipher:values.wifiCipher
     }
   }
-  getxviewfun().callNativeXView(JSON.stringify(xviewData));
+  getxviewfun()(JSON.stringify(xviewData));
 
 }
 
@@ -74,7 +74,7 @@ const socket_send = (values,fncallback)=>{
     callback:"sendSocketCallback",
     data:values
   }
-  getxviewfun().callNativeXView(JSON.stringify(xviewData));
+  getxviewfun()(JSON.stringify(xviewData));
 
 }
 
@@ -85,7 +85,7 @@ const socket_connnect = (values)=>{
     callback:"socketstatuscallback",
     data:values
   }
-  getxviewfun().callNativeXView(JSON.stringify(xviewData));
+  getxviewfun()(JSON.stringify(xviewData));
 
 }
 
@@ -96,7 +96,7 @@ const socket_close = ()=>{
     callback:"socketstatuscallback",
     data:{}
   }
-  getxviewfun().callNativeXView(JSON.stringify(xviewData));
+  getxviewfun()(JSON.stringify(xviewData));
 
 }
 

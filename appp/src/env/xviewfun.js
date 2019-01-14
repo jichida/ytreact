@@ -1,14 +1,14 @@
 
-const getxviewfun = ()=>{
+const xviewfun = (xviewdata)=>{
   if(!!window["xview"]){
-    return window["xview"].callNativeXView;
+    return window["xview"].callNativeXView(xviewdata);
   }
   if(!!window["webkit"]){
-    return window["webkit"].messageHandlers["callNativeXView"].postMessage;
+    return window["webkit"].messageHandlers["callNativeXView"].postMessage(xviewdata);
   }
   return ()=>{
 
   };
 }
 
-export {getxviewfun};
+export {xviewfun};

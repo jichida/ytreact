@@ -1,5 +1,5 @@
 // import imageA from './IMG_3861.JPG';
-import {getxviewfun} from './xviewfun';
+import {xviewfun} from './xviewfun';
 let xviewUploadImage;
 
 
@@ -48,7 +48,7 @@ if(!!window["xview"] || !!window["webkit"]){
     };
 
 
-    getxviewfun()(JSON.stringify(xviewData));
+    xviewfun(JSON.stringify(xviewData));
   };
 }
 

@@ -1,4 +1,4 @@
-import {getxviewfun} from './xviewfun';
+import {xviewfun} from './xviewfun';
 export const jsCallPhone=(phonenumber)=>{
 
   const xviewData = {
@@ -6,5 +6,5 @@ export const jsCallPhone=(phonenumber)=>{
     action:"callPhone",
     data:{ tel: phonenumber}
   }
-  getxviewfun()(JSON.stringify(xviewData));
+  xviewfun(JSON.stringify(xviewData));
 }

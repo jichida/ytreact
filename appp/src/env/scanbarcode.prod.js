@@ -1,5 +1,5 @@
 
-import {getxviewfun} from './xviewfun';
+import {xviewfun} from './xviewfun';
 export const scanbarcode=(fncallback)=>{
   // const json = {
   //   "callback": "callbackfn_scanbarcode"
@@ -14,6 +14,6 @@ export const scanbarcode=(fncallback)=>{
     callback:"callbackfn_scanbarcode"
   }
 
-  getxviewfun()(JSON.stringify(xviewData));
+  xviewfun(JSON.stringify(xviewData));
 
 };

@@ -216,6 +216,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                         <InputItem
+                            editable={false}
                             onClick={()=>{
                              scanbarcode((result)=>{
                               //  alert(JSON.stringify(result));

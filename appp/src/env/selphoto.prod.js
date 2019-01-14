@@ -41,8 +41,7 @@ if(!!window.xview){
         data:[]
       }
       for(let i = 0 ;i < result.data.length;i++){
-        alert(`图片数据:${result.data[i].imageBase64.length}`);
-        jsonret.data.push(result.data[i].imageBase64);
+        jsonret.data.push(`${result.data[i].imagePrefix}${result.data[i].imageBase64}`);
       }
       callback(jsonret);
     };

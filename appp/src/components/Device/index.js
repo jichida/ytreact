@@ -10,7 +10,7 @@ import basic_img from '../../assets/sy2.png';
 import water_img from '../../assets/sy3.png';
 import install_img from '../../assets/sy4.png';
 // import user_img from '../../assets/sy5.png';
-
+import {jsCallPhone} from '../../env/callphone';
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -63,8 +63,12 @@ class Device extends PureComponent{
                         thumb={txImg}
                         multipleLine
                         >
-                        <span style={{color: "#ffffff"}}>{`${distributor.name}`}<Brief style={{color: "#ffffff"}}>
-                          {`TEL:${distributor.username}`}</Brief></span>
+                        <span style={{color: "#ffffff"}} onClick={()=>{
+                          jsCallPhone(distributor.username);
+                        }}>
+                        {`${distributor.name}`}
+                        <Brief style={{color: "#ffffff"}}>{`TEL:${distributor.username}`}</Brief>
+                          </span>
                     </Item>
                 </List>
                 <WingBlank>

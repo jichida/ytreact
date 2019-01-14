@@ -34,6 +34,7 @@ import {
   wifi_getdata,
   wifi_init,
 
+  wifi_seteasylink,
 } from '../../actions/index.js';
 import { push } from 'connected-react-router';//https://github.com/reactjs/connected-react-router
 import lodash_startsWith from 'lodash.startswith';
@@ -451,4 +452,16 @@ export function* wififlow() {
         console.log(e);
       }
     });
+
+
+    //设置配网（输入：wifi用户名，密码）
+    // yield takeLatest(`${wifi_seteasylink}`, function*(action) {
+    //   try{
+    //     let {payload:result} = action;
+    //
+    //   }
+    //   catch(e){
+    //     console.log(e);
+    //   }
+    // });
 }

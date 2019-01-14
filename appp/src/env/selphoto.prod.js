@@ -40,8 +40,8 @@ if(!!window.xview){
         message:'success',
         data:[]
       }
-      for(let i = 0 ;i < result.length;i++){
-        jsonret.data.push(result[i].imageBase64);
+      for(let i = 0 ;i < result.data.length;i++){
+        jsonret.data.push(result.data[i].imageBase64);
       }
       callback(jsonret);
     };

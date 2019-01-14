@@ -73,6 +73,7 @@
     "react-redux": "^5.1.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "react-wx-images-viewer": "^1.0.6",
     "redux": "^4.0.1",
     "redux-act": "^1.7.4",
     "redux-form": "^7.4.2",

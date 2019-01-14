@@ -1,4 +1,4 @@
-
+import {getxviewfun} from './xviewfun';
 export const jsCallPhone=(phonenumber)=>{
 
   const xviewData = {
@@ -6,10 +6,5 @@ export const jsCallPhone=(phonenumber)=>{
     action:"callPhone",
     data:{ tel: phonenumber}
   }
-  if(!!window["xview"]){
-    window["xview"].callNativeXView(JSON.stringify(xviewData));
-  }
-  else{
-    alert('未初始化,拨打电话方法');
-  }
+  getxviewfun().callNativeXView(JSON.stringify(xviewData));
 }

@@ -1,4 +1,5 @@
 // import imageA from './IMG_3861.JPG';
+import {getxviewfun} from './xviewfun';
 let xviewUploadImage;
 
 
@@ -17,7 +18,7 @@ let xviewUploadImage;
 //     window["xview"].callNativeXView(JSON.stringify(xviewData));
 //
 
-if(!!window.xview){
+if(!!window["xview"] || !!window["webkit"]){
   xviewUploadImage = (param,callback)=>{
     // 多图上传
     //
@@ -47,7 +48,7 @@ if(!!window.xview){
     };
 
 
-    window["xview"].callNativeXView(JSON.stringify(xviewData));
+    getxviewfun()(JSON.stringify(xviewData));
   };
 }
 

@@ -64,7 +64,7 @@ class New extends React.PureComponent {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             console.log('Received values of form: ', values);
-            //dispatch(createnotice_request({data:values}));
+            dispatch(createnotice_request({data:values}));
           }
         });
     }
@@ -170,7 +170,7 @@ class New extends React.PureComponent {
                                     valuePropName: 'fileList',
                                     getValueFromEvent: this.normFile,
                                 })(
-                                    <Upload action= {config.serverurl + "/uploadavatar"}>
+                                    <Upload action= {config.serverurl + "/uploadavatar"} multiple>
                                         <Button type="primary" icon="upload" size="large"><FormattedMessage id="machine.notice.upload" /></Button>
                                     </Upload>
                                 )}

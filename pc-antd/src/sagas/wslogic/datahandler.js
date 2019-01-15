@@ -35,11 +35,18 @@ import {
     getdistributorlist_result,
 
     getdevicecount_request,
-    getdevicecount_result
+    getdevicecount_result,
+
+    createnotice_request,
+    createnotice_result,
+    page_getnotice_request,
+    page_getnotice_result,
   } from '../../actions';
 
 //接收的对应关系
 const recvmessagetoresultpair = {
+  'createnotice_result':createnotice_result,
+  'page_getnotice_result':page_getnotice_result,
   'common_err':common_err,
   'getdevicecount_result':getdevicecount_result,
   'getdistributorlist_result':getdistributorlist_result,
@@ -70,6 +77,8 @@ const sendmessagefnsz = {
 
 //验证发送接口
 const sendmessageauthfnsz = {
+  'createnotice':`${createnotice_request}`,
+  'page_getnotice':`${page_getnotice_request}`,
   'getdevicecount':`${getdevicecount_request}`,
   'getdistributorlist':`${getdistributorlist_request}`,
   'getdeviceaddressstats':`${getdeviceaddressstats_request}`,

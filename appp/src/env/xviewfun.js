@@ -6,9 +6,6 @@ const xviewfun = (xviewdata)=>{
   if(!!window["webkit"]){
     return window["webkit"].messageHandlers["callNativeXView"].postMessage(xviewdata);
   }
-  return ()=>{
-
-  };
 }
 
 export {xviewfun};

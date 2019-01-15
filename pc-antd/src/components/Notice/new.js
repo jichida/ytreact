@@ -1,8 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Card, Row, Col, Table, Button, message, Form, Input, Select, Upload } from 'antd';
+import { Card, Row, Col, Button, message, Form, Input, Select, Upload } from 'antd';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import GridContent from '../GridContent';
+import lodashmap from 'lodash.map';
+import lodashget from 'lodash.get';
+// import lodashfind from 'lodash.find';
+
+import { getdistributorlist_request, getdistributorlist_result } from '../../actions';
+import { createnotice_request } from '../../actions';
+import {callthen} from '../../sagas/pagination';
+
 import './new.less';
 
 import sb_icon from '../../assets/tz_icon.png';
@@ -49,15 +58,34 @@ class New extends React.PureComponent {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        const {dispatch} = this.props;
         this.props.form.validateFields((err, values) => {
           if (!err) {
             console.log('Received values of form: ', values);
+            dispatch(createnotice_request({data:values}));
           }
         });
     }
-    
+
     handleCancel = () => {
         this.props.history.goBack();
+    }
+
+    state = {
+        distributorOptions: [],
+    }
+    componentDidMount(){
+      const {distributorquery,dispatch} = this.props;
+      dispatch(callthen(getdistributorlist_request, getdistributorlist_result, {query:distributorquery})).then((result)=>{
+          let resultdata = result.data;
+          let distributorOptions = [];
+          lodashmap(resultdata, (item)=>{
+              distributorOptions.push(item);
+          });
+          this.setState({distributorOptions});
+        }).catch((e)=>{
+
+        });
     }
 
     render() {
@@ -90,7 +118,7 @@ class New extends React.PureComponent {
                                 {...formItemLayout}
                                 label={intl.formatMessage({id: 'machine.notice.distributor'})}
                             >
-                                {getFieldDecorator('distributor', {
+                                {getFieldDecorator('distributorids', {
                                     rules: [{
                                         required: true, message: intl.formatMessage({id: 'machine.notice.distributor.required'}),
                                     }],
@@ -103,9 +131,11 @@ class New extends React.PureComponent {
                                         optionFilterProp="children"
                                         filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                                     >
-                                        <Option value="jack">Jack</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="tom">Tom</Option>
+                                    {
+                                      lodashmap(this.state.distributorOptions, (item)=>(
+                                            <Option key={item._id} value={item._id}>{item.name}</Option>
+                                        ))
+                                    }
                                     </Select>
                                 )}
                             </Form.Item>
@@ -139,7 +169,7 @@ class New extends React.PureComponent {
                                     <Col span={12} style={{textAlign: 'right'}}><Button type="primary" htmlType="submit">{intl.formatMessage({id: 'form.submit'})}</Button></Col>
                                     <Col span={12} style={{textAlign: 'left'}}><Button onClick={this.handleCancel}>{intl.formatMessage({id: 'form.cancel'})}</Button></Col>
                                 </Row>
-                                
+
                             </Form.Item>
                         </Form>
                     </Row>
@@ -149,4 +179,24 @@ class New extends React.PureComponent {
     }
 }
 
-export default Form.create()(withRouter(injectIntl(New)));
+const mapStateToProps =  ({addressconst:{addressconsts},userlogin}) =>{
+  const addresslevel1 = lodashget(userlogin,'addresslevel1','');
+  const addresslevel2 = lodashget(userlogin,'addresslevel2','');
+  let distributorquery = {};
+  if(addresslevel1.length === 0){
+    //全部
+  }
+  else{
+    if(addresslevel2.length === 0){
+      distributorquery = {addresslevel1};//固定一级区域
+    }
+    else{
+      //无权限啊,怎么进来的
+      distributorquery = {addresslevel1,addresslevel2};
+    }
+  }
+  return {distributorquery};
+}
+
+const NewForm = Form.create()(withRouter(injectIntl(New)));
+export default connect(mapStateToProps)(NewForm);

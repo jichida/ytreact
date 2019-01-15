@@ -7,6 +7,7 @@ import {wsflow} from './ws/api.ws';
 import {uiflow} from './ui';
 import {deviceflow} from './device';
 import {userloginflow} from './userlogin';
+import {noticeflow} from './notice';
 
 export default function* rootSaga() {
   yield fork(userloginflow);
@@ -16,6 +17,7 @@ export default function* rootSaga() {
   // yield fork(wififlow);
   yield fork(uiflow);
   yield fork(deviceflow);
+  yield fork(noticeflow);
   // yield fork(restfulapiflow);
 
 }

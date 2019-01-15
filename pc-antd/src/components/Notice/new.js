@@ -97,6 +97,7 @@ class New extends React.PureComponent {
                                 })(
                                     <Select
                                         showSearch
+                                        mode="multiple"
                                         style={{ width: '100%' }}
                                         placeholder= {intl.formatMessage({id: 'machine.notice.distributor.required'})}
                                         optionFilterProp="children"

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import lodashget from 'lodash.get';
+import lodashmap from 'lodash.map';
 import { Card, Row, Col, Button, } from 'antd';
 import { FormattedMessage } from 'react-intl';
 import GridContent from '../GridContent';
@@ -48,7 +49,14 @@ class Detail extends React.PureComponent {
                     </Row>
                     <Row gutter={48} className="items">
                         <Col span={4} className="item-title"><FormattedMessage id="machine.notice.enclosure" />:</Col>
-                        <Col span={16}  className="item-content">附件在这里</Col>
+                        <Col span={16}  className="item-content">
+                            {lodashmap(lodashget(curnotice, 'attchment'), (item)=>{
+                                return(
+                                    <span style={{margin: '0 10px'}}>
+                                        <a href={item.url}>{item.name}</a>
+                                    </span>)
+                            })}
+                        </Col>
                     </Row>
                     <Row gutter={48} className="items">
                         <Col span={16} offset={4}  style={{textAlign: 'center'}}>

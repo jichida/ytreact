@@ -62,7 +62,6 @@ class New extends React.PureComponent {
                 files.push({name, url})
             })
         }
-        console.log('Will return', files)
         return files; 
     }
 

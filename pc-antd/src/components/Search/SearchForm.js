@@ -206,7 +206,7 @@ class SearchForm extends React.PureComponent{
                                 required: true, message: `${formatMessage({id: 'app.search.distributor.choose'})}`,
                             }],
                         })(
-                            <Select placeholder={formatMessage({id: 'app.search.distributor.choose'})} size="large">
+                            <Select placeholder={formatMessage({id: 'app.search.distributor.choose'})} size="large" mode="multiple">
                               {
                                 lodashmap(searchquery.distributorOptions, (item)=>(
                                       <Option key={item._id} value={item._id}>{item.name}</Option>

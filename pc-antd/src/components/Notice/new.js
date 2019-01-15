@@ -64,7 +64,7 @@ class New extends React.PureComponent {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             console.log('Received values of form: ', values);
-            //dispatch(createnotice_request({data:values}));
+            dispatch(createnotice_request({data:values}));
           }
         });
     }
@@ -166,7 +166,7 @@ class New extends React.PureComponent {
                                 {...formItemLayout}
                                 label={intl.formatMessage({id: 'machine.notice.enclosure'})}
                             >
-                                {getFieldDecorator('file', {
+                                {getFieldDecorator('attchment', {
                                     valuePropName: 'fileList',
                                     getValueFromEvent: this.normFile,
                                 })(

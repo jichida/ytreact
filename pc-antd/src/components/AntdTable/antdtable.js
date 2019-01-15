@@ -142,7 +142,6 @@ class AntdTable extends React.Component {
 
         return (
           <Table
-            size="small"
             {...tableprops}
             ref='antdtable'
             columns={columns}

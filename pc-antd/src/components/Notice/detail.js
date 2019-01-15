@@ -40,7 +40,7 @@ class Detail extends React.PureComponent {
                     </Row>
                     <Row gutter={48} className="items">
                         <Col span={4} className="item-title"><FormattedMessage id="machine.notice.distributor" />:</Col>
-                        <Col span={16}  className="item-content">{txtdistributors}</Col>
+                        <Col span={16}  className="item-content">{txtdistributors} </Col>
                     </Row>
                     <Row gutter={48} className="items">
                         <Col span={4} className="item-title"><FormattedMessage id="machine.notice.content" />:</Col>

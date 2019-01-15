@@ -122,7 +122,7 @@ class Notice extends React.PureComponent {
                             className:"notice-table",
                             showHeader:false,
                             scroll:{ y: 450 },
-                            bordered:true,
+                            // bordered:false,
                           }}
                           listtypeid = 'antdtablealarmdetail'
                           usecache = {false}

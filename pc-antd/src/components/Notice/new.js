@@ -12,6 +12,7 @@ import { getdistributorlist_request, getdistributorlist_result } from '../../act
 import { createnotice_request } from '../../actions';
 import {callthen} from '../../sagas/pagination';
 
+import config from '../../env/config'
 import './new.less';
 
 import sb_icon from '../../assets/tz_icon.png';
@@ -36,23 +37,24 @@ const tailFormItemLayout = {
     },
 };
 
-const uploadprops = {
-    name: 'file',
-    action: '',
-    // headers: {
-    //   authorization: 'authorization-text',
-    // },
-    onChange(info) {
-      if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-};
+// const uploadprops = {
+//     action: `${config.serverurl}/uploader`,
+//     // headers: {
+//     //   authorization: 'authorization-text',
+//     // },
+//     onChange(info) {
+//       if (info.file.status !== 'uploading') {
+//         console.log(info.file, info.fileList);
+//       }
+//       if (info.file.status === 'done') {
+//         console.log('done')
+//         message.success(`${info.file.name} file uploaded successfully`);
+//       } else if (info.file.status === 'error') {
+//         message.error(`${info.file.name} file upload failed.`);
+//       }
+//     },
+    
+// };
 
 class New extends React.PureComponent {
 
@@ -62,7 +64,7 @@ class New extends React.PureComponent {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             console.log('Received values of form: ', values);
-            dispatch(createnotice_request({data:values}));
+            //dispatch(createnotice_request({data:values}));
           }
         });
     }
@@ -71,9 +73,18 @@ class New extends React.PureComponent {
         this.props.history.goBack();
     }
 
+    normFile = (e) => {
+        console.log('Upload event:', e);
+        if (Array.isArray(e)) {
+          return e;
+        }
+        return e && e.fileList;
+    }
+
     state = {
         distributorOptions: [],
     }
+
     componentDidMount(){
       const {distributorquery,dispatch} = this.props;
       dispatch(callthen(getdistributorlist_request, getdistributorlist_result, {query:distributorquery})).then((result)=>{
@@ -157,9 +168,9 @@ class New extends React.PureComponent {
                             >
                                 {getFieldDecorator('file', {
                                     valuePropName: 'fileList',
-                                    // getValueFromEvent: this.normFile,
+                                    getValueFromEvent: this.normFile,
                                 })(
-                                    <Upload {...uploadprops}>
+                                    <Upload action= {config.serverurl + "/uploader"}>
                                         <Button type="primary" icon="upload" size="large"><FormattedMessage id="machine.notice.upload" /></Button>
                                     </Upload>
                                 )}

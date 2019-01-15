@@ -53,7 +53,7 @@ const tailFormItemLayout = {
 //         message.error(`${info.file.name} file upload failed.`);
 //       }
 //     },
-    
+
 // };
 
 class New extends React.PureComponent {
@@ -170,7 +170,7 @@ class New extends React.PureComponent {
                                     valuePropName: 'fileList',
                                     getValueFromEvent: this.normFile,
                                 })(
-                                    <Upload action= {config.serverurl + "/uploader"}>
+                                    <Upload action= {config.serverurl + "/uploadavatar"}>
                                         <Button type="primary" icon="upload" size="large"><FormattedMessage id="machine.notice.upload" /></Button>
                                     </Upload>
                                 )}

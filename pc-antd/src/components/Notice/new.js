@@ -37,25 +37,6 @@ const tailFormItemLayout = {
     },
 };
 
-// const uploadprops = {
-//     action: `${config.serverurl}/uploader`,
-//     // headers: {
-//     //   authorization: 'authorization-text',
-//     // },
-//     onChange(info) {
-//       if (info.file.status !== 'uploading') {
-//         console.log(info.file, info.fileList);
-//       }
-//       if (info.file.status === 'done') {
-//         console.log('done')
-//         message.success(`${info.file.name} file uploaded successfully`);
-//       } else if (info.file.status === 'error') {
-//         message.error(`${info.file.name} file upload failed.`);
-//       }
-//     },
-
-// };
-
 class New extends React.PureComponent {
 
     handleSubmit = (e) => {
@@ -63,10 +44,26 @@ class New extends React.PureComponent {
         const {dispatch} = this.props;
         this.props.form.validateFields((err, values) => {
           if (!err) {
+            if(values.attchment){
+                values.attchment = this.getFiles(values.attchment)
+            }
             console.log('Received values of form: ', values);
             dispatch(createnotice_request({data:values}));
           }
         });
+    }
+
+    getFiles = (fileList=[]) => {
+        const files = [];
+        if(fileList){
+            lodashmap(fileList, (item)=>{
+                let name = item.name;
+                let url = item.response.files[0].url;
+                files.push({name, url})
+            })
+        }
+        console.log('Will return', files)
+        return files; 
     }
 
     handleCancel = () => {
@@ -75,10 +72,11 @@ class New extends React.PureComponent {
 
     normFile = (e) => {
         console.log('Upload event:', e);
+
         if (Array.isArray(e)) {
           return e;
         }
-        return e && e.fileList;
+        return e&&e.fileList
     }
 
     state = {

@@ -45,15 +45,15 @@ class Detail extends React.PureComponent {
                     </Row>
                     <Row gutter={48} className="items">
                         <Col span={4} className="item-title"><FormattedMessage id="machine.notice.content" />:</Col>
-                        <Col span={16}  className="item-content">{lodashget(curnotice,'content','')}</Col>
+                        <Col span={16}  className="item-detail">{lodashget(curnotice,'content','')}</Col>
                     </Row>
                     <Row gutter={48} className="items">
                         <Col span={4} className="item-title"><FormattedMessage id="machine.notice.enclosure" />:</Col>
                         <Col span={16}  className="item-content">
-                            {lodashmap(lodashget(curnotice, 'attchment'), (item)=>{
+                            {lodashmap(lodashget(curnotice, 'attchment',[]), (item)=>{
                                 return(
                                     <span style={{margin: '0 10px'}}>
-                                        <a href={item.url}>{item.name}</a>
+                                        <a href={item.url} target="_blank">{item.name}</a>
                                     </span>)
                             })}
                         </Col>

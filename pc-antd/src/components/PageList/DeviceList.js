@@ -14,7 +14,7 @@ import sb_normal from '../../assets/sb_zc.png';
 import lodashget from 'lodash.get';
 let g_querysaved;
 
-const MachineItem = ({iserr, address, reportdate, id, name, runtime, mode, history})=>{
+const MachineItem = ({iserr, address, reportdate, id, name, runtime, mode, history,_id})=>{
     return (
         <Card
             className="child-card"
@@ -25,7 +25,7 @@ const MachineItem = ({iserr, address, reportdate, id, name, runtime, mode, histo
             <p><FormattedMessage id="machine.runtime" />：{runtime}</p>
             <p>
                 <span style={{color: '#6ba4e7'}}>{mode}</span>
-                <Button style={{float: "right", color: '#6ba4e7'}} onClick={()=>{history.push(`/details/${id}`)}}><FormattedMessage id="machine.detail" /></Button>
+                <Button style={{float: "right", color: '#6ba4e7'}} onClick={()=>{history.push(`/details/${_id}`)}}><FormattedMessage id="machine.detail" /></Button>
             </p>
         </Card>
     )
@@ -47,6 +47,7 @@ class DeviceList extends React.Component {
             name: lodashget(iteminput,'basicinfo.model',''),
             runtime: '02:10:10',
             mode:' Active Mode',
+            _id:iteminput._id,
     };
     return item;
   }

@@ -95,7 +95,7 @@ class Notice extends React.PureComponent {
             width: '200px',
             render: (text, record) => (
               <span>
-                <Button type="primary" ghost style={{border: 0}} onClick={(record)=>{history.push(`/noticedetail`)}}>
+                <Button type="primary" ghost style={{border: 0}} onClick={()=>{history.push(`/noticedetail/${record._id}`)}}>
                     <FormattedMessage id="machine.notice.detail" />
                 </Button>
               </span>

@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Card, Row, Col, Table, Button, message, Form, Input, Select, Upload } from 'antd';
+import lodashget from 'lodash.get';
+import { Card, Row, Col, Button, } from 'antd';
 import { FormattedMessage } from 'react-intl';
 import GridContent from '../GridContent';
 import './detail.less';
@@ -15,7 +17,15 @@ class Detail extends React.PureComponent {
 
 
     render() {
-
+        const {curnotice,distributors} = this.props;
+        let txtdistributors = [];
+        if(!!curnotice){
+          for(let i=0;i<curnotice.distributorids.length;i++){
+            const disid = curnotice.distributorids[i];
+            const name = lodashget(distributors,`${disid}.name`,'');
+            txtdistributors += `${name},`;
+          }
+        }
         return (
             <GridContent>
                 <Card bordered={false} className="main-card">
@@ -26,15 +36,15 @@ class Detail extends React.PureComponent {
                     </Row>
                     <Row gutter={48} className="items">
                         <Col span={4} className="item-title"><FormattedMessage id="machine.notice.title" />:</Col>
-                        <Col span={16}  className="item-content">标题在这里</Col>
+                        <Col span={16}  className="item-content">{lodashget(curnotice,'title','')}</Col>
                     </Row>
                     <Row gutter={48} className="items">
                         <Col span={4} className="item-title"><FormattedMessage id="machine.notice.distributor" />:</Col>
-                        <Col span={16}  className="item-content">经销商在这里</Col>
+                        <Col span={16}  className="item-content">{txtdistributors}</Col>
                     </Row>
                     <Row gutter={48} className="items">
                         <Col span={4} className="item-title"><FormattedMessage id="machine.notice.content" />:</Col>
-                        <Col span={16}  className="item-content">内容在这里</Col>
+                        <Col span={16}  className="item-content">{lodashget(curnotice,'content','')}</Col>
                     </Row>
                     <Row gutter={48} className="items">
                         <Col span={4} className="item-title"><FormattedMessage id="machine.notice.enclosure" />:</Col>
@@ -50,5 +60,10 @@ class Detail extends React.PureComponent {
         )
     }
 }
-
+const mapStateToProps =  ({notice:{notices,distributors}},props) =>{
+  let curnotice = lodashget(notices,`${props.match.params.id}`,{});
+  console.log(curnotice)
+  return {curnotice,distributors};
+};
+Detail = connect(mapStateToProps)(Detail);
 export default withRouter(Detail);

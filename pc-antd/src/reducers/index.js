@@ -9,10 +9,12 @@ import wifi from './wifi';
 import devicedata from './devicedata';
 import addressconst from './addressconst';
 import searchquery from './searchquery'
+import notice from './notice';
 
 export default (history)=>combineReducers(
   {
     app,
+    notice,
     device,
     addressconst,
     devicedata,

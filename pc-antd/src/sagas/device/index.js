@@ -5,7 +5,8 @@ import {
   setuserdevice_request,
   setuserdevice_result,
   getdevice_result,
-  adddevice_request} from '../../actions';
+  adddevice_request
+} from '../../actions';
 import lodashget from 'lodash.get';
 
 export function* deviceflow(){//仅执行一次

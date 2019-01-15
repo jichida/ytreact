@@ -163,7 +163,7 @@ class BasicLayout extends React.PureComponent {
       <React.Fragment>
           <ContainerQuery query={query}>
             {params => (
-                <div className={classNames(params)}>{layout}</div>
+                <div>{layout}</div>
             )}
           </ContainerQuery>
       </React.Fragment>

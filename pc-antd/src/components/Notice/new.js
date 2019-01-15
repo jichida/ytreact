@@ -166,7 +166,7 @@ class New extends React.PureComponent {
                                 {...formItemLayout}
                                 label={intl.formatMessage({id: 'machine.notice.enclosure'})}
                             >
-                                {getFieldDecorator('file', {
+                                {getFieldDecorator('attchment', {
                                     valuePropName: 'fileList',
                                     getValueFromEvent: this.normFile,
                                 })(

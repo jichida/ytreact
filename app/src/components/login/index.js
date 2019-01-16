@@ -33,8 +33,8 @@ const constrast = {
 class Login extends PureComponent{
 
     state = {
-        name: '15961125167',
-        password: 'admin',
+        name: '100001',
+        password: '123456',
     }
 
     handleNameChange = (value)=>{

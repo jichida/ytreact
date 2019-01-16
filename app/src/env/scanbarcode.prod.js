@@ -1,5 +1,5 @@
 
-
+import {xviewfun} from './xviewfun';
 export const scanbarcode=(fncallback)=>{
   // const json = {
   //   "callback": "callbackfn_scanbarcode"
@@ -13,13 +13,7 @@ export const scanbarcode=(fncallback)=>{
     action:"scan",
     callback:"callbackfn_scanbarcode"
   }
-  if(!!window["xview"]){
-    window["xview"].callNativeXView(JSON.stringify(xviewData));
-  }
-  else{
-    fncallback({
-      code:-1,
-      message:'未初始化,找不到扫描二维码方法'
-    });
-  }
+
+  xviewfun(JSON.stringify(xviewData));
+
 };

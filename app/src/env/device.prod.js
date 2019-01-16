@@ -1,5 +1,6 @@
 import store from './store';
 import {wifi_setstatus,socket_setstatus,socket_recvdata} from '../actions';
+import {xviewfun} from './xviewfun';
 
 window.wifistatuscallback_yt = (result)=>{
   store.dispatch(wifi_setstatus(result));
@@ -17,9 +18,8 @@ const setwifistatuscallback = ()=>{
     action:"getWifiStatus",
     callback:"wifistatuscallback_yt"
   }
-  if(!!window["xview"]){
-    window["xview"].callNativeXView(JSON.stringify(xviewData));
-  }
+  xviewfun(JSON.stringify(xviewData));
+
 }
 
 
@@ -29,9 +29,8 @@ const openwifi =  ()=>{
     action:"openWifi",
     callback:"wifistatuscallback"
   }
-  if(!!window["xview"]){
-    window["xview"].callNativeXView(JSON.stringify(xviewData));
-  }
+  xviewfun(JSON.stringify(xviewData));
+
 }
 
 
@@ -44,9 +43,7 @@ const getssidlist = (fncallback)=>{
     action:"getWifiList",
     callback:"getWifiListCallback"
   }
-  if(!!window["xview"]){
-    window["xview"].callNativeXView(JSON.stringify(xviewData));
-  }
+  xviewfun(JSON.stringify(xviewData));
   // {"code":0,"data":[{"mac":"3c:46:d8:14:8f:54","ssid":"yikuaiqian2018","wifiCipher":2},{"mac":"78:44:fd:c8:7b:39","ssid":"QianMianYuJia","wifiCipher":2}],
 
 }
@@ -65,9 +62,7 @@ const setcurwifi = (values,fncallback)=>{
       wifiCipher:values.wifiCipher
     }
   }
-  if(!!window["xview"]){
-    window["xview"].callNativeXView(JSON.stringify(xviewData));
-  }
+  xviewfun(JSON.stringify(xviewData));
 
 }
 
@@ -79,9 +74,8 @@ const socket_send = (values,fncallback)=>{
     callback:"sendSocketCallback",
     data:values
   }
-  if(!!window["xview"]){
-    window["xview"].callNativeXView(JSON.stringify(xviewData));
-  }
+  xviewfun(JSON.stringify(xviewData));
+
 }
 
 const socket_connnect = (values)=>{
@@ -91,9 +85,8 @@ const socket_connnect = (values)=>{
     callback:"socketstatuscallback",
     data:values
   }
-  if(!!window["xview"]){
-    window["xview"].callNativeXView(JSON.stringify(xviewData));
-  }
+  xviewfun(JSON.stringify(xviewData));
+
 }
 
 const socket_close = ()=>{
@@ -103,9 +96,8 @@ const socket_close = ()=>{
     callback:"socketstatuscallback",
     data:{}
   }
-  if(!!window["xview"]){
-    window["xview"].callNativeXView(JSON.stringify(xviewData));
-  }
+  xviewfun(JSON.stringify(xviewData));
+
 }
 
 

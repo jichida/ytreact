@@ -45,8 +45,6 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
-const lessRegex = /\.less$/;
-const lessModuleRegex = /\.module\.less$/;
 
 // common function to get style loaders
 const getStyleLoaders = (cssOptions, preProcessor) => {
@@ -285,6 +283,7 @@ module.exports = {
               ),
               
               plugins: [
+                ['import',{libraryName:'antd', style:true}], 
                 [
                   require.resolve('babel-plugin-named-asset-import'),
                   {
@@ -314,13 +313,6 @@ module.exports = {
               compact: false,
               presets: [
                 [
-                  "import", {
-                  "libraryName": "antd",
-                  "libraryDirectory": "es",
-                  "style": "css" // `style: true` 会加载 less 文件
-                  }
-                ],
-                [
                   require.resolve('babel-preset-react-app/dependencies'),
                   { helpers: true },
                 ],
@@ -335,6 +327,49 @@ module.exports = {
               // being evaluated would be much more helpful.
               sourceMaps: false,
             },
+          },
+          // "postcss" loader applies autoprefixer to our CSS.
+          // "css" loader resolves paths in CSS and adds assets as dependencies.
+          // "style" loader turns CSS into JS modules that inject <style> tags.
+          // In production, we use a plugin to extract that CSS to a file, but
+          // in development "style" loader enables hot editing of CSS.
+          {
+            test: /\.less$/,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 1,
+                },
+              },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  // Necessary for external CSS imports to work
+                  // https://github.com/facebookincubator/create-react-app/issues/2677
+                  ident: 'postcss',
+                  plugins: () => [
+                    require('postcss-flexbugs-fixes'),
+                    autoprefixer({
+                      browsers: [
+                        '>1%',
+                        'last 4 versions',
+                        'Firefox ESR',
+                        'not ie < 9', // React doesn't support IE8 anyway
+                      ],
+                      flexbox: 'no-2009',
+                    }),
+                  ],
+                },
+              },
+              {
+                loader:require.resolve('less-loader'),
+                options: {
+                  modules: false,
+                }
+              }
+            ],
           },
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -398,29 +433,6 @@ module.exports = {
                 getLocalIdent: getCSSModuleLocalIdent,
               },
               'sass-loader'
-            ),
-          },
-          // Opt-in support for less (using .scss or .less extensions).
-          // Chains the less-loader with the css-loader and the style-loader
-          // to immediately apply all styles to the DOM.
-          // By default we support less Modules with the
-          // extensions .module.scss or .module.less
-          {
-            test: lessRegex,
-            exclude: lessModuleRegex,
-            use: getStyleLoaders({ importLoaders: 3 }, 'less-loader'),
-          },
-          // Adds support for CSS Modules, but using less
-          // using the extension .module.scss or .module.less
-          {
-            test: lessModuleRegex,
-            use: getStyleLoaders(
-              {
-                importLoaders: 3,
-                modules: true,
-                getLocalIdent: getCSSModuleLocalIdent,
-              },
-              'less-loader'
             ),
           },
           // "file" loader makes sure assets end up in the `build` folder.

@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import {  List, InputItem, Button, WingBlank, Switch, DatePicker, Modal, WhiteSpace } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { createForm, createFormField } from 'rc-form';
+import moment from 'moment';
 import {setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import {ui_set_language} from '../../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
-
+import {common_err, wifi_sendcmd_request,getdevice_request} from '../../actions';
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -53,6 +54,10 @@ const RenderForm = createForm({
         props.showModal('modal2');
     }
 
+    const onClickCmd = (cmd)=>{
+      const {dispatch} = props;
+      dispatch(wifi_sendcmd_request({cmd}));
+    }
 
     return (
         <React.Fragment>
@@ -69,7 +74,9 @@ const RenderForm = createForm({
 
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
-                            <Button size="small" type="ghost" className="btn" >
+                            <Button size="small" type="ghost" className="btn"  onClick={()=>{
+                              onClickCmd(`$decpression%`);//20	废水阀泄压	整机泄压	$decpression%
+                            }} >
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>
@@ -77,7 +84,9 @@ const RenderForm = createForm({
                 ><FormattedMessage id="setting.system.decompression" defaultMessage="废水阀泄压" /></List.Item>
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
-                            <Button size="small" type="ghost" className="btn" >
+                            <Button size="small" type="ghost" className="btn" onClick={()=>{
+                              onClickCmd(`$sysreset 1%`);//重置重启系统	重启系统	$sysreset 1%
+                            }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>
@@ -85,7 +94,11 @@ const RenderForm = createForm({
                 ><FormattedMessage id="setting.system.resetsystem" defaultMessage="重置并重启系统" /></List.Item>
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
-                            <Button size="small" type="ghost" className="btn" >
+                            <Button size="small" type="ghost" className="btn" onClick={()=>{
+                              //获取当前时间
+                              const curdate = moment().format('YY.MM.DD.HH.ss');
+                              onClickCmd(`$date ${curdate}%`);//11	重置时间	同步系统时间	$date 18.11.30.13.20% 意思是年.月.日.时.分
+                            }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>
@@ -93,7 +106,9 @@ const RenderForm = createForm({
                 ><FormattedMessage id="setting.system.resettime" defaultMessage="重置时间" /></List.Item>
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
-                            <Button size="small" type="ghost" className="btn" >
+                            <Button size="small" type="ghost" className="btn" onClick={()=>{
+                              onClickCmd(`$sysinit%`);//12	恢复出厂设置	恢复出厂时的状态	$sysinit%
+                            }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>

@@ -84,10 +84,10 @@ class SettingSystem extends PureComponent{
                 value: lodashget(syssettings,'deviceid',''),
             },
             buydate: {
-                value: new Date().toLocaleDateString(),//lodashget(syssettings,'buydate',new Date()),
+                value: moment(lodashget(syssettings,'buydate',new Date())).format('YYYY-MM-DD'),
             },
             installdate: {
-                value: '',//lodashget(syssettings,'installdate',new Date()),
+                value: moment(lodashget(syssettings,'installdate',new Date())).format('YYYY-MM-DD'),
             },
             installer: {
                 value: lodashget(syssettings,'installer',''),
@@ -102,8 +102,8 @@ class SettingSystem extends PureComponent{
     }
 }
 
-const mapStateToProps =  ({device:{locale,syssettings,_id}}) =>{
-  return {locale,syssettings,_id};
+const mapStateToProps =  ({device:{syssettings}}) =>{
+  return {syssettings};
 };
 
 SettingSystem = connect(mapStateToProps)(injectIntl(SettingSystem));

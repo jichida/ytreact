@@ -313,13 +313,6 @@ module.exports = {
               compact: false,
               presets: [
                 [
-                  "import", {
-                  "libraryName": "antd-mobile",
-                  // "libraryDirectory": "es",
-                  "style": "css" // `style: true` 会加载 less 文件
-                  }
-                ],
-                [
                   require.resolve('babel-preset-react-app/dependencies'),
                   { helpers: true },
                 ],

@@ -35,7 +35,7 @@ if(!!window["xview"] || !!window["webkit"]){
       data:{ maxSelectNum: 9}
     }
     window.callback_xviewUploadImage = (result)=>{
-      // alert(`callback_xviewUploadImage:${JSON.stringify(result)}`)
+      // alert(`${JSON.stringify(result)}`)
       let jsonret = {
         code:0,
         message:'success',

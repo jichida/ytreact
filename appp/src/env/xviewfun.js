@@ -1,11 +1,13 @@
 
 const xviewfun = (xviewdata)=>{
-  if(!!window["xview"]){
-    return window["xview"].callNativeXView(xviewdata);
-  }
-  if(!!window["webkit"]){
-    return window["webkit"].messageHandlers["callNativeXView"].postMessage(xviewdata);
-  }
+  window.setTimeout(()=>{
+    if(!!window["xview"]){
+       window["xview"].callNativeXView(xviewdata);
+    }
+    if(!!window["webkit"]){
+       window["webkit"].messageHandlers["callNativeXView"].postMessage(xviewdata);
+    }
+  },0)
 }
 
 export {xviewfun};

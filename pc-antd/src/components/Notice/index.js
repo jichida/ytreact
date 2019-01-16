@@ -78,7 +78,7 @@ class Notice extends React.PureComponent {
             key: 'title',
             render: (text, record) => (
                 <span>
-                  <div className="dian" />{text}
+                  {/* <div className="dian" /> */}{text}
                 </span>
               ),
           }, {
@@ -87,7 +87,7 @@ class Notice extends React.PureComponent {
             width: '200px',
             render: (text, record) => (
                 <span>
-                  <div className="dian" />{moment(text).format('YYYY-MM-DD HH:mm:ss')}
+                  {/* <div className="dian" /> */}{moment(text).format('YYYY-MM-DD HH:mm:ss')}
                 </span>
               ),
           }, {
@@ -95,7 +95,7 @@ class Notice extends React.PureComponent {
             width: '200px',
             render: (text, record) => (
               <span>
-                <Button type="primary" ghost style={{border: 0}} onClick={()=>{history.push(`/noticedetail/${record._id}`)}}>
+                <Button type="primary" ghost style={{border: 0, boxShadow: 'none'}} onClick={()=>{history.push(`/noticedetail/${record._id}`)}}>
                     <FormattedMessage id="machine.notice.detail" />
                 </Button>
               </span>

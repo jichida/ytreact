@@ -60,7 +60,7 @@ class Detail extends React.PureComponent {
                     </Row>
                     <Row gutter={48} className="items">
                         <Col span={16} offset={4}  style={{textAlign: 'center'}}>
-                            <Button type="primary" onClick={this.handleCancel}><FormattedMessage id="form.return" /></Button>
+                            <Button type="primary" style={{minWidth: '200px'}} onClick={this.handleCancel}><FormattedMessage id="form.return" /></Button>
                         </Col>
                     </Row>
                 </Card>

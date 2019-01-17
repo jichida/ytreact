@@ -23,10 +23,14 @@ import {
     getdevice_result,
     setuserdevice_request,
     setuserdevice_result,
+
+    changepwd_request,
+    changepwd_result
   } from '../../actions';
 
 //接收的对应关系
 const recvmessagetoresultpair = {
+  'changepwd_result':changepwd_result,
   'common_err':common_err,
   'findpwd_result':findpwd_result,
   'sendauth_result':sendauth_result,
@@ -43,6 +47,7 @@ const recvmessagetoresultpair = {
 
 //非验证发送接口
 const sendmessagefnsz = {
+  'changepwd':`${changepwd_request}`,
   'logout':`${logout_request}`,
   'loginwithtoken':`${loginwithtoken_request}`,
   'login':`${login_request}`,

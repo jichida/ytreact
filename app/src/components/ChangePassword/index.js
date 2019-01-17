@@ -3,12 +3,12 @@ import {  NavBar, Icon, List, InputItem, Button, WhiteSpace, Toast } from 'antd-
 import { createForm } from 'rc-form';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
-
+import {set_weui,changepwd_request} from '../../actions';
 import './index.less';
 
 const Item = List.Item;
 const Brief = Item.Brief;
- 
+
 class ChangePassword extends PureComponent{
 
     handleSubmit = (e)=>{
@@ -16,7 +16,43 @@ class ChangePassword extends PureComponent{
         this.props.form.validateFields((err, values)=>{
             if(!err){
                 console.log(values);
-
+                const payload = {
+                  password:values.oldpassword,
+                  passwordA:values.pwdnew,
+                  passwordB:values.pwdconfirm
+                }
+                //<----验证-----
+                let texterr;
+                if(!payload.password){
+                  texterr = '旧密码不能为空';
+                }
+                if(!texterr){
+                  if(!payload.passwordA){
+                    texterr = '新密码不能为空';
+                  }
+                }
+                if(!texterr){
+                  if(!payload.passwordB){
+                    texterr = '请再输入新密码';
+                  }
+                }
+                if(!texterr){
+                  if(payload.passwordA !== payload.passwordB){
+                    texterr = '两次密码输入不一致';
+                  }
+                }
+                if(!!texterr){
+                  this.props.dispatch(set_weui({
+                    toast:{
+                      text:texterr,
+                      type:'warning'
+                  }
+                  }));
+                  return;
+                }
+                //<----验证结束-----
+                // this.props.dispatch(set_uiapp({ ispoppwd: false }));
+                this.props.dispatch(changepwd_request(payload));
                 // {oldpassword: "", pwdnew: "", pwdconfirm: ""}
             }
         })

@@ -7,6 +7,8 @@ import {
   findpwd_result,
   set_weui,
   getdevice_request,
+  sendauth_result,
+  changepwd_result,
 } from '../../actions';
 // import {getdevice_request} from '../../actions';
 import { replace,goBack} from 'connected-react-router';//https://github.com/reactjs/connected-react-router
@@ -34,12 +36,21 @@ export function* userloginflow() {
   //   }}));
   //   yield put(goBack());
   // });
+  yield takeLatest(`${sendauth_result}`, function*(action) {
+      let {payload:result} = action;
+      let toast = {
+          show : true,
+          text : result.msg,
+          type : "success"
+      }
+      yield put(set_weui({ toast }));
+  });
 
   yield takeLatest(`${findpwd_result}`, function*(action) {
       try{
         yield put(set_weui({
           toast:{
-            text:'修改密码成功',
+            text:'找回密码成功',
             show: true,
             type:'success'
         }}));
@@ -49,6 +60,23 @@ export function* userloginflow() {
         console.log(e);
       }
   });
+
+
+    yield takeLatest(`${changepwd_result}`, function*(action) {
+        try{
+          yield put(set_weui({
+            toast:{
+              text:'修改密码成功',
+              show: true,
+              type:'success'
+          }}));
+          yield put(goBack());
+        }
+        catch(e){
+          console.log(e);
+        }
+    });
+
 
 
 

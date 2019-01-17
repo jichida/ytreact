@@ -174,8 +174,11 @@ class SettingSystem extends PureComponent{
 
     handleSubmit = (values)=>{
         console.log(values);
-        const {dispatch,_id} = this.props;
-        dispatch(setuserdevice_request({_id,data:{syssettings:values}}));
+        //这里不能这样设置，会替换原先数据
+        const {dispatch,_id,syssettings} = this.props;
+        // syssettings.xxx = values.xxx
+        console.log(syssettings);
+        dispatch(setuserdevice_request({_id,data:{syssettings}}));
 
     }
 

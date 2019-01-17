@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {  List, InputItem, Button, WingBlank, Switch, DatePicker, Modal, WhiteSpace } from 'antd-mobile';
+import {  List, InputItem, Button, WingBlank, Switch, Picker, Modal, WhiteSpace } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { createForm, createFormField } from 'rc-form';
 import moment from 'moment';
 import {setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
+import lodashmap from 'lodash.map';
 import {ui_set_language} from '../../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
@@ -13,6 +14,15 @@ import {common_err, wifi_sendcmd_request,getdevice_request} from '../../actions'
 
 const Item = List.Item;
 const Brief = Item.Brief;
+
+const hours = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
+
+const hoursList = lodashmap(hours, (item)=> {
+    return {
+        label: `${item}时`,
+        value: item,
+    }
+})
 
 // 出水水质（ppm)		quality
 // 废水阀泄压 reset
@@ -167,7 +177,6 @@ class SettingSystem extends PureComponent{
         const {dispatch,_id} = this.props;
         dispatch(setuserdevice_request({_id,data:{syssettings:values}}));
 
-        dispatch(ui_set_language(values['language'][0]));
     }
 
     showModal = (key) => {
@@ -177,7 +186,7 @@ class SettingSystem extends PureComponent{
     }
 
     onCloseQuality = (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         this.setState({
             modal1: false,
         })
@@ -191,17 +200,29 @@ class SettingSystem extends PureComponent{
     }
 
     onQualityClick = () =>{
+      //8	出水水质  设置	0~200  ppm	$prodtrigger 120%
         console.log(this.state.quality);
+        //
+        if(this.state.quality.length > 0){
+          const {dispatch} = this.props;
+          const cmd = `$prodtrigger ${this.state.quality}%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
     }
 
     onCloseDormancy = (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         this.setState({
             modal2: false,
         })
     }
 
     onDormancyClick = () =>{
+      // 14	休眠状态	休眠使能：1 使能 0关闭	$fidle 1%
+      // 15	休眠开始时间	开始休眠 如：22	$hroff 22%
+      // 16	休眠结束时间	退出休眠 如：6	$hron 22%
+      // $fidleoffon 1.22.6%意思是 休眠.开始时间.结束时间
+
         let dormancy = {
             isdormancy: this.state.isdormancy,
             dormancystart: this.state.dormancystart,
@@ -210,19 +231,42 @@ class SettingSystem extends PureComponent{
         console.log(dormancy.isdormancy);
         console.log(dormancy.dormancystart);
         console.log(dormancy.dormancyend);
+
+
+        const {dispatch} = this.props;
+        if(dormancy.isdormancy){
+        //   const start = moment(dormancy.dormancystart).format('HH');
+        //   const end = moment(dormancy.dormancyend).format('HH');
+        //   const cmd = `$fidleoffon 1.${start}.${end}%`;
+          const cmd = `$fidleoffon 1.${dormancy.dormancystart}.${dormancy.dormancyend}%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
+        else{
+          const cmd = `$fidle 0%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
     }
 
     render () {
-        const { syssettings, intl:{ formatMessage }} = this.props;
+        const { syssettings, dispatch, intl:{ formatMessage }} = this.props;
         const basicData = {
             quality: {
                 value: lodashget(syssettings,'quality',''),
+            },
+            dormancy: {
+                value: lodashget(syssettings,'dormancy',false),
+            },
+            dormancystart: {
+                value: '',//lodashget(syssettings,'dormancystart','sample'),
+            },
+            dormancyend: {
+                value: '',//lodashget(syssettings,'dormancyend','sample'),
             },
         }
         console.log(basicData)
         return (
             <div className="sub_setting_bg">
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} />}
+                { <RenderForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} dispatch={dispatch} />}
                 <Modal
                     popup
                     visible={this.state.modal1}
@@ -280,28 +324,30 @@ class SettingSystem extends PureComponent{
                                 <Item><FormattedMessage id="setting.system.dormancystart" defaultMessage="休眠开始时间" />
                                     <Brief>
                                         <div className="item_children">
-                                            <DatePicker
-                                                mode="time"
+                                            <Picker
+                                                data={hoursList}
+                                                cols={1}
                                                 extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
                                                 value={this.state.dormancystart}
-                                                onChange={date => this.setState({ dormancystart:date })}
+                                                onChange={val => this.setState({ dormancystart:val })}
                                                 >
-                                                <List.Item arrow="horizontal"></List.Item>
-                                            </DatePicker>
+                                                <List.Item></List.Item>
+                                            </Picker>
                                         </div>
                                     </Brief>
                                 </Item>
                                 <Item><FormattedMessage id="setting.system.dormancyend" defaultMessage="休眠开始时间" />
                                     <Brief>
                                         <div className="item_children">
-                                            <DatePicker
-                                                mode="time"
+                                            <Picker
+                                                data={hoursList}
+                                                cols={1}
                                                 extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
                                                 value={this.state.dormancyend}
-                                                onChange={date => this.setState({ dormancyend:date })}
+                                                onChange={val => this.setState({ dormancyend:val })}
                                                 >
-                                                <List.Item arrow="horizontal"></List.Item>
-                                            </DatePicker>
+                                                <List.Item></List.Item>
+                                            </Picker>
                                         </div>
                                     </Brief>
                                 </Item>

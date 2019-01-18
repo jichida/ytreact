@@ -7,13 +7,13 @@ import moment from 'moment';
 
 import './index.less';
 
-const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
-let wrapProps;
-if (isIPhone) {
-  wrapProps = {
-    onTouchStart: e => e.preventDefault(),
-  };
-}
+// const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
+// let wrapProps;
+// if (isIPhone) {
+//   wrapProps = {
+//     onTouchStart: e => e.preventDefault(),
+//   };
+// }
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -69,7 +69,7 @@ const RenderForm = createForm({
           cancelButtonIndex: BUTTONS.length - 1,
           message: title,
           maskClosable: true,
-          wrapProps,
+          // wrapProps,
         },
         (buttonIndex) => {
             if(buttonIndex!==BUTTONS.length -1){

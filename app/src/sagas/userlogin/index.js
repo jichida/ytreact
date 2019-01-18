@@ -95,6 +95,7 @@ export function* userloginflow() {
             // yield put(getdevice_request({}));
             // debugger;
             if(!loginsuccess && result.loginsuccess){
+                console.log(`login success,search:${search}`);
                 if(!!result._id){
                   //get device
                   yield put(getdevice_request({'_id':result._id}));
@@ -119,8 +120,8 @@ export function* userloginflow() {
   });
 
   yield takeLatest(`${common_err}`, function*(action) {
-        let {payload:result} = action;
-
+        const {payload:result} = action;
+        console.log(result.errmsg);
         yield put(set_weui({
           toast:{
           text:result.errmsg,

@@ -35,8 +35,8 @@ const constrast = {
 class Login extends PureComponent{
 
     state = {
-        name: '15961125167',
-        password: 'admin',
+        name: '',
+        password: '',
     }
 
     handleNameChange = (value)=>{
@@ -128,5 +128,6 @@ class Login extends PureComponent{
         )
     }
 }
+
 Login = connect()(Login);
 export default withRouter(injectIntl(Login));

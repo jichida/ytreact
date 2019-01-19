@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
-
+import config from '../../env/config';
 import logo from '../../assets/logo.png';
 import {login_request} from '../../actions';
 import {ui_set_language} from '../../actions';
@@ -17,6 +17,7 @@ import {ui_set_language} from '../../actions';
 //   };
 // }
 
+// console.log(config.)
 const languages = [
     'English',
     '中文简体',
@@ -77,12 +78,16 @@ class Login extends PureComponent{
     }
 
     componentDidMount(){
+        console.log(`componentDidMount 账号：${this.state.name}，密码：${this.state.password}`);
+
         this.showActionSheet();
     }
 
     render () {
 
         const {intl, history} = this.props;
+        console.log(`render 账号：${this.state.name}，密码：${this.state.password}`);
+
         return (
             <WingBlank className="black_bg" style={{marginLeft:0, marginRight:0}}>
                 <div className="fp_container white_bg">
@@ -131,6 +136,7 @@ class Login extends PureComponent{
                             <Button type="ghost" className="btn" onClick={this.handleSubmit}><FormattedMessage id="login.login" defaultMessage="登录" /></Button>
                         </div>
                         <WhiteSpace size="xl" />
+                          <div style={{color:'#FFFFFF'}}>{config.appversion}</div>
                     </Flex>
                 </WingBlank>
                 </div>
@@ -138,5 +144,6 @@ class Login extends PureComponent{
         )
     }
 }
+
 Login = connect()(Login);
 export default withRouter(injectIntl(Login));

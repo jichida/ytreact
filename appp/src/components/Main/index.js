@@ -32,7 +32,7 @@ const getPercent = (id,value) => {
         warring = true;
     }
     console.log('input:%s',id)
-    console.log(value)
+    console.log(value) 
     console.log(percent)
     console.log(color)
     console.log(warring)

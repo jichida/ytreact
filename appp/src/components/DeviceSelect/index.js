@@ -14,11 +14,11 @@ import setup from '../../assets/setup.png';
 const data = [
     {
         img: device1,
-        name: 'Hydro D1 G1',
+        name: 'Hydro DI G1',
     },
     {
         img: device2,
-        name: 'Hydro D1 G2',
+        name: 'Hydro DI G2',
     },
 ]
 

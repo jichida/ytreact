@@ -356,7 +356,7 @@ class DeviceWater extends PureComponent{
 
     constructor(props) {
         super(props);
-        initHeight = window.innerHeight;
+        this.initHeight = window.innerHeight;
     }
 
     handleSubmit = (values)=>{
@@ -372,6 +372,8 @@ class DeviceWater extends PureComponent{
 
     render () {
         const { history,usewater,dispatch } = this.props;
+        console.log(window.innerHeight);
+        console.log(this.initHeight)
 
         const basicData = {
             quantity: {

@@ -65,6 +65,7 @@ class Login extends PureComponent{
         ActionSheet.showActionSheetWithOptions({
           options: BUTTONS,
           cancelButtonIndex: BUTTONS.length - 1,
+          destructiveButtonIndex: 1,
           message: intl.formatMessage({id:`login.selectlanguage`}),
           maskClosable: true,
           // wrapProps,

@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import {common_err,ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
-
+import { pageInputScroll } from '../../util/pageInputScroll';
 import './index.less';
 
 const Item = List.Item;
@@ -123,12 +123,12 @@ const RenderForm = createForm({
         <React.Fragment>
         <form>
             <List>
-            <Item><FormattedMessage id="water.quantity" defaultMessage="月用水量（吨）" />
+                <Item><FormattedMessage id="water.quantity" defaultMessage="月用水量（吨）" />
                     <Brief>
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                type="money"
+                                // type="money"
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('quantity',{
                                     rules: [{
@@ -145,7 +145,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                type="money"
+                                // type="money"
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('persons',{
                                     rules: [{
@@ -162,7 +162,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                type="money"
+                                // type="money"
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('spot',{
                                     rules: [{
@@ -179,7 +179,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                type="money"
+                                // type="money"
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('watergage',{
                                     rules: [{
@@ -217,7 +217,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                type="money"
+                                // type="money"
                                 placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('bathrooms',{
@@ -241,7 +241,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                type="money"
+                                // type="money"
                                 placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('tds',{
@@ -258,7 +258,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                type="money"
+                                // type="money"
                                 placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('conductivity',{
@@ -275,7 +275,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                type="money"
+                                // type="money"
                                 placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('hardness',{
@@ -292,7 +292,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                type="money"
+                                // type="money"
                                 placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('alkalinity',{
@@ -309,7 +309,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                type="money"
+                                // type="money"
                                 placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('ph',{
@@ -326,7 +326,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                type="money"
+                                // type="money"
                                 placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('usertds',{
@@ -370,10 +370,20 @@ class DeviceWater extends PureComponent{
 
     }
 
+    // handleFocus = () => {
+    //     const params = {...this.state.params};
+    //     params.isShowBounce = !params.isShowBounce;
+    //     this.setState({
+    //         params
+    //     })
+    // }
+
+    componentDidMount(){
+        pageInputScroll()
+    }
+
     render () {
         const { history,usewater,dispatch } = this.props;
-        console.log(window.innerHeight);
-        console.log(this.initHeight)
 
         const basicData = {
             quantity: {
@@ -421,7 +431,7 @@ class DeviceWater extends PureComponent{
         }
 
         return (
-            <div className="fp_container sub_bg">
+            <div className="fp_container sub_bg animated-router-forward-enter-done">
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}
@@ -429,7 +439,7 @@ class DeviceWater extends PureComponent{
                 >
                 <FormattedMessage id="device.water" />
                 </NavBar>
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} dispatch={dispatch}/>}
+                { <RenderForm {...basicData} onSubmit={this.handleSubmit} dispatch={dispatch} />}
             </div>
         )
     }

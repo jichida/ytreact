@@ -9,7 +9,7 @@ import './index.less';
 class WifiLogin extends PureComponent{
 
     onClickPass =()=>{
-      this.props.history.push('/wifisucess')
+      this.props.history.push('/devices')
     }
 
 
@@ -22,7 +22,7 @@ class WifiLogin extends PureComponent{
                 <div className="fp_container">
                     <div className="pannel">
                             <Flex direction="column" className="wifi_frame container" >
-                                
+
                                 <WhiteSpace size="xl"></WhiteSpace>
                                 <span className="frame-title">{title}</span>
                                 <div className="frame" >

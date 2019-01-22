@@ -6,6 +6,7 @@ import './common.less';
 
 import Index from './DeviceAdd';
 import WifiLogin from './WifiLogin';
+import WifiSetting from './WifiSetting';
 import WifiSuccess from './WifiSuccess';
 import DeviceSelect from './DeviceSelect';
 
@@ -42,6 +43,7 @@ class AppRoot extends React.Component {
               <Route exact path="/" component={requireAuthentication(Index)} />
               <Route exact path="/test" component={TestCo} />
               <Route exact path="/wifi" component={requireAuthentication(WifiLogin)} />
+              <Route exact path="/wifisetting" component={requireAuthentication(WifiSetting)} />
               <Route exact path="/wifisucess" component={requireAuthentication(WifiSuccess)} />
               <Route exact path="/devices" component={requireAuthentication(DeviceSelect)} />
               <Route exact path="/home" component={requireAuthentication(Home)} />

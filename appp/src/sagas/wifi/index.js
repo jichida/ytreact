@@ -445,7 +445,8 @@ export function* wififlow() {
           yield put(wifi_setcurwifi_result(wifiresult));
         }
         //跳转到下一个页面
-        yield put(push('/wifisucess'));
+        //yield put(push('/wifisucess'));
+        yield put(push('/wifisetting'));
         yield call(socket_connnect_promise,{})
       }
       catch(e){

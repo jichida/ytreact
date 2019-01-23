@@ -298,7 +298,7 @@ export function* wififlow() {
           show: true,
           type:'success'
         }}));
-        yield put(push('/devices'));
+        yield put(push('/wifisetting'));
         console.log('to next page')
       }
       catch(e){
@@ -445,8 +445,8 @@ export function* wififlow() {
           yield put(wifi_setcurwifi_result(wifiresult));
         }
         //跳转到下一个页面
-        //yield put(push('/wifisucess'));
-        yield put(push('/wifisetting'));
+        yield put(push('/wifisucess'));
+        // yield put(push('/wifisetting'));
         yield call(socket_connnect_promise,{})
       }
       catch(e){

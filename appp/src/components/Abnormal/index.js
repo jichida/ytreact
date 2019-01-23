@@ -13,19 +13,30 @@ class Abnormal extends PureComponent{
     renderList = (arr, style)=>{
 
         console.log(arr);
-        return (
-            lodashmap(arr, (item)=>{
-                return (
+        let list = [];
+        lodashmap(arr, (item)=>{
+            list.push(
                 <Flex.Item key={item.text} className="item-container"><div className={style}><span>{item.text}</span></div></Flex.Item>
-                )
-            })
-        )
+            )
+        })
+        list = this.completionList(list);
+        return list;
     }
     
 
     geterrtext = (k)=>{
       const {intl} = this.props;
       return intl.formatMessage({id:`home.show.err.${k}`});
+    }
+
+    completionList = (list = []) => {
+        let num = 3 - list.length%3;
+        for(let i = 1; i <= num; i++){
+            list.push(
+                <Flex.Item key={`completion${i}`} className="item-container"><div className="trans-circle"><span></span></div></Flex.Item>
+            )
+        }
+        return list;
     }
 
     render () {

@@ -11,7 +11,7 @@ import wifi_img from '../../assets/set3.png';
 import table_img from '../../assets/set4.png';
 
 
-import System from '../SettingSystem';
+import System from '../SettingSystem/index';
 import Inlet from '../SettingInlet';
 import Wifi from '../SettingWifi';
 import Checklist from '../SettingChecklist'; 

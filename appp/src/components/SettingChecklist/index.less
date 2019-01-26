@@ -1,9 +1,19 @@
 @import '../common.less';
 
 .checklist_bg {
-    min-height: calc(~"100vh - 218px");
+    // min-height: calc(~"100vh - 218px");
+    min-height: calc(~"100vh");
+    display: flex;
+    flex-direction: column;
+
+    form {
+        flex: 1;
+    }
+
 
     .submit_zone {
+        padding-bottom: 20px;
+        
         .add_btn {
             margin-bottom: 0;
             width: 100%;

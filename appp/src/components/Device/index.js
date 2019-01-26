@@ -9,6 +9,7 @@ import txImg from '../../assets/tx.png';
 import basic_img from '../../assets/sy2.png';
 import water_img from '../../assets/sy3.png';
 import install_img from '../../assets/sy4.png';
+import table_img from '../../assets/set4.png';
 // import user_img from '../../assets/sy5.png';
 import {jsCallPhone} from '../../env/callphone';
 const Item = List.Item;
@@ -22,6 +23,9 @@ const Brief = Item.Brief;
 //     onTouchStart: e => e.preventDefault(),
 //   };
 // }
+
+const isDirect = false;
+const isNormal = true;
 
 class Device extends PureComponent{
 
@@ -75,21 +79,34 @@ class Device extends PureComponent{
                     <p className="tools_title"><FormattedMessage id="device.tools" /></p>
                     <div className="tools_bg">
                         <Flex>
+                            { isNormal&&
                             <Flex.Item className="tools_con">
                                 <Link to="/basic"><div><img src={basic_img} alt="" />
                                     <p><FormattedMessage id="device.basic" /></p></div>
                                 </Link>
                             </Flex.Item>
+                            }
+                            { isDirect&&
                             <Flex.Item className="tools_con">
                                 <Link to="/water"><div><img src={water_img} alt="" />
                                     <p><FormattedMessage id="device.water" /></p></div>
                                 </Link>
                             </Flex.Item>
+                            }
+                            { isNormal&&
                             <Flex.Item className="tools_con">
                                 <Link to="/install"><div><img src={install_img} alt="" />
                                     <p><FormattedMessage id="device.install" /></p></div>
                                 </Link>
                             </Flex.Item>
+                            }
+                            { isNormal&&
+                            <Flex.Item className="tools_con">
+                                <Link to="/checklist"><div><img src={table_img} alt="" />
+                                    <p><FormattedMessage id="setting.checklist" defaultMessage="安装检查表" /></p></div>
+                                </Link>
+                            </Flex.Item>
+                            }
                         </Flex>
                     </div>
                 </WingBlank>

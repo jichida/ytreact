@@ -15,6 +15,9 @@ import System from '../SettingSystem/index';
 import Inlet from '../SettingInlet';
 import Wifi from '../SettingWifi';
 import Checklist from '../SettingChecklist'; 
+
+const isDirect = true;
+const isNormal = false;
  
 
 class Setting extends PureComponent{
@@ -24,7 +27,7 @@ class Setting extends PureComponent{
     }
 
     render () {
-        const { history } = this.props;
+        const { history } = this.props;        
 
         return (
             <div className="black_bg">
@@ -92,7 +95,7 @@ class Setting extends PureComponent{
                     >
                         {<Inlet />}
                     </TabBar.Item>
-                    <TabBar.Item
+                    {/* <TabBar.Item
                         icon={
                             <div className="tabbar_item">
                                 <p><FormattedMessage id="setting.wifi" /></p>
@@ -116,8 +119,8 @@ class Setting extends PureComponent{
                         }}
                     >
                         {<Wifi />}
-                    </TabBar.Item>
-                    <TabBar.Item
+                    </TabBar.Item> */}
+                    {/* <TabBar.Item
                         icon={
                             <div className="tabbar_item">
                                 <p><FormattedMessage id="setting.checklist" /></p>
@@ -141,7 +144,7 @@ class Setting extends PureComponent{
                         }}
                     >
                         {<Checklist />}
-                    </TabBar.Item>
+                    </TabBar.Item> */}
                 </TabBar>   
                 </div>
             </div>

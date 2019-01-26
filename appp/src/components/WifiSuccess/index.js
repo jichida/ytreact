@@ -51,6 +51,13 @@ import mgb from '../../assets/ljimgb.png';
                                     </Button>
                                 </div>
                                 <WhiteSpace size="xl" />
+                                <div className="add_btn" >
+                                    <Button type="ghost" className="btn" onClick={()=>{
+                                      this.props.history.goBack();
+                                    }}>
+                                        <FormattedMessage id="form.back" />
+                                    </Button>
+                                </div>
                             </Flex>
                         </WingBlank>
                     </div>

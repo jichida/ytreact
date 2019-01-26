@@ -78,8 +78,8 @@ class Home extends PureComponent{
             <div className="home">
                 <NavBar
                     className="nav"
-                    icon={<Icon type="left" />}
-                    onLeftClick={() => history.goBack()}
+                    // icon={<Icon type="left" />}
+                    // onLeftClick={() => history.goBack()}
                     // rightContent={[<div key="0" className="nav-wifi-icon" onClick={this.onClickWifi}><img src={wifi_img} alt=''/></div>]}
                     rightContent={[<div key="0" className="nav-wifi-icon" onClick={this.onClickWifi}><img src={wifiimage} alt=''/></div>]}
                 >

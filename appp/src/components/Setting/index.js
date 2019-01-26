@@ -34,8 +34,8 @@ class Setting extends PureComponent{
                 <div className="setting">
                 <NavBar
                     className="nav"
-                    icon={<Icon type="left" />}
-                    onLeftClick={() => history.goBack()}
+                    // icon={<Icon type="left" />}
+                    // onLeftClick={() => history.goBack()}
                 >
                 <FormattedMessage id="setting" />
                 </NavBar>

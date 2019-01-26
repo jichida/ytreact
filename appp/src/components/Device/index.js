@@ -56,8 +56,8 @@ class Device extends PureComponent{
             <div className="device" style={{height: `${window.innerHeight-57}px`}}>
                 <NavBar
                     className="nav"
-                    icon={<Icon type="left" />}
-                    onLeftClick={() => history.goBack()}
+                    // icon={<Icon type="left" />}
+                    // onLeftClick={() => history.goBack()}
                 >
                 <FormattedMessage id="device" />
                 </NavBar>

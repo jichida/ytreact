@@ -470,7 +470,7 @@ export function* wififlow() {
           yield put(common_err({type:'wifi_setcurwifi',errmsg:`设置wifi超时,请重试`}));
         }
         else{
-          yield put(wifi_setcurwifi_result(wifiresult));
+          yield put(wifi_setcurwifi_result(wifiresult.payload));
           //跳转到下一个页面
           yield put(push('/wifisucess'));
           // yield put(push('/wifisetting'));

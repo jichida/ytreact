@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {  List, InputItem, Button, } from 'antd-mobile';//Modal, WingBlank, WhiteSpace 
+import {  List, InputItem, Button, Modal, WingBlank, WhiteSpace  } from 'antd-mobile';//
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import {common_err,ui_setuserdevice_request} from '../../actions';
+import {common_err,ui_setuserdevice_request, wifi_sendcmd_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import Buckets from '../Buckets';
@@ -77,7 +77,15 @@ const RenderForm = createForm({
         <React.Fragment>
         <form>
             <List>
-                <Item><FormattedMessage id="setting.water.ph" defaultMessage="PH值" />
+                <Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn" onClick={()=>{props.showModal('modalPH')}} >
+                                <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.water.ph" defaultMessage="PH值" /></Item>
+                {/* <Item><FormattedMessage id="setting.water.ph" defaultMessage="PH值" />
                     <Brief>
                         <div className="item_children">
                             <InputItem
@@ -93,8 +101,16 @@ const RenderForm = createForm({
                             />
                         </div>
                     </Brief>
-                </Item>
-                <Item><FormattedMessage id="setting.water.conductivity" defaultMessage="进水导电率" />
+                </Item> */}
+                <Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn" onClick={()=>{props.showModal('modalConductivity')}} >
+                                <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.water.conductivity" defaultMessage="进水导电率" /></Item>
+                {/* <Item><FormattedMessage id="setting.water.conductivity" defaultMessage="进水导电率" />
                     <Brief>
                         <div className="item_children">
                             <InputItem
@@ -110,8 +126,16 @@ const RenderForm = createForm({
                             />
                         </div>
                     </Brief>
-                </Item>
-                <Item><FormattedMessage id="setting.water.tds" defaultMessage="进水TDS值" />
+                </Item> */}
+                <Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn" onClick={()=>{props.showModal('modalTDS')}} >
+                                <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.water.tds" defaultMessage="进水TDS值" /></Item>
+                {/* <Item><FormattedMessage id="setting.water.tds" defaultMessage="进水TDS值" />
                     <Brief>
                         <div className="item_children">
                             <InputItem
@@ -127,8 +151,17 @@ const RenderForm = createForm({
                             />
                         </div>
                     </Brief>
-                </Item>
-                <Item><FormattedMessage id="setting.water.hardness" defaultMessage="进水硬度" />
+                </Item> */}
+                <Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn" onClick={()=>{props.showModal('modalHardness')}} >
+                                <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.water.hardness" defaultMessage="进水硬度" /></Item>
+
+                {/* <Item><FormattedMessage id="setting.water.hardness" defaultMessage="进水硬度" />
                     <Brief>
                         <div className="item_children">
                             <InputItem
@@ -144,8 +177,16 @@ const RenderForm = createForm({
                             />
                         </div>
                     </Brief>
-                </Item>
-                <Item><FormattedMessage id="setting.water.alkalinity" defaultMessage="进水碱度" />
+                </Item> */}
+                <Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn" onClick={()=>{props.showModal('modalAlkalinity')}} >
+                                <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.water.alkalinity" defaultMessage="进水碱度" /></Item>
+                {/* <Item><FormattedMessage id="setting.water.alkalinity" defaultMessage="进水碱度" />
                     <Brief>
                         <div className="item_children">
                             <InputItem
@@ -161,7 +202,7 @@ const RenderForm = createForm({
                             />
                         </div>
                     </Brief>
-                </Item>
+                </Item> */}
                 {/* <Item><FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />
                     <Brief>
                         <div className="item_children">
@@ -235,8 +276,17 @@ const RenderForm = createForm({
 class Inlet extends PureComponent{
 
     state = {
-        modalVisual: false,
+        modalTDS: false,
+        modalPH: false,
+        modalConductivity: false, 
+        modalHardness: false,
+        modalAlkalinity: false,
         tds: '',
+        ph: '',
+        conductivity: '', 
+        tds: '',
+        hardness: '',
+        alkalinity: ''
     }
 
     handleSubmit = (values)=>{
@@ -245,30 +295,71 @@ class Inlet extends PureComponent{
         dispatch(ui_setuserdevice_request({_id,data:{inwatersettings:values}}));
     }
 
-    showModal = () => {
+    showModal = (modal) => {
         this.setState({
-          modalVisual: true,
+          [modal]: true,
         });
     }
 
-    handleTDSChange = (val) =>{
+    handleClose = () => {
         this.setState({
-            tds: val,
+            modalAlkalinity: false,
+            modalConductivity: false,
+            modalHardness: false,
+            modalPH: false,
+            modalTDS: false,
         })
     }
 
-    handleTDSClose = () => {
-        this.setState({
-            modalVisual: false,
-        })
+    handlePHSubmit = () => {
+        console.log(this.state.ph);
+        //
+        if(this.state.ph.length > 0){
+          const {dispatch} = this.props;
+          const cmd = `$prodtrigger ${this.state.ph}%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
     }
-
+    handleConductivitySubmit = () => {
+        console.log(this.state.conductivity);
+        //
+        if(this.state.conductivity.length > 0){
+          const {dispatch} = this.props;
+          const cmd = `$prodtrigger ${this.state.conductivity}%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
+    }
     handleTDSSubmit = () => {
         console.log(this.state.tds);
+        //
+        if(this.state.tds.length > 0){
+          const {dispatch} = this.props;
+          const cmd = `$prodtrigger ${this.state.tds}%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
+    }
+    handleHardnessSubmit = () => {
+        console.log(this.state.hardness);
+        //
+        if(this.state.hardness.length > 0){
+          const {dispatch} = this.props;
+          const cmd = `$prodtrigger ${this.state.hardness}%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
+    }
+    handleAlkalinitySubmit = () => {
+        console.log(this.state.alkalinity);
+        //
+        if(this.state.alkalinity.length > 0){
+          const {dispatch} = this.props;
+          const cmd = `$prodtrigger ${this.state.alkalinity}%`;
+          dispatch(wifi_sendcmd_request({cmd}));
+        }
     }
 
     render () {
         const {inwatersettings,dispatch} = this.props;
+        const { formatMessage } = this.props.intl;
 
         const basicData = {
             tds: {
@@ -292,7 +383,10 @@ class Inlet extends PureComponent{
         }
         return (
             <div className="sub_setting_bg">
-                <RenderForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} dispatch={dispatch}/>
+                <RenderForm {...basicData} 
+                    onSubmit={this.handleSubmit} 
+                    showModal={this.showModal} 
+                    dispatch={dispatch}/>
                 {/* { <InputModal
                     isVisual={this.state.modalVisual}
                     title_key="setting.water.tds"
@@ -302,6 +396,192 @@ class Inlet extends PureComponent{
                     onSubmit={this.handleTDSSubmit}
                     inputPlaceholder={this.props.intl.formatMessage({id: "form.input"})} />
                 } */}
+
+                <Modal
+                    popup
+                    visible={this.state.modalPH}
+                    animationType="slide-up"
+                    >
+                    <div className="setting-modal">
+                        <WingBlank className="wb_margin">
+                            <List>
+                            <Item><FormattedMessage id="setting.water.ph" />
+                                <Brief>
+                                    <div className="item_children">
+                                    <InputItem
+                                        placeholder={formatMessage({id: "form.input"})}
+                                        value={this.state.ph}
+                                        onChange={(val)=>{this.setState({ph: val})}}
+                                    />
+                                    </div>
+                                </Brief>
+                            </Item>
+                            </List>
+                            <WingBlank  className="submit_zone dual_btn">
+                                <div className="add_btn_left" style={{display: 'inline-block'}} >
+                                    <Button type="ghost" className="btn" onClick={this.handleClose}>
+                                        <FormattedMessage id="form.cancel" defaultMessage="取消" />
+                                    </Button>
+                                </div>
+                                <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
+                                <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
+                                    <Button type="ghost" className="btn" onClick={this.handlePHSubmit}>
+                                        <FormattedMessage id="setting.system.send" defaultMessage="发送" />
+                                    </Button>
+                                </div>
+                            </WingBlank>
+                        </WingBlank>
+                    </div>
+                </Modal>
+
+                <Modal
+                    popup
+                    visible={this.state.modalConductivity}
+                    animationType="slide-up"
+                    >
+                    <div className="setting-modal">
+                        <WingBlank className="wb_margin">
+                            <List>
+                            <Item><FormattedMessage id="setting.water.conductivity" />
+                                <Brief>
+                                    <div className="item_children">
+                                    <InputItem
+                                        placeholder={formatMessage({id: "form.input"})}
+                                        value={this.state.conductivity}
+                                        onChange={(val)=>{this.setState({conductivity: val})}}
+                                    />
+                                    </div>
+                                </Brief>
+                            </Item>
+                            </List>
+                            <WingBlank  className="submit_zone dual_btn">
+                                <div className="add_btn_left" style={{display: 'inline-block'}} >
+                                    <Button type="ghost" className="btn" onClick={this.handleClose}>
+                                        <FormattedMessage id="form.cancel" defaultMessage="取消" />
+                                    </Button>
+                                </div>
+                                <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
+                                <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
+                                    <Button type="ghost" className="btn" onClick={this.handleConductivitySubmit}>
+                                        <FormattedMessage id="setting.system.send" defaultMessage="发送" />
+                                    </Button>
+                                </div>
+                            </WingBlank>
+                        </WingBlank>
+                    </div>
+                </Modal>
+
+                <Modal
+                    popup
+                    visible={this.state.modalTDS}
+                    animationType="slide-up"
+                    >
+                    <div className="setting-modal">
+                        <WingBlank className="wb_margin">
+                            <List>
+                            <Item><FormattedMessage id="setting.water.tds" />
+                                <Brief>
+                                    <div className="item_children">
+                                    <InputItem
+                                        placeholder={formatMessage({id: "form.input"})}
+                                        value={this.state.tds}
+                                        onChange={(val)=>{this.setState({tds: val})}}
+                                    />
+                                    </div>
+                                </Brief>
+                            </Item>
+                            </List>
+                            <WingBlank  className="submit_zone dual_btn">
+                                <div className="add_btn_left" style={{display: 'inline-block'}} >
+                                    <Button type="ghost" className="btn" onClick={this.handleClose}>
+                                        <FormattedMessage id="form.cancel" defaultMessage="取消" />
+                                    </Button>
+                                </div>
+                                <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
+                                <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
+                                    <Button type="ghost" className="btn" onClick={this.handleTDSSubmit}>
+                                        <FormattedMessage id="setting.system.send" defaultMessage="发送" />
+                                    </Button>
+                                </div>
+                            </WingBlank>
+                        </WingBlank>
+                    </div>
+                </Modal>
+
+                <Modal
+                    popup
+                    visible={this.state.modalHardness}
+                    animationType="slide-up"
+                    >
+                    <div className="setting-modal">
+                        <WingBlank className="wb_margin">
+                            <List>
+                            <Item><FormattedMessage id="setting.water.hardness" />
+                                <Brief>
+                                    <div className="item_children">
+                                    <InputItem
+                                        placeholder={formatMessage({id: "form.input"})}
+                                        value={this.state.hardness}
+                                        onChange={(val)=>{this.setState({hardness: val})}}
+                                    />
+                                    </div>
+                                </Brief>
+                            </Item>
+                            </List>
+                            <WingBlank  className="submit_zone dual_btn">
+                                <div className="add_btn_left" style={{display: 'inline-block'}} >
+                                    <Button type="ghost" className="btn" onClick={this.handleClose}>
+                                        <FormattedMessage id="form.cancel" defaultMessage="取消" />
+                                    </Button>
+                                </div>
+                                <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
+                                <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
+                                    <Button type="ghost" className="btn" onClick={this.handleHardnessSubmit}>
+                                        <FormattedMessage id="setting.system.send" defaultMessage="发送" />
+                                    </Button>
+                                </div>
+                            </WingBlank>
+                        </WingBlank>
+                    </div>
+                </Modal>
+
+                <Modal
+                    popup
+                    visible={this.state.modalAlkalinity}
+                    animationType="slide-up"
+                    >
+                    <div className="setting-modal">
+                        <WingBlank className="wb_margin">
+                            <List>
+                            <Item><FormattedMessage id="setting.water.alkalinity" />
+                                <Brief>
+                                    <div className="item_children">
+                                    <InputItem
+                                        placeholder={formatMessage({id: "form.input"})}
+                                        value={this.state.alkalinity}
+                                        onChange={(val)=>{this.setState({alkalinity: val})}}
+                                    />
+                                    </div>
+                                </Brief>
+                            </Item>
+                            </List>
+                            <WingBlank  className="submit_zone dual_btn">
+                                <div className="add_btn_left" style={{display: 'inline-block'}} >
+                                    <Button type="ghost" className="btn" onClick={this.handleClose}>
+                                        <FormattedMessage id="form.cancel" defaultMessage="取消" />
+                                    </Button>
+                                </div>
+                                <WhiteSpace style={{display: 'inline-block', minWidth:20}} />
+                                <div className="add_btn_right" style={{display: 'inline-block', float: 'right'}} >
+                                    <Button type="ghost" className="btn" onClick={this.handleAlkalinitySubmit}>
+                                        <FormattedMessage id="setting.system.send" defaultMessage="发送" />
+                                    </Button>
+                                </div>
+                            </WingBlank>
+                        </WingBlank>
+                    </div>
+                </Modal>
+
             </div>
 
         )

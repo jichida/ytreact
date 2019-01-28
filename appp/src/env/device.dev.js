@@ -1,16 +1,24 @@
 import store from './store';
-import {wifi_setstatus} from '../actions';
+import {wifi_setstatus,socket_setstatus,socket_recvdata} from '../actions';
 
 // let fncallback;
-window.wifistatuscallback = (result)=>{
-  store.dispatch(wifi_setstatus(result));
-}
+// window.wifistatuscallback = (result)=>{
+//   store.dispatch(wifi_setstatus(result));
+// }
 
 const setwifistatuscallback = ()=>{
   // fncallback = window.wifistatuscallback;
 }
 
-
+window.wifistatuscallback_yt = (result)=>{
+  store.dispatch(wifi_setstatus(result));
+}
+window.socketstatuscallback = (result)=>{
+  store.dispatch(socket_setstatus(result));
+}
+window.xviewReceiverNativeSocket = (result)=>{
+  store.dispatch(socket_recvdata(result));
+}
 
 const openwifi =  (fncallback)=>{
   window.setTimeout(()=>{
@@ -47,6 +55,13 @@ const socket_send = (values,fncallback)=>{
 const socket_connnect = (values)=>{
   console.log(`socket_connnect`);
   console.log(values);
+  window.setTimeout(()=>{
+    window.socketstatuscallback({
+      data:{
+        socketStatus:1
+      }
+    })
+  },2000);
 }
 
 const socket_close = ()=>{

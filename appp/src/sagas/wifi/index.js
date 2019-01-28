@@ -29,12 +29,12 @@ import {
   // wifi_setstatus,
   ui_wifisuccess_tonext,
 
-  // socket_setstatus,
+  socket_setstatus,
   socket_recvdata,
   wifi_getdata,
   wifi_init,
 
-  wifi_seteasylink,
+  // wifi_seteasylink,
 } from '../../actions/index.js';
 import { push } from 'connected-react-router';//https://github.com/reactjs/connected-react-router
 import lodash_startsWith from 'lodash.startswith';
@@ -42,6 +42,7 @@ import lodash_endWith from 'lodash.endswith';
 import lodash_replace from 'lodash.replace';
 import lodash_split from 'lodash.split';
 import lodash_set from 'lodash.set';
+import lodash_get from 'lodash.get';
 import config from '../../env/config';
 let recvbuf = '';
 setwifistatuscallback();
@@ -292,13 +293,42 @@ export function* wififlow() {
           port:config.socketport
         });
 
-        yield put(set_weui({
-          toast:{
-          text:`【${config.sockethost}:${config.socketport}】开始连接`,
-          show: true,
-          type:'success'
-        }}));
-        yield put(push('/devices'));
+        // yield put(set_weui({
+        //   toast:{
+        //   text:`【${config.sockethost}:${config.socketport}】开始连接`,
+        //   show: true,
+        //   type:'success'
+        // }}));
+
+        const raceresult = yield race({
+           socketestatusresult: take(`${socket_setstatus}`),
+           timeout: call(delay, 5000)
+        });
+
+        if(!!raceresult.timeout){
+          yield put(set_weui({
+            toast:{
+            text:`连接【${config.sockethost}:${config.socketport}】超时`,
+            show: true,
+            type:'warning'
+          }}));
+        }
+        else{
+          //data { socketStatus:  -1 0 1 2 }
+          if(lodash_get(raceresult,'socketestatusresult.payload.data.socketStatus',0) === 1){
+            yield put(push('/devices'));
+          }
+          else{
+            yield put(set_weui({
+              toast:{
+              text:`连接【${config.sockethost}:${config.socketport}】失败,${JSON.stringify(raceresult.socketestatusresult.payload)}`,
+              show: true,
+              type:'warning'
+            }}));
+          }
+        }
+
+
         console.log('to next page')
       }
       catch(e){

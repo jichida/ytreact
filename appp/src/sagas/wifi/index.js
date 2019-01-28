@@ -298,7 +298,7 @@ export function* wififlow() {
           show: true,
           type:'success'
         }}));
-        yield put(push('/wifisetting'));
+        yield put(push('/devices'));
         console.log('to next page')
       }
       catch(e){
@@ -347,12 +347,12 @@ export function* wififlow() {
         // const {payload} = action;
         const result = yield call(openwifi_promise);
         yield put(wifi_open_result(result));
-        // yield put(set_weui({
-        //   toast:{
-        //   text:`打开wifi成功${JSON.stringify(result)}`,
-        //   show: true,
-        //   type:'success'
-        // }}));
+        yield put(set_weui({
+          toast:{
+          text:`打开wifi-->${JSON.stringify(result)}`,
+          show: true,
+          type:'success'
+        }}));
       }
       catch(e){
         console.log(e);

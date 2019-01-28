@@ -1,19 +1,42 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Flex, WhiteSpace, Button, WingBlank } from 'antd-mobile';
+import { Modal, Flex, WhiteSpace, Button, WingBlank } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import {ui_wifisuccess_tonext} from '../../actions';
+import {set_weui,ui_wifisuccess_tonext} from '../../actions';
+
 import './index.less';
 
 import mga from '../../assets/ljimga.png';
 import mgb from '../../assets/ljimgb.png';
 
- class WifiSuccess extends PureComponent{
+const alert = Modal.alert;
 
+ class WifiSuccess extends PureComponent{
+     onClickNext = ()=>{
+       const { wifiStatus,dispatch } = this.props;
+       if(wifiStatus === 1){
+         dispatch(ui_wifisuccess_tonext({}));
+       }
+       else{
+         alert('确认', 'wifi尚未连接,可以手工在设置中连接后再点确认,确实需要点下一步吗?', [
+          { text: '取消', onPress: () => console.log('cancel') },
+          { text: '确定', onPress: () => {
+            dispatch(ui_wifisuccess_tonext({}));
+          }},
+        ]);
+         //请先连接wifi
+         // dispatch(set_weui({
+         //   toast:{
+         //   text:`请先返回连接wifi后再试`,
+         //   show: true,
+         //   type:'warning'
+         // }}));
+       }
+     }
     render () {
         ///0为打开未连接  -1  未打开  1  已连接 2 密码错误}
-        const { wifiStatus,dispatch } = this.props;
+        const { wifiStatus } = this.props;
         let startwifiid = "start.wifi.succeed";
         if(wifiStatus === -1){
           startwifiid = 'start.wifi.notconnected';
@@ -44,7 +67,7 @@ import mgb from '../../assets/ljimgb.png';
                                 <WhiteSpace size="xl" />
                                 <div className="add_btn" >
                                     <Button type="ghost" className="btn" onClick={()=>{
-                                      dispatch(ui_wifisuccess_tonext({}));
+                                      this.onClickNext();
                                       // history.push('/devices')
                                     }}>
                                         <FormattedMessage id="form.next" />

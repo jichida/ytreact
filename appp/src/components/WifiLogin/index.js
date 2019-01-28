@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import './index.less';
 import {wifi_init,ui_setcurwifi,wifi_setcurwifi_request,
-  wifi_getssidlist_request,wifi_getssidlist_result} from '../../actions';
+  wifi_getssidlist_request,wifi_getssidlist_result,set_weui} from '../../actions';
 import {callthen} from '../../sagas/pagination';
 import wifi from '../../assets/wlimg.png';
 
@@ -61,7 +61,17 @@ class WifiLogin extends PureComponent{
     }
     onClickPass =()=>{
       // history.push('/wifisucess')
-      const {dispatch,wifissid,wifipassword,wifiCipher} = this.props;
+      const {intl,dispatch,wifissid,wifipassword,wifiCipher} = this.props;
+      if(!wifissid || wifissid===''){
+        dispatch(set_weui({
+          toast:{
+          text:`需选择当前网络`,
+          show: true,
+          type:'warning'
+        }}));
+        return;
+      }
+
       dispatch(wifi_setcurwifi_request({wifissid,wifipassword,wifiCipher}));
     }
     handleWifiPasswordChange = (value)=>{

@@ -1,4 +1,4 @@
-let islocalhost = false;
+const islocalhost = false;
 const serverurl = islocalhost?'http://localhost:4101':'http://tx.i2u.top:4101';
 const serverurlrestful = islocalhost?`${serverurl}/api`:`${serverurl}/api`;
 const wspath = islocalhost?'/socket.io':'/socket.io';
@@ -11,7 +11,7 @@ let config = {
     serverurl:`${serverurl}`,
     wspath:`${wspath}`,
     requesttimeout:5000,
-    appversion:'1.2.9(build0116)',
+    appversion:'1.2.14(build0128)',
     sendlocationinterval:20000,
     softmode:'appp'
 };

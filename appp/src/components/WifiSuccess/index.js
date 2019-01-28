@@ -37,7 +37,7 @@ const alert = Modal.alert;
     render () {
         ///0为打开未连接  -1  未打开  1  已连接 2 密码错误}
         const { wifiStatus } = this.props;
-        let startwifiid = "start.wifi.succeed";
+        let startwifiid = "start.wifi.notconnected";
         if(wifiStatus === -1){
           startwifiid = 'start.wifi.notconnected';
         }

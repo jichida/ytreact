@@ -11,7 +11,8 @@ const setwifistatuscallback = ()=>{
 }
 
 window.wifistatuscallback_yt = (result)=>{
-  store.dispatch(wifi_setstatus(result));
+  const data = result.data;
+  store.dispatch(wifi_setstatus(data));
 }
 window.socketstatuscallback = (result)=>{
   store.dispatch(socket_setstatus(result));

@@ -3,7 +3,9 @@ import {wifi_setstatus,socket_setstatus,socket_recvdata} from '../actions';
 import {xviewfun} from './xviewfun';
 
 window.wifistatuscallback_yt = (result)=>{
-  store.dispatch(wifi_setstatus(result));
+  // alert(`${JSON.stringify(result)}`)
+  const data = result.data;
+  store.dispatch(wifi_setstatus(data));
 }
 window.socketstatuscallback = (result)=>{
   store.dispatch(socket_setstatus(result));

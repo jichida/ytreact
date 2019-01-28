@@ -302,13 +302,13 @@ export function* wififlow() {
 
         const raceresult = yield race({
            socketestatusresult: take(`${socket_setstatus}`),
-           timeout: call(delay, 5000)
+           timeout: call(delay, 20000)
         });
 
         if(!!raceresult.timeout){
           yield put(set_weui({
             toast:{
-            text:`连接【${config.sockethost}:${config.socketport}】超时`,
+            text:`连接【${config.sockethost}:${config.socketport}】超时,请重试`,
             show: true,
             type:'warning'
           }}));
@@ -327,9 +327,6 @@ export function* wififlow() {
             }}));
           }
         }
-
-
-        console.log('to next page')
       }
       catch(e){
         console.log(e);
@@ -466,18 +463,19 @@ export function* wififlow() {
         console.log(`wifi_setcurwifi_request:${JSON.stringify(result)}`);
         const { wifiresult, timeout } = yield race({
            wifiresult: call(setwifi,result),
-           timeout: call(delay, 2000)
+           timeout: call(delay, 20000)
         });
         if(!!timeout){
-          yield put(common_err({type:'wifi_setcurwifi',errmsg:`设置wifi超时`}));
+          yield put(common_err({type:'wifi_setcurwifi',errmsg:`设置wifi超时,请重试`}));
         }
         else{
           yield put(wifi_setcurwifi_result(wifiresult));
+          //跳转到下一个页面
+          yield put(push('/wifisucess'));
+          // yield put(push('/wifisetting'));
+          yield call(socket_connnect_promise,{});
         }
-        //跳转到下一个页面
-        yield put(push('/wifisucess'));
-        // yield put(push('/wifisetting'));
-        yield call(socket_connnect_promise,{})
+
       }
       catch(e){
         console.log(e);

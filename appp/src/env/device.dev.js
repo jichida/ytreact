@@ -22,10 +22,18 @@ window.xviewReceiverNativeSocket = (result)=>{
 }
 
 const openwifi =  (fncallback)=>{
+  // window.setTimeout(()=>{
+  //   fncallback({
+  //     code:0,
+  //     wifiStatus:1
+  //   });
+  // },100);
   window.setTimeout(()=>{
-    fncallback({
+    window.wifistatuscallback_yt({
       code:0,
-      wifiStatus:1
+      data:{
+        wifiStatus:1
+      }
     });
   },100);
 }
@@ -44,7 +52,15 @@ const getssidlist = (fncallback)=>{
 
 const setcurwifi = (values,fncallback)=>{
   console.log(values);
-  fncallback('ok');
+  // fncallback('ok');
+  window.setTimeout(()=>{
+    window.wifistatuscallback_yt({
+      code:0,
+      data:{
+        wifiStatus:1
+      }
+    });
+  },100);
 }
 
 

@@ -51,9 +51,9 @@ const getssidlist = (fncallback)=>{
 }
 
 const setcurwifi = (values,fncallback)=>{
-  window.connectWifi = (result)=>{
-    fncallback(result);
-  };
+  // window.connectWifi = (result)=>{
+  //   fncallback(result);
+  // };
   const xviewData = {
     componentName:"ComponentUtil",
     action:"connectWifi",

@@ -26,7 +26,7 @@ import {
 
   common_err,
   set_weui,
-  // wifi_setstatus,
+  wifi_setstatus,
   ui_wifisuccess_tonext,
 
   socket_setstatus,
@@ -190,8 +190,8 @@ function getwifilist_promise() {
 function setwifi(values){
   return new Promise(resolve => {
     setcurwifi(values,(retdata)=>{
-      resolve({});
     });
+    resolve({});
   });
 }
 
@@ -461,8 +461,9 @@ export function* wififlow() {
       try{
         let {payload:result} = action;
         console.log(`wifi_setcurwifi_request:${JSON.stringify(result)}`);
+        yield call(setwifi,result);
         const { wifiresult, timeout } = yield race({
-           wifiresult: call(setwifi,result),
+           wifiresult: take(`${wifi_setstatus}`),
            timeout: call(delay, 20000)
         });
         if(!!timeout){

@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import {common_err,ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
+import Buckets from '../Buckets';
 
 import './index.less';
 
@@ -94,11 +95,15 @@ const RenderForm = createForm({
           model: createFormField({
               ...props.model,
               value: props.model.value,
-          })
+          }),
+          bucket: createFormField({
+            ...props.bucket,
+            value: props.bucket.value,
+          }),
         };
     }
 })(injectIntl((props)=>{
-    const { getFieldProps, validateFields } = props.form;
+    const { getFieldProps, validateFields, setFieldsValue } = props.form;
     const { intl: { formatMessage },dispatch} = props;
 
     const handleSubmit = (e)=>{
@@ -113,6 +118,10 @@ const RenderForm = createForm({
               dispatch_form_err(dispatch,err);
             }
         })
+    }
+
+    const handleBucketSelect = (value)=>{
+        setFieldsValue({bucket: value});
     }
 
     return (
@@ -222,6 +231,21 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
+                <Item><FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />
+                    <Brief>
+                        <div className="item_children">
+                            <Buckets
+                                {...getFieldProps('bucket',{
+                                    rules: [{
+                                        required: true,
+                                        message: <FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />,
+                                    }],
+                                })}
+                                onChange={handleBucketSelect}
+                            />
+                        </div>
+                    </Brief>
+                </Item>
             </List>
         </form>
         <div className="submit_zone">
@@ -275,7 +299,10 @@ class DeviceBasic extends PureComponent{
              },
              model: { //预装型号
                  value: [lodashget(basicinfo,'model','XXX')],
-             }
+             },
+             bucket: {
+                value:lodashget(basicinfo,'bucket','50gal'),
+             },
          }
          console.log(basicData);
         return (

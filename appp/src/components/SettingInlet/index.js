@@ -46,10 +46,10 @@ const RenderForm = createForm({
                 ...props.ph,
                 value: props.ph.value,
           }),
-          bucket: createFormField({
-                ...props.bucket,
-                value: props.bucket.value,
-          }),
+        //   bucket: createFormField({
+        //         ...props.bucket,
+        //         value: props.bucket.value,
+        //   }),
         };
     }
 })(injectIntl((props)=>{
@@ -69,9 +69,9 @@ const RenderForm = createForm({
         })
     }
 
-    const handleBucketSelect = (value)=>{
-        setFieldsValue({bucket: value});
-    }
+    // const handleBucketSelect = (value)=>{
+    //     setFieldsValue({bucket: value});
+    // }
 
     return (
         <React.Fragment>
@@ -162,18 +162,9 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />
+                {/* <Item><FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />
                     <Brief>
                         <div className="item_children">
-                            {/* <InputItem
-                                placeholder={<FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />}
-                                {...getFieldProps('bucket',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />,
-                                    }],
-                                })}
-                            /> */}
                             <Buckets
                                 {...getFieldProps('bucket',{
                                     rules: [{
@@ -185,7 +176,7 @@ const RenderForm = createForm({
                             />
                         </div>
                     </Brief>
-                </Item>
+                </Item> */}
             </List>
         </form>
         <div className="submit_zone">
@@ -295,9 +286,9 @@ class Inlet extends PureComponent{
             ph: {
                 value: lodashget(inwatersettings,'ph',''),
             },
-            bucket: {
-                value:lodashget(inwatersettings,'bucket','50gal'),
-            },
+            // bucket: {
+            //     value:lodashget(inwatersettings,'bucket','50gal'),
+            // },
         }
         return (
             <div className="sub_setting_bg">

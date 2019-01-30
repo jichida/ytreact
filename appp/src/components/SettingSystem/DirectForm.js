@@ -1,7 +1,7 @@
 import React from 'react'
-import {  List, Button, WingBlank, Picker } from 'antd-mobile';
+import {  List, Button, Picker } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
-import _ from 'lodash';
+// import _ from 'lodash';
 import moment from 'moment';
 import 'moment-timezone';
 import { injectIntl, FormattedMessage } from 'react-intl';
@@ -11,24 +11,24 @@ import { common_err, wifi_sendcmd_request } from '../../actions';
 const Item = List.Item;
 const Brief = Item.Brief;
 
-const timezoneOption = () => {
-    const timeZones = moment.tz.names();
-    const offsetTmz = [];
+// const timezoneOption = () => {
+//     const timeZones = moment.tz.names();
+//     const offsetTmz = [];
 
-    for (const i in timeZones) {
-      const tz = moment.tz(timeZones[i]).format('Z').replace(':00', '').replace(':30', '.5');
-      let x = (tz === 0) ? 0 : parseInt(tz).toFixed(2);
+//     for (const i in timeZones) {
+//       const tz = moment.tz(timeZones[i]).format('Z').replace(':00', '').replace(':30', '.5');
+//       let x = (tz === 0) ? 0 : parseInt(tz).toFixed(2);
 
-      const timeZone = {
-        label: `(GMT${moment.tz(timeZones[i]).format('Z')})${timeZones[i]}`,
-        value: `${timeZones[i]}`,
-        time: `${x}`,
-      };
-      offsetTmz.push(timeZone);
-    }
+//       const timeZone = {
+//         label: `(GMT${moment.tz(timeZones[i]).format('Z')})${timeZones[i]}`,
+//         value: `${timeZones[i]}`,
+//         time: `${x}`,
+//       };
+//       offsetTmz.push(timeZone);
+//     }
 
-    return _.sortBy(offsetTmz, [function (el) { return -(el.time); }]);
-}
+//     return _.sortBy(offsetTmz, [function (el) { return -(el.time); }]);
+// }
 
 
 const languages = [

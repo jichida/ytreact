@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Flex, NavBar, Icon, List, ActionSheet, WingBlank } from 'antd-mobile';
+import { Flex, NavBar, List, ActionSheet, WingBlank } from 'antd-mobile';
 import { Link, withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
@@ -10,6 +10,7 @@ import basic_img from '../../assets/sy2.png';
 import water_img from '../../assets/sy3.png';
 import install_img from '../../assets/sy4.png';
 import table_img from '../../assets/set4.png';
+import system_img from '../../assets/set1.png';
 // import user_img from '../../assets/sy5.png';
 import {jsCallPhone} from '../../env/callphone';
 const Item = List.Item;
@@ -104,6 +105,13 @@ class Device extends PureComponent{
                             <Flex.Item className="tools_con">
                                 <Link to="/checklist"><div><img src={table_img} alt="" />
                                     <p><FormattedMessage id="setting.checklist" defaultMessage="安装检查表" /></p></div>
+                                </Link>
+                            </Flex.Item>
+                            }
+                            { isNormal&&
+                            <Flex.Item className="tools_con">
+                                <Link to="/setting"><div><img src={system_img} alt="" />
+                                    <p><FormattedMessage id="device.setting" defaultMessage="设备设置" /></p></div>
                                 </Link>
                             </Flex.Item>
                             }

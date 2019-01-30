@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {  List, InputItem, Button, WingBlank, Switch, Picker, Modal, WhiteSpace } from 'antd-mobile';
 import moment from 'moment';
-import _ from 'lodash';
 import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import lodashmap from 'lodash.map';
@@ -10,16 +9,11 @@ import 'moment-timezone';
 import { wifi_sendcmd_request } from '../../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
-import {stringtodate} from '../../util/dateutil';
 import DirectForm from './DirectForm';
-import NormalForm from './NormalForm';
-
-const isDirect = true;
-const isNormal = false;
 
 const Item = List.Item;
 const Brief = Item.Brief;
-const curTZ = moment.tz.guess();
+// const curTZ = moment.tz.guess();
 
 const hours = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
 
@@ -116,29 +110,7 @@ class SettingSystem extends PureComponent{
 
     render () {
         const {locale,syssettings,dispatch, intl:{ formatMessage }} = this.props;
-        const timezone = `${lodashget(syssettings,'timezone',`${curTZ}`)}`;
         const basicData = {
-            deviceid: {
-                value: lodashget(syssettings,'deviceid',''),
-            },
-            buydate: {
-                value: stringtodate(lodashget(syssettings,'buydate',new Date())),
-            },
-            installdate: {
-                value: stringtodate(lodashget(syssettings,'installdate',new Date())),
-            },
-            installer: {
-                value: lodashget(syssettings,'installer',''),
-            },
-            timezone: {
-                value: [timezone]
-            },
-            sdate: {
-                value: stringtodate(lodashget(syssettings,'sdate',new Date())),
-            },
-            stime: {
-                value: stringtodate(lodashget(syssettings,'stime',new Date())),
-            },
             quality: {
                 value: lodashget(syssettings,'quality',''),
             },
@@ -177,8 +149,8 @@ class SettingSystem extends PureComponent{
         return (
             <div className="sub_setting_bg">
                 {/* { <RenderForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} dispatch={dispatch}/>} */}
-                { isDirect&&<DirectForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} dispatch={dispatch} />}
-                { isNormal&&<NormalForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} dispatch={dispatch} />}
+                <DirectForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} dispatch={dispatch} />
+                {/* { isNormal&&<NormalForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} dispatch={dispatch} />} */}
                 <Modal
                     popup
                     visible={this.state.modal1}

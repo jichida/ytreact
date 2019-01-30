@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom';
 import {common_err,ui_setuserdevice_request, wifi_sendcmd_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import Buckets from '../Buckets';
 
 import './index.less';
 
@@ -19,9 +18,9 @@ const Brief = Item.Brief;
 // 进水碱度(ppm)	alkalinity
 // ph值		ph
 // 用户需求出水TDS值	usertds
-const dispatch_form_err = (dispatch,errs)=>{
-  dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
-}
+// const dispatch_form_err = (dispatch,errs)=>{
+//   dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
+// }
 
 const RenderForm = createForm({
     mapPropsToFields(props) {
@@ -53,21 +52,21 @@ const RenderForm = createForm({
         };
     }
 })(injectIntl((props)=>{
-    const { getFieldProps, validateFields, setFieldsValue } = props.form;
-    const { intl: { formatMessage },dispatch} = props;
+    // const { validateFields } = props.form;
+    // const { dispatch} = props;
 
-    const handleSubmit = (e)=>{
-        //e.preventDefault();
-        validateFields((err, values)=>{
-            if(!err){
-                props.onSubmit(values);
-            }
-            else{
-              console.log(err)
-              dispatch_form_err(dispatch,err);
-            }
-        })
-    }
+    // const handleSubmit = (e)=>{
+    //     //e.preventDefault();
+    //     validateFields((err, values)=>{
+    //         if(!err){
+    //             props.onSubmit(values);
+    //         }
+    //         else{
+    //           console.log(err)
+    //           dispatch_form_err(dispatch,err);
+    //         }
+    //     })
+    // }
 
     // const handleBucketSelect = (value)=>{
     //     setFieldsValue({bucket: value});
@@ -284,7 +283,6 @@ class Inlet extends PureComponent{
         tds: '',
         ph: '',
         conductivity: '', 
-        tds: '',
         hardness: '',
         alkalinity: ''
     }

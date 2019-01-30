@@ -225,13 +225,13 @@ class Index extends React.Component {
                 </Item>
             </List>
         </form>
-        {/* <WingBlank className="submit_zone" style={{padding: '30px 0px'}}>
+        <WingBlank className="submit_zone" style={{padding: '30px 0px', margin: 0}}>
             <div className="add_btn" >
                 <Button type="ghost" className="btn" onClick={this.handleSubmit}>
                     <FormattedMessage id="form.save" defaultMessage="保存" />
                 </Button>
             </div>
-        </WingBlank> */}
+        </WingBlank>
         </React.Fragment>
     )
     }

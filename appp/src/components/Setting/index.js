@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { NavBar, Icon, TabBar } from 'antd-mobile';
+import { NavBar, TabBar } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,17 +7,17 @@ import './index.less';
 
 import system_img from '../../assets/set1.png';
 import water_img from '../../assets/set2.png';
-import wifi_img from '../../assets/set3.png';
-import table_img from '../../assets/set4.png';
+// import wifi_img from '../../assets/set3.png';
+// import table_img from '../../assets/set4.png';
 
 
 import System from '../SettingSystem/index';
 import Inlet from '../SettingInlet';
-import Wifi from '../SettingWifi';
-import Checklist from '../SettingChecklist'; 
+// import Wifi from '../SettingWifi';
+// import Checklist from '../SettingChecklist'; 
 
-const isDirect = true;
-const isNormal = false;
+// const isDirect = true;
+// const isNormal = false;
  
 
 class Setting extends PureComponent{
@@ -27,7 +27,7 @@ class Setting extends PureComponent{
     }
 
     render () {
-        const { history } = this.props;        
+        // const { history } = this.props;        
 
         return (
             <div className="black_bg">

@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Flex, Accordion, WhiteSpace } from 'antd-mobile';
 import { injectIntl } from 'react-intl';
+import Refresh from '../Controls/Refresh';
+import {wifi_sendcmd_request} from '../../actions';
 
 import './index.less';
 
@@ -32,6 +34,15 @@ class Performance extends PureComponent{
                 </Flex.Item>
             )
         })
+    }
+
+    handleRefresh = ()=> {
+        // refresh
+        const cmd = `$data%`;
+        const {dispatch} = this.props;
+        dispatch(wifi_sendcmd_request({cmd}));
+
+        console.log('Refresh')
     }
 
 
@@ -129,7 +140,9 @@ class Performance extends PureComponent{
           ]
 
           if(!isgetdata){
-            return (<div>未获取到数据,加个大按钮重新获取</div>)
+            return (
+                <Refresh handleRefresh={this.handleRefresh} />
+            )
           }
           return (
             <div className="panel">

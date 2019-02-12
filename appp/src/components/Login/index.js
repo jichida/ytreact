@@ -33,10 +33,12 @@ const constrast = {
 }
 
 class Login extends PureComponent{
-
-    state = {
-        name: '',
-        password: '',
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: props.username,
+            password: props.password,
+        };
     }
 
     handleNameChange = (value)=>{
@@ -129,6 +131,8 @@ class Login extends PureComponent{
         )
     }
 }
-
-Login = connect()(Login);
+const mapStateToProps =  ({app:{username,password,loginsuccess}}) =>{
+  return {username,password,loginsuccess};
+};
+Login = connect(mapStateToProps)(Login);
 export default withRouter(injectIntl(Login));

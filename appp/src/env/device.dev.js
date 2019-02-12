@@ -5,6 +5,7 @@ import {wifi_setstatus,socket_setstatus,socket_recvdata} from '../actions';
 // window.wifistatuscallback = (result)=>{
 //   store.dispatch(wifi_setstatus(result));
 // }
+//$50,0,300,50000,125,5000,720,50,30,10,0,10,120,0,90,50,10,30,10,0,60,0,0,0,91,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,300,0,7,22,2,7,600,300,20,%
 
 const setwifistatuscallback = ()=>{
   // fncallback = window.wifistatuscallback;

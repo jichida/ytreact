@@ -12,7 +12,7 @@ import {
 import { replace} from 'connected-react-router';//https://github.com/reactjs/connected-react-router
 
 // import { goBack } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
-// import config from '../../env/config.js';
+import config from '../../env/config.js';
 // import  {
 //   getrandom
 // } from '../test/bmsdata.js';
@@ -42,11 +42,15 @@ export function* userloginflow() {
       let {payload:result} = action;
         console.log(`md_login_result==>${JSON.stringify(result)}`);
         if(!!result){
-            const {loginsuccess,search} = yield select((state)=>{
-              const loginsuccess = state.userlogin.success;
+            const {loginsuccess,search,username,password} = yield select((state)=>{
+              const {username,password,loginsuccess} = state.userlogin;
               const search = state.router.location.search;
-              return {loginsuccess,search};
+              return {username,password,loginsuccess,search};
             });
+
+            localStorage.setItem(`ytreact_${config.softmode}_username`,username);
+            localStorage.setItem(`ytreact_${config.softmode}_password`,password);
+
             yield put(login_result(result));
 
             // yield put(getdevice_request({}));

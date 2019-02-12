@@ -6,6 +6,7 @@ import monitorBg from '../../assets/zhuye_an.png';
 // import lodashmap from 'lodash.map';
 import lodashget from 'lodash.get';
 import { injectIntl } from 'react-intl';
+import Refresh from '../Controls/Refresh';
 // import Waterwave from './waterwave.js';
 import config from './config';
 import './index.less';
@@ -19,8 +20,6 @@ const CGreen = '#3eef7d';
 const CBlue = '#38b4f2';
 
 const getPercent = (id,value) => {
-    // percent, color, warring
-    // Math.round(num / total * 10000) / 100.00
     let cf = config[id];
     let color = CGreen;
     let warring = false;
@@ -31,11 +30,6 @@ const getPercent = (id,value) => {
         color = CRed;
         warring = true;
     }
-    console.log('input:%s',id)
-    console.log(value)
-    console.log(percent)
-    console.log(color)
-    console.log(warring)
     return {
         value,
         percent,
@@ -289,13 +283,9 @@ class Home extends PureComponent{
       console.log(value_filterelements_posfilter3_leftvol)
 
         if(!isgetdata){
-          //未获取到数据，需要加个大按钮
-          return (<React.Fragment>
-              <img src={refresh_icon} alt=""
-                  style={{width: '20px', height: '20px', marginTop: '20px'}}
-                  onClick={this.handleRefresh}
-              />
-            </React.Fragment>
+          //未获取到数据，需要加个大按钮 
+          return (
+            <Refresh handleRefresh={this.handleRefresh} />
           )
         }
         return (

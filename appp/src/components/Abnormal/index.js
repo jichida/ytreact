@@ -5,7 +5,9 @@ import lodashmap from 'lodash.map';
 import { FormattedMessage } from 'react-intl';
 // import lodashget from 'lodash.get';
 import { injectIntl } from 'react-intl';
+import Refresh from '../Controls/Refresh';
 import './index.less';
+import {wifi_sendcmd_request} from '../../actions';
 
 
 class Abnormal extends PureComponent{
@@ -43,6 +45,15 @@ class Abnormal extends PureComponent{
         return list;
     }
 
+    handleRefresh = ()=> {
+      // refresh
+      const cmd = `$data%`;
+      const {dispatch} = this.props;
+      dispatch(wifi_sendcmd_request({cmd}));
+
+      console.log('Refresh')
+  }
+
     render () {
       const {isgetdata,errordata} = this.props;
       // const mapname = mapname_err;
@@ -65,7 +76,9 @@ class Abnormal extends PureComponent{
       })
 
       if(!isgetdata){
-        return (<div>未获取到数据,加个大按钮重新获取</div>)
+        return (
+          <Refresh handleRefresh={this.handleRefresh} />
+        )
       }
       return (
                     <div className="panel">

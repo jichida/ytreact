@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Flex, Accordion, WhiteSpace } from 'antd-mobile';
 import { injectIntl } from 'react-intl';
-
+import lodashget from 'lodash.get';
 import './index.less';
 
 
@@ -46,15 +46,15 @@ class Performance extends PureComponent{
                   sub: [
                       {
                           title: intl.formatMessage({id:`home.show.performance.average`}),
-                          content: `${devicedata.averagecurrent_600}`,
+                          content: `${lodashget(devicedata,'averagecurrent_600','')}`,
                       },
                       {
                           title: intl.formatMessage({id:`home.show.performance.min`}),
-                          content:  `${devicedata.min_averagecurrent_600}`,
+                          content:  `${lodashget(devicedata,'min_averagecurrent_600','')}`,
                       },
                       {
                           title: intl.formatMessage({id:`home.show.performance.max`}),
-                          content:  `${devicedata.max_averagecurrent_600}`,
+                          content:  `${lodashget(devicedata,'max_averagecurrent_600','')}`,
                       },
                   ],
               },
@@ -63,15 +63,15 @@ class Performance extends PureComponent{
                   sub: [
                       {
                           title: intl.formatMessage({id:`home.show.performance.average`}),
-                          content: `${devicedata.averagecurrent_300}`,
+                          content: `${lodashget(devicedata,'averagecurrent_300','')}`,
                       },
                       {
                           title: intl.formatMessage({id:`home.show.performance.min`}),
-                          content: `${devicedata.min_averagecurrent_300}`,
+                          content: `${lodashget(devicedata,'min_averagecurrent_300','')}`,
                       },
                       {
                           title: intl.formatMessage({id:`home.show.performance.max`}),
-                          content: `${devicedata.max_averagecurrent_300}`,
+                          content: `${lodashget(devicedata,'max_averagecurrent_300','')}`,
                       },
                   ],
               },
@@ -80,15 +80,15 @@ class Performance extends PureComponent{
                   sub: [
                     {
                         title: intl.formatMessage({id:`home.show.performance.average`}),
-                        content: `${devicedata.averagecut_600}`,
+                        content: `${lodashget(devicedata,'averagecut_600','')}`,
                     },
                     {
                         title: intl.formatMessage({id:`home.show.performance.min`}),
-                        content:  `${devicedata.min_averagecut_600}`,
+                        content:  `${lodashget('devicedata','min_averagecut_600','')}`,
                     },
                     {
                         title: intl.formatMessage({id:`home.show.performance.max`}),
-                        content:  `${devicedata.max_averagecut_600}`,
+                        content:  `${lodashget(devicedata,'max_averagecut_600','')}`,
                     },
                   ],
               },
@@ -97,15 +97,15 @@ class Performance extends PureComponent{
                   sub: [
                     {
                         title: intl.formatMessage({id:`home.show.performance.average`}),
-                        content: `${devicedata.averagecut_300}`,
+                        content: `${lodashget(devicedata,'averagecut_300','')}`,
                     },
                     {
                         title: intl.formatMessage({id:`home.show.performance.min`}),
-                        content:  `${devicedata.min_averagecut_300}`,
+                        content:  `${lodashget(devicedata,'min_averagecut_300','')}`,
                     },
                     {
                         title: intl.formatMessage({id:`home.show.performance.max`}),
-                        content:  `${devicedata.max_averagecut_300}`,
+                        content:  `${lodashget(devicedata,'max_averagecut_300','')}`,
                     },
                   ],
               },
@@ -114,15 +114,15 @@ class Performance extends PureComponent{
                   sub: [
                     {
                         title: intl.formatMessage({id:`home.show.performance.average`}),
-                        content: `${devicedata.waterpurificationrate}`,
+                        content: `${lodashget(devicedata,'waterpurificationrate','')}`,
                     },
                     {
                         title: intl.formatMessage({id:`home.show.performance.min`}),
-                        content:  `${devicedata.min_waterpurificationrate}`,
+                        content:  `${lodashget(devicedata,'min_waterpurificationrate','')}`,
                     },
                     {
                         title: intl.formatMessage({id:`home.show.performance.max`}),
-                        content:  `${devicedata.max_waterpurificationrate}`,
+                        content:  `${lodashget(devicedata,'max_waterpurificationrate','')}`,
                     },
                   ],
               }

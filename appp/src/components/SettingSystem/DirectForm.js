@@ -53,7 +53,7 @@ const dispatch_form_err = (dispatch,errs)=>{
     }
     dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
   }
-  
+
 
 const formOptions = {
     mapPropsToFields(props) {
@@ -244,7 +244,7 @@ class Index extends React.Component {
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{
                               //获取当前时间
-                              const curdate = moment().format('YY.MM.DD.HH.ss');
+                              const curdate = moment().format('YY.MM.DD.HH.mm');
                               this.onClickCmd(`$date ${curdate}%`);//11	重置时间	同步系统时间	$date 18.11.30.13.20% 意思是年.月.日.时.分
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
@@ -344,4 +344,3 @@ class Index extends React.Component {
 }
 
 export default createForm(formOptions)(injectIntl(Index))
-

@@ -428,7 +428,7 @@ const RenderForm = createForm({
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{
                               //获取当前时间
-                              const curdate = moment().format('YY.MM.DD.HH.ss');
+                              const curdate = moment().format('YY.MM.DD.HH.mm');
                               onClickCmd(`$date ${curdate}%`);//11	重置时间	同步系统时间	$date 18.11.30.13.20% 意思是年.月.日.时.分
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />

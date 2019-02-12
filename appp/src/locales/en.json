@@ -8,6 +8,7 @@
   "layout.home": "Home",
   "layout.abnormal": "Exception",
   "layout.performance": "Performance",
+  "layout.get": "Get Data",
   "start.add": "Add device to open smart life!",
   "start.wifi.select": "Choose the current network",
   "start.wifi.selected": "Selected wifi network",

@@ -1,6 +1,7 @@
 import React from 'react'
 import './Refresh.less'
 import refresh_icon from '../../assets/refresh.png'
+import { FormattedMessage } from 'react-intl'
 
 const Index = (props) => {
     const handleClick = () => {
@@ -13,7 +14,7 @@ const Index = (props) => {
                 style={{width: '50px', height: '50px', marginTop: '20px'}}
                 
             />
-            <span className="tip">获取数据</span>
+            <span className="tip"><FormattedMessage id="layout.get" /></span>
             </div>
         </div>
     )

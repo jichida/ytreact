@@ -57,7 +57,7 @@ class Abnormal extends PureComponent{
             //有故障
             abnormal.push({text});
           }
-          else if(v === 0){
+          else if(v === '0'){
             normal.push({text});
           }
         }

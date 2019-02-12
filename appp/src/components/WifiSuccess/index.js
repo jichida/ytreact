@@ -35,14 +35,14 @@ const alert = Modal.alert;
        }
      }
     render () {
-        ///0为打开未连接  -1  未打开  1  已连接 2 密码错误}
+        // -1  未打开  0 打开未连接  1  已连接 2 密码错误}
         const { wifiStatus } = this.props;
         let startwifiid = "start.wifi.notconnected";
         if(wifiStatus === -1){
-          startwifiid = 'start.wifi.notconnected';
+          startwifiid = 'start.wifi.notopened';
         }
         else if(wifiStatus === 0){
-          startwifiid = 'start.wifi.notopened';
+          startwifiid = 'start.wifi.notconnected';
         }
         else if(wifiStatus === 1){
           startwifiid = 'start.wifi.succeed';

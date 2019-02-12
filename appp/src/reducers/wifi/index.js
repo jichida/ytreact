@@ -18,7 +18,7 @@ const initial = {
         wifiCipher:'',
         wifipassword: '',
         wifilist:[],
-        wifiStatus:-1
+        wifiStatus:0//0为打开未连接  -1  未打开  1  已连接 2 密码错误}
     },
 };
 

@@ -6,6 +6,7 @@ import {
 
 const initial = {
     devicedata: {
+      isgetdata:false,
       homedata:{
         main_outwater_quality:30,//出水水质,
         main_outwater_grade:'优',//出水等级,
@@ -89,7 +90,7 @@ const devicedata = createReducer({
         const homedata = {...homedatanew};
         const errordata = {...errordatanew};
         const performancedata = {...performancedatanew};
-        return { ...state, homedata,errordata,performancedata };
+        return { ...state, homedata,errordata,performancedata,isgetdata:true};
     },
 
 }, initial.devicedata);

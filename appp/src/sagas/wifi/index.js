@@ -1,7 +1,7 @@
 /**
  * Created by wangxiaoqing on 2017/3/25.
  */
-import { put,takeLatest,call,take,race} from 'redux-saga/effects';
+import { put,takeLatest,call,take,race,select} from 'redux-saga/effects';
 import {delay} from 'redux-saga';
 import {
   getssidlist,
@@ -222,8 +222,15 @@ export function* wififlow() {
       // const {payload} = action;
       try{
         setwifistatuscallback();
-        yield call(delay, 100);
-        yield put(wifi_open_reqeust({}));
+        yield call(delay, 5000);//wait for 5 seconds
+        // yield put(wifi_open_reqeust({}));///0为打开未连接  -1  未打开  1  已连接 2 密码错误}
+        const wifiStatus = yield select((state)=>{
+          return state.wifi.wifiStatus;
+        });
+        if(wifiStatus === -1){
+          //未打开情况下打开
+          yield put(wifi_open_reqeust({}));
+        }
       }
       catch(e){
         console.log(e);
@@ -391,28 +398,45 @@ export function* wififlow() {
         yield call(socket_send_promise,payload.cmd);
         yield put(set_weui({
           toast:{
-          text:`【${payload.cmd}】命令发送`,
+          text:`【${payload.cmd}】开始命令发送`,
           show: true,
           type:'success'
         }}));
-        const delaytime = 5000;
+        const delaytime = 3000;//
         const raceresult = yield race({
            wifiresult: take(`${wifi_sendcmd_result}`),
            timeout: call(delay, delaytime)
         });
         const { timeout } = raceresult;
         if(!!timeout){
-          yield put(set_weui({
-            toast:{
-            text:`发送给硬件命令返回超时,${delaytime}毫秒`,
-            show: true,
-            type:'success'
-          }}));
+          //等3秒超时，重发一次
+          yield call(socket_send_promise,payload.cmd);
+          const raceresult = yield race({
+             wifiresult: take(`${wifi_sendcmd_result}`),
+             timeout: call(delay, delaytime)
+          });
+          const { timeout } = raceresult;
+          if(!!timeout){
+            yield put(set_weui({
+              toast:{
+              text:`发送给硬件命令返回超时,${delaytime}毫秒`,
+              show: true,
+              type:'success'
+            }}));
+          }
+          else{
+            yield put(set_weui({
+              toast:{
+              text:`第二次发送给硬件命令成功`,
+              show: true,
+              type:'success'
+            }}));
+          }
         }
         else{
           yield put(set_weui({
             toast:{
-            text:`发送给硬件命令成功`,
+            text:`第一次发送给硬件命令成功`,
             show: true,
             type:'success'
           }}));

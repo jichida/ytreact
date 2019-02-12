@@ -36,7 +36,7 @@ class Performance extends PureComponent{
 
 
     render () {
-          const {performancedata} = this.props;
+          const {isgetdata,performancedata} = this.props;
           const devicedata = performancedata;
           const {intl} = this.props;
 
@@ -127,20 +127,24 @@ class Performance extends PureComponent{
                   ],
               }
           ]
+
+          if(!isgetdata){
+            return (<div>未获取到数据,加个大按钮重新获取</div>)
+          }
           return (
             <div className="panel">
                 <div className="performance">
                 <WhiteSpace />
                 <Accordion accordion defaultActiveKey="0" className="pad">
-                    { this.renderList(data)}
+                    {this.renderList(data)}
                 </Accordion>
                 </div>
             </div>
         )
     }
 }
-const mapStateToProps =  ({devicedata:{performancedata}}) =>{
-  return {performancedata};
+const mapStateToProps =  ({devicedata:{isgetdata,performancedata}}) =>{
+  return {isgetdata,performancedata};
 };
 Performance = connect(mapStateToProps)(Performance);
 export default injectIntl(Performance);

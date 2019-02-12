@@ -22,7 +22,7 @@ class Abnormal extends PureComponent{
         list = this.completionList(list);
         return list;
     }
-    
+
 
     geterrtext = (k)=>{
       const {intl} = this.props;
@@ -40,7 +40,7 @@ class Abnormal extends PureComponent{
     }
 
     render () {
-      const {errordata} = this.props;
+      const {isgetdata,errordata} = this.props;
       // const mapname = mapname_err;
       const errflag = errordata;
       const abnormal = [];
@@ -58,7 +58,11 @@ class Abnormal extends PureComponent{
         }
 
       })
-        return (
+
+      if(!isgetdata){
+        return (<div>未获取到数据,加个大按钮重新获取</div>)
+      }
+      return (
                     <div className="panel">
                         <div className="abnormal">
                             <Flex direction="column">
@@ -78,8 +82,8 @@ class Abnormal extends PureComponent{
     }
 }
 
-const mapStateToProps =  ({devicedata:{errordata}}) =>{
-  return {errordata};
+const mapStateToProps =  ({devicedata:{isgetdata,errordata}}) =>{
+  return {isgetdata,errordata};
 };
 Abnormal = connect(mapStateToProps)(Abnormal);
 export default injectIntl(Abnormal);

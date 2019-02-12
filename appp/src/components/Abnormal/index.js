@@ -26,7 +26,11 @@ class Abnormal extends PureComponent{
 
     geterrtext = (k)=>{
       const {intl} = this.props;
-      return intl.formatMessage({id:`home.show.err.${k}`});
+      const txt = `home.show.err.${k}`;
+      console.log(txt);
+      const rettxt = intl.formatMessage({id:txt});
+      console.log(rettxt);
+      return rettxt;
     }
 
     completionList = (list = []) => {
@@ -47,8 +51,9 @@ class Abnormal extends PureComponent{
       const normal = [];
       lodashmap(errflag,(v,k)=>{
         const text = this.geterrtext(k);
+        console.log(text);
         if(!!text){
-          if(v === 1){
+          if(v === '1'){
             //有故障
             abnormal.push({text});
           }

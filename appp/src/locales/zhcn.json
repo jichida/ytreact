@@ -148,7 +148,7 @@
   "home.show.title_main_filterelements_posfilter1":"后置活性炭滤芯寿命",
   "home.show.title_main_filterelements_posfilter2":"后置2滤芯寿命",
   "home.show.title_main_filterelements_posfilter3":"后置3滤芯寿命",
-  "home.show.title_main_filterelements_value_warningtochange":"请更换滤芯",
+  "home.show.title_main_filterelements_value_warningtochange":"请更换滤芯! ",
   "home.show.title_main_filterelements_value_leftday":"剩余{value}天",
   "home.show.title_main_filterelements_value_leftvol":"剩余流量{value}%",
   "home.show.err.error_partsfailure":"零件",

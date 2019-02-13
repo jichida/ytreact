@@ -16,13 +16,14 @@ import WaterInfo from './DeviceWater';
 import InstallInfo from './DeviceInstall';
 import CheckList from './DeviceCheckList';
 import Setting from './DeviceSetting';
+import Inlet from './DeviceInlet';
 import EquipmentList from './EquipmentList';
 import FrontFilter from './FrontFilter';
 import AfterFilter from './AfterFilter';
 import Login from './Login';
 import PipeFittings from './PipeFittings';
 
-import TestCo from './TestCo';
+import TestCo from './SettingSystem/index_old';
 
 
 import {requireAuthentication} from './requireauthentication';
@@ -53,6 +54,7 @@ class AppRoot extends React.Component {
               <Route exact path="/water" component={requireAuthentication(WaterInfo)} />
               <Route exact path="/install" component={requireAuthentication(InstallInfo)} />
               <Route exact path="/checklist" component={requireAuthentication(CheckList)} />
+              <Route exact path="/inlet" component={requireAuthentication(Inlet)} />
               <Route exact path="/setting" component={requireAuthentication(Setting)} />
               <Route exact path="/equipmentlist" component={requireAuthentication(EquipmentList)} />
               <Route exact path="/frontfilter" component={requireAuthentication(FrontFilter)} />

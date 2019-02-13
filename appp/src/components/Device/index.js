@@ -11,6 +11,7 @@ import water_img from '../../assets/sy3.png';
 import install_img from '../../assets/sy4.png';
 import table_img from '../../assets/set4.png';
 import system_img from '../../assets/set1.png';
+import waterset_img from '../../assets/set2.png';
 // import user_img from '../../assets/sy5.png';
 import {jsCallPhone} from '../../env/callphone';
 const Item = List.Item;
@@ -79,7 +80,14 @@ class Device extends PureComponent{
                 <WingBlank>
                     <p className="tools_title"><FormattedMessage id="device.tools" /></p>
                     <div className="tools_bg">
-                        <Flex>
+                        <Flex wrap="wrap">
+                            { isNormal&&
+                            <Flex.Item className="tools_con">
+                                <Link to="/setting"><div><img src={system_img} alt="" />
+                                    <p><FormattedMessage id="device.setting" defaultMessage="设备设置" /></p></div>
+                                </Link>
+                            </Flex.Item>
+                            }
                             { isNormal&&
                             <Flex.Item className="tools_con">
                                 <Link to="/basic"><div><img src={basic_img} alt="" />
@@ -108,10 +116,12 @@ class Device extends PureComponent{
                                 </Link>
                             </Flex.Item>
                             }
+                        {/* </Flex>
+                        <Flex justify="start" align="start"> */}
                             { isNormal&&
                             <Flex.Item className="tools_con">
-                                <Link to="/setting"><div><img src={system_img} alt="" />
-                                    <p><FormattedMessage id="device.setting" defaultMessage="设备设置" /></p></div>
+                                <Link to="/inlet"><div><img src={waterset_img} alt="" />
+                                    <p><FormattedMessage id="setting.water" defaultMessage="进水设定" /></p></div>
                                 </Link>
                             </Flex.Item>
                             }

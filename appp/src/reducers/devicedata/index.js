@@ -86,11 +86,12 @@ const devicedata = createReducer({
         // let homedata = state.homedata;
         // let errordata = state.errordata;
         // let performancedata = state.performancedata;
-        const {homedata:homedatanew,errordata:errordatanew,performancedata:performancedatanew} = payload;
+        const {homedata:homedatanew,errordata:errordatanew,performancedata:performancedatanew,inwatersettings:inwatersettingsnew} = payload;
         const homedata = {...homedatanew};
         const errordata = {...errordatanew};
         const performancedata = {...performancedatanew};
-        return { ...state, homedata,errordata,performancedata,isgetdata:true};
+        const inwatersettings = {...inwatersettingsnew};
+        return { ...state, homedata,errordata,performancedata,inwatersettings,isgetdata:true};
     },
 
 }, initial.devicedata);

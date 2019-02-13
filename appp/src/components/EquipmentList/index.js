@@ -35,25 +35,27 @@ const basicData = {
 
 const configuration = [
     {
-        label: '商用',
-        value: '商用',
+        label: <FormattedMessage id="form.equip.config.comm" />,
+        value: <FormattedMessage id="form.equip.config.comm" />,
     },
     {
-        label: '家用',
-        value: '家用',
+        label: <FormattedMessage id="form.equip.config.home" />,
+        value: <FormattedMessage id="form.equip.config.home" />,
     }
 ]
 
 const materials = [
     {
-        label: '铜',
-        value: '铜',
+        label: <FormattedMessage id="form.equip.meter.cop" />,
+        value: <FormattedMessage id="form.equip.meter.cop" />,
     },
     {
-        label: '吕',
-        value: '吕',
+        label: <FormattedMessage id="form.equip.meter.alum" />,
+        value: <FormattedMessage id="form.equip.meter.alum" />,
     }
 ]
+
+
 // 
 // const others = [
 //     {
@@ -102,6 +104,8 @@ const RenderForm = createForm({
 })(withRouter((props)=>{
     const { getFieldProps, validateFields } = props.form;
     const { history } = props;
+
+    
 
     const handleSubmit = (e)=>{
         //e.preventDefault();

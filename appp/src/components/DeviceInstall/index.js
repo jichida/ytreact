@@ -15,88 +15,9 @@ const Item = List.Item;
 const Brief = Item.Brief;
 let initHeight;
 
-const positionOptions = [
-    {
-        label: '设备间',
-        value: '设备间',
-    },
-    {
-        label: '室内',
-        value: '室内',
-    },
-    {
-        label: '室外',
-        value: '室外',
-    },
-]
 
-const wallOptions = [
-    {
-        label: '水泥墙',
-        value: '水泥墙',
-    },
-    {
-        label: '空心砖',
-        value: '空心砖',
-    },
-    {
-        label: '隔板',
-        value: '隔板',
-    },
-]
 
-const methodOptions = [
-    {
-        label: '落地',
-        value: '落地',
-    },
-    {
-        label: '壁挂',
-        value: '壁挂',
-    },
-]
 
-const pipeOptions = [
-    {
-        label: '一寸管',
-        value: '一寸管',
-    },
-    {
-        label: '六分管',
-        value: '六分管',
-    },
-    {
-        label: '四分管',
-        value: '四分管',
-    },
-    {
-        label: '其他(自己填写)',
-        value: '其他(自己填写)',
-    },
-]
-
-const pipematerialsOptions = [
-    {
-        label: '镀锌钢',
-        value: '镀锌钢',
-    },
-    {
-        label: '不锈钢',
-        value: '不锈钢',
-    },
-    {
-        label: 'PPR',
-        value: 'PPR',
-    },
-    {
-        label: 'PVC',
-        value: 'PVC',
-    },
-    {
-        label: '其他(自己填写)',
-        value: '其他(自己填写)',
-    },
-]
 
 // 安装地点		position
 // 是否避光		avoidlight
@@ -141,9 +62,7 @@ const pipematerialsOptions = [
 //         value: '',
 //     },
 // }
-const dispatch_form_err = (dispatch,errs)=>{
-  dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
-}
+
 const RenderForm = createForm({
     mapPropsToFields(props) {
         return {
@@ -192,6 +111,93 @@ const RenderForm = createForm({
 })(injectIntl((props)=>{
     const { getFieldProps, validateFields, setFieldsValue } = props.form;
     const { intl: { formatMessage },dispatch} = props;
+
+    const positionOptions = [
+        {
+            label: formatMessage({id: 'install.position.equip'}),
+            value: formatMessage({id: 'install.position.equip'}),
+        },
+        {
+            label: formatMessage({id: 'install.position.in'}),
+            value: formatMessage({id: 'install.position.in'}),
+        },
+        {
+            label: formatMessage({id: 'install.position.out'}),
+            value: formatMessage({id: 'install.position.out'}),
+        },
+    ]
+
+    const wallOptions = [
+        {
+            label: formatMessage({id: 'install.wall.cement' }),
+            value: formatMessage({id: 'install.wall.cement' }),
+        },
+        {
+            label: formatMessage({id: 'install.wall.hollowbrick' }),
+            value: formatMessage({id: 'install.wall.hollowbrick' }),
+        },
+        {
+            label: formatMessage({id: 'install.wall.clapboard' }),
+            value: formatMessage({id: 'install.wall.clapboard' }),
+        },
+    ]
+    
+    const methodOptions = [
+        {
+            label: formatMessage({id: 'install.method.toground' }),
+            value: formatMessage({id: 'install.method.toground' }),
+        },
+        {
+            label: formatMessage({id: 'install.method.wallhanging' }),
+            value: formatMessage({id: 'install.method.wallhanging' }),
+        },
+    ]
+    
+    const pipeOptions = [
+        {
+            label: formatMessage({id: 'install.pipe.inch' }),
+            value: formatMessage({id: 'install.pipe.inch' }),
+        },
+        {
+            label: formatMessage({id: 'install.pipe.sixbranch' }),
+            value: formatMessage({id: 'install.pipe.sixbranch' }),
+        },
+        {
+            label: formatMessage({id: 'install.pipe.fourbranch' }),
+            value: formatMessage({id: 'install.pipe.fourbranch' }),
+        },
+        {
+            label: formatMessage({id: 'install.pipe.others' }),
+            value: formatMessage({id: 'install.pipe.others' }),
+        },
+    ]
+    
+    const pipematerialsOptions = [
+        {
+            label: formatMessage({id: 'install.pipematerials.galvanized' }),
+            value: formatMessage({id: 'install.pipematerials.galvanized' }),
+        },
+        {
+            label: formatMessage({id: 'install.pipematerials.stainless' }),
+            value: formatMessage({id: 'install.pipematerials.stainless' }),
+        },
+        {
+            label: 'PPR',
+            value: 'PPR',
+        },
+        {
+            label: 'PVC',
+            value: 'PVC',
+        },
+        {
+            label: formatMessage({id: 'install.pipematerials.others' }),
+            value: formatMessage({id: 'install.pipematerials.others' }),
+        },
+    ]
+
+    const dispatch_form_err = (dispatch,errs)=>{
+        dispatch(common_err({type:'form_err',errmsg:formatMessage({id: 'form.check'})}))
+    }
 
     const handleSubmit = (e)=>{
         //e.preventDefault();

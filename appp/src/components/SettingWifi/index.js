@@ -21,9 +21,7 @@ import './index.less';
 
 const Item = List.Item;
 const Brief = Item.Brief;
-const dispatch_form_err = (dispatch,errs)=>{
-  dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
-}
+
 
 const RenderForm = createForm({
     mapPropsToFields(props) {
@@ -62,6 +60,10 @@ const RenderForm = createForm({
     const { getFieldProps, validateFields, setFieldsValue, getFieldValue } = props.form;
     const { intl: { formatMessage },dispatch} = props;
     const title = formatMessage({id: 'start.wifi.select'});
+
+    const dispatch_form_err = (dispatch,errs)=>{
+        dispatch(common_err({type:'form_err',errmsg: intl.formatMessage({id: 'form.check'})}))
+      }
 
     const handleSubmit = (e)=>{
         //e.preventDefault();

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Upload, Icon, Modal } from 'antd';
 import {newtopicfileuploadsetpreview,newtopicfileuploadreset} from '../../actions/index.js';
+import { FormattedMessage } from 'react-intl'
 import './pictureswall.less';
 import config from '../../env/config.js';
 import PicaDisposePhoto from '../../util/pica_dispose_photo';
@@ -103,7 +104,7 @@ class PicturesWall extends React.Component {
     const uploadButton = (
       <div onClick={()=>{console.log('Click')}}>
         <Icon type="plus" />
-        <div className="ant-upload-text">上传</div>
+        <div className="ant-upload-text"><FormattedMessage id="form.upload" /></div>
       </div>
     );
 

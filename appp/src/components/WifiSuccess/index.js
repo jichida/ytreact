@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Modal, Flex, WhiteSpace, Button, WingBlank } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import {set_weui,ui_wifisuccess_tonext} from '../../actions';
 
 import './index.less';
@@ -14,14 +14,14 @@ const alert = Modal.alert;
 
  class WifiSuccess extends PureComponent{
      onClickNext = ()=>{
-       const { wifiStatus,dispatch } = this.props;
-       if(wifiStatus === 1){
+       const { wifiStatus,dispatch, intl } = this.props;
+       if(wifiStatus === 1){//
          dispatch(ui_wifisuccess_tonext({}));
        }
        else{
-         alert('确认', 'wifi尚未连接,可以手工在设置中连接后再点确认,确实需要点下一步吗?', [
-          { text: '取消', onPress: () => console.log('cancel') },
-          { text: '确定', onPress: () => {
+         alert(intl.formatMessage({id: "form.ok"}), intl.formatMessage({id: 'start.wifi.notconnected.confirm'}), [
+          { text: intl.formatMessage({id: "form.cancel"}), onPress: () => console.log('cancel') },
+          { text: intl.formatMessage({id: "form.ok"}), onPress: () => {
             dispatch(ui_wifisuccess_tonext({}));
           }},
         ]);
@@ -36,7 +36,7 @@ const alert = Modal.alert;
      }
     render () {
         // -1  未打开  0 打开未连接  1  已连接 2 密码错误}
-        const { wifiStatus } = this.props;
+        const { wifiStatus, intl } = this.props;
         let startwifiid = "start.wifi.notconnected";
         if(wifiStatus === -1){
           startwifiid = 'start.wifi.notopened';
@@ -93,4 +93,4 @@ const mapStateToProps =  ({wifi:{wifiStatus}}) =>{
   return {wifiStatus};
 };
 WifiSuccess = connect(mapStateToProps)(WifiSuccess);
-export default withRouter(WifiSuccess);
+export default withRouter(injectIntl(WifiSuccess));

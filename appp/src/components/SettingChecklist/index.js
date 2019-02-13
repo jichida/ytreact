@@ -4,7 +4,7 @@ import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import {  List, Button, WingBlank, Switch, WhiteSpace,  } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import {wifi_sendcmd_request} from '../../actions';
 import {set_weui} from '../../actions';
 import PicturesWall  from './PicturesWall';
@@ -254,7 +254,7 @@ class SettingChecklist extends PureComponent{
     }
 
     handleEnable = (values)=>{
-      const {dispatch} = this.props;
+      const {dispatch, intl} = this.props;
       const isEnableBtnVisible = values.washed &&
       (values.uptostandard) &&
       (values.bypassclosed) &&
@@ -275,7 +275,7 @@ class SettingChecklist extends PureComponent{
         //提示：需要全部检查完毕才能启用
         dispatch(set_weui({
           toast:{
-          text:`需全部检查完毕才能启用`,
+          text: intl.formatMessage({id: 'form.check'}),
           show: true,
           type:'warning'
         }}));
@@ -356,4 +356,4 @@ const mapStateToProps =  ({device:{checklist,_id}}) =>{
 };
 
 SettingChecklist = connect(mapStateToProps)(SettingChecklist);
-export default SettingChecklist;
+export default injectIntl(SettingChecklist);

@@ -389,9 +389,9 @@ const MaybeDropzone = ({ children, content, hasVisibleFiles, uploader, ...props 
 const FileInputComponent = ({ uploader, xviewUploadImage, ...props }) => {
     const { children, ...fileInputProps } = props
     const content = children || (
-        <div  style={{width: '100%'}}>
-            <p style={{textAlign: 'center'}}><UploadIcon className='react-fine-uploader-gallery-file-input-upload-icon' /></p>
-            <p style={{fontSize:'12px', textAlign: 'center'}}>上传图片</p> 
+        <div  style={{width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <div><UploadIcon className='react-fine-uploader-gallery-file-input-upload-icon' /></div>
+            {/* <p style={{fontSize:'12px', textAlign: 'center'}}>上传图片</p>  */}
         </div>
     )
 

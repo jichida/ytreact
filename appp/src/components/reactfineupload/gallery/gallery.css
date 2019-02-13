@@ -74,8 +74,8 @@
 .react-fine-uploader-gallery-file-input-upload-icon {
     fill: #00ABC7;
     height: 35px;
-    margin-bottom: -20px;
-    margin-right: 5px;
+    /* margin-bottom: -20px;
+    margin-right: 5px; */
     width: 35px;
 }
 

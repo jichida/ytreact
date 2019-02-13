@@ -33,13 +33,13 @@ const timezoneOption = () => {
     return _.sortBy(offsetTmz, [function (el) { return -(el.time); }]);
 }
 
-const dispatch_form_err = (dispatch,errs)=>{
-    if(!!errs.deviceid){
-      dispatch(common_err({type:'form_err',errmsg:`请先扫描设备二维码`}))
-      return;
-    }
-    dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
-  }
+// const dispatch_form_err = (dispatch,errs)=>{
+//     if(!!errs.deviceid){
+//       dispatch(common_err({type:'form_err',errmsg:`请先扫描设备二维码`}))
+//       return;
+//     }
+//     dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
+//   }
   
 
 const formOptions = {
@@ -87,10 +87,19 @@ class Index extends React.Component {
             }
             else{
                 console.log(err)
-                dispatch_form_err(this.props.dispatch,err);
+                this.dispatch_form_err(this.props.dispatch,err);
             }
         })
     }
+
+    dispatch_form_err = (dispatch,errs)=>{
+        const { intl } = this.props
+        if(!!errs.deviceid){
+          dispatch(common_err({type:'form_err',errmsg: intl.formatMessage({id: 'form.qrcode'})}))
+          return;
+        }
+        dispatch(common_err({type:'form_err',errmsg: intl.formatMessage({id: 'form.check'})}))
+      }
 
     onClickCmd = (cmd)=>{
         const { dispatch } = this.props;

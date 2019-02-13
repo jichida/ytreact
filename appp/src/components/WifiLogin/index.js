@@ -65,7 +65,7 @@ class WifiLogin extends PureComponent{
       if(!wifissid || wifissid===''){
         dispatch(set_weui({
           toast:{
-          text:`需选择当前网络`,
+          text: intl.formatMessage({id: 'start.wifi.select'}),
           show: true,
           type:'warning'
         }}));

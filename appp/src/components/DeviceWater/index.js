@@ -13,16 +13,7 @@ const Item = List.Item;
 const Brief = Item.Brief;
 let initHeight;
 
-const source = [
-    {
-        label: '市政水',
-        value: '市政水',
-    },
-    {
-        label: '地下水',
-        value: '地下水',
-    },
-]
+
 
 // 月用水量（吨）  	quantity
 // 用水人数（人）  	persons
@@ -38,9 +29,7 @@ const source = [
 // 原水碱度(ppm)	alkalinity
 // ph值		ph
 // 用户需求出水TDS值	usertds
-const dispatch_form_err = (dispatch,errs)=>{
-  dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
-}
+
 const RenderForm = createForm({
     mapPropsToFields(props) {
         return {
@@ -105,6 +94,21 @@ const RenderForm = createForm({
 })(injectIntl((props)=>{
     const { getFieldProps, validateFields } = props.form;
     const { intl: { formatMessage },dispatch} = props;
+
+    const source = [
+        {
+            label: formatMessage({id: 'water.source.municipal' }),
+            value: formatMessage({id: 'water.source.municipal' }),
+        },
+        {
+            label: formatMessage({id: 'water.source.ground' }),
+            value: formatMessage({id: 'water.source.ground' }),
+        },
+    ]
+
+    const dispatch_form_err = (dispatch,errs)=>{
+        dispatch(common_err({type:'form_err',errmsg:formatMessage({id: 'form.check'})}))
+    }
 
     const handleSubmit = (e)=>{
         //e.preventDefault();

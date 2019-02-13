@@ -18,9 +18,7 @@ const Brief = Item.Brief;
 // 进水碱度(ppm)	alkalinity
 // ph值		ph
 // 用户需求出水TDS值	usertds
-const dispatch_form_err = (dispatch,errs)=>{
-  dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
-}
+
 
 const RenderForm = createForm({
     mapPropsToFields(props) {
@@ -54,6 +52,10 @@ const RenderForm = createForm({
 })(injectIntl((props)=>{
     const { validateFields, getFieldProps } = props.form;
     const { intl: { formatMessage }, dispatch } = props;
+
+    const dispatch_form_err = (dispatch,errs)=>{
+        dispatch(common_err({type:'form_err',errmsg:formatMessage({id: 'form.check'})}))
+      }
 
     const handleSubmit = (e)=>{
         //e.preventDefault();

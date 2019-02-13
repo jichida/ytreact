@@ -62,9 +62,7 @@ const model = [
         value: 'HYDRODI-250',
     },
 ]
-const dispatch_form_err = (dispatch,errs)=>{
-  dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
-}
+
 const RenderForm = createForm({
     mapPropsToFields(props) {
         return {
@@ -105,6 +103,10 @@ const RenderForm = createForm({
 })(injectIntl((props)=>{
     const { getFieldProps, validateFields, setFieldsValue } = props.form;
     const { intl: { formatMessage },dispatch} = props;
+
+    const dispatch_form_err = (dispatch,errs)=>{
+        dispatch(common_err({type:'form_err',errmsg: formatMessage({id: 'form.check'})}))
+      }
 
     const handleSubmit = (e)=>{
         // //e.preventDefault();

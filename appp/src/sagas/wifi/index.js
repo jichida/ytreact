@@ -113,10 +113,97 @@ const parsedata = (stringbody,callbackfn)=>{
     'inwatersettings.alkalinity',// 53	进水碱度	进水碱度  word	1 word
 
   ];
+
+  //需要转成int类型
+  const mapParseToInt = [
+    'homedata.main_outwater_quality',//1、出水水质 :PPM
+    'homedata.main_inwater_quality',//3、进水水质	进水水质 ：PPM
+    'homedata.main_totalwatervol',//4、总产水量	用水总量 ：GAL
+    'homedata.main_runtime',//5、运行时间	运行时间：天	1 word
+    'homedata.main_outcwatervol',//6、浓水出水量	浓水出水量：GAL	2 word
+    'homedata.filterelements_modlife_leftday',//7、电离子膜寿命
+    'homedata.filterelements_prefilter1_leftday',//8、前置PP寿命	前置PP剩余天数： 天
+    'homedata.filterelements_prefilter2_leftday',//9、前置2滤芯寿命
+    'homedata.filterelements_prefilter3_leftday',//10、前置3滤芯寿命
+    'homedata.filterelements_posfilter1_leftday',//11、后置活性炭寿命
+    'homedata.filterelements_posfilter2_leftday',//12、后置2滤芯寿命
+    'homedata.filterelements_posfilter3_leftday',//13、后置3滤芯寿命
+
+    'performancedata.averagecurrent_600',//14、平均电流@600	600电导率时的电流:mA	1 word
+    'homedata.filterelements_modlife_leftvol',//15、电离子膜寿命剩余流量
+
+    'homedata.filterelements_prefilter1_leftvol',//16、前置PP剩余流量
+    'homedata.filterelements_prefilter2_leftvol',//17、前置2滤芯寿命
+    'homedata.filterelements_prefilter3_leftvol',//18、前置3滤芯寿命
+    'homedata.filterelements_posfilter1_leftvol',//19、后置活性炭寿命
+    'homedata.filterelements_posfilter2_leftvol',//20、后置2滤芯剩余流量
+    'homedata.filterelements_posfilter3_leftvol',//21、后置3滤芯剩余流量
+
+    'performancedata.averagecurrent_300',//22、300电导率时的电流:mA	1 word
+    'performancedata.averagecut_600',//23、	平均cut@600	600电导率时的cut	1 word
+    'performancedata.averagecut_300',//24、	平均cut@300	300电导率时的cut	1 word
+    'performancedata.waterpurificationrate',//25、	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
+
+    'errordata.error_partsfailure',//26、零件故障
+    'errordata.error_pumpfailure',//27、泵故障	ERROR2:0 无故障 1有故障
+    'errordata.error_programfailure',//28、	程序故障	ERROR3:0 无故障 1有故障
+    'errordata.error_flowfailure',//29、	流量故障	ERROR4:0 无故障 1有故障
+    'errordata.error_leakagefault',//30	漏水故障	ERROR5:0 无故障 1有故障
+    'errordata.error_edicurrent',//31、	EDI电流	ERROR6:0 无故障 1有故障
+    'errordata.error_modout',//32、	MODOUT  膜的去除效率	ERROR7:0 无故障 1有故障
+    'errordata.error_intakesensorfault',//33、	进水传感器故障	ERROR8 :0 无故障 1有故障
+    'errordata.error_outflowsensorfault',//34、	出水传感器故障	ERROR9:0 无故障 1有故障
+    'errordata.error_cwatersensorfault',//35、	浓水传感器故障	ERROR10 :0 无故障 1有故障
+    'errordata.error_wastewatersensorfault',//36、	废水传感器故障	ERROR11:0 无故障 1有故障
+    'errordata.error_outflowflowmeterfailure',//37、	出水流量计故障	ERROR12:0 无故障 1有故障
+    'errordata.error_wastewaterflowmeterfailure',//38、	废水流量计故障	ERROR13:0 无故障 1有故障
+    'errordata.error_clockfailure',//39、	时钟故障	ERROR14:0 无故障 1有故障
+    'errordata.error_pressuresensor1failure',//40	压力1传感器故障	ERROR15:0 无故障 1有故障
+    'errordata.error_pressuresensor2failure',//41	压力2传感器故障	ERROR16:0 无故障 1有故障
+    'errordata.error_pressuresensor3failure',//42	压力3传感器故障	ERROR17:0 无故障 1有故障
+    'errordata.error_pressuresensor4failure',//43	压力4传感器故障	ERROR18:0 无故障 1有故障
+
+    'syssettings.quality',// 44	出水水质设置值	setlo  	1 word
+    'syssettings.dormancy',// 45	休眠状态	目前设备的休眠状态	1 byte
+    'syssettings.dormancystart',// 46	休眠开始时间	开始休眠 如：22	1 byte
+    'syssettings.dormancyend',// 47	休眠结束时间	退出休眠 如：6	1 byte
+
+    'wifi.singal',// 48	网络信号	主机目前与外网的连接强度	1 byte
+    'inwatersettings.ph',// 49	进水PH	进水的PH值  byte	1 byte
+    'inwatersettings.conductivity',// 50	进水电导率	进水电导率  word	1 word
+    'inwatersettings.tds',// 51	进水TDS	进水TDS  word	1 word
+    'inwatersettings.hardness',// 52	进水硬度	进水硬度  word	1 word
+    'inwatersettings.alkalinity',// 53	进水碱度	进水碱度  word	1 word
+  ];
+
+  console.log(`dataz个数:${dataz.length},mapdatafieldname个数:${mapdatafieldname.length}`);
+
   let result = {};
   for(let i = 0;i < mapdatafieldname.length; i++){
-    const value = dataz.length >i ?dataz[i]:0;
+    let value = dataz.length >i ?dataz[i]:0;
+    if(value === ''){
+      value = 0;
+    }
     lodash_set(result,mapdatafieldname[i],value);
+  }
+  console.log(result);
+  for(let i = 0;i < mapParseToInt.length; i++){
+    const value = lodash_get(result,mapParseToInt[i],'0');
+    lodash_set(result,mapParseToInt[i],parseInt(value));
+  }
+  console.log(result);
+  const main_outwater_grade = lodash_get(result,'homedata.main_outwater_grade');
+  if(!!main_outwater_grade){
+    //问题2  0:优  1:好  2:一般
+    if(main_outwater_grade === '0'){
+      lodash_set(result,'homedata.main_outwater_grade','优');
+    }
+    if(main_outwater_grade === '1'){
+      lodash_set(result,'homedata.main_outwater_grade','好');
+    }
+    if(main_outwater_grade === '2'){
+      lodash_set(result,'homedata.main_outwater_grade','一般');
+    }
   }
   callbackfn(result);
 };

@@ -4,7 +4,7 @@ import { Modal, Flex, WhiteSpace, Button, WingBlank } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import {set_weui,ui_wifisuccess_tonext} from '../../actions';
-
+import {seteasylink} from '../../env/easylink';
 import './index.less';
 
 import mga from '../../assets/ljimga.png';
@@ -64,6 +64,25 @@ const alert = Modal.alert;
                                 </div>
                                 <WhiteSpace size="xl" />
                                 <div className="status" ><FormattedMessage id={startwifiid} /></div>
+                                <WhiteSpace size="xl" />
+                                <div className="add_btn" >
+                                    <Button type="ghost" className="btn" onClick={()=>{
+                                      if(wifiStatus === 1){
+                                        seteasylink();
+                                      }
+                                      else{
+                                        alert('确认', 'wifi尚未连接,可以手工在设置中连接后再点配网,确实需要点配网吗?', [
+                                         { text: '取消', onPress: () => console.log('cancel') },
+                                         { text: '确定', onPress: () => {
+                                           seteasylink();
+                                         }},
+                                       ]);
+                                     }
+                                    }}>
+                                        <FormattedMessage id="form.easylink" />
+                                    </Button>
+                                </div>
+                                <WhiteSpace size="xl" />
                                 <WhiteSpace size="xl" />
                                 <div className="add_btn" >
                                     <Button type="ghost" className="btn" onClick={()=>{

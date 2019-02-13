@@ -22,6 +22,7 @@
   "start.pass": "pass",
   "start.setting": "Please set it first",
   "status.normal": "Normal",
+  "form.easylink":"start config network",
   "form.next": "Next",
   "form.back": "Back",
   "form.cancel": "Cancel",

@@ -380,7 +380,7 @@ export function* wififlow() {
     yield takeLatest(`${ui_wifisuccess_tonext}`,function*(action){
       try{
         //for test--->
-        yield put(socket_recvdata({code:0,data:`$50,0,300,50000,125,5000,720,50,30,10,0,10,120,0,90,50,10,30,10,0,60,0,0,0,91,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,300,0,7,22,2,7,600,300,20,%`}));
+        // yield put(socket_recvdata({code:0,data:`$50,0,300,50000,125,5000,720,50,30,10,0,10,120,0,90,50,10,30,10,0,60,0,0,0,91,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,300,0,7,22,2,7,600,300,20,%`}));
         //开始连接socket,进入下一个页面
         yield call(socket_connnect_promise,{
           host:config.sockethost,

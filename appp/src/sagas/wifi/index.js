@@ -313,11 +313,13 @@ export function* wififlow() {
       try{
         setwifistatuscallback();
         getwifistatus();
+        alert(`调用wifi获取状态函数`)
         yield call(delay, 5000);//wait for 5 seconds
         // yield put(wifi_open_reqeust({}));///0为打开未连接  -1  未打开  1  已连接 2 密码错误}
         const wifiStatus = yield select((state)=>{
           return state.wifi.wifiStatus;
         });
+        alert(`wifi状态:${wifiStatus}`)
         if(wifiStatus === -1){
           //未打开情况下打开
           yield put(wifi_open_reqeust({}));

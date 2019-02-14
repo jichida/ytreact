@@ -4,6 +4,7 @@ import {
   adddevice_result,
   getdevice_result,
   setuserdevice_result,
+  tmp_ui_setuserdevice_request
   // ui_setcurwifi
 } from '../../actions/index.js';
 import moment from 'moment';
@@ -65,11 +66,11 @@ const initial = {
           language:''
       },
       inwatersettings:{//进水设定
-        tds:'50',
-        conductivity:'40',
-        hardness:'30',
-        alkalinity:'20',
-        ph:'10',
+        tds:'',
+        conductivity:'',
+        hardness:'',
+        alkalinity:'',
+        ph:'',
       },
       wifisettings:{
         ssid:'',
@@ -94,6 +95,18 @@ const initial = {
 };
 
 const device = createReducer({
+    [tmp_ui_setuserdevice_request]:(state,payload)=>{
+      const {inwatersettings:inwatersettingsnew} = payload;
+      const inwatersettings = state.inwatersettings;
+
+      inwatersettings.ph = inwatersettingsnew.ph;
+      inwatersettings.conductivity = inwatersettingsnew.conductivity;
+      inwatersettings.tds = inwatersettingsnew.tds;
+      inwatersettings.hardness = inwatersettingsnew.hardness;
+      inwatersettings.alkalinity = inwatersettingsnew.alkalinity;
+
+      return { ...state, inwatersettings};
+    },
     [wifi_getdata]: (state, payload) => {
         // let homedata = state.homedata;
         // let errordata = state.errordata;

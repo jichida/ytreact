@@ -29,6 +29,7 @@
   "form.cancel": "取消",
   "form.input": "请输入",
   "form.picker": "请选择",
+  "form.synctosave": "同步到本地",
   "form.save": "保存",
   "form.upload": "上传",
   "form.decompression": "系统泄压",

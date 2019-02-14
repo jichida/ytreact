@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {  List, InputItem, Button, Modal, WingBlank, WhiteSpace  } from 'antd-mobile';//
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import {common_err,ui_setuserdevice_request, wifi_sendcmd_request} from '../../actions';
+import {common_err,tmp_ui_setuserdevice_request, wifi_sendcmd_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
@@ -227,7 +227,7 @@ const RenderForm = createForm({
         <div className="submit_zone">
             <div className="add_btn" >
                 <Button type="ghost" className="btn" onClick={handleSubmit}>
-                    <FormattedMessage id="form.save" defaultMessage="保存" />
+                    <FormattedMessage id="form.synctosave" defaultMessage="同步到本地" />
                 </Button>
             </div>
         </div>
@@ -278,27 +278,31 @@ const RenderForm = createForm({
 // }
 
 class Inlet extends PureComponent{
-
-    state = {
+  constructor(props) {
+      super(props)
+      const {inwatersettings} = props;
+      this.state = {
         modalTDS: false,
         modalPH: false,
         modalConductivity: false,
         modalHardness: false,
         modalAlkalinity: false,
-        tds: '',
-        ph: '',
-        conductivity: '',
-        hardness: '',
-        alkalinity: ''
+        tds:lodashget(inwatersettings,'tds',''),
+        conductivity: lodashget(inwatersettings,'conductivity',''),
+        hardness: lodashget(inwatersettings,'hardness',''),
+        alkalinity: lodashget(inwatersettings,'alkalinity',''),
+        ph:lodashget(inwatersettings,'ph',''),
+      }
     }
+
 
     handleSubmit = ()=>{
         let { ph, conductivity, hardness, alkalinity, tds } = this.state
         const values = { ph, conductivity, hardness, alkalinity, tds }
         console.log(values)
 
-        const {dispatch,_id} = this.props;
-        dispatch(ui_setuserdevice_request({_id,data:{inwatersettings:values}}));
+        const {dispatch} = this.props;
+        dispatch(tmp_ui_setuserdevice_request({inwatersettings:values}));
     }
 
     showModal = (modal) => {

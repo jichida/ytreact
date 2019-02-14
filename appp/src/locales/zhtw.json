@@ -39,6 +39,7 @@
   "form.equip.meter.alum": "鋁",
   "form.decompression": "系統洩壓",
   "form.enable": "啟用",
+  "form.synctosave": "同步到本地",
   "form.ok": "OK",
   "form.reset": "重置",
   "device": "設備信息",

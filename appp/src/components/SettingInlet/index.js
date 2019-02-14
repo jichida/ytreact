@@ -18,9 +18,7 @@ const Brief = Item.Brief;
 // 进水碱度(ppm)	alkalinity
 // ph值		ph
 // 用户需求出水TDS值	usertds
-// const dispatch_form_err = (dispatch,errs)=>{
-//   dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
-// }
+
 
 const RenderForm = createForm({
     mapPropsToFields(props) {
@@ -52,21 +50,28 @@ const RenderForm = createForm({
         };
     }
 })(injectIntl((props)=>{
-    // const { validateFields } = props.form;
-    // const { dispatch} = props;
+    const { validateFields } = props.form;
+    const { dispatch, intl} = props;
 
-    // const handleSubmit = (e)=>{
-    //     //e.preventDefault();
-    //     validateFields((err, values)=>{
-    //         if(!err){
-    //             props.onSubmit(values);
-    //         }
-    //         else{
-    //           console.log(err)
-    //           dispatch_form_err(dispatch,err);
-    //         }
-    //     })
-    // }
+    const dispatch_form_err = (dispatch,errs)=>{
+        dispatch(common_err({type:'form_err',errmsg: intl.formatMessage({id: 'form.check'})}))
+    }
+
+    const handleSubmit = (e)=>{
+        //e.preventDefault();
+
+        // validateFields((err, values)=>{
+        //     if(!err){
+        //         props.onSubmit(values);
+        //     }
+        //     else{
+        //       console.log(err)
+        //       dispatch_form_err(dispatch,err);
+        //     }
+        // })
+
+        props.onSubmit()
+    }
 
     // const handleBucketSelect = (value)=>{
     //     setFieldsValue({bucket: value});
@@ -219,13 +224,13 @@ const RenderForm = createForm({
                 </Item> */}
             </List>
         </form>
-        {/* <div className="submit_zone">
+        <div className="submit_zone">
             <div className="add_btn" >
                 <Button type="ghost" className="btn" onClick={handleSubmit}>
                     <FormattedMessage id="form.save" defaultMessage="保存" />
                 </Button>
             </div>
-        </div> */}
+        </div>
         </React.Fragment>
     )
 }))
@@ -287,10 +292,14 @@ class Inlet extends PureComponent{
         alkalinity: ''
     }
 
-    handleSubmit = (values)=>{
-        console.log(values);
+    handleSubmit = ()=>{
+        let { ph, conductivity, hardness, alkalinity, tds } = this.state
+        const values = { ph, conductivity, hardness, alkalinity, tds }
+        console.log(values)
+
         const {dispatch,_id} = this.props;
         dispatch(ui_setuserdevice_request({_id,data:{inwatersettings:values}}));
+        // dispatch(ui_setuserdevice_request({_id,data:{inwatersettings:values}}));
     }
 
     showModal = (modal) => {
@@ -414,6 +423,7 @@ class Inlet extends PureComponent{
                                     <InputItem
                                         placeholder={formatMessage({id: "form.input"})}
                                         value={this.state.ph}
+                                        defaultValue={inwatersettings.ph}
                                         onChange={(val)=>{this.setState({ph: val})}}
                                     />
                                     </div>
@@ -451,6 +461,7 @@ class Inlet extends PureComponent{
                                     <InputItem
                                         placeholder={formatMessage({id: "form.input"})}
                                         value={this.state.conductivity}
+                                        defaultValue={inwatersettings.conductivity}
                                         onChange={(val)=>{this.setState({conductivity: val})}}
                                     />
                                     </div>
@@ -488,6 +499,7 @@ class Inlet extends PureComponent{
                                     <InputItem
                                         placeholder={formatMessage({id: "form.input"})}
                                         value={this.state.tds}
+                                        defaultValue={inwatersettings.tds}
                                         onChange={(val)=>{this.setState({tds: val})}}
                                     />
                                     </div>
@@ -525,6 +537,7 @@ class Inlet extends PureComponent{
                                     <InputItem
                                         placeholder={formatMessage({id: "form.input"})}
                                         value={this.state.hardness}
+                                        defaultValue={inwatersettings.hardness}
                                         onChange={(val)=>{this.setState({hardness: val})}}
                                     />
                                     </div>
@@ -562,6 +575,7 @@ class Inlet extends PureComponent{
                                     <InputItem
                                         placeholder={formatMessage({id: "form.input"})}
                                         value={this.state.alkalinity}
+                                        defaultValue={inwatersettings.alkalinity}
                                         onChange={(val)=>{this.setState({alkalinity: val})}}
                                     />
                                     </div>

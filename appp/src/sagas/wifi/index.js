@@ -630,7 +630,7 @@ export function* wififlow() {
               let trycount = 0;
               while(trycount < 5){
                 console.log(`--->尝试第${trycount+1}次发送一次数据`)
-                yield call(socket_send_promise,`$data%`);
+                yield call(socket_send_promise,`$ping%`);
                 const delaytime = 5000;//
                 const raceresult = yield race({
                    wifiresult: take(`${wifi_sendcmd_result}`),

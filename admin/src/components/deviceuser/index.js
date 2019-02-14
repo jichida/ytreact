@@ -40,12 +40,13 @@ const DeviceuserEdit = (props) => {
                 <SelectInput optionText="name" />
             </ReferenceInput>
             <TextInput label="用户名" source="basicinfo.username" />
-            <TextInput label="联系方式" source="basicinfo.phone" />
+            <TextInput label="联系方式" source="basicinfo.userphone" />
             <TextInput label="用户地址" source="basicinfo.useraddress"  />
             <TextInput label="使用性质" source="basicinfo.useproperty"  />
             <TextInput label="房屋类型" source="basicinfo.building"  />
             <TextInput label="楼层高度" source="basicinfo.floor"  />
             <TextInput label="预装型号" source="basicinfo.model"  />
+            <TextInput label="储水桶型号" source="basicinfo.bucket"  />
           </FormTab>
           <FormTab label="用水信息">
             <TextInput label="月用水量（吨）" source="usewater.quantity" />
@@ -80,9 +81,6 @@ const DeviceuserEdit = (props) => {
             <TextField label="安装日期" source="syssettings.installdate"  />
             <TextField label="安装人员" source="syssettings.installer"  />
             <TextField label="时区" source="syssettings.timezone"  />
-            <TextField label="复位日期" source="syssettings.sdate"  />
-            <TextField label="复位时间" source="syssettings.stime"  />
-            <TextInput label="语言" source="syssettings.language"  />
           </FormTab>
           <FormTab label="进水设定">
             <TextInput label="PH值" source="inwatersettings.ph" />
@@ -90,7 +88,6 @@ const DeviceuserEdit = (props) => {
             <TextInput label="进水TDS值" source="inwatersettings.tds"  />
             <TextInput label="进水硬度" source="inwatersettings.hardness"  />
             <TextField label="时区" source="inwatersettings.alkalinity"  />
-            <TextInput label="储水桶型号" source="inwatersettings.bucket"  />
           </FormTab>
           <FormTab label="安装检查表">
             <TextField label="滤芯已冲洗" source="checklist.washed" />
@@ -98,6 +95,12 @@ const DeviceuserEdit = (props) => {
             <TextField label="旁通已关闭" source="checklist.bypassclosed"  />
             <TextField label="系统无泄漏" source="checklist.noleakage"  />
             <TextField label="WIFI已连接" source="checklist.wificonnected"  />
+            <TextField label="是否启用" source="checklist.appset" />
+            <TextField label="进水流量正常" source="checklist.discharge" />
+            <TextField label="设备已调试" source="checklist.debugged" />
+            <TextField label="出水水质正常" source="checklist.quality"  />
+            <TextField label="设备已交付使用" source="checklist.delivered"  />
+            <TextField label="拍摄安装图" source="checklist.pictures"  />
           </FormTab>
         </TabbedForm>
       </Edit>);

@@ -28,7 +28,7 @@ import Cdevice from '@material-ui/icons/DevicesOther' //设备
 // import Ctag from '@material-ui/icons/Announcement' //关于
 
 const items = [
-    { name: 'systemconfig', icon: <Csystemconfig /> },
+    // { name: 'systemconfig', icon: <Csystemconfig /> },
     { name: 'deviceuser', icon: <Cdevice /> },
     { name: 'distributor', icon: <Cshop /> },
     { name: 'installer', icon: <Cuser /> },

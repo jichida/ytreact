@@ -39,6 +39,7 @@ class Login extends PureComponent{
             name: props.username,
             password: props.password,
         };
+        // console.log(this.state);
     }
 
     handleNameChange = (value)=>{
@@ -131,7 +132,7 @@ class Login extends PureComponent{
         )
     }
 }
-const mapStateToProps =  ({app:{username,password,loginsuccess}}) =>{
+const mapStateToProps =  ({userlogin:{username,password,loginsuccess}}) =>{
   return {username,password,loginsuccess};
 };
 Login = connect(mapStateToProps)(Login);

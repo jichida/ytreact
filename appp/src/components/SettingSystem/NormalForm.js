@@ -40,7 +40,7 @@ const timezoneOption = () => {
 //     }
 //     dispatch(common_err({type:'form_err',errmsg:`请检查所有输入项`}))
 //   }
-  
+
 
 const formOptions = {
     mapPropsToFields(props) {
@@ -65,14 +65,6 @@ const formOptions = {
             ...props.timezone,
             value: props.timezone.value,
           }),
-          sdate: createFormField({
-            ...props.sdate,
-            value: props.sdate.value,
-          }),
-          stime: createFormField({
-            ...props.stime,
-            value: props.stime.value,
-          })
         };
     }
 }
@@ -83,6 +75,7 @@ class Index extends React.Component {
         const { validateFields } = this.props.form;
         validateFields((err, values)=>{
             if(!err){
+               console.log(values);
                this.props.onSubmit(values);
             }
             else{
@@ -206,32 +199,7 @@ class Index extends React.Component {
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="setting.system.sdate" defaultMessage="选择日期" />
-                    <Brief>
-                        <div className="item_children">
-                        <DatePicker
-                            mode="date"
-                            extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
-                            {...getFieldProps('sdate')}
-                            >
-                            <List.Item arrow="horizontal"></List.Item>
-                        </DatePicker>
-                        </div>
-                    </Brief>
-                </Item>
-                <Item><FormattedMessage id="setting.system.stime" defaultMessage="选择时间" />
-                    <Brief>
-                        <div className="item_children">
-                            <DatePicker
-                                mode="time"
-                                extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
-                                {...getFieldProps('stime')}
-                                >
-                                <List.Item arrow="horizontal"></List.Item>
-                            </DatePicker>
-                        </div>
-                    </Brief>
-                </Item>
+
             </List>
         </form>
         <WingBlank className="submit_zone" style={{padding: '30px 0px', margin: 0}}>
@@ -247,4 +215,30 @@ class Index extends React.Component {
 }
 
 export default createForm(formOptions)(injectIntl(Index))
-
+//
+// <Item><FormattedMessage id="setting.system.sdate" defaultMessage="选择日期" />
+//     <Brief>
+//         <div className="item_children">
+//         <DatePicker
+//             mode="date"
+//             extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
+//             {...getFieldProps('sdate')}
+//             >
+//             <List.Item arrow="horizontal"></List.Item>
+//         </DatePicker>
+//         </div>
+//     </Brief>
+// </Item>
+// <Item><FormattedMessage id="setting.system.stime" defaultMessage="选择时间" />
+//     <Brief>
+//         <div className="item_children">
+//             <DatePicker
+//                 mode="time"
+//                 extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
+//                 {...getFieldProps('stime')}
+//                 >
+//                 <List.Item arrow="horizontal"></List.Item>
+//             </DatePicker>
+//         </div>
+//     </Brief>
+// </Item>

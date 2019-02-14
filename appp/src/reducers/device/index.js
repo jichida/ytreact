@@ -65,12 +65,11 @@ const initial = {
           language:''
       },
       inwatersettings:{//进水设定
-        tds:'',
-        conductivity:'',
-        hardness:'',
-        alkalinity:'',
-        ph:'',
-        bucket:'',
+        tds:'50',
+        conductivity:'40',
+        hardness:'30',
+        alkalinity:'20',
+        ph:'10',
       },
       wifisettings:{
         ssid:'',

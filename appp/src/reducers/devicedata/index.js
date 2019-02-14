@@ -70,12 +70,11 @@ const initial = {
         min_waterpurificationrate:2,//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
       },
       inwatersettings:{//进水设定
-        tds:'',//进水TDS	进水TDS  word	1 word
-        conductivity:'',//50	进水电导率	进水电导率  word	1 word
-        hardness:'',//进水硬度	进水硬度  word	1 word
-        alkalinity:'',//进水碱度	进水碱度  word	1 word
-        ph:'',//49	进水PH	进水的PH值  byte	1 byte
-        bucket:'',
+        tds:'1',//进水TDS	进水TDS  word	1 word
+        conductivity:'2',//50	进水电导率	进水电导率  word	1 word
+        hardness:'3',//进水硬度	进水硬度  word	1 word
+        alkalinity:'4',//进水碱度	进水碱度  word	1 word
+        ph:'5',//49	进水PH	进水的PH值  byte	1 byte
       },
     },
 

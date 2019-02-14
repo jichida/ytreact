@@ -277,12 +277,12 @@ class Inlet extends PureComponent{
     state = {
         modalTDS: false,
         modalPH: false,
-        modalConductivity: false, 
+        modalConductivity: false,
         modalHardness: false,
         modalAlkalinity: false,
         tds: '',
         ph: '',
-        conductivity: '', 
+        conductivity: '',
         hardness: '',
         alkalinity: ''
     }
@@ -308,13 +308,18 @@ class Inlet extends PureComponent{
             modalTDS: false,
         })
     }
+// 20	进水PH	进水的PH值  byte	$feedph …%
+// 21	进水电导率	进水电导率  word	$feedcon …%
+// 22	进水TDS	进水TDS  word	$feedtds …%
+// 23	进水硬度	进水硬度  word	$feedca …%
+// 24	进水碱度	进水碱度  word	$feedalk …%
 
     handlePHSubmit = () => {
         console.log(this.state.ph);
         //
         if(this.state.ph.length > 0){
           const {dispatch} = this.props;
-          const cmd = `$prodtrigger ${this.state.ph}%`;
+          const cmd = `$feedph ${this.state.ph}%`;
           dispatch(wifi_sendcmd_request({cmd}));
         }
     }
@@ -323,7 +328,7 @@ class Inlet extends PureComponent{
         //
         if(this.state.conductivity.length > 0){
           const {dispatch} = this.props;
-          const cmd = `$prodtrigger ${this.state.conductivity}%`;
+          const cmd = `$feedcon ${this.state.conductivity}%`;
           dispatch(wifi_sendcmd_request({cmd}));
         }
     }
@@ -332,7 +337,7 @@ class Inlet extends PureComponent{
         //
         if(this.state.tds.length > 0){
           const {dispatch} = this.props;
-          const cmd = `$prodtrigger ${this.state.tds}%`;
+          const cmd = `$feedtds ${this.state.tds}%`;
           dispatch(wifi_sendcmd_request({cmd}));
         }
     }
@@ -341,7 +346,7 @@ class Inlet extends PureComponent{
         //
         if(this.state.hardness.length > 0){
           const {dispatch} = this.props;
-          const cmd = `$prodtrigger ${this.state.hardness}%`;
+          const cmd = `$feedca ${this.state.hardness}%`;
           dispatch(wifi_sendcmd_request({cmd}));
         }
     }
@@ -350,7 +355,7 @@ class Inlet extends PureComponent{
         //
         if(this.state.alkalinity.length > 0){
           const {dispatch} = this.props;
-          const cmd = `$prodtrigger ${this.state.alkalinity}%`;
+          const cmd = `$feedalk ${this.state.alkalinity}%`;
           dispatch(wifi_sendcmd_request({cmd}));
         }
     }
@@ -381,9 +386,9 @@ class Inlet extends PureComponent{
         }
         return (
             <div className="sub_setting_bg">
-                <RenderForm {...basicData} 
-                    onSubmit={this.handleSubmit} 
-                    showModal={this.showModal} 
+                <RenderForm {...basicData}
+                    onSubmit={this.handleSubmit}
+                    showModal={this.showModal}
                     dispatch={dispatch}/>
                 {/* { <InputModal
                     isVisual={this.state.modalVisual}

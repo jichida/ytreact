@@ -591,7 +591,7 @@ class Inlet extends PureComponent{
     }
 }
 
-const mapStateToProps =  ({device:{inwatersettings,_id}}) =>{
+const mapStateToProps =  ({devicedata:{inwatersettings,_id}}) =>{
   return {inwatersettings,_id};
 };
 

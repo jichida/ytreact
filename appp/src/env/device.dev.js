@@ -85,8 +85,15 @@ const socket_connnect = (values)=>{
 const socket_close = ()=>{
   console.log(`socket_close`);
 }
+const getwifistatus = ()=>{
+  // const xviewData = {
+  //   componentName:"ComponentUtil",
+  //   action:"getWifiStatus",
+  //   callback:"wifistatuscallback_yt"
+  // }
+  // xviewfun(JSON.stringify(xviewData));
+}
 
 
-
-export {socket_connnect,socket_send,socket_close,
+export {socket_connnect,socket_send,socket_close,getwifistatus,
   getssidlist,setcurwifi,openwifi,setwifistatuscallback}

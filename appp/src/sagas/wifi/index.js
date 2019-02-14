@@ -45,8 +45,11 @@ import lodash_split from 'lodash.split';
 import lodash_set from 'lodash.set';
 import lodash_get from 'lodash.get';
 import config from '../../env/config';
+import moment from 'moment';
+
 let recvbuf = '';
 let linkmode = 'unknow';//unknow,directmode,internetmode
+let lastresponsemoment = moment();
 
 setwifistatuscallback();
 const parsedata = (stringbody,callbackfn)=>{
@@ -232,10 +235,12 @@ const socket_recvdata_promise = (data)=>{
           && lodash_endWith(objstring,'%')){
           if(!lodash_endWith(objstring,'ok%')){
             parsedata(objstring,(result)=>{
+              lastresponsemoment = moment();
               resolve({cmd:'data',data:result});
             });
           }
           else{
+            lastresponsemoment = moment();
             resolve({cmd:'ok',data:objstring});
           }
         }
@@ -369,6 +374,7 @@ export function* wififlow() {
           if(result.cmd === 'data'){
             //get result.data
             yield put(wifi_getdata(result.data));
+
             yield call(socket_send_promise,'$dataok%');
           }
           else if(result.cmd === 'ok'){
@@ -605,6 +611,14 @@ export function* wififlow() {
       const delaytime = 10000;
       yield call(delay,2000);
       while(true){
+          const diffmin = moment().diff(moment(lastresponsemoment),'seconds');
+          if(diffmin < 10){
+            //10秒钟内有回复,则不要重连了
+            console.log(`--->10s内有回应,不用重连了`)
+            yield call(delay,delaytime);
+            continue;
+          };
+
           const internet_connected = yield select((state)=>{
             return state.app.issocketconnected;
           });

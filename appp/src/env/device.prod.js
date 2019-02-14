@@ -5,7 +5,7 @@ import {xviewfun} from './xviewfun';
 window.wifistatuscallback_yt = (result)=>{
   // alert(`${JSON.stringify(result)}`)
   const data = result.data;
-  alert(`wifistatuscallback_yt:${data.wifiStatus}`)
+  // alert(`wifistatuscallback_yt:${data.wifiStatus}`)
   store.dispatch(wifi_setstatus(data));
 }
 window.socketstatuscallback = (result)=>{

@@ -299,7 +299,6 @@ class Inlet extends PureComponent{
 
         const {dispatch,_id} = this.props;
         dispatch(ui_setuserdevice_request({_id,data:{inwatersettings:values}}));
-        // dispatch(ui_setuserdevice_request({_id,data:{inwatersettings:values}}));
     }
 
     showModal = (modal) => {

@@ -1,13 +1,14 @@
 /**
  * Created by wangxiaoqing on 2017/3/25.
  */
-import { put,takeLatest,call,take,race,select} from 'redux-saga/effects';
+import { put,takeLatest,call,take,race,fork,select} from 'redux-saga/effects';
 import {delay} from 'redux-saga';
 import {
   getssidlist,
   openwifi,
   setcurwifi,
   setwifistatuscallback,
+  getwifistatus,
   socket_connnect,
   socket_send,
 } from '../../env/device.js';
@@ -45,6 +46,8 @@ import lodash_set from 'lodash.set';
 import lodash_get from 'lodash.get';
 import config from '../../env/config';
 let recvbuf = '';
+let linkmode = 'unknow';//unknow,directmode,internetmode
+
 setwifistatuscallback();
 const parsedata = (stringbody,callbackfn)=>{
   stringbody = lodash_replace(stringbody, '$', '');
@@ -309,15 +312,18 @@ export function* wififlow() {
       // const {payload} = action;
       try{
         setwifistatuscallback();
-        yield call(delay, 5000);//wait for 5 seconds
+        getwifistatus();
+        // alert(`调用wifi获取状态函数`)
+        yield call(delay, 1000);//wait for 1 seconds
         // yield put(wifi_open_reqeust({}));///0为打开未连接  -1  未打开  1  已连接 2 密码错误}
         const wifiStatus = yield select((state)=>{
           return state.wifi.wifiStatus;
         });
-        if(wifiStatus === -1){
+        // alert(`wifi状态:${wifiStatus}`)
+        // if(wifiStatus === -1){
           //未打开情况下打开
-          yield put(wifi_open_reqeust({}));
-        }
+        yield put(wifi_open_reqeust({}));
+        // }
       }
       catch(e){
         console.log(e);
@@ -410,6 +416,7 @@ export function* wififlow() {
         else{
           //data { socketStatus:  -1 0 1 2 }
           if(lodash_get(raceresult,'socketestatusresult.payload.data.socketStatus',0) === 1){
+            linkmode = 'directmode';
             yield put(push('/devices'));
           }
           else{
@@ -594,6 +601,68 @@ export function* wififlow() {
       }
     });
 
+    yield fork(function* (){
+      const delaytime = 10000;
+      yield call(delay,2000);
+      while(true){
+          const internet_connected = yield select((state)=>{
+            return state.app.issocketconnected;
+          });
+          console.log(internet_connected);
+          console.log(`--->开始检查:${linkmode},internet_connected:${internet_connected}`)
+          if(internet_connected){
+            linkmode = 'internetmode';
+            console.log(`--->linkmode从directmode切换为internetmode`)
+          }
+          else{
+            if(linkmode !== 'unknow'){
+              linkmode = 'directmode';//切换为directmode
+            }
+            console.log(`--->linkmode切换为directmode`)
+          }
+
+          if(linkmode === 'directmode'){
+            const wifidirectmodesocketstatus = yield select((state)=>{
+              return state.app.wifidirectmodesocketstatus;
+            });
+            if(wifidirectmodesocketstatus === 1){
+              //尝试发送一次命令
+              let trycount = 0;
+              while(trycount < 5){
+                console.log(`--->尝试第${trycount+1}次发送一次数据`)
+                yield call(socket_send_promise,`$ping%`);
+                const delaytime = 5000;//
+                const raceresult = yield race({
+                   wifiresult: take(`${wifi_sendcmd_result}`),
+                   timeout: call(delay, delaytime)
+                });
+                if(!!raceresult.timeout){
+                  //超时了!
+                  trycount++;
+                  continue;
+                }
+                console.log(`--->数据有返回,退出`)
+                break;
+              }
+              if(trycount === 5){
+                console.log(`--->重试到底了,开始重连`);
+                //开始连接socket,进入下一个页面
+                yield call(socket_connnect_promise,{
+                  host:config.sockethost,
+                  port:config.socketport
+                });
+              }
+            }
+            else{
+              yield call(socket_connnect_promise,{
+                host:config.sockethost,
+                port:config.socketport
+              });
+            }
+          }
+          yield call(delay,delaytime);
+      }
+    })
 
     //设置配网（输入：wifi用户名，密码）
     // yield takeLatest(`${wifi_seteasylink}`, function*(action) {
@@ -605,4 +674,13 @@ export function* wififlow() {
     //     console.log(e);
     //   }
     // });
+
+
+    /*
+    定时
+    当前是直连模式
+    发送数据,等待回应。如果超时,断开tcp重连。
+
+    //检查是否连接到服务器，如果是，则将mode变为inernetmode
+    */
 }

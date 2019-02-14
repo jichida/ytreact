@@ -92,15 +92,6 @@ const DeviceuserEdit = (props) => {
             <TextField label="时区" source="inwatersettings.alkalinity"  />
             <TextInput label="储水桶型号" source="inwatersettings.bucket"  />
           </FormTab>
-          <FormTab label="网络">
-            <TextInput label="wifissid" source="wifisettings.ssid" />
-            <TextInput label="wifi密码" source="wifisettings.password" />
-            <TextInput label="动态主机协议" source="wifisettings.dhcp"  />
-            <TextInput label="IP地址" source="wifisettings.ip"  />
-            <TextInput label="网关" source="wifisettings.gateway"  />
-            <TextInput label="局域网" source="wifisettings.lan"  />
-            <TextInput label="主域服务器" source="wifisettings.dns"  />
-          </FormTab>
           <FormTab label="安装检查表">
             <TextField label="滤芯已冲洗" source="checklist.washed" />
             <TextField label="进水压力已符合标准" source="checklist.uptostandard" />
@@ -112,7 +103,15 @@ const DeviceuserEdit = (props) => {
       </Edit>);
 
 };
-
+// <FormTab label="网络">
+//   <TextInput label="wifissid" source="wifisettings.ssid" />
+//   <TextInput label="wifi密码" source="wifisettings.password" />
+//   <TextInput label="动态主机协议" source="wifisettings.dhcp"  />
+//   <TextInput label="IP地址" source="wifisettings.ip"  />
+//   <TextInput label="网关" source="wifisettings.gateway"  />
+//   <TextInput label="局域网" source="wifisettings.lan"  />
+//   <TextInput label="主域服务器" source="wifisettings.dns"  />
+// </FormTab>
 
 
 const DeviceuserList = (props) => (//

@@ -62,12 +62,12 @@ class SettingSystem extends PureComponent{
     }
 
     onQualityClick = () =>{
-      //8	出水水质  设置	0~200  ppm	$prodtrigger 120%
+      //8	出水水质  设置	0~200  ppm	sysprodtrigger 120%
         console.log(this.state.quality);
         //
         if(this.state.quality.length > 0){
           const {dispatch} = this.props;
-          const cmd = `$prodtrigger ${this.state.quality}%`;
+          const cmd = `$sysprodtrigger ${this.state.quality}%`;
           dispatch(wifi_sendcmd_request({cmd}));
         }
     }

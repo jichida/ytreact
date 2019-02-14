@@ -5,6 +5,7 @@ import {xviewfun} from './xviewfun';
 window.wifistatuscallback_yt = (result)=>{
   // alert(`${JSON.stringify(result)}`)
   const data = result.data;
+  // alert(`wifistatuscallback_yt:${data.wifiStatus}`)
   store.dispatch(wifi_setstatus(data));
 }
 window.socketstatuscallback = (result)=>{
@@ -104,11 +105,27 @@ const socket_close = ()=>{
     data:{}
   }
   xviewfun(JSON.stringify(xviewData));
-
 }
 
+const getwifistatus = ()=>{
+  const xviewData = {
+    componentName:"ComponentUtil",
+    action:"getWifiStatus",
+    callback:"wifistatuscallback_yt"
+  }
+  xviewfun(JSON.stringify(xviewData));
+}
+//
+// ##### (8)wifi状态回调
+//
+// 示例代码
+//     this.xviewData.componentName = "ComponentUtil";
+//
+//     this.xviewData.action = "getWifiStatus";
+//
+//     this.xviewData.callback = 'getWifiStatusCallback';
+//
+//     window["xview"].callNativeXView(JSON.stringify(xviewData));
 
-
-
-export {socket_connnect,socket_send,socket_close,
+export {socket_connnect,socket_send,socket_close,getwifistatus,
   getssidlist,setcurwifi,openwifi,setwifistatuscallback}

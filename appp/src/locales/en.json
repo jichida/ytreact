@@ -29,6 +29,7 @@
   "form.cancel": "Cancel",
   "form.input": "Please enter",
   "form.picker":"Please select",
+  "form.synctosave": "sync to save",
   "form.save": "Save",
   "form.upload": "Upload",
   "form.check": "Please check all input items",

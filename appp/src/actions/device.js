@@ -11,3 +11,4 @@ export const setuserdevice_request = createAction('setuserdevice_request');
 export const setuserdevice_result = createAction('setuserdevice_result');
 
 export const ui_setuserdevice_request = createAction('ui_setuserdevice_request');
+export const tmp_ui_setuserdevice_request = createAction('tmp_ui_setuserdevice_request');

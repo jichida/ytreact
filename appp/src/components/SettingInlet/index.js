@@ -316,11 +316,6 @@ class Inlet extends PureComponent{
             modalTDS: false,
         })
     }
-// 20	进水PH	进水的PH值  byte	$feedph …%
-// 21	进水电导率	进水电导率  word	$feedcon …%
-// 22	进水TDS	进水TDS  word	$feedtds …%
-// 23	进水硬度	进水硬度  word	$feedca …%
-// 24	进水碱度	进水碱度  word	$feedalk …%
 
     handlePHSubmit = () => {
         console.log(this.state.ph);
@@ -388,9 +383,6 @@ class Inlet extends PureComponent{
             ph: {
                 value: lodashget(inwatersettings,'ph',''),
             },
-            // bucket: {
-            //     value:lodashget(inwatersettings,'bucket','50gal'),
-            // },
         }
         return (
             <div className="sub_setting_bg">

@@ -5,6 +5,7 @@ import {
   BooleanField,
   Edit,
   TabbedForm,
+  ImageField,
   FormTab,
   TextInput,
   Datagrid,
@@ -17,6 +18,8 @@ import {
   DateField
 } from 'react-admin';
 import TextFieldBool from '../controls/TextFieldBool';
+import ImageArrayField from '../controls/imagearrayfield';
+import InputSpaceField from '../controls/InputSpaceField';
 
 
 export const DeviceFilter = props => (
@@ -69,7 +72,7 @@ const DeviceuserEdit = (props) => {
             <TextInput label="是否避光" source="install.avoidlight" />
             <TextInput label="墙体材料" source="install.wall"  />
             <TextInput label="主机安装方式" source="install.method"  />
-            <TextInput label="安装空间" source="install.space"  />
+            <InputSpaceField label="安装空间" source="install.space"  />
             <TextInput label="进水管径大小" source="install.pipe"  />
             <TextInput label="排水距离" source="install.drainage"  />
             <TextInput label="管路材质" source="install.pipematerials"  />
@@ -101,7 +104,8 @@ const DeviceuserEdit = (props) => {
             <TextFieldBool label="设备已调试" source="checklist.debugged" />
             <TextFieldBool label="出水水质正常" source="checklist.quality"  />
             <TextFieldBool label="设备已交付使用" source="checklist.delivered"  />
-            <TextFieldBool label="拍摄安装图" source="checklist.pictures"  />
+            {/* <TextField label="拍摄安装图" source="checklist.pictures"  /> */}
+            <ImageArrayField label="拍摄安装图" title="拍摄安装图" source="checklist.pictures"  />
           </FormTab>
         </TabbedForm>
       </Edit>);

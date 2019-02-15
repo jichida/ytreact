@@ -45,11 +45,16 @@ export const ImageArrayField = ({ elStyle = {}, record, source, title }) => {
     );
 };
 
+ImageArrayField.defaultProps = {
+    addLabel: true,
+}
+
 ImageArrayField.propTypes = {
     elStyle: PropTypes.object,
     record: PropTypes.object,
     source: PropTypes.string.isRequired,
     title: PropTypes.string,
+    label: PropTypes.string,
 };
 
 export default ImageArrayField;

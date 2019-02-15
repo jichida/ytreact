@@ -3,9 +3,10 @@ import { List } from 'react-admin';
 
 import {
   BooleanField,
+  BooleanInput,
+  NullableBooleanInput,
   Edit,
   TabbedForm,
-  ImageField,
   FormTab,
   TextInput,
   Datagrid,
@@ -57,9 +58,11 @@ const DeviceuserEdit = (props) => {
             <TextInput label="用水人数（人）" source="usewater.persons" />
             <TextInput label="直饮水点（个）" source="usewater.spot"  />
             <TextInput label="水压" source="usewater.watergage"  />
-            <TextInput label="需装增压泵" source="usewater.booster"  />
+            {/* <TextInput label="需装增压泵" source="usewater.booster"  /> */}
+            <NullableBooleanInput label="需装增压泵" source="usewater.booster"  />
             <TextInput label="卫浴间数量" source="usewater.bathrooms"  />
-            <TextInput label="是否分流" source="usewater.shunt"  />
+            {/* <TextInput label="是否分流" source="usewater.shunt"  /> */}
+            <NullableBooleanInput label="是否分流" source="usewater.shunt"  />
             <TextInput label="原水TDS值" source="usewater.tds"  />
             <TextInput label="原水导电率" source="usewater.conductivity"  />
             <TextInput label="原水硬度(ppm)" source="usewater.hardness"  />
@@ -69,15 +72,18 @@ const DeviceuserEdit = (props) => {
           </FormTab>
           <FormTab label="安装信息">
             <TextInput label="安装地点" source="install.position" />
-            <TextInput label="是否避光" source="install.avoidlight" />
+            {/* <TextInput label="是否避光" source="install.avoidlight" /> */}
+            <NullableBooleanInput label="是否避光" source="install.avoidlight" />
             <TextInput label="墙体材料" source="install.wall"  />
             <TextInput label="主机安装方式" source="install.method"  />
             <InputSpaceField label="安装空间" source="install.space"  />
             <TextInput label="进水管径大小" source="install.pipe"  />
             <TextInput label="排水距离" source="install.drainage"  />
             <TextInput label="管路材质" source="install.pipematerials"  />
-            <TextInput label="有无WIFI" source="install.wifi"  />
-            <TextInput label="有无电源" source="install.power"  />
+            {/* <TextInput label="有无WIFI" source="install.wifi"  /> */}
+            <NullableBooleanInput label="有无WIFI" source="install.wifi"  />
+            {/* <TextInput label="有无电源" source="install.power"  /> */}
+            <NullableBooleanInput label="有无电源" source="install.power"  />
         </FormTab>
           <FormTab label="系统设置">
             <TextInput label="设备编号" source="syssettings.deviceid" />

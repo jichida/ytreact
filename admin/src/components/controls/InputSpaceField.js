@@ -16,7 +16,10 @@ const styles = {
     input: {
         maxWidth: '30px',
         margin: '0.5rem',
-        border: 0
+        borderTop: 0,
+        borderLeft: 0,
+        borderRight: 0,
+        borderBottom: '1px solid '
     },
 };
 

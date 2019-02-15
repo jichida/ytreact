@@ -16,6 +16,7 @@ import {
   ReferenceField,
   DateField
 } from 'react-admin';
+import TextFieldBool from '../controls/TextFieldBool';
 
 
 export const DeviceFilter = props => (
@@ -90,17 +91,17 @@ const DeviceuserEdit = (props) => {
             <TextField label="时区" source="inwatersettings.alkalinity"  />
           </FormTab>
           <FormTab label="安装检查表">
-            <TextField label="滤芯已冲洗" source="checklist.washed" />
-            <TextField label="进水压力已符合标准" source="checklist.uptostandard" />
-            <TextField label="旁通已关闭" source="checklist.bypassclosed"  />
-            <TextField label="系统无泄漏" source="checklist.noleakage"  />
-            <TextField label="WIFI已连接" source="checklist.wificonnected"  />
-            <TextField label="是否启用" source="checklist.appset" />
-            <TextField label="进水流量正常" source="checklist.discharge" />
-            <TextField label="设备已调试" source="checklist.debugged" />
-            <TextField label="出水水质正常" source="checklist.quality"  />
-            <TextField label="设备已交付使用" source="checklist.delivered"  />
-            <TextField label="拍摄安装图" source="checklist.pictures"  />
+            <TextFieldBool label="滤芯已冲洗" source="checklist.washed" />
+            <TextFieldBool label="进水压力已符合标准" source="checklist.uptostandard" />
+            <TextFieldBool label="旁通已关闭" source="checklist.bypassclosed"  />
+            <TextFieldBool label="系统无泄漏" source="checklist.noleakage"  />
+            <TextFieldBool label="WIFI已连接" source="checklist.wificonnected"  />
+            <TextFieldBool label="是否启用" source="checklist.appset" />
+            <TextFieldBool label="进水流量正常" source="checklist.discharge" />
+            <TextFieldBool label="设备已调试" source="checklist.debugged" />
+            <TextFieldBool label="出水水质正常" source="checklist.quality"  />
+            <TextFieldBool label="设备已交付使用" source="checklist.delivered"  />
+            <TextFieldBool label="拍摄安装图" source="checklist.pictures"  />
           </FormTab>
         </TabbedForm>
       </Edit>);

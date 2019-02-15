@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import {setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
+import SpaceInput from '../SpaceInput'
 
 import './index.less';
 
@@ -129,11 +130,23 @@ const RenderForm = createForm({
                     editable={false}
                     {...getFieldProps('method')}
                 ><FormattedMessage id="install.method" defaultMessage="主机安装方式" /></InputItem>
-                <InputItem
+                {/* <InputItem
                     className="right-input"
                     editable={false}
                     {...getFieldProps('space')}
-                ><FormattedMessage id="install.space" defaultMessage="安装空间" /></InputItem>
+                ><FormattedMessage id="install.space" defaultMessage="安装空间" /></InputItem> */}
+                <Item><FormattedMessage id="install.space" defaultMessage="安装空间" />
+                    <Brief>
+                        <div className="item_children">
+                            <SpaceInput
+                            {...getFieldProps('space',{
+                                rules: [],
+                            })}
+                            // onChange={handleSpaceInput}
+                            />
+                        </div>
+                    </Brief>
+                </Item>
                 <InputItem
                     className="right-input"
                     editable={false}
@@ -170,14 +183,14 @@ class DeviceInstall extends PureComponent{
 
     render () {
 
-        const { history,install}  = this.props;
+        const { history,install, intl: { formatMessage}}  = this.props;
 
          const basicData = {
            position: {
                value: lodashget(install,'position',''),
            },
            avoidlight: {
-               value: lodashget(install,'avoidlight',false)?'是':'否',
+               value: lodashget(install,'avoidlight',false) ? formatMessage({id: 'form.yes1'}) : formatMessage({id: 'form.no1'}),
            },
            wall: {
                value: lodashget(install,'wall',''),
@@ -198,10 +211,10 @@ class DeviceInstall extends PureComponent{
                value: lodashget(install,'pipematerials',''),
            },
            wifi: {
-               value: lodashget(install,'wifi',false)?'有':'无',
+               value: lodashget(install,'wifi',false)? formatMessage({id: 'form.yes2'}) : formatMessage({id: 'form.no2'}),
            },
            power: {
-               value: lodashget(install,'power',false)?'有':'无',
+               value: lodashget(install,'power',false)? formatMessage({id: 'form.yes2'}) : formatMessage({id: 'form.no2'}),
            },
          }
          console.log(basicData);
@@ -227,4 +240,4 @@ const mapStateToProps =  ({device:{install,_id}}) =>{
   return {install,_id};
 };
 DeviceInstall = connect(mapStateToProps)(DeviceInstall);
-export default withRouter(DeviceInstall);
+export default withRouter(injectIntl(DeviceInstall));

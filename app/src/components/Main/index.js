@@ -82,17 +82,17 @@ handleRefresh = ()=> {
 
       const modlife_leftday = getPercent('filterelements_modlife_leftday', lodashget(devicedata,'filterelements_modlife_leftday',0));
       const icon_filterelements_modlife_leftday = modlife_leftday.color;
-      const title_filterelements_modlife_leftday = modlife_leftday.warring ?
+      const title_filterelements_modlife_leftday = (modlife_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'}) 
-        : intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftday'},{value:modlife_leftday.value});
+        : '') + intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftday'},{value:modlife_leftday.value});
       const value_filterelements_modlife_leftday = modlife_leftday.percent;
       console.log(value_filterelements_modlife_leftday);
 
       const modlife_leftvol = getPercent('filterelements_modlife_leftvol', lodashget(devicedata,'filterelements_modlife_leftvol',0));
       const icon_filterelements_modlife_leftvol = modlife_leftvol.color;
-      const title_filterelements_modlife_leftvol = modlife_leftvol.warring ?
+      const title_filterelements_modlife_leftvol = (modlife_leftvol.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'}) 
-        : intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftvol'},{value:modlife_leftvol.percent});
+        : '') + intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftvol'},{value:modlife_leftvol.percent});
       const value_filterelements_modlife_leftvol = modlife_leftvol.percent;
       console.log(value_filterelements_modlife_leftvol)
 
@@ -106,9 +106,9 @@ handleRefresh = ()=> {
     //   }
       const prefilter1_leftday = getPercent('filterelements_prefilter1_leftday', lodashget(devicedata,'filterelements_prefilter1_leftday',0));
       const icon_filterelements_prefilter1_leftday = prefilter1_leftday.color;
-      const title_filterelements_prefilter1_leftday = prefilter1_leftday.warring ?
+      const title_filterelements_prefilter1_leftday = (prefilter1_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'}) 
-        : intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftday'},{value:prefilter1_leftday.value});
+        : '') + intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftday'},{value:prefilter1_leftday.value});
       const value_filterelements_prefilter1_leftday = prefilter1_leftday.percent;
       console.log(value_filterelements_prefilter1_leftday);
 
@@ -121,9 +121,9 @@ handleRefresh = ()=> {
     //   }
       const prefilter1_leftvol = getPercent('filterelements_prefilter1_leftvol', lodashget(devicedata,'filterelements_prefilter1_leftvol',0));
       const icon_filterelements_prefilter1_leftvol = prefilter1_leftvol.color;
-      const title_filterelements_prefilter1_leftvol = prefilter1_leftvol.warring ?
+      const title_filterelements_prefilter1_leftvol = (prefilter1_leftvol.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'}) 
-        : intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftvol'},{value:prefilter1_leftvol.percent});
+        : '') + intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftvol'},{value:prefilter1_leftvol.percent});
       const value_filterelements_prefilter1_leftvol = prefilter1_leftvol.percent;
       console.log(value_filterelements_prefilter1_leftvol)
       //
@@ -144,17 +144,17 @@ handleRefresh = ()=> {
     //   }
       const prefilter2_leftday = getPercent('filterelements_prefilter2_leftday', lodashget(devicedata,'filterelements_prefilter2_leftday',0));
       const icon_filterelements_prefilter2_leftday = prefilter2_leftday.color;
-      const title_filterelements_prefilter2_leftday = prefilter2_leftday.warring ?
+      const title_filterelements_prefilter2_leftday = (prefilter2_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'}) 
-        : intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftday'},{value:prefilter2_leftday.value});
+        : '') + intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftday'},{value:prefilter2_leftday.value});
       const value_filterelements_prefilter2_leftday = prefilter2_leftday.percent;
       console.log(value_filterelements_prefilter2_leftday);
 
       const prefilter2_leftvol = getPercent('filterelements_prefilter2_leftvol', lodashget(devicedata,'filterelements_prefilter2_leftvol',0));
       const icon_filterelements_prefilter2_leftvol = prefilter2_leftvol.color;
-      const title_filterelements_prefilter2_leftvol = prefilter2_leftvol.warring ?
+      const title_filterelements_prefilter2_leftvol = (prefilter2_leftvol.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'}) 
-        : intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftvol'},{value:prefilter2_leftvol.percent});
+        : '') + intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftvol'},{value:prefilter2_leftvol.percent});
       const value_filterelements_prefilter2_leftvol = prefilter2_leftvol.percent;
       console.log(value_filterelements_prefilter2_leftvol)
 
@@ -176,17 +176,17 @@ handleRefresh = ()=> {
     //   }
       const prefilter3_leftday = getPercent('filterelements_prefilter3_leftday', lodashget(devicedata,'filterelements_prefilter3_leftday',0));
       const icon_filterelements_prefilter3_leftday = prefilter3_leftday.color;
-      const title_filterelements_prefilter3_leftday = prefilter3_leftday.warring ?
+      const title_filterelements_prefilter3_leftday = (prefilter3_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'}) 
-        : intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftday'},{value:prefilter3_leftday.value});
+        : '') + intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftday'},{value:prefilter3_leftday.value});
       const value_filterelements_prefilter3_leftday = prefilter3_leftday.percent;
       console.log(value_filterelements_prefilter3_leftday);
 
       const prefilter3_leftvol = getPercent('filterelements_prefilter3_leftvol', lodashget(devicedata,'filterelements_prefilter3_leftvol',0));
       const icon_filterelements_prefilter3_leftvol = prefilter3_leftvol.color;
-      const title_filterelements_prefilter3_leftvol = prefilter3_leftvol.warring ?
+      const title_filterelements_prefilter3_leftvol = (prefilter3_leftvol.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'}) 
-        : intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftvol'},{value:prefilter3_leftvol.percent});
+        : '') + intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftvol'},{value:prefilter3_leftvol.percent});
       const value_filterelements_prefilter3_leftvol = prefilter3_leftvol.percent;
       console.log(value_filterelements_prefilter3_leftvol)
 
@@ -208,17 +208,17 @@ handleRefresh = ()=> {
     //   }
       const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', lodashget(devicedata,'filterelements_posfilter1_leftday',0));
       const icon_filterelements_posfilter1_leftday = posfilter1_leftday.color;
-      const title_filterelements_posfilter1_leftday = posfilter1_leftday.warring ?
+      const title_filterelements_posfilter1_leftday = (posfilter1_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'}) 
-        : intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftday'},{value:posfilter1_leftday.value});
+        : '') + intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftday'},{value:posfilter1_leftday.value});
       const value_filterelements_posfilter1_leftday = posfilter1_leftday.percent;
       console.log(value_filterelements_posfilter1_leftday);
 
       const posfilter1_leftvol = getPercent('filterelements_posfilter1_leftvol', lodashget(devicedata,'filterelements_posfilter1_leftvol',0));
       const icon_filterelements_posfilter1_leftvol = posfilter1_leftvol.color;
-      const title_filterelements_posfilter1_leftvol = posfilter1_leftvol.warring ?
+      const title_filterelements_posfilter1_leftvol = (posfilter1_leftvol.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'}) 
-        : intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftvol'},{value:posfilter1_leftvol.percent});
+        : '') + intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftvol'},{value:posfilter1_leftvol.percent});
       const value_filterelements_posfilter1_leftvol = posfilter1_leftvol.percent;
       console.log(value_filterelements_posfilter1_leftvol)
 
@@ -242,17 +242,17 @@ handleRefresh = ()=> {
 
       const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', lodashget(devicedata,'filterelements_posfilter2_leftday',0));
       const icon_filterelements_posfilter2_leftday = posfilter2_leftday.color;
-      const title_filterelements_posfilter2_leftday = posfilter2_leftday.warring ?
+      const title_filterelements_posfilter2_leftday = (posfilter2_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'}) 
-        : intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftday'},{value:posfilter2_leftday.value});
+        : '') + intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftday'},{value:posfilter2_leftday.value});
       const value_filterelements_posfilter2_leftday = posfilter2_leftday.percent;
       console.log(value_filterelements_posfilter2_leftday);
 
       const posfilter2_leftvol = getPercent('filterelements_posfilter2_leftvol', lodashget(devicedata,'filterelements_posfilter2_leftvol',0));
       const icon_filterelements_posfilter2_leftvol = posfilter2_leftvol.color;
-      const title_filterelements_posfilter2_leftvol = posfilter2_leftvol.warring ?
+      const title_filterelements_posfilter2_leftvol = (posfilter2_leftvol.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'}) 
-        : intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftvol'},{value:posfilter2_leftvol.percent});
+        : '') + intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftvol'},{value:posfilter2_leftvol.percent});
       const value_filterelements_posfilter2_leftvol = posfilter2_leftvol.percent;
       console.log(value_filterelements_posfilter2_leftvol)
 
@@ -274,17 +274,17 @@ handleRefresh = ()=> {
     //   }
       const posfilter3_leftday = getPercent('filterelements_posfilter3_leftday', lodashget(devicedata,'filterelements_posfilter3_leftday',0));
       const icon_filterelements_posfilter3_leftday = posfilter3_leftday.color;
-      const title_filterelements_posfilter3_leftday = posfilter3_leftday.warring ?
+      const title_filterelements_posfilter3_leftday = (posfilter3_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'}) 
-        : intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftday'},{value:posfilter3_leftday.value});
+        : '') + intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftday'},{value:posfilter3_leftday.value});
       const value_filterelements_posfilter3_leftday = posfilter3_leftday.percent;
       console.log(value_filterelements_posfilter3_leftday);
 
       const posfilter3_leftvol = getPercent('filterelements_posfilter3_leftvol', lodashget(devicedata,'filterelements_posfilter3_leftvol',0));
       const icon_filterelements_posfilter3_leftvol = posfilter3_leftvol.color;
-      const title_filterelements_posfilter3_leftvol = posfilter3_leftvol.warring ?
+      const title_filterelements_posfilter3_leftvol = (posfilter3_leftvol.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'}) 
-        : intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftvol'},{value:posfilter3_leftvol.percent});
+        : '') + intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftvol'},{value:posfilter3_leftvol.percent});
       const value_filterelements_posfilter3_leftvol = posfilter3_leftvol.percent;
       console.log(value_filterelements_posfilter3_leftvol)
 

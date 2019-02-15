@@ -85,6 +85,7 @@ const RenderForm = createForm({
     }
 })(injectIntl((props)=>{
     const { getFieldProps } = props.form;
+    const { intl: { formatMessage }} = props;
 
     return (
         <React.Fragment>
@@ -93,25 +94,25 @@ const RenderForm = createForm({
                 <InputItem
                     className="right-input"
                     editable={false}
-                    extra="吨"
+                    extra= {formatMessage({id: 'form.ton'})}
                     {...getFieldProps('quantity')}
                 ><FormattedMessage id="water.quantity" defaultMessage="月用水量（吨）" /></InputItem>
                 <InputItem
                     className="right-input"
                     editable={false}
-                    extra="人"
+                    extra={formatMessage({id: 'form.per'})}
                     {...getFieldProps('persons')}
                 ><FormattedMessage id="water.persons" defaultMessage="用水人数（人）" /></InputItem>
                 <InputItem
                     className="right-input"
                     editable={false}
-                    extra="个"
+                    extra={formatMessage({id: 'form.each'})}
                     {...getFieldProps('spot')}
                 ><FormattedMessage id="water.spot" defaultMessage="直饮水点（个）" /></InputItem>
                 <InputItem
                     className="right-input"
                     editable={false}
-                    extra="公斤"
+                    extra={formatMessage({id: 'form.kg'})}
                     {...getFieldProps('watergage')}
                 ><FormattedMessage id="water.watergage" defaultMessage="水压" /></InputItem>
                 <InputItem
@@ -122,7 +123,7 @@ const RenderForm = createForm({
                 <InputItem
                     className="right-input"
                     editable={false}
-                    extra="个"
+                    extra={formatMessage({id: 'form.each'})}
                     {...getFieldProps('bathrooms')}
                 ><FormattedMessage id="water.bathrooms" defaultMessage="卫浴间数量" /></InputItem>
                 <InputItem
@@ -174,7 +175,7 @@ const RenderForm = createForm({
 class DeviceWater extends PureComponent{
 
     render () {
-        const { history,usewater } = this.props;
+        const { history,usewater, intl: { formatMessage } } = this.props;
 
         const basicData = {
             quantity: {
@@ -190,13 +191,13 @@ class DeviceWater extends PureComponent{
                 value: lodashget(usewater,'watergage',''),
             },
             booster: {
-                value: lodashget(usewater,'booster',false)?'是':'否',
+                value: lodashget(usewater,'booster',false)? formatMessage({id: 'form.yes1'}) : formatMessage({id: 'form.no1'}),
             },
             bathrooms: {
                 value: lodashget(usewater,'bathrooms',''),
             },
             shunt: {
-                value: lodashget(usewater,'shunt',false)?'是':'否',
+                value: lodashget(usewater,'shunt',false)? formatMessage({id: 'form.yes1'}) : formatMessage({id: 'form.no1'}),
             },
             tds: {
                 value: lodashget(usewater,'tds',''),
@@ -240,4 +241,4 @@ const mapStateToProps =  ({device:{usewater,_id}}) =>{
   return {usewater,_id};
 };
 DeviceWater = connect(mapStateToProps)(DeviceWater);
-export default withRouter(DeviceWater);
+export default withRouter(injectIntl(DeviceWater));

@@ -20,7 +20,7 @@ class Home extends PureComponent{
             <div className="home">
                 <NavBar
                     className="nav"
-                    rightContent={[<div key="0" className="nav-wifi-icon"/>]}
+                    // rightContent={[<div key="0" className="nav-wifi-icon"/>]}
                 >
                 { formatMessage({id: "home"})}
                 </NavBar>

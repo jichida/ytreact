@@ -8,6 +8,7 @@ import { createReducer } from 'redux-act';
 import {
     wifi_getssidlist_result,
     wifi_setstatus,
+    wifi_setcurwifi_result,
     ui_setcurwifi,
 } from '../../actions/index.js';
 
@@ -17,7 +18,7 @@ const initial = {
         wifiCipher:'',
         wifipassword: '',
         wifilist:[],
-        wifiStatus:-1
+        wifiStatus:0//0为打开未连接  -1  未打开  1  已连接 2 密码错误}
     },
 };
 
@@ -26,6 +27,10 @@ const wifi = createReducer({
     [wifi_getssidlist_result]:(state, payload)=>{
         let wifilist = [...payload];
         return { ...state,wifilist};
+    },
+    [wifi_setcurwifi_result]: (state, payload) => {
+        const {wifiStatus} = payload;
+        return { ...state,wifiStatus};
     },
     [wifi_setstatus]: (state, payload) => {
         const {wifiStatus} = payload;

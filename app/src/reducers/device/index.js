@@ -1,8 +1,11 @@
 import { createReducer } from 'redux-act';
 import {
+  wifi_getdata,
   adddevice_result,
   getdevice_result,
-  setuserdevice_result
+  setuserdevice_result,
+  tmp_ui_setuserdevice_request
+  // ui_setcurwifi
 } from '../../actions/index.js';
 import moment from 'moment';
 import 'moment-timezone';
@@ -10,6 +13,7 @@ const curTZ = moment.tz.guess();
 const initial = {
     device: {
       _id:'',
+      distributorid:{},
       basicinfo:{
           username:'',
           userphone:'',
@@ -67,7 +71,6 @@ const initial = {
         hardness:'',
         alkalinity:'',
         ph:'',
-        bucket:'',
       },
       wifisettings:{
         ssid:'',
@@ -92,9 +95,48 @@ const initial = {
 };
 
 const device = createReducer({
+    [tmp_ui_setuserdevice_request]:(state,payload)=>{
+      const {inwatersettings:inwatersettingsnew} = payload;
+      const inwatersettings = state.inwatersettings;
+
+      inwatersettings.ph = inwatersettingsnew.ph;
+      inwatersettings.conductivity = inwatersettingsnew.conductivity;
+      inwatersettings.tds = inwatersettingsnew.tds;
+      inwatersettings.hardness = inwatersettingsnew.hardness;
+      inwatersettings.alkalinity = inwatersettingsnew.alkalinity;
+
+      return { ...state, inwatersettings};
+    },
+    [wifi_getdata]: (state, payload) => {
+        // let homedata = state.homedata;
+        // let errordata = state.errordata;
+        // let performancedata = state.performancedata;
+        const {inwatersettings:inwatersettingsnew,syssettings:syssettingsnew} = payload;
+        const inwatersettings = state.inwatersettings;
+        const syssettings = state.syssettings;
+        syssettings.quality = syssettingsnew.quality;
+        syssettings.dormancy = syssettingsnew.dormancy === 0?false:true;
+        syssettings.dormancystart = syssettingsnew.dormancystart;
+        syssettings.dormancyend = syssettingsnew.dormancyend;
+
+        inwatersettings.ph = inwatersettingsnew.ph;
+        inwatersettings.conductivity = inwatersettingsnew.conductivity;
+        inwatersettings.tds = inwatersettingsnew.tds;
+        inwatersettings.hardness = inwatersettingsnew.hardness;
+        inwatersettings.alkalinity = inwatersettingsnew.alkalinity;
+
+        return { ...state, inwatersettings,syssettings };
+    },
     [adddevice_result]: (state, payload) => {
         return { ...state, ...payload };
     },
+    // [ui_setcurwifi]: (state, payload) => {
+    //     const {wifissid,wifipassword} = payload;
+    //     let wifisettings = state.wifisettings;
+    //     wifisettings.ssid  = wifissid;
+    //     wifisettings.password  = wifipassword;
+    //     return { ...state,wifisettings};
+    // },
     [getdevice_result]: (state, payload) => {
       const {_id,basicinfo:basicinfonew, usewater:usewaternew,install:installnew,
         syssettings:syssettingsnew,inwatersettings:inwatersettingsnew,wifisettings:wifisettingsnew,

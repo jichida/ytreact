@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Modal, Flex, WhiteSpace, Button, WingBlank } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import {set_weui,ui_wifisuccess_tonext} from '../../actions';
+import {set_weui,ui_wifisuccess_tonext,} from '../../actions';
 import {seteasylink} from '../../env/easylink';
 import './index.less';
 
@@ -13,25 +13,18 @@ import mgb from '../../assets/ljimgb.png';
 const alert = Modal.alert;
 
  class WifiSuccess extends PureComponent{
-     onClickNext = ()=>{
+     onClickNext = (isinternet)=>{
        const { wifiStatus,dispatch, intl} = this.props;
        if(wifiStatus === 1){//
-         dispatch(ui_wifisuccess_tonext({}));
+         dispatch(ui_wifisuccess_tonext({isinternet}));
        }
        else{
          alert(intl.formatMessage({id: "form.ok"}), intl.formatMessage({id: 'start.wifi.notconnected.confirm'}), [
           { text: intl.formatMessage({id: "form.cancel"}), onPress: () => console.log('cancel') },
           { text: intl.formatMessage({id: "form.ok"}), onPress: () => {
-            dispatch(ui_wifisuccess_tonext({}));
+            dispatch(ui_wifisuccess_tonext({isinternet}));
           }},
         ]);
-         //请先连接wifi
-         // dispatch(set_weui({
-         //   toast:{
-         //   text:`请先返回连接wifi后再试`,
-         //   show: true,
-         //   type:'warning'
-         // }}));
        }
      }
     render () {
@@ -87,13 +80,21 @@ const alert = Modal.alert;
                                     </Button>
                                 </div>
                                 <WhiteSpace size="xl" />
+                                <div className="add_btn" >
+                                    <Button type="ghost" className="btn" onClick={()=>{
+                                      this.onClickNext(false);
+                                      // history.push('/devices')
+                                    }}>
+                                        <FormattedMessage id="form.next0" />
+                                    </Button>
+                                </div>
                                 <WhiteSpace size="xl" />
                                 <div className="add_btn" >
                                     <Button type="ghost" className="btn" onClick={()=>{
-                                      this.onClickNext();
+                                      this.onClickNext(true);
                                       // history.push('/devices')
                                     }}>
-                                        <FormattedMessage id="form.next" />
+                                        <FormattedMessage id="form.next1" />
                                     </Button>
                                 </div>
                                 <WhiteSpace size="xl" />

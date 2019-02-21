@@ -48,7 +48,7 @@ const getssidlist = (fncallback)=>{
         {"mac":"78:44:fd:c8:7b:39","ssid":"QianMianYuJia","wifiCipher":2}
       ]
     })
-  },100);
+  },4000);
 }
 
 const setcurwifi = (values,fncallback)=>{

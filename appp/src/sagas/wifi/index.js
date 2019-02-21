@@ -1,7 +1,7 @@
 /**
  * Created by wangxiaoqing on 2017/3/25.
  */
-import { put,takeLatest,call,take,race,fork,select} from 'redux-saga/effects';
+import { put,takeLatest,takeEvery,call,take,race,fork,select} from 'redux-saga/effects';
 import {delay} from 'redux-saga';
 import {
   getssidlist,
@@ -169,17 +169,17 @@ const parsedata = (stringbody,callbackfn)=>{
     'errordata.error_pressuresensor3failure',//42	压力3传感器故障	ERROR17:0 无故障 1有故障
     'errordata.error_pressuresensor4failure',//43	压力4传感器故障	ERROR18:0 无故障 1有故障
 
-    'syssettings.quality',// 44	出水水质设置值	setlo  	1 word
-    'syssettings.dormancy',// 45	休眠状态	目前设备的休眠状态	1 byte
-    'syssettings.dormancystart',// 46	休眠开始时间	开始休眠 如：22	1 byte
-    'syssettings.dormancyend',// 47	休眠结束时间	退出休眠 如：6	1 byte
+    // 'syssettings.quality',// 44	出水水质设置值	setlo  	1 word
+    // 'syssettings.dormancy',// 45	休眠状态	目前设备的休眠状态	1 byte
+    // 'syssettings.dormancystart',// 46	休眠开始时间	开始休眠 如：22	1 byte
+    // 'syssettings.dormancyend',// 47	休眠结束时间	退出休眠 如：6	1 byte
 
     'wifi.singal',// 48	网络信号	主机目前与外网的连接强度	1 byte
-    'inwatersettings.ph',// 49	进水PH	进水的PH值  byte	1 byte
-    'inwatersettings.conductivity',// 50	进水电导率	进水电导率  word	1 word
-    'inwatersettings.tds',// 51	进水TDS	进水TDS  word	1 word
-    'inwatersettings.hardness',// 52	进水硬度	进水硬度  word	1 word
-    'inwatersettings.alkalinity',// 53	进水碱度	进水碱度  word	1 word
+    // 'inwatersettings.ph',// 49	进水PH	进水的PH值  byte	1 byte
+    // 'inwatersettings.conductivity',// 50	进水电导率	进水电导率  word	1 word
+    // 'inwatersettings.tds',// 51	进水TDS	进水TDS  word	1 word
+    // 'inwatersettings.hardness',// 52	进水硬度	进水硬度  word	1 word
+    // 'inwatersettings.alkalinity',// 53	进水碱度	进水碱度  word	1 word
   ];
 
   console.log(`dataz个数:${dataz.length},mapdatafieldname个数:${mapdatafieldname.length}`);
@@ -197,7 +197,28 @@ const parsedata = (stringbody,callbackfn)=>{
     const value = lodash_get(result,mapParseToInt[i],'0');
     lodash_set(result,mapParseToInt[i],parseInt(value));
   }
+
+  const value = lodash_get(result,'syssettings.dormancy','0');
+  lodash_set(result,'syssettings.dormancy',value==='0'?false:true);
+
+  let value_dormancystart = lodash_get(result,'syssettings.dormancystart','0');
+  while(value_dormancystart.length < 2){
+    value_dormancystart = '0'+value_dormancystart;
+  }
+  const c_value_dormancystart = moment(`2019-01-01 ${value_dormancystart}:00:00`);
+  lodash_set(result,'syssettings.dormancystart',c_value_dormancystart.format('HH'));
+
+  let value_dormancyend = lodash_get(result,'syssettings.dormancyend','0');
+  while(value_dormancyend.length < 2){
+    value_dormancyend = '0'+value_dormancyend;
+  }
+  const c_value_dormancyend = moment(`2019-01-01 ${value_dormancyend}:00:00`);
+  lodash_set(result,'syssettings.dormancyend',c_value_dormancyend.format('HH'));
+
+
+
   console.log(result);
+
   const main_outwater_grade = lodash_get(result,'homedata.main_outwater_grade');
   if(!!main_outwater_grade){
     //问题2  0:优  1:好  2:一般
@@ -351,7 +372,7 @@ export function* wififlow() {
     //   }
     // });
 
-    yield takeLatest(`${socket_recvdata}`,function*(action){
+    yield takeEvery(`${socket_recvdata}`,function*(action){
       const {payload} = action;
       try{
         console.log(payload);
@@ -391,9 +412,16 @@ export function* wififlow() {
 
     yield takeLatest(`${ui_wifisuccess_tonext}`,function*(action){
       try{
+        const {payload:isinternet} = action;
+        if(isinternet){
+          yield put(push('/home'));
+          return;
+        }
         //for test--->
-        // yield put(socket_recvdata({code:0,data:`$50,0,300,50000,125,5000,720,50,30,10,0,10,120,0,90,50,10,30,10,0,60,0,0,0,91,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,300,0,7,22,2,7,600,300,20,%`}));
-        //开始连接socket,进入下一个页面
+      // yield put(socket_recvdata({code:0,data:`$50,0,300,50000,125,5000,720,50,30,10,0,10,120,0,90,50,10,30,10,0,60,0,0,0,91,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,300,0,7,22,2,7,600,300,20,%`}));
+         // yield put(socket_recvdata({code:0,data:`GET /units/5be29eccc80908000a01c451/datapoints/post?d[a]=954&d[b]=6&d[c]=0&d[d]=0&d[e]=0&d[f]=0&d[g]=0&d[h]=0&d[i]=31&d[j]=122&d[k]=48&d[l]=0&d[m]=0&d[n]=0&d[o]=720&d[p]=0&d[q]=0&d[r]=0&d[s]=0&d[t]=0`}));
+         // yield put(socket_recvdata({code:0,data:`$50,0,300,50000,125,5000,720,50,30,10,0,10,120,0,90,50,10,30,10,0,60,0,0,0,91,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,300,0,7,22,2,7,600,300,20,%`}));
+      //开始连接socket,进入下一个页面
         yield call(socket_connnect_promise,{
           host:config.sockethost,
           port:config.socketport
@@ -552,11 +580,24 @@ export function* wififlow() {
       try{
         let {payload:result} = action;
         const delaytime = 5000;
+        yield put(set_weui({
+          toast:{
+            type:'loading',
+            text:'wifi列表获取中,请稍后...',
+            value:'show',
+          }
+        }))
         console.log(`wifi_getssidlist_request:${JSON.stringify(result)}`);
         const raceresult = yield race({
            wifiresult: call(getwifilist_promise),
            timeout: call(delay, delaytime)
         });
+        yield put(set_weui({
+          toast:{
+            type:'loading',
+            value:'hide',
+          }
+        }))
         // yield put(set_weui({
         //   toast:{
         //   text:`${JSON.stringify(raceresult)}`,

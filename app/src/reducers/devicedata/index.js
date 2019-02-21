@@ -6,6 +6,7 @@ import {
 
 const initial = {
     devicedata: {
+      isgetdata:false,
       homedata:{
         main_outwater_quality:30,//出水水质,
         main_outwater_grade:'优',//出水等级,
@@ -14,18 +15,18 @@ const initial = {
         main_runtime:23,//运行时间
         main_outcwatervol:322,//浓水出水量
         //以下是滤芯部分
-        filterelements_modlife_leftvol:39,//电离子膜寿命剩余流量
-        filterelements_prefilter1_leftvol:29,//前置PP寿命剩余流量
+        filterelements_modlife_leftvol:390,//电离子膜寿命剩余流量
+        filterelements_prefilter1_leftvol:980,//前置PP寿命剩余流量
         filterelements_prefilter2_leftvol:30,//前置2滤芯寿命剩余流量
         filterelements_prefilter3_leftvol:9,//前置3滤芯寿命剩余流量
-        filterelements_posfilter1_leftvol:70,//后置活性炭寿命剩余流量
+        filterelements_posfilter1_leftvol:700,//后置活性炭寿命剩余流量
         filterelements_posfilter2_leftvol:90,//电离子膜寿命剩余流量
         filterelements_posfilter3_leftvol:100,//电离子膜寿命剩余流量
-        filterelements_modlife_leftday:20,//电离子膜寿命剩余天数
-        filterelements_prefilter1_leftday:1,//前置PP寿命剩余天数
+        filterelements_modlife_leftday:500,//电离子膜寿命剩余天数
+        filterelements_prefilter1_leftday:88,//前置PP寿命剩余天数
         filterelements_prefilter2_leftday:24,//前置2寿命剩余天数
         filterelements_prefilter3_leftday:41,//前置3寿命剩余天数
-        filterelements_posfilter1_leftday:5,//后置活性炭寿命剩余天数
+        filterelements_posfilter1_leftday:50,//后置活性炭寿命剩余天数
         filterelements_posfilter2_leftday:23,//后置2滤芯寿命剩余天数
         filterelements_posfilter3_leftday:46,//后置2滤芯寿命剩余天数
       },
@@ -67,8 +68,14 @@ const initial = {
         min_averagecut_600:4,//16	平均cut@600	600电导率时的cut	1 word
         min_averagecut_300:3,// 17	平均cut@300	300电导率时的cut	1 word
         min_waterpurificationrate:2,//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
-      }
-
+      },
+      inwatersettings:{//进水设定
+        tds:'',//进水TDS	进水TDS  word	1 word
+        conductivity:'',//50	进水电导率	进水电导率  word	1 word
+        hardness:'',//进水硬度	进水硬度  word	1 word
+        alkalinity:'',//进水碱度	进水碱度  word	1 word
+        ph:'',//49	进水PH	进水的PH值  byte	1 byte
+      },
     },
 
 };
@@ -78,11 +85,12 @@ const devicedata = createReducer({
         // let homedata = state.homedata;
         // let errordata = state.errordata;
         // let performancedata = state.performancedata;
-        const {homedata:homedatanew,errordata:errordatanew,performancedata:performancedatanew} = payload;
+        const {homedata:homedatanew,errordata:errordatanew,performancedata:performancedatanew,inwatersettings:inwatersettingsnew} = payload;
         const homedata = {...homedatanew};
         const errordata = {...errordatanew};
         const performancedata = {...performancedatanew};
-        return { ...state, homedata,errordata,performancedata };
+        const inwatersettings = {...inwatersettingsnew};
+        return { ...state, homedata,errordata,performancedata,inwatersettings,isgetdata:true};
     },
 
 }, initial.devicedata);

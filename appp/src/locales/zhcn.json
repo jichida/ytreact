@@ -25,6 +25,8 @@
   "status.normal": "正常",
   "form.easylink":"开始配网",
   "form.next": "下一步",
+  "form.next0": "下一步(连的是设备)",
+  "form.next1": "下一步(连的是Internet)",
   "form.back": "返回上一页",
   "form.cancel": "取消",
   "form.input": "请输入",

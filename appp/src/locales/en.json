@@ -25,6 +25,8 @@
   "status.normal": "Normal",
   "form.easylink":"start config network",
   "form.next": "Next",
+  "form.next0": "Next(direct to device)",
+  "form.next1": "Next(to internet)",
   "form.back": "Back",
   "form.cancel": "Cancel",
   "form.input": "Please enter",

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Modal, Flex, WhiteSpace, Button, WingBlank } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import {set_weui,ui_wifisuccess_tonext} from '../../actions';
+import {set_weui,ui_wifisuccess_tonext,} from '../../actions';
 import {seteasylink} from '../../env/easylink';
 import './index.less';
 
@@ -13,30 +13,23 @@ import mgb from '../../assets/ljimgb.png';
 const alert = Modal.alert;
 
  class WifiSuccess extends PureComponent{
-     onClickNext = ()=>{
-       const { wifiStatus,dispatch, intl } = this.props;
+     onClickNext = (isinternet)=>{
+       const { wifiStatus,dispatch, intl} = this.props;
        if(wifiStatus === 1){//
-         dispatch(ui_wifisuccess_tonext({}));
+         dispatch(ui_wifisuccess_tonext({isinternet}));
        }
        else{
          alert(intl.formatMessage({id: "form.ok"}), intl.formatMessage({id: 'start.wifi.notconnected.confirm'}), [
           { text: intl.formatMessage({id: "form.cancel"}), onPress: () => console.log('cancel') },
           { text: intl.formatMessage({id: "form.ok"}), onPress: () => {
-            dispatch(ui_wifisuccess_tonext({}));
+            dispatch(ui_wifisuccess_tonext({isinternet}));
           }},
         ]);
-         //请先连接wifi
-         // dispatch(set_weui({
-         //   toast:{
-         //   text:`请先返回连接wifi后再试`,
-         //   show: true,
-         //   type:'warning'
-         // }}));
        }
      }
     render () {
         // -1  未打开  0 打开未连接  1  已连接 2 密码错误}
-        const { wifiStatus, intl } = this.props;
+        const { wifiStatus, intl,wifissid } = this.props;
         let startwifiid = "start.wifi.notconnected";
         if(wifiStatus === -1){
           startwifiid = 'start.wifi.notopened';
@@ -49,6 +42,10 @@ const alert = Modal.alert;
         }
         else if(wifiStatus === 2){
           startwifiid = 'start.wifi.wrongpassword';
+        }
+        let showssid = '';
+        if(wifiStatus === 1){
+          showssid = `(${wifissid})`;
         }
         return (
             <WingBlank className="black_bg" style={{marginLeft:0, marginRight:0}}>
@@ -63,7 +60,7 @@ const alert = Modal.alert;
                                     <div><img src={mgb} alt="" className="logo_img" /></div>
                                 </div>
                                 <WhiteSpace size="xl" />
-                                <div className="status" ><FormattedMessage id={startwifiid} /></div>
+                                <div className="status" ><FormattedMessage id={startwifiid} />{showssid}</div>
                                 <WhiteSpace size="xl" />
                                 <div className="add_btn" >
                                     <Button type="ghost" className="btn" onClick={()=>{
@@ -83,13 +80,21 @@ const alert = Modal.alert;
                                     </Button>
                                 </div>
                                 <WhiteSpace size="xl" />
+                                <div className="add_btn" >
+                                    <Button type="ghost" className="btn" onClick={()=>{
+                                      this.onClickNext(false);
+                                      // history.push('/devices')
+                                    }}>
+                                        <FormattedMessage id="form.next0" />
+                                    </Button>
+                                </div>
                                 <WhiteSpace size="xl" />
                                 <div className="add_btn" >
                                     <Button type="ghost" className="btn" onClick={()=>{
-                                      this.onClickNext();
+                                      this.onClickNext(true);
                                       // history.push('/devices')
                                     }}>
-                                        <FormattedMessage id="form.next" />
+                                        <FormattedMessage id="form.next1" />
                                     </Button>
                                 </div>
                                 <WhiteSpace size="xl" />
@@ -108,8 +113,8 @@ const alert = Modal.alert;
         )
     }
 }
-const mapStateToProps =  ({wifi:{wifiStatus}}) =>{
-  return {wifiStatus};
+const mapStateToProps =  ({wifi:{wifiStatus,wifissid}}) =>{
+  return {wifiStatus,wifissid};
 };
 WifiSuccess = connect(mapStateToProps)(WifiSuccess);
 export default withRouter(injectIntl(WifiSuccess));

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {  List, InputItem, Button, Modal, WingBlank, WhiteSpace  } from 'antd-mobile';//
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import {common_err,tmp_ui_setuserdevice_request, wifi_sendcmd_request} from '../../actions';
+import {common_err,tmp_ui_setuserdevice_request, wifi_sendcmd_request,set_weui} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
@@ -295,6 +295,22 @@ class Inlet extends PureComponent{
       }
     }
 
+    componentWillReceiveProps(nextProps) {
+      const nextData = lodashget(nextProps,'inwatersettings',{});
+      const curData = lodashget(this.props,'inwatersettings',{});
+      if( nextData.length === curData.length ){
+        if(JSON.stringify(nextData) === JSON.stringify(curData)){
+          return;
+        }
+      }
+      this.setState({
+        tds:lodashget(nextData,'tds',''),
+        conductivity: lodashget(nextData,'conductivity',''),
+        hardness: lodashget(nextData,'hardness',''),
+        alkalinity: lodashget(nextData,'alkalinity',''),
+        ph:lodashget(nextData,'ph',''),
+      });
+    }
 
     handleSubmit = ()=>{
         let { ph, conductivity, hardness, alkalinity, tds } = this.state
@@ -323,47 +339,87 @@ class Inlet extends PureComponent{
 
     handlePHSubmit = () => {
         console.log(this.state.ph);
-        //
+        const {dispatch} = this.props;
         if(this.state.ph.length > 0){
-          const {dispatch} = this.props;
           const cmd = `$feedph ${this.state.ph}%`;
           dispatch(wifi_sendcmd_request({cmd}));
+          this.handleClose();
+        }
+        else{
+          dispatch(set_weui({
+            toast:{
+            text:'请输入ph值',
+            show: true,
+            type:'warning'
+          }}));
         }
     }
     handleConductivitySubmit = () => {
         console.log(this.state.conductivity);
-        //
+        const {dispatch} = this.props;
         if(this.state.conductivity.length > 0){
-          const {dispatch} = this.props;
           const cmd = `$feedcon ${this.state.conductivity}%`;
           dispatch(wifi_sendcmd_request({cmd}));
+          this.handleClose();
+        }
+        else{
+          dispatch(set_weui({
+            toast:{
+            text:'请输入导电率值',
+            show: true,
+            type:'warning'
+          }}));
         }
     }
     handleTDSSubmit = () => {
         console.log(this.state.tds);
-        //
+        const {dispatch} = this.props;
         if(this.state.tds.length > 0){
-          const {dispatch} = this.props;
           const cmd = `$feedtds ${this.state.tds}%`;
           dispatch(wifi_sendcmd_request({cmd}));
+          this.handleClose();
+        }
+        else{
+          dispatch(set_weui({
+            toast:{
+            text:'请输入TDS值',
+            show: true,
+            type:'warning'
+          }}));
         }
     }
     handleHardnessSubmit = () => {
         console.log(this.state.hardness);
-        //
+        const {dispatch} = this.props;
         if(this.state.hardness.length > 0){
-          const {dispatch} = this.props;
           const cmd = `$feedca ${this.state.hardness}%`;
           dispatch(wifi_sendcmd_request({cmd}));
+          this.handleClose();
+        }
+        else{
+          dispatch(set_weui({
+            toast:{
+            text:'请进水硬度值',
+            show: true,
+            type:'warning'
+          }}));
         }
     }
     handleAlkalinitySubmit = () => {
         console.log(this.state.alkalinity);
-        //
+        const {dispatch} = this.props;
         if(this.state.alkalinity.length > 0){
-          const {dispatch} = this.props;
           const cmd = `$feedalk ${this.state.alkalinity}%`;
           dispatch(wifi_sendcmd_request({cmd}));
+          this.handleClose();
+        }
+        else{
+          dispatch(set_weui({
+            toast:{
+            text:'请进水咸度值',
+            show: true,
+            type:'warning'
+          }}));
         }
     }
 

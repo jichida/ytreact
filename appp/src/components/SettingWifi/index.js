@@ -62,7 +62,7 @@ const RenderForm = createForm({
     const title = formatMessage({id: 'start.wifi.select'});
 
     const dispatch_form_err = (dispatch,errs)=>{
-        dispatch(common_err({type:'form_err',errmsg: intl.formatMessage({id: 'form.check'})}))
+        dispatch(common_err({type:'form_err',errmsg: formatMessage({id: 'form.check'})}))
       }
 
     const handleSubmit = (e)=>{

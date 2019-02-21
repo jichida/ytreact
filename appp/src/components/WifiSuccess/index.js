@@ -14,7 +14,7 @@ const alert = Modal.alert;
 
  class WifiSuccess extends PureComponent{
      onClickNext = ()=>{
-       const { wifiStatus,dispatch, intl } = this.props;
+       const { wifiStatus,dispatch, intl} = this.props;
        if(wifiStatus === 1){//
          dispatch(ui_wifisuccess_tonext({}));
        }
@@ -36,7 +36,7 @@ const alert = Modal.alert;
      }
     render () {
         // -1  未打开  0 打开未连接  1  已连接 2 密码错误}
-        const { wifiStatus, intl } = this.props;
+        const { wifiStatus, intl,wifissid } = this.props;
         let startwifiid = "start.wifi.notconnected";
         if(wifiStatus === -1){
           startwifiid = 'start.wifi.notopened';
@@ -49,6 +49,10 @@ const alert = Modal.alert;
         }
         else if(wifiStatus === 2){
           startwifiid = 'start.wifi.wrongpassword';
+        }
+        let showssid = '';
+        if(wifiStatus === 1){
+          showssid = `(${wifissid})`;
         }
         return (
             <WingBlank className="black_bg" style={{marginLeft:0, marginRight:0}}>
@@ -63,7 +67,7 @@ const alert = Modal.alert;
                                     <div><img src={mgb} alt="" className="logo_img" /></div>
                                 </div>
                                 <WhiteSpace size="xl" />
-                                <div className="status" ><FormattedMessage id={startwifiid} /></div>
+                                <div className="status" ><FormattedMessage id={startwifiid} />{showssid}</div>
                                 <WhiteSpace size="xl" />
                                 <div className="add_btn" >
                                     <Button type="ghost" className="btn" onClick={()=>{
@@ -108,8 +112,8 @@ const alert = Modal.alert;
         )
     }
 }
-const mapStateToProps =  ({wifi:{wifiStatus}}) =>{
-  return {wifiStatus};
+const mapStateToProps =  ({wifi:{wifiStatus,wifissid}}) =>{
+  return {wifiStatus,wifissid};
 };
 WifiSuccess = connect(mapStateToProps)(WifiSuccess);
 export default withRouter(injectIntl(WifiSuccess));

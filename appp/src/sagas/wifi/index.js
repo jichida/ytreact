@@ -1,7 +1,7 @@
 /**
  * Created by wangxiaoqing on 2017/3/25.
  */
-import { put,takeLatest,call,take,race,fork,select} from 'redux-saga/effects';
+import { put,takeLatest,takeEvery,call,take,race,fork,select} from 'redux-saga/effects';
 import {delay} from 'redux-saga';
 import {
   getssidlist,
@@ -351,7 +351,7 @@ export function* wififlow() {
     //   }
     // });
 
-    yield takeLatest(`${socket_recvdata}`,function*(action){
+    yield takeEvery(`${socket_recvdata}`,function*(action){
       const {payload} = action;
       try{
         console.log(payload);
@@ -392,8 +392,10 @@ export function* wififlow() {
     yield takeLatest(`${ui_wifisuccess_tonext}`,function*(action){
       try{
         //for test--->
-        // yield put(socket_recvdata({code:0,data:`$50,0,300,50000,125,5000,720,50,30,10,0,10,120,0,90,50,10,30,10,0,60,0,0,0,91,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,300,0,7,22,2,7,600,300,20,%`}));
-        //开始连接socket,进入下一个页面
+         // yield put(socket_recvdata({code:0,data:`$50,0,300,50000,125,5000,720,50,30,10,0,10,120,0,90,50,10,30,10,0,60,0,0,0,91,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,300,0,7,22,2,7,600,300,20,%`}));
+         // yield put(socket_recvdata({code:0,data:`GET /units/5be29eccc80908000a01c451/datapoints/post?d[a]=954&d[b]=6&d[c]=0&d[d]=0&d[e]=0&d[f]=0&d[g]=0&d[h]=0&d[i]=31&d[j]=122&d[k]=48&d[l]=0&d[m]=0&d[n]=0&d[o]=720&d[p]=0&d[q]=0&d[r]=0&d[s]=0&d[t]=0`}));
+         // yield put(socket_recvdata({code:0,data:`$50,0,300,50000,125,5000,720,50,30,10,0,10,120,0,90,50,10,30,10,0,60,0,0,0,91,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,300,0,7,22,2,7,600,300,20,%`}));
+      //开始连接socket,进入下一个页面
         yield call(socket_connnect_promise,{
           host:config.sockethost,
           port:config.socketport

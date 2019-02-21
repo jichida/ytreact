@@ -12,3 +12,6 @@ export const setuserdevice_result = createAction('setuserdevice_result');
 
 export const ui_setuserdevice_request = createAction('ui_setuserdevice_request');
 export const tmp_ui_setuserdevice_request = createAction('tmp_ui_setuserdevice_request');
+
+export const app_sendcmd_request = createAction('app_sendcmd_request');
+export const app_sendcmd_result = createAction('app_sendcmd_result');

@@ -552,11 +552,24 @@ export function* wififlow() {
       try{
         let {payload:result} = action;
         const delaytime = 5000;
+        yield put(set_weui({
+          toast:{
+            type:'loading',
+            text:'wifi列表获取中,请稍后...',
+            value:'show',
+          }
+        }))
         console.log(`wifi_getssidlist_request:${JSON.stringify(result)}`);
         const raceresult = yield race({
            wifiresult: call(getwifilist_promise),
            timeout: call(delay, delaytime)
         });
+        yield put(set_weui({
+          toast:{
+            type:'loading',
+            value:'hide',
+          }
+        }))
         // yield put(set_weui({
         //   toast:{
         //   text:`${JSON.stringify(raceresult)}`,

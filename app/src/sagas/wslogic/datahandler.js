@@ -25,11 +25,15 @@ import {
     setuserdevice_result,
 
     changepwd_request,
-    changepwd_result
+    changepwd_result,
+
+    app_sendcmd_request,
+    app_sendcmd_result
   } from '../../actions';
 
 //接收的对应关系
 const recvmessagetoresultpair = {
+  'app_sendcmd_result':`${app_sendcmd_result}`,
   'changepwd_result':changepwd_result,
   'common_err':common_err,
   'findpwd_result':findpwd_result,
@@ -59,6 +63,7 @@ const sendmessagefnsz = {
 
 //验证发送接口
 const sendmessageauthfnsz = {
+  'app_sendcmd':`${app_sendcmd_request}`,
   'adddevice':`${adddevice_request}`,
   'getdevice':`${getdevice_request}`,
   'setuserdevice':`${setuserdevice_request}`,

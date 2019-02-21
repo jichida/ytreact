@@ -3,13 +3,22 @@ import {set_weui} from '../../actions';
 import Toast from 'antd-mobile/lib/toast';  // 加载 JS
 import 'antd-mobile/lib/toast/style/css';        // 加载 CSS
 
-const popdialog = ({text,type})=>{
+const popdialog = ({text,type,value})=>{
   return new Promise(resolve => {
       if(type === 'success'){
         Toast.success(text, 1);
       }
       if(type === 'warning'){
         Toast.fail(text, 1);
+      }
+      if(type === 'loading'){
+        if(value === 'show'){
+          Toast.loading(text, 0);
+        }
+        if(value === 'hide'){
+          Toast.hide()
+        }
+
       }
       resolve();
     });

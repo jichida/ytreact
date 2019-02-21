@@ -314,7 +314,7 @@ class DeviceBasic extends PureComponent{
                     icon={<Icon type="left" />}
                     onLeftClick={() => { window.innerHeight=initHeight; history.goBack()}}                
                 >
-                <FormattedMessage id="device" />
+                <FormattedMessage id="device.basic" />
                 </NavBar>
                 { <RenderForm {...basicData} onSubmit={this.handleSubmit} dispatch={dispatch}/>}
             </div>

@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {  List, InputItem, Button, WingBlank, Switch, Picker, Modal, WhiteSpace } from 'antd-mobile';
-import moment from 'moment';
-import {ui_setuserdevice_request} from '../../actions';
+// import moment from 'moment';
+import {ui_setuserdevice_request,set_weui} from '../../actions';
 import lodashget from 'lodash.get';
 import lodashmap from 'lodash.map';
+import moment from 'moment';
 import 'moment-timezone';
 import { wifi_sendcmd_request } from '../../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
@@ -25,15 +26,35 @@ const hoursList = lodashmap(hours, (item)=> {
 })
 
 class SettingSystem extends PureComponent{
-
-    state = {
-        Modal1: false,
-        modal2: false,
-        quality: 0,
-        isdormancy: false,
-        dormancystart: '',
-        dormancyend: '',
+  constructor(props) {
+      super(props);
+      const {syssettings} = props;
+      this.state = {
+          Modal1: false,
+          modal2: false,
+          quality:lodashget(syssettings,'quality',''),
+          isdormancy: lodashget(syssettings,'isdormancy',false),
+          dormancystart: moment(`2019-01-01 ${lodashget(syssettings,'dormancystart','00')}:00:00`),
+          dormancyend: moment(`2019-01-01 ${lodashget(syssettings,'dormancyend','00')}:00:00`),
+      };
     }
+
+    componentWillReceiveProps(nextProps) {
+      const nextData = lodashget(nextProps,'syssettings',{});
+      const curData = lodashget(this.props,'syssettings',{});
+      if( nextData.length === curData.length ){
+        if(JSON.stringify(nextData) === JSON.stringify(curData)){
+          return;
+        }
+      }
+      this.setState({
+        quality:lodashget(nextData,'quality',''),
+        isdormancy: lodashget(nextData,'isdormancy',''),
+        dormancystart: moment(`2019-01-01 ${lodashget(nextData,'dormancystart','00')}:00:00`),
+        dormancyend: moment(`2019-01-01 ${lodashget(nextData,'dormancyend','00')}:00:00`),
+      });
+    }
+
 
     handleSubmit = (values)=>{
         console.log(values);
@@ -64,11 +85,19 @@ class SettingSystem extends PureComponent{
     onQualityClick = () =>{
       //8	出水水质  设置	0~200  ppm	sysprodtrigger 120%
         console.log(this.state.quality);
-        //
+        const {dispatch} = this.props;
         if(this.state.quality.length > 0){
-          const {dispatch} = this.props;
           const cmd = `$sysprodtrigger ${this.state.quality}%`;
           dispatch(wifi_sendcmd_request({cmd}));
+          this.onCloseQuality();
+        }
+        else{
+          dispatch(set_weui({
+            toast:{
+            text:'请输入出水水质的值',
+            show: true,
+            type:'warning'
+          }}));
         }
     }
 
@@ -87,8 +116,8 @@ class SettingSystem extends PureComponent{
 
         let dormancy = {
             isdormancy: this.state.isdormancy,
-            dormancystart: this.state.dormancystart,
-            dormancyend: this.state.dormancyend,
+            dormancystart: this.state.dormancystart.format('HH'),
+            dormancyend: this.state.dormancyend.format('HH'),
         }
         console.log(dormancy.isdormancy);
         console.log(dormancy.dormancystart);
@@ -101,10 +130,12 @@ class SettingSystem extends PureComponent{
         //   const cmd = `$fidleoffon 1.${start}.${end}%`;
           const cmd = `$fidleoffon 1.${dormancy.dormancystart}.${dormancy.dormancyend}%`;
           dispatch(wifi_sendcmd_request({cmd}));
+          this.onCloseDormancy();
         }
         else{
           const cmd = `$fidle 0%`;
           dispatch(wifi_sendcmd_request({cmd}));
+          this.onCloseDormancy();
         }
     }
 
@@ -136,16 +167,16 @@ class SettingSystem extends PureComponent{
                 value: lodashget(syssettings,'dormancy',false),
             },
             dormancystart: {
-                value: '',//lodashget(syssettings,'dormancystart','sample'),
+                value: this.state.dormancystart,
             },
             dormancyend: {
-                value: '',//lodashget(syssettings,'dormancyend','sample'),
+                value: this.state.dormancyend,
             },
             language: {
                 value:  [locale],
             }
         }
-        console.log(basicData)
+        console.log(this.state);
         return (
             <div className="sub_setting_bg">
                 {/* { <RenderForm {...basicData} onSubmit={this.handleSubmit} showModal={this.showModal} dispatch={dispatch}/>} */}
@@ -212,8 +243,13 @@ class SettingSystem extends PureComponent{
                                                 data={hoursList}
                                                 cols={1}
                                                 extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
-                                                value={this.state.dormancystart}
-                                                onChange={val => this.setState({ dormancystart:val })}
+                                                value={[this.state.dormancystart.format('HH')]}
+                                                onChange={(val) => {
+                                                    console.log(val);
+                                                    const v = moment(`2019-01-01 ${val[0]}:00:00`)
+                                                    this.setState({ dormancystart:v })
+                                                  }
+                                                }
                                                 >
                                                 <List.Item></List.Item>
                                             </Picker>
@@ -227,8 +263,12 @@ class SettingSystem extends PureComponent{
                                                 data={hoursList}
                                                 cols={1}
                                                 extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
-                                                value={this.state.dormancyend}
-                                                onChange={val => this.setState({ dormancyend:val })}
+                                                value={[this.state.dormancyend.format('HH')]}
+                                                onChange={(val) => {
+                                                    console.log(val);
+                                                    const v = moment(`2019-01-01 ${val[0]}:00:00`)
+                                                    this.setState({ dormancyend:v })
+                                                  }}
                                                 >
                                                 <List.Item></List.Item>
                                             </Picker>
@@ -257,11 +297,11 @@ class SettingSystem extends PureComponent{
     }
 }
 
-const mapStateToProps =  ({device:{syssettings,_id},app:{locale},userlogin:{truename}}) =>{
-  if(!syssettings.installer){
-    syssettings.installer = truename;
-  }
-  return {locale,syssettings,_id};
+const mapStateToProps =  ({devicedata:{syssettings},app:{locale}}) =>{
+  // if(!syssettings.installer){
+  //   syssettings.installer = truename;
+  // }
+  return {locale,syssettings};
 };
 
 SettingSystem = connect(mapStateToProps)(injectIntl(SettingSystem));

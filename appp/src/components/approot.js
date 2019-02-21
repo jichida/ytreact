@@ -30,14 +30,16 @@ import {requireAuthentication} from './requireauthentication';
 
 import gobal_bg from '../assets/electricbg.png';
 
-import logo from '../assets/logo.png';
-import device1 from '../assets/pimg1.png';
-import device2 from '../assets/pimg2.png';
-import setup from '../assets/setup.png';
-import refresh_icon from '../assets/refresh.png';
-import '../assets/wlimg.png';
-import home_bgimg from '../assets/zhuye_bg.png';
-import monitorBg from '../assets/zhuye_an.png';
+// import logo from '../assets/logo.png';
+// import device1 from '../assets/pimg1.png';
+// import device2 from '../assets/pimg2.png';
+// import setup from '../assets/setup.png';
+// import refresh_icon from '../assets/refresh.png';
+// import '../assets/wlimg.png';
+// import home_bgimg from '../assets/zhuye_bg.png';
+// import monitorBg from '../assets/zhuye_an.png';
+// import mga from '../assets/ljimga.png';
+// import mgb from '../assets/ljimgb.png';
 
 class AppRoot extends React.Component {
     componentWillMount() {

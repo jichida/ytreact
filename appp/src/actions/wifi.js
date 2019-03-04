@@ -12,6 +12,7 @@ export const wifi_setcurwifi_result = createAction('wifi_setcurwifi_result');
 
 export const wifi_sendcmd_request = createAction('wifi_sendcmd_request');
 export const wifi_sendcmd_result = createAction('wifi_sendcmd_result');
+export const wifi_sendcmd_result_ping = createAction('wifi_sendcmd_result_ping');
 
 export const wifi_recvcmd_request = createAction('wifi_recvcmd_request');
 export const wifi_recvcmd_result = createAction('wifi_recvcmd_result');

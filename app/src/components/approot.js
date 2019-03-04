@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Route,Switch } from 'react-router-dom';
 import './common.less';
 
-import Index from './Login';
+// import Index from './Login';
 // import Index from './DeviceAdd';
 // import WifiLogin from './WifiLogin';
 // import WifiSuccess from './WifiSuccess';

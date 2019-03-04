@@ -68,6 +68,20 @@ const setcurwifi = (values,fncallback)=>{
 const socket_send = (values,fncallback)=>{
   console.log(`socket_send`);
   console.log(values);
+  window.setTimeout(()=>{
+    let recvbuf = values.sendMessage;
+    let objstring = '';
+    const istart = recvbuf.indexOf('$',0);
+    if(istart >= 0){
+      const iend = recvbuf.indexOf('%',istart);
+      if(iend >= 0){
+        objstring = recvbuf.substr(istart,iend - istart);
+        console.log(objstring)
+        store.dispatch(socket_recvdata({code:0,data:`${objstring}ok%`}));
+      }
+    }
+
+  },100);
 }
 
 const socket_connnect = (values)=>{

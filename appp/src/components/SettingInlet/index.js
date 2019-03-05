@@ -340,15 +340,23 @@ class Inlet extends PureComponent{
     handlePHSubmit = () => {
         console.log(this.state.ph);
         const {dispatch} = this.props;
-        if(this.state.ph.length > 0){
-          const cmd = `$feedph ${this.state.ph}%`;
+        let isvalid = this.state.ph.length > 0;
+        let iph = 0;
+        if(isvalid){
+          iph = parseFloat(this.state.ph)*10;
+          iph = parseInt(`${iph}`,10);
+          isvalid = iph >= 0 && iph<= 150;
+        }
+
+        if(isvalid){
+          const cmd = `$feedph ${iph}%`;
           dispatch(wifi_sendcmd_request({cmd}));
           this.handleClose();
         }
         else{
           dispatch(set_weui({
             toast:{
-            text:'请输入ph值',
+            text:'请输入正确的ph值',
             show: true,
             type:'warning'
           }}));

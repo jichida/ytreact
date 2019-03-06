@@ -16,6 +16,7 @@ const initial = {
         locale:'zh-cn',
         issocketconnected:false,
         wifidirectmodesocketstatus:-1,
+        //-1 socket 关闭 0 socket 发送消息成功 1 连接成功 2 发送消息失败
     },
 };
 

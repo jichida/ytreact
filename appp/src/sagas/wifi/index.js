@@ -423,7 +423,7 @@ export function* wififlow() {
 
     yield takeLatest(`${ui_wifisuccess_tonext}`,function*(action){
       try{
-        const {payload:isinternet} = action;
+        const {payload:{isinternet}} = action;
         if(isinternet){
           yield put(push('/home'));
           return;

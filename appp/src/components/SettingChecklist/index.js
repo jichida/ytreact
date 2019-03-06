@@ -286,7 +286,7 @@ class SettingChecklist extends PureComponent{
       //click xy
       console.log(`click xy`)
       const {dispatch} = this.props;
-      dispatch(wifi_sendcmd_request({cmd:`$decpression%`}));
+      dispatch(wifi_sendcmd_request({cmd:`$decpression%`,cmdstring:'系统泄压'}));
     }
 
     render () {

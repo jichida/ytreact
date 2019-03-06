@@ -94,10 +94,10 @@ class Index extends React.Component {
         dispatch(common_err({type:'form_err',errmsg: intl.formatMessage({id: 'form.check'})}))
       }
 
-    onClickCmd = (cmd)=>{
-        const { dispatch } = this.props;
-        dispatch(wifi_sendcmd_request({cmd}));
-    }
+    // onClickCmd = (cmd)=>{
+    //     const { dispatch } = this.props;
+    //     dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置'}));
+    // }
 
     render () {
         const { getFieldProps, setFieldsValue} = this.props.form;

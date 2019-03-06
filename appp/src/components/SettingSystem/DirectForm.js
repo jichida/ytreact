@@ -134,9 +134,9 @@ class Index extends React.Component {
         this.props.showModal('modal2');
     }
 
-    onClickCmd = (cmd)=>{
+    onClickCmd = (cmd,cmdstring='设置')=>{
         const { dispatch } = this.props;
-        dispatch(wifi_sendcmd_request({cmd}));
+        dispatch(wifi_sendcmd_request({cmd,cmdstring}));
     }
 
     render () {
@@ -158,7 +158,7 @@ class Index extends React.Component {
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
-                              this.onClickCmd(`$res_prefilter1%`);//1	前置滤芯1 复位	滤芯寿命复位
+                              this.onClickCmd(`$res_prefilter1%`,"前置滤芯1复位");//1	前置滤芯1 复位	滤芯寿命复位
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
@@ -169,7 +169,7 @@ class Index extends React.Component {
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{
-                              this.onClickCmd(`$res_prefilter2%`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
+                              this.onClickCmd(`$res_prefilter2%`,"前置滤芯2复位");//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
@@ -180,7 +180,7 @@ class Index extends React.Component {
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{
-                              this.onClickCmd(`$res_prefilter3%`);//3	前置滤芯3 复位	滤芯寿命复位
+                              this.onClickCmd(`$res_prefilter3%`,"前置滤芯3复位");//3	前置滤芯3 复位	滤芯寿命复位
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
@@ -191,7 +191,7 @@ class Index extends React.Component {
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
-                              this.onClickCmd(`$res_posfilter1%`);//4	后置滤芯1 复位	滤芯寿命复位
+                              this.onClickCmd(`$res_posfilter1%`,"后置滤芯1复位");//4	后置滤芯1 复位	滤芯寿命复位
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
@@ -202,7 +202,7 @@ class Index extends React.Component {
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"   onClick={()=>{
-                              this.onClickCmd(`$res_posfilter2%`);//5	后置滤芯2 复位	滤芯寿命复位
+                              this.onClickCmd(`$res_posfilter2%`,"后置滤芯2复位");//5	后置滤芯2 复位	滤芯寿命复位
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
@@ -213,7 +213,7 @@ class Index extends React.Component {
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"   onClick={()=>{
-                              this.onClickCmd(`$res_posfilter3%`);//4	后置滤芯1 复位	滤芯寿命复位
+                              this.onClickCmd(`$res_posfilter3%`,"后置滤芯3复位");//4	后置滤芯1 复位	滤芯寿命复位
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
@@ -224,7 +224,7 @@ class Index extends React.Component {
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
-                              this.onClickCmd(`$decpression%`);//20	废水阀泄压	整机泄压	$decpression%
+                              this.onClickCmd(`$decpression%`,"废水阀泄压");//20	废水阀泄压	整机泄压	$decpression%
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
@@ -235,7 +235,7 @@ class Index extends React.Component {
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
-                              this.onClickCmd(`$sysreset 1%`);//重置重启系统	重启系统	$sysreset 1%
+                              this.onClickCmd(`$sysreset 1%`,"重置重启系统");//重置重启系统	重启系统	$sysreset 1%
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
@@ -248,7 +248,7 @@ class Index extends React.Component {
                             <Button size="small" type="ghost" className="btn" onClick={()=>{
                               //获取当前时间
                               const curdate = moment().format('YY.MM.DD.HH.mm');
-                              this.onClickCmd(`$date ${curdate}%`);//11	重置时间	同步系统时间	$date 18.11.30.13.20% 意思是年.月.日.时.分
+                              this.onClickCmd(`$date ${curdate}%`,"重置时间");//11	重置时间	同步系统时间	$date 18.11.30.13.20% 意思是年.月.日.时.分
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
@@ -260,7 +260,7 @@ class Index extends React.Component {
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
                               //柠檬酸冲洗	柠檬酸	$app_acid%
-                              this.onClickCmd(`$app_acid%`);//12	柠檬酸冲洗
+                              this.onClickCmd(`$app_acid%`,"柠檬酸冲洗");//12	柠檬酸冲洗
                             }}>
                                 <FormattedMessage id="setting.system.rinse" defaultMessage="冲洗" />
                             </Button>
@@ -271,7 +271,7 @@ class Index extends React.Component {
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
-                              this.onClickCmd(`$sysinit%`);//12	恢复出厂设置	恢复出厂时的状态	$sysinit%
+                              this.onClickCmd(`$sysinit%`,"恢复出厂设置");//12	恢复出厂设置	恢复出厂时的状态	$sysinit%
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>

@@ -88,7 +88,7 @@ class SettingSystem extends PureComponent{
         const {dispatch} = this.props;
         if(this.state.quality.length > 0){
           const cmd = `$sysprodtrigger ${this.state.quality}%`;
-          dispatch(wifi_sendcmd_request({cmd}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置出水水质'}));
           this.onCloseQuality();
         }
         else{
@@ -129,12 +129,12 @@ class SettingSystem extends PureComponent{
         //   const end = moment(dormancy.dormancyend).format('HH');
         //   const cmd = `$fidleoffon 1.${start}.${end}%`;
           const cmd = `$fidleoffon 1.${dormancy.dormancystart}.${dormancy.dormancyend}%`;
-          dispatch(wifi_sendcmd_request({cmd}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置休眠状态'}));
           this.onCloseDormancy();
         }
         else{
           const cmd = `$fidle 0%`;
-          dispatch(wifi_sendcmd_request({cmd}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置休眠状态'}));
           this.onCloseDormancy();
         }
     }

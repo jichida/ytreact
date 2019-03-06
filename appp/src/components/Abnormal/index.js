@@ -49,7 +49,7 @@ class Abnormal extends PureComponent{
       // refresh
       const cmd = `$data%`;
       const {dispatch} = this.props;
-      dispatch(wifi_sendcmd_request({cmd}));
+      dispatch(wifi_sendcmd_request({cmd,cmdstring:'获取数据'}));
 
       console.log('Refresh')
   }

@@ -221,8 +221,11 @@ const parsedata = (stringbody,callbackfn)=>{
   const c_value_dormancyend = moment(`2019-01-01 ${value_dormancyend}:00:00`);
   lodash_set(result,'syssettings.dormancyend',c_value_dormancyend.format('HH'));
 
-
-
+  let value_ph = lodash_get(result,'inwatersettings.ph','70');
+  value_ph = parseInt(value_ph)/10;
+  value_ph = value_ph.toFixed(1);
+  lodash_set(result,'inwatersettings.ph',value_ph);
+  debugger;
   console.log(result);
 
   const main_outwater_grade = lodash_get(result,'homedata.main_outwater_grade');
@@ -538,7 +541,7 @@ export function* wififlow() {
         yield call(socket_send_promise,payload.cmd);
         yield put(set_weui({
           toast:{
-          text:`【${payload.cmd}】开始命令发送`,
+          text:`【${payload.cmdstring}】开始命令发送`,
           show: true,
           type:'success'
         }}));
@@ -594,7 +597,7 @@ export function* wififlow() {
           if(istimeout){
             yield put(set_weui({
               toast:{
-              text:`发送给硬件命令返回超时,${delaytime}毫秒`,
+              text:`发送给硬件【${payload.cmdstring}】命令返回超时,${delaytime}毫秒`,
               show: true,
               type:'success'
             }}));
@@ -602,7 +605,7 @@ export function* wififlow() {
           else{
             yield put(set_weui({
               toast:{
-              text:`第二次发送给硬件命令成功`,
+              text:`发送给硬件【${payload.cmdstring}】命令成功(重试后)`,
               show: true,
               type:'success'
             }}));
@@ -611,7 +614,7 @@ export function* wififlow() {
         else{
           yield put(set_weui({
             toast:{
-            text:`第一次发送给硬件命令成功`,
+            text:`发送给硬件【${payload.cmdstring}】命令成功`,
             show: true,
             type:'success'
           }}));

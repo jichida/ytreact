@@ -76,7 +76,14 @@ const socket_send = (values,fncallback)=>{
       if(iend >= 0){
         objstring = recvbuf.substr(istart,iend - istart);
         console.log(objstring)
-        store.dispatch(socket_recvdata({code:0,data:`${objstring}ok%`}));
+
+        if(recvbuf === '$data%'){
+          store.dispatch(socket_recvdata({code:0,data:`$50,0,300,50000,125,5000,720,50,30,10,0,10,120,0,90,50,10,30,10,0,60,0,0,0,91,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,300,0,7,22,2,7,600,300,20,%`}));
+        }
+        else{
+          store.dispatch(socket_recvdata({code:0,data:`${objstring}ok%`}));
+        }
+
       }
     }
 

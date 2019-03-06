@@ -44,7 +44,7 @@ class Home extends PureComponent{
         // refresh
         const cmd = `$data%`;
         const {dispatch} = this.props;
-        dispatch(wifi_sendcmd_request({cmd}));
+        dispatch(wifi_sendcmd_request({cmd,cmdstring:'获取数据'}));
 
         console.log('Refresh')
     }
@@ -284,7 +284,7 @@ class Home extends PureComponent{
       console.log(value_filterelements_posfilter3_leftvol)
 
         if(!isgetdata){
-          //未获取到数据，需要加个大按钮 
+          //未获取到数据，需要加个大按钮
           return (
             <Refresh handleRefresh={this.handleRefresh} />
           )

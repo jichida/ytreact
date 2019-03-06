@@ -1,6 +1,7 @@
 import store from './store';
 import {wifi_setstatus,socket_setstatus,socket_recvdata} from '../actions';
 import {xviewfun} from './xviewfun';
+import lodash_get from 'lodash.get';
 
 window.wifistatuscallback_yt = (result)=>{
   // alert(`${JSON.stringify(result)}`)
@@ -8,9 +9,7 @@ window.wifistatuscallback_yt = (result)=>{
   // alert(`wifistatuscallback_yt:${data.wifiStatus}`)
   store.dispatch(wifi_setstatus(data));
 }
-window.socketstatuscallback = (result)=>{
-  store.dispatch(socket_setstatus(result));
-}
+
 window.xviewReceiverNativeSocket = (result)=>{
   store.dispatch(socket_recvdata(result));
 }
@@ -114,6 +113,15 @@ const getwifistatus = ()=>{
     callback:"wifistatuscallback_yt"
   }
   xviewfun(JSON.stringify(xviewData));
+}
+
+window.socketstatuscallback = (result)=>{
+  if(lodash_get(result,'data.socketStatus',0) === 1){
+    socket_send({'sendMessage':'$data%'},()=>{
+
+    });
+  }
+  store.dispatch(socket_setstatus(result));
 }
 //
 // ##### (8)wifi状态回调

@@ -1,4 +1,5 @@
 import store from './store';
+import lodash_get from 'lodash.get';
 import {wifi_setstatus,socket_setstatus,socket_recvdata} from '../actions';
 
 // let fncallback;
@@ -15,9 +16,7 @@ window.wifistatuscallback_yt = (result)=>{
   const data = result.data;
   store.dispatch(wifi_setstatus(data));
 }
-window.socketstatuscallback = (result)=>{
-  store.dispatch(socket_setstatus(result));
-}
+
 window.xviewReceiverNativeSocket = (result)=>{
   store.dispatch(socket_recvdata(result));
 }
@@ -107,7 +106,15 @@ const getwifistatus = ()=>{
   // }
   // xviewfun(JSON.stringify(xviewData));
 }
+window.socketstatuscallback = (result)=>{
+  //data { socketStatus:  -1 0 1 2 }
+  if(lodash_get(result,'data.socketStatus',0) === 1){
+    socket_send({'sendMessage':'$data%'},()=>{
 
+    });
+  }
+  store.dispatch(socket_setstatus(result));
+}
 
 export {socket_connnect,socket_send,socket_close,getwifistatus,
   getssidlist,setcurwifi,openwifi,setwifistatuscallback}

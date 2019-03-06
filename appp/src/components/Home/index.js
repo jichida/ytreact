@@ -11,6 +11,8 @@ import Performance from '../Performance';
 import './index.less';
 import wifi_img from '../../assets/wlimg.png';
 import nowifi_img from '../../assets/no-wifi.png';
+import connected_img from '../../assets/connected.png';
+import disconnect_img from '../../assets/disconnect.png';
 import {ui_home_selindex} from '../../actions';
 
 class Home extends PureComponent{
@@ -39,7 +41,7 @@ class Home extends PureComponent{
     }
 
     render () {
-        const { history, intl: { formatMessage },wifiStatus } = this.props;
+        const { history, intl: { formatMessage },wifiStatus, wifidirectmodesocketstatus } = this.props;
         const { curtab } = this.props;
         let content;
         switch (curtab) {
@@ -74,6 +76,13 @@ class Home extends PureComponent{
                 </div> },
           ];
         const wifiimage = wifiStatus === 1?wifi_img:nowifi_img;
+
+        let connectStatusImg = disconnect_img
+        if(wifidirectmodesocketstatus === 0 || wifidirectmodesocketstatus === 1) {
+            connectStatusImg = connected_img
+        } else if(wifidirectmodesocketstatus === -1 || wifidirectmodesocketstatus === 2) {
+            connectStatusImg = disconnect_img
+        }
         return (
             <div className="home">
                 <NavBar
@@ -81,7 +90,10 @@ class Home extends PureComponent{
                     // icon={<Icon type="left" />}
                     // onLeftClick={() => history.goBack()}
                     // rightContent={[<div key="0" className="nav-wifi-icon" onClick={this.onClickWifi}><img src={wifi_img} alt=''/></div>]}
-                    rightContent={[<div key="0" className="nav-wifi-icon" onClick={this.onClickWifi}><img src={wifiimage} alt=''/></div>]}
+                    rightContent={[
+                        <div key="0" className="nav-wifi-icon"><img src={connectStatusImg} alt=''/></div>,
+                        <div key="1" className="nav-wifi-icon" onClick={this.onClickWifi}><img src={wifiimage} alt=''/></div>
+                    ]}
                 >
                     <Tabs
                         tabs={tabs}
@@ -100,8 +112,8 @@ class Home extends PureComponent{
         )
     }
 }
-const mapStateToProps =  ({app:{hometabindex},wifi:{wifiStatus}}) =>{
-  return {curtab:hometabindex,wifiStatus};
+const mapStateToProps =  ({app:{hometabindex, wifidirectmodesocketstatus},wifi:{wifiStatus}}) =>{
+  return {curtab:hometabindex, wifidirectmodesocketstatus, wifiStatus};
 };
 Home = connect(mapStateToProps)(Home);
 export default withRouter(injectIntl(Home));

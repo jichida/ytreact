@@ -35,7 +35,7 @@ import {
   socket_recvdata,
   wifi_getdata,
   wifi_init,
-
+  settcp_connected,
   // wifi_seteasylink,
 } from '../../actions/index.js';
 import { push } from 'connected-react-router';//https://github.com/reactjs/connected-react-router
@@ -730,7 +730,8 @@ export function* wififlow() {
             const wifidirectmodesocketstatus = yield select((state)=>{
               return state.app.wifidirectmodesocketstatus;
             });
-            if(wifidirectmodesocketstatus === 1){
+            if(wifidirectmodesocketstatus === 1 || wifidirectmodesocketstatus === 0){
+              yield put(settcp_connected(true));
               //尝试发送一次命令
               let trycount = 0;
               while(trycount < 5){
@@ -746,11 +747,13 @@ export function* wififlow() {
                   trycount++;
                   continue;
                 }
+                yield put(settcp_connected(true));
                 console.log(`--->数据有返回,退出`)
                 break;
               }
               if(trycount === 5){
                 console.log(`--->重试到底了,开始重连`);
+                yield put(settcp_connected(false));
                 //开始连接socket,进入下一个页面
                 yield call(socket_connnect_promise,{
                   host:config.sockethost,
@@ -759,11 +762,15 @@ export function* wififlow() {
               }
             }
             else{
+              yield put(settcp_connected(false));
               yield call(socket_connnect_promise,{
                 host:config.sockethost,
                 port:config.socketport
               });
             }
+          }
+          else{
+            yield put(settcp_connected(false));
           }
           yield call(delay,delaytime);
       }

@@ -41,7 +41,7 @@ class Home extends PureComponent{
     }
 
     render () {
-        const { history, intl: { formatMessage },wifiStatus, wifidirectmodesocketstatus } = this.props;
+        const { history, intl: { formatMessage },wifiStatus, tcpconnected } = this.props;
         const { curtab } = this.props;
         let content;
         switch (curtab) {
@@ -78,9 +78,9 @@ class Home extends PureComponent{
         const wifiimage = wifiStatus === 1?wifi_img:nowifi_img;
 
         let connectStatusImg = disconnect_img
-        if(wifidirectmodesocketstatus === 0 || wifidirectmodesocketstatus === 1) {
+        if(tcpconnected) {
             connectStatusImg = connected_img
-        } else if(wifidirectmodesocketstatus === -1 || wifidirectmodesocketstatus === 2) {
+        } else {
             connectStatusImg = disconnect_img
         }
         return (
@@ -112,8 +112,8 @@ class Home extends PureComponent{
         )
     }
 }
-const mapStateToProps =  ({app:{hometabindex, wifidirectmodesocketstatus},wifi:{wifiStatus}}) =>{
-  return {curtab:hometabindex, wifidirectmodesocketstatus, wifiStatus};
+const mapStateToProps =  ({app:{hometabindex, tcpconnected},wifi:{wifiStatus}}) =>{
+  return {curtab:hometabindex, tcpconnected, wifiStatus};
 };
 Home = connect(mapStateToProps)(Home);
 export default withRouter(injectIntl(Home));

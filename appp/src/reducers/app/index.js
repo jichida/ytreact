@@ -5,6 +5,7 @@ import {
     ui_home_selindex,
     ui_set_language,
     notify_socket_connected,
+    settcp_connected,
     socket_setstatus
 } from '../../actions/index.js';
 // import moment from 'moment';
@@ -14,6 +15,7 @@ const initial = {
         maintabindex: 0,
         hometabindex: 0,
         locale:'zh-cn',
+        tcpconnected:false,
         issocketconnected:false,
         wifidirectmodesocketstatus:-1,
         //-1 socket 关闭 0 socket 发送消息成功 1 连接成功 2 发送消息失败
@@ -21,9 +23,20 @@ const initial = {
 };
 
 const app = createReducer({
+    [settcp_connected]:(state,payload)=>{
+      //data { socketStatus:  -1 0 1 2 }
+      return { ...state, tcpconnected:payload};
+    },
     [socket_setstatus]:(state,payload)=>{
       //data { socketStatus:  -1 0 1 2 }
-      return { ...state, wifidirectmodesocketstatus:payload.data.socketStatus };
+      const wifidirectmodesocketstatus = payload.data.socketStatus ;
+      let tcpconnected = false;
+      if(wifidirectmodesocketstatus === 0 || wifidirectmodesocketstatus === 1) {
+          tcpconnected = true;
+      } else if(wifidirectmodesocketstatus === -1 || wifidirectmodesocketstatus === 2) {
+          tcpconnected = false;
+      }
+      return { ...state, wifidirectmodesocketstatus,tcpconnected};
     },
     [notify_socket_connected]: (state, payload) => {
         return { ...state, issocketconnected:payload };

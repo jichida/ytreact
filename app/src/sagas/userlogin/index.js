@@ -82,17 +82,21 @@ export function* userloginflow() {
       let {payload:result} = action;
         console.log(`md_login_result==>${JSON.stringify(result)}`);
         if(!!result){
-            const {loginsuccess,search} = yield select((state)=>{
-              const loginsuccess = state.userlogin.success;
+            const {loginsuccess,search,username,password} = yield select((state)=>{
+              const {username,password,loginsuccess} = state.userlogin;
               const search = state.router.location.search;
-              return {loginsuccess,search};
+              return {username,password,loginsuccess,search};
             });
             yield put(login_result(result));
+            localStorage.removeItem(`yt_${config.softmode}_token`);
+            localStorage.setItem(`ytreact_${config.softmode}_username`,username);
+            localStorage.setItem(`ytreact_${config.softmode}_password`,password);
 
             // yield put(getdevice_request({}));
             // debugger;
             if(!loginsuccess && result.loginsuccess){
-                console.log(`login success,search:${search}`);
+                localStorage.setItem(`yt_${config.softmode}_token`,result.token);
+
                 if(!!result._id){
                   //get device
                   yield put(getdevice_request({'_id':result._id}));

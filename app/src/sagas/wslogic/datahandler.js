@@ -28,12 +28,15 @@ import {
     changepwd_result,
 
     app_sendcmd_request,
-    app_sendcmd_result
+    app_sendcmd_result,
+
+    push_devicecmddata
   } from '../../actions';
 
 //接收的对应关系
 const recvmessagetoresultpair = {
-  'app_sendcmd_result':`${app_sendcmd_result}`,
+  'push_devicecmddata':push_devicecmddata,
+  'app_sendcmd_result':app_sendcmd_result,
   'changepwd_result':changepwd_result,
   'common_err':common_err,
   'findpwd_result':findpwd_result,

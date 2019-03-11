@@ -35,6 +35,9 @@ import {
   wifi_getdata,
   wifi_init,
 
+  app_sendcmd_request,
+
+  push_devicecmddata
   // wifi_seteasylink,
 } from '../../actions/index.js';
 import { push } from 'connected-react-router';//https://github.com/reactjs/connected-react-router
@@ -350,6 +353,25 @@ export function* wififlow() {
     //     console.log(e);
     //   }
     // });
+    yield takeLatest(`${push_devicecmddata}`,function*(action){
+      const {payload} = action;
+      try{
+        const result = payload.data;
+        console.log(result);
+        if(result.cmd === 'data'){
+          //get result.data
+          yield put(wifi_getdata(result.data));
+
+          // yield call(socket_send_promise,'$dataok%');
+        }
+        else if(result.cmd === 'ok'){
+          yield put(wifi_sendcmd_result({}));
+        }
+      }
+      catch(e){
+        console.log(e);
+      }
+    });
 
     yield takeLatest(`${socket_recvdata}`,function*(action){
       const {payload} = action;
@@ -494,53 +516,54 @@ export function* wififlow() {
     });
     yield takeLatest(`${wifi_sendcmd_request}`, function*(action) {
       try{
-        const {payload} = action;
-        yield call(socket_send_promise,payload.cmd);
-        yield put(set_weui({
-          toast:{
-          text:`【${payload.cmd}】开始命令发送`,
-          show: true,
-          type:'success'
-        }}));
-        const delaytime = 3000;//
-        const raceresult = yield race({
-           wifiresult: take(`${wifi_sendcmd_result}`),
-           timeout: call(delay, delaytime)
-        });
-        const { timeout } = raceresult;
-        if(!!timeout){
-          //等3秒超时，重发一次
-          yield call(socket_send_promise,payload.cmd);
-        const raceresult = yield race({
-           wifiresult: take(`${wifi_sendcmd_result}`),
-           timeout: call(delay, delaytime)
-        });
-        const { timeout } = raceresult;
-        if(!!timeout){
-          yield put(set_weui({
-            toast:{
-            text:`发送给硬件命令返回超时,${delaytime}毫秒`,
-            show: true,
-            type:'success'
-          }}));
-        }
-        else{
-          yield put(set_weui({
-            toast:{
-              text:`第二次发送给硬件命令成功`,
-              show: true,
-              type:'success'
-            }}));
-          }
-        }
-        else{
-          yield put(set_weui({
-            toast:{
-            text:`第一次发送给硬件命令成功`,
-            show: true,
-            type:'success'
-          }}));
-        }
+        yield put(app_sendcmd_request(action.payload));
+        // const {payload} = action;
+        // yield call(socket_send_promise,payload.cmd);
+        // yield put(set_weui({
+        //   toast:{
+        //   text:`【${payload.cmd}】开始命令发送`,
+        //   show: true,
+        //   type:'success'
+        // }}));
+        // const delaytime = 3000;//
+        // const raceresult = yield race({
+        //    wifiresult: take(`${wifi_sendcmd_result}`),
+        //    timeout: call(delay, delaytime)
+        // });
+        // const { timeout } = raceresult;
+        // if(!!timeout){
+        //   //等3秒超时，重发一次
+        //   yield call(socket_send_promise,payload.cmd);
+        // const raceresult = yield race({
+        //    wifiresult: take(`${wifi_sendcmd_result}`),
+        //    timeout: call(delay, delaytime)
+        // });
+        // const { timeout } = raceresult;
+        // if(!!timeout){
+        //   yield put(set_weui({
+        //     toast:{
+        //     text:`发送给硬件命令返回超时,${delaytime}毫秒`,
+        //     show: true,
+        //     type:'success'
+        //   }}));
+        // }
+        // else{
+        //   yield put(set_weui({
+        //     toast:{
+        //       text:`第二次发送给硬件命令成功`,
+        //       show: true,
+        //       type:'success'
+        //     }}));
+        //   }
+        // }
+        // else{
+        //   yield put(set_weui({
+        //     toast:{
+        //     text:`第一次发送给硬件命令成功`,
+        //     show: true,
+        //     type:'success'
+        //   }}));
+        // }
       }
       catch(e){
         console.log(e);

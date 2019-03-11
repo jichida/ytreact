@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { NavBar, TabBar } from 'antd-mobile';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,6 +8,8 @@ import './index.less';
 
 import system_img from '../../assets/set1.png';
 import water_img from '../../assets/set2.png';
+import connected_img from '../../assets/connnected.png';
+import disconnect_img from '../../assets/disconnnected.png';
 // import wifi_img from '../../assets/set3.png';
 // import table_img from '../../assets/set4.png';
 
@@ -27,7 +30,13 @@ class Setting extends PureComponent{
     }
 
     render () {
-        // const { history } = this.props;        
+         const { tcpconnected } = this.props;    
+        let connectStatusImg = disconnect_img
+        if(tcpconnected) {
+            connectStatusImg = connected_img
+        } else {
+            connectStatusImg = disconnect_img
+        }    
 
         return (
             <div className="black_bg">
@@ -36,6 +45,9 @@ class Setting extends PureComponent{
                     className="nav"
                     // icon={<Icon type="left" />}
                     // onLeftClick={() => history.goBack()}
+                    rightContent={[
+                        <div key="0" className="nav-wifi-icon"><img src={connectStatusImg} alt=''/></div>,
+                    ]}
                 >
                 <FormattedMessage id="setting" />
                 </NavBar>
@@ -151,5 +163,10 @@ class Setting extends PureComponent{
         )
     }
 }
+
+const mapStateToProps = ({ app: { tcpconnected } }) => {
+    return { tcpconnected }
+}
+
 
 export default withRouter(Setting);

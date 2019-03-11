@@ -11,8 +11,8 @@ import Performance from '../Performance';
 import './index.less';
 import wifi_img from '../../assets/wlimg.png';
 import nowifi_img from '../../assets/no-wifi.png';
-import connected_img from '../../assets/connected.png';
-import disconnect_img from '../../assets/disconnect.png';
+import connected_img from '../../assets/connnected.png';
+import disconnect_img from '../../assets/disconnnected.png';
 import {ui_home_selindex} from '../../actions';
 
 class Home extends PureComponent{

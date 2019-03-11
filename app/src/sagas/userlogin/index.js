@@ -103,7 +103,7 @@ export function* userloginflow() {
                 }
 
                 if(config.softmode = 'app'){
-                    yield put(app_sendcmd_request({cmd:`$data%`}));
+                    yield put(app_sendcmd_request({cmd:`$data%`,cmdstring:'获取数据'}));
                 }
               //switch
                 const fdStart = search.indexOf("?next=");

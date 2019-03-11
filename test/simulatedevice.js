@@ -18,7 +18,7 @@ client.on('data',(data)=>{
     const iend = recvbuf.indexOf('%',istart);
     if(iend >= 0){
       objstring = recvbuf.substr(istart,iend - istart);
-      console.log(objstring)
+
       if(recvbuf === '$deviceid%'){
         let deviceid = 'GHCA0488';
         client.write(`$deviceid:${deviceid}%`);
@@ -27,6 +27,7 @@ client.on('data',(data)=>{
         client.write(`$50,0,300,50000,125,5000,720,50,30,10,0,10,120,0,90,50,10,30,10,0,60,0,0,0,91,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,300,0,7,22,2,7,600,300,20,%`);
       }
       else{
+        console.log(`发送数据:${objstring}ok%`);
         client.write(`${objstring}ok%`);
       }
 

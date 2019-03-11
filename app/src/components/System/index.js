@@ -64,9 +64,9 @@ const RenderForm = createForm({
         props.showModal('modal2');
     }
 
-    const onClickCmd = (cmd)=>{
+    const onClickCmd = (cmd,cmdstring='获取数据')=>{
       const {dispatch} = props;
-      dispatch(wifi_sendcmd_request({cmd}));
+      dispatch(wifi_sendcmd_request({cmd,cmdstring}));
     }
 
     return (
@@ -85,7 +85,7 @@ const RenderForm = createForm({
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
-                              onClickCmd(`$decpression%`);//20	废水阀泄压	整机泄压	$decpression%
+                              onClickCmd(`$decpression%`,'废水阀泄压');//20	废水阀泄压	整机泄压	$decpression%
                             }} >
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
@@ -95,7 +95,7 @@ const RenderForm = createForm({
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{
-                              onClickCmd(`$sysreset 1%`);//重置重启系统	重启系统	$sysreset 1%
+                              onClickCmd(`$sysreset 1%`,'重启系统');//重置重启系统	重启系统	$sysreset 1%
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
@@ -107,7 +107,7 @@ const RenderForm = createForm({
                             <Button size="small" type="ghost" className="btn" onClick={()=>{
                               //获取当前时间
                               const curdate = moment().format('YY.MM.DD.HH.ss');
-                              onClickCmd(`$date ${curdate}%`);//11	重置时间	同步系统时间	$date 18.11.30.13.20% 意思是年.月.日.时.分
+                              onClickCmd(`$date ${curdate}%`,'重置时间');//11	重置时间	同步系统时间	$date 18.11.30.13.20% 意思是年.月.日.时.分
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
@@ -117,7 +117,7 @@ const RenderForm = createForm({
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{
-                              onClickCmd(`$sysinit%`);//12	恢复出厂设置	恢复出厂时的状态	$sysinit%
+                              onClickCmd(`$sysinit%`,'恢复出厂设置');//12	恢复出厂设置	恢复出厂时的状态	$sysinit%
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
@@ -163,14 +163,19 @@ const RenderForm = createForm({
 
 class SettingSystem extends PureComponent{
 
-    state = {
-        Modal1: false,
-        modal2: false,
-        quality: 0,
-        isdormancy: false,
-        dormancystart: '',
-        dormancyend: '',
+  constructor(props) {
+      super(props);
+      const {syssettings} = props;
+      this.state = {
+          Modal1: false,
+          modal2: false,
+          quality:lodashget(syssettings,'quality',''),
+          isdormancy: lodashget(syssettings,'isdormancy',false),
+          dormancystart: moment(`2019-01-01 ${lodashget(syssettings,'dormancystart','00')}:00:00`),
+          dormancyend: moment(`2019-01-01 ${lodashget(syssettings,'dormancyend','00')}:00:00`),
+      };
     }
+
 
     handleSubmit = (values)=>{
         console.log(values);
@@ -209,7 +214,8 @@ class SettingSystem extends PureComponent{
         if(this.state.quality.length > 0){
           const {dispatch} = this.props;
           const cmd = `$prodtrigger ${this.state.quality}%`;
-          dispatch(wifi_sendcmd_request({cmd}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:'出水水质'}));
+          this.onCloseQuality();
         }
     }
 
@@ -242,14 +248,14 @@ class SettingSystem extends PureComponent{
         //   const end = moment(dormancy.dormancyend).format('HH');
         //   const cmd = `$fidleoffon 1.${start}.${end}%`;
           const cmd = `$fidleoffon 1.${dormancy.dormancystart}.${dormancy.dormancyend}%`;
-          dispatch(wifi_sendcmd_request({cmd}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:'休眠'}));
         }
         else{
           const cmd = `$fidle 0%`;
-          dispatch(wifi_sendcmd_request({cmd}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:'休眠'}));
         }
+        this.onCloseDormancy();
     }
-
     render () {
         const { syssettings, dispatch, intl:{ formatMessage }} = this.props;
         const basicData = {
@@ -260,10 +266,10 @@ class SettingSystem extends PureComponent{
                 value: lodashget(syssettings,'dormancy',false),
             },
             dormancystart: {
-                value: '',//lodashget(syssettings,'dormancystart','sample'),
+                value: this.state.dormancystart,
             },
             dormancyend: {
-                value: '',//lodashget(syssettings,'dormancyend','sample'),
+                value: this.state.dormancyend,
             },
         }
         console.log(basicData)
@@ -331,8 +337,13 @@ class SettingSystem extends PureComponent{
                                                 data={hoursList}
                                                 cols={1}
                                                 extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
-                                                value={this.state.dormancystart}
-                                                onChange={val => this.setState({ dormancystart:val })}
+                                                value={[this.state.dormancystart.format('HH')]}
+                                                onChange={(val) => {
+                                                    console.log(val);
+                                                    const v = moment(`2019-01-01 ${val[0]}:00:00`)
+                                                    this.setState({ dormancystart:v })
+                                                  }
+                                                }
                                                 >
                                                 <List.Item></List.Item>
                                             </Picker>
@@ -346,8 +357,12 @@ class SettingSystem extends PureComponent{
                                                 data={hoursList}
                                                 cols={1}
                                                 extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
-                                                value={this.state.dormancyend}
-                                                onChange={val => this.setState({ dormancyend:val })}
+                                                value={[this.state.dormancyend.format('HH')]}
+                                                onChange={(val) => {
+                                                    console.log(val);
+                                                    const v = moment(`2019-01-01 ${val[0]}:00:00`)
+                                                    this.setState({ dormancyend:v })
+                                                  }}
                                                 >
                                                 <List.Item></List.Item>
                                             </Picker>

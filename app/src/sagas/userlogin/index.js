@@ -7,17 +7,14 @@ import {
   findpwd_result,
   set_weui,
   getdevice_request,
+  app_sendcmd_request,
   sendauth_result,
   changepwd_result,
 } from '../../actions';
 // import {getdevice_request} from '../../actions';
 import { replace,goBack} from 'connected-react-router';//https://github.com/reactjs/connected-react-router
+import config from '../../env/config';
 
-// import { goBack } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
-// import config from '../../env/config.js';
-// import  {
-//   getrandom
-// } from '../test/bmsdata.js';
 
 export function* userloginflow() {
 
@@ -99,6 +96,10 @@ export function* userloginflow() {
                 if(!!result._id){
                   //get device
                   yield put(getdevice_request({'_id':result._id}));
+                }
+
+                if(config.softmode = 'app'){
+                    yield put(app_sendcmd_request({cmd:`$data%`}));
                 }
               //switch
                 const fdStart = search.indexOf("?next=");

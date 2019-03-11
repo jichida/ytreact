@@ -3,7 +3,7 @@
 export const adddevice_request = createAction('adddevice_request');
 export const adddevice_result = createAction('adddevice_result');
 
-//getdevice 可能不用
+
 export const getdevice_request = createAction('getdevice_request');
 export const getdevice_result = createAction('getdevice_result');
 
@@ -15,4 +15,4 @@ export const tmp_ui_setuserdevice_request = createAction('tmp_ui_setuserdevice_r
 
 export const app_sendcmd_request = createAction('app_sendcmd_request');
 export const app_sendcmd_result = createAction('app_sendcmd_result');
-export const push_devicecmddata = createAction('push_devicecmddata'); 
+export const push_devicecmddata = createAction('push_devicecmddata');

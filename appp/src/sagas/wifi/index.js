@@ -36,6 +36,11 @@ import {
   wifi_getdata,
   wifi_init,
   settcp_connected,
+  app_sendcmd_request,
+
+  push_devicecmddata,
+
+
   // wifi_seteasylink,
 } from '../../actions/index.js';
 import { push } from 'connected-react-router';//https://github.com/reactjs/connected-react-router
@@ -57,7 +62,6 @@ const parsedata = (stringbody,callbackfn)=>{
   stringbody = lodash_replace(stringbody, '$', '');
   stringbody = lodash_replace(stringbody, '%', '');
   const dataz = lodash_split(stringbody, ',');
-
   const mapdatafieldname = [
     'homedata.main_outwater_quality',//1、出水水质 :PPM
     'homedata.main_outwater_grade',//2、出水等级,
@@ -380,8 +384,27 @@ export function* wififlow() {
     //     console.log(e);
     //   }
     // });
+    yield takeLatest(`${push_devicecmddata}`,function*(action){
+      const {payload} = action;
+      try{
+        const result = payload.data;
+        console.log(result);
+        if(result.cmd === 'data'){
+          //get result.data
+          yield put(wifi_getdata(result.data));
 
-    yield takeEvery(`${socket_recvdata}`,function*(action){
+          // yield call(socket_send_promise,'$dataok%');
+        }
+        else if(result.cmd === 'ok'){
+          yield put(wifi_sendcmd_result({}));
+        }
+      }
+      catch(e){
+        console.log(e);
+      }
+    });
+
+    yield takeLatest(`${socket_recvdata}`,function*(action){
       const {payload} = action;
       try{
         console.log(payload);
@@ -536,6 +559,10 @@ export function* wififlow() {
     });
     yield takeLatest(`${wifi_sendcmd_request}`, function*(action) {
       try{
+if(config.softmode = 'app'){
+        yield put(app_sendcmd_request(action.payload));
+}
+else{
         const {payload} = action;
         console.log(payload);
         yield call(socket_send_promise,payload.cmd);
@@ -619,6 +646,7 @@ export function* wififlow() {
             type:'success'
           }}));
         }
+}
       }
       catch(e){
         console.log(e);

@@ -58,12 +58,6 @@ const initial = {
           timezone:`${curTZ}`,
           sdate:new Date(),
           stime:new Date(),
-          quality:'',
-          //《-----
-          dormancy:false,
-          dormancystart:'',
-          dormancyend:'',
-          language:''
       },
       inwatersettings:{//进水设定
         tds:'',

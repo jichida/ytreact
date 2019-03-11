@@ -20,3 +20,6 @@ export const logout_result = createAction('userlogin.logout_result');
 
 export const findpwd_request = createAction('findpwd_request');
 export const findpwd_result = createAction('findpwd_result');
+
+export const changepwd_request = createAction('changepwd_request');
+export const changepwd_result = createAction('changepwd_result');

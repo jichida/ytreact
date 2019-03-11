@@ -76,6 +76,13 @@ const initial = {
         alkalinity:'',//进水碱度	进水碱度  word	1 word
         ph:'',//49	进水PH	进水的PH值  byte	1 byte
       },
+      syssettings:{//系统设置
+          quality:'',
+          dormancy:false,
+          dormancystart:'00:00',
+          dormancyend:'23:00',
+          language:''
+      },
     },
 
 };
@@ -85,12 +92,14 @@ const devicedata = createReducer({
         // let homedata = state.homedata;
         // let errordata = state.errordata;
         // let performancedata = state.performancedata;
-        const {homedata:homedatanew,errordata:errordatanew,performancedata:performancedatanew,inwatersettings:inwatersettingsnew} = payload;
+        const {homedata:homedatanew,errordata:errordatanew,performancedata:performancedatanew,inwatersettings:inwatersettingsnew,
+        syssettings:syssettingsnew} = payload;
         const homedata = {...homedatanew};
         const errordata = {...errordatanew};
         const performancedata = {...performancedatanew};
         const inwatersettings = {...inwatersettingsnew};
-        return { ...state, homedata,errordata,performancedata,inwatersettings,isgetdata:true};
+        const syssettings = {...syssettingsnew};
+        return { ...state, homedata,errordata,performancedata,inwatersettings,syssettings,isgetdata:true};
     },
 
 }, initial.devicedata);

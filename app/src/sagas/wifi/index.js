@@ -229,7 +229,7 @@ const parsedata = (stringbody,callbackfn)=>{
   value_ph = parseInt(value_ph)/10;
   value_ph = value_ph.toFixed(1);
   lodash_set(result,'inwatersettings.ph',value_ph);
-  debugger;
+  // debugger;
   console.log(result);
 
   const main_outwater_grade = lodash_get(result,'homedata.main_outwater_grade');
@@ -575,7 +575,7 @@ export function* wififlow() {
               });
 
               const { devicecmdresult,timeout } = raceresult;
-              debugger;
+              // debugger;
               // payload:
               //   cmd: "echo"
               //   data: "$sysreset 1ok%"
@@ -779,8 +779,6 @@ export function* wififlow() {
             yield put(wifi_getssidlist_result(wifiresult.data));
           }
         }
-
-
       }
       catch(e){
         console.log(e);

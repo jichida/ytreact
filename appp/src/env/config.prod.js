@@ -11,7 +11,7 @@ let config = {
     serverurl:`${serverurl}`,
     wspath:`${wspath}`,
     requesttimeout:5000,
-    appversion:'1.3.10(build0307)',
+    appversion:'1.3.11(build0312)',
     sendlocationinterval:20000,
     softmode:'appp'
 };

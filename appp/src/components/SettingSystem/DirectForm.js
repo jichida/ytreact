@@ -309,15 +309,15 @@ class Index extends React.Component {
                                     if(language === 'en'){
                                       // 语言选择：0 ：中文简体，1：中文繁体，2：英语	$charact 0%
                                       const cmd = `$charact 2%`;
-                                      this.onClickCmd(cmd);
+                                      this.onClickCmd(cmd,'设置英语');
                                     }
                                     else if(language === 'zh-cn'){
                                       const cmd = `$charact 0%`;
-                                      this.onClickCmd(cmd);
+                                      this.onClickCmd(cmd,'设置中文简体');
                                     }
                                     else if(language === 'zh-tw'){
                                       const cmd = `$charact 1%`;
-                                      this.onClickCmd(cmd);
+                                      this.onClickCmd(cmd,'设置中文繁体');
                                     }
                                     console.log(v);
                                   }

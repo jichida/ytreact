@@ -656,7 +656,7 @@ export function* wififlow() {
       yield takeLatest(`${wifi_getssidlist_request}`, function*(action) {
         try{
           let {payload:result} = action;
-          const delaytime = 5000;
+          const delaytime = 15000;
           yield put(set_weui({
             toast:{
               type:'loading',

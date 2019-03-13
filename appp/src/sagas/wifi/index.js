@@ -558,10 +558,10 @@ export function* wififlow() {
     });
     yield takeLatest(`${wifi_sendcmd_request}`, function*(action) {
       try{
-            if(config.softmode = 'app'){
-                yield put(app_sendcmd_request(action.payload));
-            }
-            else{
+              if(config.softmode = 'app'){
+                  yield put(app_sendcmd_request(action.payload));
+              }
+              else{
                     const {payload} = action;
                     console.log(payload);
                     yield call(socket_send_promise,payload.cmd);

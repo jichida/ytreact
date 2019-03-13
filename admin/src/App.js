@@ -26,7 +26,8 @@ import {InstallerList,InstallerEdit,InstallerCreate} from './components/installe
 // import {UserlistList,UserlistEdit} from './components/user/index.js';
 // import {AboutlistList,AboutlistEdit,AboutlistCreate} from './components/abouts/index.js';
 import {DeviceuserList,DeviceuserEdit} from './components/deviceuser/index';
-// import {RealtimedatalistList,RealtimedatalistEdit} from './components/realtimedata/index';
+import {DeviceList,DeviceEdit} from './components/device/index';
+import {DevicedatahistoryList,DevicedatahistoryEdit} from './components/devicedatahistory/index';
 // import {DevicedatahistoryList,DevicedatahistoryEdit} from './components/devicedatahistory/index';
 // import {RecommendHistoryList,RecommendHistoryEdit} from './components/recommendhistory/index';
 
@@ -59,6 +60,8 @@ class App extends Component {
             <Resource name="installer"  icon={Widgets} list={InstallerList} edit={InstallerEdit} create={InstallerCreate} />,
             <Resource name="distributor"  icon={Widgets} list={DistributorList} edit={DistributorEdit} create={DistributorCreate} />,
             <Resource name="deviceuser"  icon={Widgets} list={DeviceuserList} edit={DeviceuserEdit}  />,
+            <Resource name="device"  icon={Widgets} list={DeviceList} edit={DeviceEdit} />,
+            <Resource name="devicedatahistory"  icon={Widgets} list={DevicedatahistoryList} edit={DevicedatahistoryEdit}  />,
           ]}
       }
       </Admin>

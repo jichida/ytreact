@@ -20,3 +20,9 @@ export const getdevicecount_result = createAction('getdevicecount_result');
 
 export const getdevicedata_request = createAction('getdevicedata_request');
 export const getdevicedata_result = createAction('getdevicedata_result');
+export const getdevicehisdata_request = createAction('getdevicehisdata_request');
+export const getdevicehisdata_result = createAction('getdevicehisdata_result');
+export const getdevicecmddata_request = createAction('getdevicecmddata_request');
+export const getdevicecmddata_result = createAction('getdevicecmddata_result');
+export const adddevicecmddata_request = createAction('adddevicecmddata_request');
+export const adddevicecmddata_result = createAction('adddevicecmddata_result');

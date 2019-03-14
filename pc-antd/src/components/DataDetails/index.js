@@ -11,6 +11,8 @@ import GridContent from '../GridContent';
 import config from './config';
 import './index.less';
 import {getdevicedata_request,getdevicedata_result} from '../../actions';
+import {getdevicehisdata_request,getdevicehisdata_result} from '../../actions';
+import {getdevicecmddata_request,getdevicecmddata_result} from '../../actions';
 import {callthen} from '../../sagas/pagination';
 
 
@@ -422,14 +424,37 @@ class DataDetails extends React.PureComponent {
     }
 
     componentDidMount(){
-      this.props.dispatch(callthen(getdevicedata_request,getdevicedata_result,{
-        deviceid:lodashget(this,'props.curdevice.deviceid','')
-        })).then((result) => {
-        console.log(result);
+      const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid');
+      if(!!deviceid){
+        this.props.dispatch(callthen(getdevicedata_request,getdevicedata_result,{
+          deviceid
+          })).then((result) => {
+            //实时数据，对应this.state.homedata
+            this.setState({homedata:result.homedata});
+          console.log(result);
+        }).catch((err) => {
+          console.log(err);
+        })
+        this.props.dispatch(callthen(getdevicehisdata_request,getdevicehisdata_result,{
+          deviceid
+          })).then((result) => {
+            //历史数据，对应this.state.data_spot
+            this.setState({data_spot:result});
+          console.log(result);
+        }).catch((err) => {
+          console.log(err);
+        })
+        this.props.dispatch(callthen(getdevicecmddata_request,getdevicecmddata_result,{
+          deviceid
+          })).then((result) => {
+            //历史命令数据，对应this.state.dataMode
+            this.setState({dataMode:result});
+          console.log(result);
+        }).catch((err) => {
+          console.log(err);
+        })
+      }
 
-      }).catch((err) => {
-        console.log(err);
-      })
     }
 
 

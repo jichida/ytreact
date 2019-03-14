@@ -1,6 +1,6 @@
 
 import { createAction } from 'redux-act';
-import { take,put, call,race,takeLatest } from 'redux-saga/effects';
+import { take,put, call,race,takeLatest,takeEvery } from 'redux-saga/effects';
 import {delay} from 'redux-saga';
 // import paginate_array from 'paginate-array';
 // import lodashmap from 'lodash.map';
@@ -18,7 +18,7 @@ export function callthen(actionreq,actionres,payload){
 }
 //以下导出放在saga中
 export function* createsagacallbackflow(){
-  yield takeLatest(`${synccallreq}`,function*(action){
+  yield takeEvery(`${synccallreq}`,function*(action){
     const {payload:{actionreq,actionres,resolve,reject,...data}} = action;
     try{
       yield put(actionreq(data));//发送请求

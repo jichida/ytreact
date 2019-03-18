@@ -49,7 +49,7 @@ class AppRoot extends React.Component {
             <Route path="/machines" component={Layout(Machines)} /> {/* :param  全部 / 异常 */}
             <Route path="/distribution" component={Layout(Distribution)} />
             <Route path="/distribution_list" component={Layout(DistributionList)} />
-            <Route path="/statistics" component={Layout(Statistics)} />
+            <Route path="/statistics/:id" component={Layout(Statistics)} />
             <Route path="/regional/:addresslevel1" component={Layout(RegionalDisplay)} /> {/* :param  区域 */}
             <Route path="/regional_list/:addresslevel2" component={Layout(RegionalList)} />
             <Route path="/details/:id" component={Layout(DataDetails)} />

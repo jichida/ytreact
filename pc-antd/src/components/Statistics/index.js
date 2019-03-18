@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import lodashget from 'lodash.get';
 import { Card, Row, Col, DatePicker, Radio, Button } from 'antd';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import ReactEcharts from 'echarts-for-react';
@@ -209,5 +211,10 @@ class Statistics extends React.PureComponent {
         )
     }
 }
-
+const mapStateToProps =  ({device:{devices}},props) =>{
+  const curdevice = lodashget(devices,`${props.match.params.id}`,{});
+  console.log(curdevice)
+  return {curdevice};
+};
+Statistics = connect(mapStateToProps)(Statistics);
 export default withRouter(injectIntl(Statistics));

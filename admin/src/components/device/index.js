@@ -1,6 +1,9 @@
 import React from 'react';
 import { List } from 'react-admin';
+
 import {
+
+  NullableBooleanInput,
   Edit,
   TabbedForm,
   FormTab,
@@ -8,28 +11,33 @@ import {
   Datagrid,
   TextField,
   EditButton,
-  ReferenceField,
+  SelectInput,
   Filter,
+  ReferenceInput,
+  ReferenceField,
+
 } from 'react-admin';
+import TextFieldBool from '../controls/TextFieldBool';
+import ImageArrayField from '../controls/imagearrayfield';
+import InputSpaceField from '../controls/InputSpaceField';
 
 
-// import DateDetail from './datadetail';
-
-
-export const DataFilter = props => (
+export const DeviceFilter = props => (
     <Filter {...props}>
         <TextInput label="搜索设备id" source="deviceid_q" />
+        <ReferenceInput label="用户" source="creator" reference="user" addLabel={false}>
+           <SelectInput optionText="username" />
+       </ReferenceInput>
     </Filter>
 );
 
-
-const DevicedatahistoryTitle = ({ record }) => {
+const DeviceuserTitle = ({ record }) => {
     console.log("record=>" + JSON.stringify(record));
-   return <span>设备历史数据</span>;
+   return <span>编辑 设备</span>;
 };
 
-const DevicedatahistoryEdit = (props) => {
-      return (<Edit title={<DevicedatahistoryTitle />} {...props}>
+const DeviceEdit = (props) => {
+      return (<Edit title={<DeviceuserTitle />} {...props}>
         <TabbedForm>
           <FormTab label="基本信息">
             <ReferenceField label="用户设备" source="deviceuserid" reference="deviceuser" allowEmpty>
@@ -109,21 +117,20 @@ const DevicedatahistoryEdit = (props) => {
           </FormTab>
         </TabbedForm>
       </Edit>);
+
 };
 
-
-
-const DevicedatahistoryList = (props) => (//
-     <List title="设备历史数据列表" {...props} filters={<DataFilter />} sort={{ field: 'updated_at', order: 'DESC' }}>
-     <Datagrid>
-       <ReferenceField label="用户设备" source="deviceuserid" reference="deviceuser" allowEmpty>
-           <TextField source="syssettings.deviceid" />
-       </ReferenceField>
-       <TextField label="最新数据" source="updated_at" />
-       <EditButton />
-     </Datagrid>
+const DeviceList = (props) => (//
+     <List title="设备列表" {...props} filters={<DeviceFilter />} sort={{ field: 'updated_at', order: 'DESC' }}>
+        <Datagrid>
+          <ReferenceField label="用户设备" source="deviceuserid" reference="deviceuser" allowEmpty>
+              <TextField source="syssettings.deviceid" />
+          </ReferenceField>
+          <TextField label="最新数据" source="updated_at" />
+          <EditButton />
+        </Datagrid>
     </List>
 );
 
 
-export  {DevicedatahistoryList,DevicedatahistoryEdit};
+export  {DeviceList,DeviceEdit};

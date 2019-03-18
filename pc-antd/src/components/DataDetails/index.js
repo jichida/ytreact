@@ -10,6 +10,12 @@ import 'moment-timezone';
 import GridContent from '../GridContent';
 import config from './config';
 import './index.less';
+import {adddevicecmddata_request,adddevicecmddata_result} from '../../actions';
+import {getdevicedata_request,getdevicedata_result} from '../../actions';
+import {getdevicehisdata_request,getdevicehisdata_result} from '../../actions';
+import {getdevicecmddata_request,getdevicecmddata_result} from '../../actions';
+import {callthen} from '../../sagas/pagination';
+
 
 import sb_icon from '../../assets/sj_icon.png';
 
@@ -19,35 +25,8 @@ const Option = Select.Option;
 
 
 // 操作指令数据
-const dataMode = [
-    {
-        key: 1,
-        type: 'message',
-        body: 'ModinUs: 353 , 303',
-        occurstime: '2018-05-05 3:21:00 PM'
-    },
-]
-
 // 底部表格数据
-const data_spot = [
-    {
-        key: 1,
-        ModInuS: 279,
-        ProductuS:178,
-        ModOutuS: 201,
-        ProductQualityAverage: 76,
-        totalONtime: 82017,
-        productDvol: 0,
-        cYield: 30,
-        DailyVolume: 15830,
-        FeedVolumeDaily: 51281,
-        cWasteVolumeDaily: 35451,
-        totalVol: 50932,
-        SysPressure: 520,
-        tmpt2: 313,
-        createtime: '2018-09-11 9:39:00 AM'
-    },
-]
+
 
 const TopMonitor = injectIntl((props)=>{
     const {homedata, intl} = props;
@@ -386,40 +365,11 @@ const timezoneOption = () => {
 
 class DataDetails extends React.PureComponent {
 
-    state = {
-        action: '',
-        timezone: curTZ,
-    }
-
-    handleSend = () => {
-        if(this.state.action){
-            console.log(this.state.action);
-        }
-    }
-
-    handleStatistic = () => {
-        const { history } = this.props;
-        history.push(`/statistics`);
-
-        console.log('数据统计');
-    }
-
-    handleDownload = () => {
-        console.log('下载数据');
-    }
-
-    render() {
-        const { history } = this.props;
-        const { formatMessage } = this.props.intl;
-        const tzs = timezoneOption();
-
-        const tzOptions = _.map(tzs, (item,key)=>{
-            return (
-                <Option value={item.value} key={key}>{item.label}</Option>
-            )
-        })
-
-        const realtimedata = {
+    constructor(props) {
+      super(props);
+      this.state = {
+          action: '',
+          timezone: curTZ,
           homedata:{
             main_outwater_quality:30,//出水水质,
             main_outwater_grade:'优',//出水等级,
@@ -444,46 +394,125 @@ class DataDetails extends React.PureComponent {
             filterelements_posfilter3_leftday:46,//后置2滤芯寿命剩余天数
             filterelements_uvfilter_leftday:46,//UV滤芯寿命剩余天数
           },
-          // errordata:{
-          //   error_partsfailure:1,//零件故障
-          //   error_pumpfailure:1,//20	泵故障	ERROR2:0 无故障 1有故障
-          //   error_programfailure:1,//21	程序故障	ERROR3:0 无故障 1有故障
-          //   error_flowfailure:1,//22	流量故障	ERROR4:0 无故障 1有故障
-          //   error_leakagefault:1,//23	漏水故障	ERROR5:0 无故障 1有故障
-          //   error_edicurrent:1,//24	EDI电流	ERROR6:0 无故障 1有故障
-          //   error_modout:1,//25	MODOUT  膜的去除效率	ERROR7:0 无故障 1有故障
-          //   error_intakesensorfault:1,//26	进水传感器故障	ERROR8 :0 无故障 1有故障
-          //   error_outflowsensorfault:1,//27	出水传感器故障	ERROR9:0 无故障 1有故障
-          //   error_cwatersensorfault:1,//28	浓水传感器故障	ERROR10 :0 无故障 1有故障
-          //   error_wastewatersensorfault:1,//29	废水传感器故障	ERROR11:0 无故障 1有故障
-          //   error_outflowflowmeterfailure:1,//30	出水流量计故障	ERROR12:0 无故障 1有故障
-          //   error_wastewaterflowmeterfailure:1,//31	废水流量计故障	ERROR13:0 无故障 1有故障
-          //   error_clockfailure:1,//32	时钟故障	ERROR14:0 无故障 1有故障
-          //   error_pressuresensor1failure:0,//33	压力1传感器故障	ERROR15:0 无故障 1有故障
-          //   error_pressuresensor2failure:0,//34	压力2传感器故障	ERROR16:0 无故障 1有故障
-          //   error_pressuresensor3failure:0,//35	压力3传感器故障	ERROR17:0 无故障 1有故障
-          //   error_pressuresensor4failure:0,//36	压力4传感器故障	ERROR18:0 无故障 1有故障
-          // },
-          // performancedata:{
-          //   averagecurrent_600:300,//平均电流@600	600电导率时的电流:mA	1 word
-          //   averagecurrent_300:200,//300电导率时的电流:mA	1 word
-          //   averagecut_600:350,//16	平均cut@600	600电导率时的cut	1 word
-          //   averagecut_300:150,// 17	平均cut@300	300电导率时的cut	1 word
-          //   waterpurificationrate:90,//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
-          //
-          //   max_averagecurrent_600:120,//平均电流@600	600电导率时的电流:mA	1 word
-          //   max_averagecurrent_300:100,//300电导率时的电流:mA	1 word
-          //   max_averagecut_600:170,//16	平均cut@600	600电导率时的cut	1 word
-          //   max_averagecut_300:70,// 17	平均cut@300	300电导率时的cut	1 word
-          //   max_waterpurificationrate:19,//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
-          //
-          //   min_averagecurrent_600:6,//平均电流@600	600电导率时的电流:mA	1 word
-          //   min_averagecurrent_300:5,//300电导率时的电流:mA	1 word
-          //   min_averagecut_600:4,//16	平均cut@600	600电导率时的cut	1 word
-          //   min_averagecut_300:3,// 17	平均cut@300	300电导率时的cut	1 word
-          //   min_waterpurificationrate:2,//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
-          // }
+          dataMode:[
+              // {
+              //     key: 1,
+              //     type: 'message',
+              //     body: 'ModinUs: 353 , 303',
+              //     occurstime: '2018-05-05 3:21:00 PM'
+              // },
+          ],
+          data_spot:[
+              // {
+              //     key: 1,
+              //     ModInuS: 279,
+              //     ProductuS:178,
+              //     ModOutuS: 201,
+              //     ProductQualityAverage: 76,
+              //     totalONtime: 82017,
+              //     productDvol: 0,
+              //     cYield: 30,
+              //     DailyVolume: 15830,
+              //     FeedVolumeDaily: 51281,
+              //     cWasteVolumeDaily: 35451,
+              //     totalVol: 50932,
+              //     SysPressure: 520,
+              //     tmpt2: 313,
+              //     createtime: '2018-09-11 9:39:00 AM'
+              // },
+          ]
+      }
+    }
 
+    componentDidMount(){
+      const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid');
+      if(!!deviceid){
+        this.props.dispatch(callthen(getdevicedata_request,getdevicedata_result,{
+          deviceid
+          })).then((result) => {
+            //实时数据，对应this.state.homedata
+            this.setState({homedata:result.homedata});
+          console.log(result);
+        }).catch((err) => {
+          console.log(err);
+        })
+        this.props.dispatch(callthen(getdevicehisdata_request,getdevicehisdata_result,{
+          deviceid
+          })).then((result) => {
+            //历史数据，对应this.state.data_spot
+            this.setState({data_spot:result});
+          console.log(result);
+        }).catch((err) => {
+          console.log(err);
+        })
+        this.props.dispatch(callthen(getdevicecmddata_request,getdevicecmddata_result,{
+          deviceid
+          })).then((result) => {
+            //历史命令数据，对应this.state.dataMode
+            this.setState({dataMode:result});
+          console.log(result);
+        }).catch((err) => {
+          console.log(err);
+        })
+      }
+
+    }
+
+
+
+    handleSend = () => {
+        const { dispatch } = this.props;
+        const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid');
+        if(this.state.action && !!deviceid){
+            console.log(this.state.action);
+
+            dispatch(callthen(adddevicecmddata_request,adddevicecmddata_result,{
+                deviceid,
+                data:{
+                  type: 'message',
+                  body: this.state.action,
+                }
+              })).then((result) => {
+                console.log(result);
+                this.props.dispatch(callthen(getdevicecmddata_request,getdevicecmddata_result,{
+                  deviceid
+                  })).then((result) => {
+                    //历史命令数据，对应this.state.dataMode
+                    this.setState({dataMode:result});
+                  console.log(result);
+                }).catch((err) => {
+                  console.log(err);
+                });
+            }).catch((err) => {
+              console.log(err);
+            })
+        }
+    }
+
+    handleStatistic = () => {
+        const { history } = this.props;
+        history.push(`/statistics/${this.props.match.params.id}`);
+
+        console.log('数据统计');
+    }
+
+    handleDownload = () => {
+        console.log('下载数据');
+    }
+
+    render() {
+        const { history } = this.props;
+        const { formatMessage } = this.props.intl;
+        const tzs = timezoneOption();
+
+        const tzOptions = _.map(tzs, (item,key)=>{
+            return (
+                <Option value={item.value} key={key}>{item.label}</Option>
+            )
+        })
+
+        const realtimedata = {
+          homedata:this.state.homedata
         };
 
         return (
@@ -501,7 +530,7 @@ class DataDetails extends React.PureComponent {
                     <Col span={2}></Col>
                     <Col span={10} className="sub-title">
                         <div><h2>{formatMessage({id: 'machine.mode'})}</h2><span className="right-Link" onClick={()=>{history.push('/actions')}}>Mode&gt;</span></div>
-                        <Table columns={Mode_columns} dataSource={dataMode} className="table-list" pagination={false} />
+                        <Table columns={Mode_columns} dataSource={this.state.dataMode} className="table-list" pagination={false} />
                     </Col>
                     <Col span={2}></Col>
                     <Col span={8} className="sub-title">
@@ -536,7 +565,7 @@ class DataDetails extends React.PureComponent {
                 </Row>
                 <Row style={{marginTop: 30}}>
                     <Col span={24} style={{margin: '0 auto'}}>
-                        <Table columns={columns} dataSource={data_spot} className="data-table-list" pagination={false} />
+                        <Table columns={columns} dataSource={this.state.data_spot} className="data-table-list" pagination={false} />
                     </Col>
                 </Row>
                 </Card>
@@ -545,7 +574,7 @@ class DataDetails extends React.PureComponent {
     }
 }
 const mapStateToProps =  ({device:{devices}},props) =>{
-  let curdevice = lodashget(devices,`${props.match.params.id}`,{});
+  const curdevice = lodashget(devices,`${props.match.params.id}`,{});
   console.log(curdevice)
   return {curdevice};
 };

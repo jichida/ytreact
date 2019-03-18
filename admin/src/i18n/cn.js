@@ -24,6 +24,12 @@ export default {
     systemconfig:{
       name: '系统配置 |||| 系统配置',
     },
+    device:{
+      name: '设备数据 |||| 设备数据',
+    },
+    devicedatahistory:{
+      name: '设备历史数据 |||| 设备历史数据',
+    },
   }
 
 };

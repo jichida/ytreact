@@ -41,10 +41,23 @@ import {
     createnotice_result,
     page_getnotice_request,
     page_getnotice_result,
+
+    getdevicedata_request,
+    getdevicedata_result,
+    getdevicehisdata_request,
+    getdevicehisdata_result,
+    getdevicecmddata_request,
+    getdevicecmddata_result,
+    adddevicecmddata_request,
+    adddevicecmddata_result
   } from '../../actions';
 
 //接收的对应关系
 const recvmessagetoresultpair = {
+  'getdevicedata_result':getdevicedata_result,
+  'getdevicehisdata_result':getdevicehisdata_result,
+  'getdevicecmddata_result':getdevicecmddata_result,
+  'adddevicecmddata_result':adddevicecmddata_result,
   'createnotice_result':createnotice_result,
   'page_getnotice_result':page_getnotice_result,
   'common_err':common_err,
@@ -77,6 +90,10 @@ const sendmessagefnsz = {
 
 //验证发送接口
 const sendmessageauthfnsz = {
+  'getdevicedata':`${getdevicedata_request}`,
+  'getdevicehisdata':`${getdevicehisdata_request}`,
+  'getdevicecmddata':`${getdevicecmddata_request}`,
+  'adddevicecmddata':`${adddevicecmddata_request}`,
   'createnotice':`${createnotice_request}`,
   'page_getnotice':`${page_getnotice_request}`,
   'getdevicecount':`${getdevicecount_request}`,

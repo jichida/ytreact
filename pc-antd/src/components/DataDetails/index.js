@@ -10,6 +10,7 @@ import 'moment-timezone';
 import GridContent from '../GridContent';
 import config from './config';
 import './index.less';
+import {adddevicecmddata_request,adddevicecmddata_result} from '../../actions';
 import {getdevicedata_request,getdevicedata_result} from '../../actions';
 import {getdevicehisdata_request,getdevicehisdata_result} from '../../actions';
 import {getdevicecmddata_request,getdevicecmddata_result} from '../../actions';
@@ -460,8 +461,31 @@ class DataDetails extends React.PureComponent {
 
 
     handleSend = () => {
-        if(this.state.action){
+        const { dispatch } = this.props;
+        const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid');
+        if(this.state.action && !!deviceid){
             console.log(this.state.action);
+
+            dispatch(callthen(adddevicecmddata_request,adddevicecmddata_result,{
+                deviceid,
+                data:{
+                  type: 'message',
+                  body: this.state.action,
+                }
+              })).then((result) => {
+                console.log(result);
+                this.props.dispatch(callthen(getdevicecmddata_request,getdevicecmddata_result,{
+                  deviceid
+                  })).then((result) => {
+                    //历史命令数据，对应this.state.dataMode
+                    this.setState({dataMode:result});
+                  console.log(result);
+                }).catch((err) => {
+                  console.log(err);
+                });
+            }).catch((err) => {
+              console.log(err);
+            })
         }
     }
 

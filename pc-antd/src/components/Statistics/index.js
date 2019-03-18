@@ -82,6 +82,10 @@ class Statistics extends React.PureComponent {
         })
     }
 
+    handleSearch = ()=> {
+        console.log({...this.state})
+    }
+
     // 示例数据
     getOption = ()=> {
         return ({
@@ -193,7 +197,7 @@ class Statistics extends React.PureComponent {
                                 { types }
                             </Radio.Group>
                         </Col>
-                        <Col span={4}><Button type="primary"><FormattedMessage id="app.search" /></Button></Col>
+                        <Col span={4}><Button type="primary" onClick={this.handleSearch}><FormattedMessage id="app.search" /></Button></Col>
                     </Row>
                     <Row gutter={24} style={{marginBottom: 30}}>
                         <Col span={24}>

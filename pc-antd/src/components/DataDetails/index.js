@@ -395,31 +395,31 @@ class DataDetails extends React.PureComponent {
             filterelements_uvfilter_leftday:46,//UV滤芯寿命剩余天数
           },
           dataMode:[
-              {
-                  key: 1,
-                  type: 'message',
-                  body: 'ModinUs: 353 , 303',
-                  occurstime: '2018-05-05 3:21:00 PM'
-              },
+              // {
+              //     key: 1,
+              //     type: 'message',
+              //     body: 'ModinUs: 353 , 303',
+              //     occurstime: '2018-05-05 3:21:00 PM'
+              // },
           ],
           data_spot:[
-              {
-                  key: 1,
-                  ModInuS: 279,
-                  ProductuS:178,
-                  ModOutuS: 201,
-                  ProductQualityAverage: 76,
-                  totalONtime: 82017,
-                  productDvol: 0,
-                  cYield: 30,
-                  DailyVolume: 15830,
-                  FeedVolumeDaily: 51281,
-                  cWasteVolumeDaily: 35451,
-                  totalVol: 50932,
-                  SysPressure: 520,
-                  tmpt2: 313,
-                  createtime: '2018-09-11 9:39:00 AM'
-              },
+              // {
+              //     key: 1,
+              //     ModInuS: 279,
+              //     ProductuS:178,
+              //     ModOutuS: 201,
+              //     ProductQualityAverage: 76,
+              //     totalONtime: 82017,
+              //     productDvol: 0,
+              //     cYield: 30,
+              //     DailyVolume: 15830,
+              //     FeedVolumeDaily: 51281,
+              //     cWasteVolumeDaily: 35451,
+              //     totalVol: 50932,
+              //     SysPressure: 520,
+              //     tmpt2: 313,
+              //     createtime: '2018-09-11 9:39:00 AM'
+              // },
           ]
       }
     }
@@ -491,7 +491,7 @@ class DataDetails extends React.PureComponent {
 
     handleStatistic = () => {
         const { history } = this.props;
-        history.push(`/statistics`);
+        history.push(`/statistics/${this.props.match.params.id}`);
 
         console.log('数据统计');
     }

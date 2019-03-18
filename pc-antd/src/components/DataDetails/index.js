@@ -528,7 +528,7 @@ class DataDetails extends React.PureComponent {
                             </div>
                             <div style={{marginTop:'50px'}}>
                                 <Button type="primary" size="large" style={{ marginRight:'20px' }} onClick={this.handleStatistic}>{formatMessage({id: 'machine.statistic'})}</Button>
-                                <Button size="large" onClick={this.handleDownload}>{formatMessage({id: 'machine.download'})}</Button>
+                                {/* <Button size="large" onClick={this.handleDownload}>{formatMessage({id: 'machine.download'})}</Button> */}
                             </div>
                         </div>
                     </Col>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Card, Row, Col, DatePicker, Radio } from 'antd';
+import { Card, Row, Col, DatePicker, Radio, Button } from 'antd';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import ReactEcharts from 'echarts-for-react';
 import _ from 'lodash';
@@ -188,11 +188,12 @@ class Statistics extends React.PureComponent {
                         </Col>
                     </Row>
                     <Row gutter={24} style={{marginBottom: 30}} className="statistic_radio">
-                        <Col span={24}>
+                        <Col span={20}>
                             <Radio.Group value={this.state.type} buttonStyle="solid" onChange={this.onTypeChange}>
                                 { types }
                             </Radio.Group>
                         </Col>
+                        <Col span={4}><Button type="primary"><FormattedMessage id="app.search" /></Button></Col>
                     </Row>
                     <Row gutter={24} style={{marginBottom: 30}}>
                         <Col span={24}>

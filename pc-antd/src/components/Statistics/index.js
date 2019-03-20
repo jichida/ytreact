@@ -39,11 +39,11 @@ const cycleAction = [
 const typeAction = [
     {
       name: 'mod in/out',
-      action: 'mod in/out',
+      action: 'homedata.main_outwater_quality',
     },
     {
         name: <FormattedMessage id="machine.report.quality" />,
-        action: 'quality',
+        action: 'homedata.main_inwater_quality',
     },
     {
         name: <FormattedMessage id="machine.report.pressure" />,
@@ -70,8 +70,8 @@ class Statistics extends React.PureComponent {
       super(props);
       this.state = {
           cycle: 'day',
-          type: 'mod in/out',
-          rangeDate: [moment('2018-11-01', dateFormat), moment('2018-11-30', dateFormat)],
+          type: 'homedata.main_outwater_quality',
+          rangeDate: [moment('2019-01-01', dateFormat), moment('2019-11-30', dateFormat)],
       }
     }
     componentDidMount(){
@@ -109,7 +109,8 @@ class Statistics extends React.PureComponent {
     }
 
     handleSearch = ()=> {
-        console.log({...this.state})
+      this.onClickQuery();
+        // console.log({...this.state})
     }
 
     // 示例数据

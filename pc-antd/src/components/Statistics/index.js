@@ -10,7 +10,8 @@ import GridContent from '../GridContent';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import './index.less';
-
+import {getdevicestat_request,getdevicestat_result} from '../../actions';
+import {callthen} from '../../sagas/pagination';
 import sb_icon from '../../assets/sj_icon.png';
 
 moment.locale('zh-cn');
@@ -38,11 +39,11 @@ const cycleAction = [
 const typeAction = [
     {
       name: 'mod in/out',
-      action: 'mod in/out',
+      action: 'homedata.main_outwater_quality',
     },
     {
         name: <FormattedMessage id="machine.report.quality" />,
-        action: 'quality',
+        action: 'homedata.main_inwater_quality',
     },
     {
         name: <FormattedMessage id="machine.report.pressure" />,
@@ -65,13 +66,37 @@ const typeAction = [
 
 
 class Statistics extends React.PureComponent {
-
-    state = {
-        cycle: 'day',
-        type: 'mod in/out',
-        rangeDate: [],
+    constructor(props) {
+      super(props);
+      this.state = {
+          cycle: 'day',
+          type: 'homedata.main_outwater_quality',
+          rangeDate: [],
+          isGetData: false
+      }
     }
-
+    componentDidMount(){
+      this.onClickQuery();
+    }
+    onClickQuery = ()=>{
+      const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid');
+      if(!!deviceid){
+        this.props.dispatch(callthen(getdevicestat_request,getdevicestat_result,{
+            deviceid,
+            data:{
+              cycle:this.state.cycle,
+              type:this.state.type,
+              rangeDate:this.state.rangeDate
+            }
+          })).then((result) => {
+            //实时数据，对应this.state.homedata
+            // this.setState({homedata:result.homedata});
+          console.log(result);
+        }).catch((err) => {
+          console.log(err);
+        })
+      }
+    }
     onCycleChange = (e)=> {
         this.setState({
             cycle: e.target.value,
@@ -90,7 +115,8 @@ class Statistics extends React.PureComponent {
     }
 
     handleSearch = ()=> {
-        console.log({...this.state})
+      this.onClickQuery();
+        // console.log({...this.state})
     }
 
     // 示例数据
@@ -213,7 +239,7 @@ class Statistics extends React.PureComponent {
                     </Row>
                     <Row gutter={24} style={{marginBottom: 30}}>
                         <Col span={24}>
-                            <ReactEcharts option={this.getOption()} />
+                            {isGetData ? <ReactEcharts option={this.getOption()} /> : '暂无数据'} 
                         </Col>
                     </Row>
                 </Card>

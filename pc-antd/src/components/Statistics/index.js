@@ -69,7 +69,7 @@ class Statistics extends React.PureComponent {
     state = {
         cycle: 'day',
         type: 'mod in/out',
-        rangeDate: [moment('2018-11-01', dateFormat), moment('2018-11-30', dateFormat)],
+        rangeDate: [],
     }
 
     onCycleChange = (e)=> {
@@ -82,6 +82,11 @@ class Statistics extends React.PureComponent {
         this.setState({
             type: e.target.value,
         })
+    }
+
+    handleRangePick = (datas, datastrings) => {
+        const rangeDate = [datas[0], datas[1]]
+        this.setState({rangeDate})
     }
 
     handleSearch = ()=> {
@@ -190,7 +195,12 @@ class Statistics extends React.PureComponent {
                             </Radio.Group>
                         </Col>
                         <Col span={4}>
-                                <DatePicker.RangePicker  value={this.state.rangeDate} />
+                                <DatePicker.RangePicker 
+                                    ranges={{ '当天': [moment(), moment()], '当月': [moment().startOf('month'), moment().endOf('month')] }}  
+                                    value={this.state.rangeDate} 
+                                    format={dateFormat}
+                                    onChange={this.handleRangePick}
+                                />
                         </Col>
                     </Row>
                     <Row gutter={24} style={{marginBottom: 30}} className="statistic_radio">

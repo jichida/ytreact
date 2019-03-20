@@ -91,7 +91,8 @@ class Statistics extends React.PureComponent {
           })).then((result) => {
             //实时数据，对应this.state.homedata
             // this.setState({homedata:result.homedata});
-          console.log(result);
+            this.setState({isGetData: true})
+            console.log(result);
         }).catch((err) => {
           console.log(err);
         })
@@ -239,7 +240,7 @@ class Statistics extends React.PureComponent {
                     </Row>
                     <Row gutter={24} style={{marginBottom: 30}}>
                         <Col span={24}>
-                            {isGetData ? <ReactEcharts option={this.getOption()} /> : '暂无数据'} 
+                            {this.state.isGetData ? <ReactEcharts option={this.getOption()} /> : '暂无数据'} 
                         </Col>
                     </Row>
                 </Card>

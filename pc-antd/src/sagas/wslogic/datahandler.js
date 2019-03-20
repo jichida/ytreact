@@ -49,11 +49,14 @@ import {
     getdevicecmddata_request,
     getdevicecmddata_result,
     adddevicecmddata_request,
-    adddevicecmddata_result
+    adddevicecmddata_result,
+    getdevicestat_request,
+    getdevicestat_result
   } from '../../actions';
 
 //接收的对应关系
 const recvmessagetoresultpair = {
+  'getdevicestat_result':getdevicestat_result,
   'getdevicedata_result':getdevicedata_result,
   'getdevicehisdata_result':getdevicehisdata_result,
   'getdevicecmddata_result':getdevicecmddata_result,
@@ -90,6 +93,7 @@ const sendmessagefnsz = {
 
 //验证发送接口
 const sendmessageauthfnsz = {
+  'getdevicestat':`${getdevicestat_request}`,
   'getdevicedata':`${getdevicedata_request}`,
   'getdevicehisdata':`${getdevicehisdata_request}`,
   'getdevicecmddata':`${getdevicecmddata_request}`,

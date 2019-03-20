@@ -10,7 +10,8 @@ import GridContent from '../GridContent';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import './index.less';
-
+import {getdevicestat_request,getdevicestat_result} from '../../actions';
+import {callthen} from '../../sagas/pagination';
 import sb_icon from '../../assets/sj_icon.png';
 
 moment.locale('zh-cn');
@@ -65,13 +66,36 @@ const typeAction = [
 
 
 class Statistics extends React.PureComponent {
-
-    state = {
-        cycle: 'day',
-        type: 'mod in/out',
-        rangeDate: [moment('2018-11-01', dateFormat), moment('2018-11-30', dateFormat)],
+    constructor(props) {
+      super(props);
+      this.state = {
+          cycle: 'day',
+          type: 'mod in/out',
+          rangeDate: [moment('2018-11-01', dateFormat), moment('2018-11-30', dateFormat)],
+      }
     }
-
+    componentDidMount(){
+      this.onClickQuery();
+    }
+    onClickQuery = ()=>{
+      const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid');
+      if(!!deviceid){
+        this.props.dispatch(callthen(getdevicestat_request,getdevicestat_result,{
+            deviceid,
+            data:{
+              cycle:this.state.cycle,
+              type:this.state.type,
+              rangeDate:this.state.rangeDate
+            }
+          })).then((result) => {
+            //实时数据，对应this.state.homedata
+            // this.setState({homedata:result.homedata});
+          console.log(result);
+        }).catch((err) => {
+          console.log(err);
+        })
+      }
+    }
     onCycleChange = (e)=> {
         this.setState({
             cycle: e.target.value,

@@ -54,7 +54,7 @@ import config from '../../env/config';
 import moment from 'moment';
 
 let recvbuf = '';
-let linkmode = 'unknow';//unknow,directmode,internetmode
+let linkmode = 'internetmode';//unknow,directmode,internetmode
 let lastresponsemoment = moment();
 
 setwifistatuscallback();
@@ -450,6 +450,14 @@ export function* wififlow() {
       try{
         const {payload:{isinternet}} = action;
         if(isinternet){
+          linkmode = 'internetmode';
+        }
+        else{
+          linkmode = 'directmode';
+        }
+
+
+        if(isinternet){
           yield put(push('/home'));
           return;
         }
@@ -486,7 +494,6 @@ export function* wififlow() {
         else{
           //data { socketStatus:  -1 0 1 2 }
           if(lodash_get(raceresult,'socketestatusresult.payload.data.socketStatus',0) === 1){
-            linkmode = 'directmode';
             yield put(push('/devices'));
           }
           else{
@@ -732,26 +739,27 @@ export function* wififlow() {
           const diffmin = moment().diff(moment(lastresponsemoment),'seconds');
           if(diffmin < 10){
             //10秒钟内有回复,则不要重连了
-            console.log(`--->10s内有回应,不用重连了`)
+            console.log(`--->10s内有回应,不用重连了`);
+            yield put(settcp_connected(true));
             yield call(delay,delaytime);
             continue;
           };
 
-          const internet_connected = yield select((state)=>{
-            return state.app.issocketconnected;
-          });
-          console.log(internet_connected);
-          console.log(`--->开始检查:${linkmode},internet_connected:${internet_connected}`)
-          if(internet_connected){
-            linkmode = 'internetmode';
-            console.log(`--->linkmode从directmode切换为internetmode`)
-          }
-          else{
-            if(linkmode !== 'unknow'){
-              linkmode = 'directmode';//切换为directmode
-            }
-            console.log(`--->linkmode切换为directmode`)
-          }
+          // const internet_connected = yield select((state)=>{
+          //   return state.app.issocketconnected;
+          // });
+          // console.log(internet_connected);
+          // console.log(`--->开始检查:${linkmode},internet_connected:${internet_connected}`)
+          // if(internet_connected){
+          //   linkmode = 'internetmode';
+          //   console.log(`--->linkmode从directmode切换为internetmode`)
+          // }
+          // else{
+          //   if(linkmode !== 'unknow'){
+          //     linkmode = 'directmode';//切换为directmode
+          //   }
+          //   console.log(`--->linkmode切换为directmode`)
+          // }
 
           if(linkmode === 'directmode'){
             const wifidirectmodesocketstatus = yield select((state)=>{

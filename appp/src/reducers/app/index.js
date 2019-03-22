@@ -30,13 +30,13 @@ const app = createReducer({
     [socket_setstatus]:(state,payload)=>{
       //data { socketStatus:  -1 0 1 2 }
       const wifidirectmodesocketstatus = payload.data.socketStatus ;
-      let tcpconnected = false;
-      if(wifidirectmodesocketstatus === 0 || wifidirectmodesocketstatus === 1) {
-          tcpconnected = true;
-      } else if(wifidirectmodesocketstatus === -1 || wifidirectmodesocketstatus === 2) {
-          tcpconnected = false;
-      }
-      return { ...state, wifidirectmodesocketstatus,tcpconnected};
+      // let tcpconnected = false;
+      // if(wifidirectmodesocketstatus === 0 || wifidirectmodesocketstatus === 1) {
+      //     tcpconnected = true;
+      // } else if(wifidirectmodesocketstatus === -1 || wifidirectmodesocketstatus === 2) {
+      //     tcpconnected = false;
+      // }
+      return { ...state, wifidirectmodesocketstatus};
     },
     [notify_socket_connected]: (state, payload) => {
         return { ...state, issocketconnected:payload };

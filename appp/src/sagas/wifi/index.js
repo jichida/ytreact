@@ -229,7 +229,7 @@ const parsedata = (stringbody,callbackfn)=>{
   value_ph = parseInt(value_ph)/10;
   value_ph = value_ph.toFixed(1);
   lodash_set(result,'inwatersettings.ph',value_ph);
-  debugger;
+  // debugger;
   console.log(result);
 
   const main_outwater_grade = lodash_get(result,'homedata.main_outwater_grade');

@@ -262,8 +262,8 @@ const TopChart = injectIntl((props)=>{
     ]
 
     return (
-        <Row gutter={24} style={{marginTop: 30}}>
-            <Col span={24} style={{textAlign: 'center'}}>
+        <Row gutter={24} style={{marginTop: 30, padding: '10px 26px'}}>
+            <Col span={24} style={{display: 'flex', justifyContent: 'space-between'}}>
                 {
                      _.map(chartData, (item)=>{
                         return (
@@ -547,14 +547,14 @@ class DataDetails extends React.PureComponent {
                 </Row>
                 <TopMonitor {...realtimedata} />
                 <TopChart {...realtimedata} />
-                <Row gutter={24} style={{marginTop: 30}}>
-                    <Col span={2}></Col>
-                    <Col span={10} className="sub-title">
+                <Row gutter={24} style={{marginTop: 30, padding: '0 26px'}}>
+                    {/* <Col span={2}></Col> */}
+                    <Col span={12} className="sub-title">
                         <div><h2>{formatMessage({id: 'machine.mode'})}</h2><span className="right-Link" onClick={()=>{history.push('/actions')}}>Mode&gt;</span></div>
                         <Table columns={Mode_columns} dataSource={this.state.dataMode} className="table-list" pagination={false} />
                     </Col>
                     <Col span={2}></Col>
-                    <Col span={8} className="sub-title">
+                    <Col span={10} className="sub-title">
                         <div><h2>{formatMessage({id: 'machine.mode.input'})}</h2></div>
                         <div className="command">
                             <h4>Send a Command</h4>
@@ -582,9 +582,9 @@ class DataDetails extends React.PureComponent {
                             </div>
                         </div>
                     </Col>
-                    <Col span={2}></Col>
+                    {/* <Col span={2}></Col> */}
                 </Row>
-                <Row style={{marginTop: 30}}>
+                <Row style={{marginTop: 30, padding: '0 26px'}}>
                     <Col span={24} style={{margin: '0 auto'}}>
                         <Table columns={columns} dataSource={this.state.data_spot} className="data-table-list" pagination={false} />
                     </Col>

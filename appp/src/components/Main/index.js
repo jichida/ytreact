@@ -328,25 +328,33 @@ class Home extends PureComponent{
                                     />
                                 </Flex.Item>
                                 <Flex.Item>
-                                    <HomeChart title={title_main_filterelements_prefilter1}
-                                      firsttitle={title_filterelements_prefilter1_leftday} firstpercent={value_filterelements_prefilter1_leftday} firstcolor={icon_filterelements_prefilter1_leftday}
-                                      secondtitle={title_filterelements_prefilter1_leftvol} secondpercent={value_filterelements_prefilter1_leftvol} secondcolor={icon_filterelements_prefilter1_leftvol}
-                                    />
                                 </Flex.Item>
                             </Flex>
                             <WhiteSpace style={{height: '2px', backgroundColor: '#333', margin: '15px auto'}} />
                             <Flex>
                                 <Flex.Item>
+                                    <HomeChart title={title_main_filterelements_prefilter1}
+                                          firsttitle={title_filterelements_prefilter1_leftday} firstpercent={value_filterelements_prefilter1_leftday} firstcolor={icon_filterelements_prefilter1_leftday}
+                                          secondtitle={title_filterelements_prefilter1_leftvol} secondpercent={value_filterelements_prefilter1_leftvol} secondcolor={icon_filterelements_prefilter1_leftvol}
+                                    />
+                                </Flex.Item>
+                                <Flex.Item>
                                     <HomeChart title={title_main_filterelements_prefilter2}
                                       firsttitle={title_filterelements_prefilter2_leftday} firstpercent={value_filterelements_prefilter2_leftday} firstcolor={icon_filterelements_prefilter2_leftday}
                                       secondtitle={title_filterelements_prefilter2_leftvol} secondpercent={value_filterelements_prefilter2_leftvol} secondcolor={icon_filterelements_prefilter2_leftvol}
                                 />
+                                  
+                                </Flex.Item>
+                            </Flex>
+                            <WhiteSpace style={{height: '2px', backgroundColor: '#333', margin: '15px auto'}} />
+                            <Flex>
+                                <Flex.Item>
+                                    <HomeChart title={title_main_filterelements_prefilter3}
+                                      firsttitle={title_filterelements_prefilter3_leftday} firstpercent={value_filterelements_prefilter3_leftday} firstcolor={icon_filterelements_prefilter3_leftday}
+                                      secondtitle={title_filterelements_prefilter3_leftvol} secondpercent={value_filterelements_prefilter3_leftvol} secondcolor={icon_filterelements_prefilter3_leftvol}
+                                    />
                                 </Flex.Item>
                                 <Flex.Item>
-                                <HomeChart title={title_main_filterelements_prefilter3}
-                                  firsttitle={title_filterelements_prefilter3_leftday} firstpercent={value_filterelements_prefilter3_leftday} firstcolor={icon_filterelements_prefilter3_leftday}
-                                  secondtitle={title_filterelements_prefilter3_leftvol} secondpercent={value_filterelements_prefilter3_leftvol} secondcolor={icon_filterelements_prefilter3_leftvol}
-                                    />
                                 </Flex.Item>
                             </Flex>
                             <WhiteSpace style={{height: '2px', backgroundColor: '#333', margin: '15px auto'}} />
@@ -361,7 +369,8 @@ class Home extends PureComponent{
                                     <HomeChart title={title_main_filterelements_posfilter2}
                                       firsttitle={title_filterelements_posfilter2_leftday} firstpercent={value_filterelements_posfilter2_leftday} firstcolor={icon_filterelements_posfilter2_leftday}
                                       secondtitle={title_filterelements_posfilter2_leftvol} secondpercent={value_filterelements_posfilter2_leftvol} secondcolor={icon_filterelements_posfilter2_leftvol}
-                                  />
+                                    />
+
                                 </Flex.Item>
                             </Flex>
                             <WhiteSpace style={{height: '2px', backgroundColor: '#333', margin: '15px auto'}} />
@@ -371,8 +380,10 @@ class Home extends PureComponent{
                                       firsttitle={title_filterelements_posfilter3_leftday} firstpercent={value_filterelements_posfilter3_leftday} firstcolor={icon_filterelements_posfilter3_leftday}
                                       secondtitle={title_filterelements_posfilter3_leftvol} secondpercent={value_filterelements_posfilter3_leftvol} secondcolor={icon_filterelements_posfilter3_leftvol}
                                       />
+
                                 </Flex.Item>
                                 <Flex.Item>
+
                                 </Flex.Item>
                             </Flex>
                             <WhiteSpace style={{height:10}} />

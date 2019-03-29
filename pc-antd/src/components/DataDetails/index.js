@@ -30,7 +30,7 @@ const Option = Select.Option;
 
 const TopMonitor = injectIntl((props)=>{
     const {homedata, intl} = props;
-    const {main_inwater_quality,main_runtime} = homedata;
+    const {main_inwater_quality,main_runtime, main_outwater_quality} = homedata;
     // main_outwater_quality:30,//出水水质,
     // main_outwater_grade:'优',//出水等级,
     // main_inwater_quality:32,//进水水质,
@@ -47,6 +47,11 @@ const TopMonitor = injectIntl((props)=>{
     const { formatMessage } = intl;
     // 顶部数据
     const topData = [
+        {   
+            title:`${formatMessage({id: 'machine.data.average'})}`,
+            unit: 'uS/cm',
+            data: `${main_outwater_quality}`,
+        },
         {
             title: `${formatMessage({id: 'machine.data.quality'})}`,//quality
             unit: 'uS/cm',
@@ -69,20 +74,36 @@ const TopMonitor = injectIntl((props)=>{
         }
     ]
 
+            // {
+        //     title: `${formatMessage({id: 'machine.data.average'})}`,
+        //     unit: 'uS/cm',
+        //     data: outwater_quality.value,
+        //     percent: outwater_quality.percent,
+        //     warring: outwater_quality.warring,
+        // },
+
+
     const topList = _.map(topData, (item)=>{
         return (
-            <Col span={6} key={item.title}>
+            // <Col span={4} key={item.title}>
+            //     <div className="number-info">
+            //         <span className="title">{item.title}</span>
+            //         <span className="unit">{item.unit}</span>
+            //         <span className="data">{item.data}</span>
+            //     </div>
+            // </Col>
+            <div key={item.title}>
                 <div className="number-info">
                     <span className="title">{item.title}</span>
                     <span className="unit">{item.unit}</span>
                     <span className="data">{item.data}</span>
                 </div>
-            </Col>
+            </div>
         )
     })
 
     return (
-        <Row gutter={24}>
+        <Row style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
             { topList }
         </Row>
     )
@@ -109,7 +130,7 @@ const TopChart = injectIntl((props)=>{
     const {homedata, intl} = props;
     console.log(homedata)
     const { formatMessage } = intl;
-    const outwater_quality = getPercent('main_outwater_quality', homedata.main_outwater_quality);
+    // const outwater_quality = getPercent('main_outwater_quality', homedata.main_outwater_quality);
     const modlife_leftday = getPercent('filterelements_modlife_leftday', homedata.filterelements_modlife_leftday);
     const prefilter1_leftday = getPercent('filterelements_prefilter1_leftday', homedata.filterelements_prefilter1_leftday);
     const prefilter2_leftday = getPercent('filterelements_prefilter2_leftday', homedata.filterelements_prefilter2_leftday);
@@ -175,13 +196,13 @@ const TopChart = injectIntl((props)=>{
     // }
 
     const chartData = [
-        {
-            title: `${formatMessage({id: 'machine.data.average'})}`,
-            unit: 'uS/cm',
-            data: outwater_quality.value,
-            percent: outwater_quality.percent,
-            warring: outwater_quality.warring,
-        },
+        // {
+        //     title: `${formatMessage({id: 'machine.data.average'})}`,
+        //     unit: 'uS/cm',
+        //     data: outwater_quality.value,
+        //     percent: outwater_quality.percent,
+        //     warring: outwater_quality.warring,
+        // },
         {
             title:  `${formatMessage({id: 'machine.data.ionmembrance'})}`,
             unit: `${formatMessage({id: 'machine.data.life'})}`,

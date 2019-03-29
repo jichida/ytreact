@@ -17,9 +17,15 @@ import {ui_home_selindex} from '../../actions';
 import {ui_set_language} from '../../actions';
 
 const constrast = {
-    EN: 'en',
-    简: 'zh-cn',
-    繁: 'zh-tw'
+    'EN': 'en',
+    '简': 'zh-cn',
+    '繁': 'zh-tw'
+}
+
+const lanString = {
+    'en': 'EN',
+    'zh-cn': '简',
+    'zh-tw': '繁'
 }
 
 const Item = Popover.Item
@@ -56,7 +62,7 @@ class Home extends PureComponent{
       }
 
     render () {
-        const { history, intl: { formatMessage },wifiStatus, tcpconnected } = this.props;
+        const { history, intl: { formatMessage },wifiStatus, tcpconnected, locale } = this.props;
         const { curtab } = this.props;
         let content;
         switch (curtab) {
@@ -119,7 +125,7 @@ class Home extends PureComponent{
                           onSelect={this.onSelect}
                         >
                           <div>
-                            简
+                            {lanString[locale]}
                           </div>
                         </Popover>
                       }
@@ -145,8 +151,8 @@ class Home extends PureComponent{
         )
     }
 }
-const mapStateToProps =  ({app:{hometabindex, tcpconnected},wifi:{wifiStatus}}) =>{
-  return {curtab:hometabindex, tcpconnected, wifiStatus};
+const mapStateToProps =  ({app:{hometabindex, tcpconnected},wifi:{wifiStatus}, app:{locale}}) =>{
+  return {curtab:hometabindex, tcpconnected, wifiStatus, locale};
 };
 Home = connect(mapStateToProps)(Home);
 export default withRouter(injectIntl(Home));

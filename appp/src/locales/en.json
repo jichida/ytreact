@@ -168,7 +168,7 @@
   "home.show.title_main_outwater_quality":"Fluid water quality TDS {value}",
   "home.show.title_main_inwater_quality":"Inlet water quality {value} ppm",
   "home.show.title_main_totalwatervol": "Total water production {value} gal",
-  "home.show.title_main_outcwatervol": "Concentrated water output {value} gal",
+  "home.show.title_main_outcwatervol": "Purification Rate {value} gal",
   "home.show.title_main_runtime": "Runtime {value} days",
   "home.show.title_main_filterelements_modlife": "Electro-ion membrane life",
   "home.show.title_main_filterelements_prefilter1": "Front PP Life",

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { NavBar, Icon, Tabs,  } from 'antd-mobile';
+import { NavBar, Icon, Tabs, Popover } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { injectIntl } from 'react-intl'
 
@@ -14,31 +14,46 @@ import nowifi_img from '../../assets/no-wifi.png';
 import connected_img from '../../assets/connnected.png';
 import disconnect_img from '../../assets/disconnnected.png';
 import {ui_home_selindex} from '../../actions';
+import {ui_set_language} from '../../actions';
+
+const constrast = {
+    EN: 'en',
+    简: 'zh-cn',
+    繁: 'zh-tw'
+}
+
+const Item = Popover.Item
 
 class Home extends PureComponent{
 
-    // state = {
-    //     SelectKey: 0,
-    // }
+    state = {
+        visible: false,
+        language: 'cn'
+    }
 
-    // handleClick = ( index ) => {
-    //     // this.setState({
-    //     //     SelectKey: key,
-    //     // })
-    //     this.props.dispatch(ui_home_selindex(index));
-    // }
     onClickWifi =()=>{
       const {history} = this.props;
       history.push(`/wifi`);
       console.log('onClickWifi');
-      // /wifi
     }
+
     onChangeTab = (index)=>{
       this.props.dispatch(ui_home_selindex(index));
-        // this.setState({
-        //     SelectKey: index,
-        // })
     }
+
+    handleVisibleChange = (visible) => {
+        this.setState({
+          visible,
+        });
+      }
+
+      onSelect = (opt) => {
+        console.log(opt.props.value);
+        this.props.dispatch(ui_set_language(constrast[opt.props.value]))
+        this.setState({
+          visible: false
+        });
+      }
 
     render () {
         const { history, intl: { formatMessage },wifiStatus, tcpconnected } = this.props;
@@ -87,9 +102,27 @@ class Home extends PureComponent{
             <div className="home">
                 <NavBar
                     className="nav"
-                    // icon={<Icon type="left" />}
-                    // onLeftClick={() => history.goBack()}
-                    // rightContent={[<div key="0" className="nav-wifi-icon" onClick={this.onClickWifi}><img src={wifi_img} alt=''/></div>]}
+                    leftContent={
+                        <Popover mask
+                          visible={this.state.visible}
+                          placement = "bottomLeft"
+                          overlay={[
+                            (<Item key="4" value="简" data-seed="logId">中文简体</Item>),
+                            (<Item key="5" value="繁">中文繁体</Item>),
+                            (<Item key="6" value="EN">EN</Item>),
+                          ]}
+                          align={{
+                            overflow: { adjustY: 30, adjustX: 30 },
+                            offset: [10, 30],
+                          }}
+                          onVisibleChange={this.handleVisibleChange}
+                          onSelect={this.onSelect}
+                        >
+                          <div>
+                            简
+                          </div>
+                        </Popover>
+                      }
                     rightContent={[
                         <div key="0" className="nav-wifi-icon"><img src={connectStatusImg} alt=''/></div>,
                         <div key="1" className="nav-wifi-icon" onClick={this.onClickWifi}><img src={wifiimage} alt=''/></div>

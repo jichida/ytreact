@@ -346,7 +346,7 @@ class Home extends PureComponent{
                                   
                                 </Flex.Item>
                             </Flex>
-                            <WhiteSpace style={{height: '2px', backgroundColor: '#333', margin: '15px auto'}} />
+                            <WhiteSpace style={{height: '2px', margin: '15px auto'}} />
                             <Flex>
                                 <Flex.Item>
                                     <HomeChart title={title_main_filterelements_prefilter3}
@@ -373,7 +373,7 @@ class Home extends PureComponent{
 
                                 </Flex.Item>
                             </Flex>
-                            <WhiteSpace style={{height: '2px', backgroundColor: '#333', margin: '15px auto'}} />
+                            <WhiteSpace style={{height: '2px', margin: '15px auto'}} />
                             <Flex>
                                 <Flex.Item>
                                     <HomeChart title={title_main_filterelements_posfilter3}

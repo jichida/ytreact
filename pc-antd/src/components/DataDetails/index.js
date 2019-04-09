@@ -462,7 +462,7 @@ class DataDetails extends React.PureComponent {
           })).then((result) => {
             //历史数据，对应this.state.data_spot
             this.setState({data_spot:result});
-          console.log(result);
+          console.log('Data_Spot Result', result);
         }).catch((err) => {
           console.log(err);
         })

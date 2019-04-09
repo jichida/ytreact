@@ -459,7 +459,8 @@ class DataDetails extends React.PureComponent {
           console.log(err);
         })
         this.props.dispatch(callthen(getdevicehisdata_request,getdevicehisdata_result,{
-          deviceid
+          query:{deviceid,
+            srvdata:{$exists:true}}
           })).then((result) => {
             //历史数据，对应this.state.data_spot
             debugger;

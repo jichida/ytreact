@@ -68,10 +68,11 @@ class SettingSystem extends PureComponent{
     }
 }
 
-const mapStateToProps =  ({device:{syssettings,_id},app:{locale},userlogin:{truename}}) =>{
-  if(!syssettings.installer){
-    syssettings.installer = truename;
+const mapStateToProps =  ({device:{syssettings,_id},app:{locale},userlogin:{username}}) =>{
+  if(!syssettings.installer || syssettings.installer === ''){
+    syssettings.installer = username;
   }
+  // debugger;
   return {locale,syssettings,_id};
 };
 

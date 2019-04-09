@@ -47,7 +47,7 @@ const TopMonitor = injectIntl((props)=>{
     const { formatMessage } = intl;
     // 顶部数据
     const topData = [
-        {   
+        {
             title:`${formatMessage({id: 'machine.data.average'})}`,
             unit: 'uS/cm',
             data: `${main_outwater_quality}`,
@@ -447,6 +447,7 @@ class DataDetails extends React.PureComponent {
 
     componentDidMount(){
       const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid');
+      console.log(`start request deviceid:${deviceid}`);
       if(!!deviceid){
         this.props.dispatch(callthen(getdevicedata_request,getdevicedata_result,{
           deviceid
@@ -461,6 +462,7 @@ class DataDetails extends React.PureComponent {
           deviceid
           })).then((result) => {
             //历史数据，对应this.state.data_spot
+            debugger;
             this.setState({data_spot:result});
           console.log(result);
         }).catch((err) => {

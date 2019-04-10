@@ -161,11 +161,11 @@ class BasicLayout extends React.PureComponent {
     );
     return (
       <React.Fragment>
-          <ContainerQuery query={query}>
-            {params => (
+          {/* <ContainerQuery query={query}>
+            {params => ( */}
                 <div>{layout}</div>
-            )}
-          </ContainerQuery>
+            {/* )}
+          </ContainerQuery> */}
       </React.Fragment>
     );
   }

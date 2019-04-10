@@ -5,6 +5,7 @@ import { Card, Row, Col, Table, Button, Select, Input, Progress } from 'antd';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import _ from 'lodash';
 import lodashget from 'lodash.get';
+import lodashmap from 'lodash.map'
 import moment from 'moment';
 import 'moment-timezone';
 import GridContent from '../GridContent';
@@ -304,6 +305,50 @@ const Mode_columns = [{
   }
 ]
 
+// {
+  // Concentration: "0"
+  // DailyVolume: "0"
+  // Energy: "0"
+  // FeedVolumeDaily: "0"
+  // Ieff: "0"
+  // MODLife: "0"
+  // ModCurrent: "0"
+  // ModIn: "0"
+  // ModOut: "0"
+  // ModVoltage: "162"
+  // ONtime: "0"
+  // Pre_filter1: "0"
+  // Pre_filter2: "0"
+  // Pre_filter3: "0"
+  // Pressure1: "50000"
+  // Pressure2: "0"
+  // Pressure3: "0"
+  // Pressure4: "0"
+  // ProductQualityAverage: "0"
+  // Waste: "0"
+  // WasteVolumeDaily: "0"
+  // Yield: "0"
+  // created_at: "2019-04-01T06:14:47.383Z"
+  // currentstate: "6"
+  // cutAbs: "0"
+  // cutPer: "0"
+  // deviceid: "GHCA0488"
+  // key: 0
+  // p1: "0"
+  // p2: "0"
+  // productDvol: "0"
+  // solenoidCurrent: "6"
+  // systime: "237"
+  // tempt1: "9934"
+  // tempt2: "0"
+  // tempt3: "0"
+  // tempt4: "0"
+  // totalVol: "0"
+  // updated_at: "2019-04-01T06:14:59.505Z"
+  // wasteDvol: "720"
+  // _id: "5ca1ac6345af8154294d9cb8"
+// }
+
 const columns = [{
     title:'ModIn uS',
     dataIndex: 'ModInuS',
@@ -358,8 +403,8 @@ const columns = [{
     key: 'tmpt2',
   }, {
     title:'Created At',
-    dataIndex: 'createtime',
-    key: 'createtime',
+    dataIndex: 'created_at',
+    key: 'created_at',
   }
 ]
 
@@ -464,8 +509,9 @@ class DataDetails extends React.PureComponent {
           })).then((result) => {
             //历史数据，对应this.state.data_spot
             debugger;
-            this.setState({data_spot:result});
-          console.log('Data_Spot Result', result);
+            let data_spot = this.initTableData(result)
+            this.setState({data_spot});
+            console.log('Data_Spot Result', data_spot);
         }).catch((err) => {
           console.log(err);
         })
@@ -480,6 +526,25 @@ class DataDetails extends React.PureComponent {
         })
       }
 
+    }
+
+
+    initTableData = (data) => {
+      const data_spot = []
+      lodashmap(data, (item, index) => {
+        const { created_at, deviceid, _id, updated_at, srvdata } = item
+        let createdTime = moment(created_at).format('YYYY-MM-DD')
+        let updatedTime = moment(updated_at).format('YYYY-MM-DD')
+        data_spot.push({
+          key: index,
+          _id,
+          deviceid,
+          created_at: createdTime,
+          updated_at: updatedTime,
+          ...srvdata
+        })
+      })
+      return data_spot
     }
 
 

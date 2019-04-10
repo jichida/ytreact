@@ -92,5 +92,20 @@
 "machine.report.pressure": "壓力",
 "machine.report.drainage": "廢水排放量",
 "machine.report.totalinlet": "總進水量",
-"machine.report.totaleffluent": "總產水量"
+"machine.report.totaleffluent": "總產水量",
+"table.ModIn uS":"進水水質",
+"table.Product uS":"濃水水質",
+"table.ModOut uS":"出水水質",
+"table.Product Quality Average":"平均水質",
+"table.totalONtime":"造水時間",
+"table.productDvol":"瞬間用水量",
+"table.cYield":"回收率",
+"table.Daily Volume":"今日用水量",
+"table.Feed VolumeDaily":"今日廢水量",
+"table.cWaste Volume":"瞬間廢水量",
+"table.totalVol":"總用水量",
+"table.SysPressure":"壓力",
+"table.tmpt2":"溫度2",
+"table.Created At":"當前接收到資料時間"
+
 }

@@ -350,59 +350,59 @@ const Mode_columns = [{
 // }
 
 const columns = [{
-    title:'ModIn uS',
-    dataIndex: 'ModInuS',
-    key: 'ModInuS',
+    title: <FormattedMessage id="table.ModIn uS" />,
+    dataIndex: 'ModIn',
+    key: 'ModIn',
+  },{ //
+    title: <FormattedMessage id="table.Product uS" />,
+    dataIndex: 'Concentration',
+    key: 'Concentration',
   },{
-    title:'Product uS',
-    dataIndex: 'ProductuS',
-    key: 'ProductuS',
-  },{
-    title:'ModOut uS',
-    dataIndex: 'ModOutuS',
-    key: 'ModOutuS',
+    title: <FormattedMessage id="table.ModOut uS" />,
+    dataIndex: 'ModOut',
+    key: 'ModOut',
   }, {
-    title:'Product Quality Average',
+    title: <FormattedMessage id="table.Product Quality Average" />,
     dataIndex: 'ProductQualityAverage',
     key: 'ProductQualityAverage',
   },{
-    title:'totalONtime',
-    dataIndex: 'totalONtime',
-    key: 'totalONtime',
-  },{
-    title:'productDvol',
+    title: <FormattedMessage id="table.totalONtime" />,
+    dataIndex: 'ONtime',
+    key: 'ONtime',
+  },{ //
+    title: <FormattedMessage id="table.productDvol" />,
     dataIndex: 'productDvol',
     key: 'productDvol',
   },{
-    title:'cYield',
-    dataIndex: 'cYield',
-    key: 'cYield',
+    title: <FormattedMessage id="table.cYield" />,
+    dataIndex: 'Yield',
+    key: 'Yield',
   },{
-    title:'Daily Volume',
+    title: <FormattedMessage id="table.Daily Volume" />,
     dataIndex: 'DailyVolume',
     key: 'DailyVolume',
   },{
-    title:'Feed VolumeDaily',
+    title: <FormattedMessage id="table.Feed VolumeDaily" />,
     dataIndex: 'FeedVolumeDaily',
     key: 'FeedVolumeDaily',
   },{
-    title:'cWaste Volume',
-    dataIndex: 'cWasteVolume',
-    key: 'cWasteVolume',
+    title: <FormattedMessage id="table.cWaste Volume" />,
+    dataIndex: 'wasteDvol',
+    key: 'wasteDvol',
   },{
-    title:'totalVol',
+    title: <FormattedMessage id="table.totalVol" />,
     dataIndex: 'totalVol',
     key: 'totalVol',
+  },{ //
+    title: <FormattedMessage id="table.SysPressure" />,
+    dataIndex: 'Pressure1',
+    key: 'Pressure1',
   },{
-    title:'SysPressure',
-    dataIndex: 'SysPressure',
-    key: 'SysPressure',
-  },{
-    title:'tmpt2',
-    dataIndex: 'tmpt2',
-    key: 'tmpt2',
+    title: <FormattedMessage id="table.tmpt2" />,
+    dataIndex: 'tempt2',
+    key: 'tempt2',
   }, {
-    title:'Created At',
+    title: <FormattedMessage id="table.Created At" />,
     dataIndex: 'created_at',
     key: 'created_at',
   }

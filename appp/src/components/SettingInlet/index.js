@@ -480,6 +480,7 @@ class Inlet extends PureComponent{
                                 <Brief>
                                     <div className="item_children">
                                     <InputItem
+                                        type="digit"
                                         placeholder={formatMessage({id: "form.input"})}
                                         value={this.state.ph}
                                         defaultValue={inwatersettings.ph}
@@ -518,6 +519,7 @@ class Inlet extends PureComponent{
                                 <Brief>
                                     <div className="item_children">
                                     <InputItem
+                                        type="digit"
                                         placeholder={formatMessage({id: "form.input"})}
                                         value={this.state.conductivity}
                                         defaultValue={inwatersettings.conductivity}
@@ -556,6 +558,7 @@ class Inlet extends PureComponent{
                                 <Brief>
                                     <div className="item_children">
                                     <InputItem
+                                        type="digit"
                                         placeholder={formatMessage({id: "form.input"})}
                                         value={this.state.tds}
                                         defaultValue={inwatersettings.tds}
@@ -594,6 +597,7 @@ class Inlet extends PureComponent{
                                 <Brief>
                                     <div className="item_children">
                                     <InputItem
+                                        type="digit"
                                         placeholder={formatMessage({id: "form.input"})}
                                         value={this.state.hardness}
                                         defaultValue={inwatersettings.hardness}
@@ -632,6 +636,7 @@ class Inlet extends PureComponent{
                                 <Brief>
                                     <div className="item_children">
                                     <InputItem
+                                        type="digit"
                                         placeholder={formatMessage({id: "form.input"})}
                                         value={this.state.alkalinity}
                                         defaultValue={inwatersettings.alkalinity}

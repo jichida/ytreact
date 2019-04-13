@@ -1,10 +1,20 @@
 .space-input-container {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     
     .space-input-item {
-        display: inline;
+        display: flex;
+        align-items: center;
         margin: 0 5px;
         flex: 1;
+
+        :global(.am-input-item) {
+            display: inline-block;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+            // color: #ffffff;
+            // height: 20px !important;
+        }
 
         input {
             background-color:transparent;
@@ -12,6 +22,7 @@
             border-color: #292929;
             color: #ffffff;
             max-width: 60px;
+            text-align: center;
         }
     }
 }

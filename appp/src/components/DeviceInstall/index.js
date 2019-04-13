@@ -110,7 +110,7 @@ const RenderForm = createForm({
     }
 })(injectIntl((props)=>{
     const { getFieldProps, validateFields, setFieldsValue } = props.form;
-    const { intl: { formatMessage },dispatch} = props;
+    const { intl: { formatMessage },dispatch, unit} = props;
 
     const positionOptions = [
         {
@@ -203,6 +203,24 @@ const RenderForm = createForm({
         //e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
+                if(unit === 'in') {
+                    if(!!values.drainage) {
+                        values.drainage = values.drainage * 2.54
+                    }
+
+                    if(!!values.space) {
+                        if(!!values.space.length) {
+                            values.space.length = values.space.length * 2.54
+                        }
+                        if(!!values.space.width) {
+                            values.space.width = values.space.width * 2.54
+                        }
+                        if(!!values.space.height) {
+                            values.space.height = values.space.height * 2.54
+                        }
+                    }
+                }
+                console.log(values)
                 props.onSubmit(values);
             }
             else{
@@ -279,7 +297,7 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="install.space" defaultMessage="安装空间" />  ( cm )
+                <Item><FormattedMessage id="install.space" defaultMessage="安装空间" />  ( {unit} )
                     <Brief>
                         <div className="item_children">
                             <SpaceInput
@@ -319,10 +337,11 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="install.drainage" defaultMessage="排水距离" />  ( cm )
+                <Item><FormattedMessage id="install.drainage" defaultMessage="排水距离" />  ( {unit} )
                         <Brief>
                             <div className="item_children">
                                 <InputItem
+                                    type="digit"
                                     placeholder={formatMessage({id: "form.input"})}
                                     {...getFieldProps('drainage',{
                                         rules: [{
@@ -442,6 +461,25 @@ class DeviceInstall extends PureComponent{
                value: lodashget(install,'power',false),
            },
          }
+
+         if(this.props.unit === 'in') {
+            if(!!basicData.drainage) {
+                basicData.drainage = basicData.drainage * 0.3937008
+            }
+
+            if(!!basicData.space) {
+                if(!!basicData.space.length) {
+                    basicData.space.length = basicData.space.length * 0.3937008
+                }
+                if(!!basicData.space.width) {
+                    basicData.space.width = basicData.space.width * 0.3937008
+                }
+                if(!!basicData.space.height) {
+                    basicData.space.height = basicData.space.height * 0.3937008
+                }
+            }
+        }
+
          console.log(basicData);
         return (
             <div className="fp_container sub_bg">
@@ -452,13 +490,13 @@ class DeviceInstall extends PureComponent{
                 >
                     <FormattedMessage id="device.install" />
                 </NavBar>
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} dispatch={dispatch}/>}
+                { <RenderForm {...basicData} unit={this.props.unit} onSubmit={this.handleSubmit} dispatch={dispatch}/>}
             </div>
         )
     }
 }
-const mapStateToProps =  ({device:{install,_id}}) =>{
-  return {install,_id};
+const mapStateToProps =  ({device:{install,_id}, app: { unit }}) =>{
+  return {install,_id, unit};
 };
 DeviceInstall = connect(mapStateToProps)(DeviceInstall);
 export default withRouter(DeviceInstall);

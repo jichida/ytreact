@@ -102,7 +102,7 @@ const RenderForm = createForm({
     }
 })(injectIntl((props)=>{
     const { getFieldProps, validateFields, setFieldsValue } = props.form;
-    const { intl: { formatMessage },dispatch} = props;
+    const { intl: { formatMessage },dispatch, unit} = props;
 
     const dispatch_form_err = (dispatch,errs)=>{
         dispatch(common_err({type:'form_err',errmsg: formatMessage({id: 'form.check'})}))
@@ -207,7 +207,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                type="number"
+                                type="digit"
                                 placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('floor',{
                                     rules: [{
@@ -243,6 +243,7 @@ const RenderForm = createForm({
                                         message: <FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />,
                                     }],
                                 })}
+                                unit={unit}
                                 onChange={handleBucketSelect}
                             />
                         </div>
@@ -316,14 +317,14 @@ class DeviceBasic extends PureComponent{
                 >
                 <FormattedMessage id="device.basic" />
                 </NavBar>
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} dispatch={dispatch}/>}
+                { <RenderForm {...basicData} unit={this.props.unit} onSubmit={this.handleSubmit} dispatch={dispatch}/>}
             </div>
         )
     }
 }
 
-const mapStateToProps =  ({device:{basicinfo,_id}}) =>{
-  return {basicinfo,_id};
+const mapStateToProps =  ({device:{basicinfo,_id}, app: { unit}}) =>{
+  return {basicinfo,_id, unit};
 };
 DeviceBasic = connect(mapStateToProps)(DeviceBasic);
 export default withRouter(DeviceBasic);

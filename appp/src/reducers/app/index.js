@@ -15,6 +15,7 @@ const initial = {
         maintabindex: 0,
         hometabindex: 0,
         locale:'zh-cn',
+        unit: 'cm',
         tcpconnected:false,
         issocketconnected:false,
         wifidirectmodesocketstatus:-1,
@@ -45,7 +46,13 @@ const app = createReducer({
         return { ...state, ...payload };
     },
     [ui_set_language]: (state, payload) => {
-        return { ...state, locale:payload };
+        let unit = ''
+        if(payload === 'en') {
+            unit = 'in'
+        } else {
+            unit ='cm'
+        }
+        return { ...state, locale:payload, unit };
     },
     [ui_main_selindex]: (state, payload) => {
         return { ...state, maintabindex:payload };

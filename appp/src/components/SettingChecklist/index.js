@@ -6,7 +6,7 @@ import {  List, Button, WingBlank, Switch, WhiteSpace,  } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import {wifi_sendcmd_request} from '../../actions';
-import {set_weui} from '../../actions';
+import {set_weui, set_confirm} from '../../actions';
 import PicturesWall  from './PicturesWall';
 import './index.less';
 
@@ -285,8 +285,9 @@ class SettingChecklist extends PureComponent{
     onClickSysXY = ()=>{
       //click xy
       console.log(`click xy`)
-      const {dispatch} = this.props;
-      dispatch(wifi_sendcmd_request({cmd:`$decpression%`,cmdstring:'系统泄压'}));
+      const {dispatch, intl} = this.props;
+      dispatch(set_confirm({title: '系统泄压', message: `${intl.formatMessage({id: 'form.confirm'})}系统泄压?`, command: wifi_sendcmd_request({cmd:`$decpression%`,cmdstring:'系统泄压'})}))
+    //   dispatch(wifi_sendcmd_request({cmd:`$decpression%`,cmdstring:'系统泄压'}));
     }
 
     render () {

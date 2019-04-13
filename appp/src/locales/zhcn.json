@@ -37,6 +37,7 @@
   "form.decompression": "系统泄压",
   "form.enable": "启用",
   "form.ok": "确认",
+  "form.confirm": "确认",
   "form.reset": "重置",
   "form.check": "请检查所有输入项",
   "form.qrcode": "请先扫描设备二维码",

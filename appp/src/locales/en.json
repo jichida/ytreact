@@ -43,6 +43,7 @@
   "form.decompression": "System Pressure Relief",
   "form.enable": "enabled",
   "form.ok": "OK",
+  "form.confirm": "confirm",
   "form.reset": "reset",
   "device": "device information",
   "device.privider.select": "Select a service provider",

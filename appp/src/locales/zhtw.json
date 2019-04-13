@@ -43,6 +43,7 @@
   "form.enable": "啟用",
   "form.synctosave": "同步到本地",
   "form.ok": "OK",
+  "form.confirm": "確認",
   "form.reset": "重置",
   "device": "設備信息",
   "device.privider.select": "選擇服務商",

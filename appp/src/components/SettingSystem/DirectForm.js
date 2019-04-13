@@ -5,7 +5,7 @@ import { createForm, createFormField } from 'rc-form';
 import moment from 'moment';
 import 'moment-timezone';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import { common_err, wifi_sendcmd_request } from '../../actions';
+import { common_err, wifi_sendcmd_request, set_confirm } from '../../actions';
 
 
 const Item = List.Item;
@@ -135,8 +135,9 @@ class Index extends React.Component {
     }
 
     onClickCmd = (cmd,cmdstring='设置')=>{
-        const { dispatch } = this.props;
-        dispatch(wifi_sendcmd_request({cmd,cmdstring}));
+        const { dispatch, intl } = this.props;
+        dispatch(set_confirm({title: cmdstring, message: `${intl.formatMessage({id: 'form.confirm'})}${cmdstring}?`, command: wifi_sendcmd_request({cmd,cmdstring})}))
+        // dispatch(wifi_sendcmd_request({cmd,cmdstring}));
     }
 
     render () {

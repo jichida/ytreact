@@ -60,7 +60,7 @@ class Layout extends React.PureComponent {
     const {curtab} = this.props;
     console.log(this.state.innerHeight);
     return (
-      <div className={`${this.state.innerHeight===initHeight&&'fh_container'} fp_container layout_bg`}>
+      <div className={`${this.state.innerHeight===initHeight&&'fh_container'} fp_container layout_bg en-font`}>
         <TabBar
           barTintColor="#000000e3"
           prerenderingSiblingsNumber={0}

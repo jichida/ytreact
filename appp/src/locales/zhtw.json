@@ -5,6 +5,7 @@
   "login.selectlanguage":"選擇當前使用的語言",
   "login.inputaccount":"請輸入賬號",
   "login.inputpassword":"請輸入密碼",
+  "login.connect": "連接",
   "layout.home": "主頁",
   "layout.abnormal": "狀況",
   "layout.performance": "性能",

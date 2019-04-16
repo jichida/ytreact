@@ -5,6 +5,7 @@
   "login.selectlanguage": "Choose the currently used language",
   "login.inputaccount": "Account Number",
   "login.inputpassword": "Password",
+  "login.connect": "Connect",
   "layout.home": "Home",
   "layout.abnormal": "Status",
   "layout.performance": "Performance",

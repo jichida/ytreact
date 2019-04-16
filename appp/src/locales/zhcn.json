@@ -5,6 +5,7 @@
   "login.selectlanguage":"选择当前使用的语言",
   "login.inputaccount":"请输入账号",
   "login.inputpassword":"请输入密码",
+  "login.connect": "连接",
   "layout.home": "主页",
   "layout.abnormal": "状况",
   "layout.performance": "性能",

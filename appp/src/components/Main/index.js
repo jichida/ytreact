@@ -13,7 +13,7 @@ import './index.less';
 import refresh_icon from '../../assets/refresh.png';
 import '../../assets/wlimg.png';
 import home_bgimg from '../../assets/zhuye_bg.png';
-import {wifi_sendcmd_request} from '../../actions';
+import {wifi_sendcmd_request, set_confirm} from '../../actions';
 
 const CRed = '#ff2728';
 const CGreen = '#3eef7d';
@@ -48,6 +48,18 @@ class Home extends PureComponent{
 
         console.log('Refresh')
     }
+
+    onClickCmd = (cmd,cmdstring='设置')=>{
+      const { dispatch, intl } = this.props;
+      dispatch(set_confirm({
+        title: `${intl.formatMessage({id: 'form.confirm'})}`, 
+        message: `${cmdstring}?`, 
+        text: [`${intl.formatMessage({id: 'form.cancel'})}`, `${intl.formatMessage({id: 'form.ok'})}`],
+        command: wifi_sendcmd_request({cmd,cmdstring})
+      }))
+
+      // dispatch(wifi_sendcmd_request({cmd,cmdstring}));
+  }
 
     render () {
       const {intl,homedata,isgetdata} = this.props;
@@ -332,13 +344,17 @@ class Home extends PureComponent{
                             </Flex>
                             <WhiteSpace style={{height: '2px', backgroundColor: '#333', margin: '15px auto'}} />
                             <Flex>
-                                <Flex.Item>
+                                <Flex.Item onClick={()=>{
+                                  this.onClickCmd(`$res_prefilter1%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.frontfilter1'})}`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
+                                }}>
                                     <HomeChart title={title_main_filterelements_prefilter1}
                                           firsttitle={title_filterelements_prefilter1_leftday} firstpercent={value_filterelements_prefilter1_leftday} firstcolor={icon_filterelements_prefilter1_leftday}
                                           secondtitle={title_filterelements_prefilter1_leftvol} secondpercent={value_filterelements_prefilter1_leftvol} secondcolor={icon_filterelements_prefilter1_leftvol}
                                     />
                                 </Flex.Item>
-                                <Flex.Item>
+                                <Flex.Item onClick={()=>{
+                                  this.onClickCmd(`$res_prefilter2%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.frontfilter2'})}`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
+                                }}>
                                     <HomeChart title={title_main_filterelements_prefilter2}
                                       firsttitle={title_filterelements_prefilter2_leftday} firstpercent={value_filterelements_prefilter2_leftday} firstcolor={icon_filterelements_prefilter2_leftday}
                                       secondtitle={title_filterelements_prefilter2_leftvol} secondpercent={value_filterelements_prefilter2_leftvol} secondcolor={icon_filterelements_prefilter2_leftvol}
@@ -348,7 +364,9 @@ class Home extends PureComponent{
                             </Flex>
                             <WhiteSpace style={{height: '2px', margin: '5px auto'}} />
                             <Flex>
-                                <Flex.Item>
+                                <Flex.Item onClick={()=>{
+                                  this.onClickCmd(`$res_prefilter3%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.frontfilter3'})}`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
+                                }}>
                                     <HomeChart title={title_main_filterelements_prefilter3}
                                       firsttitle={title_filterelements_prefilter3_leftday} firstpercent={value_filterelements_prefilter3_leftday} firstcolor={icon_filterelements_prefilter3_leftday}
                                       secondtitle={title_filterelements_prefilter3_leftvol} secondpercent={value_filterelements_prefilter3_leftvol} secondcolor={icon_filterelements_prefilter3_leftvol}
@@ -359,13 +377,17 @@ class Home extends PureComponent{
                             </Flex>
                             <WhiteSpace style={{height: '2px', backgroundColor: '#333', margin: '15px auto'}} />
                             <Flex>
-                                <Flex.Item>
+                                <Flex.Item onClick={()=>{
+                                  this.onClickCmd(`$res_posfilter1%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.afterfilter1'})}`);//4	后置滤芯1 复位	滤芯寿命复位
+                                }}>
                                     <HomeChart title={title_main_filterelements_posfilter1}
                                       firsttitle={title_filterelements_posfilter1_leftday} firstpercent={value_filterelements_posfilter1_leftday} firstcolor={icon_filterelements_posfilter1_leftday}
                                       secondtitle={title_filterelements_posfilter1_leftvol} secondpercent={value_filterelements_posfilter1_leftvol} secondcolor={icon_filterelements_posfilter1_leftvol}
                                   />
                                 </Flex.Item>
-                                <Flex.Item>
+                                <Flex.Item onClick={()=>{
+                                  this.onClickCmd(`$res_posfilter2%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.afterfilter2'})}`);//4	后置滤芯1 复位	滤芯寿命复位
+                                }}>
                                     <HomeChart title={title_main_filterelements_posfilter2}
                                       firsttitle={title_filterelements_posfilter2_leftday} firstpercent={value_filterelements_posfilter2_leftday} firstcolor={icon_filterelements_posfilter2_leftday}
                                       secondtitle={title_filterelements_posfilter2_leftvol} secondpercent={value_filterelements_posfilter2_leftvol} secondcolor={icon_filterelements_posfilter2_leftvol}
@@ -375,7 +397,9 @@ class Home extends PureComponent{
                             </Flex>
                             <WhiteSpace style={{height: '2px', margin: '5px auto'}} />
                             <Flex>
-                                <Flex.Item>
+                                <Flex.Item onClick={()=>{
+                                  this.onClickCmd(`$res_posfilter3%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.afterfilter3'})}`);//4	后置滤芯1 复位	滤芯寿命复位
+                                }}>
                                     <HomeChart title={title_main_filterelements_posfilter3}
                                       firsttitle={title_filterelements_posfilter3_leftday} firstpercent={value_filterelements_posfilter3_leftday} firstcolor={icon_filterelements_posfilter3_leftday}
                                       secondtitle={title_filterelements_posfilter3_leftvol} secondpercent={value_filterelements_posfilter3_leftvol} secondcolor={icon_filterelements_posfilter3_leftvol}

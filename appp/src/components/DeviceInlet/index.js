@@ -25,7 +25,7 @@ class DeviceBasic extends PureComponent{
                     icon={<Icon type="left" />}
                     onLeftClick={() => { window.innerHeight=initHeight; history.goBack()}}                
                 >
-                    <FormattedMessage id="setting.water" defaultMessage="进水设定" />
+                    <FormattedMessage id="setting.water.quality" defaultMessage="进水水质" />
                 </NavBar>
                 <Form />
             </div>

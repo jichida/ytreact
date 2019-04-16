@@ -121,7 +121,7 @@ class Device extends PureComponent{
                             { isNormal&&
                             <Flex.Item className="tools_con">
                                 <Link to="/inlet"><div><img src={waterset_img} alt="" />
-                                    <p><FormattedMessage id="setting.water" defaultMessage="进水设定" /></p></div>
+                                    <p><FormattedMessage id="setting.water.quality" defaultMessage="进水水质" /></p></div>
                                 </Link>
                             </Flex.Item>
                             }

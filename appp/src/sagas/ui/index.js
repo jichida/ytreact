@@ -28,11 +28,11 @@ const popdialog = ({text,type,value})=>{
     });
 }
 
-const popconfirm = ({title, message}) => {
+const popconfirm = ({title, message, text}) => {
   return new Promise( (resolve) => {
     alert(title, message, [
-      { text: 'Cancel', onPress: () => { resolve(false) } },
-      { text: 'OK', onPress: () => { resolve(true) } }
+      { text: text[0], onPress: () => { resolve(false) } },
+      { text: text[1], onPress: () => { resolve(true) } }
     ])
   })
 }

@@ -30,6 +30,7 @@
   "app.search.distributor.choose": "请选择经销商",
   "app.search.curstomer": "客户名称",
   "app.search.curstomer.input": "请输入客户名称",
+  "app.nodata": "暂无数据",
   "machine.abnormal": "异常机器",
   "machine.all": "全部设备",
   "machine.all.normal": "全部正常设备",

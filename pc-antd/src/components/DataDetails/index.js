@@ -31,57 +31,64 @@ const Option = Select.Option;
 
 const TopMonitor = injectIntl((props)=>{
     const {homedata, intl} = props;
-    const {main_inwater_quality,main_runtime, main_outwater_quality} = homedata;
-    // main_outwater_quality:30,//出水水质,
-    // main_outwater_grade:'优',//出水等级,
-    // main_inwater_quality:32,//进水水质,
-    // main_totalwatervol:29993,//总产水量
-    // main_runtime:23,//运行时间
-    // main_outcwatervol:322,//浓水出水量
+    let topData = []
+    console.log('Home Data: ', homedata)
+    if(!!homedata) {
+      const {main_inwater_quality,main_runtime, main_outwater_quality} = homedata;
 
-    // 顶部数据
-    const monitorData = {
-        consumption: 1000,
-        runtime: '02:10:20',
-        recovery: 1000,
-    };//<-----每日用水量吨&回收率uS/cm 从哪里来？
-    const { formatMessage } = intl;
-    // 顶部数据
-    const topData = [
-        {
-            title:`${formatMessage({id: 'machine.data.average'})}`,
-            unit: 'uS/cm',
-            data: `${main_outwater_quality}`,
-        },
-        {
-            title: `${formatMessage({id: 'machine.data.quality'})}`,//quality
-            unit: 'uS/cm',
-            data: `${main_inwater_quality}`,
-        },
-        {
-            title: `${formatMessage({id: 'machine.data.consumption'})}`,//consumption
-            unit: '吨',
-            data: `${monitorData.consumption}`,
-        },
-        {
-            title: `${formatMessage({id: 'machine.data.runtime'})}`,//runtime
-            unit: '时/分/秒',
-            data: `${main_runtime}`,
-        },
-        {
-            title: `${formatMessage({id: 'machine.data.recovery'})}`,//recovery
-            unit: 'uS/cm',
-            data: `${monitorData.recovery}`,
-        }
-    ]
+      // main_outwater_quality:30,//出水水质,
+      // main_outwater_grade:'优',//出水等级,
+      // main_inwater_quality:32,//进水水质,
+      // main_totalwatervol:29993,//总产水量
+      // main_runtime:23,//运行时间
+      // main_outcwatervol:322,//浓水出水量
 
-            // {
-        //     title: `${formatMessage({id: 'machine.data.average'})}`,
-        //     unit: 'uS/cm',
-        //     data: outwater_quality.value,
-        //     percent: outwater_quality.percent,
-        //     warring: outwater_quality.warring,
-        // },
+      // 顶部数据
+      const monitorData = {
+          consumption: 1000,
+          runtime: '02:10:20',
+          recovery: 1000,
+      };//<-----每日用水量吨&回收率uS/cm 从哪里来？
+      const { formatMessage } = intl;
+      // 顶部数据
+      topData = [
+          {
+              title:`${formatMessage({id: 'machine.data.average'})}`,
+              unit: 'uS/cm',
+              data: `${main_outwater_quality}`,
+          },
+          {
+              title: `${formatMessage({id: 'machine.data.quality'})}`,//quality
+              unit: 'uS/cm',
+              data: `${main_inwater_quality}`,
+          },
+          {
+              title: `${formatMessage({id: 'machine.data.consumption'})}`,//consumption
+              unit: '吨',
+              data: `${monitorData.consumption}`,
+          },
+          {
+              title: `${formatMessage({id: 'machine.data.runtime'})}`,//runtime
+              unit: '时/分/秒',
+              data: `${main_runtime}`,
+          },
+          {
+              title: `${formatMessage({id: 'machine.data.recovery'})}`,//recovery
+              unit: 'uS/cm',
+              data: `${monitorData.recovery}`,
+          }
+      ]
+
+              // {
+          //     title: `${formatMessage({id: 'machine.data.average'})}`,
+          //     unit: 'uS/cm',
+          //     data: outwater_quality.value,
+          //     percent: outwater_quality.percent,
+          //     warring: outwater_quality.warring,
+          // },
+
+    }
+    
 
 
     const topList = _.map(topData, (item)=>{
@@ -105,7 +112,7 @@ const TopMonitor = injectIntl((props)=>{
 
     return (
         <Row style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-            { topList }
+            { !!homedata ? topList : `${intl.formatMessage({id: 'app.nodata'})}` }
         </Row>
     )
 })
@@ -129,148 +136,154 @@ const getPercent = (id,value) => {
 
 const TopChart = injectIntl((props)=>{
     const {homedata, intl} = props;
-    console.log(homedata)
     const { formatMessage } = intl;
-    // const outwater_quality = getPercent('main_outwater_quality', homedata.main_outwater_quality);
-    const modlife_leftday = getPercent('filterelements_modlife_leftday', homedata.filterelements_modlife_leftday);
-    const prefilter1_leftday = getPercent('filterelements_prefilter1_leftday', homedata.filterelements_prefilter1_leftday);
-    const prefilter2_leftday = getPercent('filterelements_prefilter2_leftday', homedata.filterelements_prefilter2_leftday);
-    const prefilter3_leftday = getPercent('filterelements_prefilter3_leftday', homedata.filterelements_prefilter3_leftday);
-    const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', homedata.filterelements_posfilter1_leftday);
-    const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', homedata.filterelements_posfilter2_leftday);
-    const posfilter3_leftday = getPercent('filterelements_posfilter3_leftday', homedata.filterelements_posfilter3_leftday);
-    const uvfilter_leftday = getPercent('filterelements_uvfilter_leftday', homedata.filterelements_uvfilter_leftday);
-    //以下是滤芯部分
-    // filterelements_modlife_leftvol:39,//电离子膜寿命剩余流量
-    // filterelements_prefilter1_leftvol:29,//前置PP寿命剩余流量
-    // filterelements_prefilter2_leftvol:30,//前置2滤芯寿命剩余流量
-    // filterelements_prefilter3_leftvol:9,//前置3滤芯寿命剩余流量
-    // filterelements_posfilter1_leftvol:70,//后置活性炭寿命剩余流量
-    // filterelements_posfilter2_leftvol:90,//电离子膜寿命剩余流量
-    // filterelements_posfilter3_leftvol:100,//电离子膜寿命剩余流量
-    // filterelements_modlife_leftday:20,//电离子膜寿命剩余天数
-    // filterelements_prefilter1_leftday:1,//前置PP寿命剩余天数
-    // filterelements_prefilter2_leftday:24,//前置2寿命剩余天数
-    // filterelements_prefilter3_leftday:41,//前置3寿命剩余天数
-    // filterelements_posfilter1_leftday:5,//后置活性炭寿命剩余天数
-    // filterelements_posfilter2_leftday:23,//后置2滤芯寿命剩余天数
-    // filterelements_posfilter3_leftday:46,//后置2滤芯寿命剩余天数
-    // filterelements_uvfilter_leftday: 46, //UV滤芯剩余天数
-    // 进度数据
-    // const chartDataConst = {
-    //     average: {
-    //         data: 90,
-    //         warring: true,
-    //     },
-    //     ionmembrance: {
-    //         data: 60,
-    //         warring: false,
-    //     },
-    //     frontfilter1: {
-    //         data: 1000,
-    //         warring: false,
-    //     },
-    //     frontfilter2: {
-    //         data: 1000,
-    //         warring: false,
-    //     },
-    //     frontfilter3: {
-    //         data: 10,
-    //         warring: true,
-    //     },
-    //     afterfilter1: {
-    //         data: 100,
-    //         warring: false,
-    //     },
-    //     afterfilter2: {
-    //         data: 1000,
-    //         warring: false,
-    //     },
-    //     afterfilter3: {
-    //         data: 1000,
-    //         warring: false,
-    //     },
-    //     uvlife: {
-    //         data: 10,
-    //         warring: true,
-    //     }
-    // }
+    let chartData = []
 
-    const chartData = [
-        // {
-        //     title: `${formatMessage({id: 'machine.data.average'})}`,
-        //     unit: 'uS/cm',
-        //     data: outwater_quality.value,
-        //     percent: outwater_quality.percent,
-        //     warring: outwater_quality.warring,
-        // },
-        {
-            title:  `${formatMessage({id: 'machine.data.ionmembrance'})}`,
-            unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: modlife_leftday.value,
-            percent: modlife_leftday.percent,
-            warring: modlife_leftday.warring ,
-        },
-        {
-            title:  `${formatMessage({id: 'machine.data.frontfilter1'})}`,
-            unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: prefilter1_leftday.value,
-            percent: prefilter1_leftday.percent,
-            warring: prefilter1_leftday.warring,
-        },
-        {
-            title: `${formatMessage({id: 'machine.data.frontfilter2'})}`,
-            unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: prefilter2_leftday.value,
-            percent: prefilter2_leftday.percent,
-            warring: prefilter2_leftday.warring,
-        },
-        {
-            title: `${formatMessage({id: 'machine.data.frontfilter3'})}`,
-            unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: prefilter3_leftday.value,
-            percent: prefilter3_leftday.percent,
-            warring: prefilter3_leftday.warring,
-        },
-        {
-            title: `${formatMessage({id: 'machine.data.afterfilter1'})}`,
-            unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: posfilter1_leftday.value,
-            percent: posfilter1_leftday.percent,
-            warring: posfilter1_leftday.warring,
-        },
-        {
-            title:  `${formatMessage({id: 'machine.data.afterfilter2'})}`,
-            unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: posfilter2_leftday.value,
-            percent: posfilter2_leftday.percent,
-            warring: posfilter2_leftday.warring,
-        },
-        {
-            title:  `${formatMessage({id: 'machine.data.afterfilter3'})}`,
-            unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: posfilter3_leftday.value,
-            percent: posfilter3_leftday.percent,
-            warring: posfilter3_leftday.warring,
-        },
-        {
-            title:  `${formatMessage({id: 'machine.data.uvlife'})}`,
-            unit: `${formatMessage({id: 'machine.data.life'})}`,
-            data: uvfilter_leftday.value,
-            percent: uvfilter_leftday.percent,
-            warring: uvfilter_leftday.warring,
-        }
-    ]
+    if(!!homedata) {
+      // const outwater_quality = getPercent('main_outwater_quality', homedata.main_outwater_quality);
+      const modlife_leftday = getPercent('filterelements_modlife_leftday', homedata.filterelements_modlife_leftday);
+      const prefilter1_leftday = getPercent('filterelements_prefilter1_leftday', homedata.filterelements_prefilter1_leftday);
+      const prefilter2_leftday = getPercent('filterelements_prefilter2_leftday', homedata.filterelements_prefilter2_leftday);
+      const prefilter3_leftday = getPercent('filterelements_prefilter3_leftday', homedata.filterelements_prefilter3_leftday);
+      const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', homedata.filterelements_posfilter1_leftday);
+      const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', homedata.filterelements_posfilter2_leftday);
+      const posfilter3_leftday = getPercent('filterelements_posfilter3_leftday', homedata.filterelements_posfilter3_leftday);
+      const uvfilter_leftday = getPercent('filterelements_uvfilter_leftday', homedata.filterelements_uvfilter_leftday);
+      //以下是滤芯部分
+      // filterelements_modlife_leftvol:39,//电离子膜寿命剩余流量
+      // filterelements_prefilter1_leftvol:29,//前置PP寿命剩余流量
+      // filterelements_prefilter2_leftvol:30,//前置2滤芯寿命剩余流量
+      // filterelements_prefilter3_leftvol:9,//前置3滤芯寿命剩余流量
+      // filterelements_posfilter1_leftvol:70,//后置活性炭寿命剩余流量
+      // filterelements_posfilter2_leftvol:90,//电离子膜寿命剩余流量
+      // filterelements_posfilter3_leftvol:100,//电离子膜寿命剩余流量
+      // filterelements_modlife_leftday:20,//电离子膜寿命剩余天数
+      // filterelements_prefilter1_leftday:1,//前置PP寿命剩余天数
+      // filterelements_prefilter2_leftday:24,//前置2寿命剩余天数
+      // filterelements_prefilter3_leftday:41,//前置3寿命剩余天数
+      // filterelements_posfilter1_leftday:5,//后置活性炭寿命剩余天数
+      // filterelements_posfilter2_leftday:23,//后置2滤芯寿命剩余天数
+      // filterelements_posfilter3_leftday:46,//后置2滤芯寿命剩余天数
+      // filterelements_uvfilter_leftday: 46, //UV滤芯剩余天数
+      // 进度数据
+      // const chartDataConst = {
+      //     average: {
+      //         data: 90,
+      //         warring: true,
+      //     },
+      //     ionmembrance: {
+      //         data: 60,
+      //         warring: false,
+      //     },
+      //     frontfilter1: {
+      //         data: 1000,
+      //         warring: false,
+      //     },
+      //     frontfilter2: {
+      //         data: 1000,
+      //         warring: false,
+      //     },
+      //     frontfilter3: {
+      //         data: 10,
+      //         warring: true,
+      //     },
+      //     afterfilter1: {
+      //         data: 100,
+      //         warring: false,
+      //     },
+      //     afterfilter2: {
+      //         data: 1000,
+      //         warring: false,
+      //     },
+      //     afterfilter3: {
+      //         data: 1000,
+      //         warring: false,
+      //     },
+      //     uvlife: {
+      //         data: 10,
+      //         warring: true,
+      //     }
+      // }
+
+      chartData = [
+          // {
+          //     title: `${formatMessage({id: 'machine.data.average'})}`,
+          //     unit: 'uS/cm',
+          //     data: outwater_quality.value,
+          //     percent: outwater_quality.percent,
+          //     warring: outwater_quality.warring,
+          // },
+          {
+              title:  `${formatMessage({id: 'machine.data.ionmembrance'})}`,
+              unit: `${formatMessage({id: 'machine.data.life'})}`,
+              data: modlife_leftday.value,
+              percent: modlife_leftday.percent,
+              warring: modlife_leftday.warring ,
+          },
+          {
+              title:  `${formatMessage({id: 'machine.data.frontfilter1'})}`,
+              unit: `${formatMessage({id: 'machine.data.life'})}`,
+              data: prefilter1_leftday.value,
+              percent: prefilter1_leftday.percent,
+              warring: prefilter1_leftday.warring,
+          },
+          {
+              title: `${formatMessage({id: 'machine.data.frontfilter2'})}`,
+              unit: `${formatMessage({id: 'machine.data.life'})}`,
+              data: prefilter2_leftday.value,
+              percent: prefilter2_leftday.percent,
+              warring: prefilter2_leftday.warring,
+          },
+          {
+              title: `${formatMessage({id: 'machine.data.frontfilter3'})}`,
+              unit: `${formatMessage({id: 'machine.data.life'})}`,
+              data: prefilter3_leftday.value,
+              percent: prefilter3_leftday.percent,
+              warring: prefilter3_leftday.warring,
+          },
+          {
+              title: `${formatMessage({id: 'machine.data.afterfilter1'})}`,
+              unit: `${formatMessage({id: 'machine.data.life'})}`,
+              data: posfilter1_leftday.value,
+              percent: posfilter1_leftday.percent,
+              warring: posfilter1_leftday.warring,
+          },
+          {
+              title:  `${formatMessage({id: 'machine.data.afterfilter2'})}`,
+              unit: `${formatMessage({id: 'machine.data.life'})}`,
+              data: posfilter2_leftday.value,
+              percent: posfilter2_leftday.percent,
+              warring: posfilter2_leftday.warring,
+          },
+          {
+              title:  `${formatMessage({id: 'machine.data.afterfilter3'})}`,
+              unit: `${formatMessage({id: 'machine.data.life'})}`,
+              data: posfilter3_leftday.value,
+              percent: posfilter3_leftday.percent,
+              warring: posfilter3_leftday.warring,
+          },
+          {
+              title:  `${formatMessage({id: 'machine.data.uvlife'})}`,
+              unit: `${formatMessage({id: 'machine.data.life'})}`,
+              data: uvfilter_leftday.value,
+              percent: uvfilter_leftday.percent,
+              warring: uvfilter_leftday.warring,
+          }
+      ]
+      
+    }
 
     return (
         <Row gutter={24} style={{marginTop: 30, padding: '10px 26px'}}>
             <Col span={24} style={{display: 'flex', justifyContent: 'space-between'}}>
                 {
+                  !!homedata ? (
                      _.map(chartData, (item)=>{
                         return (
                             <Chart {...item} key={item.title} />
                         )
-                    })
+                    }))
+                    : ''
                 }
             </Col>
         </Row>

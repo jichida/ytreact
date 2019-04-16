@@ -30,6 +30,7 @@
 "app.search.distributor.choose": "Please select a reseller",
 "app.search.curstomer": "Customer Name",
 "app.search.curstomer.input": "Please enter a customer name",
+"app.nodata": "No Data",
 "machine.abnormal": "Exception machine",
 "machine.all": "all devices",
 "machine.all.normal": "all normal devices",

@@ -30,6 +30,7 @@
 "app.search.distributor.choose": "請選擇經銷商",
 "app.search.curstomer": "客戶名稱",
 "app.search.curstomer.input": "請輸入客戶名稱",
+"app.nodata": "暫無數據",
 "machine.abnormal": "異常機器",
 "machine.all": "全部設備",
 "machine.all.normal": "全部正常設備",

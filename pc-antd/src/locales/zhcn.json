@@ -62,6 +62,7 @@
   "machine.data.afterfilter3": "后置滤芯3",
   "machine.data.uvlife": "UV寿命",
   "machine.data.life": "剩余天数",
+  "machine.data.flow": "剩余流量",
   "machine.distribution.para1": "全球共",
   "machine.distribution.para2": "台设备 正常",
   "machine.distribution.para3": "台 异常",

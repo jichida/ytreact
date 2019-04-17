@@ -68,15 +68,16 @@ const TopMonitor = injectIntl((props)=>{
               data: `${DailyVolume}`,
           },
           {
-              title: `${formatMessage({id: 'machine.data.runtime'})}`,//runtime
-              unit: '时/分/秒',
-              data: `${Reserve1}`,
-          },
-          {
               title: `${formatMessage({id: 'machine.data.recovery'})}`,//recovery
               unit: '%',
               data: `${Yield}`,
-          }
+          },
+          {
+              title: `${formatMessage({id: 'machine.data.runtime'})}`,//runtime
+              unit: '天',
+              data: `${Reserve1}`,
+          },
+
       ]
 
               // {

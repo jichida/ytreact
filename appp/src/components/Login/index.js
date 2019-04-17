@@ -10,7 +10,7 @@ import config from '../../env/config';
 import logo from '../../assets/logo.png';
 import {login_request} from '../../actions';
 import {ui_set_language} from '../../actions';
-
+import {getMobileOperatingSystem} from '../../util/getos';
 // const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
 // let wrapProps;
 // if (isIPhone) {
@@ -87,6 +87,7 @@ class Login extends PureComponent{
 
     render () {
         const {intl} = this.props;
+        const os = getMobileOperatingSystem();
         return (
                 <WingBlank className="black_bg" style={{marginLeft:0, marginRight:0}}>
                 <div className="fp_container white_bg">
@@ -125,7 +126,7 @@ class Login extends PureComponent{
                             <Button type="ghost" className="btn" onClick={this.handleSubmit}><FormattedMessage id="start.pass" /></Button>
                         </div>
                         <WhiteSpace size="xl" />
-                        <div style={{color:'#FFFFFF'}}>{config.appversion}</div>
+                        <div style={{color:'#FFFFFF'}}>{config.appversion}{os}</div>
                     </Flex>
                     </div>
                 </WingBlank>

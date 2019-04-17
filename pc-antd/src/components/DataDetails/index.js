@@ -609,8 +609,8 @@ class DataDetails extends React.PureComponent {
       const data_spot = []
       lodashmap(data, (item, index) => {
         const { created_at, deviceid, _id, updated_at, srvdata } = item
-        let createdTime = moment(created_at).format('YYYY-MM-DD hh:mm:ss')
-        let updatedTime = moment(updated_at).format('YYYY-MM-DD hh:mm:ss')
+        let createdTime = moment(created_at).format('YYYY-MM-DD HH:mm:ss')
+        let updatedTime = moment(updated_at).format('YYYY-MM-DD HH:mm:ss')
         data_spot.push({
           key: index,
           _id,

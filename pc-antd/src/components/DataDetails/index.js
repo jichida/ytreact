@@ -30,11 +30,11 @@ const Option = Select.Option;
 
 
 const TopMonitor = injectIntl((props)=>{
-    const {homedata, intl} = props;
+    const {srvdata, intl} = props;
     let topData = []
-    console.log('Home Data: ', homedata)
-    if(!!homedata) {
-      const {main_inwater_quality,main_runtime, main_outwater_quality} = homedata;
+    console.log('Home Data: ', srvdata)
+    if(!!srvdata) {
+      const {ProductQualityAverage,ModIn, FeedVolumeDaily,systime,Yield} = srvdata;
 
       // main_outwater_quality:30,//出水水质,
       // main_outwater_grade:'优',//出水等级,
@@ -44,38 +44,38 @@ const TopMonitor = injectIntl((props)=>{
       // main_outcwatervol:322,//浓水出水量
 
       // 顶部数据
-      const monitorData = {
-          consumption: 1000,
-          runtime: '02:10:20',
-          recovery: 1000,
-      };//<-----每日用水量吨&回收率uS/cm 从哪里来？
+      // const monitorData = {
+      //     consumption: 1000,
+      //     runtime: '02:10:20',
+      //     recovery: 1000,
+      // };//<-----每日用水量吨&回收率uS/cm 从哪里来？
       const { formatMessage } = intl;
       // 顶部数据
       topData = [
           {
               title:`${formatMessage({id: 'machine.data.average'})}`,
               unit: 'uS/cm',
-              data: `${main_outwater_quality}`,
+              data: `${ProductQualityAverage}`,
           },
           {
               title: `${formatMessage({id: 'machine.data.quality'})}`,//quality
               unit: 'uS/cm',
-              data: `${main_inwater_quality}`,
+              data: `${ModIn}`,
           },
           {
               title: `${formatMessage({id: 'machine.data.consumption'})}`,//consumption
               unit: '吨',
-              data: `${monitorData.consumption}`,
+              data: `${FeedVolumeDaily}`,
           },
           {
               title: `${formatMessage({id: 'machine.data.runtime'})}`,//runtime
               unit: '时/分/秒',
-              data: `${main_runtime}`,
+              data: `${systime}`,
           },
           {
               title: `${formatMessage({id: 'machine.data.recovery'})}`,//recovery
               unit: 'uS/cm',
-              data: `${monitorData.recovery}`,
+              data: `${Yield}`,
           }
       ]
 
@@ -88,7 +88,7 @@ const TopMonitor = injectIntl((props)=>{
           // },
 
     }
-    
+
 
 
     const topList = _.map(topData, (item)=>{
@@ -112,7 +112,7 @@ const TopMonitor = injectIntl((props)=>{
 
     return (
         <Row style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-            { !!homedata ? topList : `${intl.formatMessage({id: 'app.nodata'})}` }
+            { !!srvdata ? topList : `${intl.formatMessage({id: 'app.nodata'})}` }
         </Row>
     )
 })
@@ -135,21 +135,32 @@ const getPercent = (id,value) => {
 }
 
 const TopChart = injectIntl((props)=>{
-    const {homedata, intl} = props;
+    const {srvdata, intl} = props;
     const { formatMessage } = intl;
     let chartData = []
 
-    if(!!homedata) {
+    if(!!srvdata) {
+      // "MODLife" : "720",//MOD Life 膜寿命 d[G] {界面6}
+      // "Pre_filter1" : "365",//Pre_filter1 前置1 d[H] {界面7}
+      // "Pre_filter2" : "30",//Pre_filter2 前置2 d[I] {界面8}
+      // "Pre_filter3" : "10",//Pre_filter3 前置3 d[J] {界面9}
+      // "Post_filter1" : "0",//Post Filter1 后置1 d[K] {界面10}
+      // "Post_filter2" : "10",//Post Filter2 后置2 d[L] {界面11}
+      // "Post_filter3" : "120",//Post Filter3 后置3 d[M] {界面12}
+      // "UV" : "60",//UV d[U] {界面13}
+      //
+      const {MODLife,Pre_filter1,Pre_filter2,Pre_filter3,Post_filter1,Post_filter2,Post_filter3,UV} = srvdata;
+      // const {prefilter1_leftday,prefilter2_leftday,prefilter3_leftday,posfilter1_leftday,posfilter2_leftday,} = srvdata;
       // const outwater_quality = getPercent('main_outwater_quality', homedata.main_outwater_quality);
-      const modlife_leftday = getPercent('filterelements_modlife_leftday', homedata.filterelements_modlife_leftday);
-      const prefilter1_leftday = getPercent('filterelements_prefilter1_leftday', homedata.filterelements_prefilter1_leftday);
-      const prefilter2_leftday = getPercent('filterelements_prefilter2_leftday', homedata.filterelements_prefilter2_leftday);
-      const prefilter3_leftday = getPercent('filterelements_prefilter3_leftday', homedata.filterelements_prefilter3_leftday);
-      const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', homedata.filterelements_posfilter1_leftday);
-      const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', homedata.filterelements_posfilter2_leftday);
-      const posfilter3_leftday = getPercent('filterelements_posfilter3_leftday', homedata.filterelements_posfilter3_leftday);
-      const uvfilter_leftday = getPercent('filterelements_uvfilter_leftday', homedata.filterelements_uvfilter_leftday);
-      //以下是滤芯部分
+      const modlife_leftday = MODLife;//getPercent('filterelements_modlife_leftday', homedata.filterelements_modlife_leftday);
+      const prefilter1_leftday = Pre_filter1;//getPercent('filterelements_prefilter1_leftday', homedata.filterelements_prefilter1_leftday);
+      const prefilter2_leftday = Pre_filter2;//getPercent('filterelements_prefilter2_leftday', homedata.filterelements_prefilter2_leftday);
+      const prefilter3_leftday = Pre_filter3;//getPercent('filterelements_prefilter3_leftday', homedata.filterelements_prefilter3_leftday);
+      const posfilter1_leftday = Post_filter1;//getPercent('filterelements_posfilter1_leftday', homedata.filterelements_posfilter1_leftday);
+      const posfilter2_leftday = Post_filter2;//getPercent('filterelements_posfilter2_leftday', homedata.filterelements_posfilter2_leftday);
+      const posfilter3_leftday = Post_filter3;//getPercent('filterelements_posfilter3_leftday', homedata.filterelements_posfilter3_leftday);
+      const uvfilter_leftday = UV;//getPercent('filterelements_uvfilter_leftday', homedata.filterelements_uvfilter_leftday);
+      // //以下是滤芯部分
       // filterelements_modlife_leftvol:39,//电离子膜寿命剩余流量
       // filterelements_prefilter1_leftvol:29,//前置PP寿命剩余流量
       // filterelements_prefilter2_leftvol:30,//前置2滤芯寿命剩余流量
@@ -270,14 +281,14 @@ const TopChart = injectIntl((props)=>{
               warring: uvfilter_leftday.warring,
           }
       ]
-      
+
     }
 
     return (
         <Row gutter={24} style={{marginTop: 30, padding: '10px 26px'}}>
             <Col span={24} style={{display: 'flex', justifyContent: 'space-between'}}>
                 {
-                  !!homedata ? (
+                  !!srvdata ? (
                      _.map(chartData, (item)=>{
                         return (
                             <Chart {...item} key={item.title} />
@@ -449,6 +460,55 @@ class DataDetails extends React.PureComponent {
       this.state = {
           action: '',
           timezone: curTZ,
+          srvdata:{
+              "Pressure3" : "0",
+              "Pressure4" : "0",
+              "tempt1" : "237",
+              "tempt2" : "235",
+              "tempt3" : "238",
+              "tempt4" : "249",
+              "MODLife" : "720",//MOD Life 膜寿命 d[G] {界面6}
+              "Pre_filter1" : "365",//Pre_filter1 前置1 d[H] {界面7}
+              "Pre_filter2" : "30",//Pre_filter2 前置2 d[I] {界面8}
+              "Pre_filter3" : "10",//Pre_filter3 前置3 d[J] {界面9}
+              "Post_filter1" : "0",//Post Filter1 后置1 d[K] {界面10}
+              "Post_filter2" : "10",//Post Filter2 后置2 d[L] {界面11}
+              "Post_filter3" : "120",//Post Filter3 后置3 d[M] {界面12}
+              "MODLifePercent" : "0",
+              "Pre_filter1_percent" : "90",
+              "Pre_filter2_percent" : "50",
+              "Pre_filter3_percent" : "10",
+              "Pos_filter1_percent" : "30",
+              "Pos_filter2_percent" : "10",
+              "Pos_filter3_percent" : "0",
+              "UV" : "60",//UV d[U] {界面13}
+              "systime" : "5196",//systime 系统运行时间 d[a] {界面4}
+              "currentstate" : "6",
+              "ModIn" : "995",//ModIn uS 进水水质 d[c]{界面2}
+              "Concentration" : "1007",
+              "ModOut" : "0",
+              "Waste" : "1001",
+              "cutAbs" : "995",
+              "cutPer" : "99",
+              "ModCurrent" : "12",
+              "ModVoltage" : "203",
+              "solenoidCurrent" : "33",
+              "ProductQualityAverage" : "0",//Product Quality Average//平均水质d[l] {界面1}
+              "ONtime" : "0",
+              "productDvol" : "0",
+              "wasteDvol" : "0",
+              "Yield" : "0",//Yield 回收率 d[p] {界面5}
+              "DailyVolume" : "0",
+              "WasteVolumeDaily" : "0",
+              "FeedVolumeDaily" : "0",//Feed Volume Daily 今日总水量 d[s] {界面3}
+              "totalVol" : "50000",
+              "p1" : "46",
+              "p2" : "0",
+              "Ieff" : "0",
+              "Energy" : "0",
+              "Pressure1" : "0",
+              "Pressure2" : "0"
+          },
           homedata:{
             main_outwater_quality:30,//出水水质,
             main_outwater_grade:'优',//出水等级,
@@ -511,7 +571,7 @@ class DataDetails extends React.PureComponent {
           deviceid
           })).then((result) => {
             //实时数据，对应this.state.homedata
-            this.setState({homedata:result.homedata});
+            this.setState({srvdata:result.srvdata});
           console.log(result);
         }).catch((err) => {
           console.log(err);
@@ -614,7 +674,7 @@ class DataDetails extends React.PureComponent {
         })
 
         const realtimedata = {
-          homedata:this.state.homedata
+          srvdata:this.state.srvdata
         };
 
         return (

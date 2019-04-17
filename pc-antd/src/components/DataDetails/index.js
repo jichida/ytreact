@@ -429,8 +429,8 @@ const columns = [{
     key: 'tempt2',
   }, {
     title: <FormattedMessage id="table.Created At" />,
-    dataIndex: 'created_at',
-    key: 'created_at',
+    dataIndex: 'updated_at',
+    key: 'updated_at',
   }
 ]
 

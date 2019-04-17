@@ -34,7 +34,7 @@ const TopMonitor = injectIntl((props)=>{
     let topData = []
     console.log('Home Data: ', srvdata)
     if(!!srvdata) {
-      const {ProductQualityAverage,ModIn, FeedVolumeDaily,systime,Yield} = srvdata;
+      const {ProductQualityAverage,ModIn, DailyVolume,Reserve1,Yield} = srvdata;
 
       // main_outwater_quality:30,//出水水质,
       // main_outwater_grade:'优',//出水等级,
@@ -64,17 +64,17 @@ const TopMonitor = injectIntl((props)=>{
           },
           {
               title: `${formatMessage({id: 'machine.data.consumption'})}`,//consumption
-              unit: '吨',
-              data: `${FeedVolumeDaily}`,
+              unit: 'Gal',
+              data: `${DailyVolume}`,
           },
           {
               title: `${formatMessage({id: 'machine.data.runtime'})}`,//runtime
               unit: '时/分/秒',
-              data: `${systime}`,
+              data: `${Reserve1}`,
           },
           {
               title: `${formatMessage({id: 'machine.data.recovery'})}`,//recovery
-              unit: 'uS/cm',
+              unit: '%',
               data: `${Yield}`,
           }
       ]
@@ -482,7 +482,7 @@ class DataDetails extends React.PureComponent {
               "Pos_filter2_percent" : "10",
               "Pos_filter3_percent" : "0",
               "UV" : "60",//UV d[U] {界面13}
-              "systime" : "5196",//systime 系统运行时间 d[a] {界面4}
+              "systime" : "5196",//systime 系统运行时间 d[a] X
               "currentstate" : "6",
               "ModIn" : "995",//ModIn uS 进水水质 d[c]{界面2}
               "Concentration" : "1007",
@@ -498,16 +498,17 @@ class DataDetails extends React.PureComponent {
               "productDvol" : "0",
               "wasteDvol" : "0",
               "Yield" : "0",//Yield 回收率 d[p] {界面5}
-              "DailyVolume" : "0",
+              "DailyVolume" : "0",//Daily Volume今日用水量 d[q]  {界面3}
               "WasteVolumeDaily" : "0",
-              "FeedVolumeDaily" : "0",//Feed Volume Daily 今日总水量 d[s] {界面3}
+              "FeedVolumeDaily" : "0",// Feed Volume Daily 今日总水量 d[s] X
               "totalVol" : "50000",
               "p1" : "46",
               "p2" : "0",
               "Ieff" : "0",
               "Energy" : "0",
               "Pressure1" : "0",
-              "Pressure2" : "0"
+              "Pressure2" : "0",
+              "Reserve1":'100' // Reserve1 预留1 d[V] {界面4}
           },
           homedata:{
             main_outwater_quality:30,//出水水质,

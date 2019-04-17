@@ -414,7 +414,7 @@ export function* wififlow() {
         //   show: true,
         //   type:'success'
         // }}));
-        if(payload.code === 0){
+        if(payload.code == 0){
           const result = yield call(socket_recvdata_promise,payload.data);
           // let showdata = result.cmd === 'data'?`${result.data}`:`${result.data}`;
           // yield put(set_weui({
@@ -693,7 +693,7 @@ export function* wififlow() {
             yield put(common_err({type:'wifi_getssidlist',errmsg:`获取wifi信息超时,${delaytime}毫秒`}));
           }
           else{
-            if(wifiresult.code === 0){
+            if(wifiresult.code == 0){
               console.log(wifiresult.data);
               yield put(wifi_getssidlist_result(wifiresult.data));
             }

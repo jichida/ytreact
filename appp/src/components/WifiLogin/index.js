@@ -8,6 +8,7 @@ import {wifi_init,ui_setcurwifi,wifi_setcurwifi_request,
   wifi_getssidlist_request,wifi_getssidlist_result,set_weui} from '../../actions';
 import {callthen} from '../../sagas/pagination';
 import wifi from '../../assets/wlimg.png';
+import {getMobileOperatingSystem} from '../../util/getos';
 
 const AgreeItem = Checkbox.AgreeItem
 
@@ -22,7 +23,7 @@ const AgreeItem = Checkbox.AgreeItem
 class WifiLogin extends PureComponent{
     state = {
       wificonnected: false,
-      isIphone: true
+      isIphone: getMobileOperatingSystem()==='iOS'
     }
 
     componentDidMount(){
@@ -84,6 +85,7 @@ class WifiLogin extends PureComponent{
 
     handleConnect = () => {
       console.log('iphone connect')
+      this.props.history.push('/wifisucess')
     }
 
     handleWifiPasswordChange = (value)=>{

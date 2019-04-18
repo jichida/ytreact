@@ -106,7 +106,7 @@ const TopMonitor = injectIntl((props)=>{
                     <span className="title">{item.title}</span>
                     <span className="unit">{item.unit}</span>
                     <span className="data">{item.data}</span>
-                    
+
                 </div>
             </div>
         )
@@ -409,8 +409,8 @@ const columns = [{
     key: 'DailyVolume',
   },{
     title: <FormattedMessage id="table.Feed VolumeDaily" />,
-    dataIndex: 'FeedVolumeDaily',
-    key: 'FeedVolumeDaily',
+    dataIndex: 'WasteVolumeDaily',
+    key: 'WasteVolumeDaily',
   },{
     title: <FormattedMessage id="table.cWaste Volume" />,
     dataIndex: 'wasteDvol',

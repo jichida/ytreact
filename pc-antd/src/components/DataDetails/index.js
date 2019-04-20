@@ -92,7 +92,7 @@ const TopMonitor = injectIntl((props)=>{
 
 
 
-    const topList = _.map(topData, (item)=>{
+    const topList = _.map(topData, (item, index)=>{
         return (
             // <Col span={4} key={item.title}>
             //     <div className="number-info">
@@ -101,7 +101,7 @@ const TopMonitor = injectIntl((props)=>{
             //         <span className="data">{item.data}</span>
             //     </div>
             // </Col>
-            <div key={item.title}>
+            <div key={index}>
                 <div className="number-info">
                     <span className="title">{item.title}</span>
                     <span className="unit">{item.unit}</span>
@@ -291,9 +291,9 @@ const TopChart = injectIntl((props)=>{
             <Col span={24} style={{display: 'flex', justifyContent: 'space-between'}}>
                 {
                   !!srvdata ? (
-                     _.map(chartData, (item)=>{
+                     _.map(chartData, (item, index)=>{
                         return (
-                            <Chart {...item} key={item.title} />
+                            <Chart {...item} key={index} />
                         )
                     }))
                     : ''
@@ -331,104 +331,244 @@ const Mode_columns = [{
   }
 ]
 
-// {
-  // Concentration: "0"
-  // DailyVolume: "0"
-  // Energy: "0"
-  // FeedVolumeDaily: "0"
-  // Ieff: "0"
-  // MODLife: "0"
-  // ModCurrent: "0"
-  // ModIn: "0"
-  // ModOut: "0"
-  // ModVoltage: "162"
-  // ONtime: "0"
-  // Pre_filter1: "0"
-  // Pre_filter2: "0"
-  // Pre_filter3: "0"
-  // Pressure1: "50000"
-  // Pressure2: "0"
-  // Pressure3: "0"
-  // Pressure4: "0"
-  // ProductQualityAverage: "0"
-  // Waste: "0"
-  // WasteVolumeDaily: "0"
-  // Yield: "0"
-  // created_at: "2019-04-01T06:14:47.383Z"
-  // currentstate: "6"
-  // cutAbs: "0"
-  // cutPer: "0"
-  // deviceid: "GHCA0488"
-  // key: 0
-  // p1: "0"
-  // p2: "0"
-  // productDvol: "0"
-  // solenoidCurrent: "6"
-  // systime: "237"
-  // tempt1: "9934"
-  // tempt2: "0"
-  // tempt3: "0"
-  // tempt4: "0"
-  // totalVol: "0"
-  // updated_at: "2019-04-01T06:14:59.505Z"
-  // wasteDvol: "720"
-  // _id: "5ca1ac6345af8154294d9cb8"
-// }
 
 const columns = [{
-    title: <FormattedMessage id="table.ModIn uS" />,
+    title: <FormattedMessage id="table.systime" />,
+    dataIndex: 'systime',
+    key: 'systime'
+  },
+  {
+    title: <FormattedMessage id="table.currentstate" />,
+    dataIndex: 'currentstate',
+    key: 'currentstate'
+  },
+  {
+    title: <FormattedMessage id="table.ModIn" />,
     dataIndex: 'ModIn',
-    key: 'ModIn',
-  },{ //
-    title: <FormattedMessage id="table.Product uS" />,
+    key: 'ModIn'
+  },
+  {
+    title: <FormattedMessage id="table.Concentration" />,
     dataIndex: 'Concentration',
-    key: 'Concentration',
-  },{
-    title: <FormattedMessage id="table.ModOut uS" />,
+    key: 'Concentration'
+  },
+  {
+    title: <FormattedMessage id="table.ModOut" />,
     dataIndex: 'ModOut',
-    key: 'ModOut',
-  }, {
-    title: <FormattedMessage id="table.Product Quality Average" />,
+    key: 'ModOut'
+  },
+  {
+    title: <FormattedMessage id="table.Waste" />,
+    dataIndex: 'Waste',
+    key: 'Waste'
+  },
+  {
+    title: <FormattedMessage id="table.cutAbs" />,
+    dataIndex: 'cutAbs',
+    key: 'cutAbs'
+  },
+  {
+    title: <FormattedMessage id="table.cutPer" />,
+    dataIndex: 'cutPer',
+    key: 'cutPer'
+  },
+  {
+    title: <FormattedMessage id="table.ModCurrent" />,
+    dataIndex: 'ModCurrent',
+    key: 'ModCurrent'
+  },
+  {
+    title: <FormattedMessage id="table.ModVoltage" />,
+    dataIndex: 'ModVoltage',
+    key: 'ModVoltage'
+  },
+  {
+    title: <FormattedMessage id="table.solenoidCurrent" />,
+    dataIndex: 'solenoidCurrent',
+    key: 'solenoidCurrent'
+  },
+  {
+    title: <FormattedMessage id="table.ProductQualityAverage" />,
     dataIndex: 'ProductQualityAverage',
-    key: 'ProductQualityAverage',
-  },{
-    title: <FormattedMessage id="table.totalONtime" />,
+    key: 'ProductQualityAverage'
+  },
+  {
+    title: <FormattedMessage id="table.ONtime" />,
     dataIndex: 'ONtime',
-    key: 'ONtime',
-  },{ //
+    key: 'ONtime'
+  },
+  {
     title: <FormattedMessage id="table.productDvol" />,
     dataIndex: 'productDvol',
-    key: 'productDvol',
-  },{
-    title: <FormattedMessage id="table.cYield" />,
-    dataIndex: 'Yield',
-    key: 'Yield',
-  },{
-    title: <FormattedMessage id="table.Daily Volume" />,
-    dataIndex: 'DailyVolume',
-    key: 'DailyVolume',
-  },{
-    title: <FormattedMessage id="table.Feed VolumeDaily" />,
-    dataIndex: 'FeedVolumeDaily',
-    key: 'FeedVolumeDaily',
-  },{
-    title: <FormattedMessage id="table.cWaste Volume" />,
+    key: 'productDvol'
+  },
+  {
+    title: <FormattedMessage id="table.wasteDvol" />,
     dataIndex: 'wasteDvol',
-    key: 'wasteDvol',
-  },{
+    key: 'wasteDvol'
+  },
+  {
+    title: <FormattedMessage id="table.Yield" />,
+    dataIndex: 'Yield',
+    key: 'Yield'
+  },
+  {
+    title: <FormattedMessage id="table.DailyVolume" />,
+    dataIndex: 'DailyVolume',
+    key: 'DailyVolume'
+  },
+  {
+    title: <FormattedMessage id="table.WasteVolumeDaily" />,
+    dataIndex: 'WasteVolumeDaily',
+    key: 'WasteVolumeDaily'
+  },
+  {
+    title: <FormattedMessage id="table.FeedVolumeDaily" />,
+    dataIndex: 'FeedVolumeDaily',
+    key: 'FeedVolumeDaily'
+  },
+{
     title: <FormattedMessage id="table.totalVol" />,
     dataIndex: 'totalVol',
-    key: 'totalVol',
-  },{ //
-    title: <FormattedMessage id="table.SysPressure" />,
+    key: 'totalVol'
+  },
+  {
+    title: <FormattedMessage id="table.p1" />,
+    dataIndex: 'p1',
+    key: 'p1'
+  },
+  {
+    title: <FormattedMessage id="table.p2" />,
+    dataIndex: 'p2',
+    key: 'p2'
+  },
+  {
+    title: <FormattedMessage id="table.Ieff" />,
+    dataIndex: 'Ieff',
+    key: 'Ieff'
+  },
+  {
+    title: <FormattedMessage id="table.Energy" />,
+    dataIndex: 'Energy',
+    key: 'Energy'
+  },
+  {
+    title: <FormattedMessage id="table.Pressure1" />,
     dataIndex: 'Pressure1',
-    key: 'Pressure1',
-  },{
+    key: 'Pressure1'
+  },
+  {
+    title: <FormattedMessage id="table.Pressure2" />,
+    dataIndex: 'Pressure2',
+    key: 'Pressure2'
+  },
+  {
+    title: <FormattedMessage id="table.Pressure3" />,
+    dataIndex: 'Pressure3',
+    key: 'Pressure3'
+  },
+  {
+    title: <FormattedMessage id="table.Pressure4" />,
+    dataIndex: 'Pressure4',
+    key: 'Pressure4'
+  },
+  {
+    title: <FormattedMessage id="table.tmpt1" />,
+    dataIndex: 'tempt1',
+    key: 'tempt1'
+  },
+  {
     title: <FormattedMessage id="table.tmpt2" />,
     dataIndex: 'tempt2',
-    key: 'tempt2',
-  }, {
-    title: <FormattedMessage id="table.Created At" />,
+    key: 'tempt2'
+  },
+  {
+    title: <FormattedMessage id="table.tmpt3" />,
+    dataIndex: 'tempt3',
+    key: 'tempt3'
+  },
+  {
+    title: <FormattedMessage id="table.tmpt4" />,
+    dataIndex: 'tempt4',
+    key: 'tempt4'
+  },
+  {
+    title: <FormattedMessage id="table.MODLife" />,
+    dataIndex: 'MODLife',
+    key: 'MODLife'
+  },
+  {
+    title: <FormattedMessage id="table.Pre_filter1" />,
+    dataIndex: 'Pre_filter1',
+    key: 'Pre_filter1'
+  },
+  {
+    title: <FormattedMessage id="table.Pre_filter2" />,
+    dataIndex: 'Pre_filter2',
+    key: 'Pre_filter2'
+  },
+  {
+    title: <FormattedMessage id="table.Pre_filter3" />,
+    dataIndex: 'Pre_filter3',
+    key: 'Pre_filter3'
+  },
+  {
+    title: <FormattedMessage id="table.Post_filter1" />,
+    dataIndex: 'Post_filter1',
+    key: 'Post_filter1'
+  },
+  {
+    title: <FormattedMessage id="table.Post_filter2" />,
+    dataIndex: 'Post_filter2',
+    key: 'Post_filter2'
+  },
+  {
+    title: <FormattedMessage id="table.Post_filter3" />,
+    dataIndex: 'Post_filter3',
+    key: 'Post_filter3'
+  },
+  {
+    title: <FormattedMessage id="table.MODLifePercent" />,
+    dataIndex: 'MODLifePercent',
+    key: 'MODLifePercent',
+  },
+  {
+    title: <FormattedMessage id="table.Pre_filter1_percent" />,
+    dataIndex: 'Pre_filter1_percent',
+    key: 'Pre_filter1_percent',
+  },
+  {
+    title: <FormattedMessage id="table.Pre_filter2_percent" />,
+    dataIndex: 'Pre_filter2_percent',
+    key: 'Pre_filter2_percent',
+  },
+  {
+    title: <FormattedMessage id="table.Pre_filter3_percent" />,
+    dataIndex: 'Pre_filter3_percent',
+    key: 'Pre_filter3_percent',
+  },
+  {
+    title: <FormattedMessage id="table.Pos_filter1_percent" />,
+    dataIndex: 'Pos_filter1_percent',
+    key: 'Pos_filter1_percent',
+  },
+  {
+    title: <FormattedMessage id="table.Pos_filter2_percent" />,
+    dataIndex: 'Pos_filter2_percent',
+    key: 'Pos_filter2_percent',
+  },
+  {
+    title: <FormattedMessage id="table.Pos_filter3_percent" />,
+    dataIndex: 'Pos_filter3_percent',
+    key: 'Pos_filter3_percent',
+  },
+  {
+    title: <FormattedMessage id="table.UV" />,
+    dataIndex: 'UV',
+    key: 'UV',
+  },
+  {
+    title: <FormattedMessage id="table.created_at" />,
     dataIndex: 'updated_at',
     key: 'updated_at',
   }
@@ -575,7 +715,7 @@ class DataDetails extends React.PureComponent {
           })).then((result) => {
             //实时数据，对应this.state.homedata
             this.setState({srvdata:result.srvdata});
-          console.log(result);
+          console.log('srvdata:', result);
         }).catch((err) => {
           console.log(err);
         })
@@ -595,13 +735,25 @@ class DataDetails extends React.PureComponent {
           deviceid
           })).then((result) => {
             //历史命令数据，对应this.state.dataMode
-            this.setState({dataMode:result});
-          console.log(result);
+            const dataMode = this.initModeTableData(result)
+            this.setState({dataMode});
+          console.log('dataMode:', result);
         }).catch((err) => {
           console.log(err);
         })
       }
 
+    }
+
+    initModeTableData = (data) => {
+      const dataMode = []
+      lodashmap(data, (item, index) => {
+        dataMode.push({
+          key: index,
+          ...item
+        })
+      })
+      return dataMode
     }
 
 
@@ -644,7 +796,7 @@ class DataDetails extends React.PureComponent {
                   })).then((result) => {
                     //历史命令数据，对应this.state.dataMode
                     this.setState({dataMode:result});
-                  console.log(result);
+                  console.log('dataMode:', result);
                 }).catch((err) => {
                   console.log(err);
                 });
@@ -730,7 +882,7 @@ class DataDetails extends React.PureComponent {
                 </Row>
                 <Row style={{marginTop: 30, padding: '0 26px'}}>
                     <Col span={24} style={{margin: '0 auto'}}>
-                        <Table columns={columns} dataSource={this.state.data_spot} className="data-table-list" pagination={false} />
+                        <Table columns={columns} dataSource={this.state.data_spot} scroll={{x: true}} className="data-table-list" pagination={false} />
                     </Col>
                 </Row>
                 </Card>

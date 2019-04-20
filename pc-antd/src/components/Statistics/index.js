@@ -194,14 +194,14 @@ class Statistics extends React.PureComponent {
         const { history } = this.props;
 
         const cycles = (
-                _.map(cycleAction, (item)=>(
-                    <Radio.Button value={item.action}>{item.name}</Radio.Button>
+                _.map(cycleAction, (item, index)=>(
+                    <Radio.Button key={index} value={item.action}>{item.name}</Radio.Button>
                 ))
         )
 
         const types = (
-            _.map(typeAction, (item)=>(
-                <Radio.Button value={item.action}>{item.name}</Radio.Button>
+            _.map(typeAction, (item, index)=>(
+                <Radio.Button key={index} value={item.action}>{item.name}</Radio.Button>
             ))
         )
 

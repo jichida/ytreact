@@ -28,3 +28,7 @@ export const adddevicecmddata_request = createAction('adddevicecmddata_request')
 export const adddevicecmddata_result = createAction('adddevicecmddata_result');
 export const getdevicestat_request = createAction('getdevicestat_request');
 export const getdevicestat_result = createAction('getdevicestat_result');
+
+export const setdevicesubscriber = createAction('setdevicesubscriber');
+export const pushdevicenotify = createAction('pushdevicenotify');
+export const startdevicequery = createAction('startdevicequery');

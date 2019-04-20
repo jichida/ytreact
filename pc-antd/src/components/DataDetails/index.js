@@ -11,9 +11,10 @@ import 'moment-timezone';
 import GridContent from '../GridContent';
 import config from './config';
 import './index.less';
+import {startdevicequery,setdevicesubscriber} from '../../actions';
 import {adddevicecmddata_request,adddevicecmddata_result} from '../../actions';
-import {getdevicedata_request,getdevicedata_result} from '../../actions';
-import {getdevicehisdata_request,getdevicehisdata_result} from '../../actions';
+// import {getdevicedata_request,getdevicedata_result} from '../../actions';
+// import {getdevicehisdata_request,getdevicehisdata_result} from '../../actions';
 import {getdevicecmddata_request,getdevicecmddata_result} from '../../actions';
 import {callthen} from '../../sagas/pagination';
 
@@ -106,7 +107,7 @@ const TopMonitor = injectIntl((props)=>{
                     <span className="title">{item.title}</span>
                     <span className="unit">{item.unit}</span>
                     <span className="data">{item.data}</span>
-                    
+
                 </div>
             </div>
         )
@@ -602,142 +603,25 @@ class DataDetails extends React.PureComponent {
       this.state = {
           action: '',
           timezone: curTZ,
-          srvdata:{
-              "Pressure3" : "0",
-              "Pressure4" : "0",
-              "tempt1" : "237",
-              "tempt2" : "235",
-              "tempt3" : "238",
-              "tempt4" : "249",
-              "MODLife" : "720",//MOD Life 膜寿命 d[G] {界面6}
-              "Pre_filter1" : "365",//Pre_filter1 前置1 d[H] {界面7}
-              "Pre_filter2" : "30",//Pre_filter2 前置2 d[I] {界面8}
-              "Pre_filter3" : "10",//Pre_filter3 前置3 d[J] {界面9}
-              "Pos_filter1" : "0",//Post Filter1 后置1 d[K] {界面10}
-              "Pos_filter2" : "10",//Post Filter2 后置2 d[L] {界面11}
-              "Pos_filter3" : "120",//Post Filter3 后置3 d[M] {界面12}
-              "MODLifePercent" : "0",
-              "Pre_filter1_percent" : "90",
-              "Pre_filter2_percent" : "50",
-              "Pre_filter3_percent" : "10",
-              "Pos_filter1_percent" : "30",
-              "Pos_filter2_percent" : "10",
-              "Pos_filter3_percent" : "0",
-              "UV" : "60",//UV d[U] {界面13}
-              "systime" : "5196",//systime 系统运行时间 d[a] X
-              "currentstate" : "6",
-              "ModIn" : "995",//ModIn uS 进水水质 d[c]{界面2}
-              "Concentration" : "1007",
-              "ModOut" : "0",
-              "Waste" : "1001",
-              "cutAbs" : "995",
-              "cutPer" : "99",
-              "ModCurrent" : "12",
-              "ModVoltage" : "203",
-              "solenoidCurrent" : "33",
-              "ProductQualityAverage" : "0",//Product Quality Average//平均水质d[l] {界面1}
-              "ONtime" : "0",
-              "productDvol" : "0",
-              "wasteDvol" : "0",
-              "Yield" : "0",//Yield 回收率 d[p] {界面5}
-              "DailyVolume" : "0",//Daily Volume今日用水量 d[q]  {界面3}
-              "WasteVolumeDaily" : "0",
-              "FeedVolumeDaily" : "0",// Feed Volume Daily 今日总水量 d[s] X
-              "totalVol" : "50000",
-              "p1" : "46",
-              "p2" : "0",
-              "Ieff" : "0",
-              "Energy" : "0",
-              "Pressure1" : "0",
-              "Pressure2" : "0",
-              "Reserve1":'100' // Reserve1 预留1 d[V] {界面4}
-          },
-          homedata:{
-            main_outwater_quality:30,//出水水质,
-            main_outwater_grade:'优',//出水等级,
-            main_inwater_quality:32,//进水水质,
-            main_totalwatervol:29993,//总产水量
-            main_runtime:23,//运行时间
-            main_outcwatervol:322,//浓水出水量
-            //以下是滤芯部分
-            filterelements_modlife_leftvol:39,//电离子膜寿命剩余流量
-            filterelements_prefilter1_leftvol:29,//前置PP寿命剩余流量
-            filterelements_prefilter2_leftvol:30,//前置2滤芯寿命剩余流量
-            filterelements_prefilter3_leftvol:9,//前置3滤芯寿命剩余流量
-            filterelements_posfilter1_leftvol:70,//后置活性炭寿命剩余流量
-            filterelements_posfilter2_leftvol:90,//电离子膜寿命剩余流量
-            filterelements_posfilter3_leftvol:100,//电离子膜寿命剩余流量
-            filterelements_modlife_leftday:20,//电离子膜寿命剩余天数
-            filterelements_prefilter1_leftday:1,//前置PP寿命剩余天数
-            filterelements_prefilter2_leftday:24,//前置2寿命剩余天数
-            filterelements_prefilter3_leftday:41,//前置3寿命剩余天数
-            filterelements_posfilter1_leftday:5,//后置活性炭寿命剩余天数
-            filterelements_posfilter2_leftday:23,//后置2滤芯寿命剩余天数
-            filterelements_posfilter3_leftday:46,//后置2滤芯寿命剩余天数
-            filterelements_uvfilter_leftday:46,//UV滤芯寿命剩余天数
-          },
-          dataMode:[
-              // {
-              //     key: 1,
-              //     type: 'message',
-              //     body: 'ModinUs: 353 , 303',
-              //     occurstime: '2018-05-05 3:21:00 PM'
-              // },
-          ],
-          data_spot:[
-              // {
-              //     key: 1,
-              //     ModInuS: 279,
-              //     ProductuS:178,
-              //     ModOutuS: 201,
-              //     ProductQualityAverage: 76,
-              //     totalONtime: 82017,
-              //     productDvol: 0,
-              //     cYield: 30,
-              //     DailyVolume: 15830,
-              //     FeedVolumeDaily: 51281,
-              //     cWasteVolumeDaily: 35451,
-              //     totalVol: 50932,
-              //     SysPressure: 520,
-              //     tmpt2: 313,
-              //     createtime: '2018-09-11 9:39:00 AM'
-              // },
-          ]
+
       }
+    }
+    componentWillUnmount(){
+      this.props.dispatch(setdevicesubscriber({data:{deviceid:'',cmd:'unset'}}));
     }
 
     componentDidMount(){
       const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid');
       console.log(`start request deviceid:${deviceid}`);
       if(!!deviceid){
-        this.props.dispatch(callthen(getdevicedata_request,getdevicedata_result,{
-          deviceid
-          })).then((result) => {
-            //实时数据，对应this.state.homedata
-            this.setState({srvdata:result.srvdata});
-          console.log('srvdata:', result);
-        }).catch((err) => {
-          console.log(err);
-        })
-        this.props.dispatch(callthen(getdevicehisdata_request,getdevicehisdata_result,{
-          query:{deviceid,
-            srvdata:{$exists:true}}
-          })).then((result) => {
-            //历史数据，对应this.state.data_spot
-            debugger;
-            let data_spot = this.initTableData(result)
-            this.setState({data_spot});
-            console.log('Data_Spot Result', data_spot);
-        }).catch((err) => {
-          console.log(err);
-        })
+        this.props.dispatch(startdevicequery({deviceid}));
+        this.props.dispatch(setdevicesubscriber({data:{deviceid,cmd:'set'}}));
         this.props.dispatch(callthen(getdevicecmddata_request,getdevicecmddata_result,{
           deviceid
           })).then((result) => {
             //历史命令数据，对应this.state.dataMode
-            const dataMode = this.initModeTableData(result)
-            this.setState({dataMode});
-          console.log('dataMode:', result);
+            // this.setState({dataMode:result});
+          console.log(result);
         }).catch((err) => {
           console.log(err);
         })
@@ -757,23 +641,23 @@ class DataDetails extends React.PureComponent {
     }
 
 
-    initTableData = (data) => {
-      const data_spot = []
-      lodashmap(data, (item, index) => {
-        const { created_at, deviceid, _id, updated_at, srvdata } = item
-        let createdTime = moment(created_at).format('YYYY-MM-DD HH:mm:ss')
-        let updatedTime = moment(updated_at).format('YYYY-MM-DD HH:mm:ss')
-        data_spot.push({
-          key: index,
-          _id,
-          deviceid,
-          created_at: createdTime,
-          updated_at: updatedTime,
-          ...srvdata
-        })
-      })
-      return data_spot
-    }
+    // initTableData = (data) => {
+    //   const data_spot = []
+    //   lodashmap(data, (item, index) => {
+    //     const { created_at, deviceid, _id, updated_at, srvdata } = item
+    //     let createdTime = moment(created_at).format('YYYY-MM-DD HH:mm:ss')
+    //     let updatedTime = moment(updated_at).format('YYYY-MM-DD HH:mm:ss')
+    //     data_spot.push({
+    //       key: index,
+    //       _id,
+    //       deviceid,
+    //       created_at: createdTime,
+    //       updated_at: updatedTime,
+    //       ...srvdata
+    //     })
+    //   })
+    //   return data_spot
+    // }
 
 
 
@@ -795,8 +679,8 @@ class DataDetails extends React.PureComponent {
                   deviceid
                   })).then((result) => {
                     //历史命令数据，对应this.state.dataMode
-                    this.setState({dataMode:result});
-                  console.log('dataMode:', result);
+                    // this.setState({dataMode:result});
+                  console.log(result);
                 }).catch((err) => {
                   console.log(err);
                 });
@@ -829,7 +713,7 @@ class DataDetails extends React.PureComponent {
         })
 
         const realtimedata = {
-          srvdata:this.state.srvdata
+          srvdata:this.props.srvdata
         };
 
         return (
@@ -847,7 +731,7 @@ class DataDetails extends React.PureComponent {
                     {/* <Col span={2}></Col> */}
                     <Col span={12} className="sub-title">
                         <div><h2>{formatMessage({id: 'machine.mode'})}</h2><span className="right-Link" onClick={()=>{history.push('/actions')}}>Mode&gt;</span></div>
-                        <Table columns={Mode_columns} dataSource={this.state.dataMode} className="table-list" pagination={false} />
+                        <Table columns={Mode_columns} dataSource={this.props.dataMode} className="table-list" pagination={false} />
                     </Col>
                     <Col span={2}></Col>
                     <Col span={10} className="sub-title">
@@ -882,7 +766,7 @@ class DataDetails extends React.PureComponent {
                 </Row>
                 <Row style={{marginTop: 30, padding: '0 26px'}}>
                     <Col span={24} style={{margin: '0 auto'}}>
-                        <Table columns={columns} dataSource={this.state.data_spot} scroll={{x: true}} className="data-table-list" pagination={false} />
+                        <Table columns={columns} dataSource={this.props.data_spot} scroll={{x: true}} className="data-table-list" pagination={false} />
                     </Col>
                 </Row>
                 </Card>
@@ -890,10 +774,10 @@ class DataDetails extends React.PureComponent {
         )
     }
 }
-const mapStateToProps =  ({device:{devices}},props) =>{
+const mapStateToProps =  ({device:{devices},devicedetail:{srvdata,data_spot,dataMode}},props) =>{
   const curdevice = lodashget(devices,`${props.match.params.id}`,{});
   console.log(curdevice)
-  return {curdevice};
+  return {curdevice,srvdata,data_spot,dataMode};
 };
 DataDetails = connect(mapStateToProps)(DataDetails);
 export default withRouter(injectIntl(DataDetails));

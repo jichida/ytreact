@@ -5,7 +5,7 @@ import {
   setuserdevice_request,
   setuserdevice_result,
   getdevice_result,
-  adddevice_request
+  adddevice_request,
 } from '../../actions';
 import lodashget from 'lodash.get';
 

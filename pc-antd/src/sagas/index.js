@@ -8,6 +8,7 @@ import {uiflow} from './ui';
 import {deviceflow} from './device';
 import {userloginflow} from './userlogin';
 import {noticeflow} from './notice';
+import {devicedetailflow} from './devicedetail';
 
 export default function* rootSaga() {
   yield fork(userloginflow);
@@ -18,6 +19,6 @@ export default function* rootSaga() {
   yield fork(uiflow);
   yield fork(deviceflow);
   yield fork(noticeflow);
-  // yield fork(restfulapiflow);
+  yield fork(devicedetailflow);
 
 }

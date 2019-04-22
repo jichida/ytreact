@@ -19,7 +19,6 @@ import {getdevicecmddata_request,getdevicecmddata_result} from '../../actions';
 import {callthen} from '../../sagas/pagination';
 
 import success from '../../assets/success.png'
-import failer from '../../assets/failer.png'
 import sb_icon from '../../assets/sj_icon.png';
 
 const curTZ = moment.tz.guess();
@@ -327,7 +326,13 @@ const Mode_columns = [{
       console.log(text);
       if(lodashget(record,'issent') === 1) {
          return (
-           <React.Fragment><img src={success} alt="" style={{width: '20px', height: '20px'}} /><span>{`${text}`}</span></React.Fragment>
+          //  <React.Fragment><span></span></React.Fragment>
+          <div>
+            <div style={{width: '25px', display: 'inline-block'}}>
+              <img src={success} alt="" style={{width: '20px', height: '20px'}} />
+            </div>
+            <div style={{display: 'inline-block'}}>{`${text}`}</div>
+          </div>
          )
       }
 
@@ -336,7 +341,14 @@ const Mode_columns = [{
       // if(lodashget(record,'issent') === 1){//表示已经发送成功
       //   return `#${text}`;
       // }
-      return text;
+      return (
+        <div>
+          <div style={{width: '25px', display: 'inline-block'}}>
+          </div>
+          <div style={{display: 'inline-block'}}>{text}</div>
+        </div>
+
+      )
     }
   }, {
     title: <FormattedMessage id="machine.mode.body" />,

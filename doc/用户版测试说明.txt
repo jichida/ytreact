@@ -1,0 +1,7 @@
+1、
+登录名: GHCA0488
+密码:123456
+2、cd 到test目录执行:node simulatedevice.js
+确保与服务端相连
+3、执行app的获取数据按钮，可以获取数据
+执行app相关设置命令

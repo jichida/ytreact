@@ -50,7 +50,7 @@ class Home extends PureComponent{
     }
 
     render () {
-      const {intl,homedata,isgetdata} = this.props;
+      const {intl,homedata,isgetdata,performancedata} = this.props;
       // const mapfilternames = mapname_filter;
 
       const devicedata = homedata;
@@ -63,8 +63,9 @@ class Home extends PureComponent{
       const title_main_inwater_quality = intl.formatMessage({id: 'home.show.title_main_inwater_quality'},{value:lodashget(devicedata,'main_inwater_quality',300)});
       const title_main_totalwatervol = intl.formatMessage({id: 'home.show.title_main_totalwatervol'},{value:lodashget(devicedata,'main_totalwatervol',0)});
       const title_main_runtime = intl.formatMessage({id: 'home.show.title_main_runtime'},{value:lodashget(devicedata,'main_runtime',0)});
-      const title_main_outcwatervol = intl.formatMessage({id: 'home.show.title_main_outcwatervol'},{value:lodashget(devicedata,'main_outcwatervol',0)});
-
+      // const title_main_outcwatervol = intl.formatMessage({id: 'home.show.title_main_outcwatervol'},{value:lodashget(devicedata,'main_outcwatervol',0)});
+      const title_main_outcwatervol = intl.formatMessage({id: 'home.show.title_main_outcwatervol'},{value:lodashget(performancedata,'waterpurificationrate',0)});
+      
       const title_main_filterelements_modlife = intl.formatMessage({id: 'home.show.title_main_filterelements_modlife'});
       const title_main_filterelements_prefilter1 = intl.formatMessage({id: 'home.show.title_main_filterelements_prefilter1'});
       const title_main_filterelements_prefilter2 = intl.formatMessage({id: 'home.show.title_main_filterelements_prefilter2'});
@@ -284,7 +285,7 @@ class Home extends PureComponent{
       console.log(value_filterelements_posfilter3_leftvol)
 
         if(!isgetdata){
-          //未获取到数据，需要加个大按钮
+          //未获取到数据，需要加个大按钮  
           return (
             <Refresh handleRefresh={this.handleRefresh} />
           )
@@ -383,8 +384,8 @@ class Home extends PureComponent{
         )
     }
 }
-const mapStateToProps =  ({devicedata:{isgetdata,homedata}}) =>{
-  return {isgetdata,homedata};
+const mapStateToProps =  ({devicedata:{isgetdata,homedata,performancedata}}) =>{
+  return {isgetdata,homedata,performancedata};
 };
 Home = connect(mapStateToProps)(Home);
 export default injectIntl(Home);

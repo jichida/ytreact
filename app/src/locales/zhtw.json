@@ -154,7 +154,7 @@
   "home.show.title_main_inwater_quality":"進水水質 {value} ppm",
   "home.show.title_main_totalwatervol":"總產水量 {value} gal",
   "home.show.title_main_runtime":"執行時間 {value} 天",
-  "home.show.title_main_outcwatervol":"濃水出水量 {value} gal",
+  "home.show.title_main_outcwatervol":"淨水率 {value} %",
   "home.show.title_main_filterelements_modlife":"電離子膜壽命",
   "home.show.title_main_filterelements_prefilter1":"前置PP壽命",
   "home.show.title_main_filterelements_prefilter2":"前置2濾芯壽命",

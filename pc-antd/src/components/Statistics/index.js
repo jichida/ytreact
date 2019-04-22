@@ -35,31 +35,82 @@ const cycleAction = [
         action: 'year',
     },
 ];
-
+//1是进水水质，3是压力1，4日废水量 5日总水量6日用水量
+// srvdata:{
+//   systime:String,//d[a]
+//   currentstate:String,//d[b]
+//   ModIn:String,//d[c]
+//   Concentration:String,//d[d]
+//   ModOut:String,//d[e]
+//   Waste:String,//d[f]
+//   cutAbs:String,//d[g]
+//   cutPer:String,//d[h]
+//   ModCurrent:String,//d[i]
+//   ModVoltage:String,//d[j]
+//   solenoidCurrent:String,//d[k]
+//   ProductQualityAverage:String,//d[l]
+//   ONtime:String,//d[m]
+//   productDvol:String,//d[n]
+//   wasteDvol:String,//d[o]
+//   Yield:String,//d[p]
+//   DailyVolume:String,//d[q]
+//   WasteVolumeDaily:String,//d[r]
+//   FeedVolumeDaily:String,//d[s]
+//   totalVol:String,//d[t]
+//   p1:String,//d[u]
+//   p2:String,//d[v]
+//   Ieff:String,//d[w]
+//   Energy:String,//d[x]
+//   Pressure1:String,//d[y]
+//   Pressure2:String,//d[z]
+//   Pressure3:String,//d[A]
+//   Pressure4:String,//d[B]
+//   tempt1:String,//d[C]
+//   tempt2:String,//d[D]
+//   tempt3:String,//d[E]
+//   tempt4:String,//d[F]
+//   MODLife:String,//d[G]
+//   Pre_filter1:String,//d[H]
+//   Pre_filter2:String,//d[I]
+//   Pre_filter3:String,//d[J]
+//   Post_filter1:String,//d[K]
+//   Post_filter2:String,//d[L]
+//   Post_filter3:String,//d[M]
+//   MODLifePercent:String,//d[N]
+//   Pre_filter1_percent:String,//d[O]
+//   Pre_filter2_percent:String,//d[P]
+//   Pre_filter3_percent:String,//d[Q]
+//   Pos_filter1_percent:String,//d[R]
+//   Pos_filter2_percent:String,//d[S]
+//   Pos_filter3_percent:String,//d[T]
+//   UV:String,//d[U]
+//   Reserve1:String,//d[V]
+//   Reserve2:String,//d[W]
+// }
 const typeAction = [
-    {
+    {//1是进水水质
       name: 'mod in/out',
-      action: 'homedata.main_outwater_quality',
+      action: 'srvdata.ModIn',//ModIn uS 进水水质 d[c]
     },
-    {
+    {//2是出水水质
         name: <FormattedMessage id="machine.report.quality" />,
-        action: 'homedata.main_inwater_quality',
+        action: 'srvdata.ModOut',//ModOut uS 出水水质 d[e]
     },
-    {
+    {//3是压力1
         name: <FormattedMessage id="machine.report.pressure" />,
-        action: 'pressure',
+        action: 'srvdata.Pressure1',//Pressure1 压力1 d[y]
     },
-    {
+    {//4日废水量
         name: <FormattedMessage id="machine.report.drainage" />,
-        action: 'drainage',
+        action: 'srvdata.WasteVolumeDaily',//Waste Volume Daily 今日废水量 d[r]
     },
-    {
+    {//5日总水量
         name: <FormattedMessage id="machine.report.totalinlet" />,
-        action: 'totalinlet',
+        action: 'srvdata.totalVol',//totalVol 总用水量 d[t]
     },
-    {
+    {//6日用水量
         name: <FormattedMessage id="machine.report.totaleffluent" />,
-        action: 'totaleffluent',
+        action: 'srvdata.DailyVolume',//Daily Volume 今日用水量 d[q]
     },
 ];
 
@@ -70,7 +121,7 @@ class Statistics extends React.PureComponent {
       super(props);
       this.state = {
           cycle: 'day',
-          type: 'homedata.main_outwater_quality',
+          type: 'srvdata.ModIn',
           rangeDate: [],
           isGetData: false
       }
@@ -222,9 +273,9 @@ class Statistics extends React.PureComponent {
                             </Radio.Group>
                         </Col>
                         <Col span={4}>
-                                <DatePicker.RangePicker 
-                                    ranges={{ '当天': [moment(), moment()], '当月': [moment().startOf('month'), moment().endOf('month')] }}  
-                                    value={this.state.rangeDate} 
+                                <DatePicker.RangePicker
+                                    ranges={{ '当天': [moment(), moment()], '当月': [moment().startOf('month'), moment().endOf('month')] }}
+                                    value={this.state.rangeDate}
                                     format={dateFormat}
                                     onChange={this.handleRangePick}
                                 />
@@ -240,7 +291,7 @@ class Statistics extends React.PureComponent {
                     </Row>
                     <Row gutter={24} style={{marginBottom: 30}}>
                         <Col span={24}>
-                            {this.state.isGetData ? <ReactEcharts option={this.getOption()} /> : '暂无数据'} 
+                            {this.state.isGetData ? <ReactEcharts option={this.getOption()} /> : '暂无数据'}
                         </Col>
                     </Row>
                 </Card>

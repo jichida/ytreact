@@ -321,6 +321,13 @@ const Mode_columns = [{
     title: <FormattedMessage id="machine.mode.type" />,
     dataIndex: 'type',
     key: 'type',
+    render: (text, record) =>{
+      console.log(text);
+      if(lodashget(record,'issent') === 1){//表示已经发送成功
+        return `#${text}`;
+      }
+      return text;
+    }
   }, {
     title: <FormattedMessage id="machine.mode.body" />,
     dataIndex: 'body',
@@ -329,6 +336,10 @@ const Mode_columns = [{
     title: <FormattedMessage id="machine.mode.occurstime" />,
     dataIndex: 'occurstime',
     key: 'occurstime',
+    render: (text, record) =>{
+      console.log(text);
+      return moment(text).format('YYYY-MM-DD HH:mm:ss');
+    }
   }
 ]
 
@@ -614,19 +625,9 @@ class DataDetails extends React.PureComponent {
       const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid');
       console.log(`start request deviceid:${deviceid}`);
       if(!!deviceid){
-        this.props.dispatch(startdevicequery({deviceid}));
         this.props.dispatch(setdevicesubscriber({data:{deviceid,cmd:'set'}}));
-        this.props.dispatch(callthen(getdevicecmddata_request,getdevicecmddata_result,{
-          deviceid
-          })).then((result) => {
-            //历史命令数据，对应this.state.dataMode
-            // this.setState({dataMode:result});
-          console.log(result);
-        }).catch((err) => {
-          console.log(err);
-        })
+        this.props.dispatch(startdevicequery({deviceid}));
       }
-
     }
 
     initModeTableData = (data) => {

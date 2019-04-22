@@ -18,7 +18,8 @@ import {adddevicecmddata_request,adddevicecmddata_result} from '../../actions';
 import {getdevicecmddata_request,getdevicecmddata_result} from '../../actions';
 import {callthen} from '../../sagas/pagination';
 
-
+import success from '../../assets/success.png'
+import failer from '../../assets/failer.png'
 import sb_icon from '../../assets/sj_icon.png';
 
 const curTZ = moment.tz.guess();
@@ -322,10 +323,19 @@ const Mode_columns = [{
     dataIndex: 'type',
     key: 'type',
     render: (text, record) =>{
+      console.log('Mode Record:', record)
       console.log(text);
-      if(lodashget(record,'issent') === 1){//表示已经发送成功
-        return `#${text}`;
+      if(lodashget(record,'issent') === 1) {
+         return (
+           <React.Fragment><img src={success} alt="" style={{width: '20px', height: '20px'}} /><span>{`${text}`}</span></React.Fragment>
+         )
       }
+
+      // return (<img src={failer} alt="" style={{width: '20px', height: '20px'}} />)
+
+      // if(lodashget(record,'issent') === 1){//表示已经发送成功
+      //   return `#${text}`;
+      // }
       return text;
     }
   }, {

@@ -10,7 +10,7 @@ import {
 } from '../../actions';
 // import {getdevice_request} from '../../actions';
 import {goBack,replace} from 'connected-react-router';//https://github.com/reactjs/connected-react-router
-
+import config from '../../env/config.js';
 // import { goBack } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
 // import config from '../../env/config.js';
 // import  {
@@ -57,15 +57,21 @@ export function* userloginflow() {
         console.log(`md_login_result==>${JSON.stringify(result)}`);
         if(!!result){
             const {loginsuccess,search} = yield select((state)=>{
-              const loginsuccess = state.userlogin.success;
+              const loginsuccess = state.userlogin.loginsuccess;
               const search = state.router.location.search;
               return {loginsuccess,search};
             });
             yield put(login_result(result));
 
+            if(!result.loginsuccess){
+              localStorage.removeItem(`ytreact_${config.softmode}_token`);
+            }
+
             // yield put(getdevice_request({}));
             // debugger;
             if(!loginsuccess && result.loginsuccess){
+              console.log(`redirect page!!!`)
+              localStorage.setItem(`ytreact_${config.softmode}_token`,result.token);
               //switch
                 const fdStart = search.indexOf("?next=");
                 if(fdStart === 0){

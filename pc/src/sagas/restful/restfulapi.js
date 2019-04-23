@@ -13,7 +13,7 @@ const statusHelper = (response)=> {
 
 const restfulapi = {
   geturlauth:({cmd,payload})=>{
-    const usertoken = localStorage.getItem(`asmb2c_${config.softmode}_token`);
+    const usertoken = localStorage.getItem(`ytreact_${config.softmode}_token`);
     return fetch(`${fetchurl}/auth/${config.softmode}/${cmd}`, {
       method  : 'POST',
       headers : {

@@ -19,7 +19,7 @@ export function* socketflow(){//仅执行一次
         const isloginsuccess = yield select((state)=>{
           return state.userlogin.loginsuccess;
         })
-        const token = localStorage.getItem(`yt_${config.softmode}_token`);
+        const token = localStorage.getItem(`ytreact_${config.softmode}_token`);
         console.log(`notify_socket_connected==>${token}`);
         if (!!token && isloginsuccess) {
           yield put(loginwithtoken_request({token}));

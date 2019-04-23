@@ -41,7 +41,7 @@ export function* userloginflow() {
         if(!!result){
             yield put(login_result(result));
             if(result.loginsuccess){
-              localStorage.setItem(`asmb2c_${config.softmode}_token`,result.token);
+              localStorage.setItem(`ytreact_${config.softmode}_token`,result.token);
             }
         }
 

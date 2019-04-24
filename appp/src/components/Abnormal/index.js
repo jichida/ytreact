@@ -84,9 +84,12 @@ class Abnormal extends PureComponent{
                     <div className="panel">
                         <div className="abnormal">
                             <Flex direction="column">
+                                <p className="normal_title"><FormattedMessage id="status.abnormal" /></p>
+                                <div style={{width: "100%"}}>
                                     <Flex wrap="wrap">
                                     {this.renderList(abnormal, 'red-circle')}
                                     </Flex>
+                                </div>
                                 <p className="normal_title"><FormattedMessage id="status.normal" /></p>
                                 <div style={{width: "100%"}}>
                                     <Flex wrap="wrap">

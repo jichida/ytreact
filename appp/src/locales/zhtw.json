@@ -24,6 +24,7 @@
   "start.pass": "通過",
   "start.setting": "請先進行設定",
   "status.normal": "正常",
+  "status.abnormal": "異常",
   "form.easylink":"开始配网",
   "form.next": "下一步",
   "form.next0": "下一步(连的是设备)",

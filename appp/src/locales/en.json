@@ -24,6 +24,7 @@
   "start.pass": "pass",
   "start.setting": "Please set it first",
   "status.normal": "Normal",
+  "status.abnormal": "Abnormal",
   "form.easylink":"start config network",
   "form.next": "Next",
   "form.next0": "Next(direct to device)",

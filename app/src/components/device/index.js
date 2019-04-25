@@ -53,8 +53,8 @@ class Device extends PureComponent{
             <div className="device">
                 <NavBar
                     className="nav"
-                    icon={<Icon type="left" />}
-                    onLeftClick={() => history.goBack()}
+                    // icon={<Icon type="left" />}
+                    // onLeftClick={() => history.goBack()}
                 >
                 <FormattedMessage id="device" />
                 </NavBar>

@@ -36,22 +36,22 @@ const basicData = {
 const configuration = [
     {
         label: <FormattedMessage id="form.equip.config.comm" />,
-        value: <FormattedMessage id="form.equip.config.comm" />,
+        value: 'comm',
     },
     {
         label: <FormattedMessage id="form.equip.config.home" />,
-        value: <FormattedMessage id="form.equip.config.home" />,
+        value: 'home',
     }
 ]
 
 const materials = [
     {
         label: <FormattedMessage id="form.equip.meter.cop" />,
-        value: <FormattedMessage id="form.equip.meter.cop" />,
+        value: 'cop',
     },
     {
         label: <FormattedMessage id="form.equip.meter.alum" />,
-        value: <FormattedMessage id="form.equip.meter.alum" />,
+        value: 'alum',
     }
 ]
 

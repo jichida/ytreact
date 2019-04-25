@@ -44,7 +44,7 @@
   "form.check": "请检查所有输入项",
   "form.qrcode": "请先扫描设备二维码",
   "form.equip.config.comm": "商用",
-  "form.equip.config.home": "商用",
+  "form.equip.config.home": "家用",
   "form.equip.meter.cop": "铜",
   "form.equip.meter.alum": "铝",
   "device": "设备信息",

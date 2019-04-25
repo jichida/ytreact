@@ -43,23 +43,23 @@ const basicData = {
 
 const triplet = [
     {
-        label: '商用',
+        label: <FormattedMessage id="form.equip.config.comm" />,
         value: '商用',
     },
     {
-        label: '家用',
+        label: <FormattedMessage id="form.equip.config.home" />,
         value: '家用',
     }
 ]
 
 const silkpair = [
     {
-        label: '铜',
+        label: <FormattedMessage id="form.equip.meter.cop" />,
         value: '铜',
     },
     {
-        label: '吕',
-        value: '吕',
+        label: <FormattedMessage id="form.equip.meter.alum" />,
+        value: '铝',
     }
 ]
 

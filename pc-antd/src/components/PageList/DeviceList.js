@@ -25,8 +25,8 @@ const MachineItem = ({isgetsrvdata,iserr, address, reportdate, id, name, runtime
             <p><FormattedMessage id="machine.name" />：{name}</p>
             <p><FormattedMessage id="machine.runtime" />：{runtime}</p>
             <p>
-                <span style={{color: '#6ba4e7'}}>{mode}</span>
-                {isgetsrvdata && <Button style={{float: "right", color: '#6ba4e7'}} onClick={()=>{history.push(`/details/${_id}`)}}><FormattedMessage id="machine.detail" /></Button>}
+                <span style={{color: '#6ba4e7', width: '20px', display: 'inline-block'}}>{mode}</span>
+                <Button style={{float: "right", color: `${!isgetsrvdata ? '#888' : '#6ba4e7'}`}} disabled={!isgetsrvdata} onClick={()=>{history.push(`/details/${_id}`)}}><FormattedMessage id="machine.detail" /></Button>
             </p>
         </Card>
     )

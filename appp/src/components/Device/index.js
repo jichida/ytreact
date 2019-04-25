@@ -10,6 +10,7 @@ import basic_img from '../../assets/sy2.png';
 import water_img from '../../assets/sy3.png';
 import install_img from '../../assets/sy4.png';
 import table_img from '../../assets/set4.png';
+import list_img from '../../assets/sy7.png';
 import system_img from '../../assets/set1.png';
 import waterset_img from '../../assets/set2.png';
 // import user_img from '../../assets/sy5.png';
@@ -82,49 +83,55 @@ class Device extends PureComponent{
                     <div className="tools_bg">
                         <Flex wrap="wrap">
                             { isNormal&&
-                            <Flex.Item className="tools_con">
+                            <div className="tools_con">
                                 <Link to="/setting"><div><img src={system_img} alt="" />
                                     <p><FormattedMessage id="device.setting" defaultMessage="设备设置" /></p></div>
                                 </Link>
-                            </Flex.Item>
+                            </div>
                             }
                             { isNormal&&
-                            <Flex.Item className="tools_con">
+                            <div className="tools_con">
                                 <Link to="/basic"><div><img src={basic_img} alt="" />
                                     <p><FormattedMessage id="device.basic" /></p></div>
                                 </Link>
-                            </Flex.Item>
+                            </div>
                             }
                             { isDirect&&
-                            <Flex.Item className="tools_con">
+                            <div className="tools_con">
                                 <Link to="/water"><div><img src={water_img} alt="" />
                                     <p><FormattedMessage id="device.water" /></p></div>
                                 </Link>
-                            </Flex.Item>
+                            </div>
                             }
                             { isNormal&&
-                            <Flex.Item className="tools_con">
+                            <div className="tools_con">
                                 <Link to="/install"><div><img src={install_img} alt="" />
                                     <p><FormattedMessage id="device.install" /></p></div>
                                 </Link>
-                            </Flex.Item>
+                            </div>
                             }
                             { isNormal&&
-                            <Flex.Item className="tools_con">
+                            <div className="tools_con">
                                 <Link to="/checklist"><div><img src={table_img} alt="" />
                                     <p><FormattedMessage id="setting.checklist" defaultMessage="安装检查表" /></p></div>
                                 </Link>
-                            </Flex.Item>
+                            </div>
                             }
-                        {/* </Flex>
-                        <Flex justify="start" align="start"> */}
                             { isNormal&&
-                            <Flex.Item className="tools_con">
-                                <Link to="/inlet"><div><img src={waterset_img} alt="" />
-                                    <p><FormattedMessage id="setting.water.quality" defaultMessage="进水水质" /></p></div>
-                                </Link>
-                            </Flex.Item>
-                            }
+                             <div className="tools_con">
+                                 <Link to="/equipmentlist"><div><img src={list_img} alt="" />
+                                     <p><FormattedMessage id="setting.device.equipmentlist" defaultMessage="设备清单" /></p></div>
+                                 </Link>
+                             </div>
+                             } 
+
+                            {/* { isNormal&&
+                             <div className="tools_con">
+                                 <Link to="/inlet"><div><img src={waterset_img} alt="" />
+                                     <p><FormattedMessage id="setting.water.quality" defaultMessage="进水水质" /></p></div>
+                                 </Link>
+                             </div>
+                             }  */}
                         </Flex>
                     </div>
                 </WingBlank>

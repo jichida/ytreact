@@ -55,6 +55,7 @@
   "device.install": "installation environment",
   "device.userversion": "user version entry",
   "device.setting": "Device Setting",
+  "device.equipmentlist": "Equipment List",
   "setting": "Settings",
   "setting.system": "System Settings",
   "setting.water": "Inlet setting",

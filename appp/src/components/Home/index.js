@@ -90,11 +90,11 @@ class Home extends PureComponent{
                     <h3>{formatMessage({id: 'layout.abnormal'})}</h3>
                     <span></span>
                 </div> },
-            { title:
-                <div className={curtab===2 ? "navbar_item_on" : "navbar_item"}>
-                    <h3>{formatMessage({id: 'layout.performance'})}</h3>
-                    <span></span>
-                </div> },
+            // { title:
+            //     <div className={curtab===2 ? "navbar_item_on" : "navbar_item"}>
+            //         <h3>{formatMessage({id: 'layout.performance'})}</h3>
+            //         <span></span>
+            //     </div> },
           ];
         const wifiimage = wifiStatus === 1?wifi_img:nowifi_img;
 

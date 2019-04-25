@@ -29,34 +29,34 @@ const Brief = Item.Brief;
 const RenderForm = createForm({
     mapPropsToFields(props) {
         return {
-          quantity: createFormField({
-            ...props.quantity,
-            value: props.quantity.value,
-          }),
-          persons: createFormField({
-            ...props.persons,
-            value: props.persons.value,
-          }),
-          spot: createFormField({
-            ...props.spot,
-            value: props.spot.value,
-          }),
-          watergage: createFormField({
-            ...props.watergage,
-            value: props.watergage.value,
-          }),
-          booster: createFormField({
-              ...props.booster,
-              value: props.booster.value,
-          }),
-          bathrooms: createFormField({
-              ...props.bathrooms,
-              value: props.bathrooms.value,
-          }),
-          shunt: createFormField({
-              ...props.shunt,
-              value: props.shunt.value,
-          }),
+        //   quantity: createFormField({
+        //     ...props.quantity,
+        //     value: props.quantity.value,
+        //   }),
+        //   persons: createFormField({
+        //     ...props.persons,
+        //     value: props.persons.value,
+        //   }),
+        //   spot: createFormField({
+        //     ...props.spot,
+        //     value: props.spot.value,
+        //   }),
+        //   watergage: createFormField({
+        //     ...props.watergage,
+        //     value: props.watergage.value,
+        //   }),
+        //   booster: createFormField({
+        //       ...props.booster,
+        //       value: props.booster.value,
+        //   }),
+        //   bathrooms: createFormField({
+        //       ...props.bathrooms,
+        //       value: props.bathrooms.value,
+        //   }),
+        //   shunt: createFormField({
+        //       ...props.shunt,
+        //       value: props.shunt.value,
+        //   }),
           tds: createFormField({
             ...props.tds,
             value: props.tds.value,
@@ -91,7 +91,7 @@ const RenderForm = createForm({
         <React.Fragment>
         <form>
             <List>
-                <InputItem
+                {/* <InputItem
                     className="right-input"
                     editable={false}
                     extra= {formatMessage({id: 'form.ton'})}
@@ -130,7 +130,7 @@ const RenderForm = createForm({
                     className="right-input"
                     editable={false}
                     {...getFieldProps('shunt')}
-                ><FormattedMessage id="water.shunt" defaultMessage="是否分流" /></InputItem>
+                ><FormattedMessage id="water.shunt" defaultMessage="是否分流" /></InputItem> */}
                 <InputItem
                     className="right-input"
                     editable={false}
@@ -178,27 +178,27 @@ class DeviceWater extends PureComponent{
         const { history,usewater, intl: { formatMessage } } = this.props;
 
         const basicData = {
-            quantity: {
-                value: lodashget(usewater,'quantity',''),
-            },
-            persons: {
-                value: lodashget(usewater,'persons',''),
-            },
-            spot: {
-                value: lodashget(usewater,'spot',''),
-            },
-            watergage: {
-                value: lodashget(usewater,'watergage',''),
-            },
-            booster: {
-                value: lodashget(usewater,'booster',false)? formatMessage({id: 'form.yes1'}) : formatMessage({id: 'form.no1'}),
-            },
-            bathrooms: {
-                value: lodashget(usewater,'bathrooms',''),
-            },
-            shunt: {
-                value: lodashget(usewater,'shunt',false)? formatMessage({id: 'form.yes1'}) : formatMessage({id: 'form.no1'}),
-            },
+            // quantity: {
+            //     value: lodashget(usewater,'quantity',''),
+            // },
+            // persons: {
+            //     value: lodashget(usewater,'persons',''),
+            // },
+            // spot: {
+            //     value: lodashget(usewater,'spot',''),
+            // },
+            // watergage: {
+            //     value: lodashget(usewater,'watergage',''),
+            // },
+            // booster: {
+            //     value: lodashget(usewater,'booster',false)? formatMessage({id: 'form.yes1'}) : formatMessage({id: 'form.no1'}),
+            // },
+            // bathrooms: {
+            //     value: lodashget(usewater,'bathrooms',''),
+            // },
+            // shunt: {
+            //     value: lodashget(usewater,'shunt',false)? formatMessage({id: 'form.yes1'}) : formatMessage({id: 'form.no1'}),
+            // },
             tds: {
                 value: lodashget(usewater,'tds',''),
             },

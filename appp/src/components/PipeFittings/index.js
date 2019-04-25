@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import {  NavBar, Icon, List, InputItem, Picker, Button } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage, } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 import './index.less';
 
@@ -107,8 +107,9 @@ const RenderForm = createForm({
           })
         };
     }
-})((props)=>{
+})(injectIntl((props)=>{
     const { getFieldProps, validateFields } = props.form;
+    const { intl: { formatMessage }} = props;
 
     const handleSubmit = (e)=>{
         //e.preventDefault();
@@ -127,7 +128,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder= "请输入"
+                                placeholder= {formatMessage({id: "form.input"})}
                                 {...getFieldProps('valve',{
                                     rules: [{
                                         required: true,
@@ -142,7 +143,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('connection',{
                                     rules: [{
                                         required: true,
@@ -157,7 +158,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('elbow',{
                                     rules: [{
                                         required: true,
@@ -214,7 +215,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('others',{
                                     rules: [{
                                         required: true,
@@ -236,7 +237,7 @@ const RenderForm = createForm({
         </div>
         </React.Fragment>
     )
-})
+}))
 
 class PipeFittings extends PureComponent{
 

@@ -210,5 +210,22 @@
   "home.show.performance.averagecurrent_300": "Average current @300",
   "home.show.performance.averagecut_600": "Average cut@600",
   "home.show.performance.averagecut_300": "Average cut@300",
-  "home.show.performance.waterpurificationrate":"Water Purification Rate"
+  "home.show.performance.waterpurificationrate":"Water Purification Rate",
+  "equipment.filtertitle": "Product details",
+  "equipment.frontfilter": "Prefilter",
+  "equipment.host": "Host",
+  "equipment.afterfilter": "Postfilter",
+  "equipment.configuration": "Others Configuration",
+  "equipment.materials": "Pipeline material",
+  "equipment.fittingstitle": "Number of fittings",
+  "equipment.pipefittings": "Main fittings",
+  "equipment.others": "Others",
+  "equipment.valve": "Valves",
+  "equipment.connection": "Live connection",
+  "equipment.elbow": "Elbow",
+  "equipment.triplet": "Tee",
+  "equipment.silkpair": "Silk pair",
+  "equipment.silkspin": "Silk spin",
+  "equipment.fillin": "Fill in"
+
 }

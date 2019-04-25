@@ -120,7 +120,7 @@ class Device extends PureComponent{
                             { isNormal&&
                              <div className="tools_con">
                                  <Link to="/equipmentlist"><div><img src={list_img} alt="" />
-                                     <p><FormattedMessage id="setting.device.equipmentlist" defaultMessage="设备清单" /></p></div>
+                                     <p><FormattedMessage id="device.equipmentlist" defaultMessage="设备清单" /></p></div>
                                  </Link>
                              </div>
                              } 

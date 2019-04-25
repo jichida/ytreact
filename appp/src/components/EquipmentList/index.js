@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import {  NavBar, Icon, List, InputItem, Picker, Button } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage, } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 import './index.less';
 
@@ -101,9 +101,9 @@ const RenderForm = createForm({
           })
         };
     }
-})(withRouter((props)=>{
+})(injectIntl(withRouter((props)=>{
     const { getFieldProps, validateFields } = props.form;
-    const { history } = props;
+    const { history,  intl: { formatMessage }} = props;
 
     
 
@@ -128,7 +128,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('frontfilter',{
                                     rules: [{
                                         required: true,
@@ -143,7 +143,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('host',{
                                     rules: [{
                                         required: true,
@@ -158,7 +158,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('afterfilter',{
                                     rules: [{
                                         required: true,
@@ -198,7 +198,7 @@ const RenderForm = createForm({
                     </Brief>
                 </Item>
             </List>
-            <List renderHeader={() => '主要管件数量（注意不同管径）'}>
+            <List renderHeader={() => <FormattedMessage id="equipment.fittingstitle" defaultMessage="主要管件数量（注意不同管径）" />}>
                 <Item><FormattedMessage id="equipment.pipefittings" defaultMessage="主要管件" />
                     <Brief>
                         <div className="item_children">
@@ -206,7 +206,7 @@ const RenderForm = createForm({
                                 editable={false}
                                 onClick={handleFillClick}
                                 extra=">"
-                                placeholder="去填写"
+                                placeholder={formatMessage({id: "equipment.fillin"})}
                                 // {...getFieldProps('pipefittings',{
                                 //     rules: [{
                                 //         required: true,
@@ -222,7 +222,7 @@ const RenderForm = createForm({
                     <Brief>
                         <div className="item_children">
                             <InputItem
-                                placeholder="请输入"
+                                placeholder={formatMessage({id: "form.input"})}
                                 {...getFieldProps('others',{
                                     rules: [{
                                         required: true,
@@ -244,7 +244,7 @@ const RenderForm = createForm({
         </div>
         </React.Fragment>
     )
-}))
+})))
 
 class EquipmentList extends PureComponent{
 
@@ -263,7 +263,7 @@ class EquipmentList extends PureComponent{
                     icon={<Icon type="left" />}
                     onLeftClick={() => history.goBack()}
                 >
-                    <FormattedMessage id="equipment.title" defaultMessage="设备清单" />
+                    <FormattedMessage id="device.equipmentlist" defaultMessage="设备清单" />
                 </NavBar>
                 { <RenderForm {...basicData} {...this.props} onSubmit={this.handleSubmit} />}
             </div></div>

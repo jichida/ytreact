@@ -210,5 +210,21 @@
   "home.show.performance.averagecurrent_300":"平均电流@300",
   "home.show.performance.averagecut_600":"平均cut@600",
   "home.show.performance.averagecut_300":"平均cut@300",
-  "home.show.performance.waterpurificationrate":"净水率"
+  "home.show.performance.waterpurificationrate":"净水率",
+  "equipment.filtertitle": "产品明细",
+  "equipment.frontfilter": "前置滤芯",
+  "equipment.host": "主机",
+  "equipment.afterfilter": "后置滤芯",
+  "equipment.configuration": "其他配置",
+  "equipment.materials": "管路材质",
+  "equipment.fittingstitle": "主要管件数量（注意不同管径）",
+  "equipment.pipefittings": "主要管件",
+  "equipment.others": "其他",
+  "equipment.valve": "阀门",
+  "equipment.connection": "活接",
+  "equipment.elbow": "弯头",
+  "equipment.triplet": "三通",
+  "equipment.silkpair": "对丝",
+  "equipment.silkspin": "丝转",
+  "equipment.fillin": "去填写"
 }

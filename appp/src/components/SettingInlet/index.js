@@ -52,6 +52,8 @@ const RenderForm = createForm({
 })(injectIntl((props)=>{
     const { validateFields } = props.form;
     const { dispatch, intl} = props;
+    const { tds, conductivity, hardness, alkalinity, ph } = props;
+    console.log('Setting Inlet Props:', props)
 
     const dispatch_form_err = (dispatch,errs)=>{
         dispatch(common_err({type:'form_err',errmsg: intl.formatMessage({id: 'form.check'})}))
@@ -88,7 +90,7 @@ const RenderForm = createForm({
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.water.ph" defaultMessage="PH值" /></Item>
+                ><FormattedMessage id="setting.water.ph" defaultMessage="PH值" /><Brief>{ph.value}</Brief></Item>
                 {/* <Item><FormattedMessage id="setting.water.ph" defaultMessage="PH值" />
                     <Brief>
                         <div className="item_children">
@@ -113,7 +115,7 @@ const RenderForm = createForm({
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.water.conductivity" defaultMessage="进水导电率" /></Item>
+                ><FormattedMessage id="setting.water.conductivity" defaultMessage="进水导电率" /><Brief>{conductivity.value}</Brief></Item>
                 {/* <Item><FormattedMessage id="setting.water.conductivity" defaultMessage="进水导电率" />
                     <Brief>
                         <div className="item_children">
@@ -138,7 +140,7 @@ const RenderForm = createForm({
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.water.tds" defaultMessage="进水TDS值" /></Item>
+                ><FormattedMessage id="setting.water.tds" defaultMessage="进水TDS值" /><Brief>{tds.value}</Brief></Item>
                 {/* <Item><FormattedMessage id="setting.water.tds" defaultMessage="进水TDS值" />
                     <Brief>
                         <div className="item_children">
@@ -163,7 +165,7 @@ const RenderForm = createForm({
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.water.hardness" defaultMessage="进水硬度" /></Item>
+                ><FormattedMessage id="setting.water.hardness" defaultMessage="进水硬度" /><Brief>{hardness.value}</Brief></Item>
 
                 {/* <Item><FormattedMessage id="setting.water.hardness" defaultMessage="进水硬度" />
                     <Brief>
@@ -189,7 +191,7 @@ const RenderForm = createForm({
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.water.alkalinity" defaultMessage="进水碱度" /></Item>
+                ><FormattedMessage id="setting.water.alkalinity" defaultMessage="进水碱度" /><Brief>{alkalinity.value}</Brief></Item>
                 {/* <Item><FormattedMessage id="setting.water.alkalinity" defaultMessage="进水碱度" />
                     <Brief>
                         <div className="item_children">

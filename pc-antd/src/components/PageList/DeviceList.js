@@ -14,7 +14,8 @@ import sb_normal from '../../assets/sb_zc.png';
 import lodashget from 'lodash.get';
 let g_querysaved;
 
-const MachineItem = ({iserr, address, reportdate, id, name, runtime, mode, history,_id})=>{
+const MachineItem = ({isgetsrvdata,iserr, address, reportdate, id, name, runtime, mode, history,_id})=>{
+    //isgetsrvdata为false 表示未接收到数据,此时图标变灰，不能
     return (
         <Card
             className="child-card"
@@ -25,7 +26,7 @@ const MachineItem = ({iserr, address, reportdate, id, name, runtime, mode, histo
             <p><FormattedMessage id="machine.runtime" />：{runtime}</p>
             <p>
                 <span style={{color: '#6ba4e7'}}>{mode}</span>
-                <Button style={{float: "right", color: '#6ba4e7'}} onClick={()=>{history.push(`/details/${_id}`)}}><FormattedMessage id="machine.detail" /></Button>
+                {isgetsrvdata && <Button style={{float: "right", color: '#6ba4e7'}} onClick={()=>{history.push(`/details/${_id}`)}}><FormattedMessage id="machine.detail" /></Button>}
             </p>
         </Card>
     )
@@ -39,14 +40,29 @@ class DeviceList extends React.Component {
   componentDidMount() {
   }
   onItemConvert(iteminput){
+    console.log(iteminput);
+    if(iteminput.hasOwnProperty('srvdata')){
+      return {
+              isgetsrvdata:true,
+              iserr: lodashget(iteminput,'basicinfo.username',''),
+              address: lodashget(iteminput,'basicinfo.username',''),
+              reportdate: moment(lodashget(iteminput,'syssettings.installdate','')).format('YYYYMMDD'),
+              id:lodashget(iteminput,'syssettings.deviceid',''),
+              name: lodashget(iteminput,'basicinfo.model',''),
+              runtime:moment(lodashget(iteminput,'datasrv_updated_at')).format('YYYYMMDD HH:mm:ss'),
+              mode:lodashget(iteminput,'srvdata.currentstate',''),
+              _id:iteminput._id,
+      }
+    }
     const item =  {
-            iserr: iteminput.iserr,
+            isgetsrvdata:false,
+            iserr: true,
             address: lodashget(iteminput,'basicinfo.username',''),
             reportdate: moment(lodashget(iteminput,'syssettings.installdate','')).format('YYYYMMDD'),
             id:lodashget(iteminput,'syssettings.deviceid',''),
             name: lodashget(iteminput,'basicinfo.model',''),
-            runtime: '02:10:10',
-            mode:' Active Mode',
+            runtime:lodashget(iteminput,'srvdata.currentstate',''),
+            mode:lodashget(iteminput,'srvdata.currentstate',''),
             _id:iteminput._id,
     };
     return item;

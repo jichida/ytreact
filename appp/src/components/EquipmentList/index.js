@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {  NavBar, Icon, List, InputItem, Picker, Button, Modal, WingBlank, DatePicker, WhiteSpace } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import lodashMap from 'lodash.map'
+import moment from 'moment'
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import {common_err,ui_setuserdevice_request} from '../../actions';
@@ -369,12 +370,12 @@ const dataInput = (data) => {
 
     lodashMap(data, (item, index)=> {
         if(item.isprev) {
-            filters[`prev${index}`] = item
+            filters[`prev${index}`] = {...item, idname: [`${item.idname}`], lastchangedate: moment(item.lastchangedate).toDate()}
         } else {
-            filters[`post${index-prevs.length}`] = item
+            filters[`post${index-prevs.length}`] = {...item, idname: [`${item.idname}`], lastchangedate: moment(item.lastchangedate).toDate()}
         }
+        
     })
-
     return filters
 }
 
@@ -383,21 +384,21 @@ const dataOutput = (data) => {
     const filters = []
 
     if(prev0.idname !== '' && prev0.idname !== []) {
-        filters.push({...prev0, idname: prev0.idname[0]})
+        filters.push({...prev0, idname: prev0.idname[0], lastchangedate: moment(prev0.lastchangedate)})
         if(prev1.idname !== '' && prev1.idname !== []) {
-            filters.push({...prev1, idname: prev1.idname[0]})
+            filters.push({...prev1, idname: prev1.idname[0], lastchangedate: moment(prev0.lastchangedate)})
             if(prev2.idname !== '' && prev2.idname !== []) {
-                filters.push({...prev2, idname: prev2.idname[0]})
+                filters.push({...prev2, idname: prev2.idname[0], lastchangedate: moment(prev0.lastchangedate)})
             }
         }
     }
 
     if(post0.idname !== '' && post0.idname !== []) {
-        filters.push({...post0, idname: post0.idname[0]})
+        filters.push({...post0, idname: post0.idname[0], lastchangedate: moment(prev0.lastchangedate)})
         if(post1.idname !== '' && post1.idname !== []) {
-            filters.push({...post1, idname: post1.idname[0]})
+            filters.push({...post1, idname: post1.idname[0], lastchangedate: moment(prev0.lastchangedate)})
             if(post2.idname !== '' && post2.idname !== []) {
-                filters.push({...post2, idname: post2.idname[0]})
+                filters.push({...post2, idname: post2.idname[0], lastchangedate: moment(prev0.lastchangedate)})
             }
         }
     }
@@ -413,7 +414,7 @@ class EquipmentList extends PureComponent{
         isprev: true,
         idname: '',
         lastchangedate: new Date(),
-        formData: basicData
+        formData: {...basicData, ...dataInput(this.props.devicelist)}
     }
 
     handleSubmit = (values)=>{
@@ -529,6 +530,7 @@ class EquipmentList extends PureComponent{
     }
 }
 const mapStateToProps =  ({device:{devicelist,_id}}) =>{
+    console.log('Devicelist:', devicelist)
   return {devicelist,_id};
 };
 EquipmentList = connect(mapStateToProps)(EquipmentList);

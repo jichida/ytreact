@@ -369,7 +369,8 @@ class EquipmentList extends PureComponent{
         const filters = []
         lodashMap(this.state.formData, (item) => {
             if(item.idname !== '') {
-                filters.push(item)
+                let filter = {...item, idname: item.idname[0]}
+                filters.push(filter)
             }
         })
         console.log('Filters:', filters)
@@ -394,7 +395,7 @@ class EquipmentList extends PureComponent{
     onFilterSubmit = () => {
         console.log('Current State:', this.state)
         const { formData, curKey, idname, lastchangedate } = this.state
-        formData[curKey] = { ...formData[curKey], idname: idname[0], lastchangedate }
+        formData[curKey] = { ...formData[curKey], idname: idname, lastchangedate }
         this.setState({ 
             formData,
             filterModal: false 

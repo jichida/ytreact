@@ -54,11 +54,18 @@ import {
     getdevicestat_result,
 
     setdevicesubscriber,
-    pushdevicenotify
+    pushdevicenotify,
+
+    page_getcmdlist_request,
+    page_getcmdlist_result,
+    page_gethistorylist_request,
+    page_gethistorylist_result
   } from '../../actions';
 
 //接收的对应关系
 const recvmessagetoresultpair = {
+  'page_getcmdlist_result':page_getcmdlist_result,
+  'page_gethistorylist_result':page_gethistorylist_result,
   'pushdevicenotify':pushdevicenotify,
   'getdevicestat_result':getdevicestat_result,
   'getdevicedata_result':getdevicedata_result,
@@ -97,6 +104,8 @@ const sendmessagefnsz = {
 
 //验证发送接口
 const sendmessageauthfnsz = {
+  'page_getcmdlist':`${page_getcmdlist_request}`,
+  'page_gethistorylist':`${page_gethistorylist_request}`,
   'setdevicesubscriber':`${setdevicesubscriber}`,
   'getdevicestat':`${getdevicestat_request}`,
   'getdevicedata':`${getdevicedata_request}`,

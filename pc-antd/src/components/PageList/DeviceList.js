@@ -16,6 +16,12 @@ let g_querysaved;
 
 const MachineItem = ({isgetsrvdata,iserr, address, reportdate, id, name, runtime, mode, history,_id})=>{
     //isgetsrvdata为false 表示未接收到数据,此时图标变灰，不能
+    //你如果从下面取的话 6 代表 Suspended  999代表ERROR   0 是Idle Mode  其他的代表 Active Mode
+    const mapmode = {
+      '0':'Idle Mode',
+      '6':'Suspended',
+      '999':'ERROR'
+    };
     return (
         <Card
             className="child-card"
@@ -25,7 +31,9 @@ const MachineItem = ({isgetsrvdata,iserr, address, reportdate, id, name, runtime
             <p><FormattedMessage id="machine.name" />：{name}</p>
             <p><FormattedMessage id="machine.runtime" />：{runtime}</p>
             <p>
-                <span style={{color: '#6ba4e7', minWidth: '100px', display: 'inline-block'}}>{mode}</span>
+                <span style={{color: '#6ba4e7', minWidth: '100px', display: 'inline-block'}}>
+                {lodashget(mapmode,`${mode}`,'Active Mode')}
+                </span>
                 <Button style={{float: "right", color: `${!isgetsrvdata ? '#888' : '#6ba4e7'}`}} disabled={!isgetsrvdata} onClick={()=>{history.push(`/details/${_id}`)}}><FormattedMessage id="machine.detail" /></Button>
             </p>
         </Card>

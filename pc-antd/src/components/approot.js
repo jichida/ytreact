@@ -56,7 +56,7 @@ class AppRoot extends React.Component {
             <Route path="/notice" component={Layout(Notice)} />
             <Route path="/noticenew" component={Layout(NoticeNew)} />
             <Route path="/noticedetail/:id" component={Layout(NoticeDetail)} />
-            <Route path="/actions" component={Layout(ActionList)} />
+            <Route path="/actions/:deviceid" component={Layout(ActionList)} />
             <Route path="/login" component={Login}/>
             <Route path="/forget" component={Forget}/>
           </Switch>

@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import {  NavBar, Icon, List, InputItem, Picker, Button, Modal, WingBlank, DatePicker, WhiteSpace } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import lodashMap from 'lodash.map'
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
-
+import {common_err,ui_setuserdevice_request} from '../../actions';
 import './index.less';
 
 const Item = List.Item;
@@ -81,7 +82,7 @@ const basicData = {
 // ]
 
 
-// 
+//
 // const others = [
 //     {
 //         label: 'XXX型',
@@ -419,6 +420,9 @@ class EquipmentList extends PureComponent{
         const filters = dataOutput(this.state.formData)
 
         console.log('Filters:', filters)
+        //输出:devicelist
+        const {dispatch,_id} = this.props;
+        dispatch(ui_setuserdevice_request({_id,data:{devicelist:filters}}));
     }
 
     onCloseFilter = () => {
@@ -441,9 +445,9 @@ class EquipmentList extends PureComponent{
         console.log('Current State:', this.state)
         const { formData, curKey, idname, lastchangedate } = this.state
         formData[curKey] = { ...formData[curKey], idname: idname, lastchangedate }
-        this.setState({ 
+        this.setState({
             formData,
-            filterModal: false 
+            filterModal: false
         })
     }
 
@@ -524,6 +528,9 @@ class EquipmentList extends PureComponent{
         )
     }
 }
-
+const mapStateToProps =  ({device:{devicelist,_id}}) =>{
+  return {devicelist,_id};
+};
+EquipmentList = connect(mapStateToProps)(EquipmentList);
 export default withRouter(EquipmentList);
 // export default withRouter(injectIntl(EquipmentList));

@@ -14,6 +14,7 @@ const initial = {
     device: {
       _id:'',
       distributorid:{},
+      devicelist:[],
       basicinfo:{
           username:'',
           userphone:'',
@@ -134,8 +135,11 @@ const device = createReducer({
     [getdevice_result]: (state, payload) => {
       const {_id,basicinfo:basicinfonew, usewater:usewaternew,install:installnew,
         syssettings:syssettingsnew,inwatersettings:inwatersettingsnew,wifisettings:wifisettingsnew,
-        checklist:checklistnew} = payload;
-      let {basicinfo,usewater,install,syssettings,inwatersettings,wifisettings,checklist} = state;
+        checklist:checklistnew,devicelist:devicelistnew} = payload;
+      let {basicinfo,usewater,install,syssettings,inwatersettings,wifisettings,checklist,devicelist} = state;
+      if(!!devicelistnew){
+        devicelist = [...devicelistnew];
+      }
       if(!!basicinfonew){
         basicinfo = {...basicinfonew};
       }
@@ -157,13 +161,16 @@ const device = createReducer({
       if(!!checklistnew){
         checklist = {...checklistnew};
       }
-      return { ...state, basicinfo,usewater,install,syssettings,inwatersettings,wifisettings,checklist,_id };
+      return { ...state, basicinfo,usewater,install,syssettings,inwatersettings,wifisettings,checklist,_id,devicelist };
     },
     [setuserdevice_result]: (state, payload) => {
         const {basicinfo:basicinfonew, usewater:usewaternew,install:installnew,
           syssettings:syssettingsnew,inwatersettings:inwatersettingsnew,wifisettings:wifisettingsnew,
-          checklist:checklistnew} = payload;
-        let {basicinfo,usewater,install,syssettings,inwatersettings,wifisettings,checklist} = state;
+          checklist:checklistnew,devicelist:devicelistnew} = payload;
+        let {basicinfo,usewater,install,syssettings,inwatersettings,wifisettings,checklist,devicelist} = state;
+        if(!!devicelistnew){
+          devicelist = [...devicelistnew];
+        }
         if(!!basicinfonew){
           basicinfo = {...basicinfonew};
         }
@@ -185,7 +192,7 @@ const device = createReducer({
         if(!!checklistnew){
           checklist = {...checklistnew};
         }
-        return { ...state, basicinfo,usewater,install,syssettings,inwatersettings,wifisettings,checklist };
+        return { ...state, basicinfo,usewater,install,syssettings,inwatersettings,wifisettings,checklist ,devicelist};
     },
 }, initial.device);
 

@@ -32,3 +32,8 @@ export const getdevicestat_result = createAction('getdevicestat_result');
 export const setdevicesubscriber = createAction('setdevicesubscriber');
 export const pushdevicenotify = createAction('pushdevicenotify');
 export const startdevicequery = createAction('startdevicequery');
+
+export const page_getcmdlist_request = createAction('page_getcmdlist_request');
+export const page_getcmdlist_result = createAction('page_getcmdlist_result');
+export const page_gethistorylist_request = createAction('page_gethistorylist_request');
+export const page_gethistorylist_result = createAction('page_gethistorylist_result');

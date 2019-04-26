@@ -4,11 +4,14 @@ import { Card, Row, Col, Table, Popover, DatePicker, Button } from 'antd';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import GridContent from '../GridContent';
 import './index.less';
-
+import AntdTable from "../AntdTable/antdtable.js";
 import sb_icon from '../../assets/sj_icon.png';
 import rl_icon from '../../assets/rl.png';
 import moment from 'moment';
-
+import {
+  callthen
+} from '../../sagas/pagination';
+import {page_getcmdlist_request,page_getcmdlist_result} from '../../actions';
 const { RangePicker } = DatePicker;
 
 const data = [
@@ -40,6 +43,9 @@ class RegionalDisplay extends React.PureComponent {
     state = {
         start: moment(),
         end: moment(),
+        query:{
+          deviceid:this.props.match.params.deviceid
+        }
     }
 
     onPickerChange = (date,datestring) => {
@@ -52,9 +58,26 @@ class RegionalDisplay extends React.PureComponent {
         // Array(2)
         // 0: Moment {_isAMomentObject: true, _isUTC: false, _pf: {…}, _locale: Locale, _z: null, …}
         // 1: Moment {_isAMomentObject: true, _isUTC: false, _pf: {…}, _locale: Locale, _z: null, …}
+        this.setState({
+          query:{
+            deviceid:this.props.match.params.deviceid,
+            created_at:{
+              $gte:  date[0],
+              $lte:  date[1],
+            }
+          }
+        })
 
+        window.setTimeout(()=>{
+          ////console.log(this.refs);
+          this.refs.cmdantdtableid.getWrappedInstance().onRefresh();
+            // this.refs.alarmdatalist.getWrappedInstance().onRefresh();
+        },0);
     }
-
+    onItemConvert(item){
+      item.key = item._id;
+      return item;
+    }
     render() {
         const { history } = this.props;
         const { formatMessage } = this.props.intl;
@@ -63,7 +86,7 @@ class RegionalDisplay extends React.PureComponent {
         const content = (
             <RangePicker onChange={this.onPickerChange} />
         )
-
+        console.log(this.state.query)
         return (
             <GridContent>
                 <Card bordered={false} className="main-card">
@@ -79,7 +102,21 @@ class RegionalDisplay extends React.PureComponent {
                 <Row>
                     <Col span={1}></Col>
                     <Col span={22} style={{margin: '0 auto'}}>
-                        <Table columns={columns} dataSource={data} className="table-list" />
+                    <AntdTable
+                      onClickRow={this.onClickRow}
+                      listtypeid = 'cmdantdtableid'
+                      usecache = {false}
+                      ref='cmdantdtableid'
+                      onItemConvert={this.onItemConvert.bind(this)}
+                      columns={columns}
+                      pagenumber={30}
+                      query={this.state.query}
+                      sort={{_id: -1}}
+                      queryfun={(payload)=>{
+                        return callthen(page_getcmdlist_request,page_getcmdlist_result,payload);
+                      }}
+                    />
+
                     </Col>
                     <Col span={1}></Col>
                 </Row>

@@ -725,7 +725,7 @@ class DataDetails extends React.PureComponent {
     }
 
     render() {
-        const { history } = this.props;
+        const { history,curdevice } = this.props;
         const { formatMessage } = this.props.intl;
         const tzs = timezoneOption();
 
@@ -753,7 +753,7 @@ class DataDetails extends React.PureComponent {
                 <Row gutter={24} style={{marginTop: 30, padding: '0 26px'}}>
                     {/* <Col span={2}></Col> */}
                     <Col span={12} className="sub-title">
-                        <div><h2>{formatMessage({id: 'machine.mode'})}</h2><span className="right-Link" onClick={()=>{history.push('/actions')}}>Mode&gt;</span></div>
+                        <div><h2>{formatMessage({id: 'machine.mode'})}</h2><span className="right-Link" onClick={()=>{history.push(`/actions/${curdevice.deviceid}`)}}>Mode&gt;</span></div>
                         <Table columns={Mode_columns} dataSource={this.props.dataMode} className="table-list" pagination={false} />
                     </Col>
                     <Col span={2}></Col>

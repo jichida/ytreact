@@ -90,7 +90,14 @@ const devicedetail = createReducer({
       return { ...state, data_spot:[...data_spot] };
     },
     [getdevicecmddata_result]:(state,payload)=>{
-      const dataMode = [...payload];
+      const dataMode = [];
+      const data = payload;
+      lodashmap(data, (item, index) => {
+        dataMode.push({
+          ...item,
+          key: index,
+        })
+      });
       return {...state,dataMode};
     },
 }, initial.devicedetail);

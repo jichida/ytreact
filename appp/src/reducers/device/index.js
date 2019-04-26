@@ -14,6 +14,7 @@ const initial = {
     device: {
       _id:'',
       distributorid:{},
+      devicelist:[],
       basicinfo:{
           username:'',
           userphone:'',

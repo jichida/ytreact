@@ -41,10 +41,14 @@ const columns = [{
 class RegionalDisplay extends React.PureComponent {
 
     state = {
-        start: moment(),
+        start: moment().subtract(1, 'M'),
         end: moment(),
         query:{
-          deviceid:this.props.match.params.deviceid
+          deviceid:this.props.match.params.deviceid,
+          created_at: {
+            $gte: moment().subtract(1, 'M'),
+            $lte: moment()
+          }
         }
     }
 
@@ -84,7 +88,7 @@ class RegionalDisplay extends React.PureComponent {
         let { start, end } = this.state;
 
         const content = (
-            <RangePicker onChange={this.onPickerChange} />
+            <RangePicker onChange={this.onPickerChange} defaultValue={[this.state.start, this.state.end]} />
         )
         console.log(this.state.query)
         return (

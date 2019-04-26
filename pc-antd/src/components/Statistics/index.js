@@ -5,6 +5,7 @@ import lodashget from 'lodash.get';
 import { Card, Row, Col, DatePicker, Radio, Button } from 'antd';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import ReactEcharts from 'echarts-for-react';
+import echarts from 'echarts'
 import _ from 'lodash';
 import GridContent from '../GridContent';
 import moment from 'moment';
@@ -174,13 +175,22 @@ class Statistics extends React.PureComponent {
     // 示例数据
     getOption = ()=> {
         return ({
-            color: ['#83b9ed'],
             title: {
                text: `mod in/out${this.props.intl.formatMessage({id: 'machine.statistic'})}`,// title 数据统计类目
                left: 'center'
             },
             tooltip: {
                 trigger: 'axis',
+                axisPointer: {
+                    lineStyle: {
+                        color: '#ddd'
+                    }
+                },
+                backgroundColor: 'rgba(255,255,255,1)',
+                padding: [5, 10],
+                textStyle: {
+                    color: '#7588E4',
+                },
             },
             grid: {
                 left: '3%',
@@ -198,9 +208,48 @@ class Statistics extends React.PureComponent {
             },
             series: [
                 {
-                    name: 'mod in/out', // title 数据统计类目
+                    name: 'mod in', // title 数据统计类目
                     type: 'line',
+                    smooth: true,
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgba(199, 237, 250,0.5)'
+                            }, {
+                                offset: 1,
+                                color: 'rgba(199, 237, 250,0.2)'
+                            }], false)
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#03db17'
+                        }
+                    },
                     data: [120, 132, 101, 134, 90, 230, 210] // yAxis[] 横轴数据，统计数据
+                },
+                {
+                    name: 'mod out', // title 数据统计类目
+                    type: 'line',
+                    smooth: true,
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgba(216, 244, 247,1)'
+                            }, {
+                                offset: 1,
+                                color: 'rgba(216, 244, 247,1)'
+                            }], false)
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#0368db'
+                        }
+                    },
+                    data: [110, 142, 111, 134, 80, 220, 220] // yAxis[] 横轴数据，统计数据
                 }
             ]
         })

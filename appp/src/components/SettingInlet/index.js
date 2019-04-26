@@ -226,13 +226,13 @@ const RenderForm = createForm({
                 </Item> */}
             </List>
         </form>
-        <div className="submit_zone">
+        {/* <div className="submit_zone">
             <div className="add_btn" >
                 <Button type="ghost" className="btn" onClick={handleSubmit}>
                     <FormattedMessage id="form.synctosave" defaultMessage="同步到本地" />
                 </Button>
             </div>
-        </div>
+        </div> */}
         </React.Fragment>
     )
 }))

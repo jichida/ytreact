@@ -354,6 +354,56 @@ const RenderForm = createForm({
     )
 })))
 
+const dataInput = (data) => {
+    const filters = {}
+    const prevs = []
+    const posts = []
+    lodashMap(data, (item, index) => {
+        if(item.isprev) {
+            prevs.push(item)
+        } else {
+            posts.push(item)
+        }
+    })
+
+    lodashMap(data, (item, index)=> {
+        if(item.isprev) {
+            filters[`prev${index}`] = item
+        } else {
+            filters[`post${index-prevs.length}`] = item
+        }
+    })
+
+    return filters
+}
+
+const dataOutput = (data) => {
+    const { prev0, prev1, prev2, post0, post1, post2 } = data
+    const filters = []
+
+    if(prev0.idname !== '' && prev0.idname !== []) {
+        filters.push({...prev0, idname: prev0.idname[0]})
+        if(prev1.idname !== '' && prev1.idname !== []) {
+            filters.push({...prev1, idname: prev1.idname[0]})
+            if(prev2.idname !== '' && prev2.idname !== []) {
+                filters.push({...prev2, idname: prev2.idname[0]})
+            }
+        }
+    }
+
+    if(post0.idname !== '' && post0.idname !== []) {
+        filters.push({...post0, idname: post0.idname[0]})
+        if(post1.idname !== '' && post1.idname !== []) {
+            filters.push({...post1, idname: post1.idname[0]})
+            if(post2.idname !== '' && post2.idname !== []) {
+                filters.push({...post2, idname: post2.idname[0]})
+            }
+        }
+    }
+
+    return filters
+}
+
 class EquipmentList extends PureComponent{
 
     state = {
@@ -366,13 +416,8 @@ class EquipmentList extends PureComponent{
     }
 
     handleSubmit = (values)=>{
-        const filters = []
-        lodashMap(this.state.formData, (item) => {
-            if(item.idname !== '') {
-                let filter = {...item, idname: item.idname[0]}
-                filters.push(filter)
-            }
-        })
+        const filters = dataOutput(this.state.formData)
+
         console.log('Filters:', filters)
     }
 

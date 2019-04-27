@@ -124,7 +124,22 @@ class Statistics extends React.PureComponent {
           cycle: 'day',
           type: 'srvdata.ModIn',
           rangeDate: [],
-          isGetData: false
+          isGetData: false,
+          chart: {
+              title: 'mod in/out',
+              x: ['5.1', '5.2', '5.3', '5.4', '5.5', '5.6', '5.7'],
+              series: [
+                  {
+                      title: 'mod in',
+                      data: [120, 132, 101, 134, 90, 230, 210],
+                  },
+                  {
+                      title: 'mod out',
+                      data: [110, 142, 111, 134, 80, 220, 220]
+                  }
+              ]
+          }
+
       }
     }
     componentDidMount(){
@@ -172,11 +187,11 @@ class Statistics extends React.PureComponent {
         // console.log({...this.state})
     }
 
-    // 示例数据
+    // 图表数据
     getOption = ()=> {
         return ({
             title: {
-               text: `mod in/out${this.props.intl.formatMessage({id: 'machine.statistic'})}`,// title 数据统计类目
+               text: `${this.state.chart.title}${this.props.intl.formatMessage({id: 'machine.statistic'})}`,// title 数据统计类目
                left: 'center'
             },
             tooltip: {
@@ -201,14 +216,14 @@ class Statistics extends React.PureComponent {
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: ['5.1', '5.2', '5.3', '5.4', '5.5', '5.6', '5.7'] // xAxis[] 横轴数据，统计周期
+                data: this.state.chart.data // xAxis[] 横轴数据，统计周期
             },
             yAxis: {
                 type: 'value',
             },
             series: [
                 {
-                    name: 'mod in', // title 数据统计类目
+                    name: `${this.state.chart.series[0].title}`, // title 数据统计类目
                     type: 'line',
                     smooth: true,
                     areaStyle: {
@@ -227,10 +242,10 @@ class Statistics extends React.PureComponent {
                             color: '#03db17'
                         }
                     },
-                    data: [120, 132, 101, 134, 90, 230, 210] // yAxis[] 横轴数据，统计数据
+                    data: this.state.chart.series[0].data // yAxis[] 横轴数据，统计数据
                 },
                 {
-                    name: 'mod out', // title 数据统计类目
+                    name: `${!!this.state.chart.series[1] && this.state.chart.series[1].title}`, // title 数据统计类目
                     type: 'line',
                     smooth: true,
                     areaStyle: {
@@ -249,46 +264,12 @@ class Statistics extends React.PureComponent {
                             color: '#0368db'
                         }
                     },
-                    data: [110, 142, 111, 134, 80, 220, 220] // yAxis[] 横轴数据，统计数据
+                    data: !!this.state.chart.series[1] && this.state.chart.series[1].data // yAxis[] 横轴数据，统计数据
                 }
             ]
         })
     }
 
-    // 实际传入数据
-    // getOption = (title, xAxis, yAxis)=> {
-    //     return ({
-    //         color: ['#83b9ed'],
-    //         title: {
-    //            text: `${title}数据统计`,// title 数据统计类目
-    //            left: 'center',
-    //         },
-    //         tooltip: {
-    //             trigger: 'axis',
-    //         },
-    //         grid: {
-    //             left: '3%',
-    //             right: '4%',
-    //             bottom: '3%',
-    //             containLabel: true,
-    //         },
-    //         xAxis: {
-    //             type: 'category',
-    //             boundaryGap: false,
-    //             data: xAxis, // xAxis[] 横轴数据，统计周期
-    //         },
-    //         yAxis: {
-    //             type: 'value',
-    //         },
-    //         series: [
-    //             {
-    //                 name: `${title}`, // title 数据统计类目
-    //                 type: 'line',
-    //                 data: yAxis, // yAxis[] 横轴数据，统计数据
-    //             }
-    //         ]
-    //     })
-    // }
 
     render() {
         const { history } = this.props;

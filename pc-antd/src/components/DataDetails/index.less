@@ -64,19 +64,44 @@
     // padding: 10px 25px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    position: relative;
+    width: 100px;
+    height: 150px;
+
+    .bottom {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+
+        :global(.ant-progress-text) {
+            top: 40%;
+        }
+    }
+
+    .top {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+
+        :global(.ant-progress-text) {
+            top: 60%;
+        }
+    }
 
     .data {
         font-size: 14px;
         color: #000;
         font-weight:600;
         margin-top: 25px;
+        display: inline-block;
     }
 
     .unit {
         font-size:10px;
         color: #999999;
+        display: inline-block;
     }
 }
 

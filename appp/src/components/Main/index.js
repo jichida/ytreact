@@ -299,10 +299,15 @@ class Home extends PureComponent{
         const devicelist_post = [];
         lodashmap(devicelist,(dv)=>{
           if(dv.isprev){
-            devicelist_prev.push(dv);
+            if(dv.idname !== ''){
+              devicelist_prev.push(dv);
+            }
+
           }
           else{
-            devicelist_post.push(dv);
+            if(dv.idname !== ''){
+              devicelist_post.push(dv);
+            }
           }
         });
 

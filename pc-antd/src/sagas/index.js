@@ -9,13 +9,14 @@ import {deviceflow} from './device';
 import {userloginflow} from './userlogin';
 import {noticeflow} from './notice';
 import {devicedetailflow} from './devicedetail';
+import {downloadexcel} from './downloadexcel';
 
 export default function* rootSaga() {
   yield fork(userloginflow);
   yield fork(createsagacallbackflow);
   yield fork(socketflow);
   yield fork(wsflow);
-  // yield fork(wififlow);
+  yield fork(downloadexcel);
   yield fork(uiflow);
   yield fork(deviceflow);
   yield fork(noticeflow);

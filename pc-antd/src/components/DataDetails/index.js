@@ -141,6 +141,7 @@ const TopChart = injectIntl((props)=>{
     const {srvdata, intl} = props;
     const { formatMessage } = intl;
     let chartData = []
+    let uvfilter = {}
 
     if(!!srvdata) {
       // "MODLife" : "720",//MOD Life 膜寿命 d[G] {界面6}
@@ -152,6 +153,14 @@ const TopChart = injectIntl((props)=>{
       // "Pos_filter3" : "120",//Post Filter3 后置3 d[M] {界面12}
       // "UV" : "60",//UV d[U] {界面13}
       //
+      const { MODLife, Pre_filter1, Pre_filter2, Pre_filter3, Post_filter1, Post_filter2, Post_filter3 } = srvdata
+      const modlife_lefeday = getPercent('filterelements_modlife_leftday', MODLife)
+      const prefilter1_leftday = getPercent('filterelements_prefilter1_leftday', Pre_filter1)
+      const prefilter2_leftday = getPercent('filterelements_prefilter2_leftday', Pre_filter2)
+      const prefilter3_leftday = getPercent('filterelements_prefilter3_leftday', Pre_filter3)
+      const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', Post_filter1)
+      const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', Post_filter2)
+      const posfilter3_leftday = getPercent('filterelements_posfilter3_leftday', Post_filter3)
       const {MODLifePercent,Pre_filter1_percent,Pre_filter2_percent,Pre_filter3_percent,Pos_filter1_percent,Pos_filter2_percent,Pos_filter3_percent,UV} = srvdata;
       // const {prefilter1_leftday,prefilter2_leftday,prefilter3_leftday,posfilter1_leftday,posfilter2_leftday,} = srvdata;
       // const outwater_quality = getPercent('main_outwater_quality', homedata.main_outwater_quality);
@@ -231,59 +240,74 @@ const TopChart = injectIntl((props)=>{
               title:  `${formatMessage({id: 'machine.data.ionmembrance'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
               data: modlife_flow.value,
-              percent: modlife_flow.percent,
-              warring: modlife_flow.warring ,
+              flow: modlife_flow.percent,
+              flowwarring: modlife_flow.warring ,
+              life: modlife_lefeday.percent,
+              lifewarring: modlife_lefeday.warring
           },
           {
               title:  `${formatMessage({id: 'machine.data.frontfilter1'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
               data: prefilter1_flow.value,
-              percent: prefilter1_flow.percent,
-              warring: prefilter1_flow.warring,
+              flow: prefilter1_flow.percent,
+              flowwarring: prefilter1_flow.warring,
+              life: prefilter1_leftday.percent,
+              lifewarring: prefilter1_leftday.warring
           },
           {
               title: `${formatMessage({id: 'machine.data.frontfilter2'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
               data: prefilter2_flow.value,
-              percent: prefilter2_flow.percent,
-              warring: prefilter2_flow.warring,
+              flow: prefilter2_flow.percent,
+              flowwarring: prefilter2_flow.warring,
+              life: prefilter2_leftday.percent,
+              lifewarring: prefilter2_leftday.warring
           },
           {
               title: `${formatMessage({id: 'machine.data.frontfilter3'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
               data: prefilter3_flow.value,
-              percent: prefilter3_flow.percent,
-              warring: prefilter3_flow.warring,
+              flow: prefilter3_flow.percent,
+              flowwarring: prefilter3_flow.warring,
+              life: prefilter3_leftday.percent,
+              lifewarring: prefilter3_leftday.warring
           },
           {
               title: `${formatMessage({id: 'machine.data.afterfilter1'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
               data: posfilter1_flow.value,
-              percent: posfilter1_flow.percent,
-              warring: posfilter1_flow.warring,
+              flow: posfilter1_flow.percent,
+              flowwarring: posfilter1_flow.warring,
+              life: posfilter1_leftday.percent,
+              lifewarring: posfilter1_leftday.warring
           },
           {
               title:  `${formatMessage({id: 'machine.data.afterfilter2'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
               data: posfilter2_flow.value,
-              percent: posfilter2_flow.percent,
-              warring: posfilter2_flow.warring,
+              flow: posfilter2_flow.percent,
+              flowwarring: posfilter2_flow.warring,
+              life: posfilter2_leftday.percent,
+              lifewarring: posfilter2_leftday.warring
           },
           {
               title:  `${formatMessage({id: 'machine.data.afterfilter3'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
               data: posfilter3_flow.value,
-              percent: posfilter3_flow.percent,
-              warring: posfilter3_flow.warring,
-          },
-          {
-              title:  `${formatMessage({id: 'machine.data.uvlife'})}`,
-              unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              data: uvfilter_flow.value,
-              percent: uvfilter_flow.percent,
-              warring: uvfilter_flow.warring,
+              flow: posfilter3_flow.percent,
+              flowwarring: posfilter3_flow.warring,
+              life: posfilter3_leftday.percent,
+              lifewarring: posfilter3_leftday.warring
           }
       ]
+
+      uvfilter = {
+        title:  `${formatMessage({id: 'machine.data.uvlife'})}`,
+        unit: `${formatMessage({id: 'machine.data.flow'})}`,
+        data: uvfilter_flow.value,
+        percent: uvfilter_flow.percent,
+        warring: uvfilter_flow.warring,
+      }
 
     }
 
@@ -296,28 +320,68 @@ const TopChart = injectIntl((props)=>{
                         return (
                             <Chart {...item} key={index} />
                         )
-                    }))
+                    })
+                    )
                     : ''
                 }
+                { !!srvdata && <SingleChart {...uvfilter} /> }
             </Col>
         </Row>
     )
 })
 
-const Chart = ({title, unit, data, percent, warring})=>{
+const Chart = ({title, unit, data, flow, life, flowwarring, lifewarring})=>{
     return (
         <div className="chart">
+          <div className="bottom">
             <Progress type="circle"
-                percent={percent}
-                width={100}
-                status={warring?"exception":"active"}
-                format={() => <React.Fragment><p className="data">{data}</p><p className="unit">{unit}</p></React.Fragment>} />
-            <p>{title}</p>
+                  percent={flow}
+                  width={100}
+                  // strokeWidth={5}
+                  strokeColor={flowwarring ? '#f81929' : '#03f241'}
+                  status={flowwarring?"exception":"active"}
+                  format={() => ''} 
+                  // <React.Fragment><p className="data">{data}</p><p className="unit">{unit}</p></React.Fragment>
+            />
+          </div>
+          <div className="top">
+            <Progress type="circle"
+                  percent={life}
+                  width={80}
+                  // strokeWidth={5}
+                  strokeColor={lifewarring ? '#f81929' : '#0379f2'}
+                  status={lifewarring?"exception":"active"}
+                  format={() => ''} 
+                  // <React.Fragment><p className="data">{data}</p><p className="unit">{unit}</p></React.Fragment>
+            />
+          </div>
+          <p>{title}</p>
         </div>
     )
 }
 
-const Mode_columns = [{
+const SingleChart = ({title, unit, data, percent, warring})=>{
+  return (
+      <div className="chart">
+        <div className="bottom">
+          <Progress type="circle"
+                percent={percent}
+                width={100}
+                // strokeWidth={5}
+                strokeColor={warring ? '#f81929' : '#03f241'}
+                status={warring?"exception":"active"}
+                format={() => ''} 
+                // <React.Fragment><p className="data">{data}</p><p className="unit">{unit}</p></React.Fragment>
+          />
+        </div>
+        <p>{title}</p>
+      </div>
+  )
+}
+
+
+const Mode_columns = [
+  {
     title: <FormattedMessage id="machine.mode.type" />,
     dataIndex: 'type',
     key: 'type',

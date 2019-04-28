@@ -33,7 +33,6 @@ const items = [
     { name: 'distributor', icon: <Cshop /> },
     { name: 'installer', icon: <Cuser /> },
     { name: 'addressconst', icon: <Caddressconst /> },
-    { name: 'device', icon: <Cuser /> },
     { name: 'devicedatahistory', icon: <Cuser /> },
 ];
 

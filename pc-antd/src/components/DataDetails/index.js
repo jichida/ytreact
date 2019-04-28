@@ -17,7 +17,7 @@ import {adddevicecmddata_request,adddevicecmddata_result} from '../../actions';
 // import {getdevicehisdata_request,getdevicehisdata_result} from '../../actions';
 import {getdevicecmddata_request,getdevicecmddata_result} from '../../actions';
 import {callthen} from '../../sagas/pagination';
-
+import {download_excel} from '../../actions';
 import success from '../../assets/success.png'
 import sb_icon from '../../assets/sj_icon.png';
 
@@ -786,6 +786,8 @@ class DataDetails extends React.PureComponent {
 
     handleDownload = () => {
         console.log('下载数据');
+        const {dispatch,curdevice} = this.props;
+        dispatch(download_excel({deviceid:curdevice.deviceid}));
     }
 
     render() {
@@ -845,7 +847,7 @@ class DataDetails extends React.PureComponent {
                             </div>
                             <div style={{marginTop:'50px'}}>
                                 <Button type="primary" size="large" style={{ marginRight:'20px' }} onClick={this.handleStatistic}>{formatMessage({id: 'machine.statistic'})}</Button>
-                                <Button size="large" onClick={this.handleDownload}>{formatMessage({id: 'machine.download'})}</Button>
+                                <Button size="large" onClick={this.handleDownload}>{formatMessage({id: 'machine.download'})}</Button> 
                             </div>
                         </div>
                     </Col>

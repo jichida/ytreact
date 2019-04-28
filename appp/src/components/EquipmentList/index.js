@@ -6,7 +6,7 @@ import lodashMap from 'lodash.map'
 import moment from 'moment'
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import {common_err,ui_setuserdevice_request} from '../../actions';
+import {common_err,setuserdevice_result,ui_setuserdevice_request} from '../../actions';
 import './index.less';
 
 const Item = List.Item;
@@ -374,7 +374,7 @@ const dataInput = (data) => {
         } else {
             filters[`post${index-prevs.length}`] = {...item, idname: [`${item.idname}`], lastchangedate: moment(item.lastchangedate).toDate()}
         }
-        
+
     })
     return filters
 }
@@ -421,8 +421,12 @@ class EquipmentList extends PureComponent{
         const filters = dataOutput(this.state.formData)
 
         console.log('Filters:', filters)
+        //yield put(setuserdevice_request({_id,data}));
+        // 考虑到没网的条件,先设置一下
         //输出:devicelist
         const {dispatch,_id} = this.props;
+        dispatch(setuserdevice_result({devicelist:filters}))
+  
         dispatch(ui_setuserdevice_request({_id,data:{devicelist:filters}}));
     }
 

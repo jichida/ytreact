@@ -91,7 +91,7 @@ const cycleAction = [
 const typeAction = [
     {//1是进水水质
       name: 'mod in/out',
-      action: 'srvdata.ModIn',//ModIn uS 进水水质 d[c]
+      action: 'ModInOut',//ModIn uS 进水水质 d[c] <<---代表两个字段
     },
     {//2是出水水质
         name: <FormattedMessage id="machine.report.quality" />,
@@ -123,7 +123,8 @@ class Statistics extends React.PureComponent {
       this.state = {
           cycle: 'day',
           type: 'srvdata.ModIn',
-          rangeDate: [],
+          rangeDate: [
+            moment().subtract(1, 'M'),moment()],
           isGetData: false,
           chart: {
               title: 'mod in/out',

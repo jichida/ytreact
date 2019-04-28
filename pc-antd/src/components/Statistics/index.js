@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import lodashget from 'lodash.get';
+import lodashmap from 'lodash.map'
 import { Card, Row, Col, DatePicker, Radio, Button } from 'antd';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import ReactEcharts from 'echarts-for-react';
@@ -18,24 +19,24 @@ import sb_icon from '../../assets/sj_icon.png';
 moment.locale('zh-cn');
 const dateFormat = 'YYYY-MM-DD';
 
-const cycleAction = [
-    {
+const cycleAction = {
+    day:{
       name: <FormattedMessage id="machine.report.day" />,
       action: 'day',
     },
-    {
+    week:{
         name: <FormattedMessage id="machine.report.week" />,
         action: 'week',
     },
-    {
+    month:{
         name: <FormattedMessage id="machine.report.month" />,
         action: 'month',
     },
-    {
+    year:{
         name: <FormattedMessage id="machine.report.year" />,
         action: 'year',
     },
-];
+};
 //1是进水水质，3是压力1，4日废水量 5日总水量6日用水量
 // srvdata:{
 //   systime:String,//d[a]
@@ -88,32 +89,32 @@ const cycleAction = [
 //   Reserve1:String,//d[V]
 //   Reserve2:String,//d[W]
 // }
-const typeAction = [
-    {//1是进水水质
+const typeAction = {
+    'ModInOut':{//1是进水水质
       name: 'mod in/out',
       action: 'ModInOut',//ModIn uS 进水水质 d[c] <<---代表两个字段
     },
-    {//2是出水水质
-        name: <FormattedMessage id="machine.report.quality" />,
-        action: 'srvdata.ModOut',//ModOut uS 出水水质 d[e]
-    },
-    {//3是压力1
+    // 'srvdata.ModOut': {//2是出水水质
+    //     name: <FormattedMessage id="machine.report.quality" />,
+    //     action: 'srvdata.ModOut',//ModOut uS 出水水质 d[e]
+    // },
+    'srvdata.Pressure1':{//3是压力1
         name: <FormattedMessage id="machine.report.pressure" />,
         action: 'srvdata.Pressure1',//Pressure1 压力1 d[y]
     },
-    {//4日废水量
+    'srvdata.WasteVolumeDaily': {//4日废水量
         name: <FormattedMessage id="machine.report.drainage" />,
         action: 'srvdata.WasteVolumeDaily',//Waste Volume Daily 今日废水量 d[r]
     },
-    {//5日总水量
+    'srvdata.totalVol': {//5日总水量
         name: <FormattedMessage id="machine.report.totalinlet" />,
         action: 'srvdata.totalVol',//totalVol 总用水量 d[t]
     },
-    {//6日用水量
+    'srvdata.DailyVolume': {//6日用水量
         name: <FormattedMessage id="machine.report.totaleffluent" />,
         action: 'srvdata.DailyVolume',//Daily Volume 今日用水量 d[q]
     },
-];
+};
 
 
 
@@ -122,21 +123,31 @@ class Statistics extends React.PureComponent {
       super(props);
       this.state = {
           cycle: 'day',
-          type: 'srvdata.ModIn',
+          type: 'ModInOut',
           rangeDate: [
             moment().subtract(1, 'M'),moment()],
           isGetData: false,
+        //   chart: {
+        //       title: 'mod in/out',
+        //       x: ['5.1', '5.2', '5.3', '5.4', '5.5', '5.6', '5.7'],
+        //       series: [
+        //           {
+        //               title: 'mod in',
+        //               data: [120, 132, 101, 134, 90, 230, 210],
+        //           },
+        //           {
+        //               title: 'mod out',
+        //               data: [110, 142, 111, 134, 80, 220, 220]
+        //           }
+        //       ]
+        //   }
           chart: {
-              title: 'mod in/out',
-              x: ['5.1', '5.2', '5.3', '5.4', '5.5', '5.6', '5.7'],
+              title: '',
+              x: [],
               series: [
                   {
-                      title: 'mod in',
-                      data: [120, 132, 101, 134, 90, 230, 210],
-                  },
-                  {
-                      title: 'mod out',
-                      data: [110, 142, 111, 134, 80, 220, 220]
+                      title: '',
+                      data: []
                   }
               ]
           }
@@ -161,11 +172,52 @@ class Statistics extends React.PureComponent {
             // this.setState({homedata:result.homedata});
             this.setState({isGetData: true})
             console.log(result);
+            let chart = this.converData(result)
+            this.setState({chart})
+            console.log('Chart:', chart)
         }).catch((err) => {
           console.log(err);
         })
       }
     }
+
+    converData = (data) => {
+        let x = []
+        if(this.state.type === 'ModInOut') {
+            let series = [{
+                title: 'mod in',
+                data: []
+            },{
+                title: 'mod out',
+                data: []
+            }]
+            lodashmap(data, (item) => {
+                x.push(item._id);
+                series[0].data.push(item.modin)
+                series[1].data.push(item.modout)
+            })
+            return ({
+                title: typeAction[this.state.type].name,
+                x,
+                series
+            })
+        } else {
+            let series = [{
+                title: typeAction[this.state.type].name,
+                data: []
+            }]
+            lodashmap(data, (item) => {
+                x.push(item._id);
+                series[0].data.push(item.value)
+            })
+            return({
+                title: typeAction[this.state.type].name,
+                x,
+                series
+            })
+        }
+    }
+
     onCycleChange = (e)=> {
         this.setState({
             cycle: e.target.value,
@@ -221,6 +273,25 @@ class Statistics extends React.PureComponent {
             },
             yAxis: {
                 type: 'value',
+                splitLine: {
+                    lineStyle: {
+                        color: ['#D4DFF5']
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#609ee9'
+                    }
+                },
+                axisLabel: {
+                    margin: 10,
+                    textStyle: {
+                        fontSize: 14
+                    }
+                }
             },
             series: [
                 {
@@ -276,14 +347,14 @@ class Statistics extends React.PureComponent {
         const { history } = this.props;
 
         const cycles = (
-                _.map(cycleAction, (item, index)=>(
-                    <Radio.Button key={index} value={item.action}>{item.name}</Radio.Button>
+                _.map(cycleAction, (item, key)=>(
+                    <Radio.Button key={key} value={item.action}>{item.name}</Radio.Button>
                 ))
         )
 
         const types = (
-            _.map(typeAction, (item, index)=>(
-                <Radio.Button key={index} value={item.action}>{item.name}</Radio.Button>
+            _.map(typeAction, (item, key)=>(
+                <Radio.Button key={key} value={item.action}>{item.name}</Radio.Button>
             ))
         )
 

@@ -43,7 +43,7 @@ const basicData = {
         idname: '',
         lastchangedate: new Date()
     },
-    host: {
+    host: { //主机
         value: '',
     },
     configuration: { //其他配置
@@ -52,9 +52,9 @@ const basicData = {
     materials: { // 管路材质
         value: [],
     },
-    pipefittings: { // 主要管件
-        value: {},
-    },
+    // pipefittings: { // 主要管件
+    //     value: {},
+    // },
     others: { //其他
         value: '',
     }

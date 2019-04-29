@@ -127,20 +127,6 @@ class Statistics extends React.PureComponent {
           rangeDate: [
             moment().subtract(1, 'M'),moment()],
           isGetData: false,
-        //   chart: {
-        //       title: 'mod in/out',
-        //       x: ['5.1', '5.2', '5.3', '5.4', '5.5', '5.6', '5.7'],
-        //       series: [
-        //           {
-        //               title: 'mod in',
-        //               data: [120, 132, 101, 134, 90, 230, 210],
-        //           },
-        //           {
-        //               title: 'mod out',
-        //               data: [110, 142, 111, 134, 80, 220, 220]
-        //           }
-        //       ]
-        //   }
           chart: {
               title: '',
               x: [],
@@ -247,6 +233,19 @@ class Statistics extends React.PureComponent {
                text: `${this.state.chart.title}${this.props.intl.formatMessage({id: 'machine.statistic'})}`,// title 数据统计类目
                left: 'center'
             },
+            // tooltip: {
+            //     trigger: 'axis',
+            //     axisPointer: {
+            //         lineStyle: {
+            //             color: '#ddd'
+            //         }
+            //     },
+            //     backgroundColor: 'rgba(255,255,255,1)',
+            //     padding: [5, 10],
+            //     textStyle: {
+            //         color: '#7588E4',
+            //     },
+            // },
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
@@ -259,6 +258,7 @@ class Statistics extends React.PureComponent {
                 textStyle: {
                     color: '#7588E4',
                 },
+                extraCssText: 'box-shadow: 0 0 5px rgba(0,0,0,0.3)'
             },
             grid: {
                 left: '3%',

@@ -91,6 +91,7 @@
 "machine.report.week": "周報",
 "machine.report.year": "年報",
 "machine.report.quality": "出水水質",
+"machine.report.modinout":"mod in/out",
 "machine.report.pressure": "壓力",
 "machine.report.drainage": "廢水排放量",
 "machine.report.totalinlet": "總進水量",

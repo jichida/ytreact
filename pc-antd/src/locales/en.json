@@ -91,6 +91,7 @@
 "machine.report.week": "Weekly",
 "machine.report.year": "Year",
 "machine.report.quality": "Fluid water quality",
+"machine.report.modinout":"mod in/out",
 "machine.report.pressure": "Pressure",
 "machine.report.drainage": "Wastewater discharge",
 "machine.report.totalinlet": "Total water intake",

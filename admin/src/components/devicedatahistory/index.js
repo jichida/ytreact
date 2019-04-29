@@ -9,9 +9,10 @@ import {
   TextField,
   EditButton,
   ReferenceField,
+  DateInput,
   Filter,
 } from 'react-admin';
-
+import DeviceShow from './deviceshow';
 
 // import DateDetail from './datadetail';
 
@@ -19,6 +20,8 @@ import {
 export const DataFilter = props => (
     <Filter {...props}>
         <TextInput label="搜索设备id" source="deviceid_q" />
+        <DateInput source="updated_at_gte" alwaysOn />
+        <DateInput source="updated_at_lte" alwaysOn />
     </Filter>
 );
 
@@ -114,13 +117,11 @@ const DevicedatahistoryEdit = (props) => {
 
 
 const DevicedatahistoryList = (props) => (//
-     <List title="设备历史数据列表" {...props} filters={<DataFilter />} sort={{ field: 'updated_at', order: 'DESC' }}>
-     <Datagrid>
-       <ReferenceField label="用户设备" source="deviceuserid" reference="deviceuser" allowEmpty>
-           <TextField source="syssettings.deviceid" />
-       </ReferenceField>
+     <List title="设备历史数据列表" {...props} filters={<DataFilter />}
+     sort={{ field: 'updated_at', order: 'DESC' }}>
+     <Datagrid expand={<DeviceShow />}>
+       <TextField label="设备id" source="deviceid" />
        <TextField label="最新数据" source="updated_at" />
-       <EditButton />
      </Datagrid>
     </List>
 );

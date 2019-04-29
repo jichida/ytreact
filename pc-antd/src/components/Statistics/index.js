@@ -91,6 +91,7 @@ const cycleAction = {
 // }
 const typeAction = {
     'ModInOut':{//1是进水水质
+      id:'machine.report.modinout',
       name: 'mod in/out',
       action: 'ModInOut',//ModIn uS 进水水质 d[c] <<---代表两个字段
     },
@@ -99,19 +100,23 @@ const typeAction = {
     //     action: 'srvdata.ModOut',//ModOut uS 出水水质 d[e]
     // },
     'srvdata.Pressure1':{//3是压力1
+        id:'machine.report.pressure',
         name: <FormattedMessage id="machine.report.pressure" />,
         action: 'srvdata.Pressure1',//Pressure1 压力1 d[y]
     },
     'srvdata.WasteVolumeDaily': {//4日废水量
+        id:'machine.report.drainage',
         name: <FormattedMessage id="machine.report.drainage" />,
         action: 'srvdata.WasteVolumeDaily',//Waste Volume Daily 今日废水量 d[r]
     },
     'srvdata.totalVol': {//5日总水量
+        id:'machine.report.totalinlet',
         name: <FormattedMessage id="machine.report.totalinlet" />,
         action: 'srvdata.totalVol',//totalVol 总用水量 d[t]
     },
     'srvdata.DailyVolume': {//6日用水量
-        name: <FormattedMessage id="machine.report.totaleffluent" />,
+        id:'machine.report.dailyvolume',
+        name: <FormattedMessage id="machine.report.dailyvolume" />,
         action: 'srvdata.DailyVolume',//Daily Volume 今日用水量 d[q]
     },
 };
@@ -167,8 +172,10 @@ class Statistics extends React.PureComponent {
       }
     }
 
+
     converData = (data) => {
         let x = []
+        const title = this.props.intl.formatMessage({id:typeAction[this.state.type].id});
         if(this.state.type === 'ModInOut') {
             let series = [{
                 title: 'mod in',
@@ -183,13 +190,13 @@ class Statistics extends React.PureComponent {
                 series[1].data.push(item.modout)
             })
             return ({
-                title: typeAction[this.state.type].name,
+                title,
                 x,
                 series
             })
         } else {
             let series = [{
-                title: typeAction[this.state.type].name,
+                title,
                 data: []
             }]
             lodashmap(data, (item) => {
@@ -197,7 +204,7 @@ class Statistics extends React.PureComponent {
                 series[0].data.push(item.value)
             })
             return({
-                title: typeAction[this.state.type].name,
+                title,
                 x,
                 series
             })
@@ -228,6 +235,8 @@ class Statistics extends React.PureComponent {
 
     // 图表数据
     getOption = ()=> {
+        console.log(this.state.chart.x)
+        const data = this.state.chart.x;
         return ({
             title: {
                text: `${this.state.chart.title}${this.props.intl.formatMessage({id: 'machine.statistic'})}`,// title 数据统计类目
@@ -269,7 +278,7 @@ class Statistics extends React.PureComponent {
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: this.state.chart.data // xAxis[] 横轴数据，统计周期
+                data // xAxis[] 横轴数据，统计周期
             },
             yAxis: {
                 type: 'value',

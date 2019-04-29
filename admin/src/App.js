@@ -61,7 +61,7 @@ class App extends Component {
             <Resource name="distributor"  icon={Widgets} list={DistributorList} edit={DistributorEdit} create={DistributorCreate} />,
             <Resource name="deviceuser"  icon={Widgets} list={DeviceuserList} edit={DeviceuserEdit}  />,
             <Resource name="device"  icon={Widgets} list={DeviceList} edit={DeviceEdit} />,
-            <Resource name="devicedatahistory"  icon={Widgets} list={DevicedatahistoryList} edit={DevicedatahistoryEdit}  />,
+            <Resource name="devicedatahistory"  icon={Widgets} list={DevicedatahistoryList}  />,
           ]}
       }
       </Admin>

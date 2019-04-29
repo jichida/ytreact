@@ -14,14 +14,29 @@ const initial = {
     device: {
       _id:'',
       distributorid:{},
-      devicelist:[
-        {isprev: true, lastchangedate: "2019-04-26T09:10:35.250Z",  idname: "prev0"},
-        {isprev: true, lastchangedate: "2019-04-26T09:10:35.250Z",  idname: "prev1"},
-        {isprev: true, lastchangedate: "2019-04-26T09:10:35.250Z",  idname: "prev2"},
-        {isprev: false, lastchangedate: "2019-04-26T09:10:35.250Z", idname: "post0"},
-        {isprev: false, lastchangedate: "2019-04-26T09:10:35.250Z", idname: "post1"},
-        {isprev: false, lastchangedate: "2019-04-26T09:10:35.250Z", idname: "post2"},
-      ],
+      devicelist:{
+        filterlist:[
+          {isprev: true, lastchangedate: "2019-04-26T09:10:35.250Z",  idname: "prev0"},
+          {isprev: true, lastchangedate: "2019-04-26T09:10:35.250Z",  idname: "prev1"},
+          {isprev: true, lastchangedate: "2019-04-26T09:10:35.250Z",  idname: "prev2"},
+          {isprev: false, lastchangedate: "2019-04-26T09:10:35.250Z", idname: "post0"},
+          {isprev: false, lastchangedate: "2019-04-26T09:10:35.250Z", idname: "post1"},
+          {isprev: false, lastchangedate: "2019-04-26T09:10:35.250Z", idname: "post2"},
+        ],
+        configuration: String,
+        materials: String,
+        host: String,
+        pipefittings: { // 主要管件
+          valve: String,
+          connection: String,
+          elbow: String,
+          triplet: String,
+          silkpair: String,
+          silkspin: String,
+          others: String
+        },
+        others:String
+      },
       basicinfo:{
           username:'',
           userphone:'',
@@ -145,7 +160,7 @@ const device = createReducer({
         checklist:checklistnew,devicelist:devicelistnew} = payload;
       let {basicinfo,usewater,install,syssettings,inwatersettings,wifisettings,checklist,devicelist} = state;
       if(!!devicelistnew){
-        devicelist = [...devicelistnew];
+        devicelist = {...devicelistnew};
       }
       if(!!basicinfonew){
         basicinfo = {...basicinfonew};
@@ -176,7 +191,7 @@ const device = createReducer({
           checklist:checklistnew,devicelist:devicelistnew} = payload;
         let {basicinfo,usewater,install,syssettings,inwatersettings,wifisettings,checklist,devicelist} = state;
         if(!!devicelistnew){
-          devicelist = [...devicelistnew];
+          devicelist = {...devicelistnew};
         }
         if(!!basicinfonew){
           basicinfo = {...basicinfonew};

@@ -490,7 +490,8 @@ class Home extends PureComponent{
     }
 }
 const mapStateToProps =  ({devicedata:{isgetdata,homedata,performancedata},device:{devicelist}}) =>{
-  return {isgetdata,homedata,performancedata,devicelist};
+
+  return {isgetdata,homedata,performancedata,devicelist:devicelist.filterlist};
 };
 Home = connect(mapStateToProps)(Home);
 export default injectIntl(Home);

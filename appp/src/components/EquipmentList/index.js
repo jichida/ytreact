@@ -43,73 +43,73 @@ const basicData = {
         idname: '',
         lastchangedate: new Date()
     },
-    // host: {
-    //     value: '',
-    // },
-    // configuration: { //其他配置
-    //     value: [],
-    // },
-    // materials: { // 管路材质
-    //     value: [],
-    // },
-    // pipefittings: { // 主要管件
-    //     value: {},
-    // },
-    // others: { //其他
-    //     value: '',
-    // }
+    host: {
+        value: '',
+    },
+    configuration: { //其他配置
+        value: [],
+    },
+    materials: { // 管路材质
+        value: [],
+    },
+    pipefittings: { // 主要管件
+        value: {},
+    },
+    others: { //其他
+        value: '',
+    }
 }
 
-// const configuration = [
-//     {
-//         label: <FormattedMessage id="form.equip.config.comm" />,
-//         value: 'comm',
-//     },
-//     {
-//         label: <FormattedMessage id="form.equip.config.home" />,
-//         value: 'home',
-//     }
-// ]
+const configuration = [
+    {
+        label: <FormattedMessage id="form.equip.config.comm" />,
+        value: 'comm',
+    },
+    {
+        label: <FormattedMessage id="form.equip.config.home" />,
+        value: 'home',
+    }
+]
 
-// const materials = [
-//     {
-//         label: <FormattedMessage id="form.equip.meter.cop" />,
-//         value: 'cop',
-//     },
-//     {
-//         label: <FormattedMessage id="form.equip.meter.alum" />,
-//         value: 'alum',
-//     }
-// ]
+const materials = [
+    {
+        label: <FormattedMessage id="form.equip.meter.cop" />,
+        value: 'cop',
+    },
+    {
+        label: <FormattedMessage id="form.equip.meter.alum" />,
+        value: 'alum',
+    }
+]
 
 
-//
-// const others = [
-//     {
-//         label: 'XXX型',
-//         value: 'XXX型',
-//     },
-//     {
-//         label: 'YYY型',
-//         value: 'YYY型',
-//     }
-// ]
+
+const others = [
+    {
+        label: 'XXX型',
+        value: 'XXX型',
+    },
+    {
+        label: 'YYY型',
+        value: 'YYY型',
+    }
+]
 
 const prevFilter = [
     {
-        label: <FormattedMessage id="form.equip.prevfilter1" defaultMessage="前置滤镜1" />,
+        label: <FormattedMessage key={0} id="form.equip.prevfilter1" defaultMessage="前置滤镜1" />,
         value:'prev0',
     },
     {
-        label: <FormattedMessage id="form.equip.prevfilter2" defaultMessage="前置滤镜2" />,
+        label: <FormattedMessage key={1} id="form.equip.prevfilter2" defaultMessage="前置滤镜2" />,
         value:'prev1',
     },
     {
-        label: <FormattedMessage id="form.equip.prevfilter3" defaultMessage="前置滤镜3" />,
+        label: <FormattedMessage key={2} id="form.equip.prevfilter3" defaultMessage="前置滤镜3" />,
         value:'prev2',
     },
     {
-        label: <FormattedMessage id="form.equip.nonefilter" defaultMessage="无" />,
+        label: <FormattedMessage key={3} id="form.equip.nonefilter" defaultMessage="无" />,
         value:'',
     },
 ]
@@ -126,19 +126,19 @@ const FilterPer = {
 
 const postFilter = [
     {
-        label: <FormattedMessage id="form.equip.postfilter1" defaultMessage="前置滤镜1" />,
+        label: <FormattedMessage key={0} id="form.equip.postfilter1" defaultMessage="前置滤镜1" />,
         value:'post0',
     },
     {
-        label: <FormattedMessage id="form.equip.postfilter2" defaultMessage="前置滤镜2" />,
+        label: <FormattedMessage key={1} id="form.equip.postfilter2" defaultMessage="前置滤镜2" />,
         value:'post1',
     },
     {
-        label: <FormattedMessage id="form.equip.postfilter3" defaultMessage="前置滤镜3" />,
+        label: <FormattedMessage key={2} id="form.equip.postfilter3" defaultMessage="前置滤镜3" />,
         value:'post2',
     },
     {
-        label: <FormattedMessage id="form.equip.nonefilter" defaultMessage="无" />,
+        label: <FormattedMessage key={3} id="form.equip.nonefilter" defaultMessage="无" />,
         value:'',
     },
 ]
@@ -146,26 +146,26 @@ const postFilter = [
 const RenderForm = createForm({
     mapPropsToFields(props) {
         return {
-        //   host: createFormField({
-        //     ...props.host,
-        //     value: props.host.value,
-        //   }),
-        //   configuration: createFormField({
-        //     ...props.configuration,
-        //     value: props.configuration.value,
-        //   }),
-        //   materials: createFormField({
-        //       ...props.materials,
-        //       value: props.materials.value,
-        //   }),
-        //   pipefittings: createFormField({
-        //       ...props.pipefittings,
-        //       value: props.pipefittings.value,
-        //   }),
-        //   others: createFormField({
-        //       ...props.others,
-        //       value: props.others.value,
-        //   })
+          host: createFormField({
+            ...props.host,
+            value: props.host.value,
+          }),
+          configuration: createFormField({
+            ...props.configuration,
+            value: props.configuration.value,
+          }),
+          materials: createFormField({
+              ...props.materials,
+              value: props.materials.value,
+          }),
+          pipefittings: createFormField({
+              ...props.pipefittings,
+              value: props.pipefittings.value,
+          }),
+          others: createFormField({
+              ...props.others,
+              value: props.others.value,
+          })
         };
     }
 })(injectIntl(withRouter((props)=>{
@@ -184,9 +184,9 @@ const RenderForm = createForm({
     }
 
 
-    // const handleFillClick = ()=>{
-    //     history.push('pipefitting');
-    // }
+    const handleFillClick = ()=>{
+        history.push('pipefitting');
+    }
 
     return (
         <React.Fragment>
@@ -228,7 +228,7 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                {/* <Item><FormattedMessage id="equipment.host" defaultMessage="主机" />
+                <Item><FormattedMessage id="equipment.host" defaultMessage="主机" />
                     <Brief>
                         <div className="item_children">
                             <InputItem
@@ -242,7 +242,7 @@ const RenderForm = createForm({
                             />
                         </div>
                     </Brief>
-                </Item> */}
+                </Item>
                 <Item
                     arrow="horizontal"
                     multipleLine
@@ -279,7 +279,7 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                {/* <Item><FormattedMessage id="equipment.configuration" defaultMessage="其他配置" />
+                <Item><FormattedMessage id="equipment.configuration" defaultMessage="其他配置" />
                     <Brief>
                         <div className="item_children">
                             <Picker
@@ -306,9 +306,9 @@ const RenderForm = createForm({
                             </Picker>
                         </div>
                     </Brief>
-                </Item> */}
+                </Item>
             </List>
-            {/* <List renderHeader={() => <FormattedMessage id="equipment.fittingstitle" defaultMessage="主要管件数量（注意不同管径）" />}>
+            <List renderHeader={() => <FormattedMessage id="equipment.fittingstitle" defaultMessage="主要管件数量（注意不同管径）" />}>
                 <Item><FormattedMessage id="equipment.pipefittings" defaultMessage="主要管件" />
                     <Brief>
                         <div className="item_children">
@@ -343,7 +343,7 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-            </List> */}
+            </List>
         </form>
         <div className="submit_zone">
             <div className="add_btn" >

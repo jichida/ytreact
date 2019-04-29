@@ -111,7 +111,7 @@ const typeAction = {
         action: 'srvdata.totalVol',//totalVol 总用水量 d[t]
     },
     'srvdata.DailyVolume': {//6日用水量
-        name: <FormattedMessage id="machine.report.totaleffluent" />,
+        name: <FormattedMessage id="machine.report.dailyvolume" />,
         action: 'srvdata.DailyVolume',//Daily Volume 今日用水量 d[q]
     },
 };

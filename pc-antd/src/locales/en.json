@@ -95,6 +95,7 @@
 "machine.report.drainage": "Wastewater discharge",
 "machine.report.totalinlet": "Total water intake",
 "machine.report.totaleffluent": "Total water production",
+"machine.report.dailyvolume":"daily volume",
 "table.created_at":"create at",
 "table.systime": "systime",
 "table.currentstate": "current state",

@@ -95,6 +95,7 @@
 "machine.report.drainage": "廢水排放量",
 "machine.report.totalinlet": "總進水量",
 "machine.report.totaleffluent": "總產水量",
+"machine.report.dailyvolume":"日用水量",
 "table.created_at":"當前接收到資料時間",
 "table.systime": "系統執行時間",
 "table.currentstate": "運行狀態",

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {  NavBar, Icon, List, InputItem, Picker, Button, Modal, WingBlank, DatePicker, WhiteSpace } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import lodashMap from 'lodash.map'
+import lodashGet from 'lodash.get'
 import moment from 'moment'
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -43,41 +44,33 @@ const basicData = {
         idname: '',
         lastchangedate: new Date()
     },
-    host: { //主机
-        value: '',
-    },
-    configuration: { //其他配置
-        value: [],
-    },
-    materials: { // 管路材质
-        value: [],
-    },
+    host: '', //主机
+    configuration: [], //其他配置
+    materials: [], // 管路材质
     // pipefittings: { // 主要管件
     //     value: {},
     // },
-    others: { //其他
-        value: '',
-    }
+    others: '', //其他
 }
 
 const configuration = [
     {
-        label: <FormattedMessage id="form.equip.config.comm" />,
+        label: <FormattedMessage key={0} id="form.equip.config.comm" />,
         value: 'comm',
     },
     {
-        label: <FormattedMessage id="form.equip.config.home" />,
+        label: <FormattedMessage key={1} id="form.equip.config.home" />,
         value: 'home',
     }
 ]
 
 const materials = [
     {
-        label: <FormattedMessage id="form.equip.meter.cop" />,
+        label: <FormattedMessage key={0} id="form.equip.meter.cop" />,
         value: 'cop',
     },
     {
-        label: <FormattedMessage id="form.equip.meter.alum" />,
+        label: <FormattedMessage key={1} id="form.equip.meter.alum" />,
         value: 'alum',
     }
 ]
@@ -146,26 +139,11 @@ const postFilter = [
 const RenderForm = createForm({
     mapPropsToFields(props) {
         return {
-          host: createFormField({
-            ...props.host,
-            value: props.host.value,
-          }),
-          configuration: createFormField({
-            ...props.configuration,
-            value: props.configuration.value,
-          }),
-          materials: createFormField({
-              ...props.materials,
-              value: props.materials.value,
-          }),
-          pipefittings: createFormField({
-              ...props.pipefittings,
-              value: props.pipefittings.value,
-          }),
-          others: createFormField({
-              ...props.others,
-              value: props.others.value,
-          })
+          host: createFormField({value: props.host}),
+          configuration: createFormField({value: props.configuration}),
+          materials: createFormField({value: props.materials}),
+          pipefittings: createFormField({value: props.pipefittings}),
+          others: createFormField({value: props.others})
         };
     }
 })(injectIntl(withRouter((props)=>{
@@ -356,10 +334,13 @@ const RenderForm = createForm({
     )
 })))
 
-const dataInput = (data) => {
+const dataInput = (device) => {
+    const { filterlist: data } = device
     const filters = {}
     const prevs = []
     const posts = []
+    const configuration = [device.configuration]
+    const materials = [device.materials]
     lodashMap(data, (item, index) => {
         if(item.isprev) {
             prevs.push(item)
@@ -376,7 +357,12 @@ const dataInput = (data) => {
         }
 
     })
-    return filters
+    return {
+        ...filters,
+        configuration,
+        materials
+
+    }
 }
 
 const dataOutput = (data) => {
@@ -414,20 +400,24 @@ class EquipmentList extends PureComponent{
         isprev: true,
         idname: '',
         lastchangedate: new Date(),
-        formData: {...basicData, ...dataInput(this.props.devicelist)}
+        formData: {...basicData, ...this.props.devicelist, ...dataInput(this.props.devicelist)}
     }
 
     handleSubmit = (values)=>{
-        const filters = dataOutput(this.state.formData)
+        const filterlist = dataOutput(this.state.formData)
+        const configuration = lodashGet(values, 'configuration', [''])[0]
+        const materials = lodashGet(values, 'materials', [''])[0]
 
-        console.log('Filters:', filters)
         //yield put(setuserdevice_request({_id,data}));
         // 考虑到没网的条件,先设置一下
         //输出:devicelist
-        const {dispatch,_id} = this.props;
-        dispatch(setuserdevice_result({devicelist:filters}))
+        let devicelist = {...values, filterlist, configuration, materials}
+        console.log('DeviseList:', devicelist)
 
-        dispatch(ui_setuserdevice_request({_id,data:{devicelist:filters}}));
+        const {dispatch,_id} = this.props;
+        dispatch(setuserdevice_result({devicelist}))
+
+        dispatch(ui_setuserdevice_request({_id,data:{devicelist}}));
     }
 
     onCloseFilter = () => {

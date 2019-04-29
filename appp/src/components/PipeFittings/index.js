@@ -238,8 +238,11 @@ class PipeFittings extends PureComponent{
     handleSubmit = (values)=>{
         console.log(values);
         const { _id, devicelist, dispatch, history } = this.props;
+        const pipefittings = {...values}
 
-        // dispatch(setuserdevice_result({devicelist:filters}))
+        console.log('PipeFittings:', {...devicelist, pipefittings})
+
+        dispatch(setuserdevice_result({devicelist:{...devicelist, pipefittings}}))
   
         // dispatch(ui_setuserdevice_request({_id,data:{devicelist:filters}}));
         history.goBack()
@@ -247,7 +250,7 @@ class PipeFittings extends PureComponent{
 
     render () {
         const { history, dispatch, devicelist } = this.props;
-        const formData = {...basicData, ...devicelist}
+        const formData = {...basicData, ...devicelist['pipefittings']}
 
         return (
             <div className="fp_container black_bg">

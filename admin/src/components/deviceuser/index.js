@@ -19,9 +19,9 @@ import {
   DateField
 } from 'react-admin';
 import TextFieldBool from '../controls/TextFieldBool';
-import ImageArrayField from '../controls/imagearrayfield';
+// import ImageArrayField from '../controls/imagearrayfield';
 import InputSpaceField from '../controls/InputSpaceField';
-
+import DeviceShow from './deviceshow';
 
 export const DeviceFilter = props => (
     <Filter {...props}>
@@ -111,7 +111,6 @@ const DeviceuserEdit = (props) => {
             <TextFieldBool label="出水水质正常" source="checklist.quality"  />
             <TextFieldBool label="设备已交付使用" source="checklist.delivered"  />
             {/* <TextField label="拍摄安装图" source="checklist.pictures"  /> */}
-            <ImageArrayField label="拍摄安装图" title="拍摄安装图" source="checklist.pictures"  />
           </FormTab>
         </TabbedForm>
       </Edit>);
@@ -129,8 +128,9 @@ const DeviceuserEdit = (props) => {
 
 
 const DeviceuserList = (props) => (//
-     <List title="设备列表" {...props} filters={<DeviceFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
-        <Datagrid>
+     <List title="设备列表" {...props} filters={<DeviceFilter />}  
+      sort={{ field: 'created_at', order: 'DESC' }}>
+        <Datagrid expand={<DeviceShow />}>
           <TextField label="设备ID" source="syssettings.deviceid" />
           <ReferenceField label="经销商" source="distributorid" reference="distributor" allowEmpty>
               <TextField source="name" />

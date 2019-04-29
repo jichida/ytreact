@@ -186,6 +186,7 @@ class Statistics extends React.PureComponent {
       }
     }
 
+
     converData = (data) => {
         let x = []
         const title = this.props.intl.formatMessage({id:typeAction[this.state.type].id});
@@ -248,6 +249,8 @@ class Statistics extends React.PureComponent {
 
     // 图表数据
     getOption = ()=> {
+        console.log(this.state.chart.x)
+        const data = this.state.chart.x;
         return ({
             title: {
                text: `${this.state.chart.title}${this.props.intl.formatMessage({id: 'machine.statistic'})}`,// title 数据统计类目
@@ -275,7 +278,7 @@ class Statistics extends React.PureComponent {
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: this.state.chart.data // xAxis[] 横轴数据，统计周期
+                data // xAxis[] 横轴数据，统计周期
             },
             yAxis: {
                 type: 'value',

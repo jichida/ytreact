@@ -426,7 +426,7 @@ class EquipmentList extends PureComponent{
         //输出:devicelist
         const {dispatch,_id} = this.props;
         dispatch(setuserdevice_result({devicelist:filters}))
-  
+
         dispatch(ui_setuserdevice_request({_id,data:{devicelist:filters}}));
     }
 
@@ -535,7 +535,7 @@ class EquipmentList extends PureComponent{
 }
 const mapStateToProps =  ({device:{devicelist,_id}}) =>{
     console.log('Devicelist:', devicelist)
-  return {devicelist,_id};
+    return {devicelist,_id};
 };
 EquipmentList = connect(mapStateToProps)(EquipmentList);
 export default withRouter(EquipmentList);

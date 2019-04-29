@@ -85,6 +85,8 @@ form {
 
 
 
+
+
 .sub_bg {
     background-color: transparent !important;
 
@@ -274,6 +276,10 @@ form {
             margin: 0 auto;
         }
     }
+}
+
+.am-accordion { 
+    border-top: 0 !important;
 }
 
 //action-sheet
@@ -606,5 +612,26 @@ form {
       border: 0 !important;
     }
   }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+    html:not([data-scale]) .am-accordion {
+      border-top: none;
+    }
+    html:not([data-scale]) .am-accordion::before {
+        background-color: transparent !important;
+        height: 0 !important;
+    }
+
+    html:not([data-scale]) .am-accordion .am-accordion-item .am-accordion-header::after {
+        background-color: transparent !important;
+        height: 0 !important;
+      }
+
+      html:not([data-scale]) .am-accordion .am-accordion-item .am-accordion-content .am-accordion-content-box::after {
+        background-color: transparent !important;
+        height: 0 !important;
+      }
+  }
+
 
 

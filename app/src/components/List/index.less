@@ -6,3 +6,49 @@
     color: #ffffff !important;
     padding: 20px 15px 20px  !important;
 }
+
+.equipment {
+    .equipment-list {
+        .am-list-extra {
+            width: initial !important; 
+            flex: initial !important; 
+            text-align: initial !important; 
+        }
+    }
+
+    .pipe {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .pipe-item {
+            width: 33.33%;
+            text-align: center;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            // font-size: 12px;
+        }
+    }
+
+    .equipment-accordion {
+        :global(.am-accordion-item) {
+            .am-accordion-header {
+                color: #ffffff;
+                background-color: transparent;
+            }
+
+            .am-accordion-content {
+                background-color: rgba(255, 255, 255, 0.1);
+                border-top-left-radius: 30px;
+                border-top-right-radius: 30px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+
+                .am-accordion-content-box {
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+}

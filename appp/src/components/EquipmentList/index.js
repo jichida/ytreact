@@ -411,7 +411,7 @@ class EquipmentList extends PureComponent{
         //yield put(setuserdevice_request({_id,data}));
         // 考虑到没网的条件,先设置一下
         //输出:devicelist
-        let devicelist = {...values, filterlist, configuration, materials}
+        let devicelist = {...this.props.devicelist, ...values, filterlist, configuration, materials}
         console.log('DeviseList:', devicelist)
 
         const {dispatch,_id} = this.props;
@@ -524,7 +524,6 @@ class EquipmentList extends PureComponent{
     }
 }
 const mapStateToProps =  ({device:{devicelist,_id}}) =>{
-    console.log('Devicelist:', devicelist)
     return {devicelist,_id};
 };
 EquipmentList = connect(mapStateToProps)(EquipmentList);

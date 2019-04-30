@@ -353,7 +353,7 @@ class Statistics extends React.PureComponent {
 
 
     render() {
-        const { history } = this.props;
+        const { history, curdevice } = this.props;
 
         const cycles = (
                 _.map(cycleAction, (item, key)=>(
@@ -372,8 +372,24 @@ class Statistics extends React.PureComponent {
             <GridContent>
                 <Card bordered={false} className="main-card">
                     <Row style={{marginBottom: 30}} className="title">
-                        <Col span={24}>
-                            <img src={sb_icon} alt="" /><span><FormattedMessage id="machine.report" /></span>
+                        <Col span={18}>
+                            <div className="left-title">
+                                <div><img src={sb_icon} alt="" /></div>
+                                <div className="left-item">
+                                    <FormattedMessage id="machine.name" />
+                                    <span>{`:${lodashget(curdevice, 'basicinfo.model', '')}`}</span>
+                                </div>
+                                <div className="left-item">
+                                    <FormattedMessage id="machine.id" />
+                                    <span>{`:${lodashget(curdevice, 'deviceid', '')}`}</span>
+                                </div>
+                                <div className="left-item">
+                                    <FormattedMessage id="machine.report" />
+                                </div>    
+                            </div>
+                            
+                        </Col>
+                        <Col span={6}>
                             <span className="right-Link" onClick={()=>{history.goBack()}}>&lt; <FormattedMessage id="app.return" /></span>
                         </Col>
                     </Row>

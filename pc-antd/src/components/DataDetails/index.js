@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Card, Row, Col, Table, Button, Select, Input, Progress } from 'antd';
+import { Card, Row, Col, Table, Button, Select, Input, Progress, DatePicker } from 'antd';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import _ from 'lodash';
 import lodashget from 'lodash.get';
@@ -24,6 +24,8 @@ import sb_icon from '../../assets/sj_icon.png';
 const curTZ = moment.tz.guess();
 
 const Option = Select.Option;
+
+const { RangePicker } = DatePicker
 
 
 // 操作指令数据
@@ -312,7 +314,18 @@ const TopChart = injectIntl((props)=>{
     }
 
     return (
-        <Row gutter={24} style={{marginTop: 30, padding: '10px 26px'}}>
+      <React.Fragment>
+        <Row gutter={24} style={{marginTop: 30}}>
+          <Col span={24} style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginLeft: '40px'}}>
+            <div style={{color: '#03f241', fontWeight: 600, marginRight: '5px'}}>——</div>
+            <div style={{marginRight: '10px', fontSize: '12px'}}><FormattedMessage id="machine.data.flow" /></div>
+            <div style={{color: '#0379f2', fontWeight: 600, marginRight: '5px'}}>——</div>
+            <div style={{marginRight: '10px', fontSize: '12px'}}><FormattedMessage id="machine.data.life" /></div>
+            <div style={{color: '#f81929', fontWeight: 600, marginRight: '5px'}}>——</div>
+            <div style={{marginRight: '10px', fontSize: '12px'}}><FormattedMessage id="machine.data.warring" /></div>
+          </Col>
+        </Row>
+        <Row gutter={24} style={{padding: '10px 26px'}}>
             <Col span={24} style={{display: 'flex', justifyContent: 'space-between'}}>
                 {
                   !!srvdata ? (
@@ -327,6 +340,7 @@ const TopChart = injectIntl((props)=>{
                 { !!srvdata && <SingleChart {...uvfilter} /> }
             </Col>
         </Row>
+      </React.Fragment>
     )
 })
 
@@ -700,7 +714,7 @@ class DataDetails extends React.PureComponent {
       this.state = {
           action: '',
           timezone: curTZ,
-
+          downloadRange: [moment(), moment()]
       }
     }
     componentWillUnmount(){
@@ -787,6 +801,7 @@ class DataDetails extends React.PureComponent {
     handleDownload = () => {
         console.log('下载数据');
         const {dispatch,curdevice} = this.props;
+        const { downloadRange } = this.state; // [moment, moment]
         dispatch(download_excel({deviceid:curdevice.deviceid}));
     }
 
@@ -832,7 +847,7 @@ class DataDetails extends React.PureComponent {
                                     onChange={(e)=>{this.setState({action: e.target.value})}}
                                     style={{ width: '80%', marginRight:'10px' }}/>
                                 <Button onClick={this.handleSend}>send</Button></div>
-                            <h4>Timezone</h4>
+                            <h4 style={{marginTop: '10px'}}>Timezone</h4>
                             <div><Select
                                     style={{ width: '100%' }}
                                     value={this.state.timezone}
@@ -845,9 +860,17 @@ class DataDetails extends React.PureComponent {
                                     {tzOptions}
                                 </Select>
                             </div>
-                            <div style={{marginTop:'50px'}}>
+                            <h4 style={{marginTop: '10px'}}>{formatMessage({id: 'machine.download.range'})}</h4>
+                            <div>
+                              <RangePicker
+                                  defaultValue={[this.state.downloadRange[0], this.state.downloadRange[1]]}
+                                  format={'YYYY/MM/DD'}
+                                  onChange={(dates)=>this.setState({downloadRange: dates})}
+                                /> 
+                            </div>
+                            <div style={{marginTop:'30px'}}>
                                 <Button type="primary" size="large" style={{ marginRight:'20px' }} onClick={this.handleStatistic}>{formatMessage({id: 'machine.statistic'})}</Button>
-                                <Button size="large" onClick={this.handleDownload}>{formatMessage({id: 'machine.download'})}</Button> 
+                                <Button size="large" onClick={this.handleDownload}>{formatMessage({id: 'machine.download'})}</Button>
                             </div>
                         </div>
                     </Col>

@@ -24,6 +24,21 @@ const hoursList = lodashmap(hours, (item)=> {
     }
 })
 
+const languages = [
+    {
+        label: '英语',
+        value: 'en',
+    },
+    {
+        label: '中文简体',
+        value: 'zh-cn',
+    },
+    {
+        label: '中文繁体',
+        value: 'zh-tw',
+    },
+]
+
 // 出水水质（ppm)		quality
 // 废水阀泄压 reset
 // 重置并重启系统 reset
@@ -39,17 +54,22 @@ const RenderForm = createForm({
             ...props.quality,
             value: props.quality.value,
           }),
+          language: createFormField({
+            ...props.language,
+            value: props.language.value,
+          }),
         };
     }
 })(withRouter(injectIntl((props)=>{
-    const { validateFields } = props.form;
+    const { validateFields, getFieldProps } = props.form;
     const { history } = props;
 
     const handleSubmit = (e)=>{
         e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
-                props.onSubmit(values);
+                console.log('Values:', values)
+                // props.onSubmit(values);
             }
         })
     }
@@ -94,10 +114,20 @@ const RenderForm = createForm({
                 ><FormattedMessage id="setting.system.decompression" defaultMessage="废水阀泄压" /></List.Item>
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn"  onClick={()=>{
+                              onClickCmd(`$decpression%`,'排气冲洗');//20	废水阀泄压	整机泄压	$decpression%
+                            }} >
+                                <FormattedMessage id="setting.system.resetbt" defaultMessage="冲洗" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.system.exhaustwash" defaultMessage="排气冲洗" /></List.Item>
+                <List.Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{
-                              onClickCmd(`$sysreset 1%`,'重启系统');//重置重启系统	重启系统	$sysreset 1%
+                              onClickCmd(`$sysreset 1%`,'排气冲洗');//重置重启系统	重启系统	$sysreset 1%
                             }}>
-                                <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
+                                <FormattedMessage id="setting.system.wash" defaultMessage="冲洗" />
                             </Button>
                             </div>
                         }
@@ -114,7 +144,7 @@ const RenderForm = createForm({
                             </div>
                         }
                 ><FormattedMessage id="setting.system.resettime" defaultMessage="重置时间" /></List.Item>
-                <List.Item className="item_switch"
+                {/* <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{
                               onClickCmd(`$sysinit%`,'恢复出厂设置');//12	恢复出厂设置	恢复出厂时的状态	$sysinit%
@@ -131,7 +161,7 @@ const RenderForm = createForm({
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.system.sendlog" defaultMessage="发送设备运行记录" /></List.Item>
+                ><FormattedMessage id="setting.system.sendlog" defaultMessage="发送设备运行记录" /></List.Item> */}
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={(showDormancySetup)} >
@@ -148,15 +178,51 @@ const RenderForm = createForm({
                             </div>
                         }
                 ><FormattedMessage id="login.changepassword" /></List.Item>
+                                <Item><FormattedMessage id="setting.system.language" defaultMessage="语言" />
+                    <Brief>
+                        <div className="item_children">
+                            <Picker
+                                data={languages}
+                                cols={1}
+                                onOk={
+                                  (v)=>{
+                                    const language = v[0];
+                                    // dispatch(ui_set_language(language));
+                                    if(language === 'en'){
+                                      // 语言选择：0 ：中文简体，1：中文繁体，2：英语	$charact 0%
+                                      const cmd = `$charact 2%`;
+                                      onClickCmd(cmd,'设置英语');
+                                    }
+                                    else if(language === 'zh-cn'){
+                                      const cmd = `$charact 0%`;
+                                      onClickCmd(cmd,'设置中文简体');
+                                    }
+                                    else if(language === 'zh-tw'){
+                                      const cmd = `$charact 1%`;
+                                      onClickCmd(cmd,'设置中文繁体');
+                                    }
+                                    console.log(v);
+                                  }
+                                }
+                                extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
+                                {...getFieldProps('language', {
+                                    initialValue: ['zh-cn'],
+                                })}
+                                >
+                                <List.Item arrow="horizontal"></List.Item>
+                            </Picker>
+                        </div>
+                    </Brief>
+                </Item>
             </List>
         </form>
-        <WingBlank className="submit_zone">
+        {/* <WingBlank className="submit_zone">
             <div className="add_btn" >
                 <Button type="ghost" className="btn" onClick={handleSubmit}>
                     <FormattedMessage id="form.save" defaultMessage="保存" />
                 </Button>
             </div>
-        </WingBlank>
+        </WingBlank> */}
         </React.Fragment>
     )
 })))
@@ -257,7 +323,7 @@ class SettingSystem extends PureComponent{
         this.onCloseDormancy();
     }
     render () {
-        const { syssettings, dispatch, intl:{ formatMessage }} = this.props;
+        const { syssettings, dispatch, intl:{ formatMessage }, locale} = this.props;
         const basicData = {
             quality: {
                 value: lodashget(syssettings,'quality',''),
@@ -271,6 +337,9 @@ class SettingSystem extends PureComponent{
             dormancyend: {
                 value: this.state.dormancyend,
             },
+            language: {
+                value: locale,
+            }
         }
         console.log(basicData)
         return (
@@ -392,7 +461,8 @@ class SettingSystem extends PureComponent{
 }
 
 const mapStateToProps =  ({device:{locale,syssettings,_id}}) =>{
-  return {locale,syssettings,_id};
+
+    return { locale, syssettings, _id };
 };
 
 SettingSystem = connect(mapStateToProps)(injectIntl(SettingSystem));

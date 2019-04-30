@@ -115,9 +115,9 @@ const RenderForm = createForm({
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
-                              onClickCmd(`$decpression%`,'排气冲洗');//20	废水阀泄压	整机泄压	$decpression%
+                              onClickCmd(`$decpression%`,'排气冲洗');
                             }} >
-                                <FormattedMessage id="setting.system.resetbt" defaultMessage="冲洗" />
+                                <FormattedMessage id="setting.system.wash" defaultMessage="冲洗" />
                             </Button>
                             </div>
                         }
@@ -125,9 +125,9 @@ const RenderForm = createForm({
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{
-                              onClickCmd(`$sysreset 1%`,'排气冲洗');//重置重启系统	重启系统	$sysreset 1%
+                              onClickCmd(`$sysreset 1%`,'重启系统');//重置重启系统	重启系统	$sysreset 1%
                             }}>
-                                <FormattedMessage id="setting.system.wash" defaultMessage="冲洗" />
+                                <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>
                         }

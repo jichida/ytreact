@@ -279,6 +279,17 @@ class Index extends React.Component {
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
+                              this.onClickCmd(`$decpression%`,`${intl.formatMessage({id: 'setting.system.exhaustwash'})}`);
+                            }} >
+                                <FormattedMessage id="setting.system.rinse" defaultMessage="冲洗" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.system.exhaustwash" defaultMessage="排气冲洗" /></List.Item>
+
+                <List.Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn"  onClick={()=>{
                               this.onClickCmd(`$sysinit%`,`${intl.formatMessage({id: 'setting.system.restore'})}`);//12	恢复出厂设置	恢复出厂时的状态	$sysinit%
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
@@ -287,14 +298,14 @@ class Index extends React.Component {
                         }
                 ><FormattedMessage id="setting.system.restore" defaultMessage="恢复出厂设置" /></List.Item>
 
-                <List.Item className="item_switch"
+                {/* <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" >
                                 <FormattedMessage id="setting.system.send" defaultMessage="发送" />
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.system.sendlog" defaultMessage="发送设备运行记录" /></List.Item>
+                ><FormattedMessage id="setting.system.sendlog" defaultMessage="发送设备运行记录" /></List.Item> */}
 
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >

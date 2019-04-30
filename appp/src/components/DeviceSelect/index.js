@@ -44,7 +44,8 @@ const data = [
                             <div className="logo" ><img className="logo_img" alt="" src={logo} /></div>
                             <div className="pimg" >
                                 <Carousel
-                                    autoplay={true}
+                                    autoplay={false}
+                                    selectedIndex={1}
                                     infinite
                                     dotActiveStyle={{backgroundColor: "#b0babd", width: 20, borderRadius: "10px"}}
                                     beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}

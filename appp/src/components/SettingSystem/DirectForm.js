@@ -137,8 +137,8 @@ class Index extends React.Component {
     onClickCmd = (cmd,cmdstring='设置')=>{
         const { dispatch, intl } = this.props;
         dispatch(set_confirm({
-          title: `${intl.formatMessage({id: 'form.confirm'})}`, 
-          message: `${cmdstring}?`, 
+          title: `${intl.formatMessage({id: 'form.confirm'})}`,
+          message: `${cmdstring}?`,
           text: [`${intl.formatMessage({id: 'form.cancel'})}`, `${intl.formatMessage({id: 'form.ok'})}`],
           command: wifi_sendcmd_request({cmd,cmdstring})
         }))
@@ -279,7 +279,7 @@ class Index extends React.Component {
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
-                              this.onClickCmd(`$decpression%`,`${intl.formatMessage({id: 'setting.system.exhaustwash'})}`);
+                              this.onClickCmd(`$prep%`,`${intl.formatMessage({id: 'setting.system.exhaustwash'})}`);
                             }} >
                                 <FormattedMessage id="setting.system.rinse" defaultMessage="冲洗" />
                             </Button>

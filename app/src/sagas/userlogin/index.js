@@ -91,14 +91,15 @@ export function* userloginflow() {
 
             if(!result.loginsuccess){
               localStorage.removeItem(`ytreact_${config.softmode}_token`);
-              localStorage.setItem(`ytreact_${config.softmode}_username`,username);
-              localStorage.setItem(`ytreact_${config.softmode}_password`,password);
             }
 
 
             // yield put(getdevice_request({}));
             // debugger;
             if(!loginsuccess && result.loginsuccess){
+               localStorage.setItem(`ytreact_${config.softmode}_username`,username);
+               localStorage.setItem(`ytreact_${config.softmode}_password`,password);
+
                 localStorage.setItem(`ytreact_${config.softmode}_token`,result.token);
 
                 if(!!result._id){

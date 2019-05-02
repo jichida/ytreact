@@ -47,15 +47,18 @@ export function* userloginflow() {
               const search = state.router.location.search;
               return {username,password,loginsuccess,search};
             });
-            localStorage.removeItem(`ytreact_${config.softmode}_token`);
-            localStorage.setItem(`ytreact_${config.softmode}_username`,username);
-            localStorage.setItem(`ytreact_${config.softmode}_password`,password);
-
+            if(!loginsuccess){
+              localStorage.removeItem(`ytreact_${config.softmode}_token`);
+            }
+  
             yield put(login_result(result));
 
             // yield put(getdevice_request({}));
             // debugger;
             if(!loginsuccess && result.loginsuccess){
+                localStorage.setItem(`ytreact_${config.softmode}_username`,username);
+                localStorage.setItem(`ytreact_${config.softmode}_password`,password);
+
                 localStorage.setItem(`ytreact_${config.softmode}_token`,result.token);
               //switch
                 const fdStart = search.indexOf("?next=");

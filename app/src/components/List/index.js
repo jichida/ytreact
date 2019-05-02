@@ -158,31 +158,31 @@ class EquipmentList extends PureComponent{
                             <div className="pipe">
                                 <div className="pipe-item">
                                     <FormattedMessage id="equipment.valve" defaultMessage="阀门" />
-                                    {`: ${loadshGet(devicelist, 'pipefittings.valve')}`}
+                                    {`: ${loadshGet(devicelist, 'pipefittings.valve', '')}`}
                                 </div>
                                 <div className="pipe-item">
                                     <FormattedMessage id="equipment.connection" defaultMessage="活接" />
-                                    {`: ${loadshGet(devicelist, 'pipefittings.connection')}`}
+                                    {`: ${loadshGet(devicelist, 'pipefittings.connection', '')}`}
                                 </div>
                                 <div className="pipe-item">
                                     <FormattedMessage id="equipment.elbow" defaultMessage="弯头" />
-                                    {`: ${loadshGet(devicelist, 'pipefittings.elbow')}`}
+                                    {`: ${loadshGet(devicelist, 'pipefittings.elbow', '')}`}
                                 </div>
                                 <div className="pipe-item">
                                     <FormattedMessage id="equipment.triplet" defaultMessage="三通" />
-                                    {`: ${loadshGet(devicelist, 'pipefittings.triplet')}`}
+                                    {`: ${loadshGet(devicelist, 'pipefittings.triplet', '')}`}
                                 </div>
                                 <div className="pipe-item">
                                     <FormattedMessage id="equipment.silkpair" defaultMessage="对丝" />
-                                    {`: ${loadshGet(devicelist, 'pipefittings.silkpair')}`}
+                                    {`: ${loadshGet(devicelist, 'pipefittings.silkpair', '')}`}
                                 </div>
                                 <div className="pipe-item">
                                     <FormattedMessage id="equipment.silkspin" defaultMessage="丝转" />
-                                    {`: ${loadshGet(devicelist, 'pipefittings.silkspin')}`}
+                                    {`: ${loadshGet(devicelist, 'pipefittings.silkspin', '')}`}
                                 </div>
                                 <div className="pipe-item">
                                     <FormattedMessage id="equipment.others" defaultMessage="其他" />
-                                    {`: ${loadshGet(devicelist, 'pipefittings.others')}`}
+                                    {`: ${loadshGet(devicelist, 'pipefittings.others', '')}`}
                                 </div>
                             </div>
                         </Accordion.Panel>

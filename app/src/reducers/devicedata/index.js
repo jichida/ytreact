@@ -1,12 +1,62 @@
 import { createReducer } from 'redux-act';
 import {
   wifi_getdata,
+  getdevice_result,
 } from '../../actions/index.js';
 // import moment from 'moment';
 
 const initial = {
     devicedata: {
       isgetdata:false,
+      srvdata : {
+          "Pressure3" : 0,
+          "Pressure4" : 0,
+          "tempt1" : 237,
+          "tempt2" : 235,
+          "tempt3" : 238,
+          "tempt4" : 247,
+          "MODLife" : 720,
+          "Pre_filter1" : 0,
+          "Pre_filter2" : 0,
+          "Pre_filter3" : 0,
+          "Post_filter1" : 0,
+          "Post_filter2" : 0,
+          "Post_filter3" : 0,
+          "MODLifePercent" : 0,
+          "Pre_filter1_percent" : 0,
+          "Pre_filter2_percent" : 0,
+          "Pre_filter3_percent" : 0,
+          "Pos_filter1_percent" : 0,
+          "Pos_filter2_percent" : 0,
+          "Pos_filter3_percent" : 0,
+          "UV" : 0,
+          "systime" : 420,
+          "currentstate" : 6,
+          "ModIn" : 31,
+          "Concentration" : 1009,
+          "ModOut" : 383,
+          "Waste" : 1007,
+          "cutAbs" : 14,
+          "cutPer" : 1,
+          "ModCurrent" : 6,
+          "ModVoltage" : 40,
+          "solenoidCurrent" : 42,
+          "ProductQualityAverage" : 0,
+          "ONtime" : 0,
+          "productDvol" : 0,
+          "wasteDvol" : 0,
+          "Yield" : 0,
+          "DailyVolume" : 590,
+          "WasteVolumeDaily" : 16,
+          "FeedVolumeDaily" : 0,
+          "totalVol" : 1,
+          "p1" : 46,
+          "p2" : 0,
+          "Ieff" : 0,
+          "Energy" : 0,
+          "Pressure1" : 174,
+          "Pressure2" : 0
+      },
       homedata:{
         main_outwater_quality:30,//出水水质,
         main_outwater_grade:'优',//出水等级,
@@ -88,6 +138,23 @@ const initial = {
 };
 
 const devicedata = createReducer({
+    [getdevice_result]:(state,payload)=>{
+      if(!!payload.appdata){
+        const {homedata:homedatanew,errordata:errordatanew,performancedata:performancedatanew,inwatersettings:inwatersettingsnew,
+        syssettings:syssettingsnew} = payload.appdata;
+        const homedata = {...homedatanew};
+        const errordata = {...errordatanew};
+        const performancedata = {...performancedatanew};
+        const inwatersettings = {...inwatersettingsnew};
+        const syssettings = {...syssettingsnew};
+        let srvdata = state.srvdata;
+        if(!!payload.srvdata){
+          srvdata = {...payload.srvdata};
+        }
+        return { ...state, homedata,errordata,performancedata,inwatersettings,syssettings,srvdata,isgetdata:true};
+      }
+      return state;
+    },
     [wifi_getdata]: (state, payload) => {
         // let homedata = state.homedata;
         // let errordata = state.errordata;

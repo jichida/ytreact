@@ -25,8 +25,9 @@ class Search extends React.PureComponent {
     handleSubmit = (values)=>{
         console.log(values)
         // 结果： {country: "5c11df1d34f6297e19e3bfbe", area: "5c11e40534f6297e19e3bfc6", distributor: "经销商1", customer: "abc"}
-        const query = {
-          "distributorid" : values.distributor
+        let query = {};
+        if(values.distributor !== ''){
+          query["distributorid"] = values.distributor
         };
         this.props.dispatch(search_setquery({query,selectDistributor:values.distributor,customerName:values.customer}));
         this.props.history.push('/result');

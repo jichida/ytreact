@@ -1,6 +1,6 @@
 import React from 'react';
 import { List } from 'react-admin';
-
+import _ from 'lodash';
 import {
 
   Edit,
@@ -76,11 +76,19 @@ const DistributorEdit = (props) => {
       </Edit>);
 
 };
+const EditBtnif = (props)=>{
+  const {record} = props;
+  return _.get(record,'is_admin',false) === false?<EditButton {...props}/>:null;
+}
+
+const rowStyle = (record, index) => ({
+    backgroundColor: _.get(record,'is_admin',false) ? '#efe' : 'white',
+});
 
 
 const DistributorList = (props) => (//
      <List title="经销商列表" {...props}  filters={<UserFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
-        <Datagrid>
+        <Datagrid bodyOptions={{ showRowHover: true }} rowStyle={rowStyle}>
         <TextField label="登录名" source="username"/>
         <TextField label="名字" source="name"/>
         <TextField label="简称" source="logname"/>
@@ -90,7 +98,7 @@ const DistributorList = (props) => (//
         <ReferenceField label="所属子区域" source="addresslevel2" reference="addressconst" allowEmpty>
             <TextField source="name" />
         </ReferenceField>
-        <EditButton />
+        <EditBtnif />
         </Datagrid>
     </List>
 );

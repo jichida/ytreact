@@ -1,6 +1,6 @@
 import React from 'react';
 import { List } from 'react-admin';
-
+import _ from 'lodash';
 import {
 
   Edit,
@@ -65,16 +65,23 @@ const UserlistEdit = (props) => {
       </Edit>);
 
 };
+const EditBtnif = (props)=>{
+  const {record} = props;
+  return _.get(record,'is_admin',false) === false?<EditButton {...props}/>:null;
+}
 
+const rowStyle = (record, index) => ({
+    backgroundColor: record.systemflag === 1 ? '#efe' : 'white',
+});
 
 const UserlistList = (props) => (//
      <List title="用户列表" {...props}  filters={<UserFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
-        <Datagrid>
+        <Datagrid bodyOptions={{ showRowHover: true }} rowStyle={rowStyle}>
         <Titlewithimage label="名字" icon="profile.avatar" name="username"/>
         <DateField label="注册时间" source="created_at"  showTime/>
         <DateField label="上次登录时间" source="updated_at"  showTime/>
         <TextField label="昵称" source="profile.nickname" />
-        <EditButton />
+        <EditBtnif />
         </Datagrid>
     </List>
 );

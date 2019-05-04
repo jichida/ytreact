@@ -443,8 +443,80 @@ const Mode_columns = [
   }
 ]
 
+const customColumns = [
+{
+  title: <FormattedMessage id="table.ModIn" />,
+  dataIndex: 'ModIn',
+  key: 'ModIn'
+},
+{
+  title: <FormattedMessage id="table.Concentration" />,
+  dataIndex: 'Concentration',
+  key: 'Concentration'
+},
+{
+  title: <FormattedMessage id="table.ModOut" />,
+  dataIndex: 'ModOut',
+  key: 'ModOut'
+},
+{
+  title: <FormattedMessage id="table.Waste" />,
+  dataIndex: 'Waste',
+  key: 'Waste'
+},
+{
+  title: <FormattedMessage id="table.ProductQualityAverage" />,
+  dataIndex: 'ProductQualityAverage',
+  key: 'ProductQualityAverage'
+},
+{
+  title: <FormattedMessage id="table.DailyVolume" />,
+  dataIndex: 'DailyVolume',
+  key: 'DailyVolume'
+},
+{
+  title: <FormattedMessage id="table.WasteVolumeDaily" />,
+  dataIndex: 'WasteVolumeDaily',
+  key: 'WasteVolumeDaily'
+},
+{
+  title: <FormattedMessage id="table.FeedVolumeDaily" />,
+  dataIndex: 'FeedVolumeDaily',
+  key: 'FeedVolumeDaily'
+},
+{
+  title: <FormattedMessage id="table.totalVol" />,
+  dataIndex: 'totalVol',
+  key: 'totalVol'
+},
+{
+  title: <FormattedMessage id="table.Pressure1" />,
+  dataIndex: 'Pressure1',
+  key: 'Pressure1'
+},
+{
+  title: <FormattedMessage id="table.Pressure2" />,
+  dataIndex: 'Pressure2',
+  key: 'Pressure2'
+},
+{
+  title: <FormattedMessage id="table.Pressure3" />,
+  dataIndex: 'Pressure3',
+  key: 'Pressure3'
+},
+{
+  title: <FormattedMessage id="table.Pressure4" />,
+  dataIndex: 'Pressure4',
+  key: 'Pressure4'
+},
+{
+  title: <FormattedMessage id="table.created_at" />,
+  dataIndex: 'updated_at',
+  key: 'updated_at',
+}
+]
 
-const columns = [{
+const adminColumns = [{
     title: <FormattedMessage id="table.systime" />,
     dataIndex: 'systime',
     key: 'systime'
@@ -806,7 +878,7 @@ class DataDetails extends React.PureComponent {
     }
 
     render() {
-        const { history,curdevice } = this.props;
+        const { history, curdevice, is_admin } = this.props;
         const { formatMessage } = this.props.intl;
         const tzs = timezoneOption();
 
@@ -834,19 +906,27 @@ class DataDetails extends React.PureComponent {
                 <Row gutter={24} style={{marginTop: 30, padding: '0 26px'}}>
                     {/* <Col span={2}></Col> */}
                     <Col span={12} className="sub-title">
-                        <div><h2>{formatMessage({id: 'machine.mode'})}</h2><span className="right-Link" onClick={()=>{history.push(`/actions/${curdevice.deviceid}`)}}>Mode&gt;</span></div>
+                        <div><h2>{ formatMessage({id: 'machine.mode'})}</h2><span className="right-Link" onClick={()=>{history.push(`/actions/${curdevice.deviceid}`)}}>Mode&gt;</span></div>
                         <Table columns={Mode_columns} dataSource={this.props.dataMode} className="table-list" pagination={false} />
                     </Col>
                     <Col span={2}></Col>
                     <Col span={10} className="sub-title">
-                        <div><h2>{formatMessage({id: 'machine.mode.input'})}</h2></div>
+                        <div><h2>{is_admin ? formatMessage({id: 'machine.mode.input'}) : formatMessage({id: 'machine.report'})}</h2></div>
                         <div className="command">
-                            <h4>Send a Command</h4>
-                            <div className="send">
-                                <Input value={this.state.action}
-                                    onChange={(e)=>{this.setState({action: e.target.value})}}
-                                    style={{ width: '80%', marginRight:'10px' }}/>
-                                <Button onClick={this.handleSend}>send</Button></div>
+                            
+                            { is_admin && (
+                              <React.Fragment>
+                                <h4>Send a Command</h4>
+                                <div className="send">
+                                    <Input value={this.state.action}
+                                        onChange={(e)=>{this.setState({action: e.target.value})}}
+                                        style={{ width: '80%', marginRight:'10px' }}/>
+                                    <Button onClick={this.handleSend}>send</Button>
+                                </div>
+                              </React.Fragment>
+                              
+                            )}
+                            
                             <h4 style={{marginTop: '10px'}}>Timezone</h4>
                             <div><Select
                                     style={{ width: '100%' }}
@@ -878,7 +958,7 @@ class DataDetails extends React.PureComponent {
                 </Row>
                 <Row style={{marginTop: 30, padding: '0 26px'}}>
                     <Col span={24} style={{margin: '0 auto'}}>
-                        <Table columns={columns} dataSource={this.props.data_spot} scroll={{x: true}} className="data-table-list" pagination={false} />
+                        <Table columns={is_admin ? adminColumns : customColumns} dataSource={this.props.data_spot} scroll={{x: true}} className="data-table-list" pagination={false} />
                     </Col>
                 </Row>
                 </Card>
@@ -886,10 +966,10 @@ class DataDetails extends React.PureComponent {
         )
     }
 }
-const mapStateToProps =  ({device:{devices},devicedetail:{srvdata,data_spot,dataMode}},props) =>{
+const mapStateToProps =  ({device:{devices},devicedetail:{srvdata,data_spot,dataMode}, userlogin: { is_admin }},props) =>{
   const curdevice = lodashget(devices,`${props.match.params.id}`,{});
   console.log(curdevice)
-  return {curdevice,srvdata,data_spot,dataMode};
+  return {curdevice,srvdata,data_spot,dataMode, is_admin};
 };
 DataDetails = connect(mapStateToProps)(DataDetails);
 export default withRouter(injectIntl(DataDetails));

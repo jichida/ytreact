@@ -87,12 +87,11 @@ export function* userloginflow() {
               const search = state.router.location.search;
               return {username,password,loginsuccess,search};
             });
-            yield put(login_result(result));
-
-            if(!result.loginsuccess){
+            if(!loginsuccess){
               localStorage.removeItem(`ytreact_${config.softmode}_token`);
             }
 
+            yield put(login_result(result));
 
             // yield put(getdevice_request({}));
             // debugger;
@@ -102,12 +101,13 @@ export function* userloginflow() {
 
                 localStorage.setItem(`ytreact_${config.softmode}_token`,result.token);
 
-                if(!!result._id){
-                  //get device
-                  yield put(getdevice_request({'_id':result._id}));
-                }
+                if(config.softmode === 'app'){
+					
+					if(!!result._id){
+					  //get device
+					  yield put(getdevice_request({'_id':result._id}));
+					}
 
-                if(config.softmode = 'app'){
                     yield put(app_sendcmd_request({cmd:`$data%`,cmdstring:'获取数据'}));
                 }
               //switch

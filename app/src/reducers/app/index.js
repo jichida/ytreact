@@ -15,6 +15,7 @@ const initial = {
         maintabindex: 0,
         hometabindex: 0,
         locale:'zh-cn',
+        unit: 'cm',
         tcpconnected:false,
         issocketconnected:false,
         wifidirectmodesocketstatus:-1,
@@ -30,13 +31,13 @@ const app = createReducer({
     [socket_setstatus]:(state,payload)=>{
       //data { socketStatus:  -1 0 1 2 }
       const wifidirectmodesocketstatus = payload.data.socketStatus ;
-      let tcpconnected = false;
-      if(wifidirectmodesocketstatus === 0 || wifidirectmodesocketstatus === 1) {
-          tcpconnected = true;
-      } else if(wifidirectmodesocketstatus === -1 || wifidirectmodesocketstatus === 2) {
-          tcpconnected = false;
-      }
-      return { ...state, wifidirectmodesocketstatus,tcpconnected};
+      // let tcpconnected = false;
+      // if(wifidirectmodesocketstatus === 0 || wifidirectmodesocketstatus === 1) {
+      //     tcpconnected = true;
+      // } else if(wifidirectmodesocketstatus === -1 || wifidirectmodesocketstatus === 2) {
+      //     tcpconnected = false;
+      // }
+      return { ...state, wifidirectmodesocketstatus};
     },
     [notify_socket_connected]: (state, payload) => {
         return { ...state, issocketconnected:payload };
@@ -45,7 +46,13 @@ const app = createReducer({
         return { ...state, ...payload };
     },
     [ui_set_language]: (state, payload) => {
-        return { ...state, locale:payload };
+        let unit = ''
+        if(payload === 'en') {
+            unit = 'in'
+        } else {
+            unit ='cm'
+        }
+        return { ...state, locale:payload, unit };
     },
     [ui_main_selindex]: (state, payload) => {
         return { ...state, maintabindex:payload };

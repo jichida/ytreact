@@ -9,12 +9,14 @@ import {
     logout_result,
 } from '../../actions/index.js';
 import config from '../../env/config';
-
+const username = localStorage.getItem(`ytreact_${config.softmode}_username`);
+const password = localStorage.getItem(`ytreact_${config.softmode}_password`);
 const initial = {
     userlogin: {
         loginsuccess:false,
-        username:localStorage.getItem(`ytreact_${config.softmode}_username`),
-        password:localStorage.getItem(`ytreact_${config.softmode}_password`),
+        username:!!username?username:'',
+        password:!!password?password:'',
+        userid:'',
         token:'',
     },
 };

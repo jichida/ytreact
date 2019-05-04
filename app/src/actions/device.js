@@ -3,7 +3,7 @@
 export const adddevice_request = createAction('adddevice_request');
 export const adddevice_result = createAction('adddevice_result');
 
-
+//getdevice 可能不用
 export const getdevice_request = createAction('getdevice_request');
 export const getdevice_result = createAction('getdevice_result');
 

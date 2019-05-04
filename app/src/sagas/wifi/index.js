@@ -54,7 +54,7 @@ import config from '../../env/config';
 import moment from 'moment';
 
 let recvbuf = '';
-let linkmode = 'unknow';//unknow,directmode,internetmode
+let linkmode = 'internetmode';//unknow,directmode,internetmode
 let lastresponsemoment = moment();
 
 setwifistatuscallback();
@@ -451,26 +451,25 @@ export function* wififlow() {
       const {payload} = action;
       try{
         console.log(payload);
-        yield put(set_weui({
-          toast:{
-          text:`socket接收到数据--->socket_recvdata--->${JSON.stringify(payload)}`,
-          show: true,
-          type:'success'
-        }}));
-        if(payload.code === 0){
+        // yield put(set_weui({
+        //   toast:{
+        //   text:`socket接收到数据--->socket_recvdata--->${JSON.stringify(payload)}`,
+        //   show: true,
+        //   type:'success'
+        // }}));
+        if(payload.code == 0){
           const result = yield call(socket_recvdata_promise,payload.data);
-          let showdata = result.cmd === 'data'?`${result.data}`:`${result.data}`;
-          yield put(set_weui({
-            toast:{
-            text:`【接收到数据】:${showdata}`,
-            show: true,
-            type:'success'
-          }}));
+          // let showdata = result.cmd === 'data'?`${result.data}`:`${result.data}`;
+          // yield put(set_weui({
+          //   toast:{
+          //   text:`【接收到数据】:${showdata}`,
+          //   show: true,
+          //   type:'success'
+          // }}));
           // debugger;
           if(result.cmd === 'data'){
             //get result.data
             yield put(wifi_getdata(result.data));
-
             yield call(socket_send_promise,'$dataok%');
           }
           else if(result.cmd === 'ok'){
@@ -493,6 +492,14 @@ export function* wififlow() {
     yield takeLatest(`${ui_wifisuccess_tonext}`,function*(action){
       try{
         const {payload:{isinternet}} = action;
+        if(isinternet){
+          linkmode = 'internetmode';
+        }
+        else{
+          linkmode = 'directmode';
+        }
+
+
         if(isinternet){
           yield put(push('/home'));
           return;
@@ -530,7 +537,6 @@ export function* wififlow() {
         else{
           //data { socketStatus:  -1 0 1 2 }
           if(lodash_get(raceresult,'socketestatusresult.payload.data.socketStatus',0) === 1){
-            linkmode = 'directmode';
         yield put(push('/devices'));
           }
           else{
@@ -600,7 +606,6 @@ export function* wififlow() {
         console.log(e);
       }
     });
-
     yield takeLatest(`${wifi_sendcmd_request}`, function*(action) {
       try{
           if(config.softmode === 'app'){
@@ -736,7 +741,7 @@ export function* wififlow() {
                       expectstring = `${objstring}ok%`;
                     }
                   }
-                  if(expectstring !== `${wifiresult.payload.data}` && recvbuf !== 'data'){
+                      if(expectstring !== `${wifiresult.payload.data}`){
                     istimeout = true;//
                   }
                 }
@@ -768,7 +773,7 @@ export function* wififlow() {
                   if(istimeout){
                     yield put(set_weui({
                       toast:{
-                      text:`发送给硬件【${payload.cmdstring}】命令返回超时,${delaytime}毫秒`,
+                          text:`发送给硬件【${payload.cmdstring}】命令失败`,
                       show: true,
                       type:'success'
                     }}));
@@ -776,7 +781,7 @@ export function* wififlow() {
                   else{
                     yield put(set_weui({
                       toast:{
-                      text:`发送给硬件【${payload.cmdstring}】命令成功(重试后)`,
+                          text:`发送给硬件【${payload.cmdstring}】命令成功`,
                       show: true,
                       type:'success'
                     }}));
@@ -801,7 +806,7 @@ export function* wififlow() {
     yield takeLatest(`${wifi_getssidlist_request}`, function*(action) {
       try{
         let {payload:result} = action;
-        const delaytime = 5000;
+          const delaytime = 15000;
         yield put(set_weui({
           toast:{
             type:'loading',
@@ -831,11 +836,13 @@ export function* wififlow() {
           yield put(common_err({type:'wifi_getssidlist',errmsg:`获取wifi信息超时,${delaytime}毫秒`}));
         }
         else{
-          if(wifiresult.code === 0){
+            if(wifiresult.code == 0){
             console.log(wifiresult.data);
             yield put(wifi_getssidlist_result(wifiresult.data));
           }
         }
+
+
       }
       catch(e){
         console.log(e);
@@ -877,26 +884,27 @@ export function* wififlow() {
             const diffmin = moment().diff(moment(lastresponsemoment),'seconds');
             if(diffmin < 10){
               //10秒钟内有回复,则不要重连了
-              console.log(`--->10s内有回应,不用重连了`)
+            console.log(`--->10s内有回应,不用重连了`);
+            yield put(settcp_connected(true));
               yield call(delay,delaytime);
               continue;
             };
 
-            const internet_connected = yield select((state)=>{
-              return state.app.issocketconnected;
-            });
-            console.log(internet_connected);
-            console.log(`--->开始检查:${linkmode},internet_connected:${internet_connected}`)
-            if(internet_connected){
-              linkmode = 'internetmode';
-              console.log(`--->linkmode从directmode切换为internetmode`)
-            }
-            else{
-              if(linkmode !== 'unknow'){
-                linkmode = 'directmode';//切换为directmode
-              }
-              console.log(`--->linkmode切换为directmode`)
-            }
+          // const internet_connected = yield select((state)=>{
+          //   return state.app.issocketconnected;
+          // });
+          // console.log(internet_connected);
+          // console.log(`--->开始检查:${linkmode},internet_connected:${internet_connected}`)
+          // if(internet_connected){
+          //   linkmode = 'internetmode';
+          //   console.log(`--->linkmode从directmode切换为internetmode`)
+          // }
+          // else{
+          //   if(linkmode !== 'unknow'){
+          //     linkmode = 'directmode';//切换为directmode
+          //   }
+          //   console.log(`--->linkmode切换为directmode`)
+          // }
 
             if(linkmode === 'directmode'){
               const wifidirectmodesocketstatus = yield select((state)=>{

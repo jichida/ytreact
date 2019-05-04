@@ -387,17 +387,60 @@ export function* wififlow() {
     yield takeLatest(`${push_devicecmddata}`,function*(action){
       const {payload} = action;
       try{
-        const result = payload.data;
+        //<----------
+        console.log(payload);
+        const payloaddata = payload.payload;
+        /*
+        注意:
+        // 命令关系:
+        // 一、cmdsentecho pc端发送命令,通知发送成功
+        // 1、转发给pc端
+        例:
+        { deviceid: 'GHCA0488',
+          type: 'cmdsentecho',
+          payload: '5cbd70c62690edbb94c8f3c4' }
+
+        // 二、cmddata 接收到硬件的data数据（app)/pc
+        // 1、转发给app/pc
+        例:
+        { deviceid: 'GHCA0488',
+            type: 'cmddata',
+            payload:
+            { cmd: 'data',
+              data:
+              { homedata:.....
+
+        // 三、cmdecho 接收到硬件的命令回复 $xxxok%
+        // 1、转发给app
+
+        // 四、cmdhttpdata 接受到硬件的http数据（两种）
+        //1、data.cmd' === 'echo' 转发给pc端
+        例:
+          { deviceid: 'GHCA0488',
+            type: 'cmdhttpdata',
+            payload: { cmd: 'echo',
+
+        //2、data.cmd' === 'data' 转发给pc端
+        例:{ deviceid: 'GHCA0488',
+         srv:mqtt   type: 'cmdhttpdata',
+         srv:mqtt   payload: { cmd: 'data', data: { srvdata: [Object] } } } +0ms
+
+        */
+
+        if(payload.type === 'cmddata'){
+          const result = payloaddata;
         console.log(result);
         if(result.cmd === 'data'){
           //get result.data
           yield put(wifi_getdata(result.data));
-
           // yield call(socket_send_promise,'$dataok%');
         }
         else if(result.cmd === 'ok'){
           yield put(wifi_sendcmd_result({}));
         }
+
+        }//if(payload.type === 'cmddata'){
+
       }
       catch(e){
         console.log(e);
@@ -566,7 +609,107 @@ export function* wififlow() {
     yield takeLatest(`${wifi_sendcmd_request}`, function*(action) {
       try{
               if(config.softmode === 'app'){
-                  yield put(app_sendcmd_request(action.payload));
+              const payload = action.payload;
+              yield put(app_sendcmd_request(payload));
+              yield put(set_weui({
+                toast:{
+                text:`【${payload.cmdstring}】开始命令发送`,
+                show: true,
+                type:'success'
+              }}));
+              const delaytime = 5000;//
+              const raceresult = yield race({
+                 devicecmdresult: take(`${push_devicecmddata}`),
+                 timeout: call(delay, delaytime)
+              });
+
+              const { devicecmdresult,timeout } = raceresult;
+              // debugger;
+              // payload:
+              //   cmd: "echo"
+              //   data: "$sysreset 1ok%"
+              //   deviceid: "GHCA0488"
+
+              let istimeout = !!timeout;
+              console.log(`是否超时1?:${istimeout}`);
+              if(!istimeout){
+
+                console.log(devicecmdresult);
+
+                const recvbuf = `${payload.cmd}`;
+                let objstring = '';
+                let expectstring = '';
+                const istart = recvbuf.indexOf('$',0);
+                if(istart >= 0){
+                  const iend = recvbuf.indexOf('%',istart);
+                  if(iend >= 0){
+                    objstring = recvbuf.substr(istart,iend - istart);
+                    expectstring = `${objstring}ok%`;
+                  }
+                }
+
+                const expdata = lodash_get(devicecmdresult,'payload.payload.data','');
+                console.log(`recvbuf:${recvbuf},expectstring:${expectstring}|${expdata}`);
+
+                if(expectstring !== `${expdata}` && recvbuf !== '$data%'){
+                  istimeout = true;//
+                }
+              }
+              if(istimeout){
+                console.log(`是否超时2?:${istimeout}`);
+                //等3秒超时，重发一次
+                yield put(app_sendcmd_request(payload));
+                const raceresult = yield race({
+                   devicecmdresult: take(`${push_devicecmddata}`),
+                   timeout: call(delay, delaytime)
+                });
+                const { devicecmdresult,timeout } = raceresult;
+                istimeout = !!timeout;
+                if(!istimeout){
+                  const recvbuf = `${payload.cmd}`;
+                  let objstring = '';
+                  let expectstring = '';
+                  const istart = recvbuf.indexOf('$',0);
+                  if(istart >= 0){
+                    const iend = recvbuf.indexOf('%',istart);
+                    if(iend >= 0){
+                      objstring = recvbuf.substr(istart,iend - istart);
+                      expectstring = `${objstring}ok%`;
+                    }
+                  }
+
+                  const expdata = lodash_get(devicecmdresult,'payload.payload.data','');
+                  console.log(`recvbuf:${recvbuf},expectstring:${expectstring}|${expdata}`);
+
+                  if(expectstring !== `${expdata}` && recvbuf !== '$data%'){
+                    istimeout = true;//
+                  }
+                }
+                if(istimeout){
+                  yield put(set_weui({
+                    toast:{
+                    text:`发送给硬件【${payload.cmdstring}】命令返回超时,${delaytime}毫秒`,
+                    show: true,
+                    type:'success'
+                  }}));
+                }
+                else{
+                  yield put(set_weui({
+                    toast:{
+                    text:`发送给硬件【${payload.cmdstring}】命令成功(重试后)`,
+                    show: true,
+                    type:'success'
+                  }}));
+                }
+              }
+              else{
+                yield put(set_weui({
+                  toast:{
+                  text:`发送给硬件【${payload.cmdstring}】命令成功`,
+                  show: true,
+                  type:'success'
+                }}));
+              }
               }
               else{
                     const {payload} = action;
@@ -732,6 +875,8 @@ export function* wififlow() {
       }
     });
 
+    if(config.softmode === 'appp'){
+      //仅适用 专业版
     yield fork(function* (){
       const delaytime = 10000;
       yield call(delay,2000);
@@ -810,6 +955,8 @@ export function* wififlow() {
           yield call(delay,delaytime);
       }
     })
+    }
+
 
     //设置配网（输入：wifi用户名，密码）
     // yield takeLatest(`${wifi_seteasylink}`, function*(action) {

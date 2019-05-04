@@ -3,6 +3,11 @@ import {
 
     loginwithtoken_request,
     login_request,
+
+    findpwd_request,
+    findpwd_result,
+    sendauth_request,
+    sendauth_result,
     // login_result,
 
     logout_request,
@@ -18,11 +23,24 @@ import {
     getdevice_result,
     setuserdevice_request,
     setuserdevice_result,
+
+    changepwd_request,
+    changepwd_result,
+
+    app_sendcmd_request,
+    app_sendcmd_result,
+
+    push_devicecmddata
   } from '../../actions';
 
 //接收的对应关系
 const recvmessagetoresultpair = {
+  'push_devicecmddata':push_devicecmddata,
+  'app_sendcmd_result':app_sendcmd_result,
+  'changepwd_result':changepwd_result,
   'common_err':common_err,
+  'findpwd_result':findpwd_result,
+  'sendauth_result':sendauth_result,
 
   'login_result':md_login_result,
   'logout_result':logout_result,
@@ -36,16 +54,19 @@ const recvmessagetoresultpair = {
 
 //非验证发送接口
 const sendmessagefnsz = {
+  'changepwd':`${changepwd_request}`,
   'logout':`${logout_request}`,
   'loginwithtoken':`${loginwithtoken_request}`,
   'login':`${login_request}`,
-
+  'findpwd':`${findpwd_request}`,
+  'sendauth':`${sendauth_request}`,
   'getsystemconfig':`${getsystemconfig_request}`,
 
 };
 
 //验证发送接口
 const sendmessageauthfnsz = {
+  'app_sendcmd':`${app_sendcmd_request}`,
   'adddevice':`${adddevice_request}`,
   'getdevice':`${getdevice_request}`,
   'setuserdevice':`${setuserdevice_request}`,

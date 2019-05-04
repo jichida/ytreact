@@ -4,18 +4,17 @@ import {
   common_err,
   md_login_result,
   login_result,
-
+  findpwd_result,
   set_weui,
-
+  getdevice_request,
+  app_sendcmd_request,
+  sendauth_result,
+  changepwd_result,
 } from '../../actions';
 // import {getdevice_request} from '../../actions';
-import { replace} from 'connected-react-router';//https://github.com/reactjs/connected-react-router
+import { replace,goBack} from 'connected-react-router';//https://github.com/reactjs/connected-react-router
+import config from '../../env/config';
 
-// import { goBack } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
-import config from '../../env/config.js';
-// import  {
-//   getrandom
-// } from '../test/bmsdata.js';
 
 export function* userloginflow() {
 
@@ -34,6 +33,47 @@ export function* userloginflow() {
   //   }}));
   //   yield put(goBack());
   // });
+  yield takeLatest(`${sendauth_result}`, function*(action) {
+      let {payload:result} = action;
+      let toast = {
+          show : true,
+          text : result.msg,
+          type : "success"
+      }
+      yield put(set_weui({ toast }));
+  });
+
+  yield takeLatest(`${findpwd_result}`, function*(action) {
+      try{
+        yield put(set_weui({
+          toast:{
+            text:'找回密码成功',
+            show: true,
+            type:'success'
+        }}));
+        yield put(goBack());
+      }
+      catch(e){
+        console.log(e);
+      }
+  });
+
+
+    yield takeLatest(`${changepwd_result}`, function*(action) {
+        try{
+          yield put(set_weui({
+            toast:{
+              text:'修改密码成功',
+              show: true,
+              type:'success'
+          }}));
+          yield put(goBack());
+        }
+        catch(e){
+          console.log(e);
+        }
+    });
+
 
 
 
@@ -60,6 +100,16 @@ export function* userloginflow() {
                 localStorage.setItem(`ytreact_${config.softmode}_password`,password);
 
                 localStorage.setItem(`ytreact_${config.softmode}_token`,result.token);
+
+                if(config.softmode === 'app'){
+					
+					if(!!result._id){
+					  //get device
+					  yield put(getdevice_request({'_id':result._id}));
+					}
+
+                    yield put(app_sendcmd_request({cmd:`$data%`,cmdstring:'获取数据'}));
+                }
               //switch
                 const fdStart = search.indexOf("?next=");
                 if(fdStart === 0){
@@ -69,7 +119,6 @@ export function* userloginflow() {
                 else{
                     yield put(replace('/'));
                 }
-
             }
         }
 
@@ -81,8 +130,8 @@ export function* userloginflow() {
   });
 
   yield takeLatest(`${common_err}`, function*(action) {
-        let {payload:result} = action;
-
+        const {payload:result} = action;
+        console.log(result.errmsg);
         yield put(set_weui({
           toast:{
           text:result.errmsg,

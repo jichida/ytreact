@@ -94,7 +94,7 @@ class SearchForm extends React.PureComponent{
     }
 
     setDistributorOption = (country, area) => {
-        const { dispatch,searchquery } = this.props;
+        const { dispatch,searchquery,is_admin } = this.props;
         let query = {};
         if(area === ''){
           if(country !== ''){
@@ -107,6 +107,12 @@ class SearchForm extends React.PureComponent{
         dispatch(callthen(getdistributorlist_request, getdistributorlist_result, {query})).then((result)=>{
             let resultdata = result.data;
             let distributorOptions = [];
+            if(is_admin){
+              distributorOptions.push({
+                _id:'',
+                name:'全部'
+              });
+            }
             lodashmap(resultdata, (item)=>{
                 distributorOptions.push(item);
             })
@@ -202,9 +208,6 @@ class SearchForm extends React.PureComponent{
                     <Form.Item {...formItemLayout} label={formatMessage({id: 'app.search.distributor'})}>
                         {getFieldDecorator('distributor', {
                             Value: searchquery.selectDistributor,
-                            rules: [{
-                                required: true, message: `${formatMessage({id: 'app.search.distributor.choose'})}`,
-                            }],
                         })(
                             <Select placeholder={formatMessage({id: 'app.search.distributor.choose'})} size="large">
                               {
@@ -235,7 +238,7 @@ const mapStateToProps =  ({addressconst:{addressconsts},searchquery,userlogin}) 
   let areas = [];
   const addresslevel1 = lodashget(userlogin,'addresslevel1','');
   const addresslevel2 = lodashget(userlogin,'addresslevel2','');
-
+  const is_admin = lodashget(userlogin,'is_admin',false);
   if(addresslevel1.length === 0){
     //所有
     provinces.push({
@@ -260,7 +263,13 @@ const mapStateToProps =  ({addressconst:{addressconsts},searchquery,userlogin}) 
 
     //选择默认经销商
     if(searchquery.selectDistributor.length === 0){
-      searchquery.selectDistributor = userlogin._id;
+      if(is_admin){
+        searchquery.selectDistributor =  '';
+      }
+      else{
+        searchquery.selectDistributor = userlogin._id;
+      }
+
     }
 
     //如果searchquery.selectDistributor不在searchquery.distributorOptions 里面
@@ -313,7 +322,7 @@ const mapStateToProps =  ({addressconst:{addressconsts},searchquery,userlogin}) 
   }
 
   // console.log(JSON.stringify(mapaddress));
-  return {mapaddress,provinces, areas,searchquery,addresslevel1,addresslevel2};
+  return {mapaddress,provinces, areas,searchquery,addresslevel1,addresslevel2,is_admin};
 };
 
 SearchForm = Form.create(createFormOption)(injectIntl(SearchForm));

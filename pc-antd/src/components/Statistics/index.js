@@ -22,11 +22,11 @@ const dateFormat = 'YYYY-MM-DD';
 const cycleAction = {
     day:{
       name: <FormattedMessage id="machine.report.day" />,
-      action: 'day',
+      action: 'hour',
     },
     week:{
         name: <FormattedMessage id="machine.report.week" />,
-        action: 'week',
+        action: 'day',
     },
     month:{
         name: <FormattedMessage id="machine.report.month" />,
@@ -127,7 +127,7 @@ class Statistics extends React.PureComponent {
     constructor(props) {
       super(props);
       this.state = {
-          cycle: 'day',
+          cycle: 'hour',
           type: 'ModInOut',
           rangeDate: [
             moment().subtract(1, 'M'),moment()],
@@ -390,9 +390,9 @@ class Statistics extends React.PureComponent {
                                 </div>
                                 <div className="left-item">
                                     <FormattedMessage id="machine.report" />
-                                </div>    
+                                </div>
                             </div>
-                            
+
                         </Col>
                         <Col span={6}>
                             <span className="right-Link" onClick={()=>{history.goBack()}}>&lt; <FormattedMessage id="app.return" /></span>

@@ -12,7 +12,7 @@ import config from '../../env/config';
 import {getdevicecount_request,getdevicecount_result} from '../../actions';
 import { search_setquery } from '../../actions';
 import {callthen} from '../../sagas/pagination';
-
+import moment from 'moment';
 
 class Distribution extends React.PureComponent {
   constructor(props) {
@@ -37,7 +37,15 @@ class Distribution extends React.PureComponent {
     if(typeof(iserr) === 'undefined'){
       this.props.dispatch(search_setquery({query: {}}));
     } else {
-      this.props.dispatch(search_setquery({query: {iserr}}));
+      this.props.dispatch(search_setquery({query: {
+        $or:[
+          {iserr:true},
+          {datasrv_updated_at:{
+            $exists:true,
+            $lte:moment().subtract(1,'hours').format()
+          }}
+        ]
+      }}));
     }
     this.props.history.push('/distribution_list');
   }

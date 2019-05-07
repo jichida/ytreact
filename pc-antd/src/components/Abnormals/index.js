@@ -6,7 +6,7 @@ import GridContent from '../GridContent';
 import './index.less';
 import DeviceList from '../PageList/DeviceList';
 import sb_icon from '../../assets/sb_icon.png';
-
+import moment from 'moment';
 class Machines extends React.PureComponent {
 
     render() {
@@ -20,7 +20,15 @@ class Machines extends React.PureComponent {
                     </Col>
                 </Row>
                 <DeviceList
-                    query={{iserr:true}}
+                    query={{
+                      $or:[
+                        {iserr:true},
+                        {datasrv_updated_at:{
+                          $exists:true,
+                          $lte:moment().subtract(1,'hours').format()
+                        }}
+                      ]
+                    }}
                 />
                 </Card>
             </GridContent>

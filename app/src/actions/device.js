@@ -15,4 +15,4 @@ export const tmp_ui_setuserdevice_request = createAction('tmp_ui_setuserdevice_r
 
 export const app_sendcmd_request = createAction('app_sendcmd_request');
 export const app_sendcmd_result = createAction('app_sendcmd_result');
-export const push_devicecmddata = createAction('push_devicecmddata');
+export const push_devicecmddata = createAction('push_devicecmddata'); 

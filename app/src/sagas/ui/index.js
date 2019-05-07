@@ -15,6 +15,15 @@ const popdialog = ({text,type,value})=>{
       if(type === 'warning'){
         Toast.fail(text, 1);
       }
+      if(type === 'fail'){
+        Toast.fail(text, 1);
+      }
+      if(type === 'info'){
+        Toast.info(text, 1);
+      }
+      if(type === 'offline'){
+        Toast.offline(text, 1);
+      }
       if(type === 'loading'){
         if(value === 'show'){
           Toast.loading(text, 0);

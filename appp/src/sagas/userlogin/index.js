@@ -90,7 +90,7 @@ export function* userloginflow() {
             if(!loginsuccess){
               localStorage.removeItem(`ytreact_${config.softmode}_token`);
             }
-  
+
             yield put(login_result(result));
 
             // yield put(getdevice_request({}));
@@ -102,12 +102,10 @@ export function* userloginflow() {
                 localStorage.setItem(`ytreact_${config.softmode}_token`,result.token);
 
                 if(config.softmode === 'app'){
-					
-					if(!!result._id){
-					  //get device
-					  yield put(getdevice_request({'_id':result._id}));
-					}
-
+          					if(!!result._id){
+          					  //get device
+          					  yield put(getdevice_request({'_id':result._id}));
+          					}
                     yield put(app_sendcmd_request({cmd:`$data%`,cmdstring:'获取数据'}));
                 }
               //switch

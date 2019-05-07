@@ -52,7 +52,7 @@ class DeviceList extends React.Component {
     if(iteminput.hasOwnProperty('srvdata')){
       return {
               isgetsrvdata:true,
-              iserr: lodashget(iteminput,'basicinfo.username',''),
+              iserr: lodashget(iteminput,'iserr',true),
               address: lodashget(iteminput,'basicinfo.username',''),
               reportdate: moment(lodashget(iteminput,'syssettings.installdate','')).format('YYYYMMDD'),
               id:lodashget(iteminput,'syssettings.deviceid',''),
@@ -64,7 +64,7 @@ class DeviceList extends React.Component {
     }
     const item =  {
             isgetsrvdata:false,
-            iserr: true,
+            iserr: lodashget(iteminput,'iserr',true),
             address: lodashget(iteminput,'basicinfo.username',''),
             reportdate: moment(lodashget(iteminput,'syssettings.installdate','')).format('YYYYMMDD'),
             id:lodashget(iteminput,'syssettings.deviceid',''),
@@ -102,7 +102,7 @@ class DeviceList extends React.Component {
     const tableprops = {
       grid:{ gutter: 24, column: 4 }
     };
-    console.log(query);
+    console.log(query);//new RegExp(value,'ig')
     return (
             <PageList
               tableprops={tableprops}

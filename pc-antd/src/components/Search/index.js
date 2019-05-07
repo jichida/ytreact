@@ -29,6 +29,10 @@ class Search extends React.PureComponent {
         if(values.distributor !== ''){
           query["distributorid"] = values.distributor
         };
+        if(values.customer !== ''){
+          query["customer"] = values.customer;//new RegExp(values.customer,'ig')
+        }//"basicinfo.username" = new RegExp(values.customer,'ig')
+        // debugger;
         this.props.dispatch(search_setquery({query,selectDistributor:values.distributor,customerName:values.customer}));
         this.props.history.push('/result');
     }

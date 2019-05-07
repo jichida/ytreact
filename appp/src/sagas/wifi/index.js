@@ -690,7 +690,7 @@ export function* wififlow() {
                     toast:{
                     text:`发送给硬件【${payload.cmdstring}】命令返回超时,${delaytime}毫秒`,
                     show: true,
-                    type:'success'
+                    type:'offline'
                   }}));
                 }
                 else{
@@ -775,7 +775,7 @@ export function* wififlow() {
                           toast:{
                           text:`发送给硬件【${payload.cmdstring}】命令失败`,
                           show: true,
-                          type:'success'
+                          type:'offline'
                         }}));
                       }
                       else{

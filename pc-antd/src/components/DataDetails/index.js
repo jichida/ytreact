@@ -876,8 +876,8 @@ class DataDetails extends React.PureComponent {
         const { downloadRange } = this.state; // [moment, moment]
         dispatch(download_excel({
           deviceid:curdevice.deviceid,
-          momentstart:downloadRange[0],
-          momentend:downloadRange[1],
+          momentstart:downloadRange[0].format(),
+          momentend:downloadRange[1].format(),
         }));
     }
     render() {

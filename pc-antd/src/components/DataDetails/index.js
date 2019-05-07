@@ -354,7 +354,7 @@ const Chart = ({title, unit, data, flow, life, flowwarring, lifewarring})=>{
                   // strokeWidth={5}
                   strokeColor={flowwarring ? '#f81929' : '#03f241'}
                   status={flowwarring?"exception":"active"}
-                  format={() => ''} 
+                  format={() => ''}
                   // <React.Fragment><p className="data">{data}</p><p className="unit">{unit}</p></React.Fragment>
             />
           </div>
@@ -365,7 +365,7 @@ const Chart = ({title, unit, data, flow, life, flowwarring, lifewarring})=>{
                   // strokeWidth={5}
                   strokeColor={lifewarring ? '#f81929' : '#0379f2'}
                   status={lifewarring?"exception":"active"}
-                  format={() => ''} 
+                  format={() => ''}
                   // <React.Fragment><p className="data">{data}</p><p className="unit">{unit}</p></React.Fragment>
             />
           </div>
@@ -384,7 +384,7 @@ const SingleChart = ({title, unit, data, percent, warring})=>{
                 // strokeWidth={5}
                 strokeColor={warring ? '#f81929' : '#03f241'}
                 status={warring?"exception":"active"}
-                format={() => ''} 
+                format={() => ''}
                 // <React.Fragment><p className="data">{data}</p><p className="unit">{unit}</p></React.Fragment>
           />
         </div>
@@ -874,9 +874,12 @@ class DataDetails extends React.PureComponent {
         console.log('下载数据');
         const {dispatch,curdevice} = this.props;
         const { downloadRange } = this.state; // [moment, moment]
-        dispatch(download_excel({deviceid:curdevice.deviceid}));
+        dispatch(download_excel({
+          deviceid:curdevice.deviceid,
+          momentstart:downloadRange[0],
+          momentend:downloadRange[1],
+        }));
     }
-
     render() {
         const { history, curdevice, is_admin } = this.props;
         const { formatMessage } = this.props.intl;
@@ -913,7 +916,7 @@ class DataDetails extends React.PureComponent {
                     <Col span={10} className="sub-title">
                         <div><h2>{is_admin ? formatMessage({id: 'machine.mode.input'}) : formatMessage({id: 'machine.report'})}</h2></div>
                         <div className="command">
-                            
+
                             { is_admin && (
                               <React.Fragment>
                                 <h4>Send a Command</h4>
@@ -924,9 +927,9 @@ class DataDetails extends React.PureComponent {
                                     <Button onClick={this.handleSend}>send</Button>
                                 </div>
                               </React.Fragment>
-                              
+
                             )}
-                            
+
                             <h4 style={{marginTop: '10px'}}>Timezone</h4>
                             <div><Select
                                     style={{ width: '100%' }}
@@ -946,7 +949,7 @@ class DataDetails extends React.PureComponent {
                                   defaultValue={[this.state.downloadRange[0], this.state.downloadRange[1]]}
                                   format={'YYYY/MM/DD'}
                                   onChange={(dates)=>this.setState({downloadRange: dates})}
-                                /> 
+                                />
                             </div>
                             <div style={{marginTop:'30px'}}>
                                 <Button type="primary" size="large" style={{ marginRight:'20px' }} onClick={this.handleStatistic}>{formatMessage({id: 'machine.statistic'})}</Button>

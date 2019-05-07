@@ -3,7 +3,7 @@ import config from '../../env/config';
 // import map from 'lodash.map';
 const fetchurl =`${config.serverurlrestful}`;
 const getForm =(url, target, value, method)=> {
-
+  const {tokenid,momentstart,momentend} = value;
   let form = document.createElement("form");
   form.method = method;
   form.action = url;
@@ -11,9 +11,20 @@ const getForm =(url, target, value, method)=> {
 
   let input = document.createElement("input");
   input.type = "hidden";
-  input.value = value;
+  input.value = tokenid;
   input.name = 'tokenid';
+  form.appendChild(input);
 
+  input = document.createElement("input");
+  input.type = "hidden";
+  input.value = momentstart;
+  input.name = 'momentstart';
+  form.appendChild(input);
+
+  input = document.createElement("input");
+  input.type = "hidden";
+  input.value = momentend;
+  input.name = 'momentend';
   form.appendChild(input);
 
   return form;
@@ -27,9 +38,9 @@ const statusHelper = (response)=> {
 }
 
 const restfulapi = {
-  getexcelfile({deviceid,tokenid}){
+  getexcelfile({deviceid,tokenid,momentstart,momentend}){
     return new Promise((resolve,reject) => {
-      const form = getForm(`${fetchurl}/exportsrvdata/${deviceid}`, "_self", tokenid, "post");
+      const form = getForm(`${fetchurl}/exportsrvdata/${deviceid}`, "_self", {tokenid,momentstart,momentend}, "post");
       document.body.appendChild(form);
       form.submit();
       form.parentNode.removeChild(form);

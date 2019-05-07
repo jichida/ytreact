@@ -394,370 +394,6 @@ const SingleChart = ({title, unit, data, percent, warring})=>{
 }
 
 
-const Mode_columns = [
-  {
-    title: <FormattedMessage id="machine.mode.type" />,
-    dataIndex: 'type',
-    key: 'type',
-    render: (text, record) =>{
-      console.log('Mode Record:', record)
-      console.log(text);
-      if(lodashget(record,'issent') === 1) {
-         return (
-          //  <React.Fragment><span></span></React.Fragment>
-          <div>
-            <div style={{width: '25px', display: 'inline-block'}}>
-              <img src={success} alt="" style={{width: '20px', height: '20px'}} />
-            </div>
-            <div style={{display: 'inline-block'}}>{`${text}`}</div>
-          </div>
-         )
-      }
-
-      // return (<img src={failer} alt="" style={{width: '20px', height: '20px'}} />)
-
-      // if(lodashget(record,'issent') === 1){//表示已经发送成功
-      //   return `#${text}`;
-      // }
-      return (
-        <div>
-          <div style={{width: '25px', display: 'inline-block'}}>
-          </div>
-          <div style={{display: 'inline-block'}}>{text}</div>
-        </div>
-
-      )
-    }
-  }, {
-    title: <FormattedMessage id="machine.mode.body" />,
-    dataIndex: 'body',
-    key: 'body',
-  }, {
-    title: <FormattedMessage id="machine.mode.occurstime" />,
-    dataIndex: 'occurstime',
-    key: 'occurstime',
-    render: (text, record) =>{
-      console.log(text);
-      return moment(text).format('YYYY-MM-DD HH:mm:ss');
-    }
-  }
-]
-
-const customColumns = [
-{
-  title: <FormattedMessage id="table.ModIn" />,
-  dataIndex: 'ModIn',
-  key: 'ModIn'
-},
-{
-  title: <FormattedMessage id="table.Concentration" />,
-  dataIndex: 'Concentration',
-  key: 'Concentration'
-},
-{
-  title: <FormattedMessage id="table.ModOut" />,
-  dataIndex: 'ModOut',
-  key: 'ModOut'
-},
-{
-  title: <FormattedMessage id="table.Waste" />,
-  dataIndex: 'Waste',
-  key: 'Waste'
-},
-{
-  title: <FormattedMessage id="table.ProductQualityAverage" />,
-  dataIndex: 'ProductQualityAverage',
-  key: 'ProductQualityAverage'
-},
-{
-  title: <FormattedMessage id="table.DailyVolume" />,
-  dataIndex: 'DailyVolume',
-  key: 'DailyVolume'
-},
-{
-  title: <FormattedMessage id="table.WasteVolumeDaily" />,
-  dataIndex: 'WasteVolumeDaily',
-  key: 'WasteVolumeDaily'
-},
-{
-  title: <FormattedMessage id="table.FeedVolumeDaily" />,
-  dataIndex: 'FeedVolumeDaily',
-  key: 'FeedVolumeDaily'
-},
-{
-  title: <FormattedMessage id="table.totalVol" />,
-  dataIndex: 'totalVol',
-  key: 'totalVol'
-},
-{
-  title: <FormattedMessage id="table.Pressure1" />,
-  dataIndex: 'Pressure1',
-  key: 'Pressure1'
-},
-{
-  title: <FormattedMessage id="table.Pressure2" />,
-  dataIndex: 'Pressure2',
-  key: 'Pressure2'
-},
-{
-  title: <FormattedMessage id="table.Pressure3" />,
-  dataIndex: 'Pressure3',
-  key: 'Pressure3'
-},
-{
-  title: <FormattedMessage id="table.Pressure4" />,
-  dataIndex: 'Pressure4',
-  key: 'Pressure4'
-},
-{
-  title: <FormattedMessage id="table.created_at" />,
-  dataIndex: 'updated_at',
-  key: 'updated_at',
-}
-]
-
-const adminColumns = [{
-    title: <FormattedMessage id="table.systime" />,
-    dataIndex: 'systime',
-    key: 'systime'
-  },
-  {
-    title: <FormattedMessage id="table.currentstate" />,
-    dataIndex: 'currentstate',
-    key: 'currentstate'
-  },
-  {
-    title: <FormattedMessage id="table.ModIn" />,
-    dataIndex: 'ModIn',
-    key: 'ModIn'
-  },
-  {
-    title: <FormattedMessage id="table.Concentration" />,
-    dataIndex: 'Concentration',
-    key: 'Concentration'
-  },
-  {
-    title: <FormattedMessage id="table.ModOut" />,
-    dataIndex: 'ModOut',
-    key: 'ModOut'
-  },
-  {
-    title: <FormattedMessage id="table.Waste" />,
-    dataIndex: 'Waste',
-    key: 'Waste'
-  },
-  {
-    title: <FormattedMessage id="table.cutAbs" />,
-    dataIndex: 'cutAbs',
-    key: 'cutAbs'
-  },
-  {
-    title: <FormattedMessage id="table.cutPer" />,
-    dataIndex: 'cutPer',
-    key: 'cutPer'
-  },
-  {
-    title: <FormattedMessage id="table.ModCurrent" />,
-    dataIndex: 'ModCurrent',
-    key: 'ModCurrent'
-  },
-  {
-    title: <FormattedMessage id="table.ModVoltage" />,
-    dataIndex: 'ModVoltage',
-    key: 'ModVoltage'
-  },
-  {
-    title: <FormattedMessage id="table.solenoidCurrent" />,
-    dataIndex: 'solenoidCurrent',
-    key: 'solenoidCurrent'
-  },
-  {
-    title: <FormattedMessage id="table.ProductQualityAverage" />,
-    dataIndex: 'ProductQualityAverage',
-    key: 'ProductQualityAverage'
-  },
-  {
-    title: <FormattedMessage id="table.ONtime" />,
-    dataIndex: 'ONtime',
-    key: 'ONtime'
-  },
-  {
-    title: <FormattedMessage id="table.productDvol" />,
-    dataIndex: 'productDvol',
-    key: 'productDvol'
-  },
-  {
-    title: <FormattedMessage id="table.wasteDvol" />,
-    dataIndex: 'wasteDvol',
-    key: 'wasteDvol'
-  },
-  {
-    title: <FormattedMessage id="table.Yield" />,
-    dataIndex: 'Yield',
-    key: 'Yield'
-  },
-  {
-    title: <FormattedMessage id="table.DailyVolume" />,
-    dataIndex: 'DailyVolume',
-    key: 'DailyVolume'
-  },
-  {
-    title: <FormattedMessage id="table.WasteVolumeDaily" />,
-    dataIndex: 'WasteVolumeDaily',
-    key: 'WasteVolumeDaily'
-  },
-  {
-    title: <FormattedMessage id="table.FeedVolumeDaily" />,
-    dataIndex: 'FeedVolumeDaily',
-    key: 'FeedVolumeDaily'
-  },
-{
-    title: <FormattedMessage id="table.totalVol" />,
-    dataIndex: 'totalVol',
-    key: 'totalVol'
-  },
-  {
-    title: <FormattedMessage id="table.p1" />,
-    dataIndex: 'p1',
-    key: 'p1'
-  },
-  {
-    title: <FormattedMessage id="table.p2" />,
-    dataIndex: 'p2',
-    key: 'p2'
-  },
-  {
-    title: <FormattedMessage id="table.Ieff" />,
-    dataIndex: 'Ieff',
-    key: 'Ieff'
-  },
-  {
-    title: <FormattedMessage id="table.Energy" />,
-    dataIndex: 'Energy',
-    key: 'Energy'
-  },
-  {
-    title: <FormattedMessage id="table.Pressure1" />,
-    dataIndex: 'Pressure1',
-    key: 'Pressure1'
-  },
-  {
-    title: <FormattedMessage id="table.Pressure2" />,
-    dataIndex: 'Pressure2',
-    key: 'Pressure2'
-  },
-  {
-    title: <FormattedMessage id="table.Pressure3" />,
-    dataIndex: 'Pressure3',
-    key: 'Pressure3'
-  },
-  {
-    title: <FormattedMessage id="table.Pressure4" />,
-    dataIndex: 'Pressure4',
-    key: 'Pressure4'
-  },
-  {
-    title: <FormattedMessage id="table.tmpt1" />,
-    dataIndex: 'tempt1',
-    key: 'tempt1'
-  },
-  {
-    title: <FormattedMessage id="table.tmpt2" />,
-    dataIndex: 'tempt2',
-    key: 'tempt2'
-  },
-  {
-    title: <FormattedMessage id="table.tmpt3" />,
-    dataIndex: 'tempt3',
-    key: 'tempt3'
-  },
-  {
-    title: <FormattedMessage id="table.tmpt4" />,
-    dataIndex: 'tempt4',
-    key: 'tempt4'
-  },
-  {
-    title: <FormattedMessage id="table.MODLife" />,
-    dataIndex: 'MODLife',
-    key: 'MODLife'
-  },
-  {
-    title: <FormattedMessage id="table.Pre_filter1" />,
-    dataIndex: 'Pre_filter1',
-    key: 'Pre_filter1'
-  },
-  {
-    title: <FormattedMessage id="table.Pre_filter2" />,
-    dataIndex: 'Pre_filter2',
-    key: 'Pre_filter2'
-  },
-  {
-    title: <FormattedMessage id="table.Pre_filter3" />,
-    dataIndex: 'Pre_filter3',
-    key: 'Pre_filter3'
-  },
-  {
-    title: <FormattedMessage id="table.Post_filter1" />,
-    dataIndex: 'Post_filter1',
-    key: 'Post_filter1'
-  },
-  {
-    title: <FormattedMessage id="table.Post_filter2" />,
-    dataIndex: 'Post_filter2',
-    key: 'Post_filter2'
-  },
-  {
-    title: <FormattedMessage id="table.Post_filter3" />,
-    dataIndex: 'Post_filter3',
-    key: 'Post_filter3'
-  },
-  {
-    title: <FormattedMessage id="table.MODLifePercent" />,
-    dataIndex: 'MODLifePercent',
-    key: 'MODLifePercent',
-  },
-  {
-    title: <FormattedMessage id="table.Pre_filter1_percent" />,
-    dataIndex: 'Pre_filter1_percent',
-    key: 'Pre_filter1_percent',
-  },
-  {
-    title: <FormattedMessage id="table.Pre_filter2_percent" />,
-    dataIndex: 'Pre_filter2_percent',
-    key: 'Pre_filter2_percent',
-  },
-  {
-    title: <FormattedMessage id="table.Pre_filter3_percent" />,
-    dataIndex: 'Pre_filter3_percent',
-    key: 'Pre_filter3_percent',
-  },
-  {
-    title: <FormattedMessage id="table.Pos_filter1_percent" />,
-    dataIndex: 'Pos_filter1_percent',
-    key: 'Pos_filter1_percent',
-  },
-  {
-    title: <FormattedMessage id="table.Pos_filter2_percent" />,
-    dataIndex: 'Pos_filter2_percent',
-    key: 'Pos_filter2_percent',
-  },
-  {
-    title: <FormattedMessage id="table.Pos_filter3_percent" />,
-    dataIndex: 'Pos_filter3_percent',
-    key: 'Pos_filter3_percent',
-  },
-  {
-    title: <FormattedMessage id="table.UV" />,
-    dataIndex: 'UV',
-    key: 'UV',
-  },
-  {
-    title: <FormattedMessage id="table.created_at" />,
-    dataIndex: 'updated_at',
-    key: 'updated_at',
-  }
-]
-
 const timezoneOption = () => {
     const timeZones = moment.tz.names();
     const offsetTmz = [];
@@ -895,6 +531,376 @@ class DataDetails extends React.PureComponent {
           srvdata:this.props.srvdata
         };
 
+        const data_spot = this.props.data_spot;
+        const dataMode = this.props.dataMode;
+        console.log(dataMode)
+
+
+        const Mode_columns = [
+          {
+            title: <FormattedMessage id="machine.mode.type" />,
+            dataIndex: 'type',
+            key: 'type',
+            render: (text, record) =>{
+              console.log('Mode Record:', record)
+              console.log(text);
+              if(lodashget(record,'issent') === 1) {
+                 return (
+                  //  <React.Fragment><span></span></React.Fragment>
+                  <div>
+                    <div style={{width: '25px', display: 'inline-block'}}>
+                      <img src={success} alt="" style={{width: '20px', height: '20px'}} />
+                    </div>
+                    <div style={{display: 'inline-block'}}>{`${text}`}</div>
+                  </div>
+                 )
+              }
+              return (
+                <div>
+                  <div style={{width: '25px', display: 'inline-block'}}>
+                  </div>
+                  <div style={{display: 'inline-block'}}>{text}</div>
+                </div>
+
+              )
+            }
+          }, {
+            title: <FormattedMessage id="machine.mode.body" />,
+            dataIndex: 'body',
+            key: 'body',
+          }, {
+            title: <FormattedMessage id="machine.mode.occurstime" />,
+            dataIndex: 'occurstime',
+            key: 'occurstime',
+            render: (text, record) =>{
+              console.log(text);
+              return moment(text).tz(this.state.timezone).format('YYYY-MM-DD HH:mm:ss');
+            }
+          }
+        ]
+
+        const customColumns = [
+        {
+          title: <FormattedMessage id="table.ModIn" />,
+          dataIndex: 'ModIn',
+          key: 'ModIn'
+        },
+        {
+          title: <FormattedMessage id="table.Concentration" />,
+          dataIndex: 'Concentration',
+          key: 'Concentration'
+        },
+        {
+          title: <FormattedMessage id="table.ModOut" />,
+          dataIndex: 'ModOut',
+          key: 'ModOut'
+        },
+        {
+          title: <FormattedMessage id="table.Waste" />,
+          dataIndex: 'Waste',
+          key: 'Waste'
+        },
+        {
+          title: <FormattedMessage id="table.ProductQualityAverage" />,
+          dataIndex: 'ProductQualityAverage',
+          key: 'ProductQualityAverage'
+        },
+        {
+          title: <FormattedMessage id="table.DailyVolume" />,
+          dataIndex: 'DailyVolume',
+          key: 'DailyVolume'
+        },
+        {
+          title: <FormattedMessage id="table.WasteVolumeDaily" />,
+          dataIndex: 'WasteVolumeDaily',
+          key: 'WasteVolumeDaily'
+        },
+        {
+          title: <FormattedMessage id="table.FeedVolumeDaily" />,
+          dataIndex: 'FeedVolumeDaily',
+          key: 'FeedVolumeDaily'
+        },
+        {
+          title: <FormattedMessage id="table.totalVol" />,
+          dataIndex: 'totalVol',
+          key: 'totalVol'
+        },
+        {
+          title: <FormattedMessage id="table.Pressure1" />,
+          dataIndex: 'Pressure1',
+          key: 'Pressure1'
+        },
+        {
+          title: <FormattedMessage id="table.Pressure2" />,
+          dataIndex: 'Pressure2',
+          key: 'Pressure2'
+        },
+        {
+          title: <FormattedMessage id="table.Pressure3" />,
+          dataIndex: 'Pressure3',
+          key: 'Pressure3'
+        },
+        {
+          title: <FormattedMessage id="table.Pressure4" />,
+          dataIndex: 'Pressure4',
+          key: 'Pressure4'
+        },
+        {
+          title: <FormattedMessage id="table.created_at" />,
+          dataIndex: 'updated_at',
+          key: 'updated_at',
+          render: (text, record) =>{
+            console.log(text);
+            return moment(text).tz(this.state.timezone).format('YYYY-MM-DD HH:mm:ss');
+          }
+        }
+        ]
+
+        const adminColumns = [{
+            title: <FormattedMessage id="table.systime" />,
+            dataIndex: 'systime',
+            key: 'systime'
+          },
+          {
+            title: <FormattedMessage id="table.currentstate" />,
+            dataIndex: 'currentstate',
+            key: 'currentstate'
+          },
+          {
+            title: <FormattedMessage id="table.ModIn" />,
+            dataIndex: 'ModIn',
+            key: 'ModIn'
+          },
+          {
+            title: <FormattedMessage id="table.Concentration" />,
+            dataIndex: 'Concentration',
+            key: 'Concentration'
+          },
+          {
+            title: <FormattedMessage id="table.ModOut" />,
+            dataIndex: 'ModOut',
+            key: 'ModOut'
+          },
+          {
+            title: <FormattedMessage id="table.Waste" />,
+            dataIndex: 'Waste',
+            key: 'Waste'
+          },
+          {
+            title: <FormattedMessage id="table.cutAbs" />,
+            dataIndex: 'cutAbs',
+            key: 'cutAbs'
+          },
+          {
+            title: <FormattedMessage id="table.cutPer" />,
+            dataIndex: 'cutPer',
+            key: 'cutPer'
+          },
+          {
+            title: <FormattedMessage id="table.ModCurrent" />,
+            dataIndex: 'ModCurrent',
+            key: 'ModCurrent'
+          },
+          {
+            title: <FormattedMessage id="table.ModVoltage" />,
+            dataIndex: 'ModVoltage',
+            key: 'ModVoltage'
+          },
+          {
+            title: <FormattedMessage id="table.solenoidCurrent" />,
+            dataIndex: 'solenoidCurrent',
+            key: 'solenoidCurrent'
+          },
+          {
+            title: <FormattedMessage id="table.ProductQualityAverage" />,
+            dataIndex: 'ProductQualityAverage',
+            key: 'ProductQualityAverage'
+          },
+          {
+            title: <FormattedMessage id="table.ONtime" />,
+            dataIndex: 'ONtime',
+            key: 'ONtime'
+          },
+          {
+            title: <FormattedMessage id="table.productDvol" />,
+            dataIndex: 'productDvol',
+            key: 'productDvol'
+          },
+          {
+            title: <FormattedMessage id="table.wasteDvol" />,
+            dataIndex: 'wasteDvol',
+            key: 'wasteDvol'
+          },
+          {
+            title: <FormattedMessage id="table.Yield" />,
+            dataIndex: 'Yield',
+            key: 'Yield'
+          },
+          {
+            title: <FormattedMessage id="table.DailyVolume" />,
+            dataIndex: 'DailyVolume',
+            key: 'DailyVolume'
+          },
+          {
+            title: <FormattedMessage id="table.WasteVolumeDaily" />,
+            dataIndex: 'WasteVolumeDaily',
+            key: 'WasteVolumeDaily'
+          },
+          {
+            title: <FormattedMessage id="table.FeedVolumeDaily" />,
+            dataIndex: 'FeedVolumeDaily',
+            key: 'FeedVolumeDaily'
+          },
+        {
+            title: <FormattedMessage id="table.totalVol" />,
+            dataIndex: 'totalVol',
+            key: 'totalVol'
+          },
+          {
+            title: <FormattedMessage id="table.p1" />,
+            dataIndex: 'p1',
+            key: 'p1'
+          },
+          {
+            title: <FormattedMessage id="table.p2" />,
+            dataIndex: 'p2',
+            key: 'p2'
+          },
+          {
+            title: <FormattedMessage id="table.Ieff" />,
+            dataIndex: 'Ieff',
+            key: 'Ieff'
+          },
+          {
+            title: <FormattedMessage id="table.Energy" />,
+            dataIndex: 'Energy',
+            key: 'Energy'
+          },
+          {
+            title: <FormattedMessage id="table.Pressure1" />,
+            dataIndex: 'Pressure1',
+            key: 'Pressure1'
+          },
+          {
+            title: <FormattedMessage id="table.Pressure2" />,
+            dataIndex: 'Pressure2',
+            key: 'Pressure2'
+          },
+          {
+            title: <FormattedMessage id="table.Pressure3" />,
+            dataIndex: 'Pressure3',
+            key: 'Pressure3'
+          },
+          {
+            title: <FormattedMessage id="table.Pressure4" />,
+            dataIndex: 'Pressure4',
+            key: 'Pressure4'
+          },
+          {
+            title: <FormattedMessage id="table.tmpt1" />,
+            dataIndex: 'tempt1',
+            key: 'tempt1'
+          },
+          {
+            title: <FormattedMessage id="table.tmpt2" />,
+            dataIndex: 'tempt2',
+            key: 'tempt2'
+          },
+          {
+            title: <FormattedMessage id="table.tmpt3" />,
+            dataIndex: 'tempt3',
+            key: 'tempt3'
+          },
+          {
+            title: <FormattedMessage id="table.tmpt4" />,
+            dataIndex: 'tempt4',
+            key: 'tempt4'
+          },
+          {
+            title: <FormattedMessage id="table.MODLife" />,
+            dataIndex: 'MODLife',
+            key: 'MODLife'
+          },
+          {
+            title: <FormattedMessage id="table.Pre_filter1" />,
+            dataIndex: 'Pre_filter1',
+            key: 'Pre_filter1'
+          },
+          {
+            title: <FormattedMessage id="table.Pre_filter2" />,
+            dataIndex: 'Pre_filter2',
+            key: 'Pre_filter2'
+          },
+          {
+            title: <FormattedMessage id="table.Pre_filter3" />,
+            dataIndex: 'Pre_filter3',
+            key: 'Pre_filter3'
+          },
+          {
+            title: <FormattedMessage id="table.Post_filter1" />,
+            dataIndex: 'Post_filter1',
+            key: 'Post_filter1'
+          },
+          {
+            title: <FormattedMessage id="table.Post_filter2" />,
+            dataIndex: 'Post_filter2',
+            key: 'Post_filter2'
+          },
+          {
+            title: <FormattedMessage id="table.Post_filter3" />,
+            dataIndex: 'Post_filter3',
+            key: 'Post_filter3'
+          },
+          {
+            title: <FormattedMessage id="table.MODLifePercent" />,
+            dataIndex: 'MODLifePercent',
+            key: 'MODLifePercent',
+          },
+          {
+            title: <FormattedMessage id="table.Pre_filter1_percent" />,
+            dataIndex: 'Pre_filter1_percent',
+            key: 'Pre_filter1_percent',
+          },
+          {
+            title: <FormattedMessage id="table.Pre_filter2_percent" />,
+            dataIndex: 'Pre_filter2_percent',
+            key: 'Pre_filter2_percent',
+          },
+          {
+            title: <FormattedMessage id="table.Pre_filter3_percent" />,
+            dataIndex: 'Pre_filter3_percent',
+            key: 'Pre_filter3_percent',
+          },
+          {
+            title: <FormattedMessage id="table.Pos_filter1_percent" />,
+            dataIndex: 'Pos_filter1_percent',
+            key: 'Pos_filter1_percent',
+          },
+          {
+            title: <FormattedMessage id="table.Pos_filter2_percent" />,
+            dataIndex: 'Pos_filter2_percent',
+            key: 'Pos_filter2_percent',
+          },
+          {
+            title: <FormattedMessage id="table.Pos_filter3_percent" />,
+            dataIndex: 'Pos_filter3_percent',
+            key: 'Pos_filter3_percent',
+          },
+          {
+            title: <FormattedMessage id="table.UV" />,
+            dataIndex: 'UV',
+            key: 'UV',
+          },
+          {
+            title: <FormattedMessage id="table.created_at" />,
+            dataIndex: 'updated_at',
+            key: 'updated_at',
+            render: (text, record) =>{
+              console.log(text);
+              return moment(text).tz(this.state.timezone).format('YYYY-MM-DD HH:mm:ss');
+            }
+          }
+        ]
         return (
             <GridContent>
                 <Card bordered={false} className="main-card">
@@ -910,7 +916,7 @@ class DataDetails extends React.PureComponent {
                     {/* <Col span={2}></Col> */}
                     <Col span={12} className="sub-title">
                         <div><h2>{ formatMessage({id: 'machine.mode'})}</h2><span className="right-Link" onClick={()=>{history.push(`/actions/${curdevice.deviceid}`)}}>Mode&gt;</span></div>
-                        <Table columns={Mode_columns} dataSource={this.props.dataMode} className="table-list" pagination={false} />
+                        <Table columns={Mode_columns} dataSource={dataMode} className="table-list" pagination={false} />
                     </Col>
                     <Col span={2}></Col>
                     <Col span={10} className="sub-title">
@@ -961,7 +967,7 @@ class DataDetails extends React.PureComponent {
                 </Row>
                 <Row style={{marginTop: 30, padding: '0 26px'}}>
                     <Col span={24} style={{margin: '0 auto'}}>
-                        <Table columns={is_admin ? adminColumns : customColumns} dataSource={this.props.data_spot} scroll={{x: true}} className="data-table-list" pagination={false} />
+                        <Table columns={is_admin ? adminColumns : customColumns} dataSource={data_spot} scroll={{x: true}} className="data-table-list" pagination={false} />
                     </Col>
                 </Row>
                 </Card>

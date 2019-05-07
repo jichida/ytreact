@@ -14,14 +14,14 @@ import {
 import {page_getcmdlist_request,page_getcmdlist_result} from '../../actions';
 const { RangePicker } = DatePicker;
 
-const data = [
-    {
-        key: 1,
-        type: 'message',
-        body: 'ModinUs: 353 , 303',
-        occurstime: '2018-05-05 3:21:00 PM'
-    },
-]
+// const data = [
+//     {
+//         key: 1,
+//         type: 'message',
+//         body: 'ModinUs: 353 , 303',
+//         occurstime: '2018-05-05 3:21:00 PM'
+//     },
+// ]
 
 const columns = [{
     title: <FormattedMessage id="machine.mode.type" />,

@@ -76,14 +76,12 @@ const devicedetail = createReducer({
       const data = payload;
       lodashmap(data, (item, index) => {
         const { created_at, deviceid, _id, updated_at, srvdata } = item
-        let createdTime = moment(created_at).format('YYYY-MM-DD HH:mm:ss')
-        let updatedTime = moment(updated_at).format('YYYY-MM-DD HH:mm:ss')
         data_spot.push({
           key: index,
           _id,
           deviceid,
-          created_at: createdTime,
-          updated_at: updatedTime,
+          created_at: created_at,
+          updated_at: updated_at,
           ...srvdata
         })
       });

@@ -315,14 +315,14 @@ const TopChart = injectIntl((props)=>{
 
     return (
       <React.Fragment>
-        <Row gutter={24} style={{marginTop: 30}}>
+        <Row gutter={24}>
           <Col span={24} style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginLeft: '40px'}}>
-            <div style={{color: '#03f241', fontWeight: 600, marginRight: '5px'}}>——</div>
-            <div style={{marginRight: '10px', fontSize: '12px'}}><FormattedMessage id="machine.data.flow" /></div>
-            <div style={{color: '#0379f2', fontWeight: 600, marginRight: '5px'}}>——</div>
-            <div style={{marginRight: '10px', fontSize: '12px'}}><FormattedMessage id="machine.data.life" /></div>
-            <div style={{color: '#f81929', fontWeight: 600, marginRight: '5px'}}>——</div>
-            <div style={{marginRight: '10px', fontSize: '12px'}}><FormattedMessage id="machine.data.warring" /></div>
+            <div style={{marginRight: '5px'}}><h1 style={{color: '#03f241', height: '34px'}}>—</h1></div>
+            <div style={{marginRight: '10px', fontSize: '12px', height: '20px'}}><FormattedMessage id="machine.data.flow" /></div>
+            <div style={{marginRight: '5px'}}><h1 style={{color: '#0379f2', height: '34px'}}>—</h1></div>
+            <div style={{marginRight: '10px', fontSize: '12px', height: '20px'}}><FormattedMessage id="machine.data.life" /></div>
+            <div style={{marginRight: '5px'}}><h1 style={{color: '#f81929', height: '34px'}}>—</h1></div>
+            <div style={{marginRight: '10px', fontSize: '12px', height: '20px'}}><FormattedMessage id="machine.data.warring" /></div>
           </Col>
         </Row>
         <Row gutter={24} style={{padding: '10px 26px'}}>
@@ -331,7 +331,7 @@ const TopChart = injectIntl((props)=>{
                   !!srvdata ? (
                      _.map(chartData, (item, index)=>{
                         return (
-                            <Chart {...item} key={index} />
+                            <Chart {...item} {...props} key={index} />
                         )
                     })
                     )
@@ -344,7 +344,7 @@ const TopChart = injectIntl((props)=>{
     )
 })
 
-const Chart = ({title, unit, data, flow, life, flowwarring, lifewarring})=>{
+const Chart = ({title, unit, data, flow, life, flowwarring, lifewarring, intl:{ formatMessage }})=>{
     return (
         <div className="chart">
           <div className="bottom">
@@ -365,8 +365,7 @@ const Chart = ({title, unit, data, flow, life, flowwarring, lifewarring})=>{
                   // strokeWidth={5}
                   strokeColor={lifewarring ? '#f81929' : '#0379f2'}
                   status={lifewarring?"exception":"active"}
-                  format={() => ''}
-                  // <React.Fragment><p className="data">{data}</p><p className="unit">{unit}</p></React.Fragment>
+                  format={() => <div className="circle-text"><div className="data">{data}</div><div className="unit">{formatMessage({id: 'machine.data.life'})}</div></div>}
             />
           </div>
           <p>{title}</p>
@@ -384,8 +383,8 @@ const SingleChart = ({title, unit, data, percent, warring})=>{
                 // strokeWidth={5}
                 strokeColor={warring ? '#f81929' : '#03f241'}
                 status={warring?"exception":"active"}
-                format={() => ''}
-                // <React.Fragment><p className="data">{data}</p><p className="unit">{unit}</p></React.Fragment>
+                format={() => <div className="circle-text"><p className="data">{data}</p><p className="unit">{unit}</p></div>}
+                
           />
         </div>
         <p>{title}</p>
@@ -906,7 +905,7 @@ class DataDetails extends React.PureComponent {
                 <Card bordered={false} className="main-card">
                 <Row style={{marginBottom: 30}} className="title">
                     <Col span={24}>
-                        <img src={sb_icon} alt="" /><span>{formatMessage({id: 'machine.datadetail'})}</span>
+                        <img src={sb_icon} alt="" /><span>{`${formatMessage({id: 'machine.datadetail'})} ID: ${curdevice.deviceid}`}</span>
                         <span className="right-Link" onClick={()=>{history.goBack()}}>&lt; {formatMessage({id: 'app.return'})}</span>
                     </Col>
                 </Row>

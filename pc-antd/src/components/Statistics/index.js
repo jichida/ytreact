@@ -148,16 +148,16 @@ class Statistics extends React.PureComponent {
     componentDidMount(){
       this.onClickQuery();
     }
-    onClickQuery = ()=>{
+    onClickQuery = (data = {
+        cycle:this.state.cycle,
+        type:this.state.type,
+        rangeDate:this.state.rangeDate
+    })=>{
       const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid');
       if(!!deviceid){
         this.props.dispatch(callthen(getdevicestat_request,getdevicestat_result,{
             deviceid,
-            data:{
-              cycle:this.state.cycle,
-              type:this.state.type,
-              rangeDate:this.state.rangeDate
-            }
+            data:data
           })).then((result) => {
             //实时数据，对应this.state.homedata
             // this.setState({homedata:result.homedata});
@@ -215,12 +215,17 @@ class Statistics extends React.PureComponent {
         this.setState({
             cycle: e.target.value,
         })
+        let { type, rangeDate } = this.state
+        this.onClickQuery({cycle: e.target.value, type, rangeDate})
+
     }
 
     onTypeChange = (e)=> {
         this.setState({
             type: e.target.value,
         })
+        let { cycle, rangeDate } = this.state
+        this.onClickQuery({cycle, type: e.target.value, rangeDate})
     }
 
     handleRangePick = (datas, datastrings) => {

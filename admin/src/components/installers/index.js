@@ -42,7 +42,8 @@ const InstallerCreate = (props) => {
            <SimpleForm redirect="list">
             <TextInput label="手机号"  source="username" />
             <TextInput label="真实姓名"  source="truename" />
-            <ReferenceInput label="经销商" source="distributorid" reference="distributor" allowEmpty>
+            <TextInput label="初始密码" source="password" validation={{ required: true }}/>
+            <ReferenceInput label="经销商" source="distributorid" reference="distributor" >
                 <SelectInput optionText="name" />
             </ReferenceInput>
            </SimpleForm>
@@ -54,7 +55,7 @@ const InstallerEdit = (props) => {
           <SimpleForm>
               <TextInput label="手机号"  source="username" />
               <TextInput label="真实姓名"  source="truename" />
-              <ReferenceInput label="经销商" source="distributorid" reference="distributor" allowEmpty>
+              <ReferenceInput label="经销商" source="distributorid" reference="distributor" >
                   <SelectInput optionText="name" />
               </ReferenceInput>
           </SimpleForm>
@@ -68,7 +69,7 @@ const InstallerList = (props) => (//
         <Datagrid>
           <TextField source="username"  label="登录名"/>
           <TextField label="真实姓名"  source="truename"/>
-          <ReferenceField label="经销商" source="distributorid" reference="distributor" allowEmpty>
+          <ReferenceField label="经销商" source="distributorid" reference="distributor">
               <TextField source="name" />
           </ReferenceField>
         <EditButton />

@@ -1,5 +1,6 @@
 import React from 'react';
 import { List } from 'react-admin';
+import _ from 'lodash';
 // import { CardActions } from '@material-ui/Card';
 // import FlatButton from '@material-ui/FlatButton';
 //import NavigationRefresh from '@material-ui/svg-icons/navigation/refresh';
@@ -73,15 +74,24 @@ const AddressconstEdit = (props) => {
 
 };
 
+const EditBtnif = (props)=>{
+  const {record} = props;
+  return _.get(record,'id',false) !== "5c11e0d340dc7d07eacf33a6" ?<EditButton {...props}/>:null;
+}
+
+const rowStyle = (record, index) => ({
+    backgroundColor: _.get(record,'id',false) === "5c11e0d340dc7d07eacf33a6" ? '#efe' : 'white',
+});
+
 
 const AddressconstList = (props) => (//
      <List {...props} >
-       <Datagrid>
+       <Datagrid bodyOptions={{ showRowHover: true }} rowStyle={rowStyle}>
        <TextField label="名字" source="name" />
        <ReferenceField label="上级" source="parent_id" reference="addressconst" addLabel={false} allowEmpty>
           <TextField source="name" />
        </ReferenceField>
-       <EditButton />
+       <EditBtnif />
        </Datagrid>
     </List>
 );

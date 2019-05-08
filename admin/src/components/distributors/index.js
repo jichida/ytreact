@@ -35,9 +35,12 @@ const DistributorCreate = (props) => {
            <SimpleForm redirect="list">
              <TextInput label="登录名" source="username" validation={{ required: true }}/>
              <TextInput label="名字" source="name" validation={{ required: true }}/>
+             <TextInput label="初始密码" source="password" validation={{ required: true }}/>
+             <TextInput label="手机" source="phone" validation={{ required: true }}/>
+             <TextInput label="email" source="email" validation={{ required: true }}/>
              <TextInput label="简称" source="logname" validation={{ required: true }}/>
-             <ReferenceInput label="所属区域" source="addresslevel1" reference="addressconst" allowEmpty
-               filter={{ parent_id: "5c11e0d340dc7d07eacf33a6" }}>
+             <ReferenceInput label="所属区域" source="addresslevel1" reference="addressconst"
+               filter={{ parent_id: "5c11e0d340dc7d07eacf33a6" }} validation={{ required: true }}>
                  <SelectInput optionText="name" />
              </ReferenceInput>
 
@@ -57,10 +60,12 @@ const DistributorEdit = (props) => {
       return (<Edit {...props}>
           <SimpleForm>
             <TextInput label="登录名" source="username" validation={{ required: true }}/>
+            <TextInput label="手机" source="phone" validation={{ required: true }}/>
+            <TextInput label="email" source="email" validation={{ required: true }}/>
             <TextInput label="名字" source="name" validation={{ required: true }}/>
             <TextInput label="简称" source="logname" validation={{ required: true }}/>
-            <ReferenceInput label="所属区域" source="addresslevel1" reference="addressconst" allowEmpty
-                filter={{ parent_id: "5c11e0d340dc7d07eacf33a6" }}>
+            <ReferenceInput label="所属区域" source="addresslevel1" reference="addressconst"
+                filter={{ parent_id: "5c11e0d340dc7d07eacf33a6" }} validation={{ required: true }}>
                   <SelectInput optionText="name" />
               </ReferenceInput>
 

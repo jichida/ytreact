@@ -429,18 +429,17 @@ export function* wififlow() {
 
         if(payload.type === 'cmddata'){
           const result = payloaddata;
-          console.log(result);
-        if(result.cmd === 'data'){
+          if(result.cmd === 'data'){
             //get result.data
             yield put(wifi_getdata(result.data));
             // yield call(socket_send_promise,'$dataok%');
           }
-          else if(result.cmd === 'ok'){
-            yield put(wifi_sendcmd_result({}));
-          }
-
         }//if(payload.type === 'cmddata'){
-
+        else if(payload.type === 'cmdecho'){
+          //{"deviceid":"GHCA0488","type":"cmdecho","payload":"$sysprodtrigger 3ok%"}
+          console.log(payloaddata);
+          yield put(wifi_sendcmd_result({data:payloaddata}));
+        }
       }
       catch(e){
         console.log(e);
@@ -608,34 +607,59 @@ export function* wififlow() {
     });
     yield takeLatest(`${wifi_sendcmd_request}`, function*(action) {
       try{
-          if(config.softmode === 'app'){
-              const payload = action.payload;
-              yield put(app_sendcmd_request(payload));
-              yield put(set_weui({
-                toast:{
-                text:`【${payload.cmdstring}】开始命令发送`,
-                show: true,
-                type:'success'
-              }}));
-              const delaytime = 5000;//
+            const {payload} = action;
+            console.log(payload);
+            if(config.softmode === 'app'){
+                yield put(app_sendcmd_request(payload));
+            }
+            else{
+              yield call(socket_send_promise,payload.cmd);
+            }
+            yield put(set_weui({
+              toast:{
+              text:`【${payload.cmdstring}】开始命令发送`,
+              show: true,
+              type:'success'
+            }}));
+            const delaytime = 5000;//
+            const raceresult = yield race({
+               wifiresult: take(`${wifi_sendcmd_result}`),
+               timeout: call(delay, delaytime)
+            });
+
+            const { wifiresult,timeout } = raceresult;
+            let istimeout = !!timeout;
+            if(!istimeout){
+              const recvbuf = `${payload.cmd}`;
+              let objstring = '';
+              let expectstring = '';
+              const istart = recvbuf.indexOf('$',0);
+              if(istart >= 0){
+                const iend = recvbuf.indexOf('%',istart);
+                if(iend >= 0){
+                  objstring = recvbuf.substr(istart,iend - istart);
+                  expectstring = `${objstring}ok%`;
+                }
+              }
+              if(expectstring !== `${wifiresult.payload.data}`){
+                istimeout = true;//
+              }
+            }
+            if(istimeout){
+              //等3秒超时，重发一次
+              if(config.softmode === 'app'){
+                  yield put(app_sendcmd_request(payload));
+              }
+              else{
+                yield call(socket_send_promise,payload.cmd);
+              }
               const raceresult = yield race({
-                 devicecmdresult: take(`${push_devicecmddata}`),
+                 wifiresult: take(`${wifi_sendcmd_result}`),
                  timeout: call(delay, delaytime)
               });
-
-              const { devicecmdresult,timeout } = raceresult;
-              // debugger;
-              // payload:
-              //   cmd: "echo"
-              //   data: "$sysreset 1ok%"
-              //   deviceid: "GHCA0488"
-
-              let istimeout = !!timeout;
-              console.log(`是否超时1?:${istimeout}`);
+              const { wifiresult,timeout } = raceresult;
+              istimeout = !!timeout;
               if(!istimeout){
-
-                console.log(devicecmdresult);
-
                 const recvbuf = `${payload.cmd}`;
                 let objstring = '';
                 let expectstring = '';
@@ -647,155 +671,36 @@ export function* wififlow() {
                     expectstring = `${objstring}ok%`;
                   }
                 }
-
-                const expdata = lodash_get(devicecmdresult,'payload.payload.data','');
-                console.log(`recvbuf:${recvbuf},expectstring:${expectstring}|${expdata}`);
-
-                if(expectstring !== `${expdata}` && recvbuf !== '$data%'){
+                if(expectstring !== `${wifiresult.payload.data}`){
                   istimeout = true;//
                 }
               }
               if(istimeout){
-                console.log(`是否超时2?:${istimeout}`);
-                //等3秒超时，重发一次
-                yield put(app_sendcmd_request(payload));
-                const raceresult = yield race({
-                   devicecmdresult: take(`${push_devicecmddata}`),
-                   timeout: call(delay, delaytime)
-                });
-                const { devicecmdresult,timeout } = raceresult;
-                istimeout = !!timeout;
-                if(!istimeout){
-                  const recvbuf = `${payload.cmd}`;
-                  let objstring = '';
-                  let expectstring = '';
-                  const istart = recvbuf.indexOf('$',0);
-                  if(istart >= 0){
-                    const iend = recvbuf.indexOf('%',istart);
-                    if(iend >= 0){
-                      objstring = recvbuf.substr(istart,iend - istart);
-                      expectstring = `${objstring}ok%`;
-                    }
-                  }
-
-                  const expdata = lodash_get(devicecmdresult,'payload.payload.data','');
-                  console.log(`recvbuf:${recvbuf},expectstring:${expectstring}|${expdata}`);
-
-                  if(expectstring !== `${expdata}` && recvbuf !== '$data%'){
-                    istimeout = true;//
-                  }
-                }
-                if(istimeout){
-                  yield put(set_weui({
-                    toast:{
-                    text:`发送给硬件【${payload.cmdstring}】命令返回超时,${delaytime}毫秒`,
-                    show: true,
-                    type:'offline'
-                  }}));
-                }
-                else{
-                  yield put(set_weui({
-                    toast:{
-                    text:`发送给硬件【${payload.cmdstring}】命令成功(重试后)`,
-                    show: true,
-                    type:'success'
-                  }}));
-                }
+                yield put(set_weui({
+                  toast:{
+                      text:`发送给硬件【${payload.cmdstring}】命令失败`,
+                  show: true,
+                      type:'offline'
+                }}));
               }
               else{
                 yield put(set_weui({
                   toast:{
-                  text:`发送给硬件【${payload.cmdstring}】命令成功`,
+                      text:`发送给硬件【${payload.cmdstring}】命令成功`,
                   show: true,
                   type:'success'
                 }}));
               }
-          }
-          else{
-                const {payload} = action;
-                console.log(payload);
-                yield call(socket_send_promise,payload.cmd);
-                yield put(set_weui({
-                  toast:{
-                  text:`【${payload.cmdstring}】开始命令发送`,
-                  show: true,
-                  type:'success'
-                }}));
-                const delaytime = 5000;//
-                const raceresult = yield race({
-                   wifiresult: take(`${wifi_sendcmd_result}`),
-                   timeout: call(delay, delaytime)
-                });
+            }
+            else{
+              yield put(set_weui({
+                toast:{
+                text:`发送给硬件【${payload.cmdstring}】命令成功`,
+                show: true,
+                type:'success'
+              }}));
+            }
 
-                const { wifiresult,timeout } = raceresult;
-                let istimeout = !!timeout;
-                if(!istimeout){
-                  const recvbuf = `${payload.cmd}`;
-                  let objstring = '';
-                  let expectstring = '';
-                  const istart = recvbuf.indexOf('$',0);
-                  if(istart >= 0){
-                    const iend = recvbuf.indexOf('%',istart);
-                    if(iend >= 0){
-                      objstring = recvbuf.substr(istart,iend - istart);
-                      expectstring = `${objstring}ok%`;
-                    }
-                  }
-                      if(expectstring !== `${wifiresult.payload.data}`){
-                    istimeout = true;//
-                  }
-                }
-                if(istimeout){
-                  //等3秒超时，重发一次
-                  yield call(socket_send_promise,payload.cmd);
-                  const raceresult = yield race({
-                     wifiresult: take(`${wifi_sendcmd_result}`),
-                     timeout: call(delay, delaytime)
-                  });
-                  const { wifiresult,timeout } = raceresult;
-                  istimeout = !!timeout;
-                  if(!istimeout){
-                    const recvbuf = `${payload.cmd}`;
-                    let objstring = '';
-                    let expectstring = '';
-                    const istart = recvbuf.indexOf('$',0);
-                    if(istart >= 0){
-                      const iend = recvbuf.indexOf('%',istart);
-                      if(iend >= 0){
-                        objstring = recvbuf.substr(istart,iend - istart);
-                        expectstring = `${objstring}ok%`;
-                      }
-                    }
-                    if(expectstring !== `${wifiresult.payload.data}`){
-                      istimeout = true;//
-                    }
-                  }
-                  if(istimeout){
-                    yield put(set_weui({
-                      toast:{
-                          text:`发送给硬件【${payload.cmdstring}】命令失败`,
-                      show: true,
-                          type:'offline'
-                    }}));
-                  }
-                  else{
-                    yield put(set_weui({
-                      toast:{
-                          text:`发送给硬件【${payload.cmdstring}】命令成功`,
-                      show: true,
-                      type:'success'
-                    }}));
-                  }
-                }
-                else{
-                  yield put(set_weui({
-                    toast:{
-                    text:`发送给硬件【${payload.cmdstring}】命令成功`,
-                    show: true,
-                    type:'success'
-                  }}));
-                }
-        }
       }
       catch(e){
         console.log(e);

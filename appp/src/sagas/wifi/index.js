@@ -280,7 +280,7 @@ const socket_recvdata_promise = (data)=>{
         }
         else{
           reject('数据有问题');
-        }
+      }
 
   });
 }
@@ -429,18 +429,17 @@ export function* wififlow() {
 
         if(payload.type === 'cmddata'){
           const result = payloaddata;
-        console.log(result);
-        if(result.cmd === 'data'){
-          //get result.data
-          yield put(wifi_getdata(result.data));
-          // yield call(socket_send_promise,'$dataok%');
-        }
-        else if(result.cmd === 'ok'){
-          yield put(wifi_sendcmd_result({}));
-        }
-
+          if(result.cmd === 'data'){
+            //get result.data
+            yield put(wifi_getdata(result.data));
+            // yield call(socket_send_promise,'$dataok%');
+          }
         }//if(payload.type === 'cmddata'){
-
+        else if(payload.type === 'cmdecho'){
+          //{"deviceid":"GHCA0488","type":"cmdecho","payload":"$sysprodtrigger 3ok%"}
+          console.log(payloaddata);
+          yield put(wifi_sendcmd_result({data:payloaddata}));
+        }
       }
       catch(e){
         console.log(e);
@@ -505,10 +504,10 @@ export function* wififlow() {
           return;
         }
         //for test--->
-      // yield put(socket_recvdata({code:0,data:`$50,0,300,50000,125,5000,720,50,30,10,0,10,120,0,90,50,10,30,10,0,60,0,0,0,91,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,300,0,7,22,2,7,600,300,20,%`}));
+        // yield put(socket_recvdata({code:0,data:`$50,0,300,50000,125,5000,720,50,30,10,0,10,120,0,90,50,10,30,10,0,60,0,0,0,91,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,300,0,7,22,2,7,600,300,20,%`}));
          // yield put(socket_recvdata({code:0,data:`GET /units/5be29eccc80908000a01c451/datapoints/post?d[a]=954&d[b]=6&d[c]=0&d[d]=0&d[e]=0&d[f]=0&d[g]=0&d[h]=0&d[i]=31&d[j]=122&d[k]=48&d[l]=0&d[m]=0&d[n]=0&d[o]=720&d[p]=0&d[q]=0&d[r]=0&d[s]=0&d[t]=0`}));
          // yield put(socket_recvdata({code:0,data:`$50,0,300,50000,125,5000,720,50,30,10,0,10,120,0,90,50,10,30,10,0,60,0,0,0,91,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,300,0,7,22,2,7,600,300,20,%`}));
-      //开始连接socket,进入下一个页面
+        //开始连接socket,进入下一个页面
         yield call(socket_connnect_promise,{
           host:config.sockethost,
           port:config.socketport
@@ -537,7 +536,7 @@ export function* wififlow() {
         else{
           //data { socketStatus:  -1 0 1 2 }
           if(lodash_get(raceresult,'socketestatusresult.payload.data.socketStatus',0) === 1){
-            yield put(push('/devices'));
+        yield put(push('/devices'));
           }
           else{
             yield put(set_weui({
@@ -608,34 +607,59 @@ export function* wififlow() {
     });
     yield takeLatest(`${wifi_sendcmd_request}`, function*(action) {
       try{
+            const {payload} = action;
+            console.log(payload);
+            if(config.softmode === 'app'){
+                yield put(app_sendcmd_request(payload));
+            }
+            else{
+              yield call(socket_send_promise,payload.cmd);
+            }
+            yield put(set_weui({
+              toast:{
+              text:`【${payload.cmdstring}】开始命令发送`,
+              show: true,
+              type:'success'
+            }}));
+            const delaytime = 5000;//
+            const raceresult = yield race({
+               wifiresult: take(`${wifi_sendcmd_result}`),
+               timeout: call(delay, delaytime)
+            });
+
+            const { wifiresult,timeout } = raceresult;
+            let istimeout = !!timeout;
+            if(!istimeout){
+              const recvbuf = `${payload.cmd}`;
+              let objstring = '';
+              let expectstring = '';
+              const istart = recvbuf.indexOf('$',0);
+              if(istart >= 0){
+                const iend = recvbuf.indexOf('%',istart);
+                if(iend >= 0){
+                  objstring = recvbuf.substr(istart,iend - istart);
+                  expectstring = `${objstring}ok%`;
+                }
+              }
+              if(expectstring !== `${wifiresult.payload.data}`){
+                istimeout = true;//
+              }
+            }
+            if(istimeout){
+              //等3秒超时，重发一次
               if(config.softmode === 'app'){
-              const payload = action.payload;
-              yield put(app_sendcmd_request(payload));
-              yield put(set_weui({
-                toast:{
-                text:`【${payload.cmdstring}】开始命令发送`,
-                show: true,
-                type:'success'
-              }}));
-              const delaytime = 5000;//
+                  yield put(app_sendcmd_request(payload));
+              }
+              else{
+                yield call(socket_send_promise,payload.cmd);
+              }
               const raceresult = yield race({
-                 devicecmdresult: take(`${push_devicecmddata}`),
+                 wifiresult: take(`${wifi_sendcmd_result}`),
                  timeout: call(delay, delaytime)
               });
-
-              const { devicecmdresult,timeout } = raceresult;
-              // debugger;
-              // payload:
-              //   cmd: "echo"
-              //   data: "$sysreset 1ok%"
-              //   deviceid: "GHCA0488"
-
-              let istimeout = !!timeout;
-              console.log(`是否超时1?:${istimeout}`);
+              const { wifiresult,timeout } = raceresult;
+              istimeout = !!timeout;
               if(!istimeout){
-
-                console.log(devicecmdresult);
-
                 const recvbuf = `${payload.cmd}`;
                 let objstring = '';
                 let expectstring = '';
@@ -647,207 +671,88 @@ export function* wififlow() {
                     expectstring = `${objstring}ok%`;
                   }
                 }
-
-                const expdata = lodash_get(devicecmdresult,'payload.payload.data','');
-                console.log(`recvbuf:${recvbuf},expectstring:${expectstring}|${expdata}`);
-
-                if(expectstring !== `${expdata}` && recvbuf !== '$data%'){
+                if(expectstring !== `${wifiresult.payload.data}`){
                   istimeout = true;//
                 }
               }
               if(istimeout){
-                console.log(`是否超时2?:${istimeout}`);
-                //等3秒超时，重发一次
-                yield put(app_sendcmd_request(payload));
-                const raceresult = yield race({
-                   devicecmdresult: take(`${push_devicecmddata}`),
-                   timeout: call(delay, delaytime)
-                });
-                const { devicecmdresult,timeout } = raceresult;
-                istimeout = !!timeout;
-                if(!istimeout){
-                  const recvbuf = `${payload.cmd}`;
-                  let objstring = '';
-                  let expectstring = '';
-                  const istart = recvbuf.indexOf('$',0);
-                  if(istart >= 0){
-                    const iend = recvbuf.indexOf('%',istart);
-                    if(iend >= 0){
-                      objstring = recvbuf.substr(istart,iend - istart);
-                      expectstring = `${objstring}ok%`;
-                    }
-                  }
-
-                  const expdata = lodash_get(devicecmdresult,'payload.payload.data','');
-                  console.log(`recvbuf:${recvbuf},expectstring:${expectstring}|${expdata}`);
-
-                  if(expectstring !== `${expdata}` && recvbuf !== '$data%'){
-                    istimeout = true;//
-                  }
-                }
-                if(istimeout){
-                  yield put(set_weui({
-                    toast:{
-                    text:`发送给硬件【${payload.cmdstring}】命令返回超时,${delaytime}毫秒`,
-                    show: true,
-                    type:'offline'
-                  }}));
-                }
-                else{
-                  yield put(set_weui({
-                    toast:{
-                    text:`发送给硬件【${payload.cmdstring}】命令成功(重试后)`,
-                    show: true,
-                    type:'success'
-                  }}));
-                }
+                yield put(set_weui({
+                  toast:{
+                      text:`发送给硬件【${payload.cmdstring}】命令失败`,
+                  show: true,
+                      type:'offline'
+                }}));
               }
               else{
                 yield put(set_weui({
                   toast:{
-                  text:`发送给硬件【${payload.cmdstring}】命令成功`,
+                      text:`发送给硬件【${payload.cmdstring}】命令成功`,
                   show: true,
                   type:'success'
                 }}));
               }
-              }
-              else{
-                    const {payload} = action;
-                    console.log(payload);
-                    yield call(socket_send_promise,payload.cmd);
-                    yield put(set_weui({
-                      toast:{
-                      text:`【${payload.cmdstring}】开始命令发送`,
-                      show: true,
-                      type:'success'
-                    }}));
-                    const delaytime = 5000;//
-                    const raceresult = yield race({
-                       wifiresult: take(`${wifi_sendcmd_result}`),
-                       timeout: call(delay, delaytime)
-                    });
+            }
+            else{
+              yield put(set_weui({
+                toast:{
+                text:`发送给硬件【${payload.cmdstring}】命令成功`,
+                show: true,
+                type:'success'
+              }}));
+            }
 
-                    const { wifiresult,timeout } = raceresult;
-                    let istimeout = !!timeout;
-                    if(!istimeout){
-                      const recvbuf = `${payload.cmd}`;
-                      let objstring = '';
-                      let expectstring = '';
-                      const istart = recvbuf.indexOf('$',0);
-                      if(istart >= 0){
-                        const iend = recvbuf.indexOf('%',istart);
-                        if(iend >= 0){
-                          objstring = recvbuf.substr(istart,iend - istart);
-                          expectstring = `${objstring}ok%`;
-                        }
-                      }
-                      if(expectstring !== `${wifiresult.payload.data}`){
-                        istimeout = true;//
-                      }
-                    }
-                    if(istimeout){
-                      //等3秒超时，重发一次
-                      yield call(socket_send_promise,payload.cmd);
-                      const raceresult = yield race({
-                         wifiresult: take(`${wifi_sendcmd_result}`),
-                         timeout: call(delay, delaytime)
-                      });
-                      const { wifiresult,timeout } = raceresult;
-                      istimeout = !!timeout;
-                      if(!istimeout){
-                        const recvbuf = `${payload.cmd}`;
-                        let objstring = '';
-                        let expectstring = '';
-                        const istart = recvbuf.indexOf('$',0);
-                        if(istart >= 0){
-                          const iend = recvbuf.indexOf('%',istart);
-                          if(iend >= 0){
-                            objstring = recvbuf.substr(istart,iend - istart);
-                            expectstring = `${objstring}ok%`;
-                          }
-                        }
-                        if(expectstring !== `${wifiresult.payload.data}`){
-                          istimeout = true;//
-                        }
-                      }
-                      if(istimeout){
-                        yield put(set_weui({
-                          toast:{
-                          text:`发送给硬件【${payload.cmdstring}】命令失败`,
-                          show: true,
-                          type:'offline'
-                        }}));
-                      }
-                      else{
-                        yield put(set_weui({
-                          toast:{
-                          text:`发送给硬件【${payload.cmdstring}】命令成功`,
-                          show: true,
-                          type:'success'
-                        }}));
-                      }
-                    }
-                    else{
-                      yield put(set_weui({
-                        toast:{
-                        text:`发送给硬件【${payload.cmdstring}】命令成功`,
-                        show: true,
-                        type:'success'
-                      }}));
-                    }
-              }
-        }
-        catch(e){
-          console.log(e);
-        }
+      }
+      catch(e){
+        console.log(e);
+      }
 
-      });
+    });
 
-      yield takeLatest(`${wifi_getssidlist_request}`, function*(action) {
-        try{
-          let {payload:result} = action;
+    yield takeLatest(`${wifi_getssidlist_request}`, function*(action) {
+      try{
+        let {payload:result} = action;
           const delaytime = 15000;
-          yield put(set_weui({
-            toast:{
-              type:'loading',
-              text:'wifi列表获取中,请稍后...',
-              value:'show',
-            }
-          }))
-          console.log(`wifi_getssidlist_request:${JSON.stringify(result)}`);
-          const raceresult = yield race({
-             wifiresult: call(getwifilist_promise),
-             timeout: call(delay, delaytime)
-          });
-          yield put(set_weui({
-            toast:{
-              type:'loading',
-              value:'hide',
-            }
-          }))
-          // yield put(set_weui({
-          //   toast:{
-          //   text:`${JSON.stringify(raceresult)}`,
-          //   show: true,
-          //   type:'success'
-          // }}));
-          const { wifiresult, timeout } = raceresult;
-          if(!!timeout){
-            yield put(common_err({type:'wifi_getssidlist',errmsg:`获取wifi信息超时,${delaytime}毫秒`}));
+        yield put(set_weui({
+          toast:{
+            type:'loading',
+            text:'wifi列表获取中,请稍后...',
+            value:'show',
           }
-          else{
+        }))
+        console.log(`wifi_getssidlist_request:${JSON.stringify(result)}`);
+        const raceresult = yield race({
+           wifiresult: call(getwifilist_promise),
+           timeout: call(delay, delaytime)
+        });
+        yield put(set_weui({
+          toast:{
+            type:'loading',
+            value:'hide',
+          }
+        }))
+        // yield put(set_weui({
+        //   toast:{
+        //   text:`${JSON.stringify(raceresult)}`,
+        //   show: true,
+        //   type:'success'
+        // }}));
+        const { wifiresult, timeout } = raceresult;
+        if(!!timeout){
+          yield put(common_err({type:'wifi_getssidlist',errmsg:`获取wifi信息超时,${delaytime}毫秒`}));
+        }
+        else{
             if(wifiresult.code == 0){
-              console.log(wifiresult.data);
-              yield put(wifi_getssidlist_result(wifiresult.data));
-            }
+            console.log(wifiresult.data);
+            yield put(wifi_getssidlist_result(wifiresult.data));
           }
+        }
 
 
-        }
-        catch(e){
-          console.log(e);
-        }
-      });
+      }
+      catch(e){
+        console.log(e);
+      }
+    });
 
     yield takeLatest(`${wifi_setcurwifi_request}`, function*(action) {
       try{
@@ -863,8 +768,8 @@ export function* wififlow() {
         }
         else{
           yield put(wifi_setcurwifi_result(wifiresult.payload));
-          //跳转到下一个页面
-          yield put(push('/wifisucess'));
+        //跳转到下一个页面
+        yield put(push('/wifisucess'));
           // yield put(push('/wifisetting'));
           yield call(socket_connnect_promise,{});
         }
@@ -877,18 +782,18 @@ export function* wififlow() {
 
     if(config.softmode === 'appp'){
       //仅适用 专业版
-    yield fork(function* (){
-      const delaytime = 10000;
-      yield call(delay,2000);
-      while(true){
-          const diffmin = moment().diff(moment(lastresponsemoment),'seconds');
-          if(diffmin < 10){
-            //10秒钟内有回复,则不要重连了
+      yield fork(function* (){
+        const delaytime = 10000;
+        yield call(delay,2000);
+        while(true){
+            const diffmin = moment().diff(moment(lastresponsemoment),'seconds');
+            if(diffmin < 10){
+              //10秒钟内有回复,则不要重连了
             console.log(`--->10s内有回应,不用重连了`);
             yield put(settcp_connected(true));
-            yield call(delay,delaytime);
-            continue;
-          };
+              yield call(delay,delaytime);
+              continue;
+            };
 
           // const internet_connected = yield select((state)=>{
           //   return state.app.issocketconnected;
@@ -906,35 +811,43 @@ export function* wififlow() {
           //   console.log(`--->linkmode切换为directmode`)
           // }
 
-          if(linkmode === 'directmode'){
-            const wifidirectmodesocketstatus = yield select((state)=>{
-              return state.app.wifidirectmodesocketstatus;
-            });
-            if(wifidirectmodesocketstatus === 1 || wifidirectmodesocketstatus === 0){
-              yield put(settcp_connected(true));
-              //尝试发送一次命令
-              let trycount = 0;
-              while(trycount < 5){
-                console.log(`--->尝试第${trycount+1}次发送一次数据`)
-                yield call(socket_send_promise,`$ping%`);
-                const delaytime = 5000;//
-                const raceresult = yield race({
-                   wifiresult: take(`${wifi_sendcmd_result_ping}`),
-                   timeout: call(delay, delaytime)
-                });
-                if(!!raceresult.timeout){
-                  //超时了!
-                  trycount++;
-                  continue;
-                }
+            if(linkmode === 'directmode'){
+              const wifidirectmodesocketstatus = yield select((state)=>{
+                return state.app.wifidirectmodesocketstatus;
+              });
+              if(wifidirectmodesocketstatus === 1 || wifidirectmodesocketstatus === 0){
                 yield put(settcp_connected(true));
-                console.log(`--->数据有返回,退出`)
-                break;
+                //尝试发送一次命令
+                let trycount = 0;
+                while(trycount < 5){
+                  console.log(`--->尝试第${trycount+1}次发送一次数据`)
+                  yield call(socket_send_promise,`$ping%`);
+                  const delaytime = 5000;//
+                  const raceresult = yield race({
+                     wifiresult: take(`${wifi_sendcmd_result_ping}`),
+                     timeout: call(delay, delaytime)
+                  });
+                  if(!!raceresult.timeout){
+                    //超时了!
+                    trycount++;
+                    continue;
+                  }
+                  yield put(settcp_connected(true));
+                  console.log(`--->数据有返回,退出`)
+                  break;
+                }
+                if(trycount === 5){
+                  console.log(`--->重试到底了,开始重连`);
+                  yield put(settcp_connected(false));
+                  //开始连接socket,进入下一个页面
+                  yield call(socket_connnect_promise,{
+                    host:config.sockethost,
+                    port:config.socketport
+                  });
+                }
               }
-              if(trycount === 5){
-                console.log(`--->重试到底了,开始重连`);
+              else{
                 yield put(settcp_connected(false));
-                //开始连接socket,进入下一个页面
                 yield call(socket_connnect_promise,{
                   host:config.sockethost,
                   port:config.socketport
@@ -943,18 +856,10 @@ export function* wififlow() {
             }
             else{
               yield put(settcp_connected(false));
-              yield call(socket_connnect_promise,{
-                host:config.sockethost,
-                port:config.socketport
-              });
             }
-          }
-          else{
-            yield put(settcp_connected(false));
-          }
-          yield call(delay,delaytime);
-      }
-    })
+            yield call(delay,delaytime);
+        }
+      })
     }
 
 

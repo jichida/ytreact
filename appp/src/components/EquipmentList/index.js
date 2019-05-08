@@ -8,6 +8,7 @@ import moment from 'moment'
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import {common_err,setuserdevice_result,ui_setuserdevice_request} from '../../actions';
+import { prev0Options, prev1Options, prev2Options, post0Options, post1Options } from './config'
 import './index.less';
 
 const Item = List.Item;
@@ -75,8 +76,6 @@ const materials = [
     }
 ]
 
-
-
 const others = [
     {
         label: 'XXX型',
@@ -88,24 +87,25 @@ const others = [
     }
 ]
 
-const prevFilter = [
-    {
-        label: <FormattedMessage key={0} id="form.equip.prevfilter1" defaultMessage="前置滤镜1" />,
-        value:'prev0',
-    },
-    {
-        label: <FormattedMessage key={1} id="form.equip.prevfilter2" defaultMessage="前置滤镜2" />,
-        value:'prev1',
-    },
-    {
-        label: <FormattedMessage key={2} id="form.equip.prevfilter3" defaultMessage="前置滤镜3" />,
-        value:'prev2',
-    },
-    {
-        label: <FormattedMessage key={3} id="form.equip.nonefilter" defaultMessage="无" />,
-        value:'',
-    },
-]
+
+// const prevFilter = [
+//     {
+//         label: <FormattedMessage key={0} id="form.equip.prevfilter1" defaultMessage="前置滤镜1" />,
+//         value:'prev0',
+//     },
+//     {
+//         label: <FormattedMessage key={1} id="form.equip.prevfilter2" defaultMessage="前置滤镜2" />,
+//         value:'prev1',
+//     },
+//     {
+//         label: <FormattedMessage key={2} id="form.equip.prevfilter3" defaultMessage="前置滤镜3" />,
+//         value:'prev2',
+//     },
+//     {
+//         label: <FormattedMessage key={3} id="form.equip.nonefilter" defaultMessage="无" />,
+//         value:'',
+//     },
+// ]
 
 const FilterPer = {
     prev0: <FormattedMessage id="form.equip.prevfilter1" defaultMessage="前置滤镜1" />,
@@ -114,27 +114,28 @@ const FilterPer = {
     post0: <FormattedMessage id="form.equip.postfilter1" defaultMessage="前置滤镜1" />,
     post1: <FormattedMessage id="form.equip.postfilter2" defaultMessage="前置滤镜2" />,
     post2: <FormattedMessage id="form.equip.postfilter3" defaultMessage="前置滤镜3" />,
-    none: <FormattedMessage id="form.equip.nonefilter" defaultMessage="无" />
+    none: <FormattedMessage id="form.equip.nonefilter" defaultMessage="无" />,
+    select: <FormattedMessage id="filter.select" defaultMessage="选择滤芯" />
 }
 
-const postFilter = [
-    {
-        label: <FormattedMessage key={0} id="form.equip.postfilter1" defaultMessage="前置滤镜1" />,
-        value:'post0',
-    },
-    {
-        label: <FormattedMessage key={1} id="form.equip.postfilter2" defaultMessage="前置滤镜2" />,
-        value:'post1',
-    },
-    {
-        label: <FormattedMessage key={2} id="form.equip.postfilter3" defaultMessage="前置滤镜3" />,
-        value:'post2',
-    },
-    {
-        label: <FormattedMessage key={3} id="form.equip.nonefilter" defaultMessage="无" />,
-        value:'',
-    },
-]
+// const postFilter = [
+//     {
+//         label: <FormattedMessage key={0} id="form.equip.postfilter1" defaultMessage="前置滤镜1" />,
+//         value:'post0',
+//     },
+//     {
+//         label: <FormattedMessage key={1} id="form.equip.postfilter2" defaultMessage="前置滤镜2" />,
+//         value:'post1',
+//     },
+//     {
+//         label: <FormattedMessage key={2} id="form.equip.postfilter3" defaultMessage="前置滤镜3" />,
+//         value:'post2',
+//     },
+//     {
+//         label: <FormattedMessage key={3} id="form.equip.nonefilter" defaultMessage="无" />,
+//         value:'',
+//     },
+// ]
 
 const RenderForm = createForm({
     mapPropsToFields(props) {
@@ -178,7 +179,7 @@ const RenderForm = createForm({
                 ><FormattedMessage id="form.equip.prevfilter1" defaultMessage="前置滤芯1" />
                     <Brief>
                         <div className="item_children">
-                            {props.prev0.idname === '' ? FilterPer['none'] : FilterPer[props.prev0.idname]}
+                            { lodashGet(props, 'prev0.life', ['0'])[0] === '0' ? FilterPer['select'] : <FormattedMessage id="setting.system.PP" values={{value: props.prev0.life}} />}
                         </div>
                     </Brief>
                 </Item>
@@ -190,7 +191,7 @@ const RenderForm = createForm({
                 ><FormattedMessage id="form.equip.prevfilter2" defaultMessage="前置滤芯2" />
                     <Brief>
                         <div className="item_children">
-                            {props.prev1.idname === '' ? FilterPer['none'] : FilterPer[props.prev1.idname]}
+                            {lodashGet(props, 'prev1.life', ['0'])[0] === '0' ? FilterPer['select'] : <FormattedMessage id="setting.system.carbon" values={{value: props.prev1.life}} />}
                         </div>
                     </Brief>
                 </Item>
@@ -202,7 +203,7 @@ const RenderForm = createForm({
                 ><FormattedMessage id="form.equip.prevfilter3" defaultMessage="前置滤芯3" />
                     <Brief>
                         <div className="item_children">
-                            {props.prev2.idname === '' ? FilterPer['none'] : FilterPer[props.prev2.idname]}
+                            {lodashGet(props, 'prev2.life', ['0'])[0] === '0' ? FilterPer['select'] : <FormattedMessage id="setting.system.TAC" values={{value: props.prev2.life}} />}
                         </div>
                     </Brief>
                 </Item>
@@ -211,12 +212,8 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('host',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="equipment.host" defaultMessage="主机" />,
-                                    }],
-                                })}
+                                editable={false}
+                                {...getFieldProps('host')}
                             />
                         </div>
                     </Brief>
@@ -229,7 +226,7 @@ const RenderForm = createForm({
                 ><FormattedMessage id="equipment.afterfilter" defaultMessage="后置滤芯" />
                     <Brief>
                         <div className="item_children">
-                            {props.post0.idname === '' ? FilterPer['none'] : FilterPer[props.post0.idname]}
+                            {lodashGet(props, 'post0.life', ['0'])[0] === '0' ? FilterPer['select'] : <FormattedMessage id="setting.system.LED" values={{value: props.post0.life}} />}
                         </div>
                     </Brief>
                 </Item>
@@ -241,11 +238,11 @@ const RenderForm = createForm({
                 ><FormattedMessage id="equipment.afterfilter" defaultMessage="后置滤芯" />
                     <Brief>
                         <div className="item_children">
-                            {props.post1.idname === '' ? FilterPer['none'] : FilterPer[props.post1.idname]}
+                            {lodashGet(props, 'post1.life', ['0'])[0] === '0' ? FilterPer['select'] : <FormattedMessage id="setting.system.AFC" values={{value: props.post1.life}} />}
                         </div>
                     </Brief>
                 </Item>
-                <Item
+                {/* <Item
                     arrow="horizontal"
                     multipleLine
                     onClick={()=>props.onSelectFilter('post2')}
@@ -253,10 +250,10 @@ const RenderForm = createForm({
                 ><FormattedMessage id="equipment.afterfilter" defaultMessage="后置滤芯" />
                     <Brief>
                         <div className="item_children">
-                            {props.post2.idname === '' ? FilterPer['none'] : FilterPer[props.post2.idname]}
+                            {props.post2.idname[0] === '' ? FilterPer['none'] : FilterPer[props.post2.idname]}
                         </div>
                     </Brief>
-                </Item>
+                </Item> */}
                 <Item><FormattedMessage id="equipment.configuration" defaultMessage="其他配置" />
                     <Brief>
                         <div className="item_children">
@@ -341,22 +338,47 @@ const dataInput = (device) => {
     const posts = []
     const configuration = [device.configuration]
     const materials = [device.materials]
-    lodashMap(data, (item, index) => {
-        if(item.isprev) {
-            prevs.push(item)
-        } else {
-            posts.push(item)
+    if(data === []) {
+        console.log('data:', data)
+        for(let i = 0; i++; i<3) {
+            data.push({isprev: true})
+            prevs.push({isprev: true})
         }
-    })
+        for(let i = 0; i++; i<3) {
+            data.push({isprev: false})
+            posts.push({isprev: false})
+        }
+    } else {
+        lodashMap(data, (item, index) => {
+            if(item.isprev) {
+                prevs.push(item)
+            } else {
+                posts.push(item)
+            }
+        })
+    }
+    
 
     lodashMap(data, (item, index)=> {
         if(item.isprev) {
-            filters[`prev${index}`] = {...item, idname: [`${item.idname}`], lastchangedate: moment(item.lastchangedate).toDate()}
+            filters[`prev${index}`] = {
+                ...item, 
+                idname: [`${lodashGet(item, 'idname', '')}`], 
+                life: [`${lodashGet(item, 'life', '0')}`], 
+                lastchangedate: moment(lodashGet(item, 'lastchangedate', moment())).toDate()
+            }
         } else {
-            filters[`post${index-prevs.length}`] = {...item, idname: [`${item.idname}`], lastchangedate: moment(item.lastchangedate).toDate()}
+            filters[`post${index-prevs.length}`] = {
+                ...item, 
+                idname: [`${item.idname}`], 
+                life: [`${lodashGet(item, 'life', '0')}`], 
+                lastchangedate: moment(item.lastchangedate).toDate()
+            }
         }
 
     })
+
+    console.log('Input filters:', filters)
     return {
         ...filters,
         configuration,
@@ -369,25 +391,32 @@ const dataOutput = (data) => {
     const { prev0, prev1, prev2, post0, post1, post2 } = data
     const filters = []
 
-    if(prev0.idname !== '' && prev0.idname !== []) {
-        filters.push({...prev0, idname: prev0.idname[0], lastchangedate: moment(prev0.lastchangedate)})
-        if(prev1.idname !== '' && prev1.idname !== []) {
-            filters.push({...prev1, idname: prev1.idname[0], lastchangedate: moment(prev0.lastchangedate)})
-            if(prev2.idname !== '' && prev2.idname !== []) {
-                filters.push({...prev2, idname: prev2.idname[0], lastchangedate: moment(prev0.lastchangedate)})
-            }
-        }
-    }
+    filters.push({...prev0, life: prev0.life[0]})
+    filters.push({...prev1, life: prev1.life[0]})
+    filters.push({...prev2, life: prev2.life[0]})
+    filters.push({...post0, life: post0.life[0]})
+    filters.push({...post1, life: post1.life[0]})
+    // filters.push({...post2, life: post2.life[0]})
 
-    if(post0.idname !== '' && post0.idname !== []) {
-        filters.push({...post0, idname: post0.idname[0], lastchangedate: moment(prev0.lastchangedate)})
-        if(post1.idname !== '' && post1.idname !== []) {
-            filters.push({...post1, idname: post1.idname[0], lastchangedate: moment(prev0.lastchangedate)})
-            if(post2.idname !== '' && post2.idname !== []) {
-                filters.push({...post2, idname: post2.idname[0], lastchangedate: moment(prev0.lastchangedate)})
-            }
-        }
-    }
+    // if(prev0.idname !== '' && prev0.idname !== []) {
+    //     filters.push({...prev0, idname: prev0.idname[0], lastchangedate: moment(prev0.lastchangedate)})
+    //     if(prev1.idname !== '' && prev1.idname !== []) {
+    //         filters.push({...prev1, idname: prev1.idname[0], lastchangedate: moment(prev0.lastchangedate)})
+    //         if(prev2.idname !== '' && prev2.idname !== []) {
+    //             filters.push({...prev2, idname: prev2.idname[0], lastchangedate: moment(prev0.lastchangedate)})
+    //         }
+    //     }
+    // }
+
+    // if(post0.idname !== '' && post0.idname !== []) {
+    //     filters.push({...post0, idname: post0.idname[0], lastchangedate: moment(prev0.lastchangedate)})
+    //     if(post1.idname !== '' && post1.idname !== []) {
+    //         filters.push({...post1, idname: post1.idname[0], lastchangedate: moment(prev0.lastchangedate)})
+    //         if(post2.idname !== '' && post2.idname !== []) {
+    //             filters.push({...post2, idname: post2.idname[0], lastchangedate: moment(prev0.lastchangedate)})
+    //         }
+    //     }
+    // }
 
     return filters
 }
@@ -398,9 +427,16 @@ class EquipmentList extends PureComponent{
         filterModal: false,
         curKey: 'prev0',
         isprev: true,
+        curOptions: prev0Options,
         idname: '',
+        life: 0,
         lastchangedate: new Date(),
-        formData: {...basicData, ...this.props.devicelist, ...dataInput(this.props.devicelist)}
+        formData: {
+            ...basicData, 
+            ...this.props.devicelist, 
+            ...dataInput(this.props.devicelist), 
+            host: lodashGet(this.props.basicinfo, 'model', '')
+        }
     }
 
     handleSubmit = (values)=>{
@@ -426,11 +462,33 @@ class EquipmentList extends PureComponent{
 
     onShowFilter = (curKey) => {
         const { formData } = this.state
-        const { isprev, idname, lastchangedate } = formData[curKey]
+        const { isprev, idname, life, lastchangedate } = formData[curKey]
+        let curOptions = []
+        switch (curKey) {
+            case 'prev0':
+                curOptions = prev0Options
+                break;
+            case 'prev1':
+                curOptions = prev1Options
+                break;
+            case 'prev2':
+                curOptions = prev2Options
+                break;
+            case 'post0':
+                curOptions = post0Options
+                break;
+            case 'post1':
+                curOptions = post1Options
+                break;
+            default:
+                break;
+        }
         this.setState({
             curKey,
             isprev,
+            curOptions,
             idname,
+            life,
             lastchangedate,
             filterModal: true
         })
@@ -438,8 +496,8 @@ class EquipmentList extends PureComponent{
 
     onFilterSubmit = () => {
         console.log('Current State:', this.state)
-        const { formData, curKey, idname, lastchangedate } = this.state
-        formData[curKey] = { ...formData[curKey], idname: idname, lastchangedate }
+        const { formData, curKey, idname, life, lastchangedate } = this.state
+        formData[curKey] = { ...formData[curKey], idname, life, lastchangedate }
         this.setState({
             formData,
             filterModal: false
@@ -472,13 +530,13 @@ class EquipmentList extends PureComponent{
                                     <Brief>
                                         <div className="item_children">
                                             <Picker
-                                                data={this.state.isprev ? prevFilter : postFilter}
+                                                data={this.state.curOptions}
                                                 cols={1}
                                                 extra={<FormattedMessage id="form.picker" defaultMessage="请选择" />}
-                                                value={this.state.idname}
+                                                value={this.state.life}
                                                 onChange={(val) => {
                                                     console.log(val);
-                                                    this.setState({idname: val})
+                                                    this.setState({life: val})
                                                     }
                                                 }
                                                 >
@@ -523,8 +581,8 @@ class EquipmentList extends PureComponent{
         )
     }
 }
-const mapStateToProps =  ({device:{devicelist,_id}}) =>{
-    return {devicelist,_id};
+const mapStateToProps =  ({device:{ basicinfo, devicelist, _id}}) =>{
+    return { basicinfo, devicelist, _id};
 };
 EquipmentList = connect(mapStateToProps)(EquipmentList);
 export default withRouter(EquipmentList);

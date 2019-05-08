@@ -65,26 +65,26 @@ const RenderForm = createForm({
               ...props.shunt,
               value: props.shunt.value,
           }),
-          tds: createFormField({
-            ...props.tds,
-            value: props.tds.value,
-          }),
-          conductivity: createFormField({
-            ...props.conductivity,
-            value: props.conductivity.value,
-          }),
-          hardness: createFormField({
-                ...props.hardness,
-                value: props.hardness.value,
-          }),
-          alkalinity: createFormField({
-                ...props.alkalinity,
-                value: props.alkalinity.value,
-          }),
-          ph: createFormField({
-                ...props.ph,
-                value: props.ph.value,
-          }),
+        //   tds: createFormField({
+        //     ...props.tds,
+        //     value: props.tds.value,
+        //   }),
+        //   conductivity: createFormField({
+        //     ...props.conductivity,
+        //     value: props.conductivity.value,
+        //   }),
+        //   hardness: createFormField({
+        //         ...props.hardness,
+        //         value: props.hardness.value,
+        //   }),
+        //   alkalinity: createFormField({
+        //         ...props.alkalinity,
+        //         value: props.alkalinity.value,
+        //   }),
+        //   ph: createFormField({
+        //         ...props.ph,
+        //         value: props.ph.value,
+        //   }),
           usertds: createFormField({
                 ...props.usertds,
                 value: props.usertds.value,
@@ -241,7 +241,7 @@ const RenderForm = createForm({
                         })}
                     />}
                 ><FormattedMessage id="water.shunt" defaultMessage="是否分流" /></List.Item>
-                <Item><FormattedMessage id="water.tds" defaultMessage="原水TDS值" />
+                {/* <Item><FormattedMessage id="water.tds" defaultMessage="原水TDS值" />
                     <Brief>
                         <div className="item_children">
                             <InputItem
@@ -325,7 +325,7 @@ const RenderForm = createForm({
                             />
                         </div>
                     </Brief>
-                </Item>
+                </Item> */}
                 <Item><FormattedMessage id="water.usertds" defaultMessage="用户需求出水TDS值" />
                     <Brief>
                         <div className="item_children">
@@ -414,21 +414,21 @@ class DeviceWater extends PureComponent{
             shunt: {
                 value: lodashget(usewater,'shunt',false),
             },
-            tds: {
-                value: lodashget(usewater,'tds',''),
-            },
-            conductivity: {
-                value: lodashget(usewater,'conductivity',''),
-            },
-            hardness: {
-                value: lodashget(usewater,'hardness',''),
-            },
-            alkalinity: {
-                value: lodashget(usewater,'alkalinity',''),
-            },
-            ph: {
-                value: lodashget(usewater,'ph',''),
-            },
+            // tds: {
+            //     value: lodashget(usewater,'tds',''),
+            // },
+            // conductivity: {
+            //     value: lodashget(usewater,'conductivity',''),
+            // },
+            // hardness: {
+            //     value: lodashget(usewater,'hardness',''),
+            // },
+            // alkalinity: {
+            //     value: lodashget(usewater,'alkalinity',''),
+            // },
+            // ph: {
+            //     value: lodashget(usewater,'ph',''),
+            // },
             usertds: {
                 value: lodashget(usewater,'usertds',''),
             },

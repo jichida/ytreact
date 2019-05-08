@@ -50,12 +50,13 @@ class DeviceList extends React.Component {
   onItemConvert(iteminput){
     console.log(iteminput);
     if(iteminput.hasOwnProperty('srvdata')){
+      const installdate = lodashget(iteminput,'syssettings.installdate');
       return {
               isgetsrvdata:true,
               iserr: lodashget(iteminput,'iserr',true),
               address: lodashget(iteminput,'basicinfo.username',''),
-              reportdate: moment(lodashget(iteminput,'syssettings.installdate','')).format('YYYYMMDD'),
-              id:lodashget(iteminput,'syssettings.deviceid',''),
+              reportdate: !!installdate ? moment(installdate).format('YYYYMMDD'): '尚未安装',
+              id:lodashget(iteminput,'syssettings.deviceid','') || lodashget(iteminput,'deviceid'),
               name: lodashget(iteminput,'basicinfo.model',''),
               runtime:moment(lodashget(iteminput,'datasrv_updated_at')).format('YYYYMMDD HH:mm:ss'),
               mode:lodashget(iteminput,'srvdata.currentstate',''),

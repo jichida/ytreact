@@ -28,7 +28,7 @@ const Brief = Item.Brief;
 //   };
 // }
 
-const isDirect = false;
+const isDirect = true;
 const isNormal = true;
 
 class Device extends PureComponent{

@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Flex, NavBar, List, ActionSheet, WingBlank } from 'antd-mobile';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import lodashGet from 'lodash.get'
 import { FormattedMessage, injectIntl } from 'react-intl';
 
 import './index.less';
@@ -48,9 +49,15 @@ class Device extends PureComponent{
         });
     }
 
+    goTo = (target) => {
+        if(isNormal) {
+            this.props.history.push(target)
+        }
+    }
+
     render () {
         console.log(window.innerHeight);
-        const { history,distributor } = this.props;
+        const { distributor, isGetDevice } = this.props;
         // const { intl: { formatMessage }} = this.props;
         // const title = formatMessage({id: "device.privider.select"})
 
@@ -82,48 +89,42 @@ class Device extends PureComponent{
                     <p className="tools_title"><FormattedMessage id="device.tools" /></p>
                     <div className="tools_bg">
                         <Flex wrap="wrap">
-                            { isNormal&&
-                            <div className="tools_con">
-                                <Link to="/setting"><div><img src={system_img} alt="" />
-                                    <p><FormattedMessage id="device.setting" defaultMessage="设备设置" /></p></div>
-                                </Link>
+                            <div className={`tools_con ${isNormal ? '' : 'disable'}`}>
+                                <div onClick={()=>{this.goTo('/setting')}}>
+                                    <img src={system_img} alt="" />
+                                    <p><FormattedMessage id="device.setting" defaultMessage="设备设置" /></p>
+                                </div>
                             </div>
-                            }
-                            { isNormal&&
-                            <div className="tools_con">
-                                <Link to="/basic"><div><img src={basic_img} alt="" />
-                                    <p><FormattedMessage id="device.basic" /></p></div>
-                                </Link>
+                            <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
+                                <div onClick={()=>{this.goTo('/basic')}}>
+                                    <img src={basic_img} alt="" />
+                                    <p><FormattedMessage id="device.basic" /></p>
+                                </div>
                             </div>
-                            }
-                            { isDirect&&
-                            <div className="tools_con">
-                                <Link to="/water"><div><img src={water_img} alt="" />
-                                    <p><FormattedMessage id="device.water" /></p></div>
-                                </Link>
+                            <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
+                                <div onClick={()=>{this.goTo('/water')}}>
+                                    <img src={water_img} alt="" />
+                                    <p><FormattedMessage id="device.water" /></p>
+                                </div>
                             </div>
-                            }
-                            { isNormal&&
-                            <div className="tools_con">
-                                <Link to="/install"><div><img src={install_img} alt="" />
-                                    <p><FormattedMessage id="device.install" /></p></div>
-                                </Link>
+                            <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
+                                <div onClick={()=>{this.goTo('/install')}}>
+                                    <img src={install_img} alt="" />
+                                    <p><FormattedMessage id="device.install" /></p>
+                                </div>
                             </div>
-                            }
-                            { isNormal&&
-                            <div className="tools_con">
-                                <Link to="/checklist"><div><img src={table_img} alt="" />
-                                    <p><FormattedMessage id="setting.checklist" defaultMessage="安装检查表" /></p></div>
-                                </Link>
+                            <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
+                                <div onClick={()=>{this.goTo('/checklist')}}>
+                                    <img src={table_img} alt="" />
+                                    <p><FormattedMessage id="setting.checklist" defaultMessage="安装检查表" /></p>
+                                </div>
                             </div>
-                            }
-                            { isNormal&&
-                             <div className="tools_con">
-                                 <Link to="/equipmentlist"><div><img src={list_img} alt="" />
-                                     <p><FormattedMessage id="device.equipmentlist" defaultMessage="设备清单" /></p></div>
-                                 </Link>
+                            <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
+                                 <div onClick={()=>{this.goTo('/equipmentlist')}}>
+                                    <img src={list_img} alt="" />
+                                    <p><FormattedMessage id="device.equipmentlist" defaultMessage="设备清单" /></p>
+                                </div>
                              </div>
-                             } 
 
                             {/* { isNormal&&
                              <div className="tools_con">
@@ -135,17 +136,28 @@ class Device extends PureComponent{
                         </Flex>
                     </div>
                 </WingBlank>
+                { isDirect && (
+                    <WingBlank style={{marginTop: '20px'}}>
+                        <div className="tools_warring"><FormattedMessage id="device.warring.direct" /></div>
+                    </WingBlank>
+                )}
+                { isNormal && !isGetDevice && (
+                    <WingBlank style={{marginTop: '20px'}}>
+                        <div className="tools_warring"><FormattedMessage id="device.warring.device" /></div>
+                    </WingBlank>
+                )}
             </div></div>
         )
     }
 }
-const mapStateToProps =  ({userlogin:{distributor},device:{distributorid}}) =>{
+const mapStateToProps =  ({userlogin:{distributor},device:{distributorid, syssettings}}) =>{
   if(!!distributorid._id){
     console.log(distributorid);
     distributor = distributorid;
   }
+  const isGetDevice = lodashGet(syssettings, 'deviceid', '') !== ''
   // debugger;
-  return {distributor};
+  return {distributor, isGetDevice};
 };
 Device = connect(mapStateToProps)(Device);
 export default withRouter(injectIntl(Device));

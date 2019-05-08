@@ -55,6 +55,8 @@
   "form.confirm": "確認",
   "form.reset": "重置",
   "device": "設備信息",
+  "device.warring.direct": "當前處於直連模式下，請切換到上網模式後再使用這些功能!",
+  "device.warring.device": "請在設備設置中掃描二維碼，獲取設備資訊!",
   "device.privider.select": "選擇服務商",
   "device.tools": "常用工具",
   "device.basic": "基本信息",

@@ -55,6 +55,8 @@
   "form.confirm": "Confirm",
   "form.reset": "reset",
   "device": "device information",
+  "device.warring.direct": "Currently in direct connection mode, please switch to online mode and use these functions again!",
+  "device.warring.device": "Scan the two-dimensional code in the device settings to get device information!",
   "device.privider.select": "Select a service provider",
   "device.tools": "common tools",
   "device.basic": "Basic information",

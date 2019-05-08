@@ -55,6 +55,8 @@
   "form.equip.postfilter3": "后置滤芯3",
   "form.equip.nonefilter": "无",
   "device": "设备信息",
+  "device.warring.direct": "当前处于直连模式下，请切换到上网模式后再使用这些功能!",
+  "device.warring.device": "请在设备设置中扫描二维码，获取设备信息!",
   "device.privider.select": "选择服务商",
   "device.tools": "常用工具",
   "device.basic": "基本信息",

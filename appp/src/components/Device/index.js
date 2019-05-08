@@ -56,7 +56,7 @@ class Device extends PureComponent{
     }
 
     gotoInfo = (target) => {
-        if(isNormal&&isGetDevice) {
+        if(isNormal&&this.props.isGetDevice) {
             this.props.history.push(target)
         }
     }

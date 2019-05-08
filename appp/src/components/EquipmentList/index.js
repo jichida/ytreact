@@ -163,8 +163,12 @@ const RenderForm = createForm({
     }
 
 
-    const handleFillClick = ()=>{
-        history.push('pipefitting');
+    const handleFillClick = () => {
+        validateFields((err, values)=>{
+            if(!err){
+                props.onFillPipeFitting(values)
+            }
+        })
     }
 
     return (
@@ -391,11 +395,11 @@ const dataOutput = (data) => {
     const { prev0, prev1, prev2, post0, post1, post2 } = data
     const filters = []
 
-    filters.push({...prev0, life: prev0.life[0]})
-    filters.push({...prev1, life: prev1.life[0]})
-    filters.push({...prev2, life: prev2.life[0]})
-    filters.push({...post0, life: post0.life[0]})
-    filters.push({...post1, life: post1.life[0]})
+    filters.push({...prev0, life: prev0.life[0], idname: prev0.idname[0]})
+    filters.push({...prev1, life: prev1.life[0], idname: prev1.idname[0]})
+    filters.push({...prev2, life: prev2.life[0], idname: prev2.idname[0]})
+    filters.push({...post0, life: post0.life[0], idname: post0.idname[0]})
+    filters.push({...post1, life: post1.life[0], idname: post1.idname[0]})
     // filters.push({...post2, life: post2.life[0]})
 
     // if(prev0.idname !== '' && prev0.idname !== []) {
@@ -448,12 +452,17 @@ class EquipmentList extends PureComponent{
         // 考虑到没网的条件,先设置一下
         //输出:devicelist
         let devicelist = {...this.props.devicelist, ...values, filterlist, configuration, materials}
-        console.log('DeviseList:', devicelist)
+        console.log('Submit DeviseList:', devicelist)
 
         const {dispatch,_id} = this.props;
         dispatch(setuserdevice_result({devicelist}))
 
         dispatch(ui_setuserdevice_request({_id,data:{devicelist}}));
+    }
+
+    handleFillPipeFittings = (values) => {
+        this.handleSubmit(values)
+        this.props.history.push('pipefitting');
     }
 
     onCloseFilter = () => {
@@ -517,7 +526,13 @@ class EquipmentList extends PureComponent{
                 >
                     <FormattedMessage id="device.equipmentlist" defaultMessage="设备清单" />
                 </NavBar>
-                { <RenderForm {...this.state.formData} {...this.props} onSelectFilter={this.onShowFilter} onSubmit={this.handleSubmit} />}
+                { <RenderForm 
+                    {...this.state.formData} 
+                    {...this.props} 
+                    onSelectFilter={this.onShowFilter} 
+                    onSubmit={this.handleSubmit} 
+                    onFillPipeFitting={this.handleFillPipeFittings}
+                />}
                 <Modal
                     popup
                     visible={this.state.filterModal}
@@ -582,6 +597,7 @@ class EquipmentList extends PureComponent{
     }
 }
 const mapStateToProps =  ({device:{ basicinfo, devicelist, _id}}) =>{
+    console.log('State devicelist:', devicelist)
     return { basicinfo, devicelist, _id};
 };
 EquipmentList = connect(mapStateToProps)(EquipmentList);

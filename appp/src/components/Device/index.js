@@ -27,7 +27,7 @@ const Brief = Item.Brief;
 //   };
 // }
 
-const isDirect = false;
+const isDirect = true;
 const isNormal = true;
 
 class Device extends PureComponent{
@@ -123,7 +123,7 @@ class Device extends PureComponent{
                                      <p><FormattedMessage id="device.equipmentlist" defaultMessage="设备清单" /></p></div>
                                  </Link>
                              </div>
-                             } 
+                             }
 
                             {/* { isNormal&&
                              <div className="tools_con">

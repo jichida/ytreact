@@ -6,7 +6,8 @@ import {
     ui_set_language,
     notify_socket_connected,
     settcp_connected,
-    socket_setstatus
+    socket_setstatus,
+    setlinkmode
 } from '../../actions/index.js';
 // import moment from 'moment';
 
@@ -19,11 +20,15 @@ const initial = {
         tcpconnected:false,
         issocketconnected:false,
         wifidirectmodesocketstatus:-1,
+        linkmode:'internetmode'
         //-1 socket 关闭 0 socket 发送消息成功 1 连接成功 2 发送消息失败
     },
 };
 
 const app = createReducer({
+    [setlinkmode]:(state,payload)=>{
+      return {...state,linkmode:payload};
+    },
     [settcp_connected]:(state,payload)=>{
       //data { socketStatus:  -1 0 1 2 }
       return { ...state, tcpconnected:payload};

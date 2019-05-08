@@ -88,7 +88,10 @@ class SettingSystem extends PureComponent{
         const {dispatch} = this.props;
         if(this.state.quality.length > 0){
           const cmd = `$sysprodtrigger ${this.state.quality}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置出水水质'}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置出水水质',target:{
+            fieldname:'syssettings.quality',
+            value:`${this.state.quality}`
+          }}));
           this.onCloseQuality();
         }
         else{

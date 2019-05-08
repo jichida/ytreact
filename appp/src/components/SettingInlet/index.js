@@ -352,7 +352,10 @@ class Inlet extends PureComponent{
 
         if(isvalid){
           const cmd = `$feedph ${iph}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置PH'}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置PH',target:{
+            fieldname:'inwatersettings.ph',
+            value:`${this.state.ph}`
+          }}));
           this.handleClose();
         }
         else{
@@ -369,7 +372,10 @@ class Inlet extends PureComponent{
         const {dispatch} = this.props;
         if(this.state.conductivity.length > 0){
           const cmd = `$feedcon ${this.state.conductivity}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置导电率值'}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置导电率值',target:{
+            fieldname:'inwatersettings.conductivity',
+            value:`${this.state.conductivity}`
+          }}));
           this.handleClose();
         }
         else{
@@ -386,7 +392,10 @@ class Inlet extends PureComponent{
         const {dispatch} = this.props;
         if(this.state.tds.length > 0){
           const cmd = `$feedtds ${this.state.tds}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置TDS值'}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置TDS值',target:{
+            fieldname:'inwatersettings.tds',
+            value:`${this.state.tds}`
+          }}));
           this.handleClose();
         }
         else{
@@ -403,7 +412,10 @@ class Inlet extends PureComponent{
         const {dispatch} = this.props;
         if(this.state.hardness.length > 0){
           const cmd = `$feedca ${this.state.hardness}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置进水硬度值'}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置进水硬度值',target:{
+            fieldname:'inwatersettings.hardness',
+            value:`${this.state.hardness}`
+          }}));
           this.handleClose();
         }
         else{
@@ -420,7 +432,10 @@ class Inlet extends PureComponent{
         const {dispatch} = this.props;
         if(this.state.alkalinity.length > 0){
           const cmd = `$feedalk ${this.state.alkalinity}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置进水咸度值'}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置进水咸度值',target:{
+            fieldname:'inwatersettings.alkalinity',
+            value:`${this.state.alkalinity}`
+          }}));
           this.handleClose();
         }
         else{

@@ -37,8 +37,8 @@ const TopMonitor = injectIntl((props)=>{
     let topData = []
     console.log('Home Data: ', srvdata)
     if(!!srvdata) {
-      const {ProductQualityAverage,ModIn, DailyVolume,Reserve1,Yield} = srvdata;
-
+      const {ProductQualityAverage,ModIn, DailyVolume,Yield} = srvdata;
+      const Reserve1 = lodashget(srvdata,'Reserve1','');
       // main_outwater_quality:30,//出水水质,
       // main_outwater_grade:'优',//出水等级,
       // main_inwater_quality:32,//进水水质,
@@ -384,7 +384,7 @@ const SingleChart = ({title, unit, data, percent, warring})=>{
                 strokeColor={warring ? '#f81929' : '#03f241'}
                 status={warring?"exception":"active"}
                 format={() => <div className="circle-text"><p className="data">{data}</p><p className="unit">{unit}</p></div>}
-                
+
           />
         </div>
         <p>{title}</p>
@@ -429,7 +429,7 @@ class DataDetails extends React.PureComponent {
     }
 
     componentDidMount(){
-      const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid');
+      const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid') || lodashget(this,'props.curdevice.deviceid');
       console.log(`start request deviceid:${deviceid}`);
       if(!!deviceid){
         this.props.dispatch(setdevicesubscriber({data:{deviceid,cmd:'set'}}));
@@ -471,7 +471,7 @@ class DataDetails extends React.PureComponent {
 
     handleSend = () => {
         const { dispatch } = this.props;
-        const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid');
+        const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid') || lodashget(this,'props.curdevice.deviceid');
         if(this.state.action && !!deviceid){
             console.log(this.state.action);
 
@@ -507,10 +507,12 @@ class DataDetails extends React.PureComponent {
 
     handleDownload = () => {
         console.log('下载数据');
-        const {dispatch,curdevice} = this.props;
+        const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid') || lodashget(this,'props.curdevice.deviceid');
+
+        const {dispatch} = this.props;
         const { downloadRange } = this.state; // [moment, moment]
         dispatch(download_excel({
-          deviceid:curdevice.deviceid,
+          deviceid,
           momentstart:downloadRange[0].format(),
           momentend:downloadRange[1].format(),
         }));

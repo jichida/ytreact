@@ -19,11 +19,14 @@ const CRed = '#ff2728';
 const CGreen = '#3eef7d';
 const CBlue = '#38b4f2';
 
-const getPercent = (id,value) => {
+const getPercent = (id, value, full) => {
+    console.log('GetPercent value:', value)
+    console.log('GetPercent Full:', full)
     let cf = config[id];
     let color = CGreen;
     let warring = false;
-    let percent = Math.round(value/cf.value * 100) ;
+    let fullvalue = !!full ? full : cf.value;
+    let percent = Math.round(value/fullvalue * 100) ;
     if(percent >= cf.fullPercent){
         color = CBlue;
     } else if(percent <= cf.warringPercent){
@@ -110,7 +113,7 @@ class Home extends PureComponent{
     //       title_filterelements_prefilter1_leftday = intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'});
     //       icon_filterelements_prefilter1_leftday = CRed;
     //   }
-      const prefilter1_leftday = getPercent('filterelements_prefilter1_leftday', lodashget(devicedata,'filterelements_prefilter1_leftday',0));
+      const prefilter1_leftday = getPercent('filterelements_prefilter1_leftday', lodashget(devicedata,'filterelements_prefilter1_leftday',0), lodashget(devicelist[0], 'life', lodashget(devicedata,'filterelements_prefilter1_leftday',0)*100));
       const icon_filterelements_prefilter1_leftday = prefilter1_leftday.color;
       const title_filterelements_prefilter1_leftday = (prefilter1_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})
@@ -148,7 +151,7 @@ class Home extends PureComponent{
     //       title_filterelements_prefilter2_leftvol = intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'});
     //       icon_filterelements_prefilter2_leftvol = CRed;
     //   }
-      const prefilter2_leftday = getPercent('filterelements_prefilter2_leftday', lodashget(devicedata,'filterelements_prefilter2_leftday',0));
+      const prefilter2_leftday = getPercent('filterelements_prefilter2_leftday', lodashget(devicedata,'filterelements_prefilter2_leftday',0), lodashget(devicelist[1], 'life', lodashget(devicedata,'filterelements_prefilter2_leftday',0)*100));
       const icon_filterelements_prefilter2_leftday = prefilter2_leftday.color;
       const title_filterelements_prefilter2_leftday = (prefilter2_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})
@@ -180,7 +183,7 @@ class Home extends PureComponent{
     //       title_filterelements_prefilter3_leftvol = intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'});
     //       icon_filterelements_prefilter3_leftvol = CRed;
     //   }
-      const prefilter3_leftday = getPercent('filterelements_prefilter3_leftday', lodashget(devicedata,'filterelements_prefilter3_leftday',0));
+      const prefilter3_leftday = getPercent('filterelements_prefilter3_leftday', lodashget(devicedata,'filterelements_prefilter3_leftday',0), lodashget(devicelist[2], 'life', lodashget(devicedata,'filterelements_prefilter3_leftday',0)*100));
       const icon_filterelements_prefilter3_leftday = prefilter3_leftday.color;
       const title_filterelements_prefilter3_leftday = (prefilter3_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})
@@ -213,7 +216,7 @@ class Home extends PureComponent{
     //       title_filterelements_posfilter1_leftvol = intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'});
     //       icon_filterelements_posfilter1_leftvol = CRed;
     //   }
-      const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', lodashget(devicedata,'filterelements_posfilter1_leftday',0));
+      const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', lodashget(devicedata,'filterelements_posfilter1_leftday',0), lodashget(devicelist[4], 'life', lodashget(devicedata,'filterelements_posfilter1_leftday',0)*100));
       const icon_filterelements_posfilter1_leftday = posfilter1_leftday.color;
       const title_filterelements_posfilter1_leftday = (posfilter1_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})
@@ -247,7 +250,7 @@ class Home extends PureComponent{
     //       icon_filterelements_posfilter2_leftvol = CRed;
     //   }
 
-      const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', lodashget(devicedata,'filterelements_posfilter2_leftday',0));
+      const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', lodashget(devicedata,'filterelements_posfilter2_leftday',0), lodashget(devicelist[5], 'life', lodashget(devicedata,'filterelements_posfilter2_leftday',0)*100));
       const icon_filterelements_posfilter2_leftday = posfilter2_leftday.color;
       const title_filterelements_posfilter2_leftday = (posfilter2_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})
@@ -279,7 +282,7 @@ class Home extends PureComponent{
     //       title_filterelements_posfilter3_leftvol = intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'});
     //       icon_filterelements_posfilter3_leftvol = CRed;
     //   }
-      const posfilter3_leftday = getPercent('filterelements_posfilter3_leftday', lodashget(devicedata,'filterelements_posfilter3_leftday',0));
+      const posfilter3_leftday = getPercent('filterelements_posfilter3_leftday', lodashget(devicedata,'filterelements_posfilter3_leftday',0), lodashget(devicelist[5], 'life', lodashget(devicedata,'filterelements_posfilter3_leftday',0)*100));
       const icon_filterelements_posfilter3_leftday = posfilter3_leftday.color;
       const title_filterelements_posfilter3_leftday = (posfilter3_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})

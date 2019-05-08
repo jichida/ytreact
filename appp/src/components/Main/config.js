@@ -1,3 +1,4 @@
+
 const config = {
     'filterelements_modlife_leftday':{
         value: 720,
@@ -71,4 +72,4 @@ const config = {
     }
 }
 
-export default config;
+export default config

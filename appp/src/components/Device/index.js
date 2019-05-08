@@ -28,8 +28,6 @@ const Brief = Item.Brief;
 //   };
 // }
 
-
-
 class Device extends PureComponent{
 
     showActionSheet = (title) => {

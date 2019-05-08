@@ -28,8 +28,7 @@ const Brief = Item.Brief;
 //   };
 // }
 
-const isDirect = true;
-const isNormal = true;
+
 
 class Device extends PureComponent{
 
@@ -50,12 +49,14 @@ class Device extends PureComponent{
     }
 
     goTo = (target) => {
+        const {isNormal} = this.props;
         if(isNormal) {
             this.props.history.push(target)
         }
     }
 
     gotoInfo = (target) => {
+        const {isNormal,isGetDevice} = this.props;
         if(isNormal&&isGetDevice) {
             this.props.history.push(target)
         }
@@ -63,7 +64,7 @@ class Device extends PureComponent{
 
     render () {
         console.log(window.innerHeight);
-        const { distributor, isGetDevice } = this.props;
+        const { distributor, isGetDevice ,isDirect,isNormal} = this.props;
         // const { intl: { formatMessage }} = this.props;
         // const title = formatMessage({id: "device.privider.select"})
 
@@ -156,14 +157,16 @@ class Device extends PureComponent{
         )
     }
 }
-const mapStateToProps =  ({userlogin:{distributor},device:{distributorid, syssettings}}) =>{
+const mapStateToProps =  ({userlogin:{distributor},device:{distributorid, syssettings},app:{linkmode}}) =>{
   if(!!distributorid._id){
     console.log(distributorid);
     distributor = distributorid;
   }
+  const isDirect = linkmode === 'directmode';
+  const isNormal = linkmode === 'internetmode';
   const isGetDevice = lodashGet(syssettings, 'deviceid', '') !== ''
   // debugger;
-  return {distributor, isGetDevice};
+  return {distributor, isGetDevice,isDirect,isNormal};
 };
 Device = connect(mapStateToProps)(Device);
 export default withRouter(injectIntl(Device));

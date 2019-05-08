@@ -55,6 +55,12 @@ class Device extends PureComponent{
         }
     }
 
+    gotoInfo = (target) => {
+        if(isNormal&&isGetDevice) {
+            this.props.history.push(target)
+        }
+    }
+
     render () {
         console.log(window.innerHeight);
         const { distributor, isGetDevice } = this.props;
@@ -96,31 +102,31 @@ class Device extends PureComponent{
                                 </div>
                             </div>
                             <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
-                                <div onClick={()=>{this.goTo('/basic')}}>
+                                <div onClick={()=>{this.gotoInfo('/basic')}}>
                                     <img src={basic_img} alt="" />
                                     <p><FormattedMessage id="device.basic" /></p>
                                 </div>
                             </div>
                             <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
-                                <div onClick={()=>{this.goTo('/water')}}>
+                                <div onClick={()=>{this.gotoInfo('/water')}}>
                                     <img src={water_img} alt="" />
                                     <p><FormattedMessage id="device.water" /></p>
                                 </div>
                             </div>
                             <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
-                                <div onClick={()=>{this.goTo('/install')}}>
+                                <div onClick={()=>{this.gotoInfo('/install')}}>
                                     <img src={install_img} alt="" />
                                     <p><FormattedMessage id="device.install" /></p>
                                 </div>
                             </div>
                             <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
-                                <div onClick={()=>{this.goTo('/checklist')}}>
+                                <div onClick={()=>{this.gotoInfo('/checklist')}}>
                                     <img src={table_img} alt="" />
                                     <p><FormattedMessage id="setting.checklist" defaultMessage="安装检查表" /></p>
                                 </div>
                             </div>
                             <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
-                                 <div onClick={()=>{this.goTo('/equipmentlist')}}>
+                                 <div onClick={()=>{this.gotoInfo('/equipmentlist')}}>
                                     <img src={list_img} alt="" />
                                     <p><FormattedMessage id="device.equipmentlist" defaultMessage="设备清单" /></p>
                                 </div>

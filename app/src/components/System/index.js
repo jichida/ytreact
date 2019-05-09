@@ -84,9 +84,14 @@ const RenderForm = createForm({
         props.showModal('modal2');
     }
 
-    const onClickCmd = (cmd,cmdstring='获取数据')=>{
+    const onClickCmd = (cmd,cmdstring='获取数据',target)=>{
       const {dispatch} = props;
-      dispatch(wifi_sendcmd_request({cmd,cmdstring}));
+      if(!!target){
+        dispatch(wifi_sendcmd_request({cmd,cmdstring,target}));
+      }
+      else{
+        dispatch(wifi_sendcmd_request({cmd,cmdstring}));
+      }
     }
 
     return (
@@ -191,15 +196,15 @@ const RenderForm = createForm({
                                     if(language === 'en'){
                                       // 语言选择：0 ：中文简体，1：中文繁体，2：英语	$charact 0%
                                       const cmd = `$charact 2%`;
-                                      onClickCmd(cmd,'设置英语');
+                                      onClickCmd(cmd,'设置英语',{fieldname:'syssettings.language',value:'en'});
                                     }
                                     else if(language === 'zh-cn'){
                                       const cmd = `$charact 0%`;
-                                      onClickCmd(cmd,'设置中文简体');
+                                      onClickCmd(cmd,'设置中文简体',{fieldname:'syssettings.language',value:'zh-cn'});
                                     }
                                     else if(language === 'zh-tw'){
                                       const cmd = `$charact 1%`;
-                                      onClickCmd(cmd,'设置中文繁体');
+                                      onClickCmd(cmd,'设置中文繁体',{fieldname:'syssettings.language',value:'zh-tw'});
                                     }
                                     console.log(v);
                                   }
@@ -326,7 +331,9 @@ class SettingSystem extends PureComponent{
         this.onCloseDormancy();
     }
     render () {
-        const { syssettings, dispatch, intl:{ formatMessage }, locale} = this.props;
+        const { syssettings, dispatch, intl:{ formatMessage }} = this.props;
+        const locale = lodashget(syssettings,'language','zh-cn');
+        console.log(locale);
         const basicData = {
             quality: {
                 value: lodashget(syssettings,'quality',''),
@@ -341,7 +348,7 @@ class SettingSystem extends PureComponent{
                 value: this.state.dormancyend,
             },
             language: {
-                value: locale,
+                value: [locale],
             }
         }
         console.log(basicData)
@@ -463,9 +470,8 @@ class SettingSystem extends PureComponent{
     }
 }
 
-const mapStateToProps =  ({device:{locale,_id},devicedata:{syssettings}}) =>{
-
-    return { locale, syssettings, _id };
+const mapStateToProps =  ({device:{_id},devicedata:{syssettings}}) =>{
+    return { syssettings, _id };
 };
 
 SettingSystem = connect(mapStateToProps)(injectIntl(SettingSystem));

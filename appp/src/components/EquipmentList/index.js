@@ -367,14 +367,14 @@ const dataInput = (device) => {
         if(item.isprev) {
             filters[`prev${index}`] = {
                 ...item, 
-                idname: [`${lodashGet(item, 'idname', '')}`], 
+                idname: [`${lodashGet(item, 'idname', `prev${index}`)}`], 
                 life: [`${lodashGet(item, 'life', '0')}`], 
                 lastchangedate: moment(lodashGet(item, 'lastchangedate', moment())).toDate()
             }
         } else {
             filters[`post${index-prevs.length}`] = {
                 ...item, 
-                idname: [`${item.idname}`], 
+                idname: [`${lodashGet(item, 'item', `post${index-prevs.length}`)}`], 
                 life: [`${lodashGet(item, 'life', '0')}`], 
                 lastchangedate: moment(item.lastchangedate).toDate()
             }
@@ -395,11 +395,11 @@ const dataOutput = (data) => {
     const { prev0, prev1, prev2, post0, post1, post2 } = data
     const filters = []
 
-    filters.push({...prev0, life: prev0.life[0], idname: prev0.idname[0]})
-    filters.push({...prev1, life: prev1.life[0], idname: prev1.idname[0]})
-    filters.push({...prev2, life: prev2.life[0], idname: prev2.idname[0]})
-    filters.push({...post0, life: post0.life[0], idname: post0.idname[0]})
-    filters.push({...post1, life: post1.life[0], idname: post1.idname[0]})
+    filters.push({...prev0, life: prev0.life[0], idname: prev0.idname[0] === '' ? 'prev0' : prev0.idname[0]})
+    filters.push({...prev1, life: prev1.life[0], idname: prev1.idname[0] === '' ? 'prev1' : prev1.idname[0]})
+    filters.push({...prev2, life: prev2.life[0], idname: prev2.idname[0] === '' ? 'prev2' : prev2.idname[0]})
+    filters.push({...post0, life: post0.life[0], idname: post0.idname[0] === '' ? 'post0' : post0.idname[0]})
+    filters.push({...post1, life: post1.life[0], idname: post1.idname[0] === '' ? 'post1' : post1.idname[0]})
     // filters.push({...post2, life: post2.life[0]})
 
     // if(prev0.idname !== '' && prev0.idname !== []) {

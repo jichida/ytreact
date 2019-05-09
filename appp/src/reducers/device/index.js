@@ -54,6 +54,7 @@ const initial = {
           booster:false,
           bathrooms:'',
           shunt:false,
+          source:'',
           tds:'',
           conductivity:'',
           hardness:'',
@@ -81,13 +82,6 @@ const initial = {
           timezone:`${curTZ}`,
           sdate:new Date(),
           stime:new Date(),
-      },
-      inwatersettings:{//进水设定
-        tds:'',
-        conductivity:'',
-        hardness:'',
-        alkalinity:'',
-        ph:'',
       },
       wifisettings:{
         ssid:'',
@@ -128,21 +122,20 @@ const device = createReducer({
         // let homedata = state.homedata;
         // let errordata = state.errordata;
         // let performancedata = state.performancedata;
-        const {inwatersettings:inwatersettingsnew,syssettings:syssettingsnew} = payload;
-        const inwatersettings = state.inwatersettings;
+        const {syssettings:syssettingsnew} = payload;
         const syssettings = state.syssettings;
         syssettings.quality = syssettingsnew.quality;
         syssettings.dormancy = syssettingsnew.dormancy === 0?false:true;
         syssettings.dormancystart = syssettingsnew.dormancystart;
         syssettings.dormancyend = syssettingsnew.dormancyend;
 
-        inwatersettings.ph = inwatersettingsnew.ph;
-        inwatersettings.conductivity = inwatersettingsnew.conductivity;
-        inwatersettings.tds = inwatersettingsnew.tds;
-        inwatersettings.hardness = inwatersettingsnew.hardness;
-        inwatersettings.alkalinity = inwatersettingsnew.alkalinity;
+        // inwatersettings.ph = inwatersettingsnew.ph;
+        // inwatersettings.conductivity = inwatersettingsnew.conductivity;
+        // inwatersettings.tds = inwatersettingsnew.tds;
+        // inwatersettings.hardness = inwatersettingsnew.hardness;
+        // inwatersettings.alkalinity = inwatersettingsnew.alkalinity;
 
-        return { ...state, inwatersettings,syssettings };
+        return { ...state, syssettings };
     },
     [adddevice_result]: (state, payload) => {
         return { ...state, ...payload };
@@ -156,9 +149,9 @@ const device = createReducer({
     // },
     [getdevice_result]: (state, payload) => {
       const {_id,basicinfo:basicinfonew, usewater:usewaternew,install:installnew,
-        syssettings:syssettingsnew,inwatersettings:inwatersettingsnew,wifisettings:wifisettingsnew,
+        syssettings:syssettingsnew,wifisettings:wifisettingsnew,
         checklist:checklistnew,devicelist:devicelistnew} = payload;
-      let {basicinfo,usewater,install,syssettings,inwatersettings,wifisettings,checklist,devicelist} = state;
+      let {basicinfo,usewater,install,syssettings,wifisettings,checklist,devicelist} = state;
       if(!!devicelistnew){
         devicelist = {...devicelistnew};
       }
@@ -174,22 +167,19 @@ const device = createReducer({
       if(!!syssettingsnew){
         syssettings = {...syssettingsnew};
       }
-      if(!!inwatersettingsnew){
-        inwatersettings = {...inwatersettingsnew};
-      }
       if(!!wifisettingsnew){
         wifisettings = {...wifisettingsnew};
       }
       if(!!checklistnew){
         checklist = {...checklistnew};
       }
-      return { ...state, basicinfo,usewater,install,syssettings,inwatersettings,wifisettings,checklist,_id,devicelist };
+      return { ...state, basicinfo,usewater,install,syssettings,wifisettings,checklist,_id,devicelist };
     },
     [setuserdevice_result]: (state, payload) => {
         const {basicinfo:basicinfonew, usewater:usewaternew,install:installnew,
-          syssettings:syssettingsnew,inwatersettings:inwatersettingsnew,wifisettings:wifisettingsnew,
+          syssettings:syssettingsnew,wifisettings:wifisettingsnew,
           checklist:checklistnew,devicelist:devicelistnew} = payload;
-        let {basicinfo,usewater,install,syssettings,inwatersettings,wifisettings,checklist,devicelist} = state;
+        let {basicinfo,usewater,install,syssettings,wifisettings,checklist,devicelist} = state;
         if(!!devicelistnew){
           devicelist = {...devicelistnew};
         }
@@ -205,16 +195,13 @@ const device = createReducer({
         if(!!syssettingsnew){
           syssettings = {...syssettingsnew};
         }
-        if(!!inwatersettingsnew){
-          inwatersettings = {...inwatersettingsnew};
-        }
         if(!!wifisettingsnew){
           wifisettings = {...wifisettingsnew};
         }
         if(!!checklistnew){
           checklist = {...checklistnew};
         }
-        return { ...state, basicinfo,usewater,install,syssettings,inwatersettings,wifisettings,checklist ,devicelist};
+        return { ...state, basicinfo,usewater,install,syssettings,wifisettings,checklist ,devicelist};
     },
 }, initial.device);
 

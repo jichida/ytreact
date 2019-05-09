@@ -43,26 +43,26 @@ const RenderForm = createForm({
                 ...props.ph,
                 value: props.ph.value,
           }),
-          rawtds: createFormField({
-            ...props.rawtds,
-            value: props.rawtds.value,
-          }),
-          rawconductivity: createFormField({
-            ...props.rawconductivity,
-            value: props.rawconductivity.value,
-          }),
-          rawhardness: createFormField({
-                ...props.rawhardness,
-                value: props.rawhardness.value,
-          }),
-          rawalkalinity: createFormField({
-                ...props.rawalkalinity,
-                value: props.rawalkalinity.value,
-          }),
-          rawph: createFormField({
-                ...props.rawph,
-                value: props.rawph.value,
-          }),
+        //   rawtds: createFormField({
+        //     ...props.rawtds,
+        //     value: props.rawtds.value,
+        //   }),
+        //   rawconductivity: createFormField({
+        //     ...props.rawconductivity,
+        //     value: props.rawconductivity.value,
+        //   }),
+        //   rawhardness: createFormField({
+        //         ...props.rawhardness,
+        //         value: props.rawhardness.value,
+        //   }),
+        //   rawalkalinity: createFormField({
+        //         ...props.rawalkalinity,
+        //         value: props.rawalkalinity.value,
+        //   }),
+        //   rawph: createFormField({
+        //         ...props.rawph,
+        //         value: props.rawph.value,
+        //   }),
         //   bucket: createFormField({
         //         ...props.bucket,
         //         value: props.bucket.value,
@@ -72,7 +72,8 @@ const RenderForm = createForm({
 })(injectIntl((props)=>{
     const { validateFields } = props.form;
     const { dispatch, intl} = props;
-    const { tds, conductivity, hardness, alkalinity, ph, rawtds, rawconductivity, rawhardness, rawalkalinity, rawph } = props;
+    const { tds, conductivity, hardness, alkalinity, ph } = props;
+    // const { rawtds, rawconductivity, rawhardness, rawalkalinity, rawph } = props;
     console.log('Setting Inlet Props:', props)
 
     const dispatch_form_err = (dispatch,errs)=>{
@@ -143,7 +144,7 @@ const RenderForm = createForm({
                             </div>
                         }
                 ><FormattedMessage id="setting.water.alkalinity" defaultMessage="进水碱度" /><Brief>{alkalinity.value}</Brief></Item>
-                <Item className="item_switch"
+                {/* <Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.showModal('modalrawPH')}} >
                                 <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
@@ -182,7 +183,7 @@ const RenderForm = createForm({
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.water.rawalkalinity" defaultMessage="原水碱度" /><Brief>{rawalkalinity.value}</Brief></Item>
+                ><FormattedMessage id="setting.water.rawalkalinity" defaultMessage="原水碱度" /><Brief>{rawalkalinity.value}</Brief></Item> */}
                 {/* <Item><FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />
                     <Brief>
                         <div className="item_children">
@@ -263,21 +264,21 @@ class Inlet extends PureComponent{
         modalConductivity: false,
         modalHardness: false,
         modalAlkalinity: false,
-        modalrawTDS: false,
-        modalrawPH: false,
-        modalrawConductivity: false,
-        modalrawHardness: false,
-        modalrawAlkalinity: false,
+        // modalrawTDS: false,
+        // modalrawPH: false,
+        // modalrawConductivity: false,
+        // modalrawHardness: false,
+        // modalrawAlkalinity: false,
         tds:lodashget(inwatersettings,'tds',''),
         conductivity: lodashget(inwatersettings,'conductivity',''),
         hardness: lodashget(inwatersettings,'hardness',''),
         alkalinity: lodashget(inwatersettings,'alkalinity',''),
         ph:lodashget(inwatersettings,'ph',''),
-        rawtds:lodashget(inwatersettings,'rawtds',''),
-        rawconductivity: lodashget(inwatersettings,'rawconductivity',''),
-        rawhardness: lodashget(inwatersettings,'rawhardness',''),
-        rawalkalinity: lodashget(inwatersettings,'rawalkalinity',''),
-        rawph:lodashget(inwatersettings,'rawph',''),
+        // rawtds:lodashget(inwatersettings,'rawtds',''),
+        // rawconductivity: lodashget(inwatersettings,'rawconductivity',''),
+        // rawhardness: lodashget(inwatersettings,'rawhardness',''),
+        // rawalkalinity: lodashget(inwatersettings,'rawalkalinity',''),
+        // rawph:lodashget(inwatersettings,'rawph',''),
       }
     }
 
@@ -320,11 +321,11 @@ class Inlet extends PureComponent{
             modalHardness: false,
             modalPH: false,
             modalTDS: false,
-            modalrawAlkalinity: false,
-            modalrawConductivity: false,
-            modalrawHardness: false,
-            modalrawPH: false,
-            modalrawTDS: false,
+            // modalrawAlkalinity: false,
+            // modalrawConductivity: false,
+            // modalrawHardness: false,
+            // modalrawPH: false,
+            // modalrawTDS: false,
         })
     }
 
@@ -437,114 +438,114 @@ class Inlet extends PureComponent{
         }
     }
 
-    handlerawPHSubmit = () => {
-        console.log(this.state.rawph);
-        const {dispatch} = this.props;
-        let isvalid = this.state.rawph.length > 0;
-        let iph = 0;
-        if(isvalid){
-          iph = parseFloat(this.state.rawph)*10;
-          iph = parseInt(`${iph}`,10);
-          isvalid = iph >= 0 && iph<= 150;
-        }
+    // handlerawPHSubmit = () => {
+    //     console.log(this.state.rawph);
+    //     const {dispatch} = this.props;
+    //     let isvalid = this.state.rawph.length > 0;
+    //     let iph = 0;
+    //     if(isvalid){
+    //       iph = parseFloat(this.state.rawph)*10;
+    //       iph = parseInt(`${iph}`,10);
+    //       isvalid = iph >= 0 && iph<= 150;
+    //     }
 
-        if(isvalid){
-          const cmd = `$feedph ${iph}%`; // 原水ph 命令
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置原水PH',target:{
-            fieldname:'inwatersettings.rawph',
-            value:`${this.state.rawph}`
-          }}));
-          this.handleClose();
-        }
-        else{
-          dispatch(set_weui({
-            toast:{
-            text:'请输入正确的原水ph值',
-            show: true,
-            type:'warning'
-          }}));
-        }
-    }
-    handlerawConductivitySubmit = () => {
-        console.log(this.state.rawconductivity);
-        const {dispatch} = this.props;
-        if(this.state.rawconductivity.length > 0){
-          const cmd = `$feedcon ${this.state.rawconductivity}%`; // 原水导电率 命令
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置原水导电率值',target:{
-            fieldname:'inwatersettings.rawconductivity',
-            value:`${this.state.rawconductivity}`
-          }}));
-          this.handleClose();
-        }
-        else{
-          dispatch(set_weui({
-            toast:{
-            text:'请输入原水导电率值',
-            show: true,
-            type:'warning'
-          }}));
-        }
-    }
-    handlerawTDSSubmit = () => {
-        console.log(this.state.rawtds);
-        const {dispatch} = this.props;
-        if(this.state.rawtds.length > 0){
-          const cmd = `$feedtds ${this.state.rawtds}%`;// 原水tds 命令
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置原水TDS值',target:{
-            fieldname:'inwatersettings.rawtds',
-            value:`${this.state.rawtds}`
-          }}));
-          this.handleClose();
-        }
-        else{
-          dispatch(set_weui({
-            toast:{
-            text:'请输入原水TDS值',
-            show: true,
-            type:'warning'
-          }}));
-        }
-    }
-    handlerawHardnessSubmit = () => {
-        console.log(this.state.rawhardness);
-        const {dispatch} = this.props;
-        if(this.state.rawhardness.length > 0){
-          const cmd = `$feedca ${this.state.rawhardness}%`; // 原水硬度值 命令
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置原水硬度值',target:{
-            fieldname:'inwatersettings.rawhardness',
-            value:`${this.state.rawhardness}`
-          }}));
-          this.handleClose();
-        }
-        else{
-          dispatch(set_weui({
-            toast:{
-            text:'请原水硬度值',
-            show: true,
-            type:'warning'
-          }}));
-        }
-    }
-    handlerawAlkalinitySubmit = () => {
-        console.log(this.state.rawalkalinity);
-        const {dispatch} = this.props;
-        if(this.state.rawalkalinity.length > 0){
-          const cmd = `$feedalk ${this.state.rawalkalinity}%`;// 原水咸度值 命令
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置原水咸度值',target:{
-            fieldname:'inwatersettings.rawalkalinity',
-            value:`${this.state.rawalkalinity}`
-          }}));
-          this.handleClose();
-        }
-        else{
-          dispatch(set_weui({
-            toast:{
-            text:'请原水咸度值',
-            show: true,
-            type:'warning'
-          }}));
-        }
-    }
+    //     if(isvalid){
+    //       const cmd = `$feedph ${iph}%`; // 原水ph 命令
+    //       dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置原水PH',target:{
+    //         fieldname:'inwatersettings.rawph',
+    //         value:`${this.state.rawph}`
+    //       }}));
+    //       this.handleClose();
+    //     }
+    //     else{
+    //       dispatch(set_weui({
+    //         toast:{
+    //         text:'请输入正确的原水ph值',
+    //         show: true,
+    //         type:'warning'
+    //       }}));
+    //     }
+    // }
+    // handlerawConductivitySubmit = () => {
+    //     console.log(this.state.rawconductivity);
+    //     const {dispatch} = this.props;
+    //     if(this.state.rawconductivity.length > 0){
+    //       const cmd = `$feedcon ${this.state.rawconductivity}%`; // 原水导电率 命令
+    //       dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置原水导电率值',target:{
+    //         fieldname:'inwatersettings.rawconductivity',
+    //         value:`${this.state.rawconductivity}`
+    //       }}));
+    //       this.handleClose();
+    //     }
+    //     else{
+    //       dispatch(set_weui({
+    //         toast:{
+    //         text:'请输入原水导电率值',
+    //         show: true,
+    //         type:'warning'
+    //       }}));
+    //     }
+    // }
+    // handlerawTDSSubmit = () => {
+    //     console.log(this.state.rawtds);
+    //     const {dispatch} = this.props;
+    //     if(this.state.rawtds.length > 0){
+    //       const cmd = `$feedtds ${this.state.rawtds}%`;// 原水tds 命令
+    //       dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置原水TDS值',target:{
+    //         fieldname:'inwatersettings.rawtds',
+    //         value:`${this.state.rawtds}`
+    //       }}));
+    //       this.handleClose();
+    //     }
+    //     else{
+    //       dispatch(set_weui({
+    //         toast:{
+    //         text:'请输入原水TDS值',
+    //         show: true,
+    //         type:'warning'
+    //       }}));
+    //     }
+    // }
+    // handlerawHardnessSubmit = () => {
+    //     console.log(this.state.rawhardness);
+    //     const {dispatch} = this.props;
+    //     if(this.state.rawhardness.length > 0){
+    //       const cmd = `$feedca ${this.state.rawhardness}%`; // 原水硬度值 命令
+    //       dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置原水硬度值',target:{
+    //         fieldname:'inwatersettings.rawhardness',
+    //         value:`${this.state.rawhardness}`
+    //       }}));
+    //       this.handleClose();
+    //     }
+    //     else{
+    //       dispatch(set_weui({
+    //         toast:{
+    //         text:'请原水硬度值',
+    //         show: true,
+    //         type:'warning'
+    //       }}));
+    //     }
+    // }
+    // handlerawAlkalinitySubmit = () => {
+    //     console.log(this.state.rawalkalinity);
+    //     const {dispatch} = this.props;
+    //     if(this.state.rawalkalinity.length > 0){
+    //       const cmd = `$feedalk ${this.state.rawalkalinity}%`;// 原水咸度值 命令
+    //       dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置原水咸度值',target:{
+    //         fieldname:'inwatersettings.rawalkalinity',
+    //         value:`${this.state.rawalkalinity}`
+    //       }}));
+    //       this.handleClose();
+    //     }
+    //     else{
+    //       dispatch(set_weui({
+    //         toast:{
+    //         text:'请原水咸度值',
+    //         show: true,
+    //         type:'warning'
+    //       }}));
+    //     }
+    // }
 
     render () {
         const {inwatersettings,dispatch} = this.props;
@@ -566,21 +567,21 @@ class Inlet extends PureComponent{
             ph: {
                 value: lodashget(inwatersettings,'ph',''),
             },
-            rawtds: {
-                value:lodashget(inwatersettings,'rawtds',''),
-            },
-            rawconductivity: {
-                value:lodashget(inwatersettings,'rawconductivity',''),
-            },
-            rawhardness: {
-                value: lodashget(inwatersettings,'rawhardness',''),
-            },
-            rawalkalinity: {
-                value: lodashget(inwatersettings,'rawalkalinity',''),
-            },
-            rawph: {
-                value: lodashget(inwatersettings,'rawph',''),
-            },
+            // rawtds: {
+            //     value:lodashget(inwatersettings,'rawtds',''),
+            // },
+            // rawconductivity: {
+            //     value:lodashget(inwatersettings,'rawconductivity',''),
+            // },
+            // rawhardness: {
+            //     value: lodashget(inwatersettings,'rawhardness',''),
+            // },
+            // rawalkalinity: {
+            //     value: lodashget(inwatersettings,'rawalkalinity',''),
+            // },
+            // rawph: {
+            //     value: lodashget(inwatersettings,'rawph',''),
+            // },
         }
         return (
             <div className="sub_setting_bg">
@@ -794,7 +795,7 @@ class Inlet extends PureComponent{
                 </Modal>
 
 
-                <Modal
+                {/* <Modal
                     popup
                     visible={this.state.modalrawPH}
                     animationType="slide-up"
@@ -987,7 +988,7 @@ class Inlet extends PureComponent{
                             </WingBlank>
                         </WingBlank>
                     </div>
-                </Modal>
+                </Modal> */}
 
             </div>
 

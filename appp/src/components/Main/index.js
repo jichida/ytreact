@@ -303,13 +303,13 @@ class Home extends PureComponent{
         const devicelist_post = [];
         lodashmap(devicelist,(dv)=>{
           if(dv.isprev){
-            if(dv.idname !== ''){
+          if(dv.life !== '0'){
               devicelist_prev.push(dv);
             }
 
           }
           else{
-            if(dv.idname !== ''){
+          if(dv.life !== '0'){
               devicelist_post.push(dv);
             }
           }

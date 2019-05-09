@@ -16,12 +16,6 @@ const initial = {
       distributorid:{},
       devicelist:{
         filterlist:[
-          {isprev: true, lastchangedate: "2019-04-26T09:10:35.250Z",  idname: "prev0"},
-          {isprev: true, lastchangedate: "2019-04-26T09:10:35.250Z",  idname: "prev1"},
-          {isprev: true, lastchangedate: "2019-04-26T09:10:35.250Z",  idname: "prev2"},
-          {isprev: false, lastchangedate: "2019-04-26T09:10:35.250Z", idname: "post0"},
-          {isprev: false, lastchangedate: "2019-04-26T09:10:35.250Z", idname: "post1"},
-          {isprev: false, lastchangedate: "2019-04-26T09:10:35.250Z", idname: "post2"},
         ],
         configuration: String,
         materials: String,

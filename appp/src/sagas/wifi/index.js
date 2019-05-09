@@ -40,7 +40,8 @@ import {
 
   push_devicecmddata,
 
-  setlinkmode
+  setlinkmode,
+  setdatatarget
   // wifi_seteasylink,
 } from '../../actions/index.js';
 import { push } from 'connected-react-router';//https://github.com/reactjs/connected-react-router
@@ -681,6 +682,9 @@ export function* wififlow() {
               }
               else{
                 if(`${payload.cmd}` !== '$data%'){
+                  if(!!payload.target){
+                    yield put(setdatatarget(payload.target));
+                  }
                   yield put(set_weui({
                     toast:{
                     text:`发送给硬件【${payload.cmdstring}】命令成功`,
@@ -692,6 +696,9 @@ export function* wififlow() {
             }
             else{
               if(`${payload.cmd}` !== '$data%'){
+                if(!!payload.target){
+                  yield put(setdatatarget(payload.target));
+                }
                 yield put(set_weui({
                   toast:{
                   text:`发送给硬件【${payload.cmdstring}】命令成功`,

@@ -1,7 +1,9 @@
 import { createReducer } from 'redux-act';
+import lodashSet from 'lodash.set';
 import {
   wifi_getdata,
   getdevice_result,
+  setdatatarget
 } from '../../actions/index.js';
 // import moment from 'moment';
 
@@ -119,7 +121,7 @@ const initial = {
         min_averagecut_300:3,// 17	平均cut@300	300电导率时的cut	1 word
         min_waterpurificationrate:2,//18	净水率	回收率  日用水量/(日用水量+日废水量)	1 byte
       },
-      inwatersettings:{//进水设定
+      inwatersettings:{//进水设定（只针对
         tds:'',//进水TDS	进水TDS  word	1 word
         conductivity:'',//50	进水电导率	进水电导率  word	1 word
         hardness:'',//进水硬度	进水硬度  word	1 word
@@ -138,6 +140,22 @@ const initial = {
 };
 
 const devicedata = createReducer({
+    [setdatatarget]:(state,payload)=>{
+      let newdata = {};
+      lodashSet(newdata,`${payload.fieldname}`,payload.value);
+      console.log(newdata);
+      const {inwatersettings:inwatersettingsnew,
+      syssettings:syssettingsnew} = newdata;
+      let inwatersettings = state.inwatersettings;
+      let syssettings = state.syssettings;
+      if(!!inwatersettingsnew){
+        inwatersettings = {...inwatersettings,...inwatersettingsnew}
+      }
+      if(!!syssettingsnew){
+        syssettings = {...syssettings,...syssettingsnew}
+      }
+      return {...state,inwatersettings, syssettings};
+    },
     [getdevice_result]:(state,payload)=>{
       if(!!payload.appdata){
         const {homedata:homedatanew,errordata:errordatanew,performancedata:performancedatanew,inwatersettings:inwatersettingsnew,

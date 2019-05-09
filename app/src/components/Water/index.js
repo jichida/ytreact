@@ -175,7 +175,7 @@ const RenderForm = createForm({
 class DeviceWater extends PureComponent{
 
     render () {
-        const { history,usewater, intl: { formatMessage } } = this.props;
+        const { history,usewater,inwatersettings, intl: { formatMessage } } = this.props;
 
         const basicData = {
             // quantity: {
@@ -200,22 +200,22 @@ class DeviceWater extends PureComponent{
             //     value: lodashget(usewater,'shunt',false)? formatMessage({id: 'form.yes1'}) : formatMessage({id: 'form.no1'}),
             // },
             tds: {
-                value: lodashget(usewater,'tds',''),
+                value: lodashget(inwatersettings,'tds',''),
             },
             conductivity: {
-                value: lodashget(usewater,'conductivity',''),
+                value: lodashget(inwatersettings,'conductivity',''),
             },
             hardness: {
-                value: lodashget(usewater,'hardness',''),
+                value: lodashget(inwatersettings,'hardness',''),
             },
             alkalinity: {
-                value: lodashget(usewater,'alkalinity',''),
+                value: lodashget(inwatersettings,'alkalinity',''),
             },
             ph: {
-                value: lodashget(usewater,'ph',''),
+                value: lodashget(inwatersettings,'ph',''),
             },
             usertds: {
-                value: lodashget(usewater,'usertds',''),
+                value: lodashget(inwatersettings,'usertds',''),
             },
         }
 
@@ -237,8 +237,8 @@ class DeviceWater extends PureComponent{
         )
     }
 }
-const mapStateToProps =  ({device:{usewater,_id}}) =>{
-  return {usewater,_id};
+const mapStateToProps =  ({device:{usewater,_id},devicedata:{inwatersettings}}) =>{
+  return {usewater,inwatersettings,_id};
 };
 DeviceWater = connect(mapStateToProps)(DeviceWater);
 export default withRouter(injectIntl(DeviceWater));

@@ -106,37 +106,37 @@ const initial = {
 };
 
 const device = createReducer({
-    [tmp_ui_setuserdevice_request]:(state,payload)=>{
-      const {inwatersettings:inwatersettingsnew} = payload;
-      const inwatersettings = state.inwatersettings;
-
-      inwatersettings.ph = inwatersettingsnew.ph;
-      inwatersettings.conductivity = inwatersettingsnew.conductivity;
-      inwatersettings.tds = inwatersettingsnew.tds;
-      inwatersettings.hardness = inwatersettingsnew.hardness;
-      inwatersettings.alkalinity = inwatersettingsnew.alkalinity;
-
-      return { ...state, inwatersettings};
-    },
-    [wifi_getdata]: (state, payload) => {
-        // let homedata = state.homedata;
-        // let errordata = state.errordata;
-        // let performancedata = state.performancedata;
-        const {syssettings:syssettingsnew} = payload;
-        const syssettings = state.syssettings;
-        syssettings.quality = syssettingsnew.quality;
-        syssettings.dormancy = syssettingsnew.dormancy === 0?false:true;
-        syssettings.dormancystart = syssettingsnew.dormancystart;
-        syssettings.dormancyend = syssettingsnew.dormancyend;
-
-        // inwatersettings.ph = inwatersettingsnew.ph;
-        // inwatersettings.conductivity = inwatersettingsnew.conductivity;
-        // inwatersettings.tds = inwatersettingsnew.tds;
-        // inwatersettings.hardness = inwatersettingsnew.hardness;
-        // inwatersettings.alkalinity = inwatersettingsnew.alkalinity;
-
-        return { ...state, syssettings };
-    },
+    // [tmp_ui_setuserdevice_request]:(state,payload)=>{
+    //   const {inwatersettings:inwatersettingsnew} = payload;
+    //   const inwatersettings = state.inwatersettings;
+    //
+    //   inwatersettings.ph = inwatersettingsnew.ph;
+    //   inwatersettings.conductivity = inwatersettingsnew.conductivity;
+    //   inwatersettings.tds = inwatersettingsnew.tds;
+    //   inwatersettings.hardness = inwatersettingsnew.hardness;
+    //   inwatersettings.alkalinity = inwatersettingsnew.alkalinity;
+    //
+    //   return { ...state, inwatersettings};
+    // },
+    // [wifi_getdata]: (state, payload) => {
+    //     // let homedata = state.homedata;
+    //     // let errordata = state.errordata;
+    //     // let performancedata = state.performancedata;
+    //     const {syssettings:syssettingsnew} = payload;
+    //     const syssettings = state.syssettings;
+    //     syssettings.quality = syssettingsnew.quality;
+    //     syssettings.dormancy = syssettingsnew.dormancy === 0?false:true;
+    //     syssettings.dormancystart = syssettingsnew.dormancystart;
+    //     syssettings.dormancyend = syssettingsnew.dormancyend;
+    //
+    //     // inwatersettings.ph = inwatersettingsnew.ph;
+    //     // inwatersettings.conductivity = inwatersettingsnew.conductivity;
+    //     // inwatersettings.tds = inwatersettingsnew.tds;
+    //     // inwatersettings.hardness = inwatersettingsnew.hardness;
+    //     // inwatersettings.alkalinity = inwatersettingsnew.alkalinity;
+    //
+    //     return { ...state, syssettings };
+    // },
     [adddevice_result]: (state, payload) => {
         return { ...state, ...payload };
     },

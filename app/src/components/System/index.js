@@ -463,7 +463,7 @@ class SettingSystem extends PureComponent{
     }
 }
 
-const mapStateToProps =  ({device:{locale,syssettings,_id}}) =>{
+const mapStateToProps =  ({device:{locale,_id},devicedata:{syssettings}}) =>{
 
     return { locale, syssettings, _id };
 };

@@ -59,3 +59,22 @@ export const post1Options = [
         value: '180'
     }
 ]
+
+export const getFilterLabel = (intl,id,value)=>{
+  if(id === 'prev0'){
+    return intl.formatMessage({id:"setting.system.PP"},{value});
+  }
+  if(id === 'prev1'){
+    return intl.formatMessage({id:"setting.system.carbon"},{value});
+  }
+  if(id === 'prev2'){
+    return intl.formatMessage({id:"setting.system.TAC" },{value});
+  }
+  if(id === 'post0'){
+    return intl.formatMessage({id:"setting.system.LED" },{value});
+  }
+  if(id === 'post1'){
+    return intl.formatMessage({id:"setting.system.AFC"},{value});
+  }
+  return '';
+}

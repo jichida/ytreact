@@ -18,7 +18,7 @@ import {
   // ImageField,
   Filter
 } from 'react-admin';
-
+import ResestPassword from './resetpassword';
 // import {Titlewithimage} from '../controls/Titlewithimage';
 
 
@@ -104,6 +104,7 @@ const DistributorList = (props) => (//
             <TextField source="name" />
         </ReferenceField>
         <EditBtnif />
+        <ResestPassword />
         </Datagrid>
     </List>
 );

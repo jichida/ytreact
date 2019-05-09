@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {  NavBar, Icon, List, Accordion } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import lodashMap from 'lodash.map'
 import loadshGet from 'lodash.get'
 
@@ -122,6 +122,7 @@ const EquipmentPer = {
     others: <FormattedMessage id="equipment.others" defaultMessage="其他" />
 }
 
+
 class EquipmentList extends PureComponent{
 
     render () {
@@ -141,13 +142,13 @@ class EquipmentList extends PureComponent{
                 {/* { <RenderForm {...basicData} {...this.props} />} */}
                 <div className="equipment">
                     <List className="equipment-list">
-                        <Item extra={EquipmentPer[loadshGet(prevlist, '0.idname', 'none')]}>{EquipmentPer['prev0']}</Item>
-                        <Item extra={EquipmentPer[loadshGet(prevlist, '1.idname', 'none')]}>{EquipmentPer['prev1']}</Item>
-                        <Item extra={EquipmentPer[loadshGet(prevlist, '2.idname', 'none')]}>{EquipmentPer['prev2']}</Item>
+                        <Item extra={loadshGet(prevlist, '0.life', '0') === '0' ? '无' : <FormattedMessage id="setting.system.PP" values={{value: loadshGet(prevlist, '0.life', '0')}} />}>{EquipmentPer['prev0']}</Item>
+                        <Item extra={loadshGet(prevlist, '1.life', '0') === '0' ? '无' : <FormattedMessage id="setting.system.carbon" values={{value: loadshGet(prevlist, '1.life', '0')}} />}>{EquipmentPer['prev1']}</Item>
+                        <Item extra={loadshGet(prevlist, '2.life', '0') === '0' ? '无' : <FormattedMessage id="setting.system.TAC" values={{value: loadshGet(prevlist, '2.life', '0')}} />}>{EquipmentPer['prev2']}</Item>
                         <Item extra={`${loadshGet(devicelist, 'host', '')}`}>{EquipmentPer['host']}</Item>
-                        <Item extra={EquipmentPer[loadshGet(postlist, '0.idname', 'none')]}>{EquipmentPer['post0']}</Item>
-                        <Item extra={EquipmentPer[loadshGet(postlist, '1.idname', 'none')]}>{EquipmentPer['post1']}</Item>
-                        <Item extra={EquipmentPer[loadshGet(postlist, '2.idname', 'none')]}>{EquipmentPer['post2']}</Item>
+                        <Item extra={loadshGet(postlist, '0.life', '0') === '0' ? '无' : <FormattedMessage id="setting.system.LED" values={{value: loadshGet(postlist, '0.life', '0')}} />}>{EquipmentPer['post0']}</Item>
+                        <Item extra={loadshGet(postlist, '1.life', '0') === '0' ? '无' : <FormattedMessage id="setting.system.AFC" values={{value: loadshGet(postlist, '1.life', '0')}} />}>{EquipmentPer['post1']}</Item>
+                        <Item extra={'无'}>{EquipmentPer['post2']}</Item>
                         <Item extra={EquipmentPer[loadshGet(devicelist, 'configuration', 'none')]}>{EquipmentPer['configuration']}</Item>
                         <Item extra={EquipmentPer[loadshGet(devicelist, 'materials', 'none')]}>{EquipmentPer['materials']}</Item>
                     </List>

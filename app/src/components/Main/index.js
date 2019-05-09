@@ -20,11 +20,12 @@ const CRed = '#ff2728';
 const CGreen = '#3eef7d';
 const CBlue = '#38b4f2';
 
-const getPercent = (id,value) => {
+const getPercent = (id, value, full) => {
     let cf = config[id];
     let color = CGreen;
     let warring = false;
-    let percent = Math.round(value/cf.value * 100) ;
+    let fullvalue = !!full ? full : cf.value;
+    let percent = Math.round(value/fullvalue * 100) ;
     if(percent >= cf.fullPercent){
         color = CBlue;
     } else if(percent <= cf.warringPercent){
@@ -100,7 +101,7 @@ class Home extends PureComponent{
     //       title_filterelements_prefilter1_leftday = intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'});
     //       icon_filterelements_prefilter1_leftday = CRed;
     //   }
-      const prefilter1_leftday = getPercent('filterelements_prefilter1_leftday', lodashget(devicedata,'filterelements_prefilter1_leftday',0));
+    const prefilter1_leftday = getPercent('filterelements_prefilter1_leftday', lodashget(devicedata,'filterelements_prefilter1_leftday',0), lodashget(devicelist[0], 'life', lodashget(devicedata,'filterelements_prefilter1_leftday',0)*100));
       const icon_filterelements_prefilter1_leftday = prefilter1_leftday.color;
       const title_filterelements_prefilter1_leftday = (prefilter1_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})
@@ -138,7 +139,7 @@ class Home extends PureComponent{
     //       title_filterelements_prefilter2_leftvol = intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'});
     //       icon_filterelements_prefilter2_leftvol = CRed;
     //   }
-      const prefilter2_leftday = getPercent('filterelements_prefilter2_leftday', lodashget(devicedata,'filterelements_prefilter2_leftday',0));
+      const prefilter2_leftday = getPercent('filterelements_prefilter2_leftday', lodashget(devicedata,'filterelements_prefilter2_leftday',0), lodashget(devicelist[1], 'life', lodashget(devicedata,'filterelements_prefilter2_leftday',0)*100));
       const icon_filterelements_prefilter2_leftday = prefilter2_leftday.color;
       const title_filterelements_prefilter2_leftday = (prefilter2_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})
@@ -170,7 +171,7 @@ class Home extends PureComponent{
     //       title_filterelements_prefilter3_leftvol = intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'});
     //       icon_filterelements_prefilter3_leftvol = CRed;
     //   }
-      const prefilter3_leftday = getPercent('filterelements_prefilter3_leftday', lodashget(devicedata,'filterelements_prefilter3_leftday',0));
+      const prefilter3_leftday = getPercent('filterelements_prefilter3_leftday', lodashget(devicedata,'filterelements_prefilter3_leftday',0), lodashget(devicelist[2], 'life', lodashget(devicedata,'filterelements_prefilter3_leftday',0)*100));
       const icon_filterelements_prefilter3_leftday = prefilter3_leftday.color;
       const title_filterelements_prefilter3_leftday = (prefilter3_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})
@@ -203,7 +204,7 @@ class Home extends PureComponent{
     //       title_filterelements_posfilter1_leftvol = intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'});
     //       icon_filterelements_posfilter1_leftvol = CRed;
     //   }
-      const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', lodashget(devicedata,'filterelements_posfilter1_leftday',0));
+      const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', lodashget(devicedata,'filterelements_posfilter1_leftday',0), lodashget(devicelist[4], 'life', lodashget(devicedata,'filterelements_posfilter1_leftday',0)*100));
       const icon_filterelements_posfilter1_leftday = posfilter1_leftday.color;
       const title_filterelements_posfilter1_leftday = (posfilter1_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})
@@ -237,7 +238,7 @@ class Home extends PureComponent{
     //       icon_filterelements_posfilter2_leftvol = CRed;
     //   }
 
-      const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', lodashget(devicedata,'filterelements_posfilter2_leftday',0));
+      const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', lodashget(devicedata,'filterelements_posfilter2_leftday',0), lodashget(devicelist[5], 'life', lodashget(devicedata,'filterelements_posfilter2_leftday',0)*100));
       const icon_filterelements_posfilter2_leftday = posfilter2_leftday.color;
       const title_filterelements_posfilter2_leftday = (posfilter2_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})
@@ -269,7 +270,7 @@ class Home extends PureComponent{
     //       title_filterelements_posfilter3_leftvol = intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'});
     //       icon_filterelements_posfilter3_leftvol = CRed;
     //   }
-      const posfilter3_leftday = getPercent('filterelements_posfilter3_leftday', lodashget(devicedata,'filterelements_posfilter3_leftday',0));
+      const posfilter3_leftday = getPercent('filterelements_posfilter3_leftday', lodashget(devicedata,'filterelements_posfilter3_leftday',0), lodashget(devicelist[5], 'life', lodashget(devicedata,'filterelements_posfilter3_leftday',0)*100));
       const icon_filterelements_posfilter3_leftday = posfilter3_leftday.color;
       const title_filterelements_posfilter3_leftday = (posfilter3_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})
@@ -288,13 +289,13 @@ class Home extends PureComponent{
       const devicelist_post = [];
       lodashmap(devicelist,(dv)=>{
         if(dv.isprev){
-          if(dv.idname !== ''){
+          if(dv.life !== '0'){
             devicelist_prev.push(dv);
           }
 
         }
         else{
-          if(dv.idname !== ''){
+          if(dv.life !== '0'){
             devicelist_post.push(dv);
           }
         }
@@ -372,11 +373,13 @@ class Home extends PureComponent{
       let showco = [];
       if(devicelist_prev.length === 3){
         showco.push(<Flex key="listprev0">
-          {getFilterCo(devicelist_prev[0].idname)}
-          {getFilterCo(devicelist_prev[1].idname)}
+          {getFilterCo('prev0')} 
+          {/* devicelist_prev[0].idname */}
+          {getFilterCo('prev1')}
+          {/* devicelist_prev[1].idname */}
           </Flex>);
         showco.push(<WhiteSpace key="listprev1" style={{height: '2px', margin: '5px auto'}} />);
-        showco.push(<Flex key="listprev2">{getFilterCo(devicelist_prev[2].idname)}
+        showco.push(<Flex key="listprev2">{getFilterCo('prev2')}
           <Flex.Item></Flex.Item>
           </Flex>);
       }
@@ -397,19 +400,19 @@ class Home extends PureComponent{
       showco.push(<WhiteSpace   key="listprevpostsep" style={{height: '2px', backgroundColor: '#333', margin: '15px auto'}} />);
       if(devicelist_post.length === 3){
         showco.push(<Flex  key="listpost0">
-          {getFilterCo(devicelist_post[0].idname)}
-          {getFilterCo(devicelist_post[1].idname)}
+          {getFilterCo('post0')}
+          {getFilterCo('post1')}
           </Flex>);
         showco.push(<WhiteSpace key="listpost1" style={{height: '2px', margin: '5px auto'}} />);
-        showco.push(<Flex key="listpost2">{getFilterCo(devicelist_post[2].idname)}
+        showco.push(<Flex key="listpost2">{getFilterCo('post2')}
           <Flex.Item></Flex.Item>
           </Flex>);
       }
       else if(devicelist_post.length === 2){
         showco.push(
           <Flex  key="listpost0">
-          {getFilterCo(devicelist_post[0].idname)}
-          {getFilterCo(devicelist_post[1].idname)}
+          {getFilterCo('post0')}
+          {getFilterCo('post1')}
           </Flex>);
       }
       else if(devicelist_post.length === 1){

@@ -133,7 +133,7 @@ const initial = {
           dormancy:false,
           dormancystart:'00:00',
           dormancyend:'23:00',
-          language:''
+          language:'zh-cn'
       },
     },
 
@@ -144,8 +144,7 @@ const devicedata = createReducer({
       let newdata = {};
       lodashSet(newdata,`${payload.fieldname}`,payload.value);
       console.log(newdata);
-      const {inwatersettings:inwatersettingsnew,
-      syssettings:syssettingsnew} = newdata;
+      const {inwatersettings:inwatersettingsnew,syssettings:syssettingsnew} = newdata;
       let inwatersettings = state.inwatersettings;
       let syssettings = state.syssettings;
       if(!!inwatersettingsnew){

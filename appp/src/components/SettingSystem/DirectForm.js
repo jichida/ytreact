@@ -134,13 +134,14 @@ class Index extends React.Component {
         this.props.showModal('modal2');
     }
 
-    onClickCmd = (cmd,cmdstring='设置')=>{
+    onClickCmd = (cmd,cmdstring='设置',target)=>{
         const { dispatch, intl } = this.props;
+        const reqobj = !!target ? {cmd,cmdstring,target}:{cmd,cmdstring};
         dispatch(set_confirm({
           title: `${intl.formatMessage({id: 'form.confirm'})}`,
           message: `${cmdstring}?`,
           text: [`${intl.formatMessage({id: 'form.cancel'})}`, `${intl.formatMessage({id: 'form.ok'})}`],
-          command: wifi_sendcmd_request({cmd,cmdstring})
+          command: wifi_sendcmd_request(reqobj)
         }))
 
         // dispatch(wifi_sendcmd_request({cmd,cmdstring}));
@@ -328,15 +329,15 @@ class Index extends React.Component {
                                     if(language === 'en'){
                                       // 语言选择：0 ：中文简体，1：中文繁体，2：英语	$charact 0%
                                       const cmd = `$charact 2%`;
-                                      this.onClickCmd(cmd,'设置英语');
+                                      this.onClickCmd(cmd,'设置英语',{fieldname:'syssettings.language',value:'en'});
                                     }
                                     else if(language === 'zh-cn'){
                                       const cmd = `$charact 0%`;
-                                      this.onClickCmd(cmd,'设置中文简体');
+                                      this.onClickCmd(cmd,'设置中文简体',{fieldname:'syssettings.language',value:'zh-cn'});
                                     }
                                     else if(language === 'zh-tw'){
                                       const cmd = `$charact 1%`;
-                                      this.onClickCmd(cmd,'设置中文繁体');
+                                      this.onClickCmd(cmd,'设置中文繁体',{fieldname:'syssettings.language',value:'zh-tw'});
                                     }
                                     console.log(v);
                                   }

@@ -63,12 +63,6 @@ const DeviceuserEdit = (props) => {
             <TextInput label="卫浴间数量" source="usewater.bathrooms"  />
             {/* <TextInput label="是否分流" source="usewater.shunt"  /> */}
             <NullableBooleanInput label="是否分流" source="usewater.shunt"  />
-            <TextInput label="原水TDS值" source="usewater.tds"  />
-            <TextInput label="原水导电率" source="usewater.conductivity"  />
-            <TextInput label="原水硬度(ppm)" source="usewater.hardness"  />
-            <TextInput label="原水碱度(ppm)" source="usewater.alkalinity"  />
-            <TextInput label="ph值" source="usewater.ph"  />
-            <TextInput label="用户需求出水TDS值" source="usewater.usertds"  />
           </FormTab>
           <FormTab label="安装信息">
             <TextInput label="安装地点" source="install.position" />
@@ -91,13 +85,6 @@ const DeviceuserEdit = (props) => {
             <TextField label="安装日期" source="syssettings.installdate"  />
             <TextField label="安装人员" source="syssettings.installer"  />
             <TextField label="时区" source="syssettings.timezone"  />
-          </FormTab>
-          <FormTab label="进水设定">
-            <TextInput label="PH值" source="inwatersettings.ph" />
-            <TextInput label="进水导电率" source="inwatersettings.conductivity" />
-            <TextInput label="进水TDS值" source="inwatersettings.tds"  />
-            <TextInput label="进水硬度" source="inwatersettings.hardness"  />
-            <TextField label="时区" source="inwatersettings.alkalinity"  />
           </FormTab>
           <FormTab label="安装检查表">
             <TextFieldBool label="滤芯已冲洗" source="checklist.washed" />
@@ -128,7 +115,7 @@ const DeviceuserEdit = (props) => {
 
 
 const DeviceuserList = (props) => (//
-     <List title="设备列表" {...props} filters={<DeviceFilter />}  
+     <List title="设备列表" {...props} filters={<DeviceFilter />}
       sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid expand={<DeviceShow />}>
           <TextField label="设备ID" source="syssettings.deviceid" />

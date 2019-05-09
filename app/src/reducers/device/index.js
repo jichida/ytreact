@@ -54,6 +54,7 @@ const initial = {
           booster:false,
           bathrooms:'',
           shunt:false,
+          source:'',
           tds:'',
           conductivity:'',
           hardness:'',
@@ -121,21 +122,20 @@ const device = createReducer({
     //     // let homedata = state.homedata;
     //     // let errordata = state.errordata;
     //     // let performancedata = state.performancedata;
-    //     const {inwatersettings:inwatersettingsnew,syssettings:syssettingsnew} = payload;
-    //     const inwatersettings = state.inwatersettings;
+    //     const {syssettings:syssettingsnew} = payload;
     //     const syssettings = state.syssettings;
     //     syssettings.quality = syssettingsnew.quality;
     //     syssettings.dormancy = syssettingsnew.dormancy === 0?false:true;
     //     syssettings.dormancystart = syssettingsnew.dormancystart;
     //     syssettings.dormancyend = syssettingsnew.dormancyend;
     //
-    //     inwatersettings.ph = inwatersettingsnew.ph;
-    //     inwatersettings.conductivity = inwatersettingsnew.conductivity;
-    //     inwatersettings.tds = inwatersettingsnew.tds;
-    //     inwatersettings.hardness = inwatersettingsnew.hardness;
-    //     inwatersettings.alkalinity = inwatersettingsnew.alkalinity;
+    //     // inwatersettings.ph = inwatersettingsnew.ph;
+    //     // inwatersettings.conductivity = inwatersettingsnew.conductivity;
+    //     // inwatersettings.tds = inwatersettingsnew.tds;
+    //     // inwatersettings.hardness = inwatersettingsnew.hardness;
+    //     // inwatersettings.alkalinity = inwatersettingsnew.alkalinity;
     //
-    //     return { ...state, inwatersettings,syssettings };
+    //     return { ...state, syssettings };
     // },
     [adddevice_result]: (state, payload) => {
         return { ...state, ...payload };

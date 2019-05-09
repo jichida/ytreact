@@ -1,7 +1,7 @@
 /**
  * Created by wangxiaoqing on 2017/3/25.
  */
-import { put,takeLatest,takeEvery,call,take,race,fork,select} from 'redux-saga/effects';
+import { put,takeLatest,call,take,race,fork,select} from 'redux-saga/effects';
 import {delay} from 'redux-saga';
 import {
   getssidlist,
@@ -40,7 +40,8 @@ import {
 
   push_devicecmddata,
 
-
+  setlinkmode,
+  setdatatarget
   // wifi_seteasylink,
 } from '../../actions/index.js';
 import { push } from 'connected-react-router';//https://github.com/reactjs/connected-react-router
@@ -54,7 +55,7 @@ import config from '../../env/config';
 import moment from 'moment';
 
 let recvbuf = '';
-let linkmode = 'internetmode';//unknow,directmode,internetmode
+// let linkmode = 'internetmode';//unknow,directmode,internetmode
 let lastresponsemoment = moment();
 
 setwifistatuscallback();
@@ -491,13 +492,9 @@ export function* wififlow() {
     yield takeLatest(`${ui_wifisuccess_tonext}`,function*(action){
       try{
         const {payload:{isinternet}} = action;
-        if(isinternet){
-          linkmode = 'internetmode';
-        }
-        else{
-          linkmode = 'directmode';
-        }
 
+        const linkmode = isinternet?'internetmode':'directmode';
+        yield put(setlinkmode(linkmode));
 
         if(isinternet){
           yield put(push('/home'));
@@ -641,7 +638,7 @@ export function* wififlow() {
                   expectstring = `${objstring}ok%`;
                 }
               }
-              if(expectstring !== `${wifiresult.payload.data}`){
+              if(expectstring !== `${wifiresult.payload.data}`  && `${payload.cmd}` !== '$data%'){
                 istimeout = true;//
               }
             }
@@ -671,7 +668,7 @@ export function* wififlow() {
                     expectstring = `${objstring}ok%`;
                   }
                 }
-                if(expectstring !== `${wifiresult.payload.data}`){
+                if(expectstring !== `${wifiresult.payload.data}` && `${payload.cmd}` !== '$data%'){
                   istimeout = true;//
                 }
               }
@@ -684,6 +681,10 @@ export function* wififlow() {
                 }}));
               }
               else{
+                if(`${payload.cmd}` !== '$data%'){
+                  if(!!payload.target){
+                    yield put(setdatatarget(payload.target));
+                  }
                 yield put(set_weui({
                   toast:{
                       text:`发送给硬件【${payload.cmdstring}】命令成功`,
@@ -692,7 +693,12 @@ export function* wififlow() {
                 }}));
               }
             }
+            }
             else{
+              if(`${payload.cmd}` !== '$data%'){
+                if(!!payload.target){
+                  yield put(setdatatarget(payload.target));
+                }
               yield put(set_weui({
                 toast:{
                 text:`发送给硬件【${payload.cmdstring}】命令成功`,
@@ -700,7 +706,7 @@ export function* wififlow() {
                 type:'success'
               }}));
             }
-
+            }
       }
       catch(e){
         console.log(e);
@@ -795,22 +801,9 @@ export function* wififlow() {
               continue;
             };
 
-          // const internet_connected = yield select((state)=>{
-          //   return state.app.issocketconnected;
-          // });
-          // console.log(internet_connected);
-          // console.log(`--->开始检查:${linkmode},internet_connected:${internet_connected}`)
-          // if(internet_connected){
-          //   linkmode = 'internetmode';
-          //   console.log(`--->linkmode从directmode切换为internetmode`)
-          // }
-          // else{
-          //   if(linkmode !== 'unknow'){
-          //     linkmode = 'directmode';//切换为directmode
-          //   }
-          //   console.log(`--->linkmode切换为directmode`)
-          // }
-
+            const linkmode = yield select((state)=>{
+              return state.app.linkmode;
+            });
             if(linkmode === 'directmode'){
               const wifidirectmodesocketstatus = yield select((state)=>{
                 return state.app.wifidirectmodesocketstatus;

@@ -18,6 +18,7 @@ import {
   // ImageField,
   Filter
 } from 'react-admin';
+import { BooleanInput } from 'react-admin';
 import ResestPassword from './resetpassword';
 // import {Titlewithimage} from '../controls/Titlewithimage';
 
@@ -77,6 +78,11 @@ const DistributorEdit = (props) => {
                      </ReferenceInput>
                  }
              </FormDataConsumer>
+
+             <BooleanInput label="接受设备离线报警" source="alarmsettings.isrecvalaram_deviceoffline" validation={{ required: true }}/>
+             <BooleanInput label="接受设备错误报警" source="alarmsettings.isrecvalaram_deviceerr" validation={{ required: true }}/>
+             <BooleanInput label="接受滤芯到期报警" source="alarmsettings.isrecvalaram_filterexp" validation={{ required: true }}/>
+
           </SimpleForm>
       </Edit>);
 

@@ -153,7 +153,7 @@ class Statistics extends React.PureComponent {
         type:this.state.type,
         rangeDate:this.state.rangeDate
     })=>{
-      const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid');
+      const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid') || lodashget(this,'props.curdevice.deviceid');
       if(!!deviceid){
         this.props.dispatch(callthen(getdevicestat_request,getdevicestat_result,{
             deviceid,

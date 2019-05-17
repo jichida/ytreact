@@ -81,6 +81,7 @@
   "setting.system.stime": "Select time",
   "setting.system.quality": "Water quality (ppm)",
   "setting.system.qualitysetup": "Setup Quality",
+  "setting.system.modlife": "Mod",
   "setting.system.frontfilter1": "Pre-filter 1",
   "setting.system.frontfilter2": "Pre-filter 2",
   "setting.system.frontfilter3": "Pre-filter 3",

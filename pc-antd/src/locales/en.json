@@ -48,6 +48,7 @@
 "machine.mode.type": "type",
 "machine.mode.body": "main body",
 "machine.mode.occurstime": "time",
+"machine.more": "See more",
 "machine.datadetail": "Data Details",
 "machine.data.quality": "Inlet water quality",
 "machine.data.consumption": "Daily water consumption",

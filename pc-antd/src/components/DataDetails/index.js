@@ -926,7 +926,7 @@ class DataDetails extends React.PureComponent {
                 <Row gutter={24} style={{marginTop: 30, padding: '0 10px'}}>
                     {/* <Col span={2}></Col> */}
                     <Col span={16} className="sub-title">
-                        <div><h2>{ formatMessage({id: 'machine.mode'})}</h2><span className="right-Link" onClick={()=>{history.push(`/actions/${curdevice.deviceid}`)}}>Mode&gt;</span></div>
+                        <div><h2>{ formatMessage({id: 'machine.mode'})}</h2><span className="right-Link" onClick={()=>{history.push(`/actions/${curdevice.deviceid}`)}}>{formatMessage({id: 'machine.more'})}</span></div>
                         <Table columns={Mode_columns} dataSource={dataMode} className="table-list" pagination={false} />
                     </Col>
                     {/* <Col span={1}></Col> */}

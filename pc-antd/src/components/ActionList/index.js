@@ -26,6 +26,7 @@ const { RangePicker } = DatePicker;
 const columns = [{
     title: <FormattedMessage id="machine.mode.type" />,
     dataIndex: 'type',
+    width: 150,
     key: 'type',
   }, {
     title: <FormattedMessage id="machine.mode.body" />,
@@ -34,7 +35,12 @@ const columns = [{
   }, {
     title: <FormattedMessage id="machine.mode.occurstime" />,
     dataIndex: 'occurstime',
+    width: 200,
     key: 'occurstime',
+    render: (text, record) =>{
+      console.log(text);
+      return moment(text).format('YYYY-MM-DD HH:mm:ss');
+    }
   }
 ]
 
@@ -105,7 +111,7 @@ class RegionalDisplay extends React.PureComponent {
                 </Row>
                 <Row>
                     <Col span={1}></Col>
-                    <Col span={22} style={{margin: '0 auto'}}>
+                    <Col span={22} className="data">
                     <AntdTable
                       onClickRow={this.onClickRow}
                       listtypeid = 'cmdantdtableid'

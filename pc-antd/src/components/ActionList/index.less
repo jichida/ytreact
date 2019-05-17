@@ -45,6 +45,28 @@
     }
 }
 
+.data {
+    margin: 0 auto;
+
+    :global(.ant-table){
+        table {
+            table-layout:fixed;
+
+            tr {
+                white-space: initial;
+
+                td {
+                    white-space: initial;
+                }
+            }
+
+            .body-container {
+                word-wrap: break-word;
+            }
+        }
+    }
+}
+
 .table-list {
     thead {
         div {

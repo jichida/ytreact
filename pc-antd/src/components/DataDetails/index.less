@@ -119,6 +119,24 @@
         display: inline;
     }
 
+    :global(.ant-table){
+        table {
+            table-layout:fixed;
+
+            tr {
+                white-space: initial;
+
+                td {
+                    white-space: initial;
+                }
+            }
+
+            .body-container {
+                word-wrap: break-word;
+            }
+        }
+    }
+
     .right-Link {
         float: right;
         line-height: 40px;

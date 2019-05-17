@@ -542,6 +542,7 @@ class DataDetails extends React.PureComponent {
             title: <FormattedMessage id="machine.mode.type" />,
             dataIndex: 'type',
             key: 'type',
+            width: 130,
             render: (text, record) =>{
               console.log('Mode Record:', record)
               console.log(text);
@@ -569,10 +570,16 @@ class DataDetails extends React.PureComponent {
             title: <FormattedMessage id="machine.mode.body" />,
             dataIndex: 'body',
             key: 'body',
+            render: (text, record) => (
+              <div className="body-container">
+                {text}
+              </div>
+            ),
           }, {
             title: <FormattedMessage id="machine.mode.occurstime" />,
             dataIndex: 'occurstime',
             key: 'occurstime',
+            width: 130,
             render: (text, record) =>{
               console.log(text);
               return moment(text).tz(this.state.timezone).format('YYYY-MM-DD HH:mm:ss');
@@ -913,14 +920,14 @@ class DataDetails extends React.PureComponent {
                 </Row>
                 <TopMonitor {...realtimedata} />
                 <TopChart {...realtimedata} />
-                <Row gutter={24} style={{marginTop: 30, padding: '0 26px'}}>
+                <Row gutter={24} style={{marginTop: 30, padding: '0 10px'}}>
                     {/* <Col span={2}></Col> */}
-                    <Col span={12} className="sub-title">
+                    <Col span={16} className="sub-title">
                         <div><h2>{ formatMessage({id: 'machine.mode'})}</h2><span className="right-Link" onClick={()=>{history.push(`/actions/${curdevice.deviceid}`)}}>Mode&gt;</span></div>
                         <Table columns={Mode_columns} dataSource={dataMode} className="table-list" pagination={false} />
                     </Col>
-                    <Col span={2}></Col>
-                    <Col span={10} className="sub-title">
+                    {/* <Col span={1}></Col> */}
+                    <Col span={8} className="sub-title">
                         <div><h2>{is_admin ? formatMessage({id: 'machine.mode.input'}) : formatMessage({id: 'machine.report'})}</h2></div>
                         <div className="command">
 

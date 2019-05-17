@@ -22,7 +22,7 @@ import {
   SelectInput,
   ReferenceField
 } from 'react-admin';
-
+import ResestPassword from './resetpassword';
 // import {Titlewithimage} from '../controls/Titlewithimage';
 
 
@@ -73,6 +73,7 @@ const InstallerList = (props) => (//
               <TextField source="name" />
           </ReferenceField>
         <EditButton />
+        <ResestPassword />
         </Datagrid>
     </List>
 );

@@ -511,10 +511,13 @@ class DataDetails extends React.PureComponent {
 
         const {dispatch} = this.props;
         const { downloadRange } = this.state; // [moment, moment]
+        const localestart = downloadRange[0].format('YYYY-MM-DD 00:00:00');
+        const localeend = downloadRange[1].format('YYYY-MM-DD 23:59:59');
+
         dispatch(download_excel({
           deviceid,
-          momentstart:downloadRange[0].format(),
-          momentend:downloadRange[1].format(),
+          momentstart:moment(localestart).tz(this.state.timezone).format(),
+          momentend:moment(localeend).tz(this.state.timezone).format()
         }));
     }
     render() {

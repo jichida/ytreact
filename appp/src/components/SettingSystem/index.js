@@ -143,7 +143,9 @@ class SettingSystem extends PureComponent{
     }
 
     render () {
-        const {locale,syssettings,dispatch, intl:{ formatMessage }} = this.props;
+        const {syssettings,dispatch, intl:{ formatMessage }} = this.props;
+        const locale = lodashget(syssettings,'language','zh-cn');
+        console.log(locale);
         const basicData = {
             quality: {
                 value: lodashget(syssettings,'quality',''),
@@ -300,11 +302,11 @@ class SettingSystem extends PureComponent{
     }
 }
 
-const mapStateToProps =  ({devicedata:{syssettings},app:{locale}}) =>{
+const mapStateToProps =  ({devicedata:{syssettings}}) =>{
   // if(!syssettings.installer){
   //   syssettings.installer = truename;
   // }
-  return {locale,syssettings};
+  return {syssettings};
 };
 
 SettingSystem = connect(mapStateToProps)(injectIntl(SettingSystem));

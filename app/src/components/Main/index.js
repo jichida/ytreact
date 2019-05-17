@@ -3,7 +3,6 @@ import { Flex, WingBlank, WhiteSpace } from 'antd-mobile';
 import { connect } from 'react-redux';
 import HomeChart from '../HomeChart';
 import monitorBg from '../../assets/zhuye_an.png';
-// import lodashmap from 'lodash.map';
 import lodashmap from 'lodash.map';
 import lodashget from 'lodash.get';
 import { injectIntl } from 'react-intl';
@@ -14,13 +13,16 @@ import './index.less';
 import refresh_icon from '../../assets/refresh.png';
 import '../../assets/wlimg.png';
 import home_bgimg from '../../assets/zhuye_bg.png';
-import {wifi_sendcmd_request} from '../../actions';
+import {wifi_sendcmd_request, set_confirm} from '../../actions';
+import {getFilterLabel} from '../EquipmentList/config.js';
 
 const CRed = '#ff2728';
 const CGreen = '#3eef7d';
 const CBlue = '#38b4f2';
 
 const getPercent = (id, value, full) => {
+    console.log('GetPercent value:', value)
+    console.log('GetPercent Full:', full)
     let cf = config[id];
     let color = CGreen;
     let warring = false;
@@ -51,10 +53,22 @@ class Home extends PureComponent{
         console.log('Refresh')
     }
 
-    render () {
-      const {intl,homedata,isgetdata,performancedata,devicelist} = this.props;
-      // const mapfilternames = mapname_filter;
+    onClickCmd = (cmd,cmdstring='设置')=>{
+      const { dispatch, intl } = this.props;
+      dispatch(set_confirm({
+        title: `${intl.formatMessage({id: 'form.confirm'})}`,
+        message: `${cmdstring}?`,
+        text: [`${intl.formatMessage({id: 'form.cancel'})}`, `${intl.formatMessage({id: 'form.ok'})}`],
+        command: wifi_sendcmd_request({cmd,cmdstring})
+      }))
 
+      // dispatch(wifi_sendcmd_request({cmd,cmdstring}));
+  }
+
+    render () {
+      const {intl,homedata,performancedata,isgetdata,devicelist} = this.props;
+      // const mapfilternames = mapname_filter;
+      //注：这里根据devicelist 显示设备数据!!!!!!
       const devicedata = homedata;
 
       // const CoFlex_FEs = [];
@@ -65,7 +79,6 @@ class Home extends PureComponent{
       const title_main_inwater_quality = intl.formatMessage({id: 'home.show.title_main_inwater_quality'},{value:lodashget(devicedata,'main_inwater_quality',300)});
       const title_main_totalwatervol = intl.formatMessage({id: 'home.show.title_main_totalwatervol'},{value:lodashget(devicedata,'main_totalwatervol',0)});
       const title_main_runtime = intl.formatMessage({id: 'home.show.title_main_runtime'},{value:lodashget(devicedata,'main_runtime',0)});
-      // const title_main_outcwatervol = intl.formatMessage({id: 'home.show.title_main_outcwatervol'},{value:lodashget(devicedata,'main_outcwatervol',0)});
       const title_main_outcwatervol = intl.formatMessage({id: 'home.show.title_main_outcwatervol'},{value:lodashget(performancedata,'waterpurificationrate',0)});
 
       const title_main_filterelements_modlife = intl.formatMessage({id: 'home.show.title_main_filterelements_modlife'});
@@ -285,6 +298,7 @@ class Home extends PureComponent{
         : '') + intl.formatMessage({id: 'home.show.title_main_filterelements_value_leftvol'},{value:posfilter3_leftvol.percent});
       const value_filterelements_posfilter3_leftvol = posfilter3_leftvol.percent;
       console.log(value_filterelements_posfilter3_leftvol)
+
       const devicelist_prev = [];
       const devicelist_post = [];
       lodashmap(devicelist,(dv)=>{
@@ -301,12 +315,13 @@ class Home extends PureComponent{
         }
       });
 
-      const getFilterCo = (idname)=>{
+        const getFilterCo = (idname,v)=>{
+          const labelstring = getFilterLabel(intl,idname,v);
         if(idname === 'prev0'){
           return (<Flex.Item key={`${idname}`} onClick={()=>{
                   this.onClickCmd(`$res_prefilter1%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.frontfilter1'})}`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
                 }}>
-                    <HomeChart title={title_main_filterelements_prefilter1}
+                      <HomeChart title={labelstring}
                           firsttitle={title_filterelements_prefilter1_leftday} firstpercent={value_filterelements_prefilter1_leftday} firstcolor={icon_filterelements_prefilter1_leftday}
                           secondtitle={title_filterelements_prefilter1_leftvol} secondpercent={value_filterelements_prefilter1_leftvol} secondcolor={icon_filterelements_prefilter1_leftvol}
                     />
@@ -316,7 +331,7 @@ class Home extends PureComponent{
           return (<Flex.Item key={`${idname}`} onClick={()=>{
               this.onClickCmd(`$res_prefilter2%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.frontfilter2'})}`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
             }}>
-                <HomeChart title={title_main_filterelements_prefilter2}
+                  <HomeChart title={labelstring}
                   firsttitle={title_filterelements_prefilter2_leftday} firstpercent={value_filterelements_prefilter2_leftday} firstcolor={icon_filterelements_prefilter2_leftday}
                   secondtitle={title_filterelements_prefilter2_leftvol} secondpercent={value_filterelements_prefilter2_leftvol} secondcolor={icon_filterelements_prefilter2_leftvol}
             />
@@ -327,7 +342,7 @@ class Home extends PureComponent{
           return (<Flex.Item key={`${idname}`} onClick={()=>{
             this.onClickCmd(`$res_prefilter3%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.frontfilter3'})}`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
           }}>
-              <HomeChart title={title_main_filterelements_prefilter3}
+                <HomeChart title={labelstring}
                 firsttitle={title_filterelements_prefilter3_leftday} firstpercent={value_filterelements_prefilter3_leftday} firstcolor={icon_filterelements_prefilter3_leftday}
                 secondtitle={title_filterelements_prefilter3_leftvol} secondpercent={value_filterelements_prefilter3_leftvol} secondcolor={icon_filterelements_prefilter3_leftvol}
               />
@@ -338,7 +353,7 @@ class Home extends PureComponent{
           return (<Flex.Item key={`${idname}`} onClick={()=>{
             this.onClickCmd(`$res_posfilter1%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.afterfilter1'})}`);//4	后置滤芯1 复位	滤芯寿命复位
           }}>
-              <HomeChart title={title_main_filterelements_posfilter1}
+                <HomeChart title={labelstring}
                 firsttitle={title_filterelements_posfilter1_leftday} firstpercent={value_filterelements_posfilter1_leftday} firstcolor={icon_filterelements_posfilter1_leftday}
                 secondtitle={title_filterelements_posfilter1_leftvol} secondpercent={value_filterelements_posfilter1_leftvol} secondcolor={icon_filterelements_posfilter1_leftvol}
             />
@@ -349,7 +364,7 @@ class Home extends PureComponent{
           return (<Flex.Item key={`${idname}`} onClick={()=>{
             this.onClickCmd(`$res_posfilter2%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.afterfilter2'})}`);//4	后置滤芯1 复位	滤芯寿命复位
           }}>
-              <HomeChart title={title_main_filterelements_posfilter2}
+                <HomeChart title={labelstring}
                 firsttitle={title_filterelements_posfilter2_leftday} firstpercent={value_filterelements_posfilter2_leftday} firstcolor={icon_filterelements_posfilter2_leftday}
                 secondtitle={title_filterelements_posfilter2_leftvol} secondpercent={value_filterelements_posfilter2_leftvol} secondcolor={icon_filterelements_posfilter2_leftvol}
               />
@@ -362,7 +377,7 @@ class Home extends PureComponent{
                 <Flex.Item key={`${idname}`} onClick={()=>{
                   this.onClickCmd(`$res_posfilter3%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.afterfilter3'})}`);//4	后置滤芯1 复位	滤芯寿命复位
                 }}>
-                    <HomeChart title={title_main_filterelements_posfilter3}
+                      <HomeChart title={labelstring}
                       firsttitle={title_filterelements_posfilter3_leftday} firstpercent={value_filterelements_posfilter3_leftday} firstcolor={icon_filterelements_posfilter3_leftday}
                       secondtitle={title_filterelements_posfilter3_leftvol} secondpercent={value_filterelements_posfilter3_leftvol} secondcolor={icon_filterelements_posfilter3_leftvol}
                       />
@@ -373,56 +388,55 @@ class Home extends PureComponent{
       let showco = [];
       if(devicelist_prev.length === 3){
         showco.push(<Flex key="listprev0">
-          {getFilterCo('prev0')} 
-          {/* devicelist_prev[0].idname */}
-          {getFilterCo('prev1')}
-          {/* devicelist_prev[1].idname */}
+            {getFilterCo('prev0',devicelist_prev[0].life)}
+            {getFilterCo('prev1',devicelist_prev[1].life)}
           </Flex>);
         showco.push(<WhiteSpace key="listprev1" style={{height: '2px', margin: '5px auto'}} />);
-        showco.push(<Flex key="listprev2">{getFilterCo('prev2')}
+          showco.push(<Flex key="listprev2">{getFilterCo(devicelist_prev[2].idname,devicelist_prev[2].life)}
           <Flex.Item></Flex.Item>
           </Flex>);
       }
       else if(devicelist_prev.length === 2){
         showco.push(
           <Flex key="listprev0">
-          {getFilterCo(devicelist_prev[0].idname)}
-          {getFilterCo(devicelist_prev[1].idname)}
+            {getFilterCo('prev0',devicelist_prev[0].life)}
+            {getFilterCo('prev1',devicelist_prev[1].life)}
           </Flex>);
       }
       else if(devicelist_prev.length === 1){
         showco.push(
           <Flex key="listprev0">
-          {getFilterCo(devicelist_prev[0].idname)}
+            {getFilterCo('prev0',devicelist_prev[0].life)}
           <Flex.Item></Flex.Item>
           </Flex>);
       }
       showco.push(<WhiteSpace   key="listprevpostsep" style={{height: '2px', backgroundColor: '#333', margin: '15px auto'}} />);
       if(devicelist_post.length === 3){
         showco.push(<Flex  key="listpost0">
-          {getFilterCo('post0')}
-          {getFilterCo('post1')}
+            {getFilterCo('post0',devicelist_post[0].life)}
+            {getFilterCo('post1',devicelist_post[1].life)}
           </Flex>);
         showco.push(<WhiteSpace key="listpost1" style={{height: '2px', margin: '5px auto'}} />);
-        showco.push(<Flex key="listpost2">{getFilterCo('post2')}
+          showco.push(<Flex key="listpost2">{getFilterCo('post2',devicelist_post[2].life)}
           <Flex.Item></Flex.Item>
           </Flex>);
       }
       else if(devicelist_post.length === 2){
         showco.push(
           <Flex  key="listpost0">
-          {getFilterCo('post0')}
-          {getFilterCo('post1')}
+            {getFilterCo('post0',devicelist_post[0].life)}
+            {getFilterCo('post1',devicelist_post[1].life)}
           </Flex>);
       }
       else if(devicelist_post.length === 1){
         showco.push(
           <Flex  key="listpost0">
-          {getFilterCo(devicelist_post[0].idname)}
+            {getFilterCo('post0',devicelist_post[0].life)}
           <Flex.Item></Flex.Item>
           </Flex>);
       }
       showco.push(<WhiteSpace key="listlast" style={{height:10}} />);
+
 
         if(!isgetdata){
           //未获取到数据，需要加个大按钮
@@ -481,6 +495,7 @@ class Home extends PureComponent{
     }
 }
 const mapStateToProps =  ({devicedata:{isgetdata,homedata,performancedata},device:{devicelist}}) =>{
+
   return {isgetdata,homedata,performancedata,devicelist:devicelist.filterlist};
 };
 Home = connect(mapStateToProps)(Home);

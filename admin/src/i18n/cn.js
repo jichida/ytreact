@@ -30,6 +30,15 @@ export default {
     devicedatahistory:{
       name: '设备历史数据 |||| 设备历史数据',
     },
+    user:{
+      name: '用户管理 |||| 用户管理',
+      notification:{
+        resetuserpassword_differrentpwd:'两次密码必须相同',
+        resetuserpassword_success:'重置密码成功',
+        resetuserpassword_failed:'重置密码失败',
+        resetuserpassword_required:'必须输入密码',
+      }
+    },
   }
 
 };

@@ -4,6 +4,7 @@ import {
   FormTab,
   NumberInput,
   ReferenceInput,
+  BooleanInput,
   SelectInput,
   TabbedForm,
   TextInput,
@@ -86,9 +87,22 @@ const SystemconfigTitle = ({ record }) => {
 const SystemconfigList = (props) => (//
         <SingleRecordPage {...props}  title={<SystemconfigTitle />}>
           <TabbedForm toolbar={<EditToolbar />}>
-              <FormTab label="resources.systemconfig.tabs.shop">
-                <TextInput  label="默认选项" source="expressapiurl" />
-            </FormTab>
+              <FormTab label="邮件发送参数">
+              <TextInput  label="邮件服务" source="mailopts.service" />
+              <NumberInput  label="端口号" source="mailopts.port" />
+              <BooleanInput  label="开启安全选项" source="mailopts.secureConnection" />
+              <TextInput  label="发送账号" source="mailopts.auth.user" />
+              <TextInput  label="发送密码" source="mailopts.auth.pass" />
+          </FormTab>
+            <FormTab label="邮件发送模版">
+              <TextInput  label="设备离线报警发送模版" source="mailtempl.subject_deviceoffline" />
+              <TextInput  label="设备错误报警发送模版" source="mailtempl.subject_deviceerr" />
+              <TextInput  label="滤芯到期报警发送模版" source="mailtempl.subject_filterexp" />
+          </FormTab>
+          <FormTab label="滤芯发送配置">
+          <TextInput  label="每天发送时间" source="mailsettings.sendmailtime_filterexp" />
+          <NumberInput  label="到期提前发送天数" source="mailsettings.sendmailtime_aheaddays" />
+        </FormTab>
           </TabbedForm>
         </SingleRecordPage>
 );

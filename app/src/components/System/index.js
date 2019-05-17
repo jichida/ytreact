@@ -183,7 +183,7 @@ const RenderForm = createForm({
                             </div>
                         }
                 ><FormattedMessage id="login.changepassword" /></List.Item>
-                                <Item><FormattedMessage id="setting.system.language" defaultMessage="语言" />
+                                <Item><FormattedMessage id="setting.system.display.language" defaultMessage="语言" />
                     <Brief>
                         <div className="item_children">
                             <Picker

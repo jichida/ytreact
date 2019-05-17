@@ -104,6 +104,7 @@
   "setting.system.dormancystart": "sleep start time",
   "setting.system.dormancyend": "Hibernate End Time",
   "setting.system.language": "Language",
+  "setting.system.display.language": "Language",
   "setting.system.resetbt": "Reset",
   "setting.system.wash": "Wash",
   "setting.system.send": "send",

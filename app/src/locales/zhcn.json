@@ -104,6 +104,7 @@
   "setting.system.dormancystart": "休眠开始时间",
   "setting.system.dormancyend": "休眠结束时间",
   "setting.system.language": "语言",
+  "setting.system.display.language": "显示屏语言选择",
   "setting.system.resetbt": "重置",
   "setting.system.wash": "冲洗",
   "setting.system.send": "发送",

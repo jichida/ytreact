@@ -53,6 +53,7 @@
   "machine.data.quality": "进水水质",
   "machine.data.consumption": "每日用水量",
   "machine.data.runtime": "运行时间",
+  "machine.data.runtime.day": "天",
   "machine.data.recovery": "回收率",
   "machine.data.average": "平均出水水质",
   "machine.data.ionmembrance": "电离子膜寿命",

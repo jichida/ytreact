@@ -77,7 +77,7 @@ const TopMonitor = injectIntl((props)=>{
           },
           {
               title: `${formatMessage({id: 'machine.data.runtime'})}`,//runtime
-              unit: '天',
+              unit: `${formatMessage({id: 'machine.data.runtime.day'})}`,
               data: `${Reserve1}`,
           },
 
@@ -350,7 +350,7 @@ const Chart = ({title, unit, data, flow, life, flowwarring, lifewarring, intl:{ 
           <div className="bottom">
             <Progress type="circle"
                   percent={flow}
-                  width={100}
+                  width={140}
                   // strokeWidth={5}
                   strokeColor={flowwarring ? '#f81929' : '#03f241'}
                   status={flowwarring?"exception":"active"}
@@ -361,14 +361,14 @@ const Chart = ({title, unit, data, flow, life, flowwarring, lifewarring, intl:{ 
           <div className="top">
             <Progress type="circle"
                   percent={life}
-                  width={80}
+                  width={120}
                   // strokeWidth={5}
                   strokeColor={lifewarring ? '#f81929' : '#0379f2'}
                   status={lifewarring?"exception":"active"}
                   format={() => <div className="circle-text"><div className="data">{data}</div><div className="unit">{formatMessage({id: 'machine.data.life'})}</div></div>}
             />
           </div>
-          <p>{title}</p>
+          <div className="chart-title">{title}</div>
         </div>
     )
 }
@@ -379,7 +379,7 @@ const SingleChart = ({title, unit, data, percent, warring})=>{
         <div className="bottom">
           <Progress type="circle"
                 percent={percent}
-                width={100}
+                width={140}
                 // strokeWidth={5}
                 strokeColor={warring ? '#f81929' : '#03f241'}
                 status={warring?"exception":"active"}
@@ -387,7 +387,7 @@ const SingleChart = ({title, unit, data, percent, warring})=>{
 
           />
         </div>
-        <p>{title}</p>
+        <div className="chart-title">{title}</div>
       </div>
   )
 }

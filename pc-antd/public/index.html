@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0" />
    <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
    <script>
      if ('addEventListener' in document) {
@@ -12,7 +12,53 @@
      if(!window.Promise) {
        document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>');
      }
+
+    // 原生js来实现，避免依赖jquery。需要注意的是：addEventListener/DOMContentLoaded在ie中是只支持>=ie9的，一般足够了
+    // document.addEventListener('DOMContentLoaded', function (event) {
+    // chrome 浏览器直接加上下面这个样式就行了，但是ff不识别
+      // document.body.style.zoom = 'reset';
+      // document.addEventListener('keydown', function (event) {
+      //     if ((event.ctrlKey === true || event.metaKey === true)
+      //     && (event.which === 61 || event.which === 107
+      //         || event.which === 173 || event.which === 109
+      //         || event.which === 187  || event.which === 189))
+      //         {
+      //             event.preventDefault();
+      //         }
+      // }, false);
+    //     document.addEventListener('mousewheel DOMMouseScroll', function (event) {
+    //       console.log(event.ctrlKey)
+    //         if (event.ctrlKey === true || event.metaKey) {
+    //             event.preventDefault();
+    //         }
+    //     }, false);
+    // }, false);
+    var isFirefox=/Firefox/i.test(navigator.userAgent)?true:false;
+    var unMouseBtn=function(e){
+      var e = e || window.event;
+      if(e.wheelDelta && e.ctrlKey){//IE/Opera/Chrome e.wheelDelta±120
+        e.preventDefault?e.preventDefault():e.returnValue=false;
+      }else if(e.detail && e.ctrlKey){//Firefox e.detail±3
+        e.preventDefault?e.preventDefault():e.returnValue=false;
+      }
+    };
+    var mousewheelevt=isFirefox?"DOMMouseScroll":"mousewheel";
+    if(document.attachEvent){//IE/Opera/Chrome
+      document.attachEvent("on"+mousewheelevt,unMouseBtn);
+    }else if(document.addEventListener){//Firefox
+      document.addEventListener(mousewheelevt,unMouseBtn,false);
+    }
+    var unCtrl=function(e){
+      var e = e || window.event;
+      var isFirefox=(/Firefox/i.test(navigator.userAgent))?true:false;
+      var code=isFirefox?"109,107,173,61":"109,107,189,187";
+      if(e.ctrlKey && code.indexOf(e.keyCode)!=-1){
+        e.preventDefault?e.preventDefault():e.returnValue=false;
+      }
+    };
+    document.onkeydown=unCtrl;
    </script>
+  
   </head>
   <body>
     <noscript>

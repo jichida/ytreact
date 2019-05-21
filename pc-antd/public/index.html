@@ -72,8 +72,6 @@
       // var code=isFirefox?"109,107,173,61":"109,107,189,187";
       var incode = isFirefox?"107,61":"107,187";
       var decode = isFirefox?"109,173":"109,189";
-      console.log(rate)
-      console.log(e)
       if(rate<=80){
         if(e.ctrlKey && decode.indexOf(e.keyCode)!=-1){
           e.preventDefault?e.preventDefault():e.returnValue=false;

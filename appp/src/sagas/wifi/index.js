@@ -609,7 +609,21 @@ export function* wififlow() {
             if(config.softmode === 'app'){
                 yield put(app_sendcmd_request(payload));
             }
-            else{
+            else{//tcpconnected
+              //专业版
+              const tcpconnected = yield select((state)=>{
+                return state.app.tcpconnected;
+              });
+              if(!tcpconnected){
+                yield put(set_weui({
+                  toast:{
+                    text:`连接已断开,请等待重连`,
+                    show: true,
+                    type:'offline'
+                }}));
+                return;
+              }
+
               yield call(socket_send_promise,payload.cmd);
             }
             yield put(set_weui({
@@ -676,7 +690,7 @@ export function* wififlow() {
                 yield put(set_weui({
                   toast:{
                       text:`发送给硬件【${payload.cmdstring}】命令失败`,
-                  show: true,
+                      show: true,
                       type:'offline'
                 }}));
               }

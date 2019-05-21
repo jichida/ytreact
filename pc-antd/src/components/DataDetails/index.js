@@ -597,24 +597,29 @@ class DataDetails extends React.PureComponent {
           key: 'ModIn'
         },
         {
-          title: <FormattedMessage id="table.Concentration" />,
-          dataIndex: 'Concentration',
-          key: 'Concentration'
-        },
-        {
           title: <FormattedMessage id="table.ModOut" />,
           dataIndex: 'ModOut',
           key: 'ModOut'
         },
         {
-          title: <FormattedMessage id="table.Waste" />,
-          dataIndex: 'Waste',
-          key: 'Waste'
-        },
-        {
           title: <FormattedMessage id="table.ProductQualityAverage" />,
           dataIndex: 'ProductQualityAverage',
           key: 'ProductQualityAverage'
+        },
+        {
+          title: <FormattedMessage id="table.ONtime" />,
+          dataIndex: 'ONtime',
+          key: 'ONtime'
+        },
+        {
+          title: <FormattedMessage id="table.productDvol" />,
+          dataIndex: 'productDvol',
+          key: 'productDvol'
+        },
+        {
+          title: <FormattedMessage id="table.Yield" />,
+          dataIndex: 'Yield',
+          key: 'Yield'
         },
         {
           title: <FormattedMessage id="table.DailyVolume" />,
@@ -637,24 +642,14 @@ class DataDetails extends React.PureComponent {
           key: 'totalVol'
         },
         {
-          title: <FormattedMessage id="table.Pressure1" />,
+          title: <FormattedMessage id="table.Pressure" />,
           dataIndex: 'Pressure1',
           key: 'Pressure1'
         },
         {
-          title: <FormattedMessage id="table.Pressure2" />,
-          dataIndex: 'Pressure2',
-          key: 'Pressure2'
-        },
-        {
-          title: <FormattedMessage id="table.Pressure3" />,
-          dataIndex: 'Pressure3',
-          key: 'Pressure3'
-        },
-        {
-          title: <FormattedMessage id="table.Pressure4" />,
-          dataIndex: 'Pressure4',
-          key: 'Pressure4'
+          title: <FormattedMessage id="table.tmpt" />,
+          dataIndex: 'tempt1',
+          key: 'tempt1'
         },
         {
           title: <FormattedMessage id="table.created_at" />,

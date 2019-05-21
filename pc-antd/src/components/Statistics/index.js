@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import lodashget from 'lodash.get';
 import lodashmap from 'lodash.map'
-import { Card, Row, Col, DatePicker, Radio, Button } from 'antd';
+import { Card, Row, Col, DatePicker, Radio, Button, CheckboxGroup } from 'antd';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import ReactEcharts from 'echarts-for-react';
 import echarts from 'echarts'
@@ -89,7 +89,7 @@ const cycleAction = {
 //   Reserve1:String,//d[V]
 //   Reserve2:String,//d[W]
 // }
-const typeAction = {
+const typeActionPer = {
     'ModInOut':{//1是进水水质
       id:'machine.report.modinout',
       name: 'mod in/out',
@@ -121,6 +121,29 @@ const typeAction = {
     },
 };
 
+const typeAction = [
+    {//1是进水水质
+        label: 'mod in/out',
+        value: 'ModInOut',//ModIn uS 进水水质 d[c] <<---代表两个字段
+    },
+    {//3是压力1
+        label: <FormattedMessage id="machine.report.pressure" />,
+        value: 'srvdata.Pressure1',//Pressure1 压力1 d[y]
+    },
+    {//4日废水量
+        label: <FormattedMessage id="machine.report.drainage" />,
+        value: 'srvdata.WasteVolumeDaily',//Waste Volume Daily 今日废水量 d[r]
+    },
+    {//5日总水量
+        label: <FormattedMessage id="machine.report.totalinlet" />,
+        value: 'srvdata.totalVol',//totalVol 总用水量 d[t]
+    },
+    {//6日用水量
+        label: <FormattedMessage id="machine.report.dailyvolume" />,
+        value: 'srvdata.DailyVolume',//Daily Volume 今日用水量 d[q]
+    },
+];
+
 
 
 class Statistics extends React.PureComponent {
@@ -128,11 +151,11 @@ class Statistics extends React.PureComponent {
       super(props);
       this.state = {
           cycle: 'hour',
-          type: 'ModInOut',
+          type: ['ModInOut'],
           rangeDate: [
             moment().subtract(1, 'M'),moment()],
           isGetData: false,
-          chart: {
+          chart: [{
               title: '',
               x: [],
               series: [
@@ -141,7 +164,7 @@ class Statistics extends React.PureComponent {
                       data: []
                   }
               ]
-          }
+          }]
 
       }
     }
@@ -174,41 +197,45 @@ class Statistics extends React.PureComponent {
 
 
     converData = (data) => {
-        let x = []
-        const title = this.props.intl.formatMessage({id:typeAction[this.state.type].id});
-        if(this.state.type === 'ModInOut') {
-            let series = [{
-                title: 'mod in',
-                data: []
-            },{
-                title: 'mod out',
-                data: []
-            }]
-            lodashmap(data, (item) => {
-                x.push(item._id);
-                series[0].data.push(item.modin)
-                series[1].data.push(item.modout)
-            })
-            return ({
-                title,
-                x,
-                series
-            })
-        } else {
-            let series = [{
-                title,
-                data: []
-            }]
-            lodashmap(data, (item) => {
-                x.push(item._id);
-                series[0].data.push(item.value)
-            })
-            return({
-                title,
-                x,
-                series
-            })
-        }
+        let chart = []
+        lodashmap(data, (dataitem)=> {
+            let x = []
+            const title = this.props.intl.formatMessage({id:typeActionPer[this.state.type].id});
+            if(this.state.type === 'ModInOut') {
+                let series = [{
+                    title: 'mod in',
+                    data: []
+                },{
+                    title: 'mod out',
+                    data: []
+                }]
+                lodashmap(data, (item) => {
+                    x.push(item._id);
+                    series[0].data.push(item.modin)
+                    series[1].data.push(item.modout)
+                })
+                chart.push({
+                    title,
+                    x,
+                    series
+                })
+            } else {
+                let series = [{
+                    title,
+                    data: []
+                }]
+                lodashmap(data, (item) => {
+                    x.push(item._id);
+                    series[0].data.push(item.value)
+                })
+                chart.push({
+                    title,
+                    x,
+                    series
+                })
+            }
+        })
+        return chart
     }
 
     onCycleChange = (e)=> {
@@ -220,12 +247,20 @@ class Statistics extends React.PureComponent {
 
     }
 
-    onTypeChange = (e)=> {
+    // onTypeChange = (e)=> {
+    //     this.setState({
+    //         type: e.target.value,
+    //     })
+    //     let { cycle, rangeDate } = this.state
+    //     this.onClickQuery({cycle, type: e.target.value, rangeDate})
+    // }
+
+    onTypeChange = (values)=> {
         this.setState({
-            type: e.target.value,
+            type: values,
         })
         let { cycle, rangeDate } = this.state
-        this.onClickQuery({cycle, type: e.target.value, rangeDate})
+        this.onClickQuery({cycle, type: values, rangeDate})
     }
 
     handleRangePick = (datas, datastrings) => {
@@ -239,12 +274,11 @@ class Statistics extends React.PureComponent {
     }
 
     // 图表数据
-    getOption = ()=> {
-        console.log(this.state.chart.x)
-        const data = this.state.chart.x;
+    getOption = (data)=> {
+        const xdata = data.x;
         return ({
             title: {
-               text: `${this.state.chart.title}${this.props.intl.formatMessage({id: 'machine.statistic'})}`,// title 数据统计类目
+               text: `${data.title}${this.props.intl.formatMessage({id: 'machine.statistic'})}`,// title 数据统计类目
                left: 'center'
             },
             // tooltip: {
@@ -283,7 +317,7 @@ class Statistics extends React.PureComponent {
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data // xAxis[] 横轴数据，统计周期
+                data: xdata // xAxis[] 横轴数据，统计周期
             },
             yAxis: {
                 type: 'value',
@@ -309,7 +343,7 @@ class Statistics extends React.PureComponent {
             },
             series: [
                 {
-                    name: `${this.state.chart.series[0].title}`, // title 数据统计类目
+                    name: `${data.series[0].title}`, // title 数据统计类目
                     type: 'line',
                     smooth: true,
                     areaStyle: {
@@ -328,10 +362,10 @@ class Statistics extends React.PureComponent {
                             color: '#03db17'
                         }
                     },
-                    data: this.state.chart.series[0].data // yAxis[] 横轴数据，统计数据
+                    data: data.series[0].data // yAxis[] 横轴数据，统计数据
                 },
                 {
-                    name: `${!!this.state.chart.series[1] && this.state.chart.series[1].title}`, // title 数据统计类目
+                    name: `${!!data.series[1] && data.series[1].title}`, // title 数据统计类目
                     type: 'line',
                     smooth: true,
                     areaStyle: {
@@ -350,7 +384,7 @@ class Statistics extends React.PureComponent {
                             color: '#0368db'
                         }
                     },
-                    data: !!this.state.chart.series[1] && this.state.chart.series[1].data // yAxis[] 横轴数据，统计数据
+                    data: !!data.series[1] && data.series[1].data // yAxis[] 横轴数据，统计数据
                 }
             ]
         })
@@ -366,11 +400,12 @@ class Statistics extends React.PureComponent {
                 ))
         )
 
-        const types = (
-            _.map(typeAction, (item, key)=>(
-                <Radio.Button key={key} value={item.action}>{item.name}</Radio.Button>
-            ))
-        )
+        // const types = (
+        //     _.map(typeAction, (item, key)=>(
+        //         <Radio.Button key={key} value={item.action}>{item.name}</Radio.Button>
+        //     ))
+        // )
+        
 
 
         return (
@@ -415,17 +450,25 @@ class Statistics extends React.PureComponent {
                     </Row>
                     <Row gutter={24} style={{marginBottom: 30}} className="statistic_radio">
                         <Col span={20}>
-                            <Radio.Group value={this.state.type} buttonStyle="solid" onChange={this.onTypeChange}>
+                            {/* <Radio.Group value={this.state.type} buttonStyle="solid" onChange={this.onTypeChange}>
                                 { types }
-                            </Radio.Group>
+                            </Radio.Group> */}
+                            <CheckboxGroup options={typeAction} defaultValue={['ModInOut']} onChange={this.onTypeChange} />
                         </Col>
                         <Col span={4}><Button type="primary" onClick={this.handleSearch}><FormattedMessage id="app.search" /></Button></Col>
                     </Row>
-                    <Row gutter={24} style={{marginBottom: 30}}>
+                    {lodashmap(this.state.chart, (item, index) => {
+                        <Row key={index} gutter={24} style={{marginBottom: 30}}>
+                            <Col span={24}>
+                                {this.state.isGetData ? <ReactEcharts option={this.getOption(item)} /> : '暂无数据'}
+                            </Col>
+                        </Row>
+                    })}
+                    {/* <Row gutter={24} style={{marginBottom: 30}}>
                         <Col span={24}>
                             {this.state.isGetData ? <ReactEcharts option={this.getOption()} /> : '暂无数据'}
                         </Col>
-                    </Row>
+                    </Row> */}
                 </Card>
             </GridContent>
         )

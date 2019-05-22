@@ -3,7 +3,8 @@ import lodashSet from 'lodash.set';
 import {
   wifi_getdata,
   getdevice_result,
-  setdatatarget
+  setdatatarget,
+  setfilterlist
 } from '../../actions/index.js';
 // import moment from 'moment';
 
@@ -135,11 +136,23 @@ const initial = {
           dormancyend:'23:00',
           language:'zh-cn'
       },
+      filterlist:{
+        prev0:0,
+        prev1:0,
+        prev2:0,
+        post0:0,
+        post1:0,
+      },
     },
 
 };
 
 const devicedata = createReducer({
+    [setfilterlist]:(state,payload)=>{
+      const {prev0,prev1,prev2,post0,post1} = payload;
+      let filterlist = {...state.filterlist,prev0,prev1,prev2,post0,post1};
+      return {...state,filterlist};
+    },
     [setdatatarget]:(state,payload)=>{
       let newdata = {};
       lodashSet(newdata,`${payload.fieldname}`,payload.value);

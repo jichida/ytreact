@@ -78,3 +78,101 @@ export const getFilterLabel = (intl,id,value)=>{
   }
   return '';
 }
+
+const filtervaluetoindex = (idname,life)=>{
+  if(idname === "prev0"){
+    if(life === '30'){
+      return 0;
+    }
+    if(life === '60'){
+      return 1;
+    }
+    if(life === '90'){
+      return 2;
+    }
+  }
+  if(idname === "prev1"){
+    if(life === '30'){
+      return 0;
+    }
+    if(life === '60'){
+      return 1;
+    }
+  }
+  if(idname === "prev2"){
+    if(life === '180'){
+      return 0;
+    }
+    if(life === '360'){
+      return 1;
+    }
+  }
+  if(idname === "post0"){
+    if(life === '180'){
+      return 0;
+    }
+    if(life === '360'){
+      return 1;
+    }
+    if(life === '540'){
+      return 2;
+    }
+  }
+  if(idname === "post1"){
+    if(life === '180'){
+      return 0;
+    }
+  }
+}
+
+export const convertfilterlist = (filterlist)=>{
+  let prev0 = 0;
+  let prev1 = 0;
+  let prev2 = 0;
+  let post0 = 0;
+  let post1 = 0;
+  for(let i = 0;i < filterlist.length;i++){
+    const v = filterlist[i];
+    if(v.idname === 'prev0'){
+      prev0 = filtervaluetoindex(v.idname,v.life);
+    }
+    if(v.idname === 'prev1'){
+      prev1 = filtervaluetoindex(v.idname,v.life);
+    }
+    if(v.idname === 'prev2'){
+      prev2 = filtervaluetoindex(v.idname,v.life);
+    }
+    if(v.idname === 'post0'){
+      post0 = filtervaluetoindex(v.idname,v.life);
+    }
+    if(v.idname === 'post1'){
+      post1 = filtervaluetoindex(v.idname,v.life);
+    }
+  }
+  return {prev0,prev1,prev2,post0,post1};
+}
+
+export const convertfromfilterlist  = ({prev0,prev1,prev2,post0,post1})=>{
+  let targetfilterlist = [];
+  targetfilterlist.push({
+    idname:'prev0',
+    life:prev0Options[prev0].value,
+  });
+  targetfilterlist.push({
+    idname:'prev1',
+    life:prev1Options[prev1].value,
+  });
+  targetfilterlist.push({
+    idname:'prev2',
+    life:prev2Options[prev2].value,
+  });
+  targetfilterlist.push({
+    idname:'post0',
+    life:post0Options[post0].value,
+  });
+  targetfilterlist.push({
+    idname:'post1',
+    life:post1Options[post1].value,
+  });
+  return targetfilterlist;
+}

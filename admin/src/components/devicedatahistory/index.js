@@ -13,7 +13,7 @@ import {
   Filter,
 } from 'react-admin';
 import DeviceShow from './deviceshow';
-
+import moment from 'moment';
 // import DateDetail from './datadetail';
 
 
@@ -115,13 +115,15 @@ const DevicedatahistoryEdit = (props) => {
 };
 
 
-
+const TextFieldDate = ({ source, record = {} }) => <span>{
+  moment(record[source]).format('YYYY-MM-DD HH:mm:ss')
+}</span>;
 const DevicedatahistoryList = (props) => (//
      <List title="设备历史数据列表" {...props} filters={<DataFilter />}
      sort={{ field: 'updated_at', order: 'DESC' }}>
      <Datagrid expand={<DeviceShow />}>
        <TextField label="设备id" source="deviceid" />
-       <TextField label="最新数据" source="updated_at" />
+       <TextFieldDate label="最新数据" source="updated_at" />
      </Datagrid>
     </List>
 );

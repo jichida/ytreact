@@ -541,7 +541,7 @@ class EquipmentList extends PureComponent{
                     <div className="setting-modal">
                         <WingBlank className="wb_margin">
                             <List>
-                                <Item><FormattedMessage id="filter.select" defaultMessage="选择滤芯" />
+                                {/* <Item><FormattedMessage id="filter.select" defaultMessage="选择滤芯" />
                                     <Brief>
                                         <div className="item_children">
                                             <Picker
@@ -559,7 +559,7 @@ class EquipmentList extends PureComponent{
                                             </Picker>
                                         </div>
                                     </Brief>
-                                </Item>
+                                </Item> */}
                                 <Item><FormattedMessage id="filter.replacedate" defaultMessage="上一次更换时间" />
                                     <Brief>
                                         <div className="item_children">

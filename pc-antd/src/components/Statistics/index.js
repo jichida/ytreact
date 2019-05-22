@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import lodashget from 'lodash.get';
 import lodashmap from 'lodash.map'
-import { Card, Row, Col, DatePicker, Radio, Button, CheckboxGroup } from 'antd';
+import { Card, Row, Col, DatePicker, Radio, Button, Checkbox } from 'antd';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import ReactEcharts from 'echarts-for-react';
 import echarts from 'echarts'
@@ -15,6 +15,8 @@ import './index.less';
 import {getdevicestat_request,getdevicestat_result} from '../../actions';
 import {callthen} from '../../sagas/pagination';
 import sb_icon from '../../assets/sj_icon.png';
+
+const CheckboxGroup = Checkbox.Group
 
 moment.locale('zh-cn');
 const dateFormat = 'YYYY-MM-DD';
@@ -99,22 +101,22 @@ const typeActionPer = {
     //     name: <FormattedMessage id="machine.report.quality" />,
     //     action: 'srvdata.ModOut',//ModOut uS 出水水质 d[e]
     // },
-    'srvdata.Pressure1':{//3是压力1
+    'Pressure1':{//3是压力1
         id:'machine.report.pressure',
         name: <FormattedMessage id="machine.report.pressure" />,
         action: 'srvdata.Pressure1',//Pressure1 压力1 d[y]
     },
-    'srvdata.WasteVolumeDaily': {//4日废水量
+    'WasteVolumeDaily': {//4日废水量
         id:'machine.report.drainage',
         name: <FormattedMessage id="machine.report.drainage" />,
         action: 'srvdata.WasteVolumeDaily',//Waste Volume Daily 今日废水量 d[r]
     },
-    'srvdata.totalVol': {//5日总水量
+    'totalVol': {//5日总水量
         id:'machine.report.totalinlet',
         name: <FormattedMessage id="machine.report.totalinlet" />,
         action: 'srvdata.totalVol',//totalVol 总用水量 d[t]
     },
-    'srvdata.DailyVolume': {//6日用水量
+    'DailyVolume': {//6日用水量
         id:'machine.report.dailyvolume',
         name: <FormattedMessage id="machine.report.dailyvolume" />,
         action: 'srvdata.DailyVolume',//Daily Volume 今日用水量 d[q]
@@ -128,19 +130,19 @@ const typeAction = [
     },
     {//3是压力1
         label: <FormattedMessage id="machine.report.pressure" />,
-        value: 'srvdata.Pressure1',//Pressure1 压力1 d[y]
+        value: 'Pressure1',//Pressure1 压力1 d[y]
     },
     {//4日废水量
         label: <FormattedMessage id="machine.report.drainage" />,
-        value: 'srvdata.WasteVolumeDaily',//Waste Volume Daily 今日废水量 d[r]
+        value: 'WasteVolumeDaily',//Waste Volume Daily 今日废水量 d[r]
     },
     {//5日总水量
         label: <FormattedMessage id="machine.report.totalinlet" />,
-        value: 'srvdata.totalVol',//totalVol 总用水量 d[t]
+        value: 'totalVol',//totalVol 总用水量 d[t]
     },
     {//6日用水量
         label: <FormattedMessage id="machine.report.dailyvolume" />,
-        value: 'srvdata.DailyVolume',//Daily Volume 今日用水量 d[q]
+        value: 'DailyVolume',//Daily Volume 今日用水量 d[q]
     },
 ];
 
@@ -152,9 +154,9 @@ class Statistics extends React.PureComponent {
       this.state = {
           cycle: 'hour',
           type: ['ModInOut'],
-          rangeDate: [
-            moment().subtract(1, 'M'),moment()],
+          rangeDate: [moment().subtract(1, 'days'), moment()],
           isGetData: false,
+          result: [],
           chart: [{
               title: '',
               x: [],
@@ -173,12 +175,14 @@ class Statistics extends React.PureComponent {
     }
     onClickQuery = (data = {
         cycle:this.state.cycle,
-        type:this.state.type,
+        // type:this.state.type,
+        // typelist: ['ModInOut','srvdata.Pressure1','srvdata.WasteVolumeDaily','srvdata.totalVol','srvdata.DailyVolume'],
         rangeDate:this.state.rangeDate
     })=>{
       data.typelist = ['ModInOut','srvdata.Pressure1','srvdata.WasteVolumeDaily','srvdata.totalVol','srvdata.DailyVolume']
       const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid') || lodashget(this,'props.curdevice.deviceid');
       if(!!deviceid){
+        console.log('Query:', {deviceid, data})
         this.props.dispatch(callthen(getdevicestat_request,getdevicestat_result,{
             deviceid,
             data:data
@@ -188,7 +192,7 @@ class Statistics extends React.PureComponent {
             this.setState({isGetData: true})
             console.log(result);
             let chart = this.converData(result)
-            this.setState({chart})
+            this.setState({chart, result})
             console.log('Chart:', chart)
         }).catch((err) => {
           console.log(err);
@@ -197,12 +201,12 @@ class Statistics extends React.PureComponent {
     }
 
 
-    converData = (data) => {
+    converData = (data, type = this.state.type) => {
         let chart = []
-        lodashmap(data, (dataitem)=> {
+        lodashmap(type, (chartitem)=> {
             let x = []
-            const title = this.props.intl.formatMessage({id:typeActionPer[this.state.type].id});
-            if(this.state.type === 'ModInOut') {
+            const title = this.props.intl.formatMessage({id:typeActionPer[chartitem].id});
+            if(chartitem === 'ModInOut') {
                 let series = [{
                     title: 'mod in',
                     data: []
@@ -227,7 +231,7 @@ class Statistics extends React.PureComponent {
                 }]
                 lodashmap(data, (item) => {
                     x.push(item._id);
-                    series[0].data.push(item.value)
+                    series[0].data.push(item[chartitem])
                 })
                 chart.push({
                     title,
@@ -239,13 +243,71 @@ class Statistics extends React.PureComponent {
         return chart
     }
 
-    onCycleChange = (e)=> {
-        this.setState({
-            cycle: e.target.value,
-        })
-        let { type, rangeDate } = this.state
-        this.onClickQuery({cycle: e.target.value, type, rangeDate})
+    // converData = (data) => {
+    //     let chart = []
+    //     lodashmap(data, (dataitem)=> {
+    //         let x = []
+    //         const title = this.props.intl.formatMessage({id:typeActionPer[this.state.type].id});
+    //         if(this.state.type === 'ModInOut') {
+    //             let series = [{
+    //                 title: 'mod in',
+    //                 data: []
+    //             },{
+    //                 title: 'mod out',
+    //                 data: []
+    //             }]
+    //             lodashmap(data, (item) => {
+    //                 x.push(item._id);
+    //                 series[0].data.push(item.modin)
+    //                 series[1].data.push(item.modout)
+    //             })
+    //             chart.push({
+    //                 title,
+    //                 x,
+    //                 series
+    //             })
+    //         } else {
+    //             let series = [{
+    //                 title,
+    //                 data: []
+    //             }]
+    //             lodashmap(data, (item) => {
+    //                 x.push(item._id);
+    //                 series[0].data.push(item.value)
+    //             })
+    //             chart.push({
+    //                 title,
+    //                 x,
+    //                 series
+    //             })
+    //         }
+    //     })
+    //     return chart
+    // }
 
+
+    onCycleChange = (e)=> {
+        const cycle = e.target.value
+        let rangeDate = []
+        let Query = { cycle: this.state.cycle, rangeDate: this.state.rangeDate}
+        if(cycle === 'hour') {
+            rangeDate = [moment().subtract(1, 'days'), moment()]
+            Query = { cycle, rangeDate}
+        }
+        if(cycle === 'day') {
+            rangeDate = [moment().subtract(7, 'days'), moment()]
+            Query = { cycle, rangeDate}
+        }
+        if(cycle === 'month') {
+            rangeDate = [moment().subtract(1, 'months'), moment()]
+            Query = { cycle: 'day', rangeDate}
+        }
+        if(cycle === 'year') {
+            rangeDate = [moment().subtract(1, 'years'), moment()]
+            Query = { cycle, rangeDate}
+        }
+        this.setState({cycle, rangeDate})
+        this.onClickQuery(Query)
     }
 
     // onTypeChange = (e)=> {
@@ -257,21 +319,36 @@ class Statistics extends React.PureComponent {
     // }
 
     onTypeChange = (values)=> {
-        this.setState({
-            type: values,
-        })
-        let { cycle, rangeDate } = this.state
-        this.onClickQuery({cycle, type: values, rangeDate})
+        const chart = this.converData(this.state.result, values)
+        this.setState({chart, type: values})
     }
 
-    handleRangePick = (datas, datastrings) => {
-        const rangeDate = [datas[0], datas[1]]
-        this.setState({rangeDate})
+    handleRangePick = (dates, dateStrings) => {
+        console.log('Datas:', dates)
+        console.log(dateStrings)
+        this.setState({rangeDate: dates})
     }
 
     handleSearch = ()=> {
-      this.onClickQuery();
-        // console.log({...this.state})
+        let [ day1, day2 ] = [...this.state.rangeDate]
+        if(!!day1&&!!day2) {
+            const cycle = 'picker'
+            let Query = { cycle: '', rangeDate: [...this.state.rangeDate]}
+            if(day1.add(2, 'days').isAfter(day2)) {
+                Query.cycle = 'hour'
+                
+            }
+            day1.subtract(2, 'days')
+            if(day1.add(1, 'months').isAfter(day2)) {
+                Query.cycle = 'day'
+                
+            }
+            day1.subtract(1, 'months')
+            
+            this.setState({cycle})
+            this.onClickQuery(Query)
+        }
+        
     }
 
     // 图表数据
@@ -454,17 +531,17 @@ class Statistics extends React.PureComponent {
                             {/* <Radio.Group value={this.state.type} buttonStyle="solid" onChange={this.onTypeChange}>
                                 { types }
                             </Radio.Group> */}
-                            <CheckboxGroup options={typeAction} defaultValue={['ModInOut']} onChange={this.onTypeChange} />
+                            <CheckboxGroup options={typeAction} value={this.state.type} onChange={this.onTypeChange} />
                         </Col>
                         <Col span={4}><Button type="primary" onClick={this.handleSearch}><FormattedMessage id="app.search" /></Button></Col>
                     </Row>
-                    {lodashmap(this.state.chart, (item, index) => {
+                    {this.state.isGetData ? lodashmap(this.state.chart, (item, index) => (
                         <Row key={index} gutter={24} style={{marginBottom: 30}}>
                             <Col span={24}>
-                                {this.state.isGetData ? <ReactEcharts option={this.getOption(item)} /> : '暂无数据'}
+                                <ReactEcharts option={this.getOption(item)} />
                             </Col>
                         </Row>
-                    })}
+                    )) : '暂无数据'}
                     {/* <Row gutter={24} style={{marginBottom: 30}}>
                         <Col span={24}>
                             {this.state.isGetData ? <ReactEcharts option={this.getOption()} /> : '暂无数据'}

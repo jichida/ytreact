@@ -227,7 +227,7 @@ const RenderForm = createForm({
                     multipleLine
                     onClick={()=>props.onSelectFilter('post0')}
                     platform="android"
-                ><FormattedMessage id="equipment.afterfilter" defaultMessage="后置滤芯" />
+                ><FormattedMessage id="form.equip.postfilter1" defaultMessage="后置滤芯1" />
                     <Brief>
                         <div className="item_children">
                             {lodashGet(props, 'post0.life', ['0'])[0] === '0' ? FilterPer['select'] : <FormattedMessage id="setting.system.LED" values={{value: props.post0.life}} />}
@@ -239,7 +239,7 @@ const RenderForm = createForm({
                     multipleLine
                     onClick={()=>props.onSelectFilter('post1')}
                     platform="android"
-                ><FormattedMessage id="equipment.afterfilter" defaultMessage="后置滤芯" />
+                ><FormattedMessage id="form.equip.postfilter2" defaultMessage="后置滤芯2" />
                     <Brief>
                         <div className="item_children">
                             {lodashGet(props, 'post1.life', ['0'])[0] === '0' ? FilterPer['select'] : <FormattedMessage id="setting.system.AFC" values={{value: props.post1.life}} />}
@@ -251,7 +251,7 @@ const RenderForm = createForm({
                     multipleLine
                     onClick={()=>props.onSelectFilter('post2')}
                     platform="android"
-                ><FormattedMessage id="equipment.afterfilter" defaultMessage="后置滤芯" />
+                ><FormattedMessage id="form.equip.postfilter3" defaultMessage="后置滤芯3" />
                     <Brief>
                         <div className="item_children">
                             {props.post2.idname[0] === '' ? FilterPer['none'] : FilterPer[props.post2.idname]}

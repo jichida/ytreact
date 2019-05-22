@@ -323,9 +323,7 @@ class Statistics extends React.PureComponent {
         this.setState({chart, type: values})
     }
 
-    handleRangePick = (dates, dateStrings) => {
-        console.log('Datas:', dates)
-        console.log(dateStrings)
+    handleRangePick = (dates) => {
         this.setState({rangeDate: dates})
     }
 
@@ -333,17 +331,16 @@ class Statistics extends React.PureComponent {
         let [ day1, day2 ] = [...this.state.rangeDate]
         if(!!day1&&!!day2) {
             const cycle = 'picker'
-            let Query = { cycle: '', rangeDate: [...this.state.rangeDate]}
+            let Query = { cycle: 'day', rangeDate: [...this.state.rangeDate]}
             if(day1.add(2, 'days').isAfter(day2)) {
                 Query.cycle = 'hour'
                 
             }
             day1.subtract(2, 'days')
-            if(day1.add(1, 'months').isAfter(day2)) {
-                Query.cycle = 'day'
-                
+            if(day1.add(1, 'years').isBefore(day2)) {
+                Query.cycle = 'month'
             }
-            day1.subtract(1, 'months')
+            day1.subtract(1, 'years')
             
             this.setState({cycle})
             this.onClickQuery(Query)

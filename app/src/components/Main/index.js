@@ -476,7 +476,9 @@ class Home extends PureComponent{
                         <WhiteSpace size="lg" style={{height: 50}} />
                         <div className="chart">
                             <Flex>
-                                <Flex.Item>
+                                <Flex.Item onClick={()=>{
+                                  this.onClickCmd(`$res_modlife%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.modlife'})}`);//4	后置滤芯1 复位	滤芯寿命复位
+                                }}>
                                     <HomeChart title={title_main_filterelements_modlife}
                                         firsttitle={title_filterelements_modlife_leftday} firstpercent={value_filterelements_modlife_leftday} firstcolor={icon_filterelements_modlife_leftday}
                                         secondtitle={title_filterelements_modlife_leftvol} secondpercent={value_filterelements_modlife_leftvol} secondcolor={icon_filterelements_modlife_leftvol}

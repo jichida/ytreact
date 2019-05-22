@@ -395,11 +395,21 @@ const dataOutput = (data) => {
     const { prev0, prev1, prev2, post0, post1, post2 } = data
     const filters = []
 
-    filters.push({...prev0, life: prev0.life[0], idname: prev0.idname[0] === '' ? 'prev0' : prev0.idname[0]})
-    filters.push({...prev1, life: prev1.life[0], idname: prev1.idname[0] === '' ? 'prev1' : prev1.idname[0]})
-    filters.push({...prev2, life: prev2.life[0], idname: prev2.idname[0] === '' ? 'prev2' : prev2.idname[0]})
-    filters.push({...post0, life: post0.life[0], idname: post0.idname[0] === '' ? 'post0' : post0.idname[0]})
-    filters.push({...post1, life: post1.life[0], idname: post1.idname[0] === '' ? 'post1' : post1.idname[0]})
+    if(!!prev0.life) {
+        filters.push({...prev0, life: prev0.life[0], idname: prev0.idname === '' ? 'prev0' : prev0.idname[0]})
+    }
+    if(!!prev1.life) {
+        filters.push({...prev1, life: prev1.life[0], idname: prev1.idname === '' ? 'prev1' : prev1.idname[0]})
+    }
+    if(!!prev2.life) {
+        filters.push({...prev2, life: prev2.life[0], idname: prev2.idname === '' ? 'prev2' : prev2.idname[0]})
+    }
+    if(!!post0.life) {
+        filters.push({...post0, life: post0.life[0], idname: post0.idname === '' ? 'post0' : post0.idname[0]})
+    }
+    if(!!post1.life) {
+        filters.push({...post1, life: post1.life[0], idname: post1.idname === '' ? 'post1' : post1.idname[0]})
+    }
     // filters.push({...post2, life: post2.life[0]})
 
     // if(prev0.idname !== '' && prev0.idname !== []) {

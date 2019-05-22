@@ -20,8 +20,6 @@ const FilterPer = {
 }
 
 const Index = (props) => {
-    console.log('Form Porps:', props)
-
     return (
         <React.Fragment>
         <form>
@@ -68,7 +66,7 @@ const Index = (props) => {
                         </div>
                     </Brief>
                 </Item>
-                <Item className="item_switch"
+                {/* <Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.onSetHost()}} >
                                 <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
@@ -81,7 +79,7 @@ const Index = (props) => {
                             {lodashGet(props, 'host', '')}
                         </div>
                     </Brief>
-                </Item>
+                </Item> */}
                 <Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.onSelectFilter('post0')}} >
@@ -126,6 +124,13 @@ const Index = (props) => {
                 </Item> */}
             </List>
         </form>
+        <div className="submit_zone">
+            <div className="add_btn" >
+                <Button type="ghost" className="btn" onClick={() => props.onSubmit()}>
+                    <FormattedMessage id="form.save" defaultMessage="保存" />
+                </Button>
+            </div>
+        </div>
         </React.Fragment>
     )
 }

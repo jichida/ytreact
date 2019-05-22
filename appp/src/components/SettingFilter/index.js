@@ -20,34 +20,34 @@ const basicData = {
     prev0: {
         isprev: true,
         idname: '',
-        lastchangedate: new Date()
+        // lastchangedate: new Date()
     },
     prev1: {
         isprev: true,
         idname: '',
-        lastchangedate: new Date()
+        // lastchangedate: new Date()
     },
     prev2: {
         isprev: true,
         idname: '',
-        lastchangedate: new Date()
+        // lastchangedate: new Date()
     },
     post0: {
         isprev: false,
         idname: '',
-        lastchangedate: new Date()
+        // lastchangedate: new Date()
     },
     post1: {
         isprev: false,
         idname: '',
-        lastchangedate: new Date()
+        // lastchangedate: new Date()
     },
     post2: {
         isprev: false,
         idname: '',
-        lastchangedate: new Date()
+        // lastchangedate: new Date()
     },
-    host: '', //主机
+    // host: '', //主机
 }
 
 const dataInput = (device) => {
@@ -55,8 +55,6 @@ const dataInput = (device) => {
     const filters = {}
     const prevs = []
     const posts = []
-    const configuration = [device.configuration]
-    const materials = [device.materials]
     if(data === []) {
         console.log('data:', data)
         for(let i = 0; i++; i<3) {
@@ -100,9 +98,6 @@ const dataInput = (device) => {
     console.log('Input filters:', filters)
     return {
         ...filters,
-        configuration,
-        materials
-
     }
 }
 
@@ -110,12 +105,22 @@ const dataOutput = (data) => {
     const { prev0, prev1, prev2, post0, post1, post2 } = data
     const filters = []
 
-    filters.push({...prev0, life: prev0.life[0], idname: prev0.idname[0] === '' ? 'prev0' : prev0.idname[0]})
-    filters.push({...prev1, life: prev1.life[0], idname: prev1.idname[0] === '' ? 'prev1' : prev1.idname[0]})
-    filters.push({...prev2, life: prev2.life[0], idname: prev2.idname[0] === '' ? 'prev2' : prev2.idname[0]})
-    filters.push({...post0, life: post0.life[0], idname: post0.idname[0] === '' ? 'post0' : post0.idname[0]})
-    filters.push({...post1, life: post1.life[0], idname: post1.idname[0] === '' ? 'post1' : post1.idname[0]})
-
+    if(!!prev0.life) {
+        filters.push({...prev0, life: prev0.life[0], idname: prev0.idname === '' ? 'prev0' : prev0.idname[0]})
+    }
+    if(!!prev1.life) {
+        filters.push({...prev1, life: prev1.life[0], idname: prev1.idname === '' ? 'prev1' : prev1.idname[0]})
+    }
+    if(!!prev2.life) {
+        filters.push({...prev2, life: prev2.life[0], idname: prev2.idname === '' ? 'prev2' : prev2.idname[0]})
+    }
+    if(!!post0.life) {
+        filters.push({...post0, life: post0.life[0], idname: post0.idname === '' ? 'post0' : post0.idname[0]})
+    }
+    if(!!post1.life) {
+        filters.push({...post1, life: post1.life[0], idname: post1.idname === '' ? 'post1' : post1.idname[0]})
+    }
+    
     return filters
 }
 
@@ -125,7 +130,7 @@ class Inlet extends PureComponent{
         super(props)
         this.state = {
             filterModal: false,
-            modalHost: false,
+            // modalHost: false,
             curKey: 'prev0',
             isprev: true,
             curOptions: prev0Options,
@@ -134,24 +139,27 @@ class Inlet extends PureComponent{
             lastchangedate: new Date(),
             formData: {
                 ...basicData, 
-                ...this.props.devicelist, 
+                // ...this.props.devicelist, 
                 ...dataInput(this.props.devicelist), 
-                host: lodashGet(this.props.basicinfo, 'model', '')
+                // host: lodashGet(this.props.basicinfo, 'model', '')
             }
         }
     }
 
-    handleSetHostSubmit =() => {
-        // 发送host至设备
-        console.log('New Host:', this.state.formData.host)
+    // handleSetHostSubmit =() => {
+    //     // 发送host至设备
+    //     console.log('New Host:', this.state.formData.host)
+    // }
+
+    handleSubmit = () => {
+        // 发送至硬件并保存至reducer
+        const filterlist = dataOutput(this.state.formData)
+        console.log('Submit DeviseList:', filterlist)
+
     }
 
     onFilterSubmit = () => {
         const { formData, curKey, idname, life } = this.state
-        // 发送滤芯至设备
-        console.log('Filter Item:', curKey)
-        console.log('Value:', life)
-
         
         formData[curKey] = { ...formData[curKey], idname, life }
         this.setState({
@@ -198,23 +206,22 @@ class Inlet extends PureComponent{
         this.setState({filterModal: false})
     }
 
-    onSetHost = () => {
-        this.setState({modalHost: true})
-    }
+    // onSetHost = () => {
+    //     this.setState({modalHost: true})
+    // }
 
-    handleHostChange = (val) => {
-        const { formData } = this.state
-        formData.host = val
-        this.setState({formData})
-    }
+    // handleHostChange = (val) => {
+    //     const { formData } = this.state
+    //     formData.host = val
+    //     this.setState({formData})
+    // }
 
-    handleSetHostClose = () => {
-        this.setState({ modalHost: false })
-    }
+    // handleSetHostClose = () => {
+    //     this.setState({ modalHost: false })
+    // }
 
 
     render () {
-        const { formatMessage } = this.props.intl;
 
         return (
             <div className="sub_setting_bg">
@@ -223,6 +230,7 @@ class Inlet extends PureComponent{
                     {...this.props} 
                     onSelectFilter={this.onShowFilter} 
                     onSetHost={this.onSetHost}
+                    onSubmit={this.handleSubmit}
                 />
                 <Modal
                     popup
@@ -268,7 +276,7 @@ class Inlet extends PureComponent{
                         </WingBlank>
                     </div>
                 </Modal>
-                <Modal
+                {/* <Modal
                     popup
                     visible={this.state.modalHost}
                     animationType="slide-up"
@@ -303,7 +311,7 @@ class Inlet extends PureComponent{
                             </WingBlank>
                         </WingBlank>
                     </div>
-                </Modal>
+                </Modal> */}
             </div>
 
         )

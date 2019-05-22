@@ -376,7 +376,7 @@ const dataInput = (device) => {
                 ...item, 
                 idname: [`${lodashGet(item, 'item', `post${index-prevs.length}`)}`], 
                 life: [`${lodashGet(item, 'life', '0')}`], 
-                lastchangedate: moment(item.lastchangedate).toDate()
+                lastchangedate: moment(lodashGet(item, 'lastchangedate', moment())).toDate()
             }
         }
 

@@ -22,6 +22,7 @@ import TextFieldBool from '../controls/TextFieldBool';
 // import ImageArrayField from '../controls/imagearrayfield';
 import InputSpaceField from '../controls/InputSpaceField';
 import DeviceShow from './deviceshow';
+import moment from 'moment';
 
 export const DeviceFilter = props => (
     <Filter {...props}>
@@ -35,6 +36,13 @@ export const DeviceFilter = props => (
 const DeviceuserTitle = ({ record }) => {
     console.log("record=>" + JSON.stringify(record));
    return <span>编辑 设备</span>;
+};
+
+const TextFieldDate = ({ source, record = {} }) => <span>{
+  moment(record[source]).format('YYYY-MM-DD')
+}</span>;
+TextFieldDate.defaultProps = {
+    addLabel: true,
 };
 
 const DeviceuserEdit = (props) => {
@@ -81,8 +89,8 @@ const DeviceuserEdit = (props) => {
         </FormTab>
           <FormTab label="系统设置">
             <TextInput label="设备编号" source="syssettings.deviceid" />
-            <TextField label="购买日期" source="syssettings.buydate" />
-            <TextField label="安装日期" source="syssettings.installdate"  />
+            <TextFieldDate label="购买日期" source="syssettings.buydate" />
+            <TextFieldDate label="安装日期" source="syssettings.installdate"  />
             <TextField label="安装人员" source="syssettings.installer"  />
             <TextField label="时区" source="syssettings.timezone"  />
           </FormTab>

@@ -2,13 +2,13 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {  List, InputItem, Button, Modal, WingBlank, WhiteSpace, Picker  } from 'antd-mobile';//
 import { withRouter } from 'react-router-dom';
-import {common_err,tmp_ui_setuserdevice_request, wifi_sendcmd_request,set_weui} from '../../actions';
+import {common_err,setfilterlist, wifi_sendcmd_request,set_weui} from '../../actions';
 import lodashMap from 'lodash.map'
 import lodashGet from 'lodash.get'
 import moment from 'moment'
 import RenderForm from './FilterForm'
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { prev0Options, prev1Options, prev2Options, post0Options, post1Options } from './config'
+import { prev0Options, prev1Options, prev2Options, post0Options, post1Options ,convertfilterlist,convertfromfilterlist} from './config'
 
 
 import './index.less';
@@ -74,21 +74,21 @@ const dataInput = (device) => {
             }
         })
     }
-    
+
 
     lodashMap(data, (item, index)=> {
         if(item.isprev) {
             filters[`prev${index}`] = {
-                ...item, 
-                idname: [`${lodashGet(item, 'idname', `prev${index}`)}`], 
-                life: [`${lodashGet(item, 'life', '0')}`], 
+                ...item,
+                idname: [`${lodashGet(item, 'idname', `prev${index}`)}`],
+                life: [`${lodashGet(item, 'life', '0')}`],
                 lastchangedate: moment(lodashGet(item, 'lastchangedate', moment())).toDate()
             }
         } else {
             filters[`post${index-prevs.length}`] = {
-                ...item, 
-                idname: [`${lodashGet(item, 'item', `post${index-prevs.length}`)}`], 
-                life: [`${lodashGet(item, 'life', '0')}`], 
+                ...item,
+                idname: [`${lodashGet(item, 'item', `post${index-prevs.length}`)}`],
+                life: [`${lodashGet(item, 'life', '0')}`],
                 lastchangedate: moment(item.lastchangedate).toDate()
             }
         }
@@ -120,7 +120,7 @@ const dataOutput = (data) => {
     if(!!post1.life) {
         filters.push({...post1, life: post1.life[0], idname: post1.idname === '' ? 'post1' : post1.idname[0]})
     }
-    
+
     return filters
 }
 
@@ -138,9 +138,9 @@ class Inlet extends PureComponent{
             life: 0,
             lastchangedate: new Date(),
             formData: {
-                ...basicData, 
-                // ...this.props.devicelist, 
-                ...dataInput(this.props.devicelist), 
+                ...basicData,
+                // ...this.props.devicelist,
+                ...dataInput(this.props.devicelist),
                 // host: lodashGet(this.props.basicinfo, 'model', '')
             }
         }
@@ -155,12 +155,15 @@ class Inlet extends PureComponent{
         // 发送至硬件并保存至reducer
         const filterlist = dataOutput(this.state.formData)
         console.log('Submit DeviseList:', filterlist)
-
+        // --->
+        const payload = convertfilterlist(filterlist);
+        console.log(payload);
+        this.props.dispatch(setfilterlist(payload));
     }
 
     onFilterSubmit = () => {
         const { formData, curKey, idname, life } = this.state
-        
+
         formData[curKey] = { ...formData[curKey], idname, life }
         this.setState({
             formData,
@@ -225,10 +228,10 @@ class Inlet extends PureComponent{
 
         return (
             <div className="sub_setting_bg">
-                <RenderForm 
-                    {...this.state.formData} 
-                    {...this.props} 
-                    onSelectFilter={this.onShowFilter} 
+                <RenderForm
+                    {...this.state.formData}
+                    {...this.props}
+                    onSelectFilter={this.onShowFilter}
                     onSetHost={this.onSetHost}
                     onSubmit={this.handleSubmit}
                 />
@@ -318,10 +321,13 @@ class Inlet extends PureComponent{
     }
 }
 
-const mapStateToProps =  (state) =>{
-    const devicelist = {}
+const mapStateToProps =  ({devicedata}) =>{
+
+    const filterlist = devicedata.filterlist;
+    const devicelist = convertfromfilterlist(filterlist);
+    console.log(devicelist);
     const basicinfo = {}
-  return { devicelist, basicinfo};
+    return { devicelist, basicinfo};
 };
 
 Inlet = connect(mapStateToProps)(Inlet);

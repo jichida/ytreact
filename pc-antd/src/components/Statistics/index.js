@@ -304,7 +304,7 @@ class Statistics extends React.PureComponent {
         }
         if(cycle === 'year') {
             rangeDate = [moment().subtract(1, 'years'), moment()]
-            Query = { cycle, rangeDate}
+            Query = { cycle: 'month', rangeDate}
         }
         this.setState({cycle, rangeDate})
         this.onClickQuery(Query)

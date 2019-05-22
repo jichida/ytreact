@@ -10,7 +10,6 @@ import RenderForm from './FilterForm'
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { prev0Options, prev1Options, prev2Options, post0Options, post1Options } from './config'
 
-
 import './index.less';
 
 const Item = List.Item;

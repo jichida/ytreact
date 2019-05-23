@@ -408,6 +408,9 @@ const dataOutput = (data) => {
     if(!!post1.life) {
         filters.push({...post1, life: post1.life[0], idname: post1.idname === '' ? 'post1' : post1.idname})
     }
+    if(!!post2.life) {
+        filters.push({...post2, life: post2.life[0], idname: post2.idname === '' ? 'post2' : post2.idname})
+    }
     // filters.push({...post2, life: post2.life[0]})
 
     // if(prev0.idname !== '' && prev0.idname !== []) {
@@ -461,6 +464,7 @@ class EquipmentList extends PureComponent{
         // 考虑到没网的条件,先设置一下
         //输出:devicelist
         let devicelist = {...this.props.devicelist, ...values, filterlist, configuration, materials}
+        console.log('State FormData:', this.state.formData)
         console.log('Submit DeviseList:', devicelist)
 
         // const {dispatch,_id} = this.props;
@@ -625,7 +629,7 @@ const mapStateToProps =  ({device:{ basicinfo, devicelist,  _id}, devicedata}) =
         ...basicData, 
         ...initData,
         // ...devicelist, 
-        // ...dataInput(devicelist), 
+        ...dataInput(devicelist), 
         host: lodashGet(basicinfo, 'model', '')
     }
 

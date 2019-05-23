@@ -612,7 +612,7 @@ export function* wififlow() {
             else{//tcpconnected
               //专业版
               const tcpconnected = yield select((state)=>{
-                return state.app.tcpconnected;
+                return (process.env.NODE_ENV === 'production')?state.app.tcpconnected:true;
               });
               if(!tcpconnected){
                 yield put(set_weui({

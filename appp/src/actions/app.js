@@ -8,4 +8,3 @@ export const getsystemconfig_result = createAction('getsystemconfig_result');
 export const settcp_connected = createAction('settcp_connected');
 export const setdatatarget = createAction('setdatatarget');
 export const setlinkmode = createAction('setlinkmode');
-export const setfilterlist = createAction('setfilterlist');

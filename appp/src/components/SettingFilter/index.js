@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {  List, InputItem, Button, Modal, WingBlank, WhiteSpace, Picker  } from 'antd-mobile';//
 import { withRouter } from 'react-router-dom';
-import {common_err,setfilterlist, wifi_sendcmd_request,set_weui} from '../../actions';
+import { wifi_sendcmd_request,set_weui} from '../../actions';
 import lodashMap from 'lodash.map'
 import lodashGet from 'lodash.get'
 import moment from 'moment'

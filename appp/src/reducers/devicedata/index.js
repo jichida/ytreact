@@ -4,7 +4,6 @@ import {
   wifi_getdata,
   getdevice_result,
   setdatatarget,
-  setfilterlist
 } from '../../actions/index.js';
 // import moment from 'moment';
 
@@ -148,11 +147,6 @@ const initial = {
 };
 
 const devicedata = createReducer({
-    [setfilterlist]:(state,payload)=>{
-      const {prev0,prev1,prev2,post0,post1} = payload;
-      let filterlist = {...state.filterlist,prev0,prev1,prev2,post0,post1};
-      return {...state,filterlist};
-    },
     [setdatatarget]:(state,payload)=>{
       let newdata = {};
       lodashSet(newdata,`${payload.fieldname}`,payload.value);

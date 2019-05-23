@@ -137,12 +137,16 @@ class Inlet extends PureComponent{
             life: 0,
             lastchangedate: new Date(),
             formData: {
-                ...basicData,
+                // ...basicData,
                 // ...this.props.devicelist,
-                ...dataInput(this.props.devicelist),
+                ...this.props.devicelist,
                 // host: lodashGet(this.props.basicinfo, 'model', '')
             }
         }
+
+        console.log('Basic Data:', basicData)
+        console.log('Props DeviceList:', this.props.devicelist)
+        console.log({...basicData, ...dataInput(this.props.devicelist)})
     }
 
     // handleSetHostSubmit =() => {
@@ -323,10 +327,11 @@ class Inlet extends PureComponent{
 const mapStateToProps =  ({devicedata}) =>{
 
     const filterlist = devicedata.filterlist;
+    console.log('Filter List:', filterlist)
     const devicelist = convertfromfilterlist(filterlist);
-    console.log(devicelist);
-    const basicinfo = {}
-    return { devicelist, basicinfo};
+    console.log('Device List:', devicelist);
+    // const basicinfo = {}
+    return { devicelist };
 };
 
 Inlet = connect(mapStateToProps)(Inlet);

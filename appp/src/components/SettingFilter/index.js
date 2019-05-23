@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {  List, InputItem, Button, Modal, WingBlank, WhiteSpace, Picker  } from 'antd-mobile';//
+import {  List, Button, Modal, WingBlank, WhiteSpace, Picker  } from 'antd-mobile';//
 import { withRouter } from 'react-router-dom';
-import { wifi_sendcmd_request,set_weui} from '../../actions';
+import { wifi_sendcmd_request, setdatatarget} from '../../actions';
 import lodashMap from 'lodash.map'
 import lodashGet from 'lodash.get'
 import moment from 'moment'
@@ -152,10 +152,10 @@ class Inlet extends PureComponent{
 
     handleSubmit = () => {
         // 发送至硬件并保存至reducer
-        const filterlist = dataOutput(this.state.formData)
-        console.log('Submit DeviseList:', filterlist)
+        // const filterlist = dataOutput(this.state.formData)
+        console.log('Submit DeviseList:', this.state.formData)
         // --->
-        const payload = convertfilterlist(filterlist);
+        const payload = convertfilterlist(this.state.formData);
         console.log(payload);
         // this.props.dispatch(setfilterlist(payload));
 
@@ -163,6 +163,7 @@ class Inlet extends PureComponent{
           fieldname:'filterlist',
           value:payload
         }}));
+
     }
 
     onFilterSubmit = () => {

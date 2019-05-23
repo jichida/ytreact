@@ -1,4 +1,5 @@
 import React from 'react'
+import lodashGet from 'lodash.get'
 import { FormattedMessage } from 'react-intl'
 
 export const prev0Options = [
@@ -81,75 +82,92 @@ export const getFilterLabel = (intl,id,value)=>{
 
 const filtervaluetoindex = (idname,life)=>{
   if(idname === "prev0"){
-    if(life === '30'){
+    if(life === '0') {
       return 0;
     }
-    if(life === '60'){
+    if(life === '30'){
       return 1;
     }
-    if(life === '90'){
+    if(life === '60'){
       return 2;
+    }
+    if(life === '90'){
+      return 3;
     }
   }
   if(idname === "prev1"){
-    if(life === '30'){
+    if(life === '0') {
       return 0;
+    }
+    if(life === '30'){
+      return 1;
     }
     if(life === '60'){
-      return 1;
-    }
-  }
-  if(idname === "prev2"){
-    if(life === '180'){
-      return 0;
-    }
-    if(life === '360'){
-      return 1;
-    }
-  }
-  if(idname === "post0"){
-    if(life === '180'){
-      return 0;
-    }
-    if(life === '360'){
-      return 1;
-    }
-    if(life === '540'){
       return 2;
     }
   }
-  if(idname === "post1"){
-    if(life === '180'){
+  if(idname === "prev2"){
+    if(life === '0') {
       return 0;
+    }
+    if(life === '180'){
+      return 1;
+    }
+    if(life === '360'){
+      return 2;
+    }
+  }
+  if(idname === "post0"){
+    if(life === '0') {
+      return 0;
+    }
+    if(life === '180'){
+      return 1;
+    }
+    if(life === '360'){
+      return 2;
+    }
+    if(life === '540'){
+      return 3;
+    }
+  }
+  if(idname === "post1"){
+    if(life === '0') {
+      return 0;
+    }
+    if(life === '180'){
+      return 1;
     }
   }
 }
 
 export const convertfilterlist = (filterlist)=>{
-  let prev0 = 0;
-  let prev1 = 0;
-  let prev2 = 0;
-  let post0 = 0;
-  let post1 = 0;
-  for(let i = 0;i < filterlist.length;i++){
-    const v = filterlist[i];
-    if(v.idname === 'prev0'){
-      prev0 = filtervaluetoindex(v.idname,v.life);
-    }
-    if(v.idname === 'prev1'){
-      prev1 = filtervaluetoindex(v.idname,v.life);
-    }
-    if(v.idname === 'prev2'){
-      prev2 = filtervaluetoindex(v.idname,v.life);
-    }
-    if(v.idname === 'post0'){
-      post0 = filtervaluetoindex(v.idname,v.life);
-    }
-    if(v.idname === 'post1'){
-      post1 = filtervaluetoindex(v.idname,v.life);
-    }
-  }
+  let prev0 = filtervaluetoindex(filterlist['prev0'].idname, filterlist['prev0'].life[0]) || 0;
+  let prev1 = filtervaluetoindex(filterlist['prev1'].idname, filterlist['prev1'].life[0]) || 0;
+  let prev2 = filtervaluetoindex(filterlist['prev2'].idname, filterlist['prev2'].life[0]) || 0;
+  let post0 = filtervaluetoindex(filterlist['post0'].idname, filterlist['post0'].life[0]) || 0;
+  let post1 = filtervaluetoindex(filterlist['post1'].idname, filterlist['post1'].life[0]) || 0;
+
   return {prev0,prev1,prev2,post0,post1};
+
+  // for(let i = 0;i < filterlist.length;i++){
+  //   const v = filterlist[i];
+  //   if(v.idname === 'prev0'){
+  //     prev0 = filtervaluetoindex(v.idname,v.life);
+  //   }
+  //   if(v.idname === 'prev1'){
+  //     prev1 = filtervaluetoindex(v.idname,v.life);
+  //   }
+  //   if(v.idname === 'prev2'){
+  //     prev2 = filtervaluetoindex(v.idname,v.life);
+  //   }
+  //   if(v.idname === 'post0'){
+  //     post0 = filtervaluetoindex(v.idname,v.life);
+  //   }
+  //   if(v.idname === 'post1'){
+  //     post1 = filtervaluetoindex(v.idname,v.life);
+  //   }
+  // }
 }
 
 export const convertfromfilterlist  = ({prev0,prev1,prev2,post0,post1})=>{
@@ -157,27 +175,27 @@ export const convertfromfilterlist  = ({prev0,prev1,prev2,post0,post1})=>{
   newlist['prev0'] = {
     idname:'prev0',
     isprev: true,
-    life:[prev0Options[prev0].value],
+    life: prev0 === 0 ? [0] : [prev0Options[prev0-1].value],
   }
   newlist['prev1'] = {
     idname:'prev1',
     isprev: true,
-    life:[prev1Options[prev1].value],
+    life: prev1 === 0 ? [0] : [prev1Options[prev1-1].value],
   }
   newlist['prev2'] = {
     idname:'prev2',
     isprev: true,
-    life:[prev2Options[prev2].value],
+    life: prev2 === 0 ? [0] : [prev2Options[prev2-1].value],
   }
   newlist['post0'] = {
     idname:'post0',
     isprev: false,
-    life:[post0Options[post0].value],
+    life: post0 === 0 ? [0] : [post0Options[post0-1].value],
   }
   newlist['post1'] = {
     idname:'post1',
     isprev: false,
-    life:[post1Options[post1].value],
+    life: post1 === 0 ? [0] : [post1Options[post1-1].value],
   }
   return newlist
   // let targetfilterlist = [];

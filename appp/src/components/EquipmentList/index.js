@@ -609,7 +609,21 @@ class EquipmentList extends PureComponent{
 }
 const mapStateToProps =  ({device:{ basicinfo, devicelist,  _id}, devicedata}) =>{
     console.log('State devicelist:', devicelist)
+    
     const initData = convertfromfilterlist(devicedata.filterlist);
+    console.log('InitData:', initData)
+
+    const inject = {
+        ...basicData, 
+        ...initData,
+        ...devicelist, 
+        ...dataInput(devicelist), 
+        host: lodashGet(basicinfo, 'model', '')
+    }
+
+    console.log('inject State:', inject)
+
+
     return { basicinfo, initData, devicelist, _id};
 };
 EquipmentList = connect(mapStateToProps)(EquipmentList);

@@ -326,12 +326,7 @@ class Inlet extends PureComponent{
 }
 
 const mapStateToProps =  ({devicedata}) =>{
-
-    const filterlist = devicedata.filterlist;
-    console.log('Filter List:', filterlist)
-    const devicelist = convertfromfilterlist(filterlist);
-    console.log('Device List:', devicelist);
-    // const basicinfo = {}
+    const devicelist = convertfromfilterlist(devicedata.filterlist);
     return { devicelist };
 };
 

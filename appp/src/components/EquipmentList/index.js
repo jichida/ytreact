@@ -8,7 +8,7 @@ import moment from 'moment'
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import {common_err,setuserdevice_result,ui_setuserdevice_request} from '../../actions';
-import { prev0Options, prev1Options, prev2Options, post0Options, post1Options } from './config'
+import { prev0Options, prev1Options, prev2Options, post0Options, post1Options, convertfromfilterlist } from '../SettingFilter/config'
 import './index.less';
 
 const Item = List.Item;
@@ -447,6 +447,7 @@ class EquipmentList extends PureComponent{
         lastchangedate: new Date(),
         formData: {
             ...basicData, 
+            ...this.props.initData,
             ...this.props.devicelist, 
             ...dataInput(this.props.devicelist), 
             host: lodashGet(this.props.basicinfo, 'model', '')
@@ -606,9 +607,10 @@ class EquipmentList extends PureComponent{
         )
     }
 }
-const mapStateToProps =  ({device:{ basicinfo, devicelist, _id}}) =>{
+const mapStateToProps =  ({device:{ basicinfo, devicelist,  _id}, devicedata}) =>{
     console.log('State devicelist:', devicelist)
-    return { basicinfo, devicelist, _id};
+    const initData = convertfromfilterlist(devicedata.filterlist);
+    return { basicinfo, initData, devicelist, _id};
 };
 EquipmentList = connect(mapStateToProps)(EquipmentList);
 export default withRouter(EquipmentList);

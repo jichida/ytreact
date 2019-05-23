@@ -150,8 +150,6 @@ const RenderForm = createForm({
     const { getFieldProps, validateFields } = props.form;
     const { history,  intl: { formatMessage }} = props;
 
-    console.log('Form Porps:', props)
-
     const handleSubmit = (e)=>{
         //e.preventDefault();
         validateFields((err, values)=>{
@@ -334,107 +332,60 @@ const RenderForm = createForm({
     )
 })))
 
-const dataInput = (device) => {
-    const { filterlist: data } = device
-    const filters = {}
-    const prevs = []
-    const posts = []
-    const configuration = [device.configuration]
-    const materials = [device.materials]
-    if(data === []) {
-        console.log('data:', data)
-        for(let i = 0; i++; i<3) {
-            data.push({isprev: true})
-            prevs.push({isprev: true})
-        }
-        for(let i = 0; i++; i<3) {
-            data.push({isprev: false})
-            posts.push({isprev: false})
-        }
-    } else {
-        lodashMap(data, (item, index) => {
-            if(item.isprev) {
-                prevs.push(item)
-            } else {
-                posts.push(item)
-            }
-        })
-    }
+// const dataInput = (device) => {
+//     const { filterlist: data } = device
+//     const filters = {}
+//     const prevs = []
+//     const posts = []
+//     const configuration = [device.configuration]
+//     const materials = [device.materials]
+//     if(data === []) {
+//         console.log('data:', data)
+//         for(let i = 0; i++; i<3) {
+//             data.push({isprev: true})
+//             prevs.push({isprev: true})
+//         }
+//         for(let i = 0; i++; i<3) {
+//             data.push({isprev: false})
+//             posts.push({isprev: false})
+//         }
+//     } else {
+//         lodashMap(data, (item, index) => {
+//             if(item.isprev) {
+//                 prevs.push(item)
+//             } else {
+//                 posts.push(item)
+//             }
+//         })
+//     }
     
 
-    lodashMap(data, (item, index)=> {
-        if(item.isprev) {
-            filters[`prev${index}`] = {
-                ...item, 
-                // idname: `${lodashGet(item, 'idname', `prev${index}`)}`, 
-                life: [`${lodashGet(item, 'life', 0)}`], 
-                lastchangedate: moment(lodashGet(item, 'lastchangedate', moment())).toDate()
-            }
-        } else {
-            filters[`post${index-prevs.length}`] = {
-                ...item, 
-                // idname: `${lodashGet(item, 'item', `post${index-prevs.length}`)}`, 
-                life: [`${lodashGet(item, 'life', 0)}`], 
-                lastchangedate: moment(lodashGet(item, 'lastchangedate', moment())).toDate()
-            }
-        }
+//     lodashMap(data, (item, index)=> {
+//         if(item.isprev) {
+//             filters[`prev${index}`] = {
+//                 ...item, 
+//                 // idname: `${lodashGet(item, 'idname', `prev${index}`)}`, 
+//                 life: [`${lodashGet(item, 'life', 0)}`], 
+//                 lastchangedate: moment(lodashGet(item, 'lastchangedate', moment())).toDate()
+//             }
+//         } else {
+//             filters[`post${index-prevs.length}`] = {
+//                 ...item, 
+//                 // idname: `${lodashGet(item, 'item', `post${index-prevs.length}`)}`, 
+//                 life: [`${lodashGet(item, 'life', 0)}`], 
+//                 lastchangedate: moment(lodashGet(item, 'lastchangedate', moment())).toDate()
+//             }
+//         }
 
-    })
+//     })
 
-    return {
-        ...filters,
-        configuration,
-        materials
+//     return {
+//         ...filters,
+//         configuration,
+//         materials
 
-    }
-}
-
-const dataOutput = (data) => {
-    const { prev0, prev1, prev2, post0, post1, post2 } = data
-    const filters = []
-
-    if(!!prev0.life) {
-        filters.push({...prev0, life: prev0.life[0], idname: prev0.idname === '' ? 'prev0' : prev0.idname})
-    }
-    if(!!prev1.life) {
-        filters.push({...prev1, life: prev1.life[0], idname: prev1.idname === '' ? 'prev1' : prev1.idname})
-    }
-    if(!!prev2.life) {
-        filters.push({...prev2, life: prev2.life[0], idname: prev2.idname === '' ? 'prev2' : prev2.idname})
-    }
-    if(!!post0.life) {
-        filters.push({...post0, life: post0.life[0], idname: post0.idname === '' ? 'post0' : post0.idname})
-    }
-    if(!!post1.life) {
-        filters.push({...post1, life: post1.life[0], idname: post1.idname === '' ? 'post1' : post1.idname})
-    }
-    if(!!post2.life) {
-        filters.push({...post2, life: post2.life[0], idname: post2.idname === '' ? 'post2' : post2.idname})
-    }
-    // filters.push({...post2, life: post2.life[0]})
-
-    // if(prev0.idname !== '' && prev0.idname !== []) {
-    //     filters.push({...prev0, idname: prev0.idname[0], lastchangedate: moment(prev0.lastchangedate)})
-    //     if(prev1.idname !== '' && prev1.idname !== []) {
-    //         filters.push({...prev1, idname: prev1.idname[0], lastchangedate: moment(prev0.lastchangedate)})
-    //         if(prev2.idname !== '' && prev2.idname !== []) {
-    //             filters.push({...prev2, idname: prev2.idname[0], lastchangedate: moment(prev0.lastchangedate)})
-    //         }
-    //     }
-    // }
-
-    // if(post0.idname !== '' && post0.idname !== []) {
-    //     filters.push({...post0, idname: post0.idname[0], lastchangedate: moment(prev0.lastchangedate)})
-    //     if(post1.idname !== '' && post1.idname !== []) {
-    //         filters.push({...post1, idname: post1.idname[0], lastchangedate: moment(prev0.lastchangedate)})
-    //         if(post2.idname !== '' && post2.idname !== []) {
-    //             filters.push({...post2, idname: post2.idname[0], lastchangedate: moment(prev0.lastchangedate)})
-    //         }
-    //     }
-    // }
-
-    return filters
-}
+//     }
+// }
 
 class EquipmentList extends PureComponent{
 
@@ -449,28 +400,46 @@ class EquipmentList extends PureComponent{
         formData: {
             ...basicData, 
             ...this.props.initData,
-            ...this.props.devicelist, 
-            ...dataInput(this.props.devicelist), 
+            // ...this.props.devicelist, 
+            // ...dataInput(this.props.devicelist), 
             host: lodashGet(this.props.basicinfo, 'model', '')
         }
     }
 
     handleSubmit = (values)=>{
-        const filterlist = dataOutput(this.state.formData)
         const configuration = lodashGet(values, 'configuration', [''])[0]
         const materials = lodashGet(values, 'materials', [''])[0]
+
+        const { prev0, prev1, prev2, post0, post1, post2 } = this.state.formData
+        const prev0lastchangedate = prev0.lastchangedate
+        const prev1lastchangedate = prev1.lastchangedate
+        const prev2lastchangedate = prev2.lastchangedate
+        const post0lastchangedate = post0.lastchangedate
+        const post1lastchangedate = post1.lastchangedate
+        const post2lastchangedate = post2.lastchangedate
 
         //yield put(setuserdevice_request({_id,data}));
         // 考虑到没网的条件,先设置一下
         //输出:devicelist
-        let devicelist = {...this.props.devicelist, ...values, filterlist, configuration, materials}
-        console.log('State FormData:', this.state.formData)
+        let devicelist = {
+            ...this.props.devicelist, 
+            ...values, 
+            prev0lastchangedate, 
+            prev1lastchangedate, 
+            prev2lastchangedate, 
+            post0lastchangedate,
+            post1lastchangedate,
+            post2lastchangedate,
+            configuration, 
+            materials
+        }
+
         console.log('Submit DeviseList:', devicelist)
 
-        // const {dispatch,_id} = this.props;
-        // dispatch(setuserdevice_result({devicelist}))
+        const {dispatch,_id} = this.props;
+        dispatch(setuserdevice_result({devicelist}))
 
-        // dispatch(ui_setuserdevice_request({_id,data:{devicelist}}));
+        dispatch(ui_setuserdevice_request({_id,data:{devicelist}}));
     }
 
     handleFillPipeFittings = (values) => {
@@ -520,7 +489,7 @@ class EquipmentList extends PureComponent{
     }
 
     onFilterSubmit = () => {
-        console.log('Current State:', this.state)
+
         const { formData, curKey, idname, life, lastchangedate } = this.state
         formData[curKey] = { ...formData[curKey], idname, life, lastchangedate }
         this.setState({
@@ -612,32 +581,20 @@ class EquipmentList extends PureComponent{
         )
     }
 }
-const mapStateToProps =  ({device:{ basicinfo, devicelist,  _id}, devicedata}) =>{
-    console.log('State devicelist:', devicelist)
-    
-    // const initData = convertfromfilterlist(devicedata.filterlist);
-    // console.log('InitData:', initData)
-    const initData = {
-        post0: {idname: "post0", isprev: false, life: [0]},
-        post1: {idname: "post1", isprev: false, life: [180]},
-        prev0: {idname: "prev0", isprev: true, life: [90]},
-        prev1: {idname: "prev1", isprev: true, life: [0]},
-        prev2: {idname: "prev2", isprev: true, life: [360]}
-    }
+const mapStateToProps =  ({device:{ basicinfo, devicelist,  _id}, devicedata: { filterlist }}) =>{
 
-    const inject = {
-        ...basicData, 
-        ...initData,
-        // ...devicelist, 
-        ...dataInput(devicelist), 
-        host: lodashGet(basicinfo, 'model', '')
-    }
+    const { prev0lastchangedate, prev1lastchangedate, prev2lastchangedate, post0lastchangedate, post1lastchangedate, post2lastchangedate } = devicelist
 
+    const initData = convertfromfilterlist(filterlist)
 
-    console.log('inject State:', inject)
+    initData['prev0'] = {...initData['prev0'], lastchangedate: prev0lastchangedate }
+    initData['prev1'] = {...initData['prev1'], lastchangedate: prev1lastchangedate }
+    initData['prev2'] = {...initData['prev2'], lastchangedate: prev2lastchangedate }
+    initData['post0'] = {...initData['post0'], lastchangedate: post0lastchangedate }
+    initData['post1'] = {...initData['post1'], lastchangedate: post1lastchangedate }
+    initData['post2'] = {...initData['post2'], lastchangedate: post2lastchangedate }
 
-
-    return { basicinfo, initData, devicelist, _id};
+    return { basicinfo, initData, _id};
 };
 EquipmentList = connect(mapStateToProps)(EquipmentList);
 export default withRouter(EquipmentList);

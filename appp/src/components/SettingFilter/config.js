@@ -150,25 +150,6 @@ export const convertfilterlist = (filterlist)=>{
   let post2 = filtervaluetoindex(filterlist['post2'].idname, filterlist['post1'].life[0]) || 0;
 
   return {prev0,prev1,prev2,post0,post1,post2};
-
-  // for(let i = 0;i < filterlist.length;i++){
-  //   const v = filterlist[i];
-  //   if(v.idname === 'prev0'){
-  //     prev0 = filtervaluetoindex(v.idname,v.life);
-  //   }
-  //   if(v.idname === 'prev1'){
-  //     prev1 = filtervaluetoindex(v.idname,v.life);
-  //   }
-  //   if(v.idname === 'prev2'){
-  //     prev2 = filtervaluetoindex(v.idname,v.life);
-  //   }
-  //   if(v.idname === 'post0'){
-  //     post0 = filtervaluetoindex(v.idname,v.life);
-  //   }
-  //   if(v.idname === 'post1'){
-  //     post1 = filtervaluetoindex(v.idname,v.life);
-  //   }
-  // }
 }
 
 export const convertfromfilterlist  = ({prev0,prev1,prev2,post0,post1,post2})=>{
@@ -204,31 +185,30 @@ export const convertfromfilterlist  = ({prev0,prev1,prev2,post0,post1,post2})=>{
     life: post2 === 0 ? [0] : [post1Options[post2-1].value],
   }
   return newlist
-  // let targetfilterlist = [];
-  // targetfilterlist.push({
-  //   idname:'prev0',
-  //   isprev: true,
-  //   life:prev0Options[prev0].value,
-  // });
-  // targetfilterlist.push({
-  //   idname:'prev1',
-  //   isprev: true,
-  //   life:prev1Options[prev1].value,
-  // });
-  // targetfilterlist.push({
-  //   idname:'prev2',
-  //   isprev: true,
-  //   life:prev2Options[prev2].value,
-  // });
-  // targetfilterlist.push({
-  //   idname:'post0',
-  //   isprev: false,
-  //   life:post0Options[post0].value,
-  // });
-  // targetfilterlist.push({
-  //   idname:'post1',
-  //   isprev: false,
-  //   life:post1Options[post1].value,
-  // });
-  // return targetfilterlist;
+}
+
+export const filterlistConvertToArray = (data) => {
+  const { prev0, prev1, prev2, post0, post1, post2 } = data
+  const filters = []
+
+  if(!!prev0.life) {
+      filters.push({...prev0, life: prev0.life[0], idname: prev0.idname === '' ? 'prev0' : prev0.idname})
+  }
+  if(!!prev1.life) {
+      filters.push({...prev1, life: prev1.life[0], idname: prev1.idname === '' ? 'prev1' : prev1.idname})
+  }
+  if(!!prev2.life) {
+      filters.push({...prev2, life: prev2.life[0], idname: prev2.idname === '' ? 'prev2' : prev2.idname})
+  }
+  if(!!post0.life) {
+      filters.push({...post0, life: post0.life[0], idname: post0.idname === '' ? 'post0' : post0.idname})
+  }
+  if(!!post1.life) {
+      filters.push({...post1, life: post1.life[0], idname: post1.idname === '' ? 'post1' : post1.idname})
+  }
+  if(!!post2.life) {
+      filters.push({...post2, life: post2.life[0], idname: post2.idname === '' ? 'post2' : post2.idname})
+  }
+
+  return filters
 }

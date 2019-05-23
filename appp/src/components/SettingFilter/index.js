@@ -2,10 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {  List, Button, Modal, WingBlank, WhiteSpace, Picker  } from 'antd-mobile';//
 import { withRouter } from 'react-router-dom';
-import { wifi_sendcmd_request, setdatatarget} from '../../actions';
-import lodashMap from 'lodash.map'
-import lodashGet from 'lodash.get'
-import moment from 'moment'
+import { wifi_sendcmd_request } from '../../actions';
 import RenderForm from './FilterForm'
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { prev0Options, prev1Options, prev2Options, post0Options, post1Options ,convertfilterlist,convertfromfilterlist} from './config'
@@ -49,81 +46,6 @@ const basicData = {
     // host: '', //主机
 }
 
-const dataInput = (device) => {
-    const { filterlist: data } = device
-    const filters = {}
-    const prevs = []
-    const posts = []
-    if(data === []) {
-        console.log('data:', data)
-        for(let i = 0; i++; i<3) {
-            data.push({isprev: true})
-            prevs.push({isprev: true})
-        }
-        for(let i = 0; i++; i<3) {
-            data.push({isprev: false})
-            posts.push({isprev: false})
-        }
-    } else {
-        lodashMap(data, (item, index) => {
-            if(item.isprev) {
-                prevs.push(item)
-            } else {
-                posts.push(item)
-            }
-        })
-    }
-
-
-    lodashMap(data, (item, index)=> {
-        if(item.isprev) {
-            filters[`prev${index}`] = {
-                ...item,
-                idname: [`${lodashGet(item, 'idname', `prev${index}`)}`],
-                life: [`${lodashGet(item, 'life', '0')}`],
-                lastchangedate: moment(lodashGet(item, 'lastchangedate', moment())).toDate()
-            }
-        } else {
-            filters[`post${index-prevs.length}`] = {
-                ...item,
-                idname: [`${lodashGet(item, 'item', `post${index-prevs.length}`)}`],
-                life: [`${lodashGet(item, 'life', '0')}`],
-                lastchangedate: moment(item.lastchangedate).toDate()
-            }
-        }
-
-    })
-
-    console.log('Input filters:', filters)
-    return {
-        ...filters,
-    }
-}
-
-const dataOutput = (data) => {
-    const { prev0, prev1, prev2, post0, post1, post2 } = data
-    const filters = []
-
-    if(!!prev0.life) {
-        filters.push({...prev0, life: prev0.life[0], idname: prev0.idname === '' ? 'prev0' : prev0.idname[0]})
-    }
-    if(!!prev1.life) {
-        filters.push({...prev1, life: prev1.life[0], idname: prev1.idname === '' ? 'prev1' : prev1.idname[0]})
-    }
-    if(!!prev2.life) {
-        filters.push({...prev2, life: prev2.life[0], idname: prev2.idname === '' ? 'prev2' : prev2.idname[0]})
-    }
-    if(!!post0.life) {
-        filters.push({...post0, life: post0.life[0], idname: post0.idname === '' ? 'post0' : post0.idname[0]})
-    }
-    if(!!post1.life) {
-        filters.push({...post1, life: post1.life[0], idname: post1.idname === '' ? 'post1' : post1.idname[0]})
-    }
-
-    return filters
-}
-
-
 class Inlet extends PureComponent{
     constructor(props) {
         super(props)
@@ -153,10 +75,10 @@ class Inlet extends PureComponent{
     handleSubmit = () => {
         // 发送至硬件并保存至reducer
         // const filterlist = dataOutput(this.state.formData)
-        console.log('Submit DeviseList:', this.state.formData)
+        // console.log('Submit DeviseList:', this.state.formData)
         // --->
         const payload = convertfilterlist(this.state.formData);
-        console.log('Submit Paylaod:',payload);
+        // console.log('Submit Paylaod:',payload);
         // this.props.dispatch(setfilterlist(payload));
 
         this.props.dispatch(wifi_sendcmd_request({cmd:`$filtertype ${payload.prev0}.${payload.prev1}.${payload.prev2}.${payload.post0}.${payload.post1}%`,cmdstring:'设置滤芯',target:{
@@ -328,7 +250,6 @@ class Inlet extends PureComponent{
 
 const mapStateToProps =  ({devicedata}) =>{
     const devicelist = convertfromfilterlist(devicedata.filterlist);
-    console.log(devicelist)
     return { devicelist };
 };
 

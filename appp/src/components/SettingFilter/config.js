@@ -153,26 +153,58 @@ export const convertfilterlist = (filterlist)=>{
 }
 
 export const convertfromfilterlist  = ({prev0,prev1,prev2,post0,post1})=>{
-  let targetfilterlist = [];
-  targetfilterlist.push({
+  let newlist = {}
+  newlist['prev0'] = {
     idname:'prev0',
+    isprev: true,
     life:prev0Options[prev0].value,
-  });
-  targetfilterlist.push({
+  }
+  newlist['prev1'] = {
     idname:'prev1',
+    isprev: true,
     life:prev1Options[prev1].value,
-  });
-  targetfilterlist.push({
+  }
+  newlist['prev2'] = {
     idname:'prev2',
+    isprev: true,
     life:prev2Options[prev2].value,
-  });
-  targetfilterlist.push({
+  }
+  newlist['post0'] = {
     idname:'post0',
+    isprev: false,
     life:post0Options[post0].value,
-  });
-  targetfilterlist.push({
+  }
+  newlist['post1'] = {
     idname:'post1',
+    isprev: false,
     life:post1Options[post1].value,
-  });
-  return targetfilterlist;
+  }
+  return newlist
+  // let targetfilterlist = [];
+  // targetfilterlist.push({
+  //   idname:'prev0',
+  //   isprev: true,
+  //   life:prev0Options[prev0].value,
+  // });
+  // targetfilterlist.push({
+  //   idname:'prev1',
+  //   isprev: true,
+  //   life:prev1Options[prev1].value,
+  // });
+  // targetfilterlist.push({
+  //   idname:'prev2',
+  //   isprev: true,
+  //   life:prev2Options[prev2].value,
+  // });
+  // targetfilterlist.push({
+  //   idname:'post0',
+  //   isprev: false,
+  //   life:post0Options[post0].value,
+  // });
+  // targetfilterlist.push({
+  //   idname:'post1',
+  //   isprev: false,
+  //   life:post1Options[post1].value,
+  // });
+  // return targetfilterlist;
 }

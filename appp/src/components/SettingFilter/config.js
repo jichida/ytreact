@@ -147,8 +147,9 @@ export const convertfilterlist = (filterlist)=>{
   let prev2 = filtervaluetoindex(filterlist['prev2'].idname, filterlist['prev2'].life[0]) || 0;
   let post0 = filtervaluetoindex(filterlist['post0'].idname, filterlist['post0'].life[0]) || 0;
   let post1 = filtervaluetoindex(filterlist['post1'].idname, filterlist['post1'].life[0]) || 0;
+  let post2 = filtervaluetoindex(filterlist['post2'].idname, filterlist['post1'].life[0]) || 0;
 
-  return {prev0,prev1,prev2,post0,post1};
+  return {prev0,prev1,prev2,post0,post1,post2};
 
   // for(let i = 0;i < filterlist.length;i++){
   //   const v = filterlist[i];
@@ -170,7 +171,7 @@ export const convertfilterlist = (filterlist)=>{
   // }
 }
 
-export const convertfromfilterlist  = ({prev0,prev1,prev2,post0,post1})=>{
+export const convertfromfilterlist  = ({prev0,prev1,prev2,post0,post1,post2})=>{
   let newlist = {}
   newlist['prev0'] = {
     idname:'prev0',
@@ -196,6 +197,11 @@ export const convertfromfilterlist  = ({prev0,prev1,prev2,post0,post1})=>{
     idname:'post1',
     isprev: false,
     life: post1 === 0 ? [0] : [post1Options[post1-1].value],
+  }
+  newlist['post2'] = {
+    idname:'post2',
+    isprev: false,
+    life: post2 === 0 ? [0] : [post1Options[post2-1].value],
   }
   return newlist
   // let targetfilterlist = [];

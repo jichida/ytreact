@@ -108,20 +108,20 @@ const Index = (props) => {
                         </div>
                     </Brief>
                 </Item>
-                {/* <Item className="item_switch"
-                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
-                            <Button size="small" type="ghost" className="btn" onClick={()=>{props.onSelectFilter('post2')}} >
-                                <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
-                            </Button>
-                            </div>
-                        }
+                <Item className="item_switch"
+                    // extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                    //         <Button size="small" type="ghost" className="btn"> onClick={()=>{props.onSelectFilter('post2')}} 
+                    //             <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
+                    //         </Button>
+                    //         </div>
+                    //     }
                 ><FormattedMessage id="form.equip.postfilter2" defaultMessage="后置滤芯2" />
                     <Brief>
                         <div className="item_children">
-                            {lodashGet(props, 'post2.life', [0])[0] === 0 ? FilterPer['select'] : <FormattedMessage id="setting.system.AFC" values={{value: props.post2.life}} />}
+                            {lodashGet(props, 'post2.life', [0])[0] === 0 ? FilterPer['none'] : <FormattedMessage id="setting.system.AFC" values={{value: props.post2.life}} />}
                         </div>
                     </Brief>
-                </Item> */}
+                </Item>
             </List>
         </form>
         <div className="submit_zone">

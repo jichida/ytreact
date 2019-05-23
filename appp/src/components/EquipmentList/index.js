@@ -245,18 +245,18 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                {/* <Item
-                    arrow="horizontal"
+                <Item
+                    // arrow="horizontal"
                     multipleLine
-                    onClick={()=>props.onSelectFilter('post2')}
+                    // onClick={()=>props.onSelectFilter('post2')}
                     platform="android"
                 ><FormattedMessage id="form.equip.postfilter3" defaultMessage="后置滤芯3" />
                     <Brief>
                         <div className="item_children">
-                            {props.post2.idname[0] === '' ? FilterPer['none'] : FilterPer[props.post2.idname]}
+                        {lodashGet(props, 'post2.life', [0])[0] === 0 ? FilterPer['none'] : <FormattedMessage id="setting.system.AFC" values={{value: props.post2.life}} />}
                         </div>
                     </Brief>
-                </Item> */}
+                </Item>
                 <Item><FormattedMessage id="equipment.configuration" defaultMessage="其他配置" />
                     <Brief>
                         <div className="item_children">

@@ -157,27 +157,27 @@ export const convertfromfilterlist  = ({prev0,prev1,prev2,post0,post1})=>{
   newlist['prev0'] = {
     idname:'prev0',
     isprev: true,
-    life:prev0Options[prev0].value,
+    life:[prev0Options[prev0].value],
   }
   newlist['prev1'] = {
     idname:'prev1',
     isprev: true,
-    life:prev1Options[prev1].value,
+    life:[prev1Options[prev1].value],
   }
   newlist['prev2'] = {
     idname:'prev2',
     isprev: true,
-    life:prev2Options[prev2].value,
+    life:[prev2Options[prev2].value],
   }
   newlist['post0'] = {
     idname:'post0',
     isprev: false,
-    life:post0Options[post0].value,
+    life:[post0Options[post0].value],
   }
   newlist['post1'] = {
     idname:'post1',
     isprev: false,
-    life:post1Options[post1].value,
+    life:[post1Options[post1].value],
   }
   return newlist
   // let targetfilterlist = [];

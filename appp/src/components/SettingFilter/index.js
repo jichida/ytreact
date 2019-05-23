@@ -143,10 +143,6 @@ class Inlet extends PureComponent{
                 // host: lodashGet(this.props.basicinfo, 'model', '')
             }
         }
-
-        console.log('Basic Data:', basicData)
-        console.log('Props DeviceList:', this.props.devicelist)
-        console.log({...basicData, ...dataInput(this.props.devicelist)})
     }
 
     // handleSetHostSubmit =() => {

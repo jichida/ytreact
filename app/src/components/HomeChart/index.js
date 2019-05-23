@@ -14,13 +14,13 @@ const progress = {
 export default({title, firsttitle, firstcolor, firstpercent, secondtitle, secondcolor, secondpercent}) => (
     <div className="chartcontainer">
         <p>{title}</p>
-        <p style={{color: firstcolor}}>{firsttitle}</p>
+        <p style={{color: firstcolor, fontSize: '13px'}}>{firsttitle}</p>
         <div><Progress percent={firstpercent} 
             position="normal" 
             style={{...progress}} 
             barStyle={{...progress, borderColor: firstcolor}} />
         </div>
-        <p style={{color: secondcolor}}>{secondtitle}</p>
+        <p style={{color: secondcolor, fontSize: '13px'}}>{secondtitle}</p>
         <div><Progress percent={secondpercent} 
             position="normal" 
             style={{...progress}} 

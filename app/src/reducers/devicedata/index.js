@@ -135,6 +135,14 @@ const initial = {
           dormancyend:'23:00',
           language:'zh-cn'
       },
+      filterlist:{
+        prev0:1,
+        prev1:1,
+        prev2:1,
+        post0:1,
+        post1:1,
+        post2:0,
+      },
     },
 
 };

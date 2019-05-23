@@ -15,8 +15,12 @@ const initial = {
       _id:'',
       distributorid:{},
       devicelist:{
-        filterlist:[
-        ],
+        prev0lastchangedate:new Date(),
+        prev1lastchangedate:new Date(),
+        prev2lastchangedate:new Date(),
+        post0lastchangedate:new Date(),
+        post1lastchangedate:new Date(),
+        post2lastchangedate:new Date(),
         configuration: String,
         materials: String,
         host: String,

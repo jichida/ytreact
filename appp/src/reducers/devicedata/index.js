@@ -157,16 +157,20 @@ const devicedata = createReducer({
       let newdata = {};
       lodashSet(newdata,`${payload.fieldname}`,payload.value);
       console.log(newdata);
-      const {inwatersettings:inwatersettingsnew,syssettings:syssettingsnew} = newdata;
+      const {inwatersettings:inwatersettingsnew,syssettings:syssettingsnew,filterlist:filterlistnew} = newdata;
       let inwatersettings = state.inwatersettings;
       let syssettings = state.syssettings;
+      let filterlist = state.filterlist;
       if(!!inwatersettingsnew){
         inwatersettings = {...inwatersettings,...inwatersettingsnew}
       }
       if(!!syssettingsnew){
         syssettings = {...syssettings,...syssettingsnew}
       }
-      return {...state,inwatersettings, syssettings};
+      if(!!filterlistnew){
+        filterlist = {...filterlist,...filterlistnew};
+      }
+      return {...state,inwatersettings, syssettings,filterlist};
     },
     [getdevice_result]:(state,payload)=>{
       if(!!payload.appdata){

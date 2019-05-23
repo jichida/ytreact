@@ -4,7 +4,7 @@ import {
   adddevice_result,
   getdevice_result,
   setuserdevice_result,
-  tmp_ui_setuserdevice_request
+  setdatatarget
   // ui_setcurwifi
 } from '../../actions/index.js';
 import moment from 'moment';
@@ -131,6 +131,15 @@ const device = createReducer({
     //
     //     return { ...state, syssettings };
     // },
+    [setdatatarget]:(state,payload)=>{
+      if(`${payload.fieldname}` === ''){
+
+      }
+      // lodashSet(newdata,`${payload.fieldname}`,payload.value);
+      // console.log(newdata);
+      // const {inwatersettings:inwatersettingsnew,syssettings:syssettingsnew,filterlist:filterlistnew} = newdata;
+
+    },
     [adddevice_result]: (state, payload) => {
         return { ...state, ...payload };
     },

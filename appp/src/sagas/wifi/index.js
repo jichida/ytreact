@@ -125,6 +125,7 @@ const parsedata = (stringbody,callbackfn)=>{
     'inwatersettings.hardness',// 52	进水硬度	进水硬度  word	1 word
     'inwatersettings.alkalinity',// 53	进水碱度	进水碱度  word	1 word
 
+
   ];
 
   //需要转成int类型
@@ -246,6 +247,28 @@ const parsedata = (stringbody,callbackfn)=>{
       lodash_set(result,'homedata.main_outwater_grade','一般');
     }
   }
+
+  const resultfilterlist = dataz[dataz.length-1];
+  let prev0 = 1;
+  let prev1 = 1;
+  let prev2 = 1;
+  let post0 = 1;
+  let post1 = 1;
+  let post2 = 0;
+  debugger;
+
+  const filterlistfieldz = lodash_split(resultfilterlist,'.');
+  if(filterlistfieldz.length >= 6 ){
+    prev0 = parseInt(filterlistfieldz[0]);
+    prev1 = parseInt(filterlistfieldz[1]);
+    prev2 = parseInt(filterlistfieldz[2]);
+    post0 = parseInt(filterlistfieldz[3]);
+    post1 = parseInt(filterlistfieldz[4]);
+    post2 = parseInt(filterlistfieldz[5]);
+  }
+  lodash_set(result,'filterlist',{prev0,prev1,prev2,post0,post1,post2});
+  //
+  debugger;
   callbackfn({cmd:'data',data:result});
 };
 

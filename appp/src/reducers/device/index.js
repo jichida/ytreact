@@ -15,8 +15,7 @@ const initial = {
       _id:'',
       distributorid:{},
       devicelist:{
-        filterlist:[
-        ],
+        filterlist:[],
         configuration: String,
         materials: String,
         host: String,

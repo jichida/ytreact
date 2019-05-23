@@ -156,7 +156,7 @@ class Inlet extends PureComponent{
         console.log('Submit DeviseList:', this.state.formData)
         // --->
         const payload = convertfilterlist(this.state.formData);
-        console.log(payload);
+        console.log('Submit Paylaod:',payload);
         // this.props.dispatch(setfilterlist(payload));
 
         this.props.dispatch(wifi_sendcmd_request({cmd:`$filtertype ${payload.prev0}.${payload.prev1}.${payload.prev2}.${payload.post0}.${payload.post1}%`,cmdstring:'设置滤芯',target:{
@@ -328,6 +328,7 @@ class Inlet extends PureComponent{
 
 const mapStateToProps =  ({devicedata}) =>{
     const devicelist = convertfromfilterlist(devicedata.filterlist);
+    console.log(devicelist)
     return { devicelist };
 };
 

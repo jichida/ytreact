@@ -19,11 +19,11 @@ import System from '../SettingSystem/index';
 import Filter from '../SettingFilter'
 import Inlet from '../SettingInlet';
 // import Wifi from '../SettingWifi';
-// import Checklist from '../SettingChecklist'; 
+// import Checklist from '../SettingChecklist';
 
 // const isDirect = true;
 // const isNormal = false;
- 
+
 
 class Setting extends PureComponent{
 
@@ -32,13 +32,13 @@ class Setting extends PureComponent{
     }
 
     render () {
-         const { tcpconnected } = this.props;    
+         const { tcpconnected } = this.props;
         let connectStatusImg = disconnect_img
         if(tcpconnected) {
             connectStatusImg = connected_img
         } else {
             connectStatusImg = disconnect_img
-        }    
+        }
 
         return (
             <div className="black_bg">
@@ -184,7 +184,7 @@ class Setting extends PureComponent{
                     >
                         {<Checklist />}
                     </TabBar.Item> */}
-                </TabBar>   
+                </TabBar>
                 </div>
             </div>
         )
@@ -194,6 +194,6 @@ class Setting extends PureComponent{
 const mapStateToProps = ({ app: { tcpconnected } }) => {
     return { tcpconnected }
 }
-
+Setting = connect(mapStateToProps)(Setting);
 
 export default withRouter(Setting);

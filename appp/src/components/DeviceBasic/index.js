@@ -99,8 +99,7 @@ const RenderForm = createForm({
             value: props.bucket.value,
           }),
         };
-    }
-})(injectIntl((props)=>{
+    }})(injectIntl((props)=>{
     const { getFieldProps, validateFields, setFieldsValue } = props.form;
     const { intl: { formatMessage },dispatch, unit} = props;
 

@@ -29,39 +29,6 @@ const basicData = {
     others: ''
 }
 
-// const triplet = [
-//     {
-//         label: <FormattedMessage id="form.equip.config.comm" />,
-//         value: '商用',
-//     },
-//     {
-//         label: <FormattedMessage id="form.equip.config.home" />,
-//         value: '家用',
-//     }
-// ]
-
-// const silkpair = [
-//     {
-//         label: <FormattedMessage id="form.equip.meter.cop" />,
-//         value: '铜',
-//     },
-//     {
-//         label: <FormattedMessage id="form.equip.meter.alum" />,
-//         value: '铝',
-//     }
-// ]
-
-// const silkspin = [
-//     {
-//         label: 'XXX型',
-//         value: 'XXX型',
-//     },
-//     {
-//         label: 'YYY型',
-//         value: 'YYY型',
-//     }
-// ]
-
 const RenderForm = createForm({
     mapPropsToFields(props) {
         return {
@@ -237,19 +204,18 @@ class PipeFittings extends PureComponent{
 
     handleSubmit = (values)=>{
         console.log(values);
-        const { _id, devicelist, dispatch, history } = this.props;
+        const { devicelist, dispatch, history } = this.props;
         const pipefittings = {...values}
 
         console.log('PipeFittings:', {...devicelist, pipefittings})
 
         dispatch(setuserdevice_result({devicelist:{...devicelist, pipefittings}}))
   
-        // dispatch(ui_setuserdevice_request({_id,data:{devicelist:filters}}));
         history.goBack()
     }
 
     render () {
-        const { history, dispatch, devicelist } = this.props;
+        const { history, devicelist } = this.props;
         const formData = {...basicData, ...devicelist['pipefittings']}
 
         return (
@@ -275,4 +241,3 @@ const mapStateToProps =  ({device:{devicelist,_id}}) =>{
 }
 
 export default connect(mapStateToProps)(withRouter(PipeFittings));
-// export default withRouter(injectIntl(silkspin));

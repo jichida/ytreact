@@ -100,9 +100,9 @@ class Index extends React.Component {
     // }
 
     render () {
-        const { getFieldProps, setFieldsValue} = this.props.form;
-        const { intl:{ formatMessage } ,dispatch} = this.props;
-        const options = timezoneOption();
+    const { getFieldProps, setFieldsValue} = this.props.form;
+    const { intl:{ formatMessage } ,dispatch} = this.props;
+    const options = timezoneOption();
 
     return (
         <React.Fragment>
@@ -122,7 +122,7 @@ class Index extends React.Component {
                               // "message": "扫描结果/失败原因"
                               // }
                               if(result.code == 0){
-                                setFieldsValue({deviceid:result.data})
+                                // setFieldsValue({deviceid:result.data})
                                 dispatch(getdevice_request({'syssettings.deviceid':result.data}));
                               }
                               //  alert(JSON.stringify(result));//<---这里判断code是否为0，如果为0，表示成功；去取data的值

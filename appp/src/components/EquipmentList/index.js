@@ -56,34 +56,26 @@ class EquipmentList extends React.Component{
 
     constructor(props) {
         super(props)
+        const { prev0lastchangedate, prev1lastchangedate, prev2lastchangedate, post0lastchangedate, post1lastchangedate, post2lastchangedate } = this.props.devicelist
         this.state = {
             filterModal: false,
             curKey: 'prev0',
-            isprev: true,
+            prev0lastchangedate: moment(prev0lastchangedate).toDate(),
+            prev1lastchangedate: moment(prev1lastchangedate).toDate(),
+            prev2lastchangedate: moment(prev2lastchangedate).toDate(),
+            post0lastchangedate: moment(post0lastchangedate).toDate(),
+            post1lastchangedate: moment(post1lastchangedate).toDate(),
+            post2lastchangedate: moment(post2lastchangedate).toDate(),
             curOptions: prev0Options,
-            idname: '',
-            life: 0,
             lastchangedate: new Date(),
-            formData: {
-                ...basicData, 
-                ...this.props.devicelist, 
-                ...this.props.initData,
-                host: lodashGet(this.props.basicinfo, 'model', '')
-            }
         }
     }    
 
     handleSubmit = (values = {})=>{
         const configuration = lodashGet(values, 'configuration', [''])[0]
         const materials = lodashGet(values, 'materials', [''])[0]
+        const { prev0lastchangedate, prev1lastchangedate, prev2lastchangedate, post0lastchangedate, post1lastchangedate, post2lastchangedate } = this.state
 
-        const { prev0, prev1, prev2, post0, post1, post2 } = this.state.formData
-        const prev0lastchangedate = prev0.lastchangedate
-        const prev1lastchangedate = prev1.lastchangedate
-        const prev2lastchangedate = prev2.lastchangedate
-        const post0lastchangedate = post0.lastchangedate
-        const post1lastchangedate = post1.lastchangedate
-        const post2lastchangedate = post2.lastchangedate
 
         //yield put(setuserdevice_request({_id,data}));
         // 考虑到没网的条件,先设置一下
@@ -107,7 +99,7 @@ class EquipmentList extends React.Component{
         dispatch(setuserdevice_result({devicelist}))
 
         dispatch(ui_setuserdevice_request({_id,data:{devicelist}}));
-        this.props.history.goBack()
+        // this.props.history.goBack()
     }
 
     handleFillPipeFittings = (values) => {
@@ -121,10 +113,9 @@ class EquipmentList extends React.Component{
     }
 
     onShowFilter = (curKey) => {
-        const { formData } = this.state
-        const { isprev, idname, life, lastchangedate } = formData[curKey]
+        console.log(lodashGet(this.props, `initData.${curKey}.life`, [0]))
 
-        if(life[0] !== 0) {
+        if(lodashGet(this.props, `initData.${curKey}.life`, [0])[0] !== 0) {
             let curOptions = []
             switch (curKey) {
                 case 'prev0':
@@ -147,11 +138,8 @@ class EquipmentList extends React.Component{
             }
             this.setState({
                 curKey,
-                isprev,
                 curOptions,
-                idname,
-                life,
-                lastchangedate,
+                lastchangedate: this.state[`${curKey}lastchangedate`],
                 filterModal: true
             })
         }
@@ -159,13 +147,10 @@ class EquipmentList extends React.Component{
     }
 
     onFilterSubmit = () => {
-
-        const { formData, curKey, idname, life, lastchangedate } = this.state
-        formData[curKey] = { ...formData[curKey], idname, life, lastchangedate }
-        this.setState({
-            formData,
-            filterModal: false
-        })
+        let newState = {...this.state}
+        newState[`${this.state.curKey}lastchangedate`] = this.state.lastchangedate
+        newState[`filterModal`] = false
+        this.setState(newState)
     }
 
     render () {
@@ -182,8 +167,8 @@ class EquipmentList extends React.Component{
                     <FormattedMessage id="device.equipmentlist" defaultMessage="设备清单" />
                 </NavBar>
                 <RenderForm 
-                    {...this.state.formData} 
-                    // {...this.props} 
+                    {...this.props.devicelist} 
+                    {...this.props.initData}
                     onSelectFilter={this.onShowFilter} 
                     onSubmit={this.handleSubmit} 
                     onFillPipeFitting={this.handleFillPipeFittings}
@@ -252,17 +237,7 @@ class EquipmentList extends React.Component{
     }
 }
 const mapStateToProps =  ({device:{ basicinfo, devicelist,  _id}, devicedata: { filterlist }}) =>{
-    // 
-    const { prev0lastchangedate, prev1lastchangedate, prev2lastchangedate, post0lastchangedate, post1lastchangedate, post2lastchangedate } = devicelist
     const initData = convertfromfilterlist(filterlist)
-
-    initData['prev0'] = {...initData['prev0'], lastchangedate: moment(prev0lastchangedate).toDate() }
-    initData['prev1'] = {...initData['prev1'], lastchangedate: moment(prev1lastchangedate).toDate() }
-    initData['prev2'] = {...initData['prev2'], lastchangedate: moment(prev2lastchangedate).toDate() }
-    initData['post0'] = {...initData['post0'], lastchangedate: moment(post0lastchangedate).toDate() }
-    initData['post1'] = {...initData['post1'], lastchangedate: moment(post1lastchangedate).toDate() }
-    initData['post2'] = {...initData['post2'], lastchangedate: moment(post2lastchangedate).toDate() }
-
     return { basicinfo, devicelist, initData, _id};
 };
 EquipmentList = connect(mapStateToProps)(EquipmentList);

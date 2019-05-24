@@ -52,7 +52,7 @@ const basicData = {
     others: '', //其他
 }
 
-class EquipmentList extends PureComponent{
+class EquipmentList extends React.Component{
 
     constructor(props) {
         super(props)
@@ -71,9 +71,7 @@ class EquipmentList extends PureComponent{
                 host: lodashGet(this.props.basicinfo, 'model', '')
             }
         }
-    }
-
-    
+    }    
 
     handleSubmit = (values = {})=>{
         const configuration = lodashGet(values, 'configuration', [''])[0]
@@ -109,6 +107,7 @@ class EquipmentList extends PureComponent{
         dispatch(setuserdevice_result({devicelist}))
 
         dispatch(ui_setuserdevice_request({_id,data:{devicelist}}));
+        this.props.history.goBack()
     }
 
     handleFillPipeFittings = (values) => {
@@ -253,6 +252,7 @@ class EquipmentList extends PureComponent{
     }
 }
 const mapStateToProps =  ({device:{ basicinfo, devicelist,  _id}, devicedata: { filterlist }}) =>{
+    // 
     const { prev0lastchangedate, prev1lastchangedate, prev2lastchangedate, post0lastchangedate, post1lastchangedate, post2lastchangedate } = devicelist
     const initData = convertfromfilterlist(filterlist)
 

@@ -125,7 +125,7 @@ const parsedata = (stringbody,callbackfn)=>{
     'inwatersettings.hardness',// 52	进水硬度	进水硬度  word	1 word
     'inwatersettings.alkalinity',// 53	进水碱度	进水碱度  word	1 word
 
-
+    'filterlist'
   ];
 
   //需要转成int类型
@@ -248,14 +248,16 @@ const parsedata = (stringbody,callbackfn)=>{
     }
   }
 
-  const resultfilterlist = dataz[dataz.length-1];
+  const resultfilterlist = lodash_get(result,'filterlist');
+  console.log(`resultfilterlist is :${resultfilterlist}`)
+
   let prev0 = 1;
   let prev1 = 1;
   let prev2 = 1;
   let post0 = 1;
   let post1 = 1;
   let post2 = 0;
-  debugger;
+  // debugger;
 
   const filterlistfieldz = lodash_split(resultfilterlist,'.');
   if(filterlistfieldz.length >= 6 ){
@@ -268,7 +270,7 @@ const parsedata = (stringbody,callbackfn)=>{
   }
   lodash_set(result,'filterlist',{prev0,prev1,prev2,post0,post1,post2});
   //
-  debugger;
+  // debugger;
   callbackfn({cmd:'data',data:result});
 };
 

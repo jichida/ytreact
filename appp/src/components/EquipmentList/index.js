@@ -7,6 +7,7 @@ import RenderForm from './renderForm'
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { setuserdevice_result,ui_setuserdevice_request} from '../../actions';
+import { createSelector } from 'reselect'
 import { prev0Options, prev1Options, prev2Options, post0Options, post1Options, convertfromfilterlist } from '../SettingFilter/config'
 import './index.less';
 
@@ -69,7 +70,7 @@ class EquipmentList extends React.Component{
             curOptions: prev0Options,
             lastchangedate: new Date(),
         }
-    }    
+    }
 
     handleSubmit = (values)=>{
         this.handleSave(values)
@@ -85,15 +86,15 @@ class EquipmentList extends React.Component{
         // 考虑到没网的条件,先设置一下
         //输出:devicelist
         let devicelist = {
-            ...this.props.devicelist, 
-            ...values, 
-            prev0lastchangedate, 
-            prev1lastchangedate, 
-            prev2lastchangedate, 
+            ...this.props.devicelist,
+            ...values,
+            prev0lastchangedate,
+            prev1lastchangedate,
+            prev2lastchangedate,
             post0lastchangedate,
             post1lastchangedate,
             post2lastchangedate,
-            configuration, 
+            configuration,
             materials
         }
 
@@ -144,7 +145,7 @@ class EquipmentList extends React.Component{
                 filterModal: true
             })
         }
-        
+
     }
 
     onFilterSubmit = () => {
@@ -167,11 +168,11 @@ class EquipmentList extends React.Component{
                 >
                     <FormattedMessage id="device.equipmentlist" defaultMessage="设备清单" />
                 </NavBar>
-                <RenderForm 
-                    {...this.props.devicelist} 
+                <RenderForm
+                    {...this.props.devicelist}
                     {...this.props.initData}
-                    onSelectFilter={this.onShowFilter} 
-                    onSubmit={this.handleSubmit} 
+                    onSelectFilter={this.onShowFilter}
+                    onSubmit={this.handleSubmit}
                     onFillPipeFitting={this.handleFillPipeFittings}
                 />
                 <Modal
@@ -237,9 +238,25 @@ class EquipmentList extends React.Component{
         )
     }
 }
-const mapStateToProps =  ({device:{ basicinfo, devicelist,  _id}, devicedata: { filterlist }}) =>{
-    const initData = convertfromfilterlist(filterlist)
-    return { basicinfo, devicelist, initData, _id};
+
+const getProp_device = (state, props) =>
+  state.device
+
+const getProp_devicedata = (state, props) =>
+  state.devicedata
+
+const getProps = ()=>{
+  return createSelector(
+    [ getProp_device, getProp_devicedata ],
+    (device,devicedata) => {
+      const { basicinfo, devicelist,  _id} = device;
+      const {filterlist} = devicedata;
+      const initData = convertfromfilterlist(filterlist)
+      return { basicinfo, devicelist, initData, _id};
+    });
+}
+const mapStateToProps =  ({device, devicedata}) =>{
+    return getProps(device, devicedata);
 };
 EquipmentList = connect(mapStateToProps)(EquipmentList);
 export default withRouter(EquipmentList);

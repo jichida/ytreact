@@ -81,7 +81,7 @@ class Inlet extends PureComponent{
         // console.log('Submit Paylaod:',payload);
         // this.props.dispatch(setfilterlist(payload));
 
-        this.props.dispatch(wifi_sendcmd_request({cmd:`$filtertype ${payload.prev0}.${payload.prev1}.${payload.prev2}.${payload.post0}.${payload.post1}%`,cmdstring:'设置滤芯',target:{
+        this.props.dispatch(wifi_sendcmd_request({cmd:`$filtertype ${payload.prev0}.${payload.prev1}.${payload.prev2}.${payload.post0}.${payload.post1}%.0`,cmdstring:'设置滤芯',target:{
           fieldname:'filterlist',
           value:payload
         }}));

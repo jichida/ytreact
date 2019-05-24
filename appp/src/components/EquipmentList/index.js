@@ -115,9 +115,10 @@ class EquipmentList extends React.Component{
     }
 
     onShowFilter = (curKey) => {
-        console.log(lodashGet(this.props, `initData.${curKey}.life`, [0]))
+        const initData = convertfromfilterlist(this.props.filterlist);
+        console.log(lodashGet(initData, `${curKey}.life`, [0]))
 
-        if(lodashGet(this.props, `initData.${curKey}.life`, [0])[0] !== 0) {
+        if(lodashGet(initData, `${curKey}.life`, [0])[0] !== 0) {
             let curOptions = []
             switch (curKey) {
                 case 'prev0':
@@ -156,7 +157,8 @@ class EquipmentList extends React.Component{
     }
 
     render () {
-        const { history } = this.props;
+        const { filterlist,history } = this.props;
+        const initData = convertfromfilterlist(filterlist);
 
         return (
             <div className="fp_container black_bg">
@@ -170,7 +172,7 @@ class EquipmentList extends React.Component{
                 </NavBar>
                 <RenderForm
                     {...this.props.devicelist}
-                    {...this.props.initData}
+                    {...initData}
                     onSelectFilter={this.onShowFilter}
                     onSubmit={this.handleSubmit}
                     onFillPipeFitting={this.handleFillPipeFittings}
@@ -239,24 +241,11 @@ class EquipmentList extends React.Component{
     }
 }
 
-const getProp_device = (state, props) =>
-  state.device
 
-const getProp_devicedata = (state, props) =>
-  state.devicedata
-
-const getProps = ()=>{
-  return createSelector(
-    [ getProp_device, getProp_devicedata ],
-    (device,devicedata) => {
-      const { basicinfo, devicelist,  _id} = device;
-      const {filterlist} = devicedata;
-      const initData = convertfromfilterlist(filterlist)
-      return { basicinfo, devicelist, initData, _id};
-    });
-}
 const mapStateToProps =  ({device, devicedata}) =>{
-    return getProps(device, devicedata);
+    const {basicinfo,devicelist,_id} = device;
+    const {filterlist} = devicedata;
+    return { basicinfo, devicelist, filterlist, _id};
 };
 EquipmentList = connect(mapStateToProps)(EquipmentList);
 export default withRouter(EquipmentList);

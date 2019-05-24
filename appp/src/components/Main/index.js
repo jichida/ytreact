@@ -22,8 +22,8 @@ const CGreen = '#3eef7d';
 const CBlue = '#38b4f2';
 
 const getPercent = (id, value, full) => {
-    console.log('GetPercent value:', value)
-    console.log('GetPercent Full:', full)
+    // console.log('GetPercent value:', value)
+    // console.log('GetPercent Full:', full)
     let cf = config[id];
     let color = CGreen;
     let warring = false;

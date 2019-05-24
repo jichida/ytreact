@@ -71,11 +71,15 @@ class EquipmentList extends React.Component{
         }
     }    
 
-    handleSubmit = (values = {})=>{
+    handleSubmit = (values)=>{
+        this.handleSave(values)
+        this.props.history.goBack()
+    }
+
+    handleSave = (values = {}) => {
         const configuration = lodashGet(values, 'configuration', [''])[0]
         const materials = lodashGet(values, 'materials', [''])[0]
         const { prev0lastchangedate, prev1lastchangedate, prev2lastchangedate, post0lastchangedate, post1lastchangedate, post2lastchangedate } = this.state
-
 
         //yield put(setuserdevice_request({_id,data}));
         // 考虑到没网的条件,先设置一下
@@ -97,14 +101,11 @@ class EquipmentList extends React.Component{
 
         const {dispatch,_id} = this.props;
         dispatch(setuserdevice_result({devicelist}))
-
         dispatch(ui_setuserdevice_request({_id,data:{devicelist}}));
-        // this.props.history.goBack()
     }
 
     handleFillPipeFittings = (values) => {
-        console.log('Will Fill:', values)
-        this.handleSubmit(values)
+        this.handleSave(values)
         this.props.history.push('pipefitting');
     }
 

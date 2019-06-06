@@ -115,7 +115,7 @@ const Index = (props) => {
                     //         </Button>
                     //         </div>
                     //     }
-                ><FormattedMessage id="form.equip.postfilter2" defaultMessage="后置滤芯2" />
+                ><FormattedMessage id="form.equip.postfilter3" defaultMessage="后置滤芯3" />
                     <Brief>
                         <div className="item_children">
                             {lodashGet(props, 'post2.life', [0])[0] === 0 ? FilterPer['none'] : <FormattedMessage id="setting.system.AFC" values={{value: props.post2.life}} />}

@@ -28,7 +28,8 @@ const getPercent = (id, value, full) => {
     let color = CGreen;
     let warring = false;
     let fullvalue = !!full ? full : cf.value;
-    let percent = Math.round(value/fullvalue * 100) ;
+    let percent = Math.round(value/fullvalue * 100);
+    percent = percent >= 100 ? 100 : percent;
     if(percent >= cf.fullPercent){
         color = CBlue;
     } else if(percent <= cf.warringPercent){

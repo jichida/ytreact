@@ -70,14 +70,16 @@
     width: 140px;
     height: 180px;
 
+    .ant-progress-inner {
+        .ant-progress-circle {
+            transform: rotateY(180deg);
+        }
+    }
+
     .bottom {
         position: absolute;
         left: 0px;
         top: 0px;
-
-        // :global(.ant-progress-text) {
-        //     top: 40%;
-        // }
     }
 
     .top {
@@ -89,6 +91,7 @@
             top: 40%;
         }
     }
+
 
     .chart-title {
         text-align: center;

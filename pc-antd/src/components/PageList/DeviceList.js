@@ -18,9 +18,9 @@ const MachineItem = ({isgetsrvdata,iserr, address, reportdate, id, name, runtime
     //isgetsrvdata为false 表示未接收到数据,此时图标变灰，不能
     //你如果从下面取的话 6 代表 Suspended  999代表ERROR   0 是Idle Mode  其他的代表 Active Mode
     const mapmode = {
-      '0':'Idle Mode',
-      '6':'Suspended',
-      '999':'ERROR'
+      '0': <FormattedMessage id="machine.datedetail.Active" />,
+      '6': <FormattedMessage id="machine.datedetail.Suspended" />,
+      '999': <FormattedMessage id="machine.datedetail.ERROR" />
     };
     return (
         <Card
@@ -32,7 +32,7 @@ const MachineItem = ({isgetsrvdata,iserr, address, reportdate, id, name, runtime
             <p><FormattedMessage id="machine.runtime" />：{runtime}</p>
             <p>
                 <span style={{color: '#6ba4e7', minWidth: '100px', display: 'inline-block'}}>
-                {lodashget(mapmode,`${mode}`,'Active Mode')}
+                {lodashget(mapmode,`${mode}`,<FormattedMessage id="machine.datedetail.Active" />)}
                 </span>
                 <Button style={{float: "right", color: `${!isgetsrvdata ? '#888' : '#6ba4e7'}`}} disabled={!isgetsrvdata} onClick={()=>{history.push(`/details/${_id}`)}}><FormattedMessage id="machine.detail" /></Button>
             </p>

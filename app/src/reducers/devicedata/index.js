@@ -173,27 +173,27 @@ const devicedata = createReducer({
         syssettings:syssettingsnew,filterlist:filterlistnew} = payload.appdata;
         let homedata = state.homedata;
         if(!!homedatanew){
-          homedata = {homedata,...homedatanew};
+          homedata = {...homedata,...homedatanew};
         }
         let errordata =  state.errordata;
         if(!!errordatanew){
-          errordata = {errordata,...errordatanew};
+          errordata = {...errordata,...errordatanew};
         }
         let performancedata =  state.performancedata;
         if(!!performancedatanew){
-          performancedata = {performancedata,...performancedatanew};
+          performancedata = {...performancedata,...performancedatanew};
         }
         let inwatersettings =  state.inwatersettings;
         if(!!inwatersettingsnew){
-          inwatersettings = {inwatersettings,...inwatersettingsnew};
+          inwatersettings = {...inwatersettings,...inwatersettingsnew};
         }
         let syssettings =  state.syssettings;
         if(!!syssettingsnew){
-          syssettings = {syssettings,...syssettingsnew};
+          syssettings = {...syssettings,...syssettingsnew};
         }
         let filterlist = state.filterlist;
         if(!!filterlistnew){
-          filterlist = {filterlist,...filterlistnew};
+          filterlist = {...filterlist,...filterlistnew};
         }
         let srvdata = state.srvdata;
         if(!!payload.srvdata){
@@ -211,27 +211,27 @@ const devicedata = createReducer({
         syssettings:syssettingsnew,filterlist:filterlistnew} = payload;
         let homedata = state.homedata;
         if(!!homedatanew){
-          homedata = {homedata,...homedatanew};
+          homedata = {...homedata,...homedatanew};
         }
         let errordata =  state.errordata;
         if(!!errordatanew){
-          errordata = {errordata,...errordatanew};
+          errordata = {...errordata,...errordatanew};
         }
         let performancedata =  state.performancedata;
         if(!!performancedatanew){
-          performancedata = {performancedata,...performancedatanew};
+          performancedata = {...performancedata,...performancedatanew};
         }
         let inwatersettings =  state.inwatersettings;
         if(!!inwatersettingsnew){
-          inwatersettings = {inwatersettings,...inwatersettingsnew};
+          inwatersettings = {...inwatersettings,...inwatersettingsnew};
         }
         let syssettings =  state.syssettings;
         if(!!syssettingsnew){
-          syssettings = {syssettings,...syssettingsnew};
+          syssettings = {...syssettings,...syssettingsnew};
         }
         let filterlist = state.filterlist;
         if(!!filterlistnew){
-          filterlist = {filterlist,...filterlistnew};
+          filterlist = {...filterlist,...filterlistnew};
         }
         return { ...state, homedata,errordata,performancedata,inwatersettings,syssettings,filterlist,isgetdata:true};
     },

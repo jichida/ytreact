@@ -125,7 +125,12 @@ const parsedata = (stringbody,callbackfn)=>{
     'inwatersettings.hardness',// 52	进水硬度	进水硬度  word	1 word
     'inwatersettings.alkalinity',// 53	进水碱度	进水碱度  word	1 word
 
-    'filterlist'
+    'filterlist.prev0',
+    'filterlist.prev1',
+    'filterlist.prev2',
+    'filterlist.post0',
+    'filterlist.post1',
+    'filterlist.post2',
   ];
 
   //需要转成int类型
@@ -188,6 +193,12 @@ const parsedata = (stringbody,callbackfn)=>{
     // 'inwatersettings.tds',// 51	进水TDS	进水TDS  word	1 word
     // 'inwatersettings.hardness',// 52	进水硬度	进水硬度  word	1 word
     // 'inwatersettings.alkalinity',// 53	进水碱度	进水碱度  word	1 word
+    'filterlist.prev0',
+    'filterlist.prev1',
+    'filterlist.prev2',
+    'filterlist.post0',
+    'filterlist.post1',
+    'filterlist.post2',
   ];
 
   if(dataz.length < mapParseToInt.length){
@@ -248,27 +259,27 @@ const parsedata = (stringbody,callbackfn)=>{
     }
   }
 
-  const resultfilterlist = lodash_get(result,'filterlist');
-  console.log(`resultfilterlist is :${resultfilterlist}`)
-
-  let prev0 = 1;
-  let prev1 = 1;
-  let prev2 = 1;
-  let post0 = 1;
-  let post1 = 1;
-  let post2 = 0;
-  // debugger;
-
-  const filterlistfieldz = lodash_split(resultfilterlist,'.');
-  if(filterlistfieldz.length >= 6 ){
-    prev0 = parseInt(filterlistfieldz[0]);
-    prev1 = parseInt(filterlistfieldz[1]);
-    prev2 = parseInt(filterlistfieldz[2]);
-    post0 = parseInt(filterlistfieldz[3]);
-    post1 = parseInt(filterlistfieldz[4]);
-    post2 = parseInt(filterlistfieldz[5]);
-  }
-  lodash_set(result,'filterlist',{prev0,prev1,prev2,post0,post1,post2});
+  // const resultfilterlist = lodash_get(result,'filterlist');
+  // console.log(`resultfilterlist is :${resultfilterlist}`)
+  //
+  // let prev0 = 1;
+  // let prev1 = 1;
+  // let prev2 = 1;
+  // let post0 = 1;
+  // let post1 = 1;
+  // let post2 = 0;
+  // // debugger;
+  //
+  // const filterlistfieldz = lodash_split(resultfilterlist,'.');
+  // if(filterlistfieldz.length >= 6 ){
+  //   prev0 = parseInt(filterlistfieldz[0]);
+  //   prev1 = parseInt(filterlistfieldz[1]);
+  //   prev2 = parseInt(filterlistfieldz[2]);
+  //   post0 = parseInt(filterlistfieldz[3]);
+  //   post1 = parseInt(filterlistfieldz[4]);
+  //   post2 = parseInt(filterlistfieldz[5]);
+  // }
+  // lodash_set(result,'filterlist',{prev0,prev1,prev2,post0,post1,post2});
   //
   // debugger;
   callbackfn({cmd:'data',data:result});
@@ -715,7 +726,7 @@ export function* wififlow() {
                 yield put(set_weui({
                   toast:{
                       text:`发送给硬件【${payload.cmdstring}】命令失败`,
-                  show: true,
+                      show: true,
                       type:'offline'
                 }}));
               }
@@ -724,27 +735,27 @@ export function* wififlow() {
                   if(!!payload.target){
                     yield put(setdatatarget(payload.target));
                   }
-                yield put(set_weui({
-                  toast:{
-                      text:`发送给硬件【${payload.cmdstring}】命令成功`,
-                  show: true,
-                  type:'success'
-                }}));
+                  yield put(set_weui({
+                    toast:{
+                    text:`发送给硬件【${payload.cmdstring}】命令成功`,
+                    show: true,
+                    type:'success'
+                  }}));
+                }
               }
-            }
             }
             else{
               if(`${payload.cmd}` !== '$data%'){
                 if(!!payload.target){
                   yield put(setdatatarget(payload.target));
                 }
-              yield put(set_weui({
-                toast:{
-                text:`发送给硬件【${payload.cmdstring}】命令成功`,
-                show: true,
-                type:'success'
-              }}));
-            }
+                yield put(set_weui({
+                  toast:{
+                  text:`发送给硬件【${payload.cmdstring}】命令成功`,
+                  show: true,
+                  type:'success'
+                }}));
+              }
             }
       }
       catch(e){
@@ -756,7 +767,7 @@ export function* wififlow() {
     yield takeLatest(`${wifi_getssidlist_request}`, function*(action) {
       try{
         let {payload:result} = action;
-          const delaytime = 15000;
+        const delaytime = 15000;
         yield put(set_weui({
           toast:{
             type:'loading',

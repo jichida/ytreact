@@ -67,6 +67,9 @@ let irand = 0;
 const socket_send = (values,fncallback)=>{
   console.log(`socket_send`);
   console.log(values);
+  if(values.sendMessage === "$dataok%"){
+    return;//什么也不做
+  }
   window.setTimeout(()=>{
     let recvbuf = values.sendMessage;
     let objstring = '';

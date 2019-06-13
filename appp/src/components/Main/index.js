@@ -317,7 +317,11 @@ class Home extends PureComponent{
           }
         });
 
+        console.log('prev devicelist:', devicelist_prev)
+        console.log('post devicelist:', devicelist_post)
+
         const getFilterCo = (idname,v)=>{
+          console.log('getlabelString:', idname)
           const labelstring = getFilterLabel(intl,idname,v);
           if(idname === 'prev0'){
             return (<Flex.Item key={`${idname}`} onClick={()=>{
@@ -390,8 +394,8 @@ class Home extends PureComponent{
         let showco = [];
         if(devicelist_prev.length === 3){
           showco.push(<Flex key="listprev0">
-            {getFilterCo('prev0',devicelist_prev[0].life)}
-            {getFilterCo('prev1',devicelist_prev[1].life)}
+            {getFilterCo(devicelist_prev[0].idname,devicelist_prev[0].life)}
+            {getFilterCo(devicelist_prev[1].idname,devicelist_prev[1].life)}
             </Flex>);
           showco.push(<WhiteSpace key="listprev1" style={{height: '2px', margin: '5px auto'}} />);
           showco.push(<Flex key="listprev2">{getFilterCo(devicelist_prev[2].idname,devicelist_prev[2].life)}
@@ -401,39 +405,39 @@ class Home extends PureComponent{
         else if(devicelist_prev.length === 2){
           showco.push(
             <Flex key="listprev0">
-            {getFilterCo('prev0',devicelist_prev[0].life)}
-            {getFilterCo('prev1',devicelist_prev[1].life)}
+            {getFilterCo(devicelist_prev[0].idname,devicelist_prev[0].life)}
+            {getFilterCo(devicelist_prev[1].idname,devicelist_prev[1].life)}
             </Flex>);
         }
         else if(devicelist_prev.length === 1){
           showco.push(
             <Flex key="listprev0">
-            {getFilterCo('prev0',devicelist_prev[0].life)}
+            {getFilterCo(devicelist_prev[0].idname,devicelist_prev[0].life)}
             <Flex.Item></Flex.Item>
             </Flex>);
         }
         showco.push(<WhiteSpace   key="listprevpostsep" style={{height: '2px', backgroundColor: '#333', margin: '15px auto'}} />);
         if(devicelist_post.length === 3){
           showco.push(<Flex  key="listpost0">
-            {getFilterCo('post0',devicelist_post[0].life)}
-            {getFilterCo('post1',devicelist_post[1].life)}
+            {getFilterCo(devicelist_post[0].idname,devicelist_post[0].life)}
+            {getFilterCo(devicelist_post[1].idname,devicelist_post[1].life)}
             </Flex>);
           showco.push(<WhiteSpace key="listpost1" style={{height: '2px', margin: '5px auto'}} />);
-          showco.push(<Flex key="listpost2">{getFilterCo('post2',devicelist_post[2].life)}
+          showco.push(<Flex key="listpost2">{getFilterCo(devicelist_post[2].idname,devicelist_post[2].life)}
             <Flex.Item></Flex.Item>
             </Flex>);
         }
         else if(devicelist_post.length === 2){
           showco.push(
             <Flex  key="listpost0">
-            {getFilterCo('post0',devicelist_post[0].life)}
-            {getFilterCo('post1',devicelist_post[1].life)}
+            {getFilterCo(devicelist_post[0].idname,devicelist_post[0].life)}
+            {getFilterCo(devicelist_post[1].idname,devicelist_post[1].life)}
             </Flex>);
         }
         else if(devicelist_post.length === 1){
           showco.push(
             <Flex  key="listpost0">
-            {getFilterCo('post0',devicelist_post[0].life)}
+            {getFilterCo(devicelist_post[0].idname,devicelist_post[0].life)}
             <Flex.Item></Flex.Item>
             </Flex>);
         }

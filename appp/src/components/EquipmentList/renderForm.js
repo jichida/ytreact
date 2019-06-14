@@ -1,7 +1,7 @@
 import React from 'react'
 import { createForm, createFormField } from 'rc-form'
 import lodashGet from 'lodash.get'
-import { Button, Picker, InputItem, List } from 'antd-mobile'
+import { Button, Picker, InputItem, List, Icon } from 'antd-mobile'
 import { FormattedMessage, injectIntl } from 'react-intl'
 
 const Item = List.Item;
@@ -188,7 +188,7 @@ const Index = (props) => {
                             <InputItem
                                 editable={false}
                                 onClick={handleFillClick}
-                                extra=">"
+                                extra={<Icon type="right" />}
                                 placeholder={formatMessage({id: "equipment.fillin"})}
                                 // {...getFieldProps('pipefittings',{
                                 //     rules: [{
@@ -206,12 +206,13 @@ const Index = (props) => {
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('others',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="equipment.others" defaultMessage="其他" />,
-                                    }],
-                                })}
+                                {...getFieldProps('others')}
+                                // {...getFieldProps('others',{
+                                //     rules: [{
+                                //         required: true,
+                                //         message: <FormattedMessage id="equipment.others" defaultMessage="其他" />,
+                                //     }],
+                                // })}
                             />
                         </div>
                     </Brief>

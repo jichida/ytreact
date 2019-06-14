@@ -469,8 +469,7 @@ export function* wififlow() {
           if(result.cmd === 'data'){
             //get result.data
             yield put(wifi_getdata(result.data));
-            yield put(wifi_sendcmd_result({data:'$dataok%'}));//to be test!!!
-            // yield call(socket_send_promise,'$dataok%');
+            yield put(wifi_sendcmd_result({data:'$dataok%'}));
           }
         }//if(payload.type === 'cmddata'){
         else if(payload.type === 'cmdecho'){

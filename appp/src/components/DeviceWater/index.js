@@ -133,6 +133,7 @@ const RenderForm = createForm({
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
                                 // type="money"
+                                type="digit"
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('quantity',{
                                     rules: [{
@@ -150,6 +151,7 @@ const RenderForm = createForm({
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
                                 // type="money"
+                                type="digit"
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('persons',{
                                     rules: [{
@@ -167,6 +169,7 @@ const RenderForm = createForm({
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
                                 // type="money"
+                                type="digit"
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('spot',{
                                     rules: [{
@@ -184,6 +187,7 @@ const RenderForm = createForm({
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
                                 // type="money"
+                                type="digit"
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('watergage',{
                                     rules: [{
@@ -222,6 +226,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 // type="money"
+                                type="digit"
                                 placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('bathrooms',{
@@ -331,6 +336,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 // type="money"
+                                type="digit"
                                 placeholder={formatMessage({id: "form.input"})}
                                 extra= {<Icon type="right" />}
                                 {...getFieldProps('usertds',{

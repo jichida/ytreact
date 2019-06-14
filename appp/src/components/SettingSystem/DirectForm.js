@@ -167,6 +167,17 @@ class Index extends React.Component {
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
+                              this.onClickCmd(`$res_modlife%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.modlife'})}`);//1	电离子膜 复位	
+                            }}>
+                                <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.system.modlife" defaultMessage="电离子膜" /></List.Item>
+
+                <List.Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn"  onClick={()=>{
                               this.onClickCmd(`$res_prefilter1%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.frontfilter1'})}`);//1	前置滤芯1 复位	滤芯寿命复位
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />

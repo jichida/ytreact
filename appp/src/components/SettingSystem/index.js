@@ -201,6 +201,7 @@ class SettingSystem extends PureComponent{
                                     <InputItem
                                         placeholder={formatMessage({id: "form.input"})}
                                         value={this.state.quality}
+                                        type="digit"
                                         onChange={(val)=>{this.setState({quality: val})}}
                                     />
                                     </div>

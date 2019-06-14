@@ -188,7 +188,8 @@ const Index = (props) => {
                             <InputItem
                                 editable={false}
                                 onClick={handleFillClick}
-                                extra={<Icon type="right" onClick={handleFillClick} />}
+                                extra={<Icon type="right" />}
+                                onExtraClick={handleFillClick}
                                 placeholder={formatMessage({id: "equipment.fillin"})}
                                 // {...getFieldProps('pipefittings',{
                                 //     rules: [{

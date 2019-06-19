@@ -8,7 +8,7 @@ import { injectIntl } from 'react-intl';
 import Refresh from '../Controls/Refresh';
 import './index.less';
 import {wifi_sendcmd_request} from '../../actions';
-
+import {getintlmessage} from '../../util/globalIntl';
 
 class Abnormal extends PureComponent{
 
@@ -49,7 +49,7 @@ class Abnormal extends PureComponent{
       // refresh
       const cmd = `$data%`;
       const {dispatch} = this.props;
-      dispatch(wifi_sendcmd_request({cmd,cmdstring:'获取数据'}));
+      dispatch(wifi_sendcmd_request({cmd,cmdstring:getintlmessage('constcmd.cmdstring.data')}));
 
       console.log('Refresh')
   }

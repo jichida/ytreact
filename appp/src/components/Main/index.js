@@ -16,6 +16,7 @@ import home_bgimg from '../../assets/zhuye_bg.png';
 import {wifi_sendcmd_request, set_confirm} from '../../actions';
 import {getFilterLabel} from '../EquipmentList/config.js';
 import { convertfromfilterlist, filterlistConvertToArray } from '../SettingFilter/config'
+import {getintlmessage} from '../../util/globalIntl';
 
 const CRed = '#ff2728';
 const CGreen = '#3eef7d';
@@ -50,7 +51,7 @@ class Home extends PureComponent{
         // refresh
         const cmd = `$data%`;
         const {dispatch} = this.props;
-        dispatch(wifi_sendcmd_request({cmd,cmdstring:'获取数据'}));
+        dispatch(wifi_sendcmd_request({cmd,cmdstring:getintlmessage('constcmd.cmdstring.data')}));
 
         console.log('Refresh')
     }

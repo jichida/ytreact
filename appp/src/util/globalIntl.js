@@ -20,5 +20,9 @@ class IntlGlobalProvider extends React.PureComponent{
   }
 }
 
-export {intl};
+const getintlmessage = (id)=>{
+  return intl.formatMessage({id});
+}
+
+export {intl,getintlmessage};
 export default injectIntl(IntlGlobalProvider);

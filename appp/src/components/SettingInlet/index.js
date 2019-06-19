@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import {common_err,tmp_ui_setuserdevice_request, wifi_sendcmd_request,set_weui} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
-
+import {getintlmessage} from '../../util/globalIntl';
 import './index.less';
 
 const Item = List.Item;
@@ -342,7 +342,7 @@ class Inlet extends PureComponent{
 
         if(isvalid){
           const cmd = `$feedph ${iph}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置PH',target:{
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:getintlmessage('constcmd.cmdstring.feedph'),target:{
             fieldname:'inwatersettings.ph',
             value:`${this.state.ph}`
           }}));
@@ -362,7 +362,7 @@ class Inlet extends PureComponent{
         const {dispatch} = this.props;
         if(this.state.conductivity.length > 0){
           const cmd = `$feedcon ${this.state.conductivity}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置导电率值',target:{
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:getintlmessage('constcmd.cmdstring.feedcon'),target:{
             fieldname:'inwatersettings.conductivity',
             value:`${this.state.conductivity}`
           }}));
@@ -382,7 +382,7 @@ class Inlet extends PureComponent{
         const {dispatch} = this.props;
         if(this.state.tds.length > 0){
           const cmd = `$feedtds ${this.state.tds}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置TDS值',target:{
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:getintlmessage('constcmd.cmdstring.feedtds'),target:{
             fieldname:'inwatersettings.tds',
             value:`${this.state.tds}`
           }}));
@@ -402,7 +402,7 @@ class Inlet extends PureComponent{
         const {dispatch} = this.props;
         if(this.state.hardness.length > 0){
           const cmd = `$feedca ${this.state.hardness}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置进水硬度值',target:{
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:getintlmessage('constcmd.cmdstring.feedca'),target:{
             fieldname:'inwatersettings.hardness',
             value:`${this.state.hardness}`
           }}));
@@ -422,7 +422,7 @@ class Inlet extends PureComponent{
         const {dispatch} = this.props;
         if(this.state.alkalinity.length > 0){
           const cmd = `$feedalk ${this.state.alkalinity}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置进水咸度值',target:{
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:getintlmessage('constcmd.cmdstring.feedalk'),target:{
             fieldname:'inwatersettings.alkalinity',
             value:`${this.state.alkalinity}`
           }}));

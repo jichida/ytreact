@@ -6,7 +6,7 @@ import { wifi_sendcmd_request } from '../../actions';
 import RenderForm from './FilterForm'
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { prev0Options, prev1Options, prev2Options, post0Options, post1Options ,convertfilterlist,convertfromfilterlist} from './config'
-
+import {getintlmessage} from '../../util/globalIntl';
 import './index.less';
 
 const Item = List.Item;
@@ -81,7 +81,8 @@ class Inlet extends PureComponent{
         // console.log('Submit Paylaod:',payload);
         // this.props.dispatch(setfilterlist(payload));
 
-        this.props.dispatch(wifi_sendcmd_request({cmd:`$filtertype ${payload.prev0}.${payload.prev1}.${payload.prev2}.${payload.post0}.${payload.post1}.0%`,cmdstring:'设置滤芯',target:{
+        this.props.dispatch(wifi_sendcmd_request({cmd:`$filtertype ${payload.prev0}.${payload.prev1}.${payload.prev2}.${payload.post0}.${payload.post1}.0%`,
+          cmdstring:getintlmessage('constcmd.cmdstring.filtertype'),target:{
           fieldname:'filterlist',
           value:payload
         }}));

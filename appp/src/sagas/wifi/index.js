@@ -245,17 +245,21 @@ const parsedata = (stringbody,callbackfn)=>{
   // debugger;
   console.log(result);
 
+  const textgrade0 = intl.formatMessage({id:'constsaga.msg.textgrade0'});
+  const textgrade1 = intl.formatMessage({id:'constsaga.msg.textgrade1'});
+  const textgrade2 = intl.formatMessage({id:'constsaga.msg.textgrade2'});
+
   const main_outwater_grade = lodash_get(result,'homedata.main_outwater_grade');
   if(!!main_outwater_grade){
     //问题2  0:优  1:好  2:一般
     if(main_outwater_grade === '0'){
-      lodash_set(result,'homedata.main_outwater_grade','优');
+      lodash_set(result,'homedata.main_outwater_grade',textgrade0);
     }
     if(main_outwater_grade === '1'){
-      lodash_set(result,'homedata.main_outwater_grade','好');
+      lodash_set(result,'homedata.main_outwater_grade',textgrade1);
     }
     if(main_outwater_grade === '2'){
-      lodash_set(result,'homedata.main_outwater_grade','一般');
+      lodash_set(result,'homedata.main_outwater_grade',textgrade2);
     }
   }
 
@@ -558,11 +562,12 @@ export function* wififlow() {
            socketestatusresult: take(`${socket_setstatus}`),
            timeout: call(delay, 20000)
         });
-
+        const value = `${config.sockethost}:${config.socketport}`;
+        const textconnecttimeout = intl.formatMessage({id:'constsaga.msg.connecttimeout'},{value});
         if(!!raceresult.timeout){
           yield put(set_weui({
             toast:{
-            text:`连接【${config.sockethost}:${config.socketport}】超时,请重试`,
+            text:textconnecttimeout,
             show: true,
             type:'warning'
           }}));
@@ -573,9 +578,10 @@ export function* wififlow() {
         yield put(push('/devices'));
           }
           else{
+            const textconnecterror = intl.formatMessage({id:'constsaga.msg.connecterror'},{value});
             yield put(set_weui({
               toast:{
-              text:`连接【${config.sockethost}:${config.socketport}】失败,${JSON.stringify(raceresult.socketestatusresult.payload)}`,
+              text:textconnecterror,
               show: true,
               type:'warning'
             }}));
@@ -628,12 +634,12 @@ export function* wififlow() {
         // const {payload} = action;
         const result = yield call(openwifi_promise);
         yield put(wifi_open_result(result));
-        yield put(set_weui({
-          toast:{
-          text:`打开wifi-->${JSON.stringify(result)}`,
-          show: true,
-          type:'success'
-        }}));
+        // yield put(set_weui({
+        //   toast:{
+        //   text:`打开wifi-->${JSON.stringify(result)}`,
+        //   show: true,
+        //   type:'success'
+        // }}));
       }
       catch(e){
         console.log(e);
@@ -655,7 +661,7 @@ export function* wififlow() {
               if(!tcpconnected){
                 yield put(set_weui({
                   toast:{
-                    text:`连接已断开,请等待重连`,
+                    text:intl.formatMessage({id:'constsaga.msg.wifidisconnect'}),
                     show: true,
                     type:'offline'
                 }}));
@@ -665,7 +671,6 @@ export function* wififlow() {
               yield call(socket_send_promise,payload.cmd);
             }
 
-            //这里为什么不起作用???
             const textstartcmdsend = intl.formatMessage({id:'constsaga.msg.startcmdsend'},{value:`${payload.cmdstring}`});
             console.log(textstartcmdsend);
 
@@ -732,7 +737,7 @@ export function* wififlow() {
               if(istimeout){
                 yield put(set_weui({
                   toast:{
-                      text:`发送给硬件【${payload.cmdstring}】命令失败`,
+                      text: intl.formatMessage({id:'constsaga.msg.senddeviceerror'},{value:`${payload.cmdstring}`}),
                       show: true,
                       type:'offline'
                 }}));
@@ -744,7 +749,7 @@ export function* wififlow() {
                   }
                   yield put(set_weui({
                     toast:{
-                    text:`发送给硬件【${payload.cmdstring}】命令成功`,
+                    text:intl.formatMessage({id:'constsaga.msg.senddeviceok'},{value:`${payload.cmdstring}`}),
                     show: true,
                     type:'success'
                   }}));
@@ -758,7 +763,7 @@ export function* wififlow() {
                 }
                 yield put(set_weui({
                   toast:{
-                  text:`发送给硬件【${payload.cmdstring}】命令成功`,
+                  text:intl.formatMessage({id:'constsaga.msg.senddeviceok'},{value:`${payload.cmdstring}`}),
                   show: true,
                   type:'success'
                 }}));
@@ -778,7 +783,7 @@ export function* wififlow() {
         yield put(set_weui({
           toast:{
             type:'loading',
-            text:'wifi列表获取中,请稍后...',
+            text:intl.formatMessage({id:'constsaga.msg.wifigetting'}),
             value:'show',
           }
         }))
@@ -801,7 +806,7 @@ export function* wififlow() {
         // }}));
         const { wifiresult, timeout } = raceresult;
         if(!!timeout){
-          yield put(common_err({type:'wifi_getssidlist',errmsg:`获取wifi信息超时,${delaytime}毫秒`}));
+          yield put(common_err({type:'wifi_getssidlist',errmsg:intl.formatMessage({id:'constsaga.msg.wifigettingtimeout',value:`${delaytime}`})}));
         }
         else{
             if(wifiresult.code == 0){
@@ -827,7 +832,7 @@ export function* wififlow() {
            timeout: call(delay, 20000)
         });
         if(!!timeout){
-          yield put(common_err({type:'wifi_setcurwifi',errmsg:`设置wifi超时,请重试`}));
+          yield put(common_err({type:'wifi_setcurwifi',errmsg:intl.formatMessage({id:'constsaga.msg.wifisettingtimeout'})}));
         }
         else{
           yield put(wifi_setcurwifi_result(wifiresult.payload));

@@ -14,7 +14,7 @@ import {
 // import {getdevice_request} from '../../actions';
 import { replace,goBack} from 'connected-react-router';//https://github.com/reactjs/connected-react-router
 import config from '../../env/config';
-
+import {getintlmessage} from '../../util/globalIntl';
 
 export function* userloginflow() {
 
@@ -106,7 +106,7 @@ export function* userloginflow() {
           					  //get device
           					  yield put(getdevice_request({'_id':result._id}));
           					}
-                    yield put(app_sendcmd_request({cmd:`$data%`,cmdstring:'获取数据'}));
+                    yield put(app_sendcmd_request({cmd:`$data%`,cmdstring:getintlmessage('constcmd.cmdstring.data')}));
                 }
               //switch
                 const fdStart = search.indexOf("?next=");

@@ -11,7 +11,7 @@ import { wifi_sendcmd_request } from '../../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
 import DirectForm from './DirectForm';
-
+import {getintlmessage} from '../../util/globalIntl';
 const Item = List.Item;
 const Brief = Item.Brief;
 // const curTZ = moment.tz.guess();
@@ -88,7 +88,7 @@ class SettingSystem extends PureComponent{
         const {dispatch} = this.props;
         if(this.state.quality.length > 0){
           const cmd = `$sysprodtrigger ${this.state.quality}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置出水水质',target:{
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:getintlmessage('constcmd.cmdstring.sysprodtrigger'),target:{
             fieldname:'syssettings.quality',
             value:`${this.state.quality}`
           }}));
@@ -132,12 +132,12 @@ class SettingSystem extends PureComponent{
         //   const end = moment(dormancy.dormancyend).format('HH');
         //   const cmd = `$fidleoffon 1.${start}.${end}%`;
           const cmd = `$fidleoffon 1.${dormancy.dormancystart}.${dormancy.dormancyend}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置休眠状态'}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:getintlmessage('constcmd.cmdstring.fidleoffon')}));
           this.onCloseDormancy();
         }
         else{
           const cmd = `$fidle 0%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置休眠状态'}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:getintlmessage('constcmd.cmdstring.fidle')}));
           this.onCloseDormancy();
         }
     }

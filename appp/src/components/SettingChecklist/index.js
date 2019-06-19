@@ -9,6 +9,7 @@ import {wifi_sendcmd_request} from '../../actions';
 import {set_weui, set_confirm} from '../../actions';
 import PicturesWall  from './PicturesWall';
 import './index.less';
+import {getintlmessage} from '../../util/globalIntl';
 
 const RenderCheckForm = createForm({
     mapPropsToFields(props) {
@@ -286,7 +287,7 @@ class SettingChecklist extends PureComponent{
       //click xy
       console.log(`click xy`)
       const {dispatch, intl} = this.props;
-      dispatch(set_confirm({title: '系统泄压', message: `${intl.formatMessage({id: 'form.confirm'})}系统泄压?`, command: wifi_sendcmd_request({cmd:`$decpression%`,cmdstring:'系统泄压'})}))
+      dispatch(set_confirm({title: '系统泄压', message: `${intl.formatMessage({id: 'form.confirm'})}系统泄压?`, command: wifi_sendcmd_request({cmd:`$decpression%`,cmdstring:getintlmessage('constcmd.cmdstring.decpression')})}))
     //   dispatch(wifi_sendcmd_request({cmd:`$decpression%`,cmdstring:'系统泄压'}));
     }
 

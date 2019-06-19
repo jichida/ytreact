@@ -245,6 +245,7 @@ class EquipmentList extends React.Component{
 const mapStateToProps =  ({device, devicedata}) =>{
     const {basicinfo,devicelist,_id} = device;
     const {filterlist} = devicedata;
+    devicelist.host = basicinfo.model;//设备清单中的主机，从基本信息中的预装型号获取
     return { basicinfo, devicelist, filterlist, _id};
 };
 EquipmentList = connect(mapStateToProps)(EquipmentList);

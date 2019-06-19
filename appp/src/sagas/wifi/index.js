@@ -53,7 +53,7 @@ import lodash_set from 'lodash.set';
 import lodash_get from 'lodash.get';
 import config from '../../env/config';
 import moment from 'moment';
-
+import { intl } from '../../util/globalIntl';
 let recvbuf = '';
 // let linkmode = 'internetmode';//unknow,directmode,internetmode
 let lastresponsemoment = moment();
@@ -316,7 +316,7 @@ const socket_recvdata_promise = (data)=>{
           }
         }
         else{
-          reject('数据有问题');
+          reject(intl.formatMessage({id:'constsaga.msg.dataerr'}));
       }
 
   });
@@ -641,6 +641,7 @@ export function* wififlow() {
     });
     yield takeLatest(`${wifi_sendcmd_request}`, function*(action) {
       try{
+
             const {payload} = action;
             console.log(payload);
             if(config.softmode === 'app'){
@@ -663,9 +664,14 @@ export function* wififlow() {
 
               yield call(socket_send_promise,payload.cmd);
             }
+
+            //这里为什么不起作用???
+            const textstartcmdsend = intl.formatMessage({id:'constsaga.msg.startcmdsend'},{value:`${payload.cmdstring}`});
+            console.log(textstartcmdsend);
+
             yield put(set_weui({
               toast:{
-              text:`【${payload.cmdstring}】开始命令发送`,
+              text:textstartcmdsend,
               show: true,
               type:'success'
             }}));

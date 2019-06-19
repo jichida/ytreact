@@ -13,7 +13,7 @@ import {history} from './store';
 import AppRoot from '../components/approot.js';
 import enUS from 'antd-mobile/lib/locale-provider/en_US';
 import zhTW from 'antd-mobile/lib/locale-provider/en_US';
-
+import IntlGlobalProvider from '../util/globalIntl';
 //react 国际化
 import {IntlProvider,addLocaleData} from 'react-intl';
 import MessageProvider from '../locales/MessageProvider';
@@ -36,14 +36,16 @@ const languages = {
 let ChildRoot = (props)=>{
   const locale = props.locale || 'zh-cn';
   return (<IntlProvider locale={locale} messages={MessageProvider(locale)}>
-    <div>
-      <ConnectedRouter history={history}>
-        <LocaleProvider locale={languages[locale]}>
-          <Route path="/" component={AppRoot}/>
-        </LocaleProvider>
-      </ConnectedRouter>
-      <DevTools />
-    </div>
+  <IntlGlobalProvider>
+      <div>
+        <ConnectedRouter history={history}>
+          <LocaleProvider locale={languages[locale]}>
+              <Route path="/" component={AppRoot}/>
+          </LocaleProvider>
+        </ConnectedRouter>
+        <DevTools />
+        </div>
+      </IntlGlobalProvider>
   </IntlProvider>);
 }
 const mapStateToProps =  ({app:{locale}}) =>{

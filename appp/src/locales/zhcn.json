@@ -1,4 +1,6 @@
 {
+  "constsaga.msg.dataerr":"数据有问题",
+  "constsaga.msg.startcmdsend":"【{value}】开始命令发送",
   "const.select.useproperty0":"商用",
   "const.select.useproperty1":"家用",
   "const.select.building0":"独立别墅",

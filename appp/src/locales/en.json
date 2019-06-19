@@ -1,4 +1,6 @@
-{  
+{
+  "constsaga.msg.dataerr":"data is error",
+  "constsaga.msg.startcmdsend":"【{value}】start send command",
   "const.select.useproperty0": "commercial",
   "const.select.useproperty1": "Home",
   "const.select.building0": "Independent Villa",

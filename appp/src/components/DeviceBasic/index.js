@@ -14,40 +14,6 @@ const Item = List.Item;
 const Brief = Item.Brief;
 let initHeight;
 
-const useproperty = [
-    {
-        label: '商用',
-        value: '商用',
-    },
-    {
-        label: '家用',
-        value: '家用',
-    }
-]
-
-const building = [
-    {
-        label: '独立别墅',
-        value: '独立别墅',
-    },
-    {
-        label: '公寓',
-        value: '公寓',
-    },
-    {
-        label: '商用',
-        value: '商用',
-    },
-    {
-        label: '企事业单位',
-        value: '企事业单位',
-    },
-    {
-        label: '其他',
-        value: '其他',
-    },
-]
-
 const model = [
     {
         label: 'HYDRODI-G2',
@@ -101,8 +67,8 @@ const RenderForm = createForm({
         };
     }})(injectIntl((props)=>{
     const { getFieldProps, validateFields, setFieldsValue } = props.form;
-    const { intl: { formatMessage },dispatch, unit} = props;
-
+    const { intl,dispatch, unit} = props;
+    const {formatMessage} = intl;
     const dispatch_form_err = (dispatch,errs)=>{
         dispatch(common_err({type:'form_err',errmsg: formatMessage({id: 'form.check'})}))
       }
@@ -125,6 +91,40 @@ const RenderForm = createForm({
         setFieldsValue({bucket: value});
     }
 
+
+    const useproperty = [
+        {
+            label: intl.formatMessage({id:'const.select.useproperty0'}),
+            value: '商用',
+        },
+        {
+            label: intl.formatMessage({id:'const.select.useproperty1'}),
+            value: '家用',
+        }
+    ];
+
+    const building = [
+        {
+            label: intl.formatMessage({id:'const.select.building0'}),
+            value: '独立别墅',
+        },
+        {
+            label: intl.formatMessage({id:'const.select.building1'}),
+            value: '公寓',
+        },
+        {
+            label: intl.formatMessage({id:'const.select.building2'}),
+            value: '商用',
+        },
+        {
+            label: intl.formatMessage({id:'const.select.building3'}),
+            value: '企事业单位',
+        },
+        {
+            label: intl.formatMessage({id:'const.select.building4'}),
+            value: '其他',
+        },
+    ]
     return (
         <React.Fragment>
         <form>
@@ -312,7 +312,7 @@ class DeviceBasic extends PureComponent{
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}
-                    onLeftClick={() => { window.innerHeight=initHeight; history.goBack()}}                
+                    onLeftClick={() => { window.innerHeight=initHeight; history.goBack()}}
                 >
                 <FormattedMessage id="device.basic" />
                 </NavBar>

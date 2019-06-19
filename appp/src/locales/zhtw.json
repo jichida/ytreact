@@ -1,4 +1,11 @@
 {
+  "const.select.useproperty0":"商用",
+  "const.select.useproperty1":"家用",
+  "const.select.building0":"獨立別墅",
+  "const.select.building1":"公寓",
+  "const.select.building2":"商用",
+  "const.select.building3":"企事業單位",
+  "const.select.building4":"其他",
   "login.account":"賬號",
   "login.password":"密碼",
   "login.login":"登錄",

@@ -1,4 +1,11 @@
-{
+{  
+  "const.select.useproperty0": "commercial",
+  "const.select.useproperty1": "Home",
+  "const.select.building0": "Independent Villa",
+  "const.select.building1":"Apartment",
+  "const.select.building2": "commercial",
+  "const.select.building3": "Enterprises",
+  "const.select.building4": "Other",
   "login.account": "Account",
   "login.password": "Password",
   "login.login": "login",

@@ -34,7 +34,7 @@ class Home extends PureComponent{
 
     state = {
         visible: false,
-        language: 'cn'
+        language: 'zh-cn'
     }
 
     onClickWifi =()=>{
@@ -62,7 +62,8 @@ class Home extends PureComponent{
       }
 
     render () {
-        const { history, intl: { formatMessage },wifiStatus, tcpconnected, locale } = this.props;
+        const { history, intl,wifiStatus, tcpconnected, locale } = this.props;
+        const {formatMessage} = intl;
         const { curtab } = this.props;
         let content;
         switch (curtab) {
@@ -104,6 +105,7 @@ class Home extends PureComponent{
         } else {
             connectStatusImg = disconnect_img
         }
+        console.log(`locale is :${locale}`);
         return (
             <div className="home">
                 <NavBar
@@ -114,8 +116,8 @@ class Home extends PureComponent{
                           placement = "bottomLeft"
                           overlay={[
                             (<Item key="4" value="简" data-seed="logId">中文简体</Item>),
-                            (<Item key="5" value="繁">中文繁体</Item>),
-                            (<Item key="6" value="EN">EN</Item>),
+                            (<Item key="5" value="繁">中文繁體</Item>),
+                            (<Item key="6" value="EN">English</Item>),
                           ]}
                           align={{
                             overflow: { adjustY: 30, adjustX: 30 },

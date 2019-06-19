@@ -33,7 +33,7 @@ const Brief = Item.Brief;
 
 const languages = [
     {
-        label: '英语',
+        label: 'English',
         value: 'en',
     },
     {
@@ -41,7 +41,7 @@ const languages = [
         value: 'zh-cn',
     },
     {
-        label: '中文繁体',
+        label: '中文繁體',
         value: 'zh-tw',
     },
 ]
@@ -167,7 +167,7 @@ class Index extends React.Component {
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
-                              this.onClickCmd(`$res_modlife%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.modlife'})}`);//1	电离子膜 复位	
+                              this.onClickCmd(`$res_modlife%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.modlife'})}`);//1	电离子膜 复位
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>

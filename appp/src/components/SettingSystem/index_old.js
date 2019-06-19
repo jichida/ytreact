@@ -75,7 +75,7 @@ const hoursList = lodashmap(hours, (item)=> {
 
 const languages = [
     {
-        label: '英语',
+        label: 'English',
         value: 'en',
     },
     {
@@ -83,7 +83,7 @@ const languages = [
         value: 'zh-cn',
     },
     {
-        label: '中文繁体',
+        label: '中文繁體',
         value: 'zh-tw',
     },
 ]

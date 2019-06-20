@@ -1,4 +1,11 @@
-{  
+{
+  "constsaga.device.getdevicesuccess": "Get device information successfully",
+  "constsaga.device.setdevicesuccess": "Set device information success",
+  "constsaga.device.scanqrfirst": "Please scan the device QR code in the system settings first",
+  "constsaga.pagination.timeout": "Request timed out",
+  "constsaga.userlogin.findpwd": "Retrieve password successfully",
+  "constsaga.userlogin.changepwd": "Change password successfully",
+  "constsaga.wsapi.connect": "The server connection is broken! The command {value} could not be sent",
   "constcmd.cmdstring.data": "Get data",
   "constcmd.cmdstring.decpression": "System Pressure Relief",
   "constcmd.cmdstring.filtertype": "Set filter",

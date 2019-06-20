@@ -9,7 +9,7 @@ import { fork, take, call, put, cancel } from 'redux-saga/effects';
 import store from '../../env/store.js';
 
 import {wsrecvhandler} from './wsrecvhandler.js';
-
+import { intl } from '../../util/globalIntl';
 import data from '../wslogic/datahandler.js';
 import {
     login_result,
@@ -66,7 +66,7 @@ function* write(socket,fun,cmd) {
           socket.emit(`${config.softmode}`,{cmd:cmd,data:payload});
         }
         else{
-          yield put(common_err({type:cmd,errmsg:`服务器连接断开!无法发送命令${cmd}`}))
+          yield put(common_err({type:cmd,errmsg:intl.formatMessage({id:'constsaga.wsapi.connect'},{value:cmd})}))
         }
     }
 }

@@ -14,7 +14,7 @@ import {
 // import {getdevice_request} from '../../actions';
 import { replace,goBack} from 'connected-react-router';//https://github.com/reactjs/connected-react-router
 import config from '../../env/config';
-import {getintlmessage} from '../../util/globalIntl';
+import {intl,getintlmessage} from '../../util/globalIntl';
 
 export function* userloginflow() {
 
@@ -47,7 +47,7 @@ export function* userloginflow() {
       try{
         yield put(set_weui({
           toast:{
-            text:'找回密码成功',
+            text:intl.formatMessage({id:'constsaga.userlogin.findpwd'}),
             show: true,
             type:'success'
         }}));
@@ -63,7 +63,7 @@ export function* userloginflow() {
         try{
           yield put(set_weui({
             toast:{
-              text:'修改密码成功',
+              text:intl.formatMessage({id:'constsaga.userlogin.changepwd'}),
               show: true,
               type:'success'
           }}));

@@ -8,13 +8,14 @@ import {
   adddevice_request
 } from '../../actions';
 import lodashget from 'lodash.get';
+import { intl } from '../../util/globalIntl';
 
 export function* deviceflow(){//仅执行一次
   yield takeLatest(`${getdevice_result}`, function*(action) {
     try{
       yield put(set_weui({
         toast:{
-        text:'获取设备信息成功',
+        text:intl.formatMessage({id:'constsaga.device.getdevicesuccess'}),
         show: true,
         type:'success'
       }}));
@@ -28,7 +29,7 @@ export function* deviceflow(){//仅执行一次
     try{
       yield put(set_weui({
         toast:{
-        text:'设置设备信息成功',
+        text:intl.formatMessage({id:'constsaga.device.setdevicesuccess'}),
         show: true,
         type:'success'
       }}));
@@ -56,7 +57,7 @@ export function* deviceflow(){//仅执行一次
         }
         yield put(set_weui({
           toast:{
-          text:'请先系统设置中扫描设备二维码',
+          text:intl.formatMessage({id:'constsaga.device.scanqrfirst'}),
           show: true,
           type:'warning'
         }}));

@@ -1,4 +1,11 @@
 {
+  "constsaga.device.getdevicesuccess":"獲取設備信息成功",
+  "constsaga.device.setdevicesuccess":"設置設備信息成功",
+  "constsaga.device.scanqrfirst":"請先系統設置中掃描設備二維碼",
+  "constsaga.pagination.timeout":"請求超時",
+  "constsaga.userlogin.findpwd":"找回密碼成功",
+  "constsaga.userlogin.changepwd":"修改密碼成功",
+  "constsaga.wsapi.connect":"服務器連接斷開!無法發送命令{value}",
   "constcmd.cmdstring.data":"獲取數據",
   "constcmd.cmdstring.decpression":"系統洩壓",
   "constcmd.cmdstring.filtertype":"設置濾芯",

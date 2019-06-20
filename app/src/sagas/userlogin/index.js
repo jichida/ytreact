@@ -14,7 +14,7 @@ import {
 // import {getdevice_request} from '../../actions';
 import { replace,goBack} from 'connected-react-router';//https://github.com/reactjs/connected-react-router
 import config from '../../env/config';
-
+import {intl,getintlmessage} from '../../util/globalIntl';
 
 export function* userloginflow() {
 
@@ -47,7 +47,7 @@ export function* userloginflow() {
       try{
         yield put(set_weui({
           toast:{
-            text:'找回密码成功',
+            text:intl.formatMessage({id:'constsaga.userlogin.findpwd'}),
             show: true,
             type:'success'
         }}));
@@ -63,7 +63,7 @@ export function* userloginflow() {
         try{
           yield put(set_weui({
             toast:{
-              text:'修改密码成功',
+              text:intl.formatMessage({id:'constsaga.userlogin.changepwd'}),
               show: true,
               type:'success'
           }}));
@@ -96,17 +96,17 @@ export function* userloginflow() {
             // yield put(getdevice_request({}));
             // debugger;
             if(!loginsuccess && result.loginsuccess){
-               localStorage.setItem(`ytreact_${config.softmode}_username`,username);
-               localStorage.setItem(`ytreact_${config.softmode}_password`,password);
+                localStorage.setItem(`ytreact_${config.softmode}_username`,username);
+                localStorage.setItem(`ytreact_${config.softmode}_password`,password);
 
                 localStorage.setItem(`ytreact_${config.softmode}_token`,result.token);
 
                 if(config.softmode === 'app'){
-					if(!!result._id){
-					  //get device
-					  yield put(getdevice_request({'_id':result._id}));
-					}
-                    yield put(app_sendcmd_request({cmd:`$data%`,cmdstring:'获取数据'}));
+          					if(!!result._id){
+          					  //get device
+          					  yield put(getdevice_request({'_id':result._id}));
+          					}
+                    yield put(app_sendcmd_request({cmd:`$data%`,cmdstring:getintlmessage('constcmd.cmdstring.data')}));
                 }
               //switch
                 const fdStart = search.indexOf("?next=");

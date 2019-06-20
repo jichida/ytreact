@@ -1,5 +1,5 @@
 ﻿import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+// import { reducer as formReducer } from 'redux-form';
 import { connectRouter } from 'connected-react-router'
 
 import userlogin from './userlogin';
@@ -17,6 +17,6 @@ export default (history)=>combineReducers(
     devicedata,
     wifi,
     userlogin,
-    form: formReducer,
+    // form: formReducer,
     router: connectRouter(history),
   });

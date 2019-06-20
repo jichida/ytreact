@@ -30,6 +30,7 @@
   "constsaga.msg.textgrade1":"好",
   "constsaga.msg.textgrade2":"一般",
   "constsaga.msg.dataerr":"數據有問題",
+  "constsaga.msg.startcmdsend":"【{value}】开始命令发送",
   "const.select.useproperty0":"商用",
   "const.select.useproperty1":"家用",
   "const.select.building0":"獨立別墅",

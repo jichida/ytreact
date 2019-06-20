@@ -5,7 +5,7 @@ import {delay} from 'redux-saga';
 // import paginate_array from 'paginate-array';
 // import lodashmap from 'lodash.map';
 // import lodashincludes from 'lodash.includes';
-
+import { intl } from '../../util/globalIntl';
 const synccallreq = createAction('synccallreq');
 
 //以下导出放在视图
@@ -27,7 +27,7 @@ export function* createsagacallbackflow(){
          timeout: call(delay, 30000)
       });
       if(!!timeout){
-        reject('请求超时!');
+        reject(intl.formatMessage({id:'constsaga.pagination.timeout'}));
       }
       else{
         let {payload} = response;

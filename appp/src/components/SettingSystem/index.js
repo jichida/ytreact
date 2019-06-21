@@ -18,12 +18,7 @@ const Brief = Item.Brief;
 
 const hours = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
 
-const hoursList = lodashmap(hours, (item)=> {
-    return {
-        label: `${item}时`,
-        value: item,
-    }
-})
+
 
 class SettingSystem extends PureComponent{
   constructor(props) {
@@ -144,6 +139,14 @@ class SettingSystem extends PureComponent{
 
     render () {
         const {syssettings,dispatch, intl:{ formatMessage }} = this.props;
+
+        const hoursList = lodashmap(hours, (item)=> {
+            return {
+                label: formatMessage({id:"const.form.time"},{value:`${item}`}),
+                value: item,
+            }
+        })
+
         const locale = lodashget(syssettings,'language','zh-cn');
         console.log(locale);
         const basicData = {

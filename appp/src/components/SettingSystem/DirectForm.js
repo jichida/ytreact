@@ -6,7 +6,7 @@ import moment from 'moment';
 import 'moment-timezone';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { common_err, wifi_sendcmd_request, set_confirm } from '../../actions';
-
+import {getintlmessage,intl} from '../../util/globalIntl';
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -340,15 +340,15 @@ class Index extends React.Component {
                                     if(language === 'en'){
                                       // 语言选择：0 ：中文简体，1：中文繁体，2：英语	$charact 0%
                                       const cmd = `$charact 2%`;
-                                      this.onClickCmd(cmd,'设置英语',{fieldname:'syssettings.language',value:'en'});
+                                      this.onClickCmd(cmd,intl.formatMessage({id: 'constcmd.cmdstring.language2'}),{fieldname:'syssettings.language',value:'en'});
                                     }
                                     else if(language === 'zh-cn'){
                                       const cmd = `$charact 0%`;
-                                      this.onClickCmd(cmd,'设置中文简体',{fieldname:'syssettings.language',value:'zh-cn'});
+                                      this.onClickCmd(cmd,intl.formatMessage({id: 'constcmd.cmdstring.language0'}),{fieldname:'syssettings.language',value:'zh-cn'});
                                     }
                                     else if(language === 'zh-tw'){
                                       const cmd = `$charact 1%`;
-                                      this.onClickCmd(cmd,'设置中文繁体',{fieldname:'syssettings.language',value:'zh-tw'});
+                                      this.onClickCmd(cmd,intl.formatMessage({id: 'constcmd.cmdstring.language1'}),{fieldname:'syssettings.language',value:'zh-tw'});
                                     }
                                     console.log(v);
                                   }

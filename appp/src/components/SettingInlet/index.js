@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import {common_err,tmp_ui_setuserdevice_request, wifi_sendcmd_request,set_weui} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import {getintlmessage} from '../../util/globalIntl';
+import {getintlmessage,intl} from '../../util/globalIntl';
 import './index.less';
 
 const Item = List.Item;
@@ -351,7 +351,7 @@ class Inlet extends PureComponent{
         else{
           dispatch(set_weui({
             toast:{
-            text:'请输入正确的ph值',
+            text:intl.formatMessage({id: 'formpopup.weui.correctph'}),//'请输入正确的ph值',
             show: true,
             type:'warning'
           }}));
@@ -371,7 +371,7 @@ class Inlet extends PureComponent{
         else{
           dispatch(set_weui({
             toast:{
-            text:'请输入导电率值',
+            text:intl.formatMessage({id: 'formpopup.weui.correctconductivity'}),//'请输入导电率值',
             show: true,
             type:'warning'
           }}));
@@ -391,7 +391,7 @@ class Inlet extends PureComponent{
         else{
           dispatch(set_weui({
             toast:{
-            text:'请输入TDS值',
+            text:intl.formatMessage({id: 'formpopup.weui.correcttds'}),//'请输入TDS值',
             show: true,
             type:'warning'
           }}));
@@ -411,7 +411,7 @@ class Inlet extends PureComponent{
         else{
           dispatch(set_weui({
             toast:{
-            text:'请进水硬度值',
+            text:intl.formatMessage({id: 'formpopup.weui.correcthardness'}),//'请进水硬度值',
             show: true,
             type:'warning'
           }}));
@@ -431,7 +431,7 @@ class Inlet extends PureComponent{
         else{
           dispatch(set_weui({
             toast:{
-            text:'请进水咸度值',
+            text:intl.formatMessage({id: 'formpopup.weui.correctalkalinity'}),//'请进水咸度值',
             show: true,
             type:'warning'
           }}));

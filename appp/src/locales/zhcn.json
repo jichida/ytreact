@@ -1,4 +1,14 @@
 {
+  "formpopup.weui.correctph":"请输入正确的ph值",
+  "formpopup.weui.correctconductivity":"请输入导电率值",
+  "formpopup.weui.correcttds":"请输入TDS值",
+  "formpopup.weui.correcthardness":"请进水硬度值",
+  "formpopup.weui.correctalkalinity":"请进水咸度值",
+  "formpopup.weui.correctquality":"请输入出水水质的值",
+  "constcmd.cmdstring.language0":"设置中文简体",
+  "constcmd.cmdstring.language1":"设置中文繁体",
+  "constcmd.cmdstring.language2":"设置英语",
+
   "constsaga.device.getdevicesuccess":"获取设备信息成功",
   "constsaga.device.setdevicesuccess":"设置设备信息成功",
   "constsaga.device.scanqrfirst":"请先系统设置中扫描设备二维码",

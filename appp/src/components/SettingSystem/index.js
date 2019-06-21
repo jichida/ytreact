@@ -11,7 +11,7 @@ import { wifi_sendcmd_request } from '../../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
 import DirectForm from './DirectForm';
-import {getintlmessage} from '../../util/globalIntl';
+import {getintlmessage,intl} from '../../util/globalIntl';
 const Item = List.Item;
 const Brief = Item.Brief;
 // const curTZ = moment.tz.guess();
@@ -97,7 +97,7 @@ class SettingSystem extends PureComponent{
         else{
           dispatch(set_weui({
             toast:{
-            text:'请输入出水水质的值',
+            text:intl.formatMessage({id: 'formpopup.weui.correctquality'}),//'请输入出水水质的值',
             show: true,
             type:'warning'
           }}));

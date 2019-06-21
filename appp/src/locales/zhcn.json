@@ -1,4 +1,12 @@
 {
+  "constfilter.frontfilter.0":"PP滤芯",
+  "constfilter.frontfilter.1":"UF滤芯",
+  "constfilter.frontfilter.2":"TAC滤芯",
+  "constfilter.frontfilter.3":"无",
+  "constfilter.afterfilter.0":"精滤滤芯",
+  "constfilter.afterfilter.1":"除菌滤芯",
+  "constfilter.afterfilter.2":"UV滤芯",
+  "constfilter.afterfilter.3":"无",
   "formpopup.weui.correctph":"请输入正确的ph值",
   "formpopup.weui.correctconductivity":"请输入导电率值",
   "formpopup.weui.correcttds":"请输入TDS值",

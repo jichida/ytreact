@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route,Switch } from 'react-router-dom';
+import { LocaleProvider } from 'antd-mobile'
+import enUs from 'antd-mobile/lib/locale-provider/en_US'
 import './common.less';
 
 // import Index from './Login';
@@ -37,6 +39,7 @@ class AppRoot extends React.Component {
     }
     render() {
       return (
+        <LocaleProvider locale={this.props.locale === 'en' ? enUs : undefined}>
           <div className="page" style={{backgroundImage: `url(${gobal_bg})`}}>
             <Switch>
               <Route exact path="/" component={requireAuthentication(Home)} />
@@ -54,8 +57,17 @@ class AppRoot extends React.Component {
               <Route exact path="/change" component={requireAuthentication(ChangePassword)} />
             </Switch>
           </div>
+        </LocaleProvider>
       );
   }
 }
 
-export default connect()(AppRoot);
+const mapStateToProps = ({app: { locale }}) => {
+  console.log('locale:', locale)
+  return {
+    locale
+  }
+}
+
+
+export default connect(mapStateToProps)(AppRoot);

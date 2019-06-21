@@ -226,7 +226,7 @@
   "water.ph": "PH value",
   "water.usertds": "effluent TDS value(mg/l)",
   "home": "Home",
-  "home.show.title_main_outwater_quality":"Fluid water quality {value} ppm",
+  "home.show.title_main_outwater_quality":"Fluid water TDS {value}",
   "home.show.title_main_inwater_quality":"Inlet water quality {value} ppm",
   "home.show.title_main_totalwatervol": "Total water production {value} gal",
   "home.show.title_main_runtime": "Runtime {value} days",

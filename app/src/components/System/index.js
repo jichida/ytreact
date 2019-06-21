@@ -110,7 +110,7 @@ const RenderForm = createForm({
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
-                              onClickCmd(`$decpression%`,'废水阀泄压');//20	废水阀泄压	整机泄压	$decpression%
+                              onClickCmd(`$decpression%`,`${intl.formatMessage({id: 'setting.system.decompression'})}`);//20	废水阀泄压	整机泄压	$decpression%
                             }} >
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
@@ -120,7 +120,7 @@ const RenderForm = createForm({
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
-                              onClickCmd(`$prep%`,'排气冲洗');
+                              onClickCmd(`$prep%`,`${intl.formatMessage({id: 'setting.system.restore'})}`);
                             }} >
                                 <FormattedMessage id="setting.system.wash" defaultMessage="冲洗" />
                             </Button>
@@ -130,7 +130,7 @@ const RenderForm = createForm({
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{
-                              onClickCmd(`$sysreset 1%`,'重启系统');//重置重启系统	重启系统	$sysreset 1%
+                              onClickCmd(`$sysreset 1%`,`${intl.formatMessage({id: 'setting.system.resetsystem'})}`);//重置重启系统	重启系统	$sysreset 1%
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
@@ -142,7 +142,7 @@ const RenderForm = createForm({
                             <Button size="small" type="ghost" className="btn" onClick={()=>{
                               //获取当前时间
                               const curdate = moment().format('YY.MM.DD.HH.ss');
-                              onClickCmd(`$date ${curdate}%`,'重置时间');//11	重置时间	同步系统时间	$date 18.11.30.13.20% 意思是年.月.日.时.分
+                              onClickCmd(`$date ${curdate}%`,`${intl.formatMessage({id: 'setting.system.resettime'})}`);//11	重置时间	同步系统时间	$date 18.11.30.13.20% 意思是年.月.日.时.分
                             }}>
                                 <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>

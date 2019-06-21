@@ -10,7 +10,7 @@ import lodashmap from 'lodash.map';
 import {ui_set_language} from '../../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
-import {common_err, wifi_sendcmd_request,getdevice_request} from '../../actions';
+import {common_err, wifi_sendcmd_request,getdevice_request, set_confirm} from '../../actions';
 import {intl,getintlmessage} from '../../util/globalIntl';
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -86,13 +86,21 @@ const RenderForm = createForm({
 
     const onClickCmd = (cmd,cmdstring='获取数据',target)=>{
       const {dispatch} = props;
-      if(!!target){
-        dispatch(wifi_sendcmd_request({cmd,cmdstring,target}));
-      }
-      else{
-        dispatch(wifi_sendcmd_request({cmd,cmdstring}));
-      }
+      const reqobj = !!target ? {cmd,cmdstring,target}:{cmd,cmdstring};
+        dispatch(set_confirm({
+          title: `${intl.formatMessage({id: 'form.confirm'})}`,
+          message: `${cmdstring}?`,
+          text: [`${intl.formatMessage({id: 'form.cancel'})}`, `${intl.formatMessage({id: 'form.ok'})}`],
+          command: wifi_sendcmd_request(reqobj)
+        }))
     }
+    //   if(!!target){
+    //     dispatch(wifi_sendcmd_request({cmd,cmdstring,target}));
+    //   }
+    //   else{
+    //     dispatch(wifi_sendcmd_request({cmd,cmdstring}));
+    //   }
+    // }
 
     return (
         <React.Fragment>

@@ -41,7 +41,8 @@ import {
   push_devicecmddata,
 
   setlinkmode,
-  setdatatarget
+  setdatatarget,
+  ui_main_selindex
   // wifi_seteasylink,
 } from '../../actions/index.js';
 import { push } from 'connected-react-router';//https://github.com/reactjs/connected-react-router
@@ -538,6 +539,7 @@ export function* wififlow() {
         yield put(setlinkmode(linkmode));
 
         if(isinternet){
+          yield put(ui_main_selindex(1))
           yield put(push('/home'));
           return;
         }

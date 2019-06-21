@@ -18,12 +18,12 @@ import './index.less';
 const Item = List.Item;
 const Brief = Item.Brief;
 
-const Filters = [
-    'PP滤芯',
-    'UF滤芯',
-    'TAC滤芯',
-    '无',
-]
+// const Filters = [
+//     'PP滤芯',
+//     'UF滤芯',
+//     'TAC滤芯',
+//     '无',
+// ]
 
 const basicData = {
     filter: {
@@ -61,7 +61,16 @@ const RenderForm = createForm({
             }
         })
     }
-
+    const Filters = [
+      formatMessage({id:"constfilter.frontfilter.0"}),
+      formatMessage({id:"constfilter.frontfilter.1"}),
+      formatMessage({id:"constfilter.frontfilter.2"}),
+      formatMessage({id:"constfilter.frontfilter.3"}),
+        //'PP滤芯',
+        //'UF滤芯',
+        //'TAC滤芯',
+        //'无',
+    ]
     const showActionSheet = () => {
         const BUTTONS = Filters;
         ActionSheet.showActionSheetWithOptions({

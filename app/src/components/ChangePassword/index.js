@@ -22,23 +22,24 @@ class ChangePassword extends PureComponent{
                   passwordB:values.pwdconfirm
                 }
                 //<----验证-----
+                const { intl } = this.props;
                 let texterr;
                 if(!payload.password){
-                  texterr = '旧密码不能为空';
+                  texterr = intl.formatMessage({id: 'const.changepassword.error0'});
                 }
                 if(!texterr){
                   if(!payload.passwordA){
-                    texterr = '新密码不能为空';
+                    texterr = intl.formatMessage({id: 'const.changepassword.error1'});
                   }
                 }
                 if(!texterr){
                   if(!payload.passwordB){
-                    texterr = '请再输入新密码';
+                    texterr = intl.formatMessage({id: 'const.changepassword.error2'});
                   }
                 }
                 if(!texterr){
                   if(payload.passwordA !== payload.passwordB){
-                    texterr = '两次密码输入不一致';
+                    texterr = intl.formatMessage({id: 'const.changepassword.error3'});
                   }
                 }
                 if(!!texterr){

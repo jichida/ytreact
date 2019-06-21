@@ -11,7 +11,7 @@ import {ui_set_language} from '../../actions';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
 import {common_err, wifi_sendcmd_request,getdevice_request} from '../../actions';
-
+import {intl,getintlmessage} from '../../util/globalIntl';
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -26,7 +26,7 @@ const hoursList = lodashmap(hours, (item)=> {
 
 const languages = [
     {
-        label: '英语',
+        label: 'English',
         value: 'en',
     },
     {
@@ -34,7 +34,7 @@ const languages = [
         value: 'zh-cn',
     },
     {
-        label: '中文繁体',
+        label: '中文繁體',
         value: 'zh-tw',
     },
 ]
@@ -196,15 +196,15 @@ const RenderForm = createForm({
                                     if(language === 'en'){
                                       // 语言选择：0 ：中文简体，1：中文繁体，2：英语	$charact 0%
                                       const cmd = `$charact 2%`;
-                                      onClickCmd(cmd,'设置英语',{fieldname:'syssettings.language',value:'en'});
+                                      onClickCmd(cmd,intl.formatMessage({id:"constcmd.cmdstring.language2"}),{fieldname:'syssettings.language',value:'en'});
                                     }
                                     else if(language === 'zh-cn'){
                                       const cmd = `$charact 0%`;
-                                      onClickCmd(cmd,'设置中文简体',{fieldname:'syssettings.language',value:'zh-cn'});
+                                      onClickCmd(cmd,intl.formatMessage({id:"constcmd.cmdstring.language0"}),{fieldname:'syssettings.language',value:'zh-cn'});
                                     }
                                     else if(language === 'zh-tw'){
                                       const cmd = `$charact 1%`;
-                                      onClickCmd(cmd,'设置中文繁体',{fieldname:'syssettings.language',value:'zh-tw'});
+                                      onClickCmd(cmd,intl.formatMessage({id:"constcmd.cmdstring.language1"}),{fieldname:'syssettings.language',value:'zh-tw'});
                                     }
                                     console.log(v);
                                   }
@@ -285,7 +285,7 @@ class SettingSystem extends PureComponent{
         if(this.state.quality.length > 0){
           const {dispatch} = this.props;
           const cmd = `$sysprodtrigger ${this.state.quality}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'出水水质',target:{
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:getintlmessage('constcmd.cmdstring.sysprodtrigger'),target:{
             fieldname:'syssettings.quality',
             value:this.state.quality
           }}));
@@ -322,11 +322,11 @@ class SettingSystem extends PureComponent{
         //   const end = moment(dormancy.dormancyend).format('HH');
         //   const cmd = `$fidleoffon 1.${start}.${end}%`;
           const cmd = `$fidleoffon 1.${dormancy.dormancystart}.${dormancy.dormancyend}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'休眠'}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:getintlmessage('constcmd.cmdstring.fidleoffon')}));
         }
         else{
           const cmd = `$fidle 0%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:'休眠'}));
+          dispatch(wifi_sendcmd_request({cmd,cmdstring:getintlmessage('constcmd.cmdstring.fidle')}));
         }
         this.onCloseDormancy();
     }

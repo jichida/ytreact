@@ -18,17 +18,18 @@ import {ui_set_language} from '../../actions';
 // }
 
 // console.log(config.)
-const languages = [
-    'English',
-    '中文简体',
-    '中文繁体',
-    '取消',
-]
+
+// const languages = [
+//     'English',
+//     '中文简体',
+//     '中文繁體',
+//     '取消',
+// ]
 
 const constrast = {
     English: 'en',
     中文简体: 'zh-cn',
-    中文繁体: 'zh-tw'
+    中文繁體: 'zh-tw'
 }
 
 class Login extends PureComponent{
@@ -65,6 +66,12 @@ class Login extends PureComponent{
     showActionSheet = () => {
         // const {dispatch} = this.props;
         const {intl,dispatch} = this.props;
+        const languages = [
+            'English',
+            '中文简体',
+            '中文繁體',
+            intl.formatMessage({id:'form.cancel'}),
+        ];
 
         const BUTTONS = languages;
         ActionSheet.showActionSheetWithOptions({

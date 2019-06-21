@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import {setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
-
+import {intl,getintlmessage} from '../../util/globalIntl';
 import './index.less';
 
 const Item = List.Item;
@@ -102,7 +102,21 @@ const RenderForm = createForm({
 class DeviceBasic extends PureComponent{
 
     render () {
-        const { history,basicinfo}  = this.props;
+        let { history,basicinfo}  = this.props;
+        const usepropertymap = {
+          '商用':intl.formatMessage({id:'const.select.useproperty0'}),
+          '家用':intl.formatMessage({id:'const.select.useproperty1'})
+        };
+
+        const buildingmap = {
+          '独立别墅':intl.formatMessage({id:'const.select.building0'}),
+          '公寓':intl.formatMessage({id:'const.select.building1'}),
+          '商用':intl.formatMessage({id:'const.select.building2'}),
+          '企事业单位':intl.formatMessage({id:'const.select.building3'}),
+          '其他':intl.formatMessage({id:'const.select.building4'}),
+        }
+        basicinfo.useproperty = usepropertymap[basicinfo.useproperty];
+        basicinfo.building = buildingmap[basicinfo.building];
 
          const basicData = {
              username: {

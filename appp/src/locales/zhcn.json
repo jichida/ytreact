@@ -1,4 +1,6 @@
 {
+  "setting.system.lanuchsystem": "启动运行",
+
   "const.form.time":"{value}时",
 
   "constfilter.frontfilter.0":"PP滤芯",

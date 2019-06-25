@@ -145,6 +145,18 @@ const RenderForm = createForm({
                             </div>
                         }
                 ><FormattedMessage id="setting.system.resetsystem" defaultMessage="重置并重启系统" /></List.Item>
+
+                <List.Item className="item_switch"
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                            <Button size="small" type="ghost" className="btn"  onClick={()=>{
+                              onClickCmd(`$sysstart%`,`${intl.formatMessage({id: 'setting.system.lanuchsystem'})}`);//启动运行	$sysstart%
+                            }}>
+                                <FormattedMessage id="setting.system.send" defaultMessage="发送" />
+                            </Button>
+                            </div>
+                        }
+                ><FormattedMessage id="setting.system.lanuchsystem" defaultMessage="启动运行" /></List.Item>
+
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{

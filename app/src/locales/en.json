@@ -1,4 +1,5 @@
 {
+  "setting.system.lanuchsystem": "Start running",
   "constfilter.frontfilter.0": "PP filter",
   "constfilter.frontfilter.1": "UF filter",
   "constfilter.frontfilter.2": "TAC filter",

@@ -245,23 +245,23 @@ const parsedata = (stringbody,callbackfn)=>{
   // debugger;
   console.log(result);
 
-  const textgrade0 = intl.formatMessage({id:'constsaga.msg.textgrade0'});
-  const textgrade1 = intl.formatMessage({id:'constsaga.msg.textgrade1'});
-  const textgrade2 = intl.formatMessage({id:'constsaga.msg.textgrade2'});
-
-  const main_outwater_grade = lodash_get(result,'homedata.main_outwater_grade');
-  if(!!main_outwater_grade){
-    //问题2  0:优  1:好  2:一般
-    if(main_outwater_grade === '0'){
-      lodash_set(result,'homedata.main_outwater_grade',textgrade0);
-    }
-    if(main_outwater_grade === '1'){
-      lodash_set(result,'homedata.main_outwater_grade',textgrade1);
-    }
-    if(main_outwater_grade === '2'){
-      lodash_set(result,'homedata.main_outwater_grade',textgrade2);
-    }
-  }
+  // const textgrade0 = intl.formatMessage({id:'constsaga.msg.textgrade0'});
+  // const textgrade1 = intl.formatMessage({id:'constsaga.msg.textgrade1'});
+  // const textgrade2 = intl.formatMessage({id:'constsaga.msg.textgrade2'});
+  //
+  // const main_outwater_grade = lodash_get(result,'homedata.main_outwater_grade');
+  // if(!!main_outwater_grade){
+  //   //问题2  0:优  1:好  2:一般
+  //   if(main_outwater_grade === '0'){
+  //     lodash_set(result,'homedata.main_outwater_grade',textgrade0);
+  //   }
+  //   if(main_outwater_grade === '1'){
+  //     lodash_set(result,'homedata.main_outwater_grade',textgrade1);
+  //   }
+  //   if(main_outwater_grade === '2'){
+  //     lodash_set(result,'homedata.main_outwater_grade',textgrade2);
+  //   }
+  // }
 
   // const resultfilterlist = lodash_get(result,'filterlist');
   // console.log(`resultfilterlist is :${resultfilterlist}`)

@@ -1,4 +1,5 @@
 {
+  "setting.system.lanuchsystem": "Start running",
   "const.form.time":"{value}",
   "constfilter.frontfilter.0": "PP filter",
   "constfilter.frontfilter.1": "UF filter",

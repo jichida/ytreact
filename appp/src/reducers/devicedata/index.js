@@ -61,7 +61,7 @@ const initial = {
       },
       homedata:{
         main_outwater_quality:30,//出水水质,
-        main_outwater_grade:'优',//出水等级,
+        main_outwater_grade:'0',//出水等级,
         main_inwater_quality:32,//进水水质,
         main_totalwatervol:29993,//总产水量
         main_runtime:23,//运行时间

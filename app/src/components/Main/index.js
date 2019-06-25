@@ -446,6 +446,24 @@ class Home extends PureComponent{
             <Refresh handleRefresh={this.handleRefresh} />
           )
         }
+        const textgrade0 = intl.formatMessage({id:'constsaga.msg.textgrade0'});
+        const textgrade1 = intl.formatMessage({id:'constsaga.msg.textgrade1'});
+        const textgrade2 = intl.formatMessage({id:'constsaga.msg.textgrade2'});
+
+        let textgrade = textgrade0;
+        const main_outwater_grade = lodashget(devicedata,'homedata.main_outwater_grade','优');
+        if(!!main_outwater_grade){
+          //问题2  0:优  1:好  2:一般
+          if(main_outwater_grade === '0'){
+            textgrade = textgrade0;
+          }
+          if(main_outwater_grade === '1'){
+            textgrade = textgrade1;
+          }
+          if(main_outwater_grade === '2'){
+            textgrade = textgrade2;
+          }
+        }
         return (
             <React.Fragment>
                 <div className="home_bg" style={{backgroundImage: `url(${home_bgimg})`}}></div>
@@ -454,7 +472,7 @@ class Home extends PureComponent{
                             <img src={monitorBg} alt="" style={{width: '100%', display: 'block'}} />
                             {/* <Waterwave style={{width: '100%', display: 'block'}} />*/}
                             <div className="monitor">
-                                <h1>{lodashget(devicedata,'main_outwater_grade','优')}</h1>
+                                <h1>{textgrade}</h1>
                                 <p>{title_main_outwater_quality}</p>
                             </div>
                         </div>

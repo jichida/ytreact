@@ -134,7 +134,7 @@ const RenderForm = createForm({
                                 placeholder={formatMessage({id: "form.input"})}
                                 // type="money"
                                 type="digit"
-                                extra= {<Icon type="right" />}
+                                // extra= {<Icon type="right" />}
                                 {...getFieldProps('quantity',{
                                     rules: [{
                                         required: true,
@@ -152,7 +152,7 @@ const RenderForm = createForm({
                                 placeholder={formatMessage({id: "form.input"})}
                                 // type="money"
                                 type="digit"
-                                extra= {<Icon type="right" />}
+                                // extra= {<Icon type="right" />}
                                 {...getFieldProps('persons',{
                                     rules: [{
                                         required: true,
@@ -170,7 +170,7 @@ const RenderForm = createForm({
                                 placeholder={formatMessage({id: "form.input"})}
                                 // type="money"
                                 type="digit"
-                                extra= {<Icon type="right" />}
+                                // extra= {<Icon type="right" />}
                                 {...getFieldProps('spot',{
                                     rules: [{
                                         required: true,
@@ -188,7 +188,7 @@ const RenderForm = createForm({
                                 placeholder={formatMessage({id: "form.input"})}
                                 // type="money"
                                 type="digit"
-                                extra= {<Icon type="right" />}
+                                // extra= {<Icon type="right" />}
                                 {...getFieldProps('watergage',{
                                     rules: [{
                                         required: true,
@@ -228,7 +228,7 @@ const RenderForm = createForm({
                                 // type="money"
                                 type="digit"
                                 placeholder={formatMessage({id: "form.input"})}
-                                extra= {<Icon type="right" />}
+                                // extra= {<Icon type="right" />}
                                 {...getFieldProps('bathrooms',{
                                     rules: [{
                                         required: true,
@@ -338,7 +338,7 @@ const RenderForm = createForm({
                                 // type="money"
                                 type="digit"
                                 placeholder={formatMessage({id: "form.input"})}
-                                extra= {<Icon type="right" />}
+                                // extra= {<Icon type="right" />}
                                 {...getFieldProps('usertds',{
                                     rules: [{
                                         required: true,

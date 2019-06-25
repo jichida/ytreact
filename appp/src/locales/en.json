@@ -183,7 +183,7 @@
   "setting.water.conductivity": "Inlet conductivity",
   "setting.water.tds": "Inlet TDS value",
   "setting.water.hardness": "Inlet water hardness",
-  "setting.water.alkalinity": "Into the water alkalinity",
+  "setting.water.alkalinity": "Inlet water alkalinity",
   "setting.water.rawph": "raw PH value",
   "setting.water.rawconductivity": "raw conductivity",
   "setting.water.rawtds": "raw TDS value",

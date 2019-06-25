@@ -63,12 +63,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder= {formatMessage({id: "form.input"})}
-                                {...getFieldProps('valve',{
-                                    rules: [{
-                                        required: true,
-                                    message: <FormattedMessage id="equipment.valve" defaultMessage="阀门" />,
-                                    }],
-                                })}
+                                {...getFieldProps('valve')}
                             />
                         </div>
                     </Brief>
@@ -78,12 +73,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('connection',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="equipment.connection" defaultMessage="活接" />,
-                                    }],
-                                })}
+                                {...getFieldProps('connection')}
                             />
                         </div>
                     </Brief>
@@ -93,12 +83,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('elbow',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="equipment.elbow" defaultMessage="弯头" />,
-                                    }],
-                                })}
+                                {...getFieldProps('elbow')}
                             />
                         </div>
                     </Brief>
@@ -108,12 +93,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('triplet',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="equipment.triplet" defaultMessage="三通" />,
-                                    }],
-                                })}
+                                {...getFieldProps('triplet')}
                             />
                             {/* <Picker
                                 data={triplet}
@@ -131,12 +111,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('silkpair',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="equipment.silkpair" defaultMessage="对丝" />,
-                                    }],
-                                })}
+                                {...getFieldProps('silkpair')}
                             />
                             {/* <Picker
                                 data={silkpair}
@@ -154,12 +129,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('silkspin',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="equipment.silkspin" defaultMessage="丝转" />,
-                                    }],
-                                })}
+                                {...getFieldProps('silkspin')}
                             />
                             {/* <Picker
                                 data={silkspin}
@@ -177,12 +147,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('others',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="equipment.others" defaultMessage="其他" />,
-                                    }],
-                                })}
+                                {...getFieldProps('others')}
                             />
                         </div>
                     </Brief>

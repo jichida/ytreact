@@ -320,9 +320,7 @@ class Home extends PureComponent{
         const getFilterCo = (idname,v)=>{
           const labelstring = getFilterLabel(intl,idname,v);
         if(idname === 'prev0'){
-          return (<Flex.Item key={`${idname}`} onClick={()=>{
-                  this.onClickCmd(`$res_prefilter1%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.frontfilter1'})}`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
-                }}>
+          return (<Flex.Item key={`${idname}`}>
                       <HomeChart title={labelstring}
                           firsttitle={title_filterelements_prefilter1_leftday} firstpercent={value_filterelements_prefilter1_leftday} firstcolor={icon_filterelements_prefilter1_leftday}
                           secondtitle={title_filterelements_prefilter1_leftvol} secondpercent={value_filterelements_prefilter1_leftvol} secondcolor={icon_filterelements_prefilter1_leftvol}
@@ -330,9 +328,7 @@ class Home extends PureComponent{
                 </Flex.Item>);
         }
         if(idname === 'prev1'){
-          return (<Flex.Item key={`${idname}`} onClick={()=>{
-              this.onClickCmd(`$res_prefilter2%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.frontfilter2'})}`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
-            }}>
+          return (<Flex.Item key={`${idname}`}>
                   <HomeChart title={labelstring}
                   firsttitle={title_filterelements_prefilter2_leftday} firstpercent={value_filterelements_prefilter2_leftday} firstcolor={icon_filterelements_prefilter2_leftday}
                   secondtitle={title_filterelements_prefilter2_leftvol} secondpercent={value_filterelements_prefilter2_leftvol} secondcolor={icon_filterelements_prefilter2_leftvol}
@@ -341,9 +337,7 @@ class Home extends PureComponent{
             </Flex.Item>);
         }
         if(idname === 'prev2'){
-          return (<Flex.Item key={`${idname}`} onClick={()=>{
-            this.onClickCmd(`$res_prefilter3%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.frontfilter3'})}`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
-          }}>
+          return (<Flex.Item key={`${idname}`}>
                 <HomeChart title={labelstring}
                 firsttitle={title_filterelements_prefilter3_leftday} firstpercent={value_filterelements_prefilter3_leftday} firstcolor={icon_filterelements_prefilter3_leftday}
                 secondtitle={title_filterelements_prefilter3_leftvol} secondpercent={value_filterelements_prefilter3_leftvol} secondcolor={icon_filterelements_prefilter3_leftvol}
@@ -352,9 +346,7 @@ class Home extends PureComponent{
         }
 
         if(idname === 'post0'){
-          return (<Flex.Item key={`${idname}`} onClick={()=>{
-            this.onClickCmd(`$res_posfilter1%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.afterfilter1'})}`);//4	后置滤芯1 复位	滤芯寿命复位
-          }}>
+          return (<Flex.Item key={`${idname}`}>
                 <HomeChart title={labelstring}
                 firsttitle={title_filterelements_posfilter1_leftday} firstpercent={value_filterelements_posfilter1_leftday} firstcolor={icon_filterelements_posfilter1_leftday}
                 secondtitle={title_filterelements_posfilter1_leftvol} secondpercent={value_filterelements_posfilter1_leftvol} secondcolor={icon_filterelements_posfilter1_leftvol}
@@ -363,9 +355,7 @@ class Home extends PureComponent{
         }
 
         if(idname === 'post1'){
-          return (<Flex.Item key={`${idname}`} onClick={()=>{
-            this.onClickCmd(`$res_posfilter2%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.afterfilter2'})}`);//4	后置滤芯1 复位	滤芯寿命复位
-          }}>
+          return (<Flex.Item key={`${idname}`}>
                 <HomeChart title={labelstring}
                 firsttitle={title_filterelements_posfilter2_leftday} firstpercent={value_filterelements_posfilter2_leftday} firstcolor={icon_filterelements_posfilter2_leftday}
                 secondtitle={title_filterelements_posfilter2_leftvol} secondpercent={value_filterelements_posfilter2_leftvol} secondcolor={icon_filterelements_posfilter2_leftvol}
@@ -376,9 +366,7 @@ class Home extends PureComponent{
 
         if(idname === 'post2'){
           return (
-                <Flex.Item key={`${idname}`} onClick={()=>{
-                  this.onClickCmd(`$res_posfilter3%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.afterfilter3'})}`);//4	后置滤芯1 复位	滤芯寿命复位
-                }}>
+                <Flex.Item key={`${idname}`}>
                       <HomeChart title={labelstring}
                       firsttitle={title_filterelements_posfilter3_leftday} firstpercent={value_filterelements_posfilter3_leftday} firstcolor={icon_filterelements_posfilter3_leftday}
                       secondtitle={title_filterelements_posfilter3_leftvol} secondpercent={value_filterelements_posfilter3_leftvol} secondcolor={icon_filterelements_posfilter3_leftvol}
@@ -496,9 +484,7 @@ class Home extends PureComponent{
                         <WhiteSpace size="lg" style={{height: 50}} />
                         <div className="chart">
                             <Flex>
-                                <Flex.Item onClick={()=>{
-                                  this.onClickCmd(`$res_modlife%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.modlife'})}`);//4	后置滤芯1 复位	滤芯寿命复位
-                                }}>
+                                <Flex.Item>
                                     <HomeChart title={title_main_filterelements_modlife}
                                         firsttitle={title_filterelements_modlife_leftday} firstpercent={value_filterelements_modlife_leftday} firstcolor={icon_filterelements_modlife_leftday}
                                         secondtitle={title_filterelements_modlife_leftvol} secondpercent={value_filterelements_modlife_leftvol} secondcolor={icon_filterelements_modlife_leftvol}

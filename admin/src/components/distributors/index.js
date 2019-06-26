@@ -12,7 +12,8 @@ import {
   FormDataConsumer,
   Datagrid,
   TextField,
-  // DateField,
+  TabbedForm,
+  FormTab,
   EditButton,
   SelectInput,
   // ImageField,
@@ -21,7 +22,7 @@ import {
 import { BooleanInput } from 'react-admin';
 import ResestPassword from './resetpassword';
 // import {Titlewithimage} from '../controls/Titlewithimage';
-
+import MarkdownInput from '../controls/MarkDownInputWithField';
 
 
 export const UserFilter = props => (
@@ -59,7 +60,8 @@ const DistributorCreate = (props) => {
 
 const DistributorEdit = (props) => {
       return (<Edit {...props}>
-          <SimpleForm>
+        <TabbedForm>
+          <FormTab label="基本信息">
             <TextInput label="登录名" source="username" validation={{ required: true }}/>
             <TextInput label="手机" source="phone" validation={{ required: true }}/>
             <TextInput label="email" source="email" validation={{ required: true }}/>
@@ -78,12 +80,17 @@ const DistributorEdit = (props) => {
                      </ReferenceInput>
                  }
              </FormDataConsumer>
-
+             </FormTab>
+             <FormTab label="详细信息">
+              <MarkdownInput label="内容" source="intro" />
+             </FormTab>
+              <FormTab label="报警设置">
              <BooleanInput label="接受设备离线报警" source="alarmsettings.isrecvalaram_deviceoffline" validation={{ required: true }}/>
              <BooleanInput label="接受设备错误报警" source="alarmsettings.isrecvalaram_deviceerr" validation={{ required: true }}/>
              <BooleanInput label="接受滤芯到期报警" source="alarmsettings.isrecvalaram_filterexp" validation={{ required: true }}/>
+             </FormTab>
 
-          </SimpleForm>
+             </TabbedForm>
       </Edit>);
 
 };

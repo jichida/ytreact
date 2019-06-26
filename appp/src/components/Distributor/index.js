@@ -34,7 +34,7 @@ class Index extends React.Component{
                         </div>
                         <div className="phone" onClick={() => {jsCallPhone(phone);}}>
                             <div className="phone-icon"><img src={phoneImg} alt="" /></div>
-                            <div className="number">电话：{phone}</div>
+                            <div className="number"><FormattedMessage id="device.phone" defaultMessage="电话" />：{phone}</div>
                         </div>
                     </div>
                 </div>

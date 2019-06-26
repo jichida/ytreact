@@ -15,7 +15,7 @@ import list_img from '../../assets/sy7.png';
 import system_img from '../../assets/set1.png';
 import waterset_img from '../../assets/set2.png';
 // import user_img from '../../assets/sy5.png';
-import {jsCallPhone} from '../../env/callphone';
+// import {jsCallPhone} from '../../env/callphone';
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -81,13 +81,15 @@ class Device extends PureComponent{
                         arrow="horizontal"
                         thumb={txImg}
                         multipleLine
+                        onClick={() => this.props.history.push('/distributor')}
+                    >
+                        <span 
+                            style={{color: "#ffffff"}}
+                            // onClick={() => {jsCallPhone(distributor.username);}}
                         >
-                        <span style={{color: "#ffffff"}} onClick={()=>{
-                          jsCallPhone(distributor.username);
-                        }}>
-                        {`${distributor.name}`}
-                        <Brief style={{color: "#ffffff"}}>{`TEL:${distributor.username}`}</Brief>
-                          </span>
+                            {`${distributor.name}`}
+                            <Brief style={{color: "#ffffff"}}>{`TEL:${distributor.username}`}</Brief>
+                        </span>
                     </Item>
                 </List>
                 <WingBlank>

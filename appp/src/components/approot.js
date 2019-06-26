@@ -22,6 +22,7 @@ import FrontFilter from './FrontFilter';
 import AfterFilter from './AfterFilter';
 import Login from './Login';
 import PipeFittings from './PipeFittings';
+import Distributor from './Distributor'
 
 import TestCo from './SettingSystem/index_old';
 
@@ -70,6 +71,7 @@ class AppRoot extends React.Component {
               <Route exact path="/frontfilter" component={requireAuthentication(FrontFilter)} />
               <Route exact path="/afterfilter" component={requireAuthentication(AfterFilter)} />
               <Route exact path="/pipefitting" component={requireAuthentication(PipeFittings)} />
+              <Route exact path="/distributor" component={requireAuthentication(Distributor)} />
               <Route exact path="/login" component={Login} />
             </Switch>
           </div>

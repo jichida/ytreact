@@ -1,5 +1,5 @@
 const islocalhost = false;
-const serverurl = islocalhost?'http://localhost:4101':'http://tx.i2u.top:4101';
+const serverurl = islocalhost?'http://localhost:4101':'http://47.111.13.144:4101';
 const serverurlrestful = islocalhost?`${serverurl}/api`:`${serverurl}/api`;
 const wspath = islocalhost?'/socket.io':'/socket.io';
 

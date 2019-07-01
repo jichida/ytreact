@@ -1,5 +1,5 @@
 let islocalhost = false;
-let serverurl = islocalhost?'http://localhost:4101':'http://yt.i2u.top:4101';
+let serverurl = islocalhost?'http://localhost:4101':'http://47.111.13.144:4101';
 
 export default {
     restserverurl:`${serverurl}/adminapi/v1`,

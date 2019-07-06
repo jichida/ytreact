@@ -118,6 +118,8 @@
   "form.equip.postfilter3": "Post Filter 3",
   "form.equip.nonefilter": "None",
   "device": "device information",
+  "device.distributor": "Distributor",
+  "device.phone": "Phone",
   "device.privider.select": "Select a service provider",
   "device.tools": "common tools",
   "device.basic": "Basic information",

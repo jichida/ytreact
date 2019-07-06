@@ -116,6 +116,8 @@
   "form.equip.postfilter3": "後置濾芯3",
   "form.equip.nonefilter": "無",
   "device": "設備資訊",
+  "device.distributor": "經銷商詳情",
+  "device.phone": "電話",
   "device.privider.select": "選擇服務商",
   "device.tools": "常用工具",
   "device.basic": "基本資訊",

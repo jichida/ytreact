@@ -23,6 +23,7 @@ import AfterFilter from './AfterFilter';
 import Login from './Login';
 import Forget from './Forget';
 import ChangePassword from './ChangePassword';
+import Distributor from './Distributor'
 
 
 import {requireAuthentication} from './requireauthentication';
@@ -55,6 +56,7 @@ class AppRoot extends React.Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/forget" component={Forget} />
               <Route exact path="/change" component={requireAuthentication(ChangePassword)} />
+              <Route exact path="/distributor" component={requireAuthentication(Distributor)} />
             </Switch>
           </div>
         </LocaleProvider>

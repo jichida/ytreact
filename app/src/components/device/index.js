@@ -63,10 +63,11 @@ class Device extends PureComponent{
                         arrow="horizontal"
                         thumb={txImg}
                         multipleLine
+                        onClick={() => this.props.history.push('/distributor')}
                         >
-                        <span style={{color: "#ffffff"}} onClick={()=>{
-                          jsCallPhone(distributor.username);
-                        }}>
+                        <span style={{color: "#ffffff"}} 
+                                // onClick={()=>{ sCallPhone(distributor.username);}}
+                        >
                         {`${distributor.name}`}
                         <Brief style={{color: "#ffffff"}}>{`TEL:${distributor.username}`}</Brief>
                           </span>

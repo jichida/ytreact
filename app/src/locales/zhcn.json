@@ -119,6 +119,8 @@
   "form.equip.nonefilter": "无",
   "device": "设备信息",
   "device.privider.select": "选择服务商",
+  "device.distributor": "经销商详情",
+  "device.phone": "电话",
   "device.tools": "常用工具",
   "device.basic": "基本信息",
   "device.water": "用水信息",

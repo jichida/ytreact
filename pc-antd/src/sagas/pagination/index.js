@@ -16,10 +16,12 @@ export function callthen(actionreq,actionres,payload){
     });
   }
 }
+
 //以下导出放在saga中
 export function* createsagacallbackflow(){
   yield takeEvery(`${synccallreq}`,function*(action){
     const {payload:{actionreq,actionres,resolve,reject,...data}} = action;
+    console.log('Get Action...')
     try{
       yield put(actionreq(data));//发送请求
       const { response, timeout } = yield race({

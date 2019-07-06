@@ -44,9 +44,9 @@ class Index extends React.Component{
 }
 
 
-const mapStateToProps =  (state) =>{
-    const content = 'distributor introduce'
-    const phone = '123-123-123'
+const mapStateToProps =  ({userlogin}) =>{
+    const content = userlogin.distributor.intro;
+    const phone = userlogin.distributor.username;
     return { content, phone };
 };
 

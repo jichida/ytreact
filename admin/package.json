@@ -13,19 +13,22 @@
     "lodash.get": "^4.4.2",
     "lodash.map": "^4.6.0",
     "prop-types": "^15.6.2",
+    "ra-core": "^2.9.3",
     "ra-language-english": "^2.6.1",
     "ra-tree-ui-materialui": "^2.6.0",
     "react": "^16.8.1",
     "react-admin": "^2.9.0",
     "react-dom": "^16.8.1",
-    "react-scripts": "2.0.4"
+    "react-mde": "^7.4.1",
+    "react-scripts": "2.0.4",
+    "showdown": "^1.9.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "buildcp": "npm run build && cp -r build/. /home/ubuntu/yt/deploy/dist/admin",
+    "buildcp": "npm run build && cp -r build/. /root/yt/deploy/dist/admin",
     "buildcpr": "npm run build && scp -r build/. ubuntu@yt.i2u.top:/home/ubuntu/yt/deploy/dist/admin"
   },
   "eslintConfig": {

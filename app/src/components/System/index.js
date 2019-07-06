@@ -128,7 +128,7 @@ const RenderForm = createForm({
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
-                              onClickCmd(`$prep%`,`${intl.formatMessage({id: 'setting.system.restore'})}`);
+                              onClickCmd(`$prep%`,`${intl.formatMessage({id: 'setting.system.wash'})}`);
                             }} >
                                 <FormattedMessage id="setting.system.wash" defaultMessage="冲洗" />
                             </Button>

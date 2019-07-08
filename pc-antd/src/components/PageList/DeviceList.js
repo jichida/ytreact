@@ -11,11 +11,12 @@ import PageList from './index';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import sb_err from '../../assets/sb_yc.png';
 import sb_normal from '../../assets/sb_zc.png';
-import sb_warring from '../../assets/sb_wlw.png'
+import sb_warring from '../../assets/sb_wlw.png';
+import sb_offline from '../../assets/sb_lx.png';
 import lodashget from 'lodash.get';
 let g_querysaved;
 
-const MachineItem = ({isgetsrvdata,iserr, iswarr, address, reportdate, id, name, runtime, mode, history,_id})=>{
+const MachineItem = ({isgetsrvdata,iserr, iswarr, isoffline, address, reportdate, id, name, runtime, mode, history,_id})=>{
     //isgetsrvdata为false 表示未接收到数据,此时图标变灰，不能
     //你如果从下面取的话 6 代表 Suspended  999代表ERROR   0 是Idle Mode  其他的代表 Active Mode
     const mapmode = {
@@ -26,7 +27,7 @@ const MachineItem = ({isgetsrvdata,iserr, iswarr, address, reportdate, id, name,
     return (
         <Card
             className="child-card"
-            title={<p style={{display: 'flex', alignItems: 'center'}}><img src={iserr ? sb_err: iswarr ? sb_warring : sb_normal} alt="" /><span>{address} {reportdate}</span></p>}
+            title={<p style={{display: 'flex', alignItems: 'center'}}><img src={iserr ? sb_err: isoffline ? sb_offline : sb_normal} alt="" /><span>{address} {reportdate}</span></p>}
         >
             <p><FormattedMessage id="machine.id" />：{id}</p>
             <p><FormattedMessage id="machine.name" />：{name}</p>
@@ -49,13 +50,14 @@ class DeviceList extends React.Component {
   componentDidMount() {
   }
   onItemConvert(iteminput){
-    console.log(iteminput);
+    console.log('Item Input:',iteminput);
     if(iteminput.hasOwnProperty('srvdata')){
       const installdate = lodashget(iteminput,'syssettings.installdate');
       return {
               isgetsrvdata:true,
               iserr: lodashget(iteminput,'iserr',true),
               iswarr: !installdate,
+              isoffline: !!iteminput.datasrv_updated_at ? moment(iteminput.datasrv_updated_at).isBefore(moment().subtract(1,'hours')) : true,
               address: lodashget(iteminput,'basicinfo.username',''),
               reportdate: !!installdate ? moment(installdate).format('YYYYMMDD'): <FormattedMessage id="machine.notinstall" />,
               id:lodashget(iteminput,'syssettings.deviceid','') || lodashget(iteminput,'deviceid'),
@@ -68,6 +70,8 @@ class DeviceList extends React.Component {
     const item =  {
             isgetsrvdata:false,
             iserr: lodashget(iteminput,'iserr',true),
+            iswarr: true,
+            isoffline: true,
             address: lodashget(iteminput,'basicinfo.username',''),
             reportdate: moment(lodashget(iteminput,'syssettings.installdate','')).format('YYYYMMDD'),
             id:lodashget(iteminput,'syssettings.deviceid',''),

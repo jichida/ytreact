@@ -6,11 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import { ShowController, ReferenceField, TextField } from 'react-admin';
 
 const itemStyle = {
-    display: 'flex', 
-    flexDirection: 'column', 
-    alignItems:'center', 
-    justifyContent: 'space-every', 
-    width: '10%', 
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems:'center',
+    justifyContent: 'space-every',
+    width: '10%',
     margin: '10px'
 }
 
@@ -281,62 +281,7 @@ const showDevice = ({ record })=>{
   if(record.hasOwnProperty('srvdata')){
     return ShowSrvdataField({ record });
   }
-  return (<Card style={{ width: 600, margin: 'auto' }}>
-        <CardContent>
-            <Grid container spacing={16}>
-                <Grid item xs={6}>
-                    <Typography variant="title" gutterBottom>
-                        Posters Galore
-                    </Typography>
-                </Grid>
-                <Grid item xs={6}>
-                    <Typography
-                        variant="title"
-                        gutterBottom
-                        align="right"
-                    >
-                        Invoice {record.id}
-                    </Typography>
-                </Grid>
-            </Grid>
-            <Grid container spacing={16}>
-                <Grid item xs={12} align="right">
-                </Grid>
-            </Grid>
-            <div style={{ height: 20 }}>&nbsp;</div>
-            <Grid container spacing={16}>
-                <Grid item xs={6}>
-                    <Typography
-                        variant="title"
-                        gutterBottom
-                        align="center"
-                    >
-                        Date{' '}
-                    </Typography>
-                    <Typography gutterBottom align="center">
-                        {new Date(record.date).toLocaleDateString()}
-                    </Typography>
-                </Grid>
-
-                <Grid item xs={5}>
-                    <Typography
-                        variant="title"
-                        gutterBottom
-                        align="center"
-                    >
-                        Order
-                    </Typography>
-                    <Typography gutterBottom align="center">
-
-                    </Typography>
-                </Grid>
-            </Grid>
-            <div style={{ margin: '10px 0' }}>
-
-            </div>
-        </CardContent>
-    </Card>
-  );
+  return (<div>未接受到数据</div>)
 }
 
 

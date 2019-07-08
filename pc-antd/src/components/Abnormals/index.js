@@ -22,11 +22,14 @@ class Machines extends React.PureComponent {
                 <DeviceList
                     query={{
                       $or:[
-                        {iserr:true},
+                        {iserr:true},//999状态
+                        {'syssettings.installdate':{
+                          $exists:false,
+                        }},//尚未安装
                         {datasrv_updated_at:{
                           $exists:true,
                           $lte:moment().subtract(1,'hours').format()
-                        }}
+                        }}//离线机器
                       ]
                     }}
                 />

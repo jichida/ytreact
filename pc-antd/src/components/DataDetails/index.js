@@ -129,18 +129,19 @@ const getPercent = (id,value) => {
     let warring = false;
     console.log(id);
     let percent = Math.round(value/cf.value * 100) ;
-    if(percent <= cf.warringPercent){
+    if(percent <= cf.warringPercent || !value){
         warring = true;
     }
     return {
         value,
-        percent,
-        warring
+        percent: percent > 1 ? percent : 1,
+        warring,
+        ishave: !!value
     }
 }
 
 const TopChart = injectIntl((props)=>{
-    const {srvdata, intl} = props;
+    const { srvdata, intl} = props;
     const { formatMessage } = intl;
     let chartData = []
     let uvfilter = {}
@@ -245,7 +246,8 @@ const TopChart = injectIntl((props)=>{
               flow: modlife_flow.percent,
               flowwarring: modlife_flow.warring ,
               life: modlife_lefeday.percent,
-              lifewarring: modlife_lefeday.warring
+              lifewarring: modlife_lefeday.warring,
+              ishave: modlife_flow.ishave
           },
           {
               title:  `${formatMessage({id: 'machine.data.frontfilter1'})}`,
@@ -254,7 +256,8 @@ const TopChart = injectIntl((props)=>{
               flow: prefilter1_flow.percent,
               flowwarring: prefilter1_flow.warring,
               life: prefilter1_leftday.percent,
-              lifewarring: prefilter1_leftday.warring
+              lifewarring: prefilter1_leftday.warring,
+              ishave: posfilter1_flow.ishave
           },
           {
               title: `${formatMessage({id: 'machine.data.frontfilter2'})}`,
@@ -263,7 +266,8 @@ const TopChart = injectIntl((props)=>{
               flow: prefilter2_flow.percent,
               flowwarring: prefilter2_flow.warring,
               life: prefilter2_leftday.percent,
-              lifewarring: prefilter2_leftday.warring
+              lifewarring: prefilter2_leftday.warring,
+              ishave: prefilter2_flow.ishave
           },
           {
               title: `${formatMessage({id: 'machine.data.frontfilter3'})}`,
@@ -272,7 +276,8 @@ const TopChart = injectIntl((props)=>{
               flow: prefilter3_flow.percent,
               flowwarring: prefilter3_flow.warring,
               life: prefilter3_leftday.percent,
-              lifewarring: prefilter3_leftday.warring
+              lifewarring: prefilter3_leftday.warring,
+              ishave: prefilter3_flow.ishave
           },
           {
               title: `${formatMessage({id: 'machine.data.afterfilter1'})}`,
@@ -281,7 +286,8 @@ const TopChart = injectIntl((props)=>{
               flow: posfilter1_flow.percent,
               flowwarring: posfilter1_flow.warring,
               life: posfilter1_leftday.percent,
-              lifewarring: posfilter1_leftday.warring
+              lifewarring: posfilter1_leftday.warring,
+              ishave: posfilter1_flow.ishave
           },
           {
               title:  `${formatMessage({id: 'machine.data.afterfilter2'})}`,
@@ -290,7 +296,8 @@ const TopChart = injectIntl((props)=>{
               flow: posfilter2_flow.percent,
               flowwarring: posfilter2_flow.warring,
               life: posfilter2_leftday.percent,
-              lifewarring: posfilter2_leftday.warring
+              lifewarring: posfilter2_leftday.warring,
+              ishave: posfilter2_flow.ishave
           },
           {
               title:  `${formatMessage({id: 'machine.data.afterfilter3'})}`,
@@ -299,7 +306,8 @@ const TopChart = injectIntl((props)=>{
               flow: posfilter3_flow.percent,
               flowwarring: posfilter3_flow.warring,
               life: posfilter3_leftday.percent,
-              lifewarring: posfilter3_leftday.warring
+              lifewarring: posfilter3_leftday.warring,
+              ishave: posfilter3_flow.ishave
           }
       ]
 
@@ -309,6 +317,7 @@ const TopChart = injectIntl((props)=>{
         data: uvfilter_flow.value,
         percent: uvfilter_flow.percent,
         warring: uvfilter_flow.warring,
+        ishave: uvfilter_flow.ishave
       }
 
     }
@@ -330,14 +339,17 @@ const TopChart = injectIntl((props)=>{
                 {
                   !!srvdata ? (
                      _.map(chartData, (item, index)=>{
-                        return (
+                        if(item.ishave) {
+                          return (
                             <Chart {...item} {...props} key={index} />
-                        )
+                          )
+                        }
+                        
                     })
                     )
                     : ''
                 }
-                { !!srvdata && <SingleChart {...uvfilter} /> }
+                { !!srvdata && uvfilter.ishave && <SingleChart {...uvfilter} /> }
             </Col>
         </Row>
       </React.Fragment>

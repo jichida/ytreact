@@ -39,6 +39,7 @@
 "machine.id": "識別編號",
 "machine.name": "設備名稱",
 "machine.runtime": "運行時間",
+"machine.notinstall": "尚未安裝",
 "machine.detail": "顯示詳情",
 "machine.statistic": "數據統計",
 "machine.download": "下載數據",

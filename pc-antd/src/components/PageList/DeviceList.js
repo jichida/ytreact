@@ -11,10 +11,11 @@ import PageList from './index';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import sb_err from '../../assets/sb_yc.png';
 import sb_normal from '../../assets/sb_zc.png';
+import sb_warring from '../../assets/sb_wlw.png'
 import lodashget from 'lodash.get';
 let g_querysaved;
 
-const MachineItem = ({isgetsrvdata,iserr, address, reportdate, id, name, runtime, mode, history,_id})=>{
+const MachineItem = ({isgetsrvdata,iserr, iswarr, address, reportdate, id, name, runtime, mode, history,_id})=>{
     //isgetsrvdata为false 表示未接收到数据,此时图标变灰，不能
     //你如果从下面取的话 6 代表 Suspended  999代表ERROR   0 是Idle Mode  其他的代表 Active Mode
     const mapmode = {
@@ -25,7 +26,7 @@ const MachineItem = ({isgetsrvdata,iserr, address, reportdate, id, name, runtime
     return (
         <Card
             className="child-card"
-            title={<p><img src={iserr?sb_err:sb_normal} alt="" /><span>{address} {reportdate}</span></p>}
+            title={<p style={{display: 'flex', alignItems: 'center'}}><img src={iserr ? sb_err: iswarr ? sb_warring : sb_normal} alt="" /><span>{address} {reportdate}</span></p>}
         >
             <p><FormattedMessage id="machine.id" />：{id}</p>
             <p><FormattedMessage id="machine.name" />：{name}</p>
@@ -54,8 +55,9 @@ class DeviceList extends React.Component {
       return {
               isgetsrvdata:true,
               iserr: lodashget(iteminput,'iserr',true),
+              iswarr: !installdate,
               address: lodashget(iteminput,'basicinfo.username',''),
-              reportdate: !!installdate ? moment(installdate).format('YYYYMMDD'): '尚未安装',
+              reportdate: !!installdate ? moment(installdate).format('YYYYMMDD'): <FormattedMessage id="machine.notinstall" />,
               id:lodashget(iteminput,'syssettings.deviceid','') || lodashget(iteminput,'deviceid'),
               name: lodashget(iteminput,'basicinfo.model',''),
               runtime:moment(lodashget(iteminput,'datasrv_updated_at')).format('YYYYMMDD HH:mm:ss'),

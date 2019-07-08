@@ -39,6 +39,7 @@
 "machine.id": "identification number",
 "machine.name": "device name",
 "machine.runtime": "run time",
+"machine.notinstall": "Not yet installed",
 "machine.detail": "show details",
 "machine.statistic": "data statistics",
 "machine.download": "Download data",

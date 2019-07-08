@@ -50,9 +50,9 @@ class DeviceList extends React.Component {
   componentDidMount() {
   }
   onItemConvert(iteminput){
-    console.log('Item Input:',iteminput);
+    console.log(iteminput);
+    const installdate = lodashget(iteminput,'syssettings.installdate');
     if(iteminput.hasOwnProperty('srvdata')){
-      const installdate = lodashget(iteminput,'syssettings.installdate');
       return {
               isgetsrvdata:true,
               iserr: lodashget(iteminput,'iserr',true),
@@ -73,7 +73,7 @@ class DeviceList extends React.Component {
             iswarr: true,
             isoffline: true,
             address: lodashget(iteminput,'basicinfo.username',''),
-            reportdate: moment(lodashget(iteminput,'syssettings.installdate','')).format('YYYYMMDD'),
+            reportdate: !!installdate ? moment(installdate).format('YYYYMMDD'): <FormattedMessage id="machine.notinstall" />,
             id:lodashget(iteminput,'syssettings.deviceid',''),
             name: lodashget(iteminput,'basicinfo.model',''),
             runtime:lodashget(iteminput,'srvdata.currentstate',''),

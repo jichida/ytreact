@@ -20,7 +20,7 @@ export function* socketflow(){//仅执行一次
         })
         const token = localStorage.getItem(`ytreact_${config.softmode}_token`);
         console.log(`notify_socket_connected==>${token}`);
-        if (!!token && isloginsuccess) {
+        if (!!token) {
           yield put(loginwithtoken_request({token}));
         }
       }

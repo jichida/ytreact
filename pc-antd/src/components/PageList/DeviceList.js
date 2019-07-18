@@ -19,9 +19,6 @@ let g_querysaved;
 const MachineItem = ({isgetsrvdata,iserr, iswarr, isoffline, address, reportdate, id, name, runtime, mode, history,_id})=>{
     //isgetsrvdata为false 表示未接收到数据,此时图标变灰，不能
     //你如果从下面取的话 6 代表 Suspended  999代表ERROR   0 是Idle Mode  其他的代表 Active Mode
-    console.log('Is Error:', iserr)
-    console.log('Is Warring:', iswarr)
-    console.log('Is Offline:', isoffline)
     const mapmode = {
       '0': <FormattedMessage id="machine.datedetail.Active" />,
       '6': <FormattedMessage id="machine.datedetail.Suspended" />,

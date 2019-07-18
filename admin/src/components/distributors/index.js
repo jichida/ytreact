@@ -45,7 +45,7 @@ const DistributorCreate = (props) => {
                filter={{ parent_id: "5c11e0d340dc7d07eacf33a6" }} validation={{ required: true }}>
                  <SelectInput optionText="name" />
              </ReferenceInput>
-
+             <BooleanInput label="是否管理员" source="is_admin" validation={{ required: true }} default={false}/>
              <FormDataConsumer>
                 {({ formData, ...rest }) =>
                     <ReferenceInput label="所属子区域" source="addresslevel2" reference="addressconst" allowEmpty
@@ -71,6 +71,7 @@ const DistributorEdit = (props) => {
                 filter={{ parent_id: "5c11e0d340dc7d07eacf33a6" }} validation={{ required: true }}>
                   <SelectInput optionText="name" />
               </ReferenceInput>
+              <BooleanInput label="是否管理员" source="is_admin" validation={{ required: true }} default={false}/>
 
               <FormDataConsumer>
                  {({ formData, ...rest }) =>
@@ -105,7 +106,8 @@ const rowStyle = (record, index) => ({
 
 
 const DistributorList = (props) => (//
-     <List title="经销商列表" {...props}  filters={<UserFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
+     <List title="经销商列表" {...props}  filters={<UserFilter />} sort={{ field: 'created_at', order: 'DESC' }}
+     bulkActionButtons={false} >
         <Datagrid bodyOptions={{ showRowHover: true }} rowStyle={rowStyle}>
         <TextField label="登录名" source="username"/>
         <TextField label="名字" source="name"/>

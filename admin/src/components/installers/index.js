@@ -65,7 +65,8 @@ const InstallerEdit = (props) => {
 
 
 const InstallerList = (props) => (//
-     <List title="用户列表" {...props}  filters={<UserFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
+     <List title="用户列表" {...props}  filters={<UserFilter />} sort={{ field: 'created_at', order: 'DESC' }}
+     bulkActionButtons={false} >
         <Datagrid>
           <TextField source="username"  label="登录名"/>
           <TextField label="真实姓名"  source="truename"/>

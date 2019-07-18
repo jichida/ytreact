@@ -14,7 +14,7 @@ import {
 } from 'react-admin';
 import DeviceShow from './deviceshow';
 import moment from 'moment';
-// import DateDetail from './datadetail';
+import _ from 'lodash';
 
 
 export const DataFilter = props => (
@@ -114,15 +114,18 @@ const DevicedatahistoryEdit = (props) => {
       </Edit>);
 };
 
+const TextDeviceId = ({ source, record = {} }) => <span>{
+  _.get(record,"deviceid")
+}</span>;
 
 const TextFieldDate = ({ source, record = {} }) => <span>{
   moment(record[source]).format('YYYY-MM-DD HH:mm:ss')
 }</span>;
 const DevicedatahistoryList = (props) => (//
-     <List title="设备历史数据列表" {...props} filters={<DataFilter />}
+     <List title="设备历史数据列表" {...props} filters={<DataFilter /> } bulkActionButtons={false}
      sort={{ field: 'updated_at', order: 'DESC' }}>
      <Datagrid expand={<DeviceShow />}>
-       <TextField label="设备id" source="deviceid" />
+       <TextDeviceId label="设备id" source="deviceid" />
        <TextFieldDate label="最新数据" source="updated_at" />
      </Datagrid>
     </List>

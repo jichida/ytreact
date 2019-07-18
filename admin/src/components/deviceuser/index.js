@@ -23,6 +23,7 @@ import TextFieldBool from '../controls/TextFieldBool';
 import InputSpaceField from '../controls/InputSpaceField';
 import DeviceShow from './deviceshow';
 import moment from 'moment';
+import _ from 'lodash';
 
 export const DeviceFilter = props => (
     <Filter {...props}>
@@ -121,11 +122,16 @@ const DeviceuserEdit = (props) => {
 //   <TextInput label="主域服务器" source="wifisettings.dns"  />
 // </FormTab>
 
+const TextDeviceId = ({ source, record = {} }) => <span>{
+   _.get(record,"deviceid") || _.get(record,"syssettings.deviceid") || ''
+}</span>;
+
 
 const DeviceuserList = (props) => (//
-     <List title="设备列表" {...props} filters={<DeviceFilter />}
+     <List title="设备列表" {...props} filters={<DeviceFilter />} bulkActionButtons={false}
       sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid expand={<DeviceShow />}>
+          <TextDeviceId label="设备id" source="deviceid" />
           <TextField label="设备ID" source="syssettings.deviceid" />
           <ReferenceField label="经销商" source="distributorid" reference="distributor" allowEmpty>
               <TextField source="name" />

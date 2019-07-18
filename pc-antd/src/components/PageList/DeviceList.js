@@ -30,7 +30,7 @@ const MachineItem = ({isgetsrvdata,iserr, iswarr, isoffline, address, reportdate
     return (
         <Card
             className="child-card"
-            title={<p style={{display: 'flex', alignItems: 'center'}}><img src={iserr ? sb_err: isoffline ? sb_offline : sb_normal} alt="" /><span>{address} {reportdate}</span></p>}
+            title={<p style={{display: 'flex', alignItems: 'center'}}><img src={iserr ? sb_err: isoffline ? sb_offline : iswarr ? sb_warring : sb_normal} alt="" /><span>{address} {reportdate}</span></p>}
         >
             <p><FormattedMessage id="machine.id" />：{id}</p>
             <p><FormattedMessage id="machine.name" />：{name}</p>

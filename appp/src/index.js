@@ -10,6 +10,8 @@ import 'moment/locale/zh-cn';
 // import {
 //   setwifistatuscallback
 // } from './env/device';
+global.Intl = require('intl');
+window.Intl = require('intl');
 
 sagaMiddleware.run(rootSaga);
 ReactDOM.render( < Approot / > ,

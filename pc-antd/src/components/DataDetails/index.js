@@ -25,7 +25,7 @@ const Index = ({curdevice, id, dispatch }) => {
 
     if(Object.keys(device).length !== 0)
         return <DataDetails curdevice={device} /> 
-    return <Spin />
+    return <div style={{minHeight: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><Spin size="large" /></div>
 }
 
 const mapStateToProps = ({device: { devices}}, props) => {

@@ -5,6 +5,10 @@ const seteasylink = ()=>{
     if(!!window["xview"]){
       window["xview"].setNetworkUI(JSON.stringify(xviewData));
     }
+    if(!!window["webkit"]){
+      window["webkit"].messageHandlers["setNetworkUI"].postMessage(JSON.stringify(xviewData));
+      // window["webkit"].setNetworkUI(JSON.stringify(xviewData));
+    }
 }
 
 export {seteasylink};

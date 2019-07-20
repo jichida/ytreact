@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import Approot from './env/root';
 import { sagaMiddleware } from './env/store';
@@ -10,6 +10,8 @@ import 'moment/locale/zh-cn';
 // import {
 //   setwifistatuscallback
 // } from './env/device';
+global.Intl = require('intl');
+window.Intl = require('intl');
 
 sagaMiddleware.run(rootSaga);
 ReactDOM.render( < Approot / > ,

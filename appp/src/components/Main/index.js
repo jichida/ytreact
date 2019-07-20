@@ -475,8 +475,8 @@ class Home extends PureComponent{
             <React.Fragment>
                 <div className="home_bg" style={{backgroundImage: `url(${home_bgimg})`}}></div>
                     <WingBlank style={{marginTop: "-140px", display: "flex", justifyContent: 'center'}}>
-                        <div className="zhuyean">
-                            <img src={monitorBg} alt="" style={{width: '100%', display: 'block'}} />
+                        <div className="zhuyean" style={{backgroundImage: `url(${monitorBg})`}}>
+                            {/* <img src={monitorBg} alt="" style={{width: '100%', display: 'block'}} /> */}
                             {/* <Waterwave style={{width: '100%', display: 'block'}} />*/}
                             <div className="monitor">
                                 <h1>{textgrade}</h1>

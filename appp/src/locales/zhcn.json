@@ -65,6 +65,7 @@
   "login.inputaccount":"请输入账号",
   "login.inputpassword":"请输入密码",
   "login.connect": "连接",
+  "login.wifi.success": "已连接至无线网络",
   "layout.home": "主页",
   "layout.abnormal": "状况",
   "layout.performance": "性能",

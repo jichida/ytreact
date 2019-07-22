@@ -65,6 +65,7 @@
   "login.inputaccount":"請輸入賬號",
   "login.inputpassword":"請輸入密碼",
   "login.connect": "連接",
+  "login.wifi.success": "已連接至無線網路",
   "layout.home": "主頁",
   "layout.abnormal": "狀況",
   "layout.performance": "性能",

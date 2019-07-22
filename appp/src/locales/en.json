@@ -64,6 +64,7 @@
   "login.inputaccount": "Account Number",
   "login.inputpassword": "Password",
   "login.connect": "Connect",
+  "login.wifi.success": "I have successfully connected",
   "layout.home": "Home",
   "layout.abnormal": "Status",
   "layout.performance": "Performance",

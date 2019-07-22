@@ -150,7 +150,7 @@ class WifiLogin extends PureComponent{
                   <Flex.Item className="itemTitle"></Flex.Item>
                   <Flex.Item className="itemContent">
                     <AgreeItem checked={wificonnected} onChange={()=>this.setState({wificonnected: !wificonnected})}>
-                        I have successfully connected
+                        <FormattedMessage id="login.wifi.success" />
                     </AgreeItem>
                   </Flex.Item>
               </Flex>

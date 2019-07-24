@@ -1,4 +1,5 @@
 import React from 'react';
+import { Spin } from 'antd'
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
@@ -14,7 +15,7 @@ export function requireAuthentication(Component) {
         return (<Component {...props}/>)
       }else{
         if(props.loginflag === -1){
-          return <div>loading</div>
+          return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '300px'}}><Spin size="large" /></div>
         }
         return (<Redirect to={loginroute}/>)
       }

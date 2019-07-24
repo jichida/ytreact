@@ -2,89 +2,103 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0" />
-   <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
-   <script>
-     if ('addEventListener' in document) {
-       document.addEventListener('DOMContentLoaded', function() {
-         FastClick.attach(document.body);
-       }, false);
-     }
-     if(!window.Promise) {
-       document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>');
-     }
+    <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
+    <script>
+      if ('addEventListener' in document) {
+        document.addEventListener('DOMContentLoaded', function() {
+          FastClick.attach(document.body);
+          document.getElementById('root').addEventListener('mousewheel', event => {
+            console.log('root')
+            if (event.ctrlKey) {
+              event.preventDefault()
+            }
+          }, { passive: false })
 
+        }, false);
+      }
+      if(!window.Promise) {
+        document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>');
+      }
 
-    // pc浏览器是否缩放
-    function detectZoom (){
-      var ratio = 0,
-        screen = window.screen,
-        ua = navigator.userAgent.toLowerCase();
-      
-      if (window.devicePixelRatio !== undefined) {
-          ratio = window.devicePixelRatio;
-      }
-      else if (~ua.indexOf('msie')) {
-        if (screen.deviceXDPI && screen.logicalXDPI) {
-          ratio = screen.deviceXDPI / screen.logicalXDPI;
-        }
-      }
-      else if (window.outerWidth !== undefined && window.innerWidth !== undefined) {
-        ratio = window.outerWidth / window.innerWidth;
-      }
+      // pc浏览器是否缩放
+      function detectZoom (){
+        var ratio = 0,
+          screen = window.screen,
+          ua = navigator.userAgent.toLowerCase();
         
-      if (ratio){
-        ratio = Math.round(ratio * 100);
-      }
-        
-      return ratio;
-    };
+        if (window.devicePixelRatio !== undefined) {
+            ratio = window.devicePixelRatio;
+        }
+        else if (~ua.indexOf('msie')) {
+          if (screen.deviceXDPI && screen.logicalXDPI) {
+            ratio = screen.deviceXDPI / screen.logicalXDPI;
+          }
+        }
+        else if (window.outerWidth !== undefined && window.innerWidth !== undefined) {
+          ratio = window.outerWidth / window.innerWidth;
+        }
+          
+        if (ratio){
+          ratio = Math.round(ratio * 100);
+        }
+          
+        return ratio;
+      };
 
-    var isFirefox=/Firefox/i.test(navigator.userAgent)?true:false;
-    var unMouseBtn=function(e){
-      var e = e || window.event;
-      var rate = detectZoom();
-      if(rate>=120) {
-        if(e.wheelDelta && e.ctrlKey && e.wheelDelta>0){//IE/Opera/Chrome e.wheelDelta±120
-          e.preventDefault?e.preventDefault():e.returnValue=false;
-        }else if(e.detail && e.ctrlKey){//Firefox e.detail±3
-          e.preventDefault?e.preventDefault():e.returnValue=false;
+      var isFirefox=/Firefox/i.test(navigator.userAgent)?true:false;
+      var unMouseBtn=function(e){
+        console.log('mouse')
+        var e = e || window.event;
+        var rate = detectZoom();
+        if(rate>=110) {
+          if(e.wheelDelta && e.ctrlKey && e.wheelDelta>0){//IE/Opera/Chrome e.wheelDelta±120
+            e.preventDefault?e.preventDefault():e.returnValue=false;
+          }else if(e.detail && e.ctrlKey){//Firefox e.detail±3
+            e.preventDefault?e.preventDefault():e.returnValue=false;
+          }
         }
-      }
-      if(rate<=80){
-        if(e.wheelDelta && e.ctrlKey && e.wheelDelta<0){//IE/Opera/Chrome e.wheelDelta±120
-          e.preventDefault?e.preventDefault():e.returnValue=false;
-        }else if(e.detail && e.ctrlKey){//Firefox e.detail±3
-          e.preventDefault?e.preventDefault():e.returnValue=false;
+        if(rate<=90){
+          if(e.wheelDelta && e.ctrlKey && e.wheelDelta<0){//IE/Opera/Chrome e.wheelDelta±120
+            e.preventDefault?e.preventDefault():e.returnValue=false;
+          }else if(e.detail && e.ctrlKey){//Firefox e.detail±3
+            e.preventDefault?e.preventDefault():e.returnValue=false;
+          }
         }
+        
+      };
+
+      var mousewheelevt = isFirefox ? "DOMMouseScroll" : "mousewheel";
+      if(document.attachEvent){//IE/Opera/Chrome
+        console.log('attachEvent')
+        document.attachEvent("on"+mousewheelevt,unMouseBtn);
+      }else if(document.addEventListener){//Firefox
+        console.log('addEventListener')
+        document.addEventListener(mousewheelevt,unMouseBtn, false);
       }
+
+      var unCtrl=function(e){
+        
+        var e = e || window.event;
+        var rate = detectZoom();
+        var isFirefox=(/Firefox/i.test(navigator.userAgent))?true:false;
+        // var code=isFirefox?"109,107,173,61":"109,107,189,187";
+        var incode = isFirefox?"107,61":"107,187";
+        var decode = isFirefox?"109,173":"109,189";
+        if(rate<=90){
+          if(e.ctrlKey && decode.indexOf(e.keyCode)!=-1){
+            e.preventDefault?e.preventDefault():e.returnValue=false;
+          }
+        }
+        if(rate>=110){
+          if(e.ctrlKey && incode.indexOf(e.keyCode)!=-1){
+            e.preventDefault?e.preventDefault():e.returnValue=false;
+          }
+        }
+      };
+      document.onkeydown=unCtrl;
+      window.onmousewheel = document.onmousewheel = unMouseBtn;
       
-    };
-    var mousewheelevt=isFirefox?"DOMMouseScroll":"mousewheel";
-    if(document.attachEvent){//IE/Opera/Chrome
-      document.attachEvent("on"+mousewheelevt,unMouseBtn);
-    }else if(document.addEventListener){//Firefox
-      document.addEventListener(mousewheelevt,unMouseBtn,false);
-    }
-    var unCtrl=function(e){
-      var e = e || window.event;
-      var rate = detectZoom();
-      var isFirefox=(/Firefox/i.test(navigator.userAgent))?true:false;
-      // var code=isFirefox?"109,107,173,61":"109,107,189,187";
-      var incode = isFirefox?"107,61":"107,187";
-      var decode = isFirefox?"109,173":"109,189";
-      if(rate<=80){
-        if(e.ctrlKey && decode.indexOf(e.keyCode)!=-1){
-          e.preventDefault?e.preventDefault():e.returnValue=false;
-        }
-      }
-      if(rate>=120){
-        if(e.ctrlKey && incode.indexOf(e.keyCode)!=-1){
-          e.preventDefault?e.preventDefault():e.returnValue=false;
-        }
-      }
-    };
-    document.onkeydown=unCtrl;
-   </script>
+    </script>
   
   </head>
   <body>

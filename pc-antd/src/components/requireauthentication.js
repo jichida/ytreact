@@ -13,6 +13,9 @@ export function requireAuthentication(Component) {
       if(props.loginsuccess === true){
         return (<Component {...props}/>)
       }else{
+        if(props.loginflag === -1){
+          return <div>loading</div>
+        }
         return (<Redirect to={loginroute}/>)
       }
     };

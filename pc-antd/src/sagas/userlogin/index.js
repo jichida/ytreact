@@ -78,9 +78,9 @@ export function* userloginflow() {
                     const redirectRoute = search.substring(6);
                     yield put(replace(redirectRoute));
                 }
-                else{
-                    yield put(replace('/'));
-                }
+                // else{
+                //     yield put(replace('/'));
+                // }
 
             }
         }

@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import {common_err,ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { pageInputScroll } from '../../util/pageInputScroll';
+// import { pageInputScroll } from '../../util/pageInputScroll';
 import './index.less';
 
 const Item = List.Item;
@@ -388,9 +388,9 @@ class DeviceWater extends PureComponent{
     //     })
     // }
 
-    componentDidMount(){
-        pageInputScroll()
-    }
+    // componentDidMount(){
+    //     pageInputScroll()
+    // }
 
     render () {
         const { history,usewater,dispatch } = this.props;

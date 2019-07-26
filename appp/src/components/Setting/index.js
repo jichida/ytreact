@@ -82,7 +82,7 @@ class Setting extends PureComponent{
                         });
                         }}
                     >
-                        {<System />}
+                        {/* {<System />} */}
                     </TabBar.Item>
                     <TabBar.Item
                         key="filter"
@@ -107,7 +107,7 @@ class Setting extends PureComponent{
                         });
                         }}
                     >
-                        {<Filter />}
+                        {/* {<Filter />} */}
                     </TabBar.Item>
                     <TabBar.Item
                         icon={
@@ -132,7 +132,7 @@ class Setting extends PureComponent{
                         });
                         }}
                     >
-                        {<Inlet />}
+                        {/* {<Inlet />} */}
                     </TabBar.Item>
                     {/* <TabBar.Item
                         icon={
@@ -185,6 +185,9 @@ class Setting extends PureComponent{
                         {<Checklist />}
                     </TabBar.Item> */}
                 </TabBar>
+                { this.state.selectedTab === 'system' && <System />}
+                { this.state.selectedTab === 'filter' && <Filter />}
+                { this.state.selectedTab === 'water' && <Inlet />}
                 </div>
             </div>
         )

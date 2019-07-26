@@ -24,7 +24,7 @@ import Login from './Login';
 import PipeFittings from './PipeFittings';
 import Distributor from './Distributor'
 
-import TestCo from './SettingSystem/index_old';
+// import TestCo from './SettingSystem/index_old';
 
 
 import {requireAuthentication} from './requireauthentication';
@@ -55,7 +55,7 @@ class AppRoot extends React.Component {
           <div className="page" style={{backgroundImage: `url(${gobal_bg})`}}>
             <Switch>
               <Route exact path="/" component={requireAuthentication(Index)} />
-              <Route exact path="/test" component={TestCo} />
+              {/* <Route exact path="/test" component={TestCo} /> */}
               <Route exact path="/wifi" component={requireAuthentication(WifiLogin)} />
               <Route exact path="/wifisetting" component={requireAuthentication(WifiSetting)} />
               <Route exact path="/wifisucess" component={requireAuthentication(WifiSuccess)} />

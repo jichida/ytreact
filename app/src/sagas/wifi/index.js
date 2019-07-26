@@ -37,6 +37,7 @@ import {
   wifi_init,
   settcp_connected,
   app_sendcmd_request,
+  app_sendcmd_result,
 
   push_devicecmddata,
 
@@ -647,11 +648,38 @@ export function* wififlow() {
     });
     yield takeLatest(`${wifi_sendcmd_request}`, function*(action) {
       try{
-
             const {payload} = action;
             console.log(payload);
             if(config.softmode === 'app'){
                 yield put(app_sendcmd_request(payload));
+                const delaytime = 5000;//
+                const {appresult,timeout} = yield race({
+                   appresult: take(`${app_sendcmd_result}`),
+                   timeout: call(delay, delaytime)
+                });
+                let isoffline = false;
+                if(!!appresult){
+                  if(appresult.payload.value === 1){
+                    //设备离线
+                    isoffline = false;
+                  }
+                  else if(appresult.payload.value === 0){
+                    isoffline = true;
+                  }
+                }
+                else{
+                  isoffline = true;
+                }
+
+                if(isoffline){
+                  yield put(set_weui({
+                    toast:{
+                      text:intl.formatMessage({id:'constsaga.msg.wifidisconnect'}),
+                      show: true,
+                      type:'offline'
+                  }}));
+                  return;
+                }
             }
             else{//tcpconnected
               //专业版
@@ -708,6 +736,34 @@ export function* wififlow() {
               //等3秒超时，重发一次
               if(config.softmode === 'app'){
                   yield put(app_sendcmd_request(payload));
+                  const delaytime = 5000;//
+                  const {appresult,timeout} = yield race({
+                     appresult: take(`${app_sendcmd_result}`),
+                     timeout: call(delay, delaytime)
+                  });
+                  let isoffline = false;
+                  if(!!appresult){
+                    if(appresult.payload.value === 1){
+                      //设备离线
+                      isoffline = false;
+                    }
+                    else if(appresult.payload.value === 0){
+                      isoffline = true;
+                    }
+                  }
+                  else{
+                    isoffline = true;
+                  }
+
+                  if(isoffline){
+                    yield put(set_weui({
+                      toast:{
+                        text:intl.formatMessage({id:'constsaga.msg.wifidisconnect'}),
+                        show: true,
+                        type:'offline'
+                    }}));
+                    return;
+                  }
               }
               else{
                 yield call(socket_send_promise,payload.cmd);

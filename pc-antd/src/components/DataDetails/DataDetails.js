@@ -18,6 +18,8 @@ import {adddevicecmddata_request,adddevicecmddata_result} from '../../actions';
 import {getdevicecmddata_request,getdevicecmddata_result} from '../../actions';
 import {callthen} from '../../sagas/pagination';
 import {download_excel} from '../../actions';
+
+import failer from '../../assets/failer.png';
 import success from '../../assets/success.png'
 import sb_icon from '../../assets/sj_icon.png';
 
@@ -341,7 +343,7 @@ const TopChart = injectIntl((props)=>{
                             <Chart {...item} {...props} key={index} />
                           )
                         }
-                        
+
                     })
                     )
                     : ''
@@ -558,16 +560,28 @@ class DataDetails extends React.PureComponent {
             render: (text, record) =>{
               console.log('Mode Record:', record)
               console.log(text);
-              if(lodashget(record,'issent') === 1) {
+              if(lodashget(record,'type') === 'message') {
+                let statusimage;
+                if(lodashget(record,'issent') === -1){//待发送
+
+                }
+                if(lodashget(record,'issent') === 0){//发送失败
+                  statusimage = failer;
+                }
+                if(lodashget(record,'issent') === 1){//发送成功
+                  statusimage = success;
+                }
+
                  return (
                   //  <React.Fragment><span></span></React.Fragment>
                   <div>
                     <div style={{width: '25px', display: 'inline-block'}}>
-                      <img src={success} alt="" style={{width: '20px', height: '20px'}} />
+                      <img src={statusimage} alt="" style={{width: '20px', height: '20px'}} />
                     </div>
                     <div style={{display: 'inline-block'}}>{`${text}`}</div>
                   </div>
                  )
+
               }
               return (
                 <div>

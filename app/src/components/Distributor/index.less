@@ -22,100 +22,104 @@
     // padding-top: 78px;
     box-sizing: border-box;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-
-    .intro-content {
-        .md {
-            h1 {
-                // font-size: 18px;
-                // line-height: 25px;
-                // font-weight: 550;
-                color: @text-primary;
-                // text-align: left;
-            }
-        
-            h2 {
-                color: @text-primary;
-            }
-            h3 {
-                color: @text-primary;
-            }
-            h4 {
-                color: @text-primary;
-            }
-            h5 {
-                color: @text-primary;
-            }
-            h6 {
-                color: @text-primary;
-            }
-        
-            p {
-                line-height: 25px;
-            }
-        
-            code {
-                white-space: normal;
-            }
-        
-            pre {
-                border: 1px solid @bgcolor-primary;
-            }
-        
-            hr {
-                width:90%;
-                margin:0 auto;
-                border: 0;
-                height: 0;
-                border-top: 1px solid rgba(0, 0, 0, 0.1);
-                border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            }
-              
-            blockquote {
-                color: @text-second;
-                margin: 0;
-                padding-left: 3em;
-                border-left: 0.5em @bgcolor-primary solid;
-            }
-            
-            tr {
-            border-top: 1px solid @splite-primary;
-            background: transparent;
-            }
-            
-            th,
-            td {
-            padding: 6px 13px;
-            border: 1px solid @splite-primary;
-            }
-            
-            table tr:nth-child(2n) {
-                background: @splite-primary;
-            }
-        }
-    }
-
-    .phone {
-        margin-top: 20px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        box-sizing: border-box;
+    .intro-content-container {
         display: flex;
-        justify-content: flex-start;
-        align-items: center;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
 
-        .phone-icon {
-            img {
-                width: 30px;
-                height: auto;
+        .intro-content {
+            .md {
+                h1 {
+                    // font-size: 18px;
+                    // line-height: 25px;
+                    // font-weight: 550;
+                    color: @text-primary;
+                    // text-align: left;
+                }
+            
+                h2 {
+                    color: @text-primary;
+                }
+                h3 {
+                    color: @text-primary;
+                }
+                h4 {
+                    color: @text-primary;
+                }
+                h5 {
+                    color: @text-primary;
+                }
+                h6 {
+                    color: @text-primary;
+                }
+            
+                p {
+                    line-height: 25px;
+                }
+            
+                code {
+                    white-space: normal;
+                }
+            
+                pre {
+                    border: 1px solid @bgcolor-primary;
+                }
+            
+                hr {
+                    width:90%;
+                    margin:0 auto;
+                    border: 0;
+                    height: 0;
+                    border-top: 1px solid rgba(0, 0, 0, 0.1);
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+                }
+                
+                blockquote {
+                    color: @text-second;
+                    margin: 0;
+                    padding-left: 3em;
+                    border-left: 0.5em @bgcolor-primary solid;
+                }
+                
+                tr {
+                border-top: 1px solid @splite-primary;
+                background: transparent;
+                }
+                
+                th,
+                td {
+                padding: 6px 13px;
+                border: 1px solid @splite-primary;
+                }
+                
+                table tr:nth-child(2n) {
+                    background: @splite-primary;
+                }
             }
         }
 
-        .number {
-            margin-left: 10px;
+        .phone {
+            margin-top: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            .phone-icon {
+                img {
+                    width: 30px;
+                    height: auto;
+                }
+            }
+
+            .number {
+                margin-left: 10px;
+            }
         }
     }
+
+    
 }

@@ -29,6 +29,7 @@ class Index extends React.Component{
                         <FormattedMessage id="device.distributor" defaultMessage="经销商详情" />
                     </NavBar>
                     <div className="introduce">
+                        <div className="intro-content-container">
                         <div className="intro-content">
                             <Markdown source={content} className="md" />
                         </div>
@@ -36,6 +37,8 @@ class Index extends React.Component{
                             <div className="phone-icon"><img src={phoneImg} alt="" /></div>
                             <div className="number"><FormattedMessage id="device.phone" defaultMessage="电话" />：{phone}</div>
                         </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

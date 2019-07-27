@@ -24,7 +24,10 @@ class Home extends PureComponent{
                 >
                 { formatMessage({id: "home"})}
                 </NavBar>
-                <Main />
+                <div className="home-content">
+                    <Main />
+                </div>
+                
             </div>
         )
     }

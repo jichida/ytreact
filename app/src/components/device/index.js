@@ -58,61 +58,64 @@ class Device extends PureComponent{
                 >
                 <FormattedMessage id="device" />
                 </NavBar>
-                <List>
-                    <Item
-                        arrow="horizontal"
-                        thumb={txImg}
-                        multipleLine
-                        onClick={() => this.props.history.push('/distributor')}
-                        >
-                        <span style={{color: "#ffffff"}} 
-                                // onClick={()=>{ sCallPhone(distributor.username);}}
-                        >
-                        {`${distributor.name}`}
-                        <Brief style={{color: "#ffffff"}}>{`TEL:${distributor.username}`}</Brief>
-                          </span>
-                    </Item>
-                </List>  
-                <WingBlank>
-                    <p className="tools_title"><FormattedMessage id="device.tools" /></p>
-                    <div className="tools_bg">
-                        <Flex>
-                            <Flex.Item className="tools_con">
-                                <Link to="/deviceinfo"><div><img src={deviceinfo_img} alt="" />
-                                    <p><FormattedMessage id="device" /></p></div>
-                                </Link>
-                            </Flex.Item>
-                            <Flex.Item className="tools_con">
-                                <Link to="/basic"><div><img src={basic_img} alt="" />
-                                    <p><FormattedMessage id="device.basic" /></p></div>
-                                </Link>
-                            </Flex.Item>
-                            <Flex.Item className="tools_con">
-                                <Link to="/water"><div><img src={water_img} alt="" />
-                                    <p><FormattedMessage id="device.water" /></p></div>
-                                </Link>
-                            </Flex.Item>
-                        </Flex>
-                        <hr style={{borderColor: 'rgba(255, 255, 255, 0.08)'}} />
-                        <Flex>
-                            <Flex.Item className="tools_con">
-                                <Link to="/install"><div><img src={install_img} alt="" />
-                                    <p><FormattedMessage id="device.install" /></p></div>
-                                </Link>
-                            </Flex.Item>
-                            <Flex.Item className="tools_con">
-                                <Link to="/equipmentlist"><div><img src={user_img} alt="" />
-                                    <p><FormattedMessage id="device.equipmentlist" /></p></div>
-                                </Link>
-                            </Flex.Item>
-                            <Flex.Item className="tools_con">
-                                <Link to="/setting"><div><img src={setting_img} alt="" />
-                                    <p><FormattedMessage id="setting.system" /></p></div>
-                                </Link>
-                            </Flex.Item>
-                        </Flex>
-                    </div>
-                </WingBlank>
+                <div className="device-content">
+                    <List>
+                        <Item
+                            arrow="horizontal"
+                            thumb={txImg}
+                            multipleLine
+                            onClick={() => this.props.history.push('/distributor')}
+                            >
+                            <span style={{color: "#ffffff"}} 
+                                    // onClick={()=>{ sCallPhone(distributor.username);}}
+                            >
+                            {`${distributor.name}`}
+                            <Brief style={{color: "#ffffff"}}>{`TEL:${distributor.username}`}</Brief>
+                            </span>
+                        </Item>
+                    </List>  
+                    <WingBlank>
+                        <p className="tools_title"><FormattedMessage id="device.tools" /></p>
+                        <div className="tools_bg">
+                            <Flex>
+                                <Flex.Item className="tools_con">
+                                    <Link to="/deviceinfo"><div><img src={deviceinfo_img} alt="" />
+                                        <p><FormattedMessage id="device" /></p></div>
+                                    </Link>
+                                </Flex.Item>
+                                <Flex.Item className="tools_con">
+                                    <Link to="/basic"><div><img src={basic_img} alt="" />
+                                        <p><FormattedMessage id="device.basic" /></p></div>
+                                    </Link>
+                                </Flex.Item>
+                                <Flex.Item className="tools_con">
+                                    <Link to="/water"><div><img src={water_img} alt="" />
+                                        <p><FormattedMessage id="device.water" /></p></div>
+                                    </Link>
+                                </Flex.Item>
+                            </Flex>
+                            <hr style={{borderColor: 'rgba(255, 255, 255, 0.08)'}} />
+                            <Flex>
+                                <Flex.Item className="tools_con">
+                                    <Link to="/install"><div><img src={install_img} alt="" />
+                                        <p><FormattedMessage id="device.install" /></p></div>
+                                    </Link>
+                                </Flex.Item>
+                                <Flex.Item className="tools_con">
+                                    <Link to="/equipmentlist"><div><img src={user_img} alt="" />
+                                        <p><FormattedMessage id="device.equipmentlist" /></p></div>
+                                    </Link>
+                                </Flex.Item>
+                                <Flex.Item className="tools_con">
+                                    <Link to="/setting"><div><img src={setting_img} alt="" />
+                                        <p><FormattedMessage id="setting.system" /></p></div>
+                                    </Link>
+                                </Flex.Item>
+                            </Flex>
+                        </div>
+                    </WingBlank>
+                </div>
+                
             </div></div>
         )
     }

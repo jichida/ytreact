@@ -16,13 +16,13 @@ export const scanbarcode=(fncallback)=>{
 
   xviewfun(JSON.stringify(xviewData));
 
-  if(!window["webkit"] && !window["xview"]){
-    //仅供测试
-    fncallback({
-      "code": 0,
-      // "data": "GHCA0488",
-      "data": "GHCA0488"
-    });
-  }
+  // if(!window["webkit"] && !window["xview"]){
+  //   //仅供测试
+  //   fncallback({
+  //     "code": 0,
+  //     // "data": "GHCA0488",
+  //     "data": "GHCA0488"
+  //   });
+  // }
 
 };

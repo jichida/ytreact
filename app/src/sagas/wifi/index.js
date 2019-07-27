@@ -59,7 +59,10 @@ let recvbuf = '';
 // let linkmode = 'internetmode';//unknow,directmode,internetmode
 let lastresponsemoment = moment();
 
-setwifistatuscallback();
+if(config.softmode === 'appp'){
+  setwifistatuscallback();
+}
+
 const parsedata = (stringbody,callbackfn)=>{
   stringbody = lodash_replace(stringbody, '$', '');
   stringbody = lodash_replace(stringbody, '%', '');

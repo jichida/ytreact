@@ -59,12 +59,13 @@ class Device extends PureComponent{
                 <FormattedMessage id="device" />
                 </NavBar>
                 <div className="device-content">
+                    <div onClick={() => history.push('/distributor')}>
                     <List>
                         <Item
                             arrow="horizontal"
                             thumb={txImg}
                             multipleLine
-                            onClick={() => this.props.history.push('/distributor')}
+                            onClick={() => history.push('/distributor')}
                             >
                             <span style={{color: "#ffffff"}} 
                                     // onClick={()=>{ sCallPhone(distributor.username);}}
@@ -74,6 +75,7 @@ class Device extends PureComponent{
                             </span>
                         </Item>
                     </List>  
+                    </div>
                     <WingBlank>
                         <p className="tools_title"><FormattedMessage id="device.tools" /></p>
                         <div className="tools_bg">

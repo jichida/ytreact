@@ -193,7 +193,8 @@ class PipeFittings extends PureComponent{
                 >
                     <FormattedMessage id="equipment.pipefittings" defaultMessage="主要管件" />
                 </NavBar>
-                { <RenderForm {...formData} {...this.props} onSubmit={this.handleSubmit} />}
+                <div className="sub_device_bg">{ <RenderForm {...formData} {...this.props} onSubmit={this.handleSubmit} />}</div>
+                
             </div>
             </div>
         )

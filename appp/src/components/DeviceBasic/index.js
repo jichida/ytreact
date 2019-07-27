@@ -316,7 +316,10 @@ class DeviceBasic extends PureComponent{
                 >
                 <FormattedMessage id="device.basic" />
                 </NavBar>
-                { <RenderForm {...basicData} unit={this.props.unit} onSubmit={this.handleSubmit} dispatch={dispatch}/>}
+                <div className="sub_device_bg">
+                    { <RenderForm {...basicData} unit={this.props.unit} onSubmit={this.handleSubmit} dispatch={dispatch}/>}
+                </div>
+                
             </div>
         )
     }

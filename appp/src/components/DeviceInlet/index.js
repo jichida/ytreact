@@ -27,7 +27,8 @@ class DeviceBasic extends PureComponent{
                 >
                     <FormattedMessage id="setting.water.quality" defaultMessage="进水水质" />
                 </NavBar>
-                <Form />
+                <div className="sub_device_bg"><Form /></div>
+                
             </div>
         )
     }

@@ -170,13 +170,16 @@ class EquipmentList extends React.Component{
                 >
                     <FormattedMessage id="device.equipmentlist" defaultMessage="设备清单" />
                 </NavBar>
-                <RenderForm
-                    {...this.props.devicelist}
-                    {...initData}
-                    onSelectFilter={this.onShowFilter}
-                    onSubmit={this.handleSubmit}
-                    onFillPipeFitting={this.handleFillPipeFittings}
-                />
+                <div className="sub_device_bg">
+                    <RenderForm
+                        {...this.props.devicelist}
+                        {...initData}
+                        onSelectFilter={this.onShowFilter}
+                        onSubmit={this.handleSubmit}
+                        onFillPipeFitting={this.handleFillPipeFittings}
+                    />
+                </div>
+                
                 <Modal
                     popup
                     visible={this.state.filterModal}

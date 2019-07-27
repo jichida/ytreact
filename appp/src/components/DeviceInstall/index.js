@@ -490,7 +490,10 @@ class DeviceInstall extends PureComponent{
                 >
                     <FormattedMessage id="device.install" />
                 </NavBar>
-                { <RenderForm {...basicData} unit={this.props.unit} onSubmit={this.handleSubmit} dispatch={dispatch}/>}
+                <div className="sub_device_bg">
+                    { <RenderForm {...basicData} unit={this.props.unit} onSubmit={this.handleSubmit} dispatch={dispatch}/>}
+                </div>
+                
             </div>
         )
     }

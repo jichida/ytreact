@@ -449,7 +449,8 @@ class DeviceWater extends PureComponent{
                 >
                 <FormattedMessage id="device.water" />
                 </NavBar>
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} dispatch={dispatch} />}
+                <div className="sub_device_bg">{ <RenderForm {...basicData} onSubmit={this.handleSubmit} dispatch={dispatch} />}</div>
+                
             </div>
         )
     }

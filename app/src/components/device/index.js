@@ -59,7 +59,7 @@ class Device extends PureComponent{
                 <FormattedMessage id="device" />
                 </NavBar>
                 <div className="device-content">
-                    <div onClick={() => history.push('/distributor')}>
+                    {/* <div onClick={() => history.push('/distributor')}> */}
                     <List>
                         <Item
                             arrow="horizontal"
@@ -75,7 +75,7 @@ class Device extends PureComponent{
                             </span>
                         </Item>
                     </List>  
-                    </div>
+                    {/* </div> */}
                     <WingBlank>
                         <p className="tools_title"><FormattedMessage id="device.tools" /></p>
                         <div className="tools_bg">

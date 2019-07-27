@@ -27,7 +27,8 @@ class DeviceBasic extends PureComponent{
                 >
                     <FormattedMessage id="setting.checklist" defaultMessage="安装检查表" />
                 </NavBar>
-                <CheckList />
+                <div className="sub_device_bg"> <CheckList /></div>
+               
             </div>
         )
     }

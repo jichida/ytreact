@@ -148,7 +148,10 @@ class Home extends PureComponent{
                         tabBarTextStyle={{height:60}}
                     />
                 </NavBar>
-                { content }
+                <div style={{height: 'calc(100vh - 122px)', overflowY: 'auto'}}>
+                  { content }
+                </div>
+                
             </div>
         )
     }

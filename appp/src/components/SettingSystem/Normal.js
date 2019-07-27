@@ -61,7 +61,7 @@ class SettingSystem extends PureComponent{
         }
         console.log(basicData)
         return (
-            <div className="sub_setting_bg" style={{padding: 0}}>
+            <div className="sub_device_setting_bg" style={{padding: 0}}>
                 <NormalForm {...basicData} onSubmit={this.handleSubmit} dispatch={dispatch} />
             </div>
         )

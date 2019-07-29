@@ -103,7 +103,20 @@ const RenderCheckForm = createForm({
                 ><FormattedMessage id="setting.checklist.appset" defaultMessage="APP已设置" /></List.Item>
             </List>
         </form>
-        <WingBlank className="submit_zone dual_btn" style={{margin: 0,padding: '5px 10px 20px 10px' }} >{/* style={{marginTop: '20px'}} */}
+        <div className="submit_zone" style={{margin: 0,padding: '5px 10px 20px 10px' }}>
+            {
+                isEnableBtnVisible && (  <div className="add_btn" >
+                        <Button type="ghost" className="btn" style={{color: '#7ac7e5'}} onClick={()=>{
+                        validateFields((err, values)=>{
+                            onEnable(values);
+                        });
+                        }}>
+                            <FormattedMessage id="form.enable" defaultMessage="启用" />
+                        </Button>
+                    </div>)
+            }
+        </div>
+        {/* <WingBlank className="submit_zone dual_btn" style={{margin: 0,padding: '5px 10px 20px 10px' }} >
             <div className="add_btn_left" style={{display: 'inline-block'}} >
                 <Button type="ghost" className="btn" style={{color: '#7ac7e5'}} onClick={
                   ()=>{onClickSysXY()}
@@ -123,7 +136,7 @@ const RenderCheckForm = createForm({
                     </Button>
                 </div>)
             }
-        </WingBlank>
+        </WingBlank> */}
         </React.Fragment>
     )
 })

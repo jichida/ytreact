@@ -326,7 +326,7 @@ class Home extends PureComponent{
           const labelstring = getFilterLabel(intl,idname,v);
           if(idname === 'prev0'){
             return (<Flex.Item key={`${idname}`} onClick={()=>{
-                    this.onClickCmd(`$res_prefilter1%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.frontfilter1'})}`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
+                    this.onClickCmd(`$res_prefilter1%`,`${intl.formatMessage({id: 'setting.system.resetbt'})}${labelstring.split('（')[0]}`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
                   }}>
                       <HomeChart title={labelstring}
                             firsttitle={title_filterelements_prefilter1_leftday} firstpercent={value_filterelements_prefilter1_leftday} firstcolor={icon_filterelements_prefilter1_leftday}
@@ -336,7 +336,7 @@ class Home extends PureComponent{
           }
           if(idname === 'prev1'){
             return (<Flex.Item key={`${idname}`} onClick={()=>{
-                this.onClickCmd(`$res_prefilter2%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.frontfilter2'})}`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
+                this.onClickCmd(`$res_prefilter2%`,`${intl.formatMessage({id: 'setting.system.resetbt'})}${labelstring.split('（')[0]}`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
               }}>
                   <HomeChart title={labelstring}
                     firsttitle={title_filterelements_prefilter2_leftday} firstpercent={value_filterelements_prefilter2_leftday} firstcolor={icon_filterelements_prefilter2_leftday}
@@ -347,7 +347,7 @@ class Home extends PureComponent{
           }
           if(idname === 'prev2'){
             return (<Flex.Item key={`${idname}`} onClick={()=>{
-              this.onClickCmd(`$res_prefilter3%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.frontfilter3'})}`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
+              this.onClickCmd(`$res_prefilter3%`,`${intl.formatMessage({id: 'setting.system.resetbt'})}${labelstring.split('（')[0]}`);//2	前置滤芯2 复位	滤芯寿命复位	$res_prefilter2%
             }}>
                 <HomeChart title={labelstring}
                   firsttitle={title_filterelements_prefilter3_leftday} firstpercent={value_filterelements_prefilter3_leftday} firstcolor={icon_filterelements_prefilter3_leftday}
@@ -358,7 +358,7 @@ class Home extends PureComponent{
 
           if(idname === 'post0'){
             return (<Flex.Item key={`${idname}`} onClick={()=>{
-              this.onClickCmd(`$res_posfilter1%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.afterfilter1'})}`);//4	后置滤芯1 复位	滤芯寿命复位
+              this.onClickCmd(`$res_posfilter1%`,`${intl.formatMessage({id: 'setting.system.resetbt'})}${labelstring.split('（')[0]}`);//4	后置滤芯1 复位	滤芯寿命复位
             }}>
                 <HomeChart title={labelstring}
                   firsttitle={title_filterelements_posfilter1_leftday} firstpercent={value_filterelements_posfilter1_leftday} firstcolor={icon_filterelements_posfilter1_leftday}
@@ -369,7 +369,7 @@ class Home extends PureComponent{
 
           if(idname === 'post1'){
             return (<Flex.Item key={`${idname}`} onClick={()=>{
-              this.onClickCmd(`$res_posfilter2%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.afterfilter2'})}`);//4	后置滤芯1 复位	滤芯寿命复位
+              this.onClickCmd(`$res_posfilter2%`,`${intl.formatMessage({id: 'setting.system.resetbt'})}${labelstring.split('（')[0]}`);//4	后置滤芯1 复位	滤芯寿命复位
             }}>
                 <HomeChart title={labelstring}
                   firsttitle={title_filterelements_posfilter2_leftday} firstpercent={value_filterelements_posfilter2_leftday} firstcolor={icon_filterelements_posfilter2_leftday}
@@ -382,7 +382,7 @@ class Home extends PureComponent{
           if(idname === 'post2'){
             return (
                   <Flex.Item key={`${idname}`} onClick={()=>{
-                    this.onClickCmd(`$res_posfilter3%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.afterfilter3'})}`);//4	后置滤芯1 复位	滤芯寿命复位
+                    this.onClickCmd(`$res_posfilter3%`,`${intl.formatMessage({id: 'setting.system.resetbt'})}${labelstring.split('（')[0]}`);//4	后置滤芯1 复位	滤芯寿命复位
                   }}>
                       <HomeChart title={labelstring}
                         firsttitle={title_filterelements_posfilter3_leftday} firstpercent={value_filterelements_posfilter3_leftday} firstcolor={icon_filterelements_posfilter3_leftday}
@@ -504,7 +504,7 @@ class Home extends PureComponent{
                         <div className="chart">
                             <Flex>
                                 <Flex.Item onClick={()=>{
-                                  this.onClickCmd(`$res_modlife%`,`${intl.formatMessage({id: 'setting.system.resetbt'})} ${intl.formatMessage({id: 'setting.system.modlife'})}`);//4	后置滤芯1 复位	滤芯寿命复位
+                                  this.onClickCmd(`$res_modlife%`,`${intl.formatMessage({id: 'setting.system.resetbt'})}${intl.formatMessage({id: 'setting.system.modlife'})}`);//4	后置滤芯1 复位	滤芯寿命复位
                                 }}>
                                     <HomeChart title={title_main_filterelements_modlife}
                                         firsttitle={title_filterelements_modlife_leftday} firstpercent={value_filterelements_modlife_leftday} firstcolor={icon_filterelements_modlife_leftday}

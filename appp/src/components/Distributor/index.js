@@ -48,7 +48,7 @@ class Index extends React.Component{
 
 const mapStateToProps =  ({userlogin}) =>{
     const content = userlogin.distributor.intro;
-    const phone = userlogin.distributor.username;
+    const phone = userlogin.distributor.phone;
     return { content, phone };
 };
 

@@ -100,7 +100,7 @@ class ChangePassword extends PureComponent{
         return (
             <div className="black_bg">
             <div className="fp_container white2_bg">
-            <div className="sub_bg">
+            <div className="sub_change_bg">
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}

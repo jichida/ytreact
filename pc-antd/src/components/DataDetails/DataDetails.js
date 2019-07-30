@@ -22,6 +22,9 @@ import {download_excel} from '../../actions';
 import failer from '../../assets/failer.png';
 import success from '../../assets/success.png'
 import sb_icon from '../../assets/sj_icon.png';
+import green from '../../assets/green.png'
+import blue from '../../assets/blue.png'
+import red from '../../assets/red.png'
 
 const curTZ = moment.tz.guess();
 
@@ -325,11 +328,11 @@ const TopChart = injectIntl((props)=>{
       <React.Fragment>
         <Row gutter={24}>
           <Col span={24} style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginLeft: '40px'}}>
-            <div style={{marginRight: '5px'}}><h1 style={{color: '#03f241', height: '34px'}}>—</h1></div>
+            <div style={{marginRight: '5px', display: 'flex', alignItems: 'center'}}><img src={green} alt="" style={{width: 'auto', height: '10px'}} /></div>
             <div style={{marginRight: '10px', fontSize: '12px', height: '20px'}}><FormattedMessage id="machine.data.flow" /></div>
-            <div style={{marginRight: '5px'}}><h1 style={{color: '#0379f2', height: '34px'}}>—</h1></div>
+            <div style={{marginRight: '5px', display: 'flex', alignItems: 'center'}}><img src={blue} alt="" style={{width: 'auto', height: '10px'}} /></div>
             <div style={{marginRight: '10px', fontSize: '12px', height: '20px'}}><FormattedMessage id="machine.data.life" /></div>
-            <div style={{marginRight: '5px'}}><h1 style={{color: '#f81929', height: '34px'}}>—</h1></div>
+            <div style={{marginRight: '5px', display: 'flex', alignItems: 'center'}}><img src={red} alt="" style={{width: 'auto', height: '10px'}} /></div>
             <div style={{marginRight: '10px', fontSize: '12px', height: '20px'}}><FormattedMessage id="machine.data.warring" /></div>
           </Col>
         </Row>

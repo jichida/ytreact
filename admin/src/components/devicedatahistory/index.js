@@ -20,8 +20,8 @@ import _ from 'lodash';
 export const DataFilter = props => (
     <Filter {...props}>
         <TextInput label="搜索设备id" source="deviceid_q" />
-        <DateInput source="updated_at_gte" alwaysOn />
-        <DateInput source="updated_at_lte" alwaysOn />
+        <DateInput label="起始时间" source="updated_at_gte" />
+        <DateInput label="结束时间" source="updated_at_lte" />
     </Filter>
 );
 

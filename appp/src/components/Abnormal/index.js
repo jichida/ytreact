@@ -80,22 +80,36 @@ class Abnormal extends PureComponent{
           <Refresh handleRefresh={this.handleRefresh} />
         )
       }
+
       return (
                     <div className="panel">
                         <div className="abnormal">
                             <Flex direction="column">
-                                <p className="normal_title"><FormattedMessage id="status.abnormal" /></p>
-                                <div style={{width: "100%"}}>
-                                    <Flex wrap="wrap">
-                                    {this.renderList(abnormal, 'red-circle')}
-                                    </Flex>
-                                </div>
-                                <p className="normal_title"><FormattedMessage id="status.normal" /></p>
-                                <div style={{width: "100%"}}>
-                                    <Flex wrap="wrap">
-                                    {this.renderList(normal, 'green-circle')}
-                                    </Flex>
-                                </div>
+                              {
+                                abnormal.length !== 0 && (
+                                  <React.Fragment>
+                                  <p className="normal_title"><FormattedMessage id="status.abnormal" /></p>
+                                  <div style={{width: "100%"}}>
+                                      <Flex wrap="wrap">
+                                      {this.renderList(abnormal, 'red-circle')}
+                                      </Flex>
+                                  </div>
+                                  </React.Fragment>
+                                )
+                              }
+                              {
+                                normal.length !== 0 && (
+                                  <React.Fragment>
+                                    <p className="normal_title"><FormattedMessage id="status.normal" /></p>
+                                    <div style={{width: "100%"}}>
+                                        <Flex wrap="wrap">
+                                        {this.renderList(normal, 'green-circle')}
+                                        </Flex>
+                                    </div>
+                                  </React.Fragment>
+                                )
+                              }
+                                
                             </Flex>
                         </div>
                     </div>

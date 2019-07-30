@@ -25,7 +25,7 @@ const Index = (props) => {
         <form>
             <List>
                 <Item className="item_switch"
-                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                    extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.onSelectFilter('prev0')}} >
                                 <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
                             </Button>
@@ -39,7 +39,7 @@ const Index = (props) => {
                     </Brief>
                 </Item>
                 <Item className="item_switch"
-                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                    extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.onSelectFilter('prev1')}} >
                                 <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
                             </Button>
@@ -53,7 +53,7 @@ const Index = (props) => {
                     </Brief>
                 </Item>
                 <Item className="item_switch"
-                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                    extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.onSelectFilter('prev2')}} >
                                 <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
                             </Button>
@@ -81,7 +81,7 @@ const Index = (props) => {
                     </Brief>
                 </Item> */}
                 <Item className="item_switch"
-                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                    extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.onSelectFilter('post0')}} >
                                 <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
                             </Button>
@@ -95,7 +95,7 @@ const Index = (props) => {
                     </Brief>
                 </Item>
                 <Item className="item_switch"
-                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                    extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.onSelectFilter('post1')}} >
                                 <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
                             </Button>

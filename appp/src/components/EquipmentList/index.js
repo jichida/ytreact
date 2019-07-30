@@ -74,7 +74,7 @@ class EquipmentList extends React.Component{
 
     handleSubmit = (values)=>{
         this.handleSave(values)
-        this.props.history.goBack()
+        // this.props.history.goBack()
     }
 
     handleSave = (values = {}) => {

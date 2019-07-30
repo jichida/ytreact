@@ -25,17 +25,17 @@ class SpaceInput extends React.Component {
             <div className="space-input-container">
                 <div className="space-input-item">
                     <FormattedMessage id="install.space.length" />
-                    : <InputItem type="digit" value={value.length || ''} onChange={(value)=>{this.handleChange2('length',value)}} />
+                    : <InputItem type="digit" value={value.length} onChange={(value)=>{this.handleChange2('length',value)}} />
                 </div>
                 {/* <input name="length" value={value.length||''} onChange={(e)=>{this.handleChange('length',e)}} /> */}
                 <div className="space-input-item">
                     <FormattedMessage id="install.space.width" />
-                    : <InputItem type="digit" value={value.width || ''} onChange={(value)=>{this.handleChange2('width',value)}} />
+                    : <InputItem type="digit" value={value.width} onChange={(value)=>{this.handleChange2('width',value)}} />
                 </div>
                 {/* <input name="length" value={value.width||''} onChange={(e)=>{this.handleChange('width',e)}} /> */}
                 <div className="space-input-item">
                     <FormattedMessage id="install.space.height" />
-                    : <InputItem type="digit" value={value.height || ''} onChange={(value)=>{this.handleChange2('height',value)}} />
+                    : <InputItem type="digit" value={value.height} onChange={(value)=>{this.handleChange2('height',value)}} />
                 </div>
                 {/* <input name="length" value={value.height||''} onChange={(e)=>{this.handleChange('height',e)}} /> */}
             </div>

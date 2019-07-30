@@ -253,7 +253,7 @@
   "water.usertds": "用戶需求出水TDS值",
   "home.show.title_main_outwater_quality":"出水水質 TDS {value}",
   "home.show.title_main_inwater_quality":"進水水質 {value} ppm",
-  "home.show.title_main_totalwatervol":"總產水量 {value} gal",
+  "home.show.title_main_totalwatervol":"總產水量 {value} 升",
   "home.show.title_main_outcwatervol":"淨水率 {value} %",
   "home.show.title_main_runtime":"運行時間 {value} 天",
   "home.show.title_main_filterelements_modlife":"電離子膜壽命",

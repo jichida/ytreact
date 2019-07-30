@@ -105,7 +105,7 @@ const RenderForm = createForm({
         <form>
             <List>
                 <Item className="item_switch"
-                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                    extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.showModal('modalPH')}} >
                                 <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
                             </Button>
@@ -113,7 +113,7 @@ const RenderForm = createForm({
                         }
                 ><FormattedMessage id="setting.water.ph" defaultMessage="PH值" /><Brief>{ph.value}</Brief></Item>
                 <Item className="item_switch"
-                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                    extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.showModal('modalConductivity')}} >
                                 <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
                             </Button>
@@ -121,7 +121,7 @@ const RenderForm = createForm({
                         }
                 ><FormattedMessage id="setting.water.conductivity" defaultMessage="进水导电率" /><Brief>{conductivity.value}</Brief></Item>
                 <Item className="item_switch"
-                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                    extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.showModal('modalTDS')}} >
                                 <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
                             </Button>
@@ -129,7 +129,7 @@ const RenderForm = createForm({
                         }
                 ><FormattedMessage id="setting.water.tds" defaultMessage="进水TDS值" /><Brief>{tds.value}</Brief></Item>
                 <Item className="item_switch"
-                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                    extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.showModal('modalHardness')}} >
                                 <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
                             </Button>
@@ -137,7 +137,7 @@ const RenderForm = createForm({
                         }
                 ><FormattedMessage id="setting.water.hardness" defaultMessage="进水硬度" /><Brief>{hardness.value}</Brief></Item>
                 <Item className="item_switch"
-                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
+                    extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.showModal('modalAlkalinity')}} >
                                 <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
                             </Button>

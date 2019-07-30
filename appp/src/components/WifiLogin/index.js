@@ -107,6 +107,12 @@ class WifiLogin extends PureComponent{
         const Android = () => {
           return (
             <React.Fragment>
+              <div className="logo" >
+                  <div className="logo_img">
+                      <img src={wifi} alt=""  />
+                  </div>
+              </div>
+              <WhiteSpace size="xl" />
               <Flex justify="start" className="loginform">
                   <Flex.Item className="itemTitle">
                       <span><FormattedMessage id="start.wifi" /></span>
@@ -146,6 +152,12 @@ class WifiLogin extends PureComponent{
         const Iphone = () => {
           return (
             <React.Fragment>
+              <div className="logo" >
+                  <div className="logo_img" onClick={()=>this.setState({wificonnected: !wificonnected})}>
+                      <img src={wifi} alt=""  />
+                  </div>
+              </div>
+              <WhiteSpace size="xl" />
               <Flex justify="start" className="loginform">
                   <Flex.Item className="itemTitle"></Flex.Item>
                   <Flex.Item className="itemContent">
@@ -170,12 +182,12 @@ class WifiLogin extends PureComponent{
                     <div className="pannel">
                             <Flex direction="column" className="wifi_login container" >
                                 <WhiteSpace size="xl" />
-                                <div className="logo" >
+                                {/* <div className="logo" >
                                     <div className="logo_img">
                                         <img src={wifi} alt=""  />
                                     </div>
                                 </div>
-                                <WhiteSpace size="xl" />
+                                <WhiteSpace size="xl" /> */}
                                 { isIphone ? <Iphone /> : <Android />}
                                 <WhiteSpace size="xl" />
                             </Flex>

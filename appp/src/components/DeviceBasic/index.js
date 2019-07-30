@@ -66,12 +66,12 @@ const RenderForm = createForm({
           }),
         };
     }})(injectIntl((props)=>{
-    const { getFieldProps, validateFields, setFieldsValue } = props.form;
+    const { getFieldProps, validateFields, setFieldsValue, getFieldValue } = props.form;
     const { intl,dispatch, unit} = props;
     const {formatMessage} = intl;
     const dispatch_form_err = (dispatch,errs)=>{
         dispatch(common_err({type:'form_err',errmsg: formatMessage({id: 'form.check'})}))
-      }
+    }
 
     const handleSubmit = (e)=>{
         // //e.preventDefault();
@@ -232,22 +232,19 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />
-                    <Brief>
-                        <div className="item_children">
-                            <Buckets
-                                {...getFieldProps('bucket',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />,
-                                    }],
-                                })}
-                                unit={unit}
-                                onChange={handleBucketSelect}
-                            />
-                        </div>
-                    </Brief>
-                </Item>
+                { getFieldValue('model')[0] !== 'HYDRODI-G2' && (
+                    <Item><FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />
+                        <Brief>
+                            <div className="item_children">
+                                <Buckets
+                                    {...getFieldProps('bucket')}
+                                    unit={unit}
+                                    onChange={handleBucketSelect}
+                                />
+                            </div>
+                        </Brief>
+                    </Item>
+                ) }
             </List>
         </form>
         <div className="submit_zone">

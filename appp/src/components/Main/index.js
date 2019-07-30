@@ -69,7 +69,7 @@ class Home extends PureComponent{
   }
 
     render () {
-      const {intl,homedata,performancedata,isgetdata,devicelist} = this.props;
+      const {intl,homedata,performancedata,isgetdata,devicelist, locale} = this.props;
       // const mapfilternames = mapname_filter;
       //注：这里根据devicelist 显示设备数据!!!!!!
       const devicedata = homedata;
@@ -79,8 +79,8 @@ class Home extends PureComponent{
       //
       // });
       const title_main_outwater_quality = intl.formatMessage({id: 'home.show.title_main_outwater_quality'},{value:lodashget(devicedata,'main_outwater_quality',300)});
-      const title_main_inwater_quality = intl.formatMessage({id: 'home.show.title_main_inwater_quality'},{value:lodashget(devicedata,'main_inwater_quality',300)});
-      const title_main_totalwatervol = intl.formatMessage({id: 'home.show.title_main_totalwatervol'},{value:lodashget(devicedata,'main_totalwatervol',0)});
+      const title_main_inwater_quality = intl.formatMessage({id: 'home.show.title_main_inwater_quality'},{value: lodashget(devicedata,'main_inwater_quality',300)});
+      const title_main_totalwatervol = intl.formatMessage({id: 'home.show.title_main_totalwatervol'},{value:locale === 'en' ? lodashget(devicedata,'main_totalwatervol',0) : Math.round(lodashget(devicedata,'main_totalwatervol',0)*3.785)});
       const title_main_runtime = intl.formatMessage({id: 'home.show.title_main_runtime'},{value:lodashget(devicedata,'main_runtime',0)});
       const title_main_outcwatervol = intl.formatMessage({id: 'home.show.title_main_outcwatervol'},{value:lodashget(performancedata,'waterpurificationrate',0)});
 
@@ -523,7 +523,7 @@ class Home extends PureComponent{
         )
     }
 }
-const mapStateToProps =  ({devicedata:{isgetdata,homedata,performancedata},device:{devicelist}, devicedata:{ filterlist }}) =>{
+const mapStateToProps =  ({devicedata:{isgetdata,homedata,performancedata},device:{devicelist}, devicedata:{ filterlist }, app: { locale }}) =>{
   const { prev0lastchangedate, prev1lastchangedate, prev2lastchangedate, post0lastchangedate, post1lastchangedate, post2lastchangedate } = devicelist
   const initData = convertfromfilterlist(filterlist)
   initData['prev0'] = {...initData['prev0'], lastchangedate: prev0lastchangedate }
@@ -533,7 +533,7 @@ const mapStateToProps =  ({devicedata:{isgetdata,homedata,performancedata},devic
   initData['post1'] = {...initData['post1'], lastchangedate: post1lastchangedate }
   initData['post2'] = {...initData['post2'], lastchangedate: post2lastchangedate }
   const filter_list = filterlistConvertToArray(initData)
-  return {isgetdata,homedata,performancedata,devicelist:filter_list};
+  return {isgetdata,homedata,performancedata,devicelist:filter_list, locale};
 };
 Home = connect(mapStateToProps)(Home);
 export default injectIntl(Home);

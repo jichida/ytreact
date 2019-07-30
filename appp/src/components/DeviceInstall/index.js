@@ -204,19 +204,20 @@ const RenderForm = createForm({
         validateFields((err, values)=>{
             if(!err){
                 if(unit === 'in') {
+                    console.log('Submit Values:', values)
                     if(!!values.drainage) {
-                        values.drainage = values.drainage * 2.54
+                        values.drainage = Math.round(values.drainage * 2.54)
                     }
 
                     if(!!values.space) {
                         if(!!values.space.length) {
-                            values.space.length = values.space.length * 2.54
+                            values.space.length = Math.round(values.space.length * 2.54)
                         }
                         if(!!values.space.width) {
-                            values.space.width = values.space.width * 2.54
+                            values.space.width = Math.round(values.space.width * 2.54)
                         }
                         if(!!values.space.height) {
-                            values.space.height = values.space.height * 2.54
+                            values.space.height = Math.round(values.space.height * 2.54)
                         }
                     }
                 }
@@ -464,23 +465,24 @@ class DeviceInstall extends PureComponent{
 
          if(this.props.unit === 'in') {
             if(!!basicData.drainage) {
-                basicData.drainage = basicData.drainage * 0.3937008
+                basicData.drainage.value = Math.round(basicData.drainage.value * 0.3937008)
             }
 
             if(!!basicData.space) {
-                if(!!basicData.space.length) {
-                    basicData.space.length = basicData.space.length * 0.3937008
+                console.log('space')
+                if(!!basicData.space.value.length) {
+                    basicData.space.value.length = Math.round(basicData.space.value.length * 0.3937008)
                 }
-                if(!!basicData.space.width) {
-                    basicData.space.width = basicData.space.width * 0.3937008
+                if(!!basicData.space.value.width) {
+                    basicData.space.value.width = Math.round(basicData.space.value.width * 0.3937008)
                 }
-                if(!!basicData.space.height) {
-                    basicData.space.height = basicData.space.height * 0.3937008
+                if(!!basicData.space.value.height) {
+                    basicData.space.value.height = Math.round(basicData.space.value.height * 0.3937008)
                 }
             }
         }
 
-         console.log(basicData);
+        console.log('Basic Data:', basicData)
         return (
             <div className="fp_container sub_bg">
                 <NavBar

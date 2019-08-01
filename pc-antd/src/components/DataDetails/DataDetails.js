@@ -938,7 +938,7 @@ class DataDetails extends React.PureComponent {
                 <Card bordered={false} className="main-card">
                 <Row style={{marginBottom: 30}} className="title">
                     <Col span={24}>
-                        <img src={sb_icon} alt="" /><span>{`${formatMessage({id: 'machine.datadetail'})} ID: ${curdevice.deviceid}`}</span>
+                        <img src={sb_icon} alt="" /><span>{`${formatMessage({id: 'machine.datadetail'})} ${lodashget(curdevice,'basicinfo.username','')} ${curdevice.deviceid}`} </span>
                         <span className="right-Link" onClick={()=>{history.goBack()}}>&lt; {formatMessage({id: 'app.return'})}</span>
                     </Col>
                 </Row>

@@ -704,6 +704,7 @@ export function* wififlow() {
               }
               if(expectstring !== `${wifiresult.payload.data}`  && `${payload.cmd}` !== '$data%'){
                 istimeout = true;//
+                console.log(`【1】这里注意,拷贝该条命令给我:${wifiresult.payload.data}`)
               }
             }
             if(istimeout){
@@ -734,6 +735,7 @@ export function* wififlow() {
                 }
                 if(expectstring !== `${wifiresult.payload.data}` && `${payload.cmd}` !== '$data%'){
                   istimeout = true;//
+                  console.log(`【2】这里注意,拷贝该条命令给我:${wifiresult.payload.data}`)
                 }
               }
               if(istimeout){

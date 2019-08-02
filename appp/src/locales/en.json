@@ -45,7 +45,7 @@
   "constsaga.msg.wifidisconnect": "The connection has been disconnected, please wait for reconnection",
   "constsaga.msg.connecterror": "Connection [{value}] failed",
   "constsaga.msg.connecttimeout": "Connection [{value}] timed out, please try again",
-  "constsaga.msg.textgrade0": "Fine",
+  "constsaga.msg.textgrade0": "Excellent",
   "constsaga.msg.textgrade1": "Good",
   "constsaga.msg.textgrade2": "General",
   "constsaga.msg.dataerr": "There is a problem with the data",

@@ -479,8 +479,8 @@ class Home extends PureComponent{
                             {/* <img src={monitorBg} alt="" style={{width: '100%', display: 'block'}} /> */}
                             {/* <Waterwave style={{width: '100%', display: 'block'}} />*/}
                             <div className="monitor">
-                                <h1>{textgrade}</h1>
-                                <p>{title_main_outwater_quality}</p>
+                                <h1 style={{fontSize: `${locale === 'en' ? '20px' : '30px'}`}}>{textgrade}</h1>
+                                <p style={{fontSize: `${locale === 'en' ? '12px' : '14px'}`}}>{title_main_outwater_quality}</p>
                             </div>
                         </div>
                         <img src={refresh_icon} alt=""

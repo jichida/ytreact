@@ -187,16 +187,16 @@ const RenderForm = createForm({
                             </div>
                         }
                 ><FormattedMessage id="setting.system.sendlog" defaultMessage="发送设备运行记录" /></List.Item> */}
-                <List.Item className="item_switch"
+                {/* <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={(showDormancySetup)} >
                                 <FormattedMessage id="setting.system.dormancy" defaultMessage="休眠" />
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.system.dormancy" /></List.Item>
+                ><FormattedMessage id="setting.system.dormancy" /></List.Item> */}
                 <List.Item className="item_switch"
-                    extra={<div className="add_btn" style={{width: 80, display: 'inline-block'}} >
+                    extra={<div className="add_btn" style={{width: 140, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{history.push('/change')}}>
                                 <FormattedMessage id="login.changepassword" />
                             </Button>

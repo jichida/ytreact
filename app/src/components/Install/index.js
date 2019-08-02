@@ -135,13 +135,14 @@ const RenderForm = createForm({
                     editable={false}
                     {...getFieldProps('space')}
                 ><FormattedMessage id="install.space" defaultMessage="安装空间" /></InputItem> */}
-                <Item><FormattedMessage id="install.space" defaultMessage="安装空间" />
+                <Item><FormattedMessage id="install.space" defaultMessage="安装空间" />({props.unit})
                     <Brief>
                         <div className="item_children">
                             <SpaceInput
-                            {...getFieldProps('space',{
-                                rules: [],
-                            })}
+                                unit={props.unit}
+                                {...getFieldProps('space',{
+                                    rules: [],
+                                })}
                             // onChange={handleSpaceInput}
                             />
                         </div>
@@ -155,7 +156,7 @@ const RenderForm = createForm({
                 <InputItem
                     className="right-input"
                     editable={false}
-                    extra="m"
+                    extra={props.unit}
                     {...getFieldProps('drainage')}
                 ><FormattedMessage id="install.drainage" defaultMessage="排水距离" /></InputItem>
                 <InputItem
@@ -205,7 +206,8 @@ class DeviceInstall extends PureComponent{
                value: lodashget(install,'pipe',''),
            },
            drainage: {
-               value: lodashget(install,'drainage',''),
+               value: this.props.unit === 'cm' ? lodashget(install,'drainage', '') 
+                : Math.round(lodashget(install,'drainage', 0) * 0.3937008) === 0 ? '' : Math.round(lodashget(install,'drainage', 0) * 0.3937008),
            },
            pipematerials: {
                value: lodashget(install,'pipematerials',''),
@@ -229,15 +231,15 @@ class DeviceInstall extends PureComponent{
                     <FormattedMessage id="device.install" />
                 </NavBar>
                 <div className="sub_setting_bg">
-                { <RenderForm {...basicData} onSubmit={this.handleSubmit} />}
+                { <RenderForm {...basicData} unit={this.props.unit} onSubmit={this.handleSubmit} />}
                 </div>
                 </div>
             </div>
         )
     }
 }
-const mapStateToProps =  ({device:{install,_id}}) =>{
-  return {install,_id};
+const mapStateToProps =  ({device:{install,_id}, app: { unit }}) =>{
+  return {install,_id, unit};
 };
 DeviceInstall = connect(mapStateToProps)(DeviceInstall);
 export default withRouter(injectIntl(DeviceInstall));

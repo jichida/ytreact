@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Flex, WingBlank, WhiteSpace } from 'antd-mobile';
 import { connect } from 'react-redux';
 import HomeChart from '../HomeChart';
-import monitorBg from '../../assets/zhuye_an.png';
+// import monitorBg from '../../assets/zhuye_an.png';
 import lodashmap from 'lodash.map';
 import lodashget from 'lodash.get';
 import { injectIntl } from 'react-intl';
@@ -10,9 +10,10 @@ import Refresh from '../Controls/Refresh';
 // import Waterwave from './waterwave.js';
 import config from './config';
 import './index.less';
-import refresh_icon from '../../assets/refresh.png';
-import '../../assets/wlimg.png';
-import home_bgimg from '../../assets/zhuye_bg.png';
+// import refresh_icon from '../../assets/refresh.png';
+// import '../../assets/wlimg.png';
+// import home_bgimg from '../../assets/zhuye_bg.png';
+import { refresh_icon, home_bgimg, monitorBg} from './assets'
 import {wifi_sendcmd_request, set_confirm} from '../../actions';
 import {getFilterLabel} from '../EquipmentList/config.js';
 import { convertfromfilterlist, filterlistConvertToArray } from '../SettingFilter/config'

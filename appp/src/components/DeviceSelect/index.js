@@ -6,10 +6,12 @@ import { FormattedMessage } from 'react-intl';
 // import {getdevice_request} from '../../actions';
 import './index.less';
 
-import logo from '../../assets/logo.png';
-import device1 from '../../assets/pimg1.png';
-import device2 from '../../assets/pimg2.png';
-import setup from '../../assets/setup.png';
+// import logo from '../../assets/logo.png';
+// import device1 from '../../assets/pimg1.png';
+// import device2 from '../../assets/pimg2.png';
+// import setup from '../../assets/setup.png';
+
+import {logo, device1, device2, setup } from './assets.js'
 
 const data = [
     {

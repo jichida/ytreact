@@ -71,7 +71,7 @@ class Device extends PureComponent{
                                     // onClick={()=>{ sCallPhone(distributor.username);}}
                             >
                             {`${distributor.name}`}
-                            <Brief style={{color: "#ffffff"}}>{`TEL:${distributor.username}`}</Brief>
+                            <Brief style={{color: "#ffffff"}}>{`TEL:${distributor.phone}`}</Brief>
                             </span>
                         </Item>
                     </List>  

@@ -95,7 +95,7 @@ class WifiLogin extends PureComponent{
 
     handleClickAgreeItem = () => {
       console.log('iphone handleClickAgreeItem')
-      this.props.history.push('prefs:root=WIFI')
+      // this.props.history.push('prefs:root=WIFI')
     }
 
     render () {

@@ -92,6 +92,12 @@ class WifiLogin extends PureComponent{
       const {wifissid,wifiCipher,dispatch} = this.props;
       dispatch(ui_setcurwifi({ wifissid,wifipassword:value,wifiCipher:wifiCipher}));
     }
+
+    handleClickAgreeItem = () => {
+      console.log('iphone handleClickAgreeItem')
+      // this.props.history.push('prefs:root=WIFI')
+    }
+
     render () {
         const {  intl,wifissid,wifipassword } = this.props;
         const { wificonnected, isIphone } = this.state;
@@ -153,7 +159,7 @@ class WifiLogin extends PureComponent{
           return (
             <React.Fragment>
               <div className="logo" >
-                  <div className="logo_img" onClick={()=>this.setState({wificonnected: !wificonnected})}>
+                  <div className="logo_img" onClick={()=>this.handleClickAgreeItem()}>
                       <img src={wifi} alt=""  />
                   </div>
               </div>
@@ -202,5 +208,6 @@ class WifiLogin extends PureComponent{
 const mapStateToProps =  ({wifi:{wifissid,wifipassword,wifiCipher,wifilist}}) =>{
   return {wifissid,wifipassword,wifiCipher,wifilist};
 };
+
 WifiLogin = connect(mapStateToProps)(WifiLogin);
 export default withRouter(injectIntl(WifiLogin));

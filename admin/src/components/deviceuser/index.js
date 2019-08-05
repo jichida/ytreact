@@ -130,7 +130,7 @@ const TextDeviceId = ({ source, record = {} }) => <span>{
 const DeviceuserList = (props) => (//
      <List title="设备列表" {...props} filters={<DeviceFilter />} bulkActionButtons={false}
       sort={{ field: 'created_at', order: 'DESC' }}>
-        <Datagrid expand={<DeviceShow />}>
+      <Datagrid>
           <TextDeviceId label="设备id" source="deviceid" />
           <TextField label="设备ID" source="syssettings.deviceid" />
           <ReferenceField label="经销商" source="distributorid" reference="distributor" allowEmpty>
@@ -138,7 +138,7 @@ const DeviceuserList = (props) => (//
           </ReferenceField>
           <TextField label="用户名" source="basicinfo.username" />
           <EditButton />
-        </Datagrid>
+          </Datagrid>
     </List>
 );
 

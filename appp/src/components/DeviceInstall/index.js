@@ -416,6 +416,17 @@ class DeviceInstall extends PureComponent{
         initHeight = window.innerHeight;
     }
 
+    componentDidMount() {
+        window.addEventListener('resize', () => {
+            const activeElement = document.activeElement
+            if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+                setTimeout(() => {
+                  activeElement.scrollIntoView()
+                }, 100)
+            }
+        })
+    }
+
     handleSubmit = (values)=>{
         values.position = values.position[0];
         values.wall = values.wall[0];
@@ -444,7 +455,7 @@ class DeviceInstall extends PureComponent{
                value: [lodashget(install,'method','')],
            },
            space: {
-               value: lodashget(install,'space',''),
+               value: {...lodashget(install,'space', {})},
            },
            pipe: {
                value: [lodashget(install,'pipe','')],

@@ -265,6 +265,17 @@ class DeviceBasic extends PureComponent{
         initHeight = window.innerHeight;
     }
 
+    componentDidMount() {
+        window.addEventListener('resize', () => {
+            const activeElement = document.activeElement
+            if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+                setTimeout(() => {
+                  activeElement.scrollIntoView()
+                }, 100)
+            }
+        })
+    }
+
     handleSubmit = (values)=>{
         console.log(values);
         const {dispatch,_id} = this.props;

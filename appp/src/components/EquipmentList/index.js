@@ -72,6 +72,17 @@ class EquipmentList extends React.Component{
         }
     }
 
+    componentDidMount() {
+        window.addEventListener('resize', () => {
+            const activeElement = document.activeElement
+            if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+                setTimeout(() => {
+                  activeElement.scrollIntoView()
+                }, 100)
+            }
+        })
+    }
+
     handleSubmit = (values)=>{
         this.handleSave(values)
         // this.props.history.goBack()

@@ -25,7 +25,7 @@ const itemData = {
     fontSize: '10px'
 }
 
-const ShowSrvdataField = ({ record }) => {
+export const ShowSrvdataField = ({ record }) => {
   const {srvdata} = record;
   // "Pressure3" : "0",
   //      "Pressure4" : "0",
@@ -77,7 +77,7 @@ const ShowSrvdataField = ({ record }) => {
   //      "Pressure1" : "0",
   //      "Pressure2" : "0"
   return  (
-    <Typography>
+    <div>
         <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-every', alignItems: 'center'}}>
             <div style={itemStyle}>
                 <div style={itemTitle}>systime</div>
@@ -272,7 +272,7 @@ const ShowSrvdataField = ({ record }) => {
                 <div style={itemData}>{srvdata.UV}</div>
             </div>
         </div>
-    </Typography>
+    </div>
   );
 }
 

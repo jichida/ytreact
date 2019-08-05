@@ -16,7 +16,7 @@ import {
 import DeviceShow from './deviceshow';
 import moment from 'moment';
 import _ from 'lodash';
-
+import { ShowSrvdataField } from './deviceshow'
 
 export const DataFilter = props => (
     <Filter {...props}>
@@ -35,13 +35,18 @@ const DevicedatahistoryTitle = ({ record }) => {
 const DevicedatahistoryEdit = (props) => {
       return (<Edit title={<DevicedatahistoryTitle />} {...props}>
         <SimpleForm>
-        <TextDeviceId label="设备id" source="deviceid" />
-        <TextFieldDate label="最新数据" source="updated_at" />
-        <TextField label="这个下面填充数据" source="srvdata.Pressure3" />
-
+        {/* <TextDeviceId label="设备id" source="deviceid" />
+        <TextFieldDate label="最新数据" source="updated_at" /> */}
+        {/* <TextField label="这个下面填充数据" source="srvdata.Pressure3" /> */}
+        <HistoryTitle />
+        <ShowSrvdataField />
         </SimpleForm>
       </Edit>);
 };
+
+const HistoryTitle = ({record = {}}) => (
+  <span>{`设备ID：${_.get(record,"deviceid")}  最新数据：${moment(_.get(record,"updated_at")).format('YYYY-MM-DD HH:mm:ss')}`}</span>
+)
 
 const TextDeviceId = ({ source, record = {} }) => <span>{
   _.get(record,"deviceid")

@@ -8,8 +8,10 @@ import {seteasylink} from '../../env/easylink';
 import './index.less';
 import {getMobileOperatingSystem} from '../../util/getos';
 
-import mga from '../../assets/ljimga.png';
-import mgb from '../../assets/ljimgb.png';
+// import mga from '../../assets/ljimga.png';
+// import mgb from '../../assets/ljimgb.png';
+
+import { mga, mgb } from './assets'
 
 const alert = Modal.alert;
 

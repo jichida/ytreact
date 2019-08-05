@@ -82,6 +82,7 @@
   "start.wifi": "網絡",
   "start.password": "密碼",
   "start.pass": "通過",
+  "start.skip": "跳過",
   "start.setting": "請先進行設定",
   "status.normal": "正常",
   "status.abnormal": "異常",

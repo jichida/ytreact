@@ -428,9 +428,9 @@ class DeviceInstall extends PureComponent{
 
     render () {
 
-        const { history,install,dispatch}  = this.props;
+        const { history, install, dispatch }  = this.props;
 
-         const basicData = {
+        const basicData = {
            position: {
                value: [lodashget(install,'position','')],
            },
@@ -461,28 +461,28 @@ class DeviceInstall extends PureComponent{
            power: {
                value: lodashget(install,'power',false),
            },
-         }
-
-         if(this.props.unit === 'in') {
+        }
+        
+        if(this.props.unit === 'in') {
+            
             if(!!basicData.drainage) {
-                basicData.drainage.value = Math.round(basicData.drainage.value * 0.3937008)
+                basicData.drainage.value = Math.round(lodashget(install,'drainage','') * 0.3937008)
             }
 
             if(!!basicData.space) {
                 console.log('space')
                 if(!!basicData.space.value.length) {
-                    basicData.space.value.length = Math.round(basicData.space.value.length * 0.3937008)
+                    basicData.space.value.length = Math.round(lodashget(install,'space','').length * 0.3937008)
                 }
                 if(!!basicData.space.value.width) {
-                    basicData.space.value.width = Math.round(basicData.space.value.width * 0.3937008)
+                    basicData.space.value.width = Math.round(lodashget(install,'space','').width * 0.3937008)
                 }
                 if(!!basicData.space.value.height) {
-                    basicData.space.value.height = Math.round(basicData.space.value.height * 0.3937008)
+                    basicData.space.value.height = Math.round(lodashget(install,'space','').height * 0.3937008)
                 }
             }
         }
 
-        console.log('Basic Data:', basicData)
         return (
             <div className="fp_container sub_bg">
                 <NavBar
@@ -493,7 +493,7 @@ class DeviceInstall extends PureComponent{
                     <FormattedMessage id="device.install" />
                 </NavBar>
                 <div className="sub_device_bg">
-                    { <RenderForm {...basicData} unit={this.props.unit} onSubmit={this.handleSubmit} dispatch={dispatch}/>}
+                    <RenderForm {...basicData} unit={this.props.unit} onSubmit={this.handleSubmit} dispatch={dispatch}/>
                 </div>
                 
             </div>
@@ -501,6 +501,7 @@ class DeviceInstall extends PureComponent{
     }
 }
 const mapStateToProps =  ({device:{install,_id}, app: { unit }}) =>{
+    console.log('mstp install:', install)
   return {install,_id, unit};
 };
 DeviceInstall = connect(mapStateToProps)(DeviceInstall);

@@ -7,7 +7,8 @@ import './index.less';
 import {wifi_init,ui_setcurwifi,wifi_setcurwifi_request,
   wifi_getssidlist_request,wifi_getssidlist_result,set_weui} from '../../actions';
 import {callthen} from '../../sagas/pagination';
-import wifi from '../../assets/wlimg.png';
+// import wifi from '../../assets/wlimg.png';
+import { wifi } from './assets'
 import {getMobileOperatingSystem} from '../../util/getos';
 
 const AgreeItem = Checkbox.AgreeItem
@@ -99,7 +100,7 @@ class WifiLogin extends PureComponent{
     }
 
     render () {
-        const {  intl,wifissid,wifipassword } = this.props;
+        const {  intl,wifissid,wifipassword, history } = this.props;
         const { wificonnected, isIphone } = this.state;
         const title = intl.formatMessage({id: 'start.wifi.select'});
         /*
@@ -149,6 +150,13 @@ class WifiLogin extends PureComponent{
                     }
                   }>
                       <FormattedMessage id="start.pass" />
+                  </Button>
+              </div>
+              <WhiteSpace size="xl" style={{ marginBottom: 10}} />
+              <div className="add_btn" >
+                  <Button type="ghost" className="btn" onClick={()=>{ history.push('/wifisucess')}
+                  }>
+                      <FormattedMessage id="start.skip" />
                   </Button>
               </div>
             </React.Fragment>

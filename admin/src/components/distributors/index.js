@@ -97,11 +97,16 @@ const DistributorEdit = (props) => {
 };
 const EditBtnif = (props)=>{
   const {record} = props;
-  return _.get(record,'is_admin',false) === false?<EditButton {...props}/>:null;
+  //如果是admin，OK
+  if(_.get(record,'username','')!=='admin'){
+    return <EditButton {...props}/>;
+  }
+  //如果是系统管理员
+  return  _.get(record,'username','')!=='admin' ?<EditButton {...props}/>:null;
 }
 
 const rowStyle = (record, index) => ({
-    backgroundColor: _.get(record,'is_admin',false) ? '#efe' : 'white',
+    backgroundColor: _.get(record,'username','')==='admin' ? '#efe' : 'white',
 });
 
 

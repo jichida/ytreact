@@ -421,7 +421,7 @@ class DeviceInstall extends PureComponent{
             const activeElement = document.activeElement
             if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
                 setTimeout(() => {
-                  activeElement.scrollIntoView()
+                  activeElement.scrollIntoView(false)
                 }, 100)
             }
         })

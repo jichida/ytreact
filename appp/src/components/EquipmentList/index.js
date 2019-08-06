@@ -77,7 +77,7 @@ class EquipmentList extends React.Component{
             const activeElement = document.activeElement
             if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
                 setTimeout(() => {
-                  activeElement.scrollIntoView()
+                  activeElement.scrollIntoView(false)
                 }, 100)
             }
         })

@@ -63,15 +63,15 @@ class Setting extends PureComponent{
                         key="system"
                         icon={
                             <div className="tabbar_item">
-                                <p><FormattedMessage id="setting.system" /></p>
-                                <img src={system_img} alt="" className="navbar_icon" />
+                                <div><FormattedMessage id="setting.system" /></div>
+                                <img src={system_img} alt="" className="device_navbar_icon" />
                                 <span></span>
                             </div>
                         }
                         selectedIcon={
                             <div className="tabbar_item_on">
-                                <p><FormattedMessage id="setting.system" /></p>
-                                <img src={system_img} alt="" className="navbar_icon" />
+                                <div><FormattedMessage id="setting.system" /></div>
+                                <img src={system_img} alt="" className="device_navbar_icon" />
                                 <span></span>
                             </div>
                         }
@@ -88,15 +88,15 @@ class Setting extends PureComponent{
                         key="filter"
                         icon={
                             <div className="tabbar_item">
-                                <p><FormattedMessage id="form.equip.filter" /></p>
-                                <img src={list_img} alt="" className="navbar_icon" />
+                                <div><FormattedMessage id="form.equip.filter" /></div>
+                                <img src={list_img} alt="" className="device_navbar_icon" />
                                 <span></span>
                             </div>
                         }
                         selectedIcon={
                             <div className="tabbar_item_on">
-                                <p><FormattedMessage id="form.equip.filter" /></p>
-                                <img src={list_img} alt="" className="navbar_icon" />
+                                <div><FormattedMessage id="form.equip.filter" /></div>
+                                <img src={list_img} alt="" className="device_navbar_icon" />
                                 <span></span>
                             </div>
                         }
@@ -112,15 +112,15 @@ class Setting extends PureComponent{
                     <TabBar.Item
                         icon={
                             <div className="tabbar_item">
-                                <p><FormattedMessage id="setting.water" /></p>
-                                <img src={water_img} alt="" className="navbar_icon" />
+                                <div><FormattedMessage id="setting.water" /></div>
+                                <img src={water_img} alt="" className="device_navbar_icon" />
                                 <span></span>
                             </div>
                         }
                         selectedIcon={
                             <div className="tabbar_item_on">
-                                <p><FormattedMessage id="setting.water" /></p>
-                                <img src={water_img} alt="" className="navbar_icon" />
+                                <div><FormattedMessage id="setting.water" /></div>
+                                <img src={water_img} alt="" className="device_navbar_icon" />
                                 <span></span>
                             </div>
                         }

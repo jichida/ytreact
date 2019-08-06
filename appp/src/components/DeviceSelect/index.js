@@ -42,8 +42,8 @@ const data = [
             <WingBlank style={{marginLeft:0, marginRight:0}}>
                 <div className="fp_container">
                     <div className="pannel">
-                        <Flex direction="column" justify="between" className="container">
-                            <div className="logo" ><img className="logo_img" alt="" src={logo} /></div>
+                        <Flex direction="column" className="container" style={{minHeight: '100vh', justifyContent: 'space-evenly'}}>
+                            <div className="select-logo" ><img className="select_logo_img" alt="" src={logo} /></div>
                             <div className="pimg" >
                                 <Carousel
                                     autoplay={false}

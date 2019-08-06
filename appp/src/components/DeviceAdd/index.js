@@ -15,9 +15,9 @@ import AddImg from '../../assets/addbtn.png';
         return (
             <div className="fp_container">
                 <div className="fh_container">
-                    <div className="pannel">
-                        <Flex direction="column" justify="between">
-                            <div className="logo" ><img className="logo_img" alt="" src={logo} /></div>
+                    <div className="pannel" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                        <Flex direction="column" justify="between" style={{height: '90%'}}>
+                            <div className="add-logo" ><img className="add_logo_img" alt="" src={logo} /></div>
                             <div className="pimg" ><img alt="" src={ping} /></div>
                             <WhiteSpace size="xl" />
                             <div className="add_btn" >

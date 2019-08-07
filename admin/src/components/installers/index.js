@@ -74,6 +74,7 @@ const InstallerList = (props) => (//
               <TextField source="name" />
           </ReferenceField>
         <EditButton />
+        <ResestPassword />
         </Datagrid>
     </List>
 );

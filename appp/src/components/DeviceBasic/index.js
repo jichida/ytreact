@@ -267,11 +267,13 @@ class DeviceBasic extends PureComponent{
 
     componentDidMount() {
         window.addEventListener('resize', () => {
-            const activeElement = document.activeElement
-            if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
-                setTimeout(() => {
-                  activeElement.scrollIntoView(false)
-                }, 100)
+            if(window.innerHeight < this.state.initHeight) {
+                const activeElement = document.activeElement
+                if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+                    setTimeout(() => {
+                    activeElement.scrollIntoView(false)
+                    }, 100)
+                }
             }
         })
     }

@@ -116,7 +116,6 @@ class ResetPassword extends React.Component {
               label="请输入密码"
               placeholder="请输入密码"
             />
-            <br />
             <TextField
               id="password2"
               type="password"

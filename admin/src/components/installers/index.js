@@ -73,8 +73,8 @@ const InstallerList = (props) => (//
           <ReferenceField label="经销商" source="distributorid" reference="distributor">
               <TextField source="name" />
           </ReferenceField>
-        <EditButton />
         <ResestPassword />
+        <EditButton />
         </Datagrid>
     </List>
 );

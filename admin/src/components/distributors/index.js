@@ -114,7 +114,7 @@ const DistributorList = (props) => (//
      <List title="经销商列表" {...props}  filters={<UserFilter />} sort={{ field: 'created_at', order: 'DESC' }}
      bulkActionButtons={false} >
        {/* bodyOptions={{ showRowHover: true }} */}
-        <Datagrid  rowStyle={rowStyle}> 
+        <Datagrid  rowStyle={rowStyle}>
         <TextField label="登录名" source="username"/>
         <TextField label="名字" source="name"/>
         <TextField label="简称" source="logname"/>
@@ -124,8 +124,8 @@ const DistributorList = (props) => (//
         <ReferenceField label="所属子区域" source="addresslevel2" reference="addressconst" allowEmpty>
             <TextField source="name" />
         </ReferenceField>
-        <EditBtnif />
         <ResestPassword />
+        <EditBtnif />
         </Datagrid>
     </List>
 );

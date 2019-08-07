@@ -69,19 +69,20 @@ class EquipmentList extends React.Component{
             post2lastchangedate: moment(post2lastchangedate).toDate(),
             curOptions: prev0Options,
             lastchangedate: new Date(),
-            orignHeight: window.innerHeight
         }
     }
 
     componentDidMount() {
         window.addEventListener('resize', () => {
-            if(window.innerHeight < this.state.orignHeight) {
-                const activeElement = document.activeElement
-                if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
-                    setTimeout(() => {
-                    activeElement.scrollIntoView(false)
-                    }, 100)
-                }
+            const activeElement = document.activeElement
+            if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+                setTimeout(() => {
+                    if(!!activeElement.scrollIntoViewIfNeeded) {
+                        activeElement.scrollIntoViewIfNeeded(true)
+                    } else {
+                        activeElement.scrollIntoView(false)
+                    }
+                }, 100)
             }
         })
     }

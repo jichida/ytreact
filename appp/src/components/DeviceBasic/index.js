@@ -267,13 +267,15 @@ class DeviceBasic extends PureComponent{
 
     componentDidMount() {
         window.addEventListener('resize', () => {
-            if(window.innerHeight < this.state.initHeight) {
-                const activeElement = document.activeElement
-                if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
-                    setTimeout(() => {
-                    activeElement.scrollIntoView(false)
-                    }, 100)
-                }
+            const activeElement = document.activeElement
+            if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+                setTimeout(() => {
+                    if(!!activeElement.scrollIntoViewIfNeeded) {
+                        activeElement.scrollIntoViewIfNeeded(true)
+                    } else {
+                        activeElement.scrollIntoView(false)
+                    }
+                }, 100)
             }
         })
     }
@@ -290,7 +292,7 @@ class DeviceBasic extends PureComponent{
     render () {
         const { history,basicinfo,dispatch}  = this.props;
 
-         const basicData = {
+        const basicData = {
              username: {
                  value: lodashget(basicinfo,'username',''),
              },

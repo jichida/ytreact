@@ -110,7 +110,7 @@ class ResetPassword extends React.Component {
             <TextField
               id="password"
               type="password"
-              validate={required()}
+              // validate={required()}
               value={this.state.pwdvalue}
               onChange={this.handleChange}
               label="请输入密码"
@@ -120,7 +120,7 @@ class ResetPassword extends React.Component {
             <TextField
               id="password2"
               type="password"
-              validate={required()}
+              // validate={required()}
               value={this.state.pwdvalue2}
               onChange={this.handleChange2}
               label="请再输入一次密码"

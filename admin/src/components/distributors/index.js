@@ -113,7 +113,8 @@ const rowStyle = (record, index) => ({
 const DistributorList = (props) => (//
      <List title="经销商列表" {...props}  filters={<UserFilter />} sort={{ field: 'created_at', order: 'DESC' }}
      bulkActionButtons={false} >
-        <Datagrid bodyOptions={{ showRowHover: true }} rowStyle={rowStyle}>
+       {/* bodyOptions={{ showRowHover: true }} */}
+        <Datagrid  rowStyle={rowStyle}> 
         <TextField label="登录名" source="username"/>
         <TextField label="名字" source="name"/>
         <TextField label="简称" source="logname"/>

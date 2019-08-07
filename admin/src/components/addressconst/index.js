@@ -86,7 +86,8 @@ const rowStyle = (record, index) => ({
 
 const AddressconstList = (props) => (//
      <List {...props} bulkActionButtons={false} >
-       <Datagrid bodyOptions={{ showRowHover: true }} rowStyle={rowStyle}>
+       {/* bodyOptions={{ showRowHover: true }} */}
+       <Datagrid  rowStyle={rowStyle}>
        <TextField label="名字" source="name" />
        <ReferenceField label="上级" source="parent_id" reference="addressconst" addLabel={false} allowEmpty>
           <TextField source="name" />

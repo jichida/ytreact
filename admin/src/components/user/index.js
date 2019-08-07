@@ -76,7 +76,8 @@ const rowStyle = (record, index) => ({
 
 const UserlistList = (props) => (//
      <List title="用户列表" {...props}  filters={<UserFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
-        <Datagrid bodyOptions={{ showRowHover: true }} rowStyle={rowStyle}>
+         {/* bodyOptions={{ showRowHover: true }} */}
+        <Datagrid  rowStyle={rowStyle}>
         <Titlewithimage label="名字" icon="profile.avatar" name="username"/>
         <DateField label="注册时间" source="created_at"  showTime/>
         <DateField label="上次登录时间" source="updated_at"  showTime/>

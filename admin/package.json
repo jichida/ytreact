@@ -1,6 +1,6 @@
 {
   "name": "admin",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "homepage": ".",
   "dependencies": {
@@ -13,11 +13,11 @@
     "lodash.get": "^4.4.2",
     "lodash.map": "^4.6.0",
     "prop-types": "^15.6.2",
-    "ra-core": "^2.9.3",
+    "ra-core": "2.9.5",
     "ra-language-english": "^2.6.1",
     "ra-tree-ui-materialui": "^2.6.0",
     "react": "^16.8.1",
-    "react-admin": "^2.9.2",
+    "react-admin": "2.9.5",
     "react-dom": "^16.8.1",
     "react-mde": "^7.4.1",
     "react-scripts": "2.0.4",

@@ -19,7 +19,7 @@ import {
   DateField
 } from 'react-admin';
 import TextFieldBool from '../controls/TextFieldBool';
-// import ImageArrayField from '../controls/imagearrayfield';
+import ImageArrayField from '../controls/imagearrayfield';
 import InputSpaceField from '../controls/InputSpaceField';
 import DeviceShow from './deviceshow';
 import moment from 'moment';
@@ -106,7 +106,7 @@ const DeviceuserEdit = (props) => {
             <TextFieldBool label="设备已调试" source="checklist.debugged" />
             <TextFieldBool label="出水水质正常" source="checklist.quality"  />
             <TextFieldBool label="设备已交付使用" source="checklist.delivered"  />
-            {/* <TextField label="拍摄安装图" source="checklist.pictures"  /> */}
+            <ImageArrayField label="拍摄安装图" source="checklist.pictures"  />
           </FormTab>
         </TabbedForm>
       </Edit>);

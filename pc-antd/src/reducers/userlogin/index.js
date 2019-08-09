@@ -8,7 +8,7 @@ import {
     logout_result,
     common_err
 } from '../../actions/index.js';
-
+import config from '../../env/config';
 
 const initial = {
     userlogin: {
@@ -21,7 +21,8 @@ const initial = {
 
 const userlogin = createReducer({
     [logout_result]:(state, payload)=>{
-        return { ...initial.userlogin};
+        localStorage.removeItem(`ytreact_${config.softmode}_token`);
+        return { ...initial.userlogin,loginflag:0};
     },
     [common_err]:(state,payload)=>{
       if(payload.type === 'login'){

@@ -1,6 +1,5 @@
 import store from './store';
 import { goBack  } from 'connected-react-router';//https://github.com/reactjs/react-router-redux
-import * as xview from './xview/Common';
 let handlerbackfn;
 
 export const exitAndroidApp=()=>{
@@ -9,7 +8,7 @@ export const exitAndroidApp=()=>{
   window.setTimeout(()=>{
     try{
       //alert('exit app');
-      xview.exitApp();
+      // xview.exitApp();
     }
     catch(e){
 

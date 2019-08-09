@@ -515,7 +515,7 @@ export function* wififlow() {
             yield put(wifi_sendcmd_result({data:'$dataok%'}));
           }
           else if(result.cmd === 'ok'){
-            if(result.data === 'ping'){
+            if(result.data === '$pingok%'){
               yield put(wifi_sendcmd_result_ping({data:result.data}));
             }
             else{

@@ -117,6 +117,7 @@ const getwifistatus = ()=>{
 
 window.socketstatuscallback = (result)=>{
   try{
+    console.log(result);
     if(!!result){
       if(lodash_get(result,'data.socketStatus',0) === 1){
         socket_send({'sendMessage':'$data%'},()=>{

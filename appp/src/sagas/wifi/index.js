@@ -858,20 +858,21 @@ export function* wififlow() {
         const delaytime = 10000;
         yield call(delay,2000);
         while(true){
-            const curtime = moment();
-            const diffmin = curtime.diff(lastresponsemoment,'seconds');
-            if(diffmin < 10){
-              //10秒钟内有回复,则不要重连了
-              console.log(`--->10s内有回应,不用重连了`);
-              yield put(settcp_connected(true));
-              yield call(delay,delaytime);
-              continue;
-            };
-            console.log(`当前时间:${curtime.format()},上次接受时间:${lastresponsemoment.format()}`);
             const linkmode = yield select((state)=>{
               return state.app.linkmode;
             });
             if(linkmode === 'directmode'){
+              const curtime = moment();
+              const diffmin = curtime.diff(lastresponsemoment,'seconds');
+              if(diffmin < 10){
+                //10秒钟内有回复,则不要重连了
+                console.log(`--->10s内有回应,不用重连了`);
+                yield put(settcp_connected(true));
+                yield call(delay,delaytime);
+                continue;
+              };
+              console.log(`当前时间:${curtime.format()},上次接受时间:${lastresponsemoment.format()}`);
+
               const wifidirectmodesocketstatus = yield select((state)=>{
                 return state.app.wifidirectmodesocketstatus;
               });

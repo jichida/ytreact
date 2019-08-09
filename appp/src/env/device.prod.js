@@ -116,12 +116,22 @@ const getwifistatus = ()=>{
 }
 
 window.socketstatuscallback = (result)=>{
-  if(lodash_get(result,'data.socketStatus',0) === 1){
-    socket_send({'sendMessage':'$data%'},()=>{
+  try{
+    if(!!result){
+      if(lodash_get(result,'data.socketStatus',0) === 1){
+        socket_send({'sendMessage':'$data%'},()=>{
 
-    });
+        });
+      }
+      store.dispatch(socket_setstatus(result));
+    }
+    else{
+      console.log(`====socketstatuscallback竟然是空====`)
+    }
   }
-  store.dispatch(socket_setstatus(result));
+  catch(e){
+    console.log(e);
+  }
 }
 //
 // ##### (8)wifi状态回调

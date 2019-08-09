@@ -138,7 +138,7 @@ const getPercent = (id,value) => {
         value,
         percent: percent > 1 ? percent : 1,
         warring,
-        ishave: true//!!value
+        ishave: !!value
     }
 }
 

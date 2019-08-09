@@ -5,11 +5,14 @@ import { sagaMiddleware } from './env/store';
 import rootSaga from './sagas';
 import 'antd-mobile/dist/antd-mobile.css';
 // import moment from 'moment';
+import VConsole from 'vconsole';
 import 'moment/locale/zh-cn';
 // import registerServiceWorker from './registerServiceWorker';
 // import {
 //   setwifistatuscallback
 // } from './env/device';
+const vConsole = new VConsole();
+
 global.Intl = require('intl');
 window.Intl = require('intl');
 

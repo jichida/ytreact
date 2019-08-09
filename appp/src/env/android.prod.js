@@ -30,7 +30,7 @@ export const removebackhandler=()=>{
 }
 
 export const registerandroid=()=>{
-  window.webBack=()=>{
+  window.onBack =()=>{
     try{
       //alert("window.webBack");
       if(!!handlerbackfn){

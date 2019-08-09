@@ -7,12 +7,13 @@ import 'antd-mobile/dist/antd-mobile.css';
 // import moment from 'moment';
 import VConsole from 'vconsole';
 import 'moment/locale/zh-cn';
+import {registerandroid} from './env/android';
 // import registerServiceWorker from './registerServiceWorker';
 // import {
 //   setwifistatuscallback
 // } from './env/device';
 const vConsole = new VConsole();
-
+registerandroid();
 global.Intl = require('intl');
 window.Intl = require('intl');
 

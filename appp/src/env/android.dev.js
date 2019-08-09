@@ -19,7 +19,7 @@ export const exitAndroidApp=()=>{
 }
 
 export const registerandroid=()=>{
-  window.webBack=()=>{
+  window.onBack=()=>{
     if(!!handlerbackfn){
       handlerbackfn();
     }

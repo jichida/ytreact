@@ -14,6 +14,9 @@ import Home from './Layout';
 import BasicInfo from './DeviceBasic';
 import WaterInfo from './DeviceWater';
 import InstallInfo from './DeviceInstall';
+import SurveyBasic from './DeviceSurveyBasic';
+import SurveyWater from './DeviceSurveyWater';
+import SurveyInstall from './DeviceSurveyInstall';
 import CheckList from './DeviceCheckList';
 import Setting from './DeviceSetting';
 import Inlet from './DeviceInlet';
@@ -64,6 +67,9 @@ class AppRoot extends React.Component {
               <Route exact path="/basic" component={requireAuthentication(BasicInfo)} />
               <Route exact path="/water" component={requireAuthentication(WaterInfo)} />
               <Route exact path="/install" component={requireAuthentication(InstallInfo)} />
+              <Route exact path="/surveybasic" component={requireAuthentication(SurveyBasic)} />
+              <Route exact path="/surveywater" component={requireAuthentication(SurveyWater)} />
+              <Route exact path="/surveyinstall" component={requireAuthentication(SurveyInstall)} />
               <Route exact path="/checklist" component={requireAuthentication(CheckList)} />
               <Route exact path="/inlet" component={requireAuthentication(Inlet)} />
               <Route exact path="/setting" component={requireAuthentication(Setting)} />

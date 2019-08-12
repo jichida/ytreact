@@ -91,6 +91,10 @@ const RenderForm = createForm({
         setFieldsValue({bucket: value});
     }
 
+    const handleLoad = () => {
+        // 导入调研输入的数据
+    }
+
 
     const useproperty = [
         {
@@ -144,7 +148,9 @@ const RenderForm = createForm({
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="user.phone" defaultMessage="联系方式" />
+                <Item className="extra-load"
+                    extra={<Button size="small" type="ghost" className="load-btn" onClick={handleLoad}><FormattedMessage id="form.load" /></Button>}
+                ><FormattedMessage id="user.phone" defaultMessage="联系方式" />
                     <Brief>
                         <div className="item_children">
                             <InputItem

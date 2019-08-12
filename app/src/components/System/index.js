@@ -196,9 +196,9 @@ const RenderForm = createForm({
                         }
                 ><FormattedMessage id="setting.system.dormancy" /></List.Item> */}
                 <List.Item className="item_switch"
-                    extra={<div className="add_btn" style={{width: 140, display: 'inline-block'}} >
+                    extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{history.push('/change')}}>
-                                <FormattedMessage id="login.changepassword" />
+                                <FormattedMessage id="login.change" />
                             </Button>
                             </div>
                         }

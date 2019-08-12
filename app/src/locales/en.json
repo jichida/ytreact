@@ -65,6 +65,7 @@
   "login.inputpassword": "Please enter a password",
   "login.forget": "Forget",
   "login.changepassword": "Change Password",
+  "login.change": "Change",
   "login.oldpassword": "Old Password",
   "login.inputoldpassword": "Please enter old password",
   "login.verification": "Verification",

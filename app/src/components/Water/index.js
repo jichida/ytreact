@@ -238,6 +238,7 @@ class DeviceWater extends PureComponent{
     }
 }
 const mapStateToProps =  ({device:{usewater,_id},devicedata:{inwatersettings}}) =>{
+    console.log('setting:', inwatersettings)
   return {usewater,inwatersettings,_id};
 };
 DeviceWater = connect(mapStateToProps)(DeviceWater);

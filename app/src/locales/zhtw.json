@@ -63,6 +63,7 @@
   "login.inputpassword":"請輸入密碼",
   "login.forget": "忘記密碼",
   "login.changepassword": "修改密碼",
+  "login.change": "修改",
   "login.oldpassword": "原密碼",
   "login.inputoldpassword": "請輸入原密碼",
   "login.verification": "驗證碼",

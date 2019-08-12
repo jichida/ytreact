@@ -65,6 +65,7 @@
   "login.inputpassword":"请输入密码",
   "login.forget": "忘记密码",
   "login.changepassword": "修改密码",
+  "login.change": "修改",
   "login.oldpassword": "原密码",
   "login.inputoldpassword": "请输入原密码",
   "login.verification": "验证码",

@@ -1,6 +1,6 @@
 {
   "setting.system.lanuchsystem": "Start running",
-  "wifi.opengps":"Please turn on location service",
+  "wifi.opengps":"Please turn on location service Gps mode",
   "const.form.time":"{value}",
   "constfilter.frontfilter.0": "PP filter",
   "constfilter.frontfilter.1": "UF filter",

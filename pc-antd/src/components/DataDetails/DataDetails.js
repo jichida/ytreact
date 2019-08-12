@@ -134,6 +134,10 @@ const getPercent = (id,value) => {
     if(percent <= cf.warringPercent || !value){
         warring = true;
     }
+    console.log('ID:', id)
+    console.log('Value:', value)
+    console.log('Totle Value:', cf.value)
+    console.log('Percent:', percent)
     return {
         value,
         percent: percent > 1 ? percent : 1,
@@ -244,70 +248,77 @@ const TopChart = injectIntl((props)=>{
           {
               title:  `${formatMessage({id: 'machine.data.ionmembrance'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              data: modlife_flow.value,
+              // data: modlife_flow.value,
               flow: modlife_flow.percent,
               flowwarring: modlife_flow.warring ,
               life: modlife_lefeday.percent,
+              data: modlife_lefeday.value,
               lifewarring: modlife_lefeday.warring,
               ishave: modlife_flow.ishave
           },
           {
               title:  `${formatMessage({id: 'machine.data.frontfilter1'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              data: prefilter1_flow.value,
+              // data: prefilter1_flow.value,
               flow: prefilter1_flow.percent,
               flowwarring: prefilter1_flow.warring,
               life: prefilter1_leftday.percent,
+              data: prefilter1_leftday.value,
               lifewarring: prefilter1_leftday.warring,
               ishave: posfilter1_flow.ishave
           },
           {
               title: `${formatMessage({id: 'machine.data.frontfilter2'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              data: prefilter2_flow.value,
+              // data: prefilter2_flow.value,
               flow: prefilter2_flow.percent,
               flowwarring: prefilter2_flow.warring,
               life: prefilter2_leftday.percent,
+              data: prefilter2_leftday.value,
               lifewarring: prefilter2_leftday.warring,
               ishave: prefilter2_flow.ishave
           },
           {
               title: `${formatMessage({id: 'machine.data.frontfilter3'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              data: prefilter3_flow.value,
+              // data: prefilter3_flow.value,
               flow: prefilter3_flow.percent,
               flowwarring: prefilter3_flow.warring,
               life: prefilter3_leftday.percent,
+              data: prefilter3_leftday.value,
               lifewarring: prefilter3_leftday.warring,
               ishave: prefilter3_flow.ishave
           },
           {
               title: `${formatMessage({id: 'machine.data.afterfilter1'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              data: posfilter1_flow.value,
+              // data: posfilter1_flow.value,
               flow: posfilter1_flow.percent,
               flowwarring: posfilter1_flow.warring,
               life: posfilter1_leftday.percent,
+              data: posfilter1_leftday.value,
               lifewarring: posfilter1_leftday.warring,
               ishave: posfilter1_flow.ishave
           },
           {
               title:  `${formatMessage({id: 'machine.data.afterfilter2'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              data: posfilter2_flow.value,
+              // data: posfilter2_flow.value,
               flow: posfilter2_flow.percent,
               flowwarring: posfilter2_flow.warring,
               life: posfilter2_leftday.percent,
+              data: posfilter2_leftday.value,
               lifewarring: posfilter2_leftday.warring,
               ishave: posfilter2_flow.ishave
           },
           {
               title:  `${formatMessage({id: 'machine.data.afterfilter3'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              data: posfilter3_flow.value,
+              // data: posfilter3_flow.value,
               flow: posfilter3_flow.percent,
               flowwarring: posfilter3_flow.warring,
               life: posfilter3_leftday.percent,
+              data: posfilter3_leftday.value,
               lifewarring: posfilter3_leftday.warring,
               ishave: posfilter3_flow.ishave
           }
@@ -359,6 +370,9 @@ const TopChart = injectIntl((props)=>{
 })
 
 const Chart = ({title, unit, data, flow, life, flowwarring, lifewarring, intl:{ formatMessage }})=>{
+  console.log('Title:', title)
+  console.log('Life', life)
+  console.log('Data:', data)
     return (
         <div className="chart">
           <div className="bottom">

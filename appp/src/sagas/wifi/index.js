@@ -12,6 +12,7 @@ import {
   socket_connnect,
   socket_send,
 } from '../../env/device.js';
+import {checkLocation} from '../../env/checkLocation';
 import {
   wifi_open_reqeust,
   wifi_open_result,
@@ -333,6 +334,14 @@ const socket_send_promise = (data)=>{
 
       });
       resolve({});
+  });
+}
+
+const checkLocation_promise = (data)=>{
+  return new Promise(resolve => {
+      checkLocation((result)=>{
+        resolve(result);
+      });
   });
 }
 // socket_setrecvcallback(()=>{
@@ -784,6 +793,17 @@ export function* wififlow() {
       try{
         let {payload:result} = action;
         const delaytime = 15000;
+                //wifi_getssidlist_request
+        const res = yield call(checkLocation_promise);
+        if(res.code === -1){
+          yield put(set_weui({
+            toast:{
+            text: intl.formatMessage({id: 'wifi.opengps'}),
+            show: true,
+            type:'warning'
+          }}));
+          return;
+        }
         yield put(set_weui({
           toast:{
             type:'loading',

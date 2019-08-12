@@ -1,5 +1,6 @@
 {
   "setting.system.lanuchsystem": "啟動運行",
+  "wifi.opengps":"請開啟定位服務",
   "const.form.time":"{value}时",
   "constfilter.frontfilter.0":"PP濾芯",
   "constfilter.frontfilter.1":"UF濾芯",

@@ -215,7 +215,7 @@ class DeviceWater extends PureComponent{
                 value: lodashget(inwatersettings,'ph',''),
             },
             usertds: {
-                value: lodashget(inwatersettings,'usertds',''),
+                value: lodashget(usewater,'usertds',''),
             },
         }
 

@@ -12,7 +12,7 @@ import {
   socket_connnect,
   socket_send,
 } from '../../env/device.js';
-import {checkLocation} from '../../env/checkLocation';
+import {openLocation,checkLocation} from '../../env/checkLocation';
 import {
   wifi_open_reqeust,
   wifi_open_result,
@@ -29,6 +29,7 @@ import {
 
   common_err,
   set_weui,
+  set_confirm,
   wifi_setstatus,
   ui_wifisuccess_tonext,
 
@@ -796,12 +797,12 @@ export function* wififlow() {
                 //wifi_getssidlist_request
         const res = yield call(checkLocation_promise);
         if(res.code === -1){
-          yield put(set_weui({
-            toast:{
-            text: intl.formatMessage({id: 'wifi.opengps'}),
-            show: true,
-            type:'warning'
-          }}));
+          yield put(set_confirm({
+            title: `${intl.formatMessage({id: 'form.confirm'})}`,
+            message: intl.formatMessage({id: 'wifi.opengps'}),
+            text: [`${intl.formatMessage({id: 'form.cancel'})}`, `${intl.formatMessage({id: 'form.ok'})}`],
+            fun:openLocation
+          }))
           return;
         }
         yield put(set_weui({

@@ -1,9 +1,13 @@
+const openLocation = ()=>{
+  console.log(`openLocation`);
+}
+
 const checkLocation = (fncallback)=>{
   window.setTimeout(()=>{
     fncallback({
-      "code": 0
+      "code": -1
     })
   },0);
 }
 
-export {checkLocation};
+export {openLocation,checkLocation};

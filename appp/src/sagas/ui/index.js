@@ -59,11 +59,14 @@ export function* uiflow(){//仅执行一次
 export function* uiconfirm(){//仅执行一次
   yield takeLatest(`${set_confirm}`, function*(action) {
     console.log(action.payload)
-    const { command } = action.payload
+    const { command,fun } = action.payload
     if(!!action.payload) {
       const isconfirm = yield call(popconfirm, action.payload)
-      if(isconfirm && command) {
+      if(isconfirm && !!command) {
         yield put(command)
+      }
+      if(isconfirm && !!fun) {
+        fun()
       }
     }
   });

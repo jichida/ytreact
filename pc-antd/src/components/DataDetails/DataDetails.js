@@ -142,12 +142,20 @@ const getPercent = (id,value) => {
         value,
         percent: percent > 1 ? percent : 1,
         warring,
-        ishave: !!value
+        ishave: true
     }
 }
 
+const emptyFilter = {
+  value: 0,
+  percent: 0,
+  warring: false,
+  ishave: false
+}
+
 const TopChart = injectIntl((props)=>{
-    const { srvdata, intl} = props;
+    const { srvdata, intl, curdevice} = props;
+    const filterlist = lodashget(curdevice, 'appdata.filterlist', {})
     const { formatMessage } = intl;
     let chartData = []
     let uvfilter = {}
@@ -165,22 +173,22 @@ const TopChart = injectIntl((props)=>{
       const { MODLife, Pre_filter1, Pre_filter2, Pre_filter3, Post_filter1, Post_filter2, Post_filter3 } = srvdata
       console.log('srvdata:', srvdata)
       const modlife_lefeday = getPercent('filterelements_modlife_leftday', MODLife)
-      const prefilter1_leftday = getPercent('filterelements_prefilter1_leftday', Pre_filter1)
-      const prefilter2_leftday = getPercent('filterelements_prefilter2_leftday', Pre_filter2)
-      const prefilter3_leftday = getPercent('filterelements_prefilter3_leftday', Pre_filter3)
-      const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', Post_filter1)
-      const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', Post_filter2)
-      const posfilter3_leftday = getPercent('filterelements_posfilter3_leftday', Post_filter3)
+      const prefilter1_leftday = String(lodashget(filterlist, 'prev0', '0')) !== '0' ? getPercent('filterelements_prefilter1_leftday', Pre_filter1) : emptyFilter
+      const prefilter2_leftday = String(lodashget(filterlist, 'prev1', '0')) !== '0' ? getPercent('filterelements_prefilter2_leftday', Pre_filter2) : emptyFilter
+      const prefilter3_leftday = String(lodashget(filterlist, 'prev2', '0')) !== '0' ? getPercent('filterelements_prefilter3_leftday', Pre_filter3) : emptyFilter
+      const posfilter1_leftday = String(lodashget(filterlist, 'post0', '0')) !== '0' ? getPercent('filterelements_posfilter1_leftday', Post_filter1) : emptyFilter
+      const posfilter2_leftday = String(lodashget(filterlist, 'post1', '0')) !== '0' ? getPercent('filterelements_posfilter2_leftday', Post_filter2) : emptyFilter
+      const posfilter3_leftday = String(lodashget(filterlist, 'post2', '0')) !== '0' ? getPercent('filterelements_posfilter3_leftday', Post_filter3) : emptyFilter
       const {MODLifePercent,Pre_filter1_percent,Pre_filter2_percent,Pre_filter3_percent,Pos_filter1_percent,Pos_filter2_percent,Pos_filter3_percent,UV} = srvdata;
       // const {prefilter1_leftday,prefilter2_leftday,prefilter3_leftday,posfilter1_leftday,posfilter2_leftday,} = srvdata;
       // const outwater_quality = getPercent('main_outwater_quality', homedata.main_outwater_quality);
       const modlife_flow = getPercent('filterelements_modlife_flow', MODLifePercent);
-      const prefilter1_flow = getPercent('filterelements_prefilter1_flow', Pre_filter1_percent);
-      const prefilter2_flow = getPercent('filterelements_prefilter2_flow', Pre_filter2_percent);
-      const prefilter3_flow = getPercent('filterelements_prefilter3_flow', Pre_filter3_percent);
-      const posfilter1_flow = getPercent('filterelements_posfilter1_flow', Pos_filter1_percent);
-      const posfilter2_flow = getPercent('filterelements_posfilter2_flow', Pos_filter2_percent);
-      const posfilter3_flow = getPercent('filterelements_posfilter3_flow', Pos_filter3_percent);
+      const prefilter1_flow = String(lodashget(filterlist, 'prev0', '0')) !== '0' ? getPercent('filterelements_prefilter1_flow', Pre_filter1_percent) : emptyFilter;
+      const prefilter2_flow = String(lodashget(filterlist, 'prev1', '0')) !== '0' ? getPercent('filterelements_prefilter2_flow', Pre_filter2_percent) : emptyFilter;
+      const prefilter3_flow = String(lodashget(filterlist, 'prev2', '0')) !== '0' ? getPercent('filterelements_prefilter3_flow', Pre_filter3_percent) : emptyFilter;
+      const posfilter1_flow = String(lodashget(filterlist, 'post0', '0')) !== '0' ? getPercent('filterelements_posfilter1_flow', Pos_filter1_percent) : emptyFilter;
+      const posfilter2_flow = String(lodashget(filterlist, 'post1', '0')) !== '0' ? getPercent('filterelements_posfilter2_flow', Pos_filter2_percent) : emptyFilter;
+      const posfilter3_flow = String(lodashget(filterlist, 'post2', '0')) !== '0' ? getPercent('filterelements_posfilter3_flow', Pos_filter3_percent) : emptyFilter;
       const uvfilter_flow = getPercent('filterelements_uvfilter_flow', UV);
       // //以下是滤芯部分
       // filterelements_modlife_leftvol:39,//电离子膜寿命剩余流量
@@ -363,7 +371,7 @@ const TopChart = injectIntl((props)=>{
                     )
                     : ''
                 }
-                { !!srvdata && uvfilter.ishave && <SingleChart {...uvfilter} /> }
+                {/* { !!srvdata && uvfilter.ishave && <SingleChart {...uvfilter} /> } */}
             </Col>
         </Row>
       </React.Fragment>
@@ -550,7 +558,7 @@ class DataDetails extends React.PureComponent {
         }));
     }
     render() {
-        const { history, curdevice, is_admin } = this.props;
+        const { history, curdevice, is_admin, filterlist } = this.props;
         const { formatMessage } = this.props.intl;
         const tzs = timezoneOption();
 
@@ -703,7 +711,8 @@ class DataDetails extends React.PureComponent {
         }
         ]
 
-        const adminColumns = [{
+        const adminColumns = [
+          {
             title: <FormattedMessage id="table.systime" />,
             dataIndex: 'systime',
             key: 'systime'
@@ -958,7 +967,7 @@ class DataDetails extends React.PureComponent {
                     </Col>
                 </Row>
                 <TopMonitor {...realtimedata} />
-                <TopChart {...realtimedata} />
+                <TopChart {...realtimedata} curdevice={curdevice} />
                 <Row gutter={24} style={{marginTop: 30, padding: '0 10px'}}>
                     {/* <Col span={2}></Col> */}
                     <Col span={16} className="sub-title">
@@ -1022,10 +1031,10 @@ class DataDetails extends React.PureComponent {
         )
     }
 }
-const mapStateToProps =  ({devicedetail:{srvdata,data_spot,dataMode}, userlogin: { is_admin }}, { curdevice}) =>{
+const mapStateToProps =  ({devicedetail:{srvdata, data_spot,dataMode}, userlogin: { is_admin }}, { curdevice}) =>{
   // const curdevice = lodashget(devices,`${props.match.params.id}`,{});
   console.log(curdevice)
-  return {curdevice,srvdata,data_spot,dataMode, is_admin};
+  return {curdevice,srvdata, data_spot,dataMode, is_admin};
 };
 DataDetails = connect(mapStateToProps)(DataDetails);
 export default withRouter(injectIntl(DataDetails));

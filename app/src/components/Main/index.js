@@ -303,6 +303,7 @@ class Home extends PureComponent{
 
       const devicelist_prev = [];
       const devicelist_post = [];
+      console.log('devicelist:', devicelist)
       lodashmap(devicelist,(dv)=>{
         if(dv.isprev){
           if(String(dv.life) !== '0'){
@@ -316,6 +317,8 @@ class Home extends PureComponent{
           }
         }
       });
+      console.log('prev:', devicelist_prev)
+      console.log('post:', devicelist_post)
 
         const getFilterCo = (idname,v)=>{
           const labelstring = getFilterLabel(intl,idname,v);
@@ -504,6 +507,7 @@ class Home extends PureComponent{
 }
 const mapStateToProps =  ({devicedata:{isgetdata,homedata,performancedata},device:{devicelist}, devicedata:{ filterlist }, app: { locale }}) =>{
   const { prev0lastchangedate, prev1lastchangedate, prev2lastchangedate, post0lastchangedate, post1lastchangedate, post2lastchangedate } = devicelist
+  console.log('pre filterlist:', filter_list)
   const initData = convertfromfilterlist(filterlist)
   initData['prev0'] = {...initData['prev0'], lastchangedate: prev0lastchangedate }
   initData['prev1'] = {...initData['prev1'], lastchangedate: prev1lastchangedate }
@@ -512,6 +516,9 @@ const mapStateToProps =  ({devicedata:{isgetdata,homedata,performancedata},devic
   initData['post1'] = {...initData['post1'], lastchangedate: post1lastchangedate }
   initData['post2'] = {...initData['post2'], lastchangedate: post2lastchangedate }
   const filter_list = filterlistConvertToArray(initData)
+  console.log('Home Data:', homedata)
+  console.log('devicelist:', devicelist)
+  console.log('filter_list:', filter_list)
   return {isgetdata,homedata,performancedata,devicelist:filter_list, locale};
 };
 Home = connect(mapStateToProps)(Home);

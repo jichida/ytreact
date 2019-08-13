@@ -163,6 +163,7 @@ const TopChart = injectIntl((props)=>{
       // "UV" : "60",//UV d[U] {界面13}
       //
       const { MODLife, Pre_filter1, Pre_filter2, Pre_filter3, Post_filter1, Post_filter2, Post_filter3 } = srvdata
+      console.log('srvdata:', srvdata)
       const modlife_lefeday = getPercent('filterelements_modlife_leftday', MODLife)
       const prefilter1_leftday = getPercent('filterelements_prefilter1_leftday', Pre_filter1)
       const prefilter2_leftday = getPercent('filterelements_prefilter2_leftday', Pre_filter2)
@@ -311,17 +312,17 @@ const TopChart = injectIntl((props)=>{
               lifewarring: posfilter2_leftday.warring,
               ishave: posfilter2_flow.ishave
           },
-          {
-              title:  `${formatMessage({id: 'machine.data.afterfilter3'})}`,
-              unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              // data: posfilter3_flow.value,
-              flow: posfilter3_flow.percent,
-              flowwarring: posfilter3_flow.warring,
-              life: posfilter3_leftday.percent,
-              data: posfilter3_leftday.value,
-              lifewarring: posfilter3_leftday.warring,
-              ishave: posfilter3_flow.ishave
-          }
+          // {
+          //     title:  `${formatMessage({id: 'machine.data.afterfilter3'})}`,
+          //     unit: `${formatMessage({id: 'machine.data.flow'})}`,
+          //     // data: posfilter3_flow.value,
+          //     flow: posfilter3_flow.percent,
+          //     flowwarring: posfilter3_flow.warring,
+          //     life: posfilter3_leftday.percent,
+          //     data: posfilter3_leftday.value,
+          //     lifewarring: posfilter3_leftday.warring,
+          //     ishave: posfilter3_flow.ishave
+          // }
       ]
 
       uvfilter = {

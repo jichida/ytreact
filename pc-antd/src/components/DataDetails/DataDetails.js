@@ -343,7 +343,7 @@ const TopChart = injectIntl((props)=>{
     return (
       <React.Fragment>
         <Row gutter={24}>
-          <Col span={24} style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginLeft: '40px'}}>
+          <Col span={24} style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginLeft: '40px', marginTop: '20px', marginBottom: '20px'}}>
             <div style={{marginRight: '5px', display: 'flex', alignItems: 'center'}}><img src={green} alt="" style={{width: 'auto', height: '10px'}} /></div>
             <div style={{marginRight: '10px', fontSize: '12px', height: '20px'}}><FormattedMessage id="machine.data.flow" /></div>
             <div style={{marginRight: '5px', display: 'flex', alignItems: 'center'}}><img src={blue} alt="" style={{width: 'auto', height: '10px'}} /></div>
@@ -375,9 +375,6 @@ const TopChart = injectIntl((props)=>{
 })
 
 const Chart = ({title, unit, data, flow, life, flowwarring, lifewarring, intl:{ formatMessage }})=>{
-  console.log('Title:', title)
-  console.log('Life', life)
-  console.log('Data:', data)
     return (
         <div className="chart">
           <div className="bottom">

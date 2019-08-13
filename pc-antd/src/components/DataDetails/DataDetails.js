@@ -134,10 +134,6 @@ const getPercent = (id,value) => {
     if(percent <= cf.warringPercent || !value){
         warring = true;
     }
-    console.log('ID:', id)
-    console.log('Value:', value)
-    console.log('Totle Value:', cf.value)
-    console.log('Percent:', percent)
     return {
         value,
         percent: percent > 1 ? percent : 1,
@@ -357,7 +353,7 @@ const TopChart = injectIntl((props)=>{
           </Col>
         </Row>
         <Row gutter={24} style={{padding: '10px 26px'}}>
-            <Col span={24} style={{display: 'flex', justifyContent: 'space-between'}}>
+            <Col span={24} style={{display: 'flex', justifyContent: 'flex-start'}}>
                 {
                   !!srvdata ? (
                      _.map(chartData, (item, index)=>{

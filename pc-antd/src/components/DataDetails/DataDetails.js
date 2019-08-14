@@ -127,10 +127,12 @@ const TopMonitor = injectIntl((props)=>{
     )
 })
 
-const getPercent = (id,value) => {
+const getPercent = (id,value, full) => {
+    console.log('left day:', value)
+    console.log('full day:', full)
     let cf = config[id];
     let warring = false;
-    let percent = Math.round(value/cf.value * 100) ;
+    let percent = !!full ? Math.round(value/full*100) : Math.round(value/cf.value * 100);
     if(percent <= cf.warringPercent || !value){
         warring = true;
     }
@@ -169,12 +171,12 @@ const TopChart = injectIntl((props)=>{
       const { MODLife, Pre_filter1, Pre_filter2, Pre_filter3, Post_filter1, Post_filter2, Post_filter3 } = srvdata
       console.log('srvdata:', srvdata)
       const modlife_lefeday = getPercent('filterelements_modlife_leftday', MODLife)
-      const prefilter1_leftday = String(lodashget(filterlist, 'prev0', '0')) !== '0' ? getPercent('filterelements_prefilter1_leftday', Pre_filter1) : emptyFilter
-      const prefilter2_leftday = String(lodashget(filterlist, 'prev1', '0')) !== '0' ? getPercent('filterelements_prefilter2_leftday', Pre_filter2) : emptyFilter
-      const prefilter3_leftday = String(lodashget(filterlist, 'prev2', '0')) !== '0' ? getPercent('filterelements_prefilter3_leftday', Pre_filter3) : emptyFilter
-      const posfilter1_leftday = String(lodashget(filterlist, 'post0', '0')) !== '0' ? getPercent('filterelements_posfilter1_leftday', Post_filter1) : emptyFilter
-      const posfilter2_leftday = String(lodashget(filterlist, 'post1', '0')) !== '0' ? getPercent('filterelements_posfilter2_leftday', Post_filter2) : emptyFilter
-      const posfilter3_leftday = String(lodashget(filterlist, 'post2', '0')) !== '0' ? getPercent('filterelements_posfilter3_leftday', Post_filter3) : emptyFilter
+      const prefilter1_leftday = String(lodashget(filterlist, 'prev0', '0')) !== '0' ? getPercent('filterelements_prefilter1_leftday', Pre_filter1, lodashget(curdevice, 'devicelist.filterlist[0].life')) : emptyFilter
+      const prefilter2_leftday = String(lodashget(filterlist, 'prev1', '0')) !== '0' ? getPercent('filterelements_prefilter2_leftday', Pre_filter2, lodashget(curdevice, 'devicelist.filterlist[1].life')) : emptyFilter
+      const prefilter3_leftday = String(lodashget(filterlist, 'prev2', '0')) !== '0' ? getPercent('filterelements_prefilter3_leftday', Pre_filter3, lodashget(curdevice, 'devicelist.filterlist[2].life')) : emptyFilter
+      const posfilter1_leftday = String(lodashget(filterlist, 'post0', '0')) !== '0' ? getPercent('filterelements_posfilter1_leftday', Post_filter1, lodashget(curdevice, 'devicelist.filterlist[3].life')) : emptyFilter
+      const posfilter2_leftday = String(lodashget(filterlist, 'post1', '0')) !== '0' ? getPercent('filterelements_posfilter2_leftday', Post_filter2, lodashget(curdevice, 'devicelist.filterlist[4].life')) : emptyFilter
+      const posfilter3_leftday = String(lodashget(filterlist, 'post2', '0')) !== '0' ? getPercent('filterelements_posfilter3_leftday', Post_filter3, lodashget(curdevice, 'devicelist.filterlist[5].life')) : emptyFilter
       const {MODLifePercent,Pre_filter1_percent,Pre_filter2_percent,Pre_filter3_percent,Pos_filter1_percent,Pos_filter2_percent,Pos_filter3_percent,UV} = srvdata;
       // const {prefilter1_leftday,prefilter2_leftday,prefilter3_leftday,posfilter1_leftday,posfilter2_leftday,} = srvdata;
       // const outwater_quality = getPercent('main_outwater_quality', homedata.main_outwater_quality);
@@ -1024,7 +1026,7 @@ class DataDetails extends React.PureComponent {
         )
     }
 }
-const mapStateToProps =  ({devicedetail:{srvdata, data_spot,dataMode}, userlogin: { is_admin }}, { curdevice}) =>{
+const mapStateToProps =  ({devicedetail:{srvdata, data_spot, dataMode}, userlogin: { is_admin }}, { curdevice}) =>{
   // const curdevice = lodashget(devices,`${props.match.params.id}`,{});
   console.log(curdevice)
   return {curdevice,srvdata, data_spot,dataMode, is_admin};

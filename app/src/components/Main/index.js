@@ -219,7 +219,7 @@ class Home extends PureComponent{
     //       title_filterelements_posfilter1_leftvol = intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'});
     //       icon_filterelements_posfilter1_leftvol = CRed;
     //   }
-      const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', lodashget(devicedata,'filterelements_posfilter1_leftday',0), lodashget(devicelist[4], 'life', lodashget(devicedata,'filterelements_posfilter1_leftday',0)*100));
+      const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', lodashget(devicedata,'filterelements_posfilter1_leftday',0), lodashget(devicelist[3], 'life', lodashget(devicedata,'filterelements_posfilter1_leftday',0)*100));
       const icon_filterelements_posfilter1_leftday = posfilter1_leftday.color;
       const title_filterelements_posfilter1_leftday = (posfilter1_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})
@@ -253,7 +253,7 @@ class Home extends PureComponent{
     //       icon_filterelements_posfilter2_leftvol = CRed;
     //   }
 
-      const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', lodashget(devicedata,'filterelements_posfilter2_leftday',0), lodashget(devicelist[5], 'life', lodashget(devicedata,'filterelements_posfilter2_leftday',0)*100));
+      const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', lodashget(devicedata,'filterelements_posfilter2_leftday',0), lodashget(devicelist[4], 'life', lodashget(devicedata,'filterelements_posfilter2_leftday',0)*100));
       const icon_filterelements_posfilter2_leftday = posfilter2_leftday.color;
       const title_filterelements_posfilter2_leftday = (posfilter2_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})
@@ -507,14 +507,15 @@ class Home extends PureComponent{
 }
 const mapStateToProps =  ({devicedata:{isgetdata,homedata,performancedata},device:{devicelist}, devicedata:{ filterlist }, app: { locale }}) =>{
   const { prev0lastchangedate, prev1lastchangedate, prev2lastchangedate, post0lastchangedate, post1lastchangedate, post2lastchangedate } = devicelist
-  console.log('pre filterlist:', filter_list)
+  console.log('pre filterlist:', filterlist)
   const initData = convertfromfilterlist(filterlist)
-  initData['prev0'] = {...initData['prev0'], lastchangedate: prev0lastchangedate }
-  initData['prev1'] = {...initData['prev1'], lastchangedate: prev1lastchangedate }
-  initData['prev2'] = {...initData['prev2'], lastchangedate: prev2lastchangedate }
-  initData['post0'] = {...initData['post0'], lastchangedate: post0lastchangedate }
-  initData['post1'] = {...initData['post1'], lastchangedate: post1lastchangedate }
-  initData['post2'] = {...initData['post2'], lastchangedate: post2lastchangedate }
+  console.log('initData:', initData)
+  initData['prev0'] = {...initData['prev0'], lastchangedate: prev0lastchangedate, life: [lodashget(devicelist, 'filterlist[0].life')] }
+  initData['prev1'] = {...initData['prev1'], lastchangedate: prev1lastchangedate, life: [lodashget(devicelist, 'filterlist[1].life')] }
+  initData['prev2'] = {...initData['prev2'], lastchangedate: prev2lastchangedate, life: [lodashget(devicelist, 'filterlist[2].life')] }
+  initData['post0'] = {...initData['post0'], lastchangedate: post0lastchangedate, life: [lodashget(devicelist, 'filterlist[3].life')] }
+  initData['post1'] = {...initData['post1'], lastchangedate: post1lastchangedate, life: [lodashget(devicelist, 'filterlist[4].life')] }
+  // initData['post2'] = {...initData['post2'], lastchangedate: post2lastchangedate, life: [lodashget(devicelist, 'filterlist[5].life', 180)] }
   const filter_list = filterlistConvertToArray(initData)
   console.log('Home Data:', homedata)
   console.log('devicelist:', devicelist)

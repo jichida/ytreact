@@ -161,6 +161,73 @@ const filtervaluetoindex = (idname,life)=>{
   }
 }
 
+const filterindextovalue = (idname,index)=>{
+  if(idname === "prev0"){
+    if(index === 0) {
+      return 0;
+    }
+    if(index === 1){
+      return 30;
+    }
+    if(index === 2){
+      return 60;
+    }
+    if(index === 3){
+      return 90;
+    }
+  }
+  if(idname === "prev1"){
+    if(index === 0) {
+      return 0;
+    }
+    if(index === 1){
+      return 30;
+    }
+    if(index === 2){
+      return 60;
+    }
+  }
+  if(idname === "prev2"){
+    if(index === 0) {
+      return 0;
+    }
+    if(index === 1){
+      return 180;
+    }
+    if(index === 2){
+      return 360;
+    }
+  }
+  if(idname === "post0"){
+    if(index === 0) {
+      return 0;
+    }
+    if(index === 1){
+      return 180;
+    }
+    if(index === 2){
+      return 360;
+    }
+    if(index === 3){
+      return 540;
+    }
+  }
+  if(idname === "post1"){
+    if(index === 0) {
+      return 0;
+    }
+    if(index === 1){
+      return 180;
+    } else {
+      return 180
+    }
+    
+  }
+  if(idname === "post2"){
+    return 0;
+  }
+}
+
 export const convertfilterlist = (filterlist)=>{
   let prev0 = filtervaluetoindex(filterlist['prev0'].idname, filterlist['prev0'].life[0]) || 0;
   let prev1 = filtervaluetoindex(filterlist['prev1'].idname, filterlist['prev1'].life[0]) || 0;
@@ -204,6 +271,43 @@ export const convertfromfilterlist  = ({prev0,prev1,prev2,post0,post1,post2})=>{
     isprev: false,
     life: post2 === 0 ? [0] : [post1Options[post2-1].value],
   }
+  console.log('newlist:', newlist)
+  return newlist
+}
+
+export const mainconvertfromfilterlist  = ({prev0,prev1,prev2,post0,post1,post2})=>{
+  let newlist = {}
+  newlist['prev0'] = {
+    idname:'prev0',
+    isprev: true,
+    life: [filterindextovalue('prev0', prev0)]
+  }
+  newlist['prev1'] = {
+    idname:'prev1',
+    isprev: true,
+    life: [filterindextovalue('prev1', prev1)]
+  }
+  newlist['prev2'] = {
+    idname:'prev2',
+    isprev: true,
+    life: [filterindextovalue('prev2', prev2)]
+  }
+  newlist['post0'] = {
+    idname:'post0',
+    isprev: false,
+    life: [filterindextovalue('post0', post0)]
+  }
+  newlist['post1'] = {
+    idname:'post1',
+    isprev: false,
+    life: [filterindextovalue('post1', post1)]
+  }
+  newlist['post2'] = {
+    idname:'post2',
+    isprev: false,
+    life: [filterindextovalue('post2', post2)]
+  }
+  console.log('newlist:', newlist)
   return newlist
 }
 

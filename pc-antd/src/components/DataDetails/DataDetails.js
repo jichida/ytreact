@@ -128,8 +128,6 @@ const TopMonitor = injectIntl((props)=>{
 })
 
 const getPercent = (id,value, full) => {
-    console.log('left day:', value)
-    console.log('full day:', full)
     let cf = config[id];
     let warring = false;
     let percent = !!full ? Math.round(value/full*100) : Math.round(value/cf.value * 100);

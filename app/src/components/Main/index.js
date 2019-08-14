@@ -22,8 +22,6 @@ const CGreen = '#3eef7d';
 const CBlue = '#38b4f2';
 
 const getPercent = (id, value, full) => {
-    console.log('GetPercent value:', value)
-    console.log('GetPercent Full:', full)
     let cf = config[id];
     let color = CGreen;
     let warring = false;
@@ -507,9 +505,7 @@ class Home extends PureComponent{
 }
 const mapStateToProps =  ({devicedata:{isgetdata,homedata,performancedata},device:{devicelist}, devicedata:{ filterlist }, app: { locale }}) =>{
   const { prev0lastchangedate, prev1lastchangedate, prev2lastchangedate, post0lastchangedate, post1lastchangedate, post2lastchangedate } = devicelist
-  console.log('pre filterlist:', filterlist)
   const initData = convertfromfilterlist(filterlist)
-  console.log('initData:', initData)
   initData['prev0'] = {...initData['prev0'], lastchangedate: prev0lastchangedate, life: [lodashget(devicelist, 'filterlist[0].life')] }
   initData['prev1'] = {...initData['prev1'], lastchangedate: prev1lastchangedate, life: [lodashget(devicelist, 'filterlist[1].life')] }
   initData['prev2'] = {...initData['prev2'], lastchangedate: prev2lastchangedate, life: [lodashget(devicelist, 'filterlist[2].life')] }
@@ -517,9 +513,6 @@ const mapStateToProps =  ({devicedata:{isgetdata,homedata,performancedata},devic
   initData['post1'] = {...initData['post1'], lastchangedate: post1lastchangedate, life: [lodashget(devicelist, 'filterlist[4].life')] }
   // initData['post2'] = {...initData['post2'], lastchangedate: post2lastchangedate, life: [lodashget(devicelist, 'filterlist[5].life', 180)] }
   const filter_list = filterlistConvertToArray(initData)
-  console.log('Home Data:', homedata)
-  console.log('devicelist:', devicelist)
-  console.log('filter_list:', filter_list)
   return {isgetdata,homedata,performancedata,devicelist:filter_list, locale};
 };
 Home = connect(mapStateToProps)(Home);

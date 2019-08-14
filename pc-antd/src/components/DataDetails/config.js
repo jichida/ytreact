@@ -25,7 +25,7 @@ const config = {
         warringPercent: 10,
     },
     'filterelements_posfilter1_leftday':{
-        value: 90,
+        value: 190,
         fullPercent: 95,
         warringPercent: 10,
     },
@@ -35,7 +35,7 @@ const config = {
         warringPercent: 10,
     },
     'filterelements_posfilter3_leftday':{
-        value: 90,
+        value: 190,
         fullPercent: 95,
         warringPercent: 10,
     },

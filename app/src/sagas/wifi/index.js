@@ -839,6 +839,7 @@ export function* wififlow() {
       try{
         let {payload:result} = action;
         const delaytime = 15000;
+        console.log(`wifi_getssidlist_request start loading`);
         yield put(set_weui({
           toast:{
             type:'loading',

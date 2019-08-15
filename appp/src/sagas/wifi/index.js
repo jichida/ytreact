@@ -794,8 +794,10 @@ export function* wififlow() {
       try{
         let {payload:result} = action;
         const delaytime = 15000;
+        console.log(`wifi_start_loading....`);
                 //wifi_getssidlist_request
         const res = yield call(checkLocation_promise);
+        console.log(`checkLocation_promise===>${res.code}`);
         if(res.code === -1){
           yield put(set_confirm({
             title: `${intl.formatMessage({id: 'form.confirm'})}`,

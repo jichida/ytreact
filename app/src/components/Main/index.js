@@ -15,7 +15,7 @@ import '../../assets/wlimg.png';
 import home_bgimg from '../../assets/zhuye_bg.png';
 import {wifi_sendcmd_request, set_confirm} from '../../actions';
 import {getFilterLabel} from '../EquipmentList/config.js';
-import { convertfromfilterlist, filterlistConvertToArray } from './filterconfig'
+import { mainconvertfromfilterlist, filterlistConvertToArray } from './filterconfig'
 import {intl,getintlmessage} from '../../util/globalIntl';
 const CRed = '#ff2728';
 const CGreen = '#3eef7d';
@@ -505,12 +505,12 @@ class Home extends PureComponent{
 }
 const mapStateToProps =  ({devicedata:{isgetdata,homedata,performancedata},device:{devicelist}, devicedata:{ filterlist }, app: { locale }}) =>{
   const { prev0lastchangedate, prev1lastchangedate, prev2lastchangedate, post0lastchangedate, post1lastchangedate, post2lastchangedate } = devicelist
-  const initData = convertfromfilterlist(filterlist)
-  initData['prev0'] = {...initData['prev0'], lastchangedate: prev0lastchangedate, life: [lodashget(devicelist, 'filterlist[0].life')] }
-  initData['prev1'] = {...initData['prev1'], lastchangedate: prev1lastchangedate, life: [lodashget(devicelist, 'filterlist[1].life')] }
-  initData['prev2'] = {...initData['prev2'], lastchangedate: prev2lastchangedate, life: [lodashget(devicelist, 'filterlist[2].life')] }
-  initData['post0'] = {...initData['post0'], lastchangedate: post0lastchangedate, life: [lodashget(devicelist, 'filterlist[3].life')] }
-  initData['post1'] = {...initData['post1'], lastchangedate: post1lastchangedate, life: [lodashget(devicelist, 'filterlist[4].life')] }
+  const initData = mainconvertfromfilterlist(filterlist)
+  initData['prev0'] = {...initData['prev0'], lastchangedate: prev0lastchangedate }
+  initData['prev1'] = {...initData['prev1'], lastchangedate: prev1lastchangedate }
+  initData['prev2'] = {...initData['prev2'], lastchangedate: prev2lastchangedate }
+  initData['post0'] = {...initData['post0'], lastchangedate: post0lastchangedate }
+  initData['post1'] = {...initData['post1'], lastchangedate: post1lastchangedate }
   // initData['post2'] = {...initData['post2'], lastchangedate: post2lastchangedate, life: [lodashget(devicelist, 'filterlist[5].life', 180)] }
   const filter_list = filterlistConvertToArray(initData)
   return {isgetdata,homedata,performancedata,devicelist:filter_list, locale};

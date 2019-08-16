@@ -244,13 +244,13 @@ class Index extends React.Component {
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
-                              this.onClickCmd(`$decpression%`,`${intl.formatMessage({id: 'setting.system.decompression'})}`);//20	废水阀泄压	整机泄压	$decpression%
-                            }}>
-                                <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
+                              this.onClickCmd(`$prep%`,`${intl.formatMessage({id: 'setting.system.exhaustwash'})}`);
+                            }} >
+                                <FormattedMessage id="setting.system.rinse" defaultMessage="冲洗" />
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.system.decompression" defaultMessage="废水阀泄压" /></List.Item>
+                ><FormattedMessage id="setting.system.exhaustwash" defaultMessage="排气冲洗" /></List.Item>
 
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
@@ -291,7 +291,7 @@ class Index extends React.Component {
                     extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
                               //柠檬酸冲洗	柠檬酸	$app_acid%
-                              this.onClickCmd(`$app_acid%`,`${intl.formatMessage({id: 'setting.system.rinse'})}`);//12	柠檬酸冲洗
+                              this.onClickCmd(`$app_acid%`,`${intl.formatMessage({id: 'setting.system.Citric'})}`);//12	柠檬酸冲洗
                             }}>
                                 <FormattedMessage id="setting.system.rinse" defaultMessage="冲洗" />
                             </Button>
@@ -302,13 +302,13 @@ class Index extends React.Component {
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
-                              this.onClickCmd(`$prep%`,`${intl.formatMessage({id: 'setting.system.exhaustwash'})}`);
-                            }} >
-                                <FormattedMessage id="setting.system.rinse" defaultMessage="冲洗" />
+                              this.onClickCmd(`$decpression%`,`${intl.formatMessage({id: 'setting.system.decompression'})}`);//20	废水阀泄压	整机泄压	$decpression%
+                            }}>
+                                <FormattedMessage id="setting.system.resetbt" defaultMessage="重置" />
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.system.exhaustwash" defaultMessage="排气冲洗" /></List.Item>
+                ><FormattedMessage id="setting.system.decompression" defaultMessage="废水阀泄压" /></List.Item>
 
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >

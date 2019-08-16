@@ -30,11 +30,19 @@ import {
     app_sendcmd_request,
     app_sendcmd_result,
 
-    push_devicecmddata
+    push_devicecmddata,
+
+    getsurvey_request,
+    getsurvey_result,
+
+    savesurvey_request,
+    savesurvey_result
   } from '../../actions';
 
 //接收的对应关系
 const recvmessagetoresultpair = {
+  'savesurvey_result':savesurvey_result,
+  'getsurvey_result':getsurvey_result,
   'push_devicecmddata':push_devicecmddata,
   'app_sendcmd_result':app_sendcmd_result,
   'changepwd_result':changepwd_result,
@@ -66,6 +74,8 @@ const sendmessagefnsz = {
 
 //验证发送接口
 const sendmessageauthfnsz = {
+  'getsurvey':`${getsurvey_request}`,
+  'savesurvey':`${savesurvey_request}`,
   'app_sendcmd':`${app_sendcmd_request}`,
   'adddevice':`${adddevice_request}`,
   'getdevice':`${getdevice_request}`,

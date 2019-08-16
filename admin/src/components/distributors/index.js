@@ -85,11 +85,11 @@ const DistributorEdit = (props) => {
              <FormTab label="详细信息">
               <MarkdownInput label="内容" source="intro" />
              </FormTab>
-              <FormTab label="报警设置">
+              {/* <FormTab label="报警设置">
              <BooleanInput label="接受设备离线报警" source="alarmsettings.isrecvalaram_deviceoffline" validation={{ required: true }}/>
              <BooleanInput label="接受设备错误报警" source="alarmsettings.isrecvalaram_deviceerr" validation={{ required: true }}/>
              <BooleanInput label="接受滤芯到期报警" source="alarmsettings.isrecvalaram_filterexp" validation={{ required: true }}/>
-             </FormTab>
+             </FormTab> */}
 
              </TabbedForm>
       </Edit>);

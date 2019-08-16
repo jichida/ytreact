@@ -16,7 +16,7 @@ import {
   Filter,
   ReferenceInput,
   ReferenceField,
-  DateField
+  DateInput
 } from 'react-admin';
 import TextFieldBool from '../controls/TextFieldBool';
 import ImageArrayField from '../controls/imagearrayfield';
@@ -49,6 +49,13 @@ TextFieldDate.defaultProps = {
 const DeviceuserEdit = (props) => {
       return (<Edit title={<DeviceuserTitle />} {...props}>
         <TabbedForm>
+          <FormTab label="设备设置">
+            <TextInput label="设备编号" source="syssettings.deviceid" />
+            <DateInput label="购买日期" source="syssettings.buydate" />
+            <DateInput label="安装日期" source="syssettings.installdate"  />
+            <TextInput label="安装人员" source="syssettings.installer"  />
+            <TextField label="时区" source="syssettings.timezone"  />
+          </FormTab>
           <FormTab label="基本信息">
             <ReferenceInput label="经销商" source="distributorid" reference="distributor" allowEmpty>
                 <SelectInput optionText="name" />
@@ -67,13 +74,16 @@ const DeviceuserEdit = (props) => {
             <TextInput label="用水人数（人）" source="usewater.persons" />
             <TextInput label="直饮水点（个）" source="usewater.spot"  />
             <TextInput label="水压" source="usewater.watergage"  />
-            {/* <TextInput label="需装增压泵" source="usewater.booster"  /> */}
             <NullableBooleanInput label="需装增压泵" source="usewater.booster"  />
+            <SelectInput label="进水水源"  source="usewater.source" choices={[
+                { id: '地下水', name: '地下水' },
+                { id: '市政水', name: '市政水' },
+            ]} />
             <TextInput label="卫浴间数量" source="usewater.bathrooms"  />
-            {/* <TextInput label="是否分流" source="usewater.shunt"  /> */}
             <NullableBooleanInput label="是否分流" source="usewater.shunt"  />
+            <TextInput label="用户需求出水TDS值" source="usewater.usertds"  />
           </FormTab>
-          <FormTab label="安装信息">
+          <FormTab label="安装环境">
             <TextInput label="安装地点" source="install.position" />
             {/* <TextInput label="是否避光" source="install.avoidlight" /> */}
             <NullableBooleanInput label="是否避光" source="install.avoidlight" />
@@ -88,13 +98,6 @@ const DeviceuserEdit = (props) => {
             {/* <TextInput label="有无电源" source="install.power"  /> */}
             <NullableBooleanInput label="有无电源" source="install.power"  />
         </FormTab>
-          <FormTab label="系统设置">
-            <TextInput label="设备编号" source="syssettings.deviceid" />
-            <TextFieldDate label="购买日期" source="syssettings.buydate" />
-            <TextFieldDate label="安装日期" source="syssettings.installdate"  />
-            <TextField label="安装人员" source="syssettings.installer"  />
-            <TextField label="时区" source="syssettings.timezone"  />
-          </FormTab>
           <FormTab label="安装检查表">
             <TextFieldBool label="滤芯已冲洗" source="checklist.washed" />
             <TextFieldBool label="进水压力已符合标准" source="checklist.uptostandard" />
@@ -107,6 +110,54 @@ const DeviceuserEdit = (props) => {
             <TextFieldBool label="出水水质正常" source="checklist.quality"  />
             <TextFieldBool label="设备已交付使用" source="checklist.delivered"  />
             <ImageArrayField label="拍摄安装图" source="checklist.pictures"  />
+          </FormTab>
+          <FormTab label="设备清单">
+          <SelectInput label="前置滤芯1"  source="appdata.filterlist.prev0" choices={[
+                { id: 0, name: '无' },
+                { id: 1, name: 'PP滤芯(30天)' },
+                { id: 2, name: 'PP滤芯(60天)' },
+                { id: 3, name: 'PP滤芯(90天)' }
+            ]} />
+             <SelectInput label="前置滤芯2"  source="appdata.filterlist.prev1" choices={[
+                { id: 0, name: '无' },
+                { id: 1, name: '活性炭(30天)' },
+                { id: 2, name: '活性炭(60天)' }
+            ]} />
+             <SelectInput label="前置滤芯3"  source="appdata.filterlist.prev2" choices={[
+                { id: 0, name: '无' },
+                { id: 1, name: 'TAC滤芯(180天)' },
+                { id: 2, name: 'TAC滤芯(360天)' }
+            ]} />
+           <SelectInput label="后置滤芯1"  source="appdata.filterlist.post0" choices={[
+                { id: 0, name: '无' },
+                { id: 1, name: 'LED UVC(180天)' },
+                { id: 2, name: 'LED UVC(360天)' },
+                { id: 3, name: 'LED UVC(540天)' }
+            ]} />
+            <SelectInput label="后置滤芯2"  source="appdata.filterlist.post1" choices={[
+                { id: 0, name: '无' },
+                { id: 1, name: 'AFC滤芯(180天)' }
+            ]} />
+             <SelectInput label="后置滤芯3"  source="appdata.filterlist.post2" choices={[
+                { id: 0, name: '无' }
+            ]} />
+          <DateInput label="前置1安装日期" source="devicelist.prev0lastchangedate"  />
+          <DateInput label="前置2安装日期" source="devicelist.prev1lastchangedate"  />
+          <DateInput label="前置3安装日期" source="devicelist.prev2lastchangedate"  />
+          <DateInput label="后置1安装日期" source="devicelist.post0lastchangedate"  />
+          <DateInput label="后置2安装日期" source="devicelist.post1lastchangedate"  />
+          <DateInput label="后置3安装日期" source="devicelist.post2lastchangedate"  />
+          <TextInput label="主机" source="devicelist.host"  />
+          <TextInput label="其他" source="devicelist.others"  />
+          <TextInput label="阀门" source="devicelist.pipefittings.valve"  />
+          <TextInput label="活接" source="devicelist.pipefittings.connection"  />
+          <TextInput label="弯头" source="devicelist.pipefittings.elbow"  />
+          <TextInput label="三通" source="devicelist.pipefittings.triplet"  />
+          <TextInput label="对丝" source="devicelist.pipefittings.silkpair"  />
+          <TextInput label="丝转" source="devicelist.pipefittings.silkspin"  />
+          <TextInput label="其他" source="devicelist.pipefittings.others"  />
+          <TextInput label="其他配置" source="devicelist.configuration"  />
+          <TextInput label="管路材质" source="devicelist.materials"  />
           </FormTab>
         </TabbedForm>
       </Edit>);

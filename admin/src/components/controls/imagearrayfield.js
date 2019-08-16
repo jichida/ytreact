@@ -22,7 +22,7 @@ export const ImageArrayField = ({ elStyle = {}, record, source, title }) => {
         window.open(url);
     }
     const titleValue = get(record, title) || title;
-    const srcValuez = get(record, source);
+    const srcValuez = get(record, source) || [];
 
     if (srcValuez.length === 0) {
         return <div />;

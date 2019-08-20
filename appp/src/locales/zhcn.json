@@ -298,6 +298,7 @@
   "home.show.performance.averagecut_600":"平均cut@600",
   "home.show.performance.averagecut_300":"平均cut@300",
   "home.show.performance.waterpurificationrate":"净水率",
+  "home.show.fitertip": "滤芯使用寿命依各地水质而异",
   "equipment.filtertitle": "产品明细",
   "equipment.frontfilter": "前置滤芯",
   "equipment.host": "主机",

@@ -272,6 +272,7 @@
   "home.show.performance.averagecut_600": "Average cut@600",
   "home.show.performance.averagecut_300": "Average cut@300",
   "home.show.performance.waterpurificationrate":"Water Purification Rate",
+  "home.show.fitertip": "The life of filter varies according to the water quality of different places.",
   "equipment.title": "Equipment List",
   "equipment.frontfilter": "Front Filter",
   "equipment.host": "Host",

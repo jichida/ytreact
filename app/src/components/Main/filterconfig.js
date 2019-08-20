@@ -3,62 +3,93 @@ import lodashGet from 'lodash.get'
 import { FormattedMessage } from 'react-intl'
 
 export const prev0Options = [
-    {
-        label: <FormattedMessage key={0} id="setting.system.PP" values={{value: '30'}} />,
-        value: '30'
-    },
-    {
-        label: <FormattedMessage key={1} id="setting.system.PP" values={{value: '60'}} />,
-        value: '60'
-    },
-    {
-        label: <FormattedMessage key={2} id="setting.system.PP" values={{value: '90'}} />,
-        value: '90'
-    }
+  {
+      label: <FormattedMessage key={0} id="setting.system.PP" values={{value: '30'}} />,
+      value: '30'
+  },
+  {
+      label: <FormattedMessage key={1} id="setting.system.PP" values={{value: '90'}} />,
+      value: '90'
+  },
+  {
+      label: <FormattedMessage key={2} id="setting.system.PP" values={{value: '180'}} />,
+      value: '180'
+  }
 ]
 
 export const prev1Options = [
-    {
-        label: <FormattedMessage key={0} id="setting.system.carbon" values={{value: '30'}} />,
-        value: '30'
-    },
-    {
-        label: <FormattedMessage key={1} id="setting.system.carbon" values={{value: '60'}} />,
-        value: '60'
-    },
+  {
+      label: <FormattedMessage key={0} id="setting.system.carbon" values={{value: '180'}} />,
+      value: '180'
+  },
+  {
+      label: <FormattedMessage key={1} id="setting.system.carbon" values={{value: '360'}} />,
+      value: '360'
+  },
+  {
+      label: <FormattedMessage key={1} id="setting.system.carbon" values={{value: '540'}} />,
+      value: '540'
+  },
 ]
 
 export const prev2Options = [
-    {
-        label: <FormattedMessage key={0} id="setting.system.TAC" values={{value: '180'}} />,
-        value: '180'
-    },
-    {
-        label: <FormattedMessage key={1} id="setting.system.TAC" values={{value: '360'}} />,
-        value: '360'
-    }
+  {
+      label: <FormattedMessage key={0} id="setting.system.FOF" values={{value: '180'}} />,
+      value: '180'
+  },
+  {
+      label: <FormattedMessage key={1} id="setting.system.FOF" values={{value: '360'}} />,
+      value: '360'
+  },
+  {
+      label: <FormattedMessage key={1} id="setting.system.FOF" values={{value: '540'}} />,
+      value: '540'
+  },
 ]
 
 export const post0Options = [
-    {
-        label: <FormattedMessage key={0} id="setting.system.LED" values={{value: '180'}} />,
-        value: '180'
-    },
-    {
-        label: <FormattedMessage key={1} id="setting.system.LED" values={{value: '360'}} />,
-        value: '360'
-    },
-    {
-        label: <FormattedMessage key={2} id="setting.system.LED" values={{value: '540'}} />,
-        value: '540'
-    }
+  {
+      label: <FormattedMessage key={0} id="setting.system.AFC" values={{value: '180'}} />,
+      value: '180'
+  },
+  {
+      label: <FormattedMessage key={1} id="setting.system.AFC" values={{value: '270'}} />,
+      value: '270'
+  },
+  {
+      label: <FormattedMessage key={2} id="setting.system.AFC" values={{value: '360'}} />,
+      value: '360'
+  }
 ]
 
 export const post1Options = [
-    {
-        label: <FormattedMessage key={0} id="setting.system.AFC" values={{value: '180'}} />,
-        value: '180'
-    }
+  {
+      label: <FormattedMessage key={0} id="setting.system.DCF" values={{value: '180'}} />,
+      value: '180'
+  },
+  {
+      label: <FormattedMessage key={1} id="setting.system.DCF" values={{value: '270'}} />,
+      value: '270'
+  },
+  {
+      label: <FormattedMessage key={2} id="setting.system.DCF" values={{value: '360'}} />,
+      value: '360'
+  }
+]
+
+export const post2Options = [
+  {
+      label: <FormattedMessage key={0} id="setting.system.LED" values={{value: '360'}} />,
+      value: '360'
+  },
+  {
+      label: <FormattedMessage key={1} id="setting.system.LED" values={{value: '720'}} />,
+      value: '720'
+  },
+  {
+      label: <FormattedMessage key={2} id="setting.system.LED" values={{value: '1080'}} />,
+      value: '1080'
+  }
 ]
 
 export const getFilterLabel = (intl,id,value)=>{
@@ -69,13 +100,16 @@ export const getFilterLabel = (intl,id,value)=>{
     return intl.formatMessage({id:"setting.system.carbon"},{value});
   }
   if(id === 'prev2'){
-    return intl.formatMessage({id:"setting.system.TAC" },{value});
+    return intl.formatMessage({id:"setting.system.FOF" },{value});
   }
   if(id === 'post0'){
-    return intl.formatMessage({id:"setting.system.LED" },{value});
+    return intl.formatMessage({id:"setting.system.AFC" },{value});
   }
   if(id === 'post1'){
-    return intl.formatMessage({id:"setting.system.AFC"},{value});
+    return intl.formatMessage({id:"setting.system.DCF"},{value});
+  }
+  if(id === 'post2'){
+    return intl.formatMessage({id:"setting.system.LED"},{value});
   }
   return '';
 }
@@ -88,10 +122,10 @@ const filtervaluetoindex = (idname,life)=>{
     if(life === '30'){
       return 1;
     }
-    if(life === '60'){
+    if(life === '90'){
       return 2;
     }
-    if(life === '90'){
+    if(life === '180'){
       return 3;
     }
   }
@@ -99,29 +133,7 @@ const filtervaluetoindex = (idname,life)=>{
     if(life === '0') {
       return 0;
     }
-    if(life === '30'){
-      return 1;
-    }
-    if(life === '60'){
-      return 2;
-    }
-  }
-  if(idname === "prev2"){
-    if(life === '0') {
-      return 0;
-    }
-    if(life === '180'){
-      return 1;
-    }
-    if(life === '360'){
-      return 2;
-    }
-  }
-  if(idname === "post0"){
-    if(life === '0') {
-      return 0;
-    }
-    if(life === '180'){
+    if(life === '18'){
       return 1;
     }
     if(life === '360'){
@@ -131,12 +143,60 @@ const filtervaluetoindex = (idname,life)=>{
       return 3;
     }
   }
+  if(idname === "prev2"){
+    if(life === '0') {
+      return 0;
+    }
+    if(life === '18'){
+      return 1;
+    }
+    if(life === '360'){
+      return 2;
+    }
+    if(life === '540'){
+      return 3;
+    }
+  }
+  if(idname === "post0"){
+    if(life === '0') {
+      return 0;
+    }
+    if(life === '180'){
+      return 1;
+    }
+    if(life === '270'){
+      return 2;
+    }
+    if(life === '360'){
+      return 3;
+    }
+  }
   if(idname === "post1"){
     if(life === '0') {
       return 0;
     }
     if(life === '180'){
       return 1;
+    }
+    if(life === '270'){
+      return 2;
+    }
+    if(life === '360'){
+      return 3;
+    }
+  }
+  if(idname === "post2"){
+    if(life === '0') {
+      return 0;
+    }
+    if(life === '360'){
+      return 1;
+    }
+    if(life === '720'){
+      return 2;
+    }
+    if(life === '1080'){
+      return 3;
     }
   }
 }
@@ -150,35 +210,13 @@ const filterindextovalue = (idname,index)=>{
       return 30;
     }
     if(index === 2){
-      return 60;
+      return 80;
     }
     if(index === 3){
-      return 90;
+      return 180;
     }
   }
   if(idname === "prev1"){
-    if(index === 0) {
-      return 0;
-    }
-    if(index === 1){
-      return 30;
-    }
-    if(index === 2){
-      return 60;
-    }
-  }
-  if(idname === "prev2"){
-    if(index === 0) {
-      return 0;
-    }
-    if(index === 1){
-      return 180;
-    }
-    if(index === 2){
-      return 360;
-    }
-  }
-  if(idname === "post0"){
     if(index === 0) {
       return 0;
     }
@@ -192,19 +230,61 @@ const filterindextovalue = (idname,index)=>{
       return 540;
     }
   }
+  if(idname === "prev2"){
+    if(index === 0) {
+      return 0;
+    }
+    if(index === 1){
+      return 180;
+    }
+    if(index === 2){
+      return 360;
+    }
+    if(index === 3){
+      return 540;
+    }
+  }
+  if(idname === "post0"){
+    if(index === 0) {
+      return 0;
+    }
+    if(index === 1){
+      return 180;
+    }
+    if(index === 2){
+      return 270;
+    }
+    if(index === 3){
+      return 360;
+    }
+  }
   if(idname === "post1"){
     if(index === 0) {
       return 0;
     }
     if(index === 1){
       return 180;
-    } else {
-      return 180
     }
-    
+    if(index === 2){
+      return 270;
+    }
+    if(index === 3){
+      return 360;
+    }
   }
   if(idname === "post2"){
-    return 0;
+    if(index === 0) {
+      return 0;
+    }
+    if(index === 1){
+      return 360;
+    }
+    if(index === 2){
+      return 720;
+    }
+    if(index === 3){
+      return 1080;
+    }
   }
 }
 
@@ -249,7 +329,7 @@ export const convertfromfilterlist  = ({prev0,prev1,prev2,post0,post1,post2})=>{
   newlist['post2'] = {
     idname:'post2',
     isprev: false,
-    life: post2 === 0 ? [0] : [post1Options[post2-1].value],
+    life: post2 === 0 ? [0] : [post2Options[post2-1].value],
   }
   return newlist
 }

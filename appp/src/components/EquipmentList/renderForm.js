@@ -101,7 +101,7 @@ const Index = (props) => {
                 ><FormattedMessage id="form.equip.prevfilter3" defaultMessage="前置滤芯3" />
                     <Brief>
                         <div className="item_children">
-                            {lodashGet(props, 'prev2.life', [0])[0] === 0 ? FilterPer['none'] : <FormattedMessage id="setting.system.TAC" values={{value: props.prev2.life}} />}
+                            {lodashGet(props, 'prev2.life', [0])[0] === 0 ? FilterPer['none'] : <FormattedMessage id="setting.system.FOF" values={{value: props.prev2.life}} />}
                         </div>
                     </Brief>
                 </Item>
@@ -124,11 +124,11 @@ const Index = (props) => {
                 ><FormattedMessage id="form.equip.postfilter1" defaultMessage="后置滤芯1" />
                     <Brief>
                         <div className="item_children">
-                            {lodashGet(props, 'post0.life', [0])[0] === 0 ? FilterPer['none'] : <FormattedMessage id="setting.system.LED" values={{value: props.post0.life}} />}
+                            {lodashGet(props, 'post0.life', [0])[0] === 0 ? FilterPer['none'] : <FormattedMessage id="setting.system.AFC" values={{value: props.post0.life}} />}
                         </div>
                     </Brief>
                 </Item>
-                <Item
+                {/* <Item
                     arrow="horizontal"
                     multipleLine
                     onClick={()=>props.onSelectFilter('post1')}
@@ -136,19 +136,19 @@ const Index = (props) => {
                 ><FormattedMessage id="form.equip.postfilter2" defaultMessage="后置滤芯2" />
                     <Brief>
                         <div className="item_children">
-                            {lodashGet(props, 'post1.life', [0])[0] === 0 ? FilterPer['none'] : <FormattedMessage id="setting.system.AFC" values={{value: props.post1.life}} />}
+                            {lodashGet(props, 'post1.life', [0])[0] === 0 ? FilterPer['none'] : <FormattedMessage id="setting.system.DCF" values={{value: props.post1.life}} />}
                         </div>
                     </Brief>
-                </Item>
+                </Item> */}
                 <Item
-                    // arrow="horizontal"
+                    arrow="horizontal"
                     multipleLine
-                    // onClick={()=>props.onSelectFilter('post2')}
+                    onClick={()=>props.onSelectFilter('post2')}
                     platform="android"
                 ><FormattedMessage id="form.equip.postfilter3" defaultMessage="后置滤芯3" />
                     <Brief>
                         <div className="item_children">
-                        {lodashGet(props, 'post2.life', [0])[0] === 0 ? FilterPer['none'] : <FormattedMessage id="setting.system.AFC" values={{value: props.post2.life}} />}
+                        {lodashGet(props, 'post2.life', [0])[0] === 0 ? FilterPer['none'] : <FormattedMessage id="setting.system.LED" values={{value: props.post2.life}} />}
                         </div>
                     </Brief>
                 </Item>

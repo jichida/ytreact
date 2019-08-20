@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { wifi_sendcmd_request } from '../../actions';
 import RenderForm from './FilterForm'
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { prev0Options, prev1Options, prev2Options, post0Options, post1Options ,convertfilterlist,convertfromfilterlist} from './config'
+import { prev0Options, prev1Options, prev2Options, post0Options, post1Options , post2Options, convertfilterlist, convertfromfilterlist} from './config'
 import {getintlmessage} from '../../util/globalIntl';
 import './index.less';
 
@@ -118,6 +118,9 @@ class Inlet extends PureComponent{
                 break;
             case 'post1':
                 curOptions = post1Options
+                break;
+            case 'post2':
+                curOptions = post2Options
                 break;
             default:
                 break;

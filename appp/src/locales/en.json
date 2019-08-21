@@ -320,6 +320,7 @@
   "survey.new": "New",
   "survey.edit": "Edit",
   "survey.delete": "Delete",
+  "survey.delete.warring": "Are you sure?",
   "survey.save": "Save",
   "survey.back": "Confirm",
   "survey.back.warring": "Returning to the previous step will discard your input.",

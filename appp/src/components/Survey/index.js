@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import {  NavBar, Icon, List, SwipeAction } from 'antd-mobile';
+import {  NavBar, Icon, List, SwipeAction, Modal } from 'antd-mobile';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import lodashmap from 'lodash.map'
@@ -7,6 +7,8 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import {getsurvey_request,getsurvey_result} from '../../actions';
 import {callthen} from '../../sagas/pagination';
 import './index.less';
+
+const alert = Modal.alert
 
 const SurveyItem = ({ survey, onSelect, onDelete, formatMessage}) => {
     const { _id, name } = survey
@@ -55,7 +57,13 @@ class Index extends PureComponent{
     }
 
     handleDelete = (_id) => {
-        console.log('will delete id:', _id)
+        const { intl: { formatMessage }}  = this.props;
+        alert(`${formatMessage({id: 'survey.delete'})}`, `${formatMessage({id: 'survey.delete.warring'})}`, [
+            { text: `${formatMessage({id: 'survey.cancel'})}`, onPress: () => console.log('cancel') },
+            { text: `${formatMessage({id: 'survey.ok'})}`, onPress: () => {
+                console.log('删除调研记录')
+            } },
+        ])
     }
 
     render () {
@@ -78,7 +86,7 @@ class Index extends PureComponent{
                                 <SurveyItem key={index} 
                                     survey={item} 
                                     onSelect={this.handleSelect} 
-                                    onDelete={this.onDelete} 
+                                    onDelete={this.handleDelete} 
                                     formatMessage={formatMessage} 
                                 />
                             ))}

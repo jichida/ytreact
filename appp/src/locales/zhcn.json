@@ -321,6 +321,7 @@
   "survey.new": "新建",
   "survey.edit": "编辑",
   "survey.delete": "删除",
+  "survey.delete.warring": "确认删除吗?",
   "survey.save": "保存",
   "survey.back": "确认返回",
   "survey.back.warring": "返回上一步将丢弃你的输入",

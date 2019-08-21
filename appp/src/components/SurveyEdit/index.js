@@ -163,6 +163,7 @@ class Index extends PureComponent{
 
     handleBack = () => {
         const { intl: { formatMessage }, history } = this.props
+        this.saveCurrent(this.state.curTab)
         if(JSON.stringify(this.state.survey) !== JSON.stringify(this.convertToUnit(this.props.survey))) {
             alert(`${formatMessage({id: 'survey.back'})}`, `${formatMessage({id: 'survey.back.warring'})}`, [
                 { text: `${formatMessage({id: 'survey.cancel'})}`, onPress: () => console.log('cancel') },
@@ -250,8 +251,13 @@ class Index extends PureComponent{
 const mapStateToProps =  ({app: {unit},surveys:{surveys}}, ownProps) => {
     const {match} = ownProps;
     let _id = lodashGet(match, 'params.id', '0')
-    const survey = lodashGet(surveys,`${_id}`);
-    console.log(survey);
+    console.log('survery id:', _id)
+    let survey = lodashGet(surveys,`${_id}`);
+    
+    if(!survey.basicinfo) {
+        survey = { ...survey, basicinfo: {}}
+    }
+    console.log('survey', survey);
 
     return {
         survey,

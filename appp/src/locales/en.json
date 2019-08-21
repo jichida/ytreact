@@ -322,6 +322,8 @@
   "survey.back": "Confirm",
   "survey.back.warring": "Returning to the previous step will discard your input.",
   "survey.next": "Next",
-  "survey.name.placeholder": "Please enter the name of the survey."
+  "survey.name.placeholder": "Please enter the name of the survey.",
+  "survey.ok": "OK",
+  "survey.cancel": "Cancel"
 
 }

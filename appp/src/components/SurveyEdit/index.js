@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import {  NavBar, Icon } from 'antd-mobile';
+import {  NavBar, Icon, Modal } from 'antd-mobile';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import lodashSet from 'lodash.set'
@@ -13,6 +13,8 @@ import WaterForm from './WaterForm'
 import InstallForm from './InstallForm'
 
 import './index.less';
+
+const alert = Modal.alert
 
 class Index extends PureComponent{
 
@@ -147,17 +149,17 @@ class Index extends PureComponent{
         })
     }
 
-    // handleBack = () => {
-    //     const { intl: { formatMessage }, history } = this.props
-    //     if(this.state.name !== lodashGet(this.props, 'survey.name', '')) {
-    //         alert(`${formatMessage({id: 'survey.back'})}`, `${formatMessage({id: 'survey.back.warring'})}`, [
-    //             { text: 'Cancel', onPress: () => console.log('cancel') },
-    //             { text: 'Ok', onPress: () => history.goBack() },
-    //           ])
-    //     } else {
-    //         history.goBack()
-    //     }
-    // }
+    handleBack = () => {
+        const { intl: { formatMessage }, history } = this.props
+        if(JSON.stringify(this.state.survey) !== JSON.stringify(this.convertToUnit(this.props.survey))) {
+            alert(`${formatMessage({id: 'survey.back'})}`, `${formatMessage({id: 'survey.back.warring'})}`, [
+                { text: `${formatMessage({id: 'survey.cancel'})}`, onPress: () => console.log('cancel') },
+                { text: `${formatMessage({id: 'survey.ok'})}`, onPress: () => history.goBack() },
+              ])
+        } else {
+            history.goBack()
+        }
+    }
 
     render () {
         const { history, dispatch, unit, intl }  = this.props;
@@ -168,7 +170,7 @@ class Index extends PureComponent{
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}
-                    onLeftClick={() => {history.goBack()}}
+                    onLeftClick={this.handleBack}
                     rightContent={<span onClick={this.handleSave}><FormattedMessage id="survey.save" /></span>}
                 >
                     <FormattedMessage id="device.tools.survey" />

@@ -22,8 +22,8 @@ class Index extends PureComponent{
         const { intl: { formatMessage }, history } = this.props
         if(this.state.name !== lodashGet(this.props, 'survey.name', '')) {
             alert(`${formatMessage({id: 'survey.back'})}`, `${formatMessage({id: 'survey.back.warring'})}`, [
-                { text: 'Cancel', onPress: () => console.log('cancel') },
-                { text: 'Ok', onPress: () => history.goBack() },
+                { text: `${formatMessage({id: 'survey.cancel'})}`, onPress: () => console.log('cancel') },
+                { text: `${formatMessage({id: 'survey.ok'})}`, onPress: () => history.goBack() },
               ])
         } else {
             history.goBack()

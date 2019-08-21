@@ -36,11 +36,15 @@ import {
     getsurvey_result,
 
     savesurvey_request,
-    savesurvey_result
+    savesurvey_result,
+
+    deletesurvey_request,
+    deletesurvey_result,
   } from '../../actions';
 
 //接收的对应关系
 const recvmessagetoresultpair = {
+  'deletesurvey_result':deletesurvey_result,
   'savesurvey_result':savesurvey_result,
   'getsurvey_result':getsurvey_result,
   'push_devicecmddata':push_devicecmddata,
@@ -74,6 +78,7 @@ const sendmessagefnsz = {
 
 //验证发送接口
 const sendmessageauthfnsz = {
+  'deletesurvey':`${deletesurvey_request}`,
   'getsurvey':`${getsurvey_request}`,
   'savesurvey':`${savesurvey_request}`,
   'app_sendcmd':`${app_sendcmd_request}`,

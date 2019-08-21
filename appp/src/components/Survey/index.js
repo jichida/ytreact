@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom';
 import lodashmap from 'lodash.map'
 import { FormattedMessage, injectIntl } from 'react-intl';
 import {getsurvey_request,getsurvey_result} from '../../actions';
+import {deletesurvey_request,deletesurvey_result} from '../../actions';
+
 import {callthen} from '../../sagas/pagination';
 import './index.less';
 
@@ -62,6 +64,20 @@ class Index extends PureComponent{
             { text: `${formatMessage({id: 'survey.cancel'})}`, onPress: () => console.log('cancel') },
             { text: `${formatMessage({id: 'survey.ok'})}`, onPress: () => {
                 console.log('删除调研记录')
+                //deletesurvey_request
+                this.props.dispatch(callthen(deletesurvey_request,deletesurvey_result,{
+                    query:{_id}
+                })).then((result)=>{
+                    let newlist = [];
+                    for(let i = 0 ;i < this.state.surveys.length;i++){
+                        if(this.state.surveys[i]._id !== _id){
+                            newlist.push(this.state.surveys[i]);
+                        }
+                    }
+                    this.setState({surveys:[...newlist]});
+                }).catch((e)=>{
+                    console.log(e);
+                });
             } },
         ])
     }

@@ -78,7 +78,7 @@ class Index extends PureComponent{
                                 <SurveyItem key={index} 
                                     survey={item} 
                                     onSelect={this.handleSelect} 
-                                    onDelete={this.onDelete} 
+                                    onDelete={this.handleDelete} 
                                     formatMessage={formatMessage} 
                                 />
                             ))}

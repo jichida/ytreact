@@ -8,7 +8,9 @@ import lodashget from 'lodash.get';
 import lodashmap from 'lodash.map'
 import { FormattedMessage, injectIntl } from 'react-intl';
 import Buckets from '../Buckets';
-
+import {getsurvey_request,getsurvey_result} from '../../actions';
+import {callthen} from '../../sagas/pagination';
+import {importsurvey} from '../../actions';
 import './index.less';
 
 const Item = List.Item;
@@ -270,32 +272,40 @@ class DeviceBasic extends PureComponent{
     }
 
     showLoad = () => {
-        const {intl, surveys} = this.props;
+        const {intl} = this.props;
         const list = []
-        lodashmap(surveys, (item) => {
-            list.push(item.name)
-        })
-        list.push(intl.formatMessage({id:'form.cancel'}))
+        this.props.dispatch(callthen(getsurvey_request,getsurvey_result,{})).then((surveys)=>{
+            lodashmap(surveys, (item) => {
+                list.push(item.name)
+            })
 
-        const BUTTONS = list;
-        ActionSheet.showActionSheetWithOptions({
-          options: BUTTONS,
-          cancelButtonIndex: BUTTONS.length - 1,
-        //   destructiveButtonIndex: 1,
-          message: intl.formatMessage({id:`form.load`}),
-          maskClosable: true,
-          // wrapProps,
-        },
-        (buttonIndex) => {
-            if(buttonIndex!==BUTTONS.length -1){
-                this.handleLoad(surveys[buttonIndex])
-            }
+            list.push(intl.formatMessage({id:'form.cancel'}))
+
+            const BUTTONS = list;
+            ActionSheet.showActionSheetWithOptions({
+            options: BUTTONS,
+            cancelButtonIndex: BUTTONS.length - 1,
+            //   destructiveButtonIndex: 1,
+            message: intl.formatMessage({id:`form.load`}),
+            maskClosable: true,
+            // wrapProps,
+            },
+            (buttonIndex) => {
+                if(buttonIndex!==BUTTONS.length -1){
+                    this.handleLoad(surveys[buttonIndex])
+                }
+            });
+        }).catch((e)=>{
+            console.log(e);
         });
+
+ 
     }
 
     handleLoad = (survey) => {
         // 导入调研输入的数据
         console.log(survey)
+        this.props.dispatch(importsurvey(survey));
     }
 
 
@@ -348,35 +358,7 @@ class DeviceBasic extends PureComponent{
     }
 }
 
-const mapStateToProps =  ({device:{basicinfo,_id}, app: { unit}}) =>{
-    const surveys = [{
-        _id: '1',
-        name: '1'
-    },{
-        _id: '2',
-        name: '2'
-    },{
-        _id: '3',
-        name: '3'
-    },{
-        _id: '4',
-        name: '4'
-    },{
-        _id: '5',
-        name: '5'
-    },{
-        _id: '6',
-        name: '6'
-    },{
-        _id: '7',
-        name: '7'
-    },{
-        _id: '8',
-        name: '8'
-    },{
-        _id: '9',
-        name: '9'
-    }] 
+const mapStateToProps =  ({device:{basicinfo,_id},surveys:{surveys},app: { unit}}) =>{
     return {basicinfo,_id, unit, surveys};
 };
 DeviceBasic = connect(mapStateToProps)(DeviceBasic);

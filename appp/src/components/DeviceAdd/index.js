@@ -16,7 +16,7 @@ import AddImg from '../../assets/addbtn.png';
             <div className="fp_container">
                 <div className="fh_container">
                     <div className="pannel" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                        <Flex direction="column" justify="between" style={{height: '90%'}}>
+                        <Flex direction="column" justify="between" style={{height: '90vh'}}>
                             <div className="add-logo" ><img className="add_logo_img" alt="" src={logo} /></div>
                             <div className="pimg" ><img alt="" src={ping} /></div>
                             <WhiteSpace size="xl" />

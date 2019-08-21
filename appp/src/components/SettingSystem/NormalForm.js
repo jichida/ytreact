@@ -170,7 +170,7 @@ class Index extends React.Component {
                     <Brief>
                         <div className="item_children">
                         <InputItem
-                            editable={false}
+                            // editable={false}
                             placeholder={formatMessage({id: "form.input"})}
                             {...getFieldProps('installer',{
                                 validateTrigger: 'onBlur',

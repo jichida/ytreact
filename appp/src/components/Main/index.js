@@ -16,7 +16,7 @@ import './index.less';
 import { refresh_icon, home_bgimg, monitorBg} from './assets'
 import {wifi_sendcmd_request, set_confirm} from '../../actions';
 import {getFilterLabel} from '../EquipmentList/config.js';
-import { convertfromfilterlist, filterlistConvertToArray } from '../SettingFilter/config'
+import { mainconvertfromfilterlist, filterlistConvertToArray } from '../SettingFilter/config'
 import {getintlmessage} from '../../util/globalIntl';
 
 const CRed = '#ff2728';
@@ -74,6 +74,8 @@ class Home extends PureComponent{
       // const mapfilternames = mapname_filter;
       //注：这里根据devicelist 显示设备数据!!!!!!
       const devicedata = homedata;
+
+      console.log('render devicelist:', devicelist)
 
       // const CoFlex_FEs = [];
       // lodashmap(devicedata.filterelements,(fename)=>{
@@ -221,7 +223,7 @@ class Home extends PureComponent{
     //       title_filterelements_posfilter1_leftvol = intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'});
     //       icon_filterelements_posfilter1_leftvol = CRed;
     //   }
-      const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', lodashget(devicedata,'filterelements_posfilter1_leftday',0), lodashget(devicelist[4], 'life', lodashget(devicedata,'filterelements_posfilter1_leftday',0)*100));
+      const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', lodashget(devicedata,'filterelements_posfilter1_leftday',0), lodashget(devicelist[3], 'life', lodashget(devicedata,'filterelements_posfilter1_leftday',0)*100));
       const icon_filterelements_posfilter1_leftday = posfilter1_leftday.color;
       const title_filterelements_posfilter1_leftday = (posfilter1_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})
@@ -255,7 +257,7 @@ class Home extends PureComponent{
     //       icon_filterelements_posfilter2_leftvol = CRed;
     //   }
 
-      const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', lodashget(devicedata,'filterelements_posfilter2_leftday',0), lodashget(devicelist[5], 'life', lodashget(devicedata,'filterelements_posfilter2_leftday',0)*100));
+      const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', lodashget(devicedata,'filterelements_posfilter2_leftday',0), lodashget(devicelist[4], 'life', lodashget(devicedata,'filterelements_posfilter2_leftday',0)*100));
       const icon_filterelements_posfilter2_leftday = posfilter2_leftday.color;
       const title_filterelements_posfilter2_leftday = (posfilter2_leftday.warring ?
         intl.formatMessage({id:'home.show.title_main_filterelements_value_warningtochange'})
@@ -526,7 +528,7 @@ class Home extends PureComponent{
 }
 const mapStateToProps =  ({devicedata:{isgetdata,homedata,performancedata},device:{devicelist}, devicedata:{ filterlist }, app: { locale }}) =>{
   const { prev0lastchangedate, prev1lastchangedate, prev2lastchangedate, post0lastchangedate, post1lastchangedate, post2lastchangedate } = devicelist
-  const initData = convertfromfilterlist(filterlist)
+  const initData = mainconvertfromfilterlist(filterlist)
   initData['prev0'] = {...initData['prev0'], lastchangedate: prev0lastchangedate }
   initData['prev1'] = {...initData['prev1'], lastchangedate: prev1lastchangedate }
   initData['prev2'] = {...initData['prev2'], lastchangedate: prev2lastchangedate }

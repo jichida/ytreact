@@ -18,7 +18,7 @@ import {adddevicecmddata_request,adddevicecmddata_result} from '../../actions';
 import {getdevicecmddata_request,getdevicecmddata_result} from '../../actions';
 import {callthen} from '../../sagas/pagination';
 import {download_excel} from '../../actions';
-
+import { mainconvertfromfilterlist, filterlistConvertToArray } from './filterconfig'
 import failer from '../../assets/failer.png';
 import success from '../../assets/success.png'
 import sb_icon from '../../assets/sj_icon.png';
@@ -127,10 +127,10 @@ const TopMonitor = injectIntl((props)=>{
     )
 })
 
-const getPercent = (id,value) => {
+const getPercent = (id,value, full) => {
     let cf = config[id];
     let warring = false;
-    let percent = Math.round(value/cf.value * 100) ;
+    let percent = !!full ? Math.round(value/full*100) : Math.round(value/cf.value * 100);
     if(percent <= cf.warringPercent || !value){
         warring = true;
     }
@@ -138,13 +138,24 @@ const getPercent = (id,value) => {
         value,
         percent: percent > 1 ? percent : 1,
         warring,
-        ishave: !!value
+        ishave: true
     }
 }
 
+const emptyFilter = {
+  value: 0,
+  percent: 0,
+  warring: false,
+  ishave: false
+}
+
 const TopChart = injectIntl((props)=>{
-    const { srvdata, intl} = props;
+    const { srvdata, intl, curdevice} = props;
+    const filterlist = lodashget(curdevice, 'appdata.filterlist', {})
     const { formatMessage } = intl;
+    // const filterlist2 = lodashget(curdevice, 'devicedata.filterlist', {})
+    const initData = mainconvertfromfilterlist(filterlist)
+    const filter_list = filterlistConvertToArray(initData)
     let chartData = []
     let uvfilter = {}
 
@@ -159,23 +170,24 @@ const TopChart = injectIntl((props)=>{
       // "UV" : "60",//UV d[U] {界面13}
       //
       const { MODLife, Pre_filter1, Pre_filter2, Pre_filter3, Post_filter1, Post_filter2, Post_filter3 } = srvdata
+      console.log('srvdata:', srvdata)
       const modlife_lefeday = getPercent('filterelements_modlife_leftday', MODLife)
-      const prefilter1_leftday = getPercent('filterelements_prefilter1_leftday', Pre_filter1)
-      const prefilter2_leftday = getPercent('filterelements_prefilter2_leftday', Pre_filter2)
-      const prefilter3_leftday = getPercent('filterelements_prefilter3_leftday', Pre_filter3)
-      const posfilter1_leftday = getPercent('filterelements_posfilter1_leftday', Post_filter1)
-      const posfilter2_leftday = getPercent('filterelements_posfilter2_leftday', Post_filter2)
-      const posfilter3_leftday = getPercent('filterelements_posfilter3_leftday', Post_filter3)
+      const prefilter1_leftday = String(lodashget(filterlist, 'prev0', '0')) !== '0' ? getPercent('filterelements_prefilter1_leftday', Pre_filter1, filter_list[0].life) : emptyFilter
+      const prefilter2_leftday = String(lodashget(filterlist, 'prev1', '0')) !== '0' ? getPercent('filterelements_prefilter2_leftday', Pre_filter2, filter_list[1].life) : emptyFilter
+      const prefilter3_leftday = String(lodashget(filterlist, 'prev2', '0')) !== '0' ? getPercent('filterelements_prefilter3_leftday', Pre_filter3, filter_list[2].life) : emptyFilter
+      const posfilter1_leftday = String(lodashget(filterlist, 'post0', '0')) !== '0' ? getPercent('filterelements_posfilter1_leftday', Post_filter1, filter_list[3].life) : emptyFilter
+      const posfilter2_leftday = String(lodashget(filterlist, 'post1', '0')) !== '0' ? getPercent('filterelements_posfilter2_leftday', Post_filter2, filter_list[4].life) : emptyFilter
+      const posfilter3_leftday = String(lodashget(filterlist, 'post2', '0')) !== '0' ? getPercent('filterelements_posfilter3_leftday', Post_filter3, filter_list[5].life) : emptyFilter
       const {MODLifePercent,Pre_filter1_percent,Pre_filter2_percent,Pre_filter3_percent,Pos_filter1_percent,Pos_filter2_percent,Pos_filter3_percent,UV} = srvdata;
       // const {prefilter1_leftday,prefilter2_leftday,prefilter3_leftday,posfilter1_leftday,posfilter2_leftday,} = srvdata;
       // const outwater_quality = getPercent('main_outwater_quality', homedata.main_outwater_quality);
       const modlife_flow = getPercent('filterelements_modlife_flow', MODLifePercent);
-      const prefilter1_flow = getPercent('filterelements_prefilter1_flow', Pre_filter1_percent);
-      const prefilter2_flow = getPercent('filterelements_prefilter2_flow', Pre_filter2_percent);
-      const prefilter3_flow = getPercent('filterelements_prefilter3_flow', Pre_filter3_percent);
-      const posfilter1_flow = getPercent('filterelements_posfilter1_flow', Pos_filter1_percent);
-      const posfilter2_flow = getPercent('filterelements_posfilter2_flow', Pos_filter2_percent);
-      const posfilter3_flow = getPercent('filterelements_posfilter3_flow', Pos_filter3_percent);
+      const prefilter1_flow = String(lodashget(filterlist, 'prev0', '0')) !== '0' ? getPercent('filterelements_prefilter1_flow', Pre_filter1_percent) : emptyFilter;
+      const prefilter2_flow = String(lodashget(filterlist, 'prev1', '0')) !== '0' ? getPercent('filterelements_prefilter2_flow', Pre_filter2_percent) : emptyFilter;
+      const prefilter3_flow = String(lodashget(filterlist, 'prev2', '0')) !== '0' ? getPercent('filterelements_prefilter3_flow', Pre_filter3_percent) : emptyFilter;
+      const posfilter1_flow = String(lodashget(filterlist, 'post0', '0')) !== '0' ? getPercent('filterelements_posfilter1_flow', Pos_filter1_percent) : emptyFilter;
+      const posfilter2_flow = String(lodashget(filterlist, 'post1', '0')) !== '0' ? getPercent('filterelements_posfilter2_flow', Pos_filter2_percent) : emptyFilter;
+      const posfilter3_flow = String(lodashget(filterlist, 'post2', '0')) !== '0' ? getPercent('filterelements_posfilter3_flow', Pos_filter3_percent) : emptyFilter;
       const uvfilter_flow = getPercent('filterelements_uvfilter_flow', UV);
       // //以下是滤芯部分
       // filterelements_modlife_leftvol:39,//电离子膜寿命剩余流量
@@ -244,73 +256,80 @@ const TopChart = injectIntl((props)=>{
           {
               title:  `${formatMessage({id: 'machine.data.ionmembrance'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              data: modlife_flow.value,
+              // data: modlife_flow.value,
               flow: modlife_flow.percent,
               flowwarring: modlife_flow.warring ,
               life: modlife_lefeday.percent,
+              data: modlife_lefeday.value,
               lifewarring: modlife_lefeday.warring,
               ishave: modlife_flow.ishave
           },
           {
               title:  `${formatMessage({id: 'machine.data.frontfilter1'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              data: prefilter1_flow.value,
+              // data: prefilter1_flow.value,
               flow: prefilter1_flow.percent,
               flowwarring: prefilter1_flow.warring,
               life: prefilter1_leftday.percent,
+              data: prefilter1_leftday.value,
               lifewarring: prefilter1_leftday.warring,
               ishave: posfilter1_flow.ishave
           },
           {
               title: `${formatMessage({id: 'machine.data.frontfilter2'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              data: prefilter2_flow.value,
+              // data: prefilter2_flow.value,
               flow: prefilter2_flow.percent,
               flowwarring: prefilter2_flow.warring,
               life: prefilter2_leftday.percent,
+              data: prefilter2_leftday.value,
               lifewarring: prefilter2_leftday.warring,
               ishave: prefilter2_flow.ishave
           },
           {
               title: `${formatMessage({id: 'machine.data.frontfilter3'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              data: prefilter3_flow.value,
+              // data: prefilter3_flow.value,
               flow: prefilter3_flow.percent,
               flowwarring: prefilter3_flow.warring,
               life: prefilter3_leftday.percent,
+              data: prefilter3_leftday.value,
               lifewarring: prefilter3_leftday.warring,
               ishave: prefilter3_flow.ishave
           },
           {
               title: `${formatMessage({id: 'machine.data.afterfilter1'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              data: posfilter1_flow.value,
+              // data: posfilter1_flow.value,
               flow: posfilter1_flow.percent,
               flowwarring: posfilter1_flow.warring,
               life: posfilter1_leftday.percent,
+              data: posfilter1_leftday.value,
               lifewarring: posfilter1_leftday.warring,
               ishave: posfilter1_flow.ishave
           },
           {
               title:  `${formatMessage({id: 'machine.data.afterfilter2'})}`,
               unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              data: posfilter2_flow.value,
+              // data: posfilter2_flow.value,
               flow: posfilter2_flow.percent,
               flowwarring: posfilter2_flow.warring,
               life: posfilter2_leftday.percent,
+              data: posfilter2_leftday.value,
               lifewarring: posfilter2_leftday.warring,
               ishave: posfilter2_flow.ishave
           },
-          {
-              title:  `${formatMessage({id: 'machine.data.afterfilter3'})}`,
-              unit: `${formatMessage({id: 'machine.data.flow'})}`,
-              data: posfilter3_flow.value,
-              flow: posfilter3_flow.percent,
-              flowwarring: posfilter3_flow.warring,
-              life: posfilter3_leftday.percent,
-              lifewarring: posfilter3_leftday.warring,
-              ishave: posfilter3_flow.ishave
-          }
+          // {
+          //     title:  `${formatMessage({id: 'machine.data.afterfilter3'})}`,
+          //     unit: `${formatMessage({id: 'machine.data.flow'})}`,
+          //     // data: posfilter3_flow.value,
+          //     flow: posfilter3_flow.percent,
+          //     flowwarring: posfilter3_flow.warring,
+          //     life: posfilter3_leftday.percent,
+          //     data: posfilter3_leftday.value,
+          //     lifewarring: posfilter3_leftday.warring,
+          //     ishave: posfilter3_flow.ishave
+          // }
       ]
 
       uvfilter = {
@@ -327,7 +346,7 @@ const TopChart = injectIntl((props)=>{
     return (
       <React.Fragment>
         <Row gutter={24}>
-          <Col span={24} style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginLeft: '40px'}}>
+          <Col span={24} style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginLeft: '40px', marginTop: '20px', marginBottom: '20px'}}>
             <div style={{marginRight: '5px', display: 'flex', alignItems: 'center'}}><img src={green} alt="" style={{width: 'auto', height: '10px'}} /></div>
             <div style={{marginRight: '10px', fontSize: '12px', height: '20px'}}><FormattedMessage id="machine.data.flow" /></div>
             <div style={{marginRight: '5px', display: 'flex', alignItems: 'center'}}><img src={blue} alt="" style={{width: 'auto', height: '10px'}} /></div>
@@ -337,7 +356,7 @@ const TopChart = injectIntl((props)=>{
           </Col>
         </Row>
         <Row gutter={24} style={{padding: '10px 26px'}}>
-            <Col span={24} style={{display: 'flex', justifyContent: 'space-between'}}>
+            <Col span={24} style={{display: 'flex', justifyContent: 'flex-start'}}>
                 {
                   !!srvdata ? (
                      _.map(chartData, (item, index)=>{
@@ -351,7 +370,7 @@ const TopChart = injectIntl((props)=>{
                     )
                     : ''
                 }
-                { !!srvdata && uvfilter.ishave && <SingleChart {...uvfilter} /> }
+                {/* { !!srvdata && uvfilter.ishave && <SingleChart {...uvfilter} /> } */}
             </Col>
         </Row>
       </React.Fragment>
@@ -535,7 +554,7 @@ class DataDetails extends React.PureComponent {
         }));
     }
     render() {
-        const { history, curdevice, is_admin } = this.props;
+        const { history, curdevice, is_admin, filterlist } = this.props;
         const { formatMessage } = this.props.intl;
         const tzs = timezoneOption();
 
@@ -688,7 +707,8 @@ class DataDetails extends React.PureComponent {
         }
         ]
 
-        const adminColumns = [{
+        const adminColumns = [
+          {
             title: <FormattedMessage id="table.systime" />,
             dataIndex: 'systime',
             key: 'systime'
@@ -943,7 +963,7 @@ class DataDetails extends React.PureComponent {
                     </Col>
                 </Row>
                 <TopMonitor {...realtimedata} />
-                <TopChart {...realtimedata} />
+                <TopChart {...realtimedata} curdevice={curdevice} />
                 <Row gutter={24} style={{marginTop: 30, padding: '0 10px'}}>
                     {/* <Col span={2}></Col> */}
                     <Col span={16} className="sub-title">
@@ -1007,10 +1027,11 @@ class DataDetails extends React.PureComponent {
         )
     }
 }
-const mapStateToProps =  ({devicedetail:{srvdata,data_spot,dataMode}, userlogin: { is_admin }}, { curdevice}) =>{
+const mapStateToProps =  ({devicedetail:{srvdata, data_spot, dataMode}, userlogin: { is_admin }}, { curdevice}) =>{
   // const curdevice = lodashget(devices,`${props.match.params.id}`,{});
   console.log(curdevice)
-  return {curdevice,srvdata,data_spot,dataMode, is_admin};
+
+  return {curdevice,srvdata, data_spot,dataMode, is_admin};
 };
 DataDetails = connect(mapStateToProps)(DataDetails);
 export default withRouter(injectIntl(DataDetails));

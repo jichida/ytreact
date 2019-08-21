@@ -26,7 +26,7 @@ const SurveyItem = ({ survey, onSelect, onDelete, formatMessage}) => {
                 },
                 {
                     text: `${formatMessage({id: 'survey.delete'})}`,
-                    onPress: () => onDelete(_id),
+                    onPress: () => onDelete(survey),
                     style: { backgroundColor: '#F4333C', color: 'white' },
                 },
             ]}
@@ -58,9 +58,10 @@ class Index extends PureComponent{
         this.props.history.push(`/surveyname/${_id}`)
     }
 
-    handleDelete = (_id) => {
+    handleDelete = (survey) => {
         const { intl: { formatMessage }}  = this.props;
-        alert(`${formatMessage({id: 'survey.delete'})}`, `${formatMessage({id: 'survey.delete.warring'})}`, [
+        const { _id } = survey
+        alert(`${formatMessage({id: 'survey.delete'})}`, `${formatMessage({id: 'survey.delete.warring'}, {value: survey.name})}`, [
             { text: `${formatMessage({id: 'survey.cancel'})}`, onPress: () => console.log('cancel') },
             { text: `${formatMessage({id: 'survey.ok'})}`, onPress: () => {
                 console.log('删除调研记录')
@@ -90,7 +91,7 @@ class Index extends PureComponent{
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}
-                    onLeftClick={() => history.goBack()}
+                    onLeftClick={() => history.push('/home')}
                     rightContent={<span onClick={() => history.push('/surveyname/0')}><FormattedMessage id="survey.new" /></span>}
                 >
                 <FormattedMessage id="device.tools.survey" />

@@ -317,7 +317,7 @@
   "survey.new": "新建",
   "survey.edit": "編輯",
   "survey.delete": "刪除",
-  "survey.delete.warring": "確認刪除嗎?",
+  "survey.delete.warring": "確認刪除{value}嗎?",
     "survey.save": "保存",
   "survey.back": "確認返回",
   "survey.back.warring": "返回上一步將丟棄你的輸入",

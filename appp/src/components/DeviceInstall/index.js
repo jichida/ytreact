@@ -344,12 +344,7 @@ const RenderForm = createForm({
                                 <InputItem
                                     type="digit"
                                     placeholder={formatMessage({id: "form.input"})}
-                                    {...getFieldProps('drainage',{
-                                        rules: [{
-                                            required: true,
-                                            message: <FormattedMessage id="install.drainage" defaultMessage="排水距离" />,
-                                        }],
-                                    })}
+                                    {...getFieldProps('drainage')}
                                 />
                             </div>
                     </Brief>

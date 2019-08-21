@@ -243,6 +243,8 @@ const mapStateToProps =  ({app: { unit}}, ownProps) => {
         install: {}
     }
 
+    console.log('map state to props')
+
     return {
         survey,
         unit

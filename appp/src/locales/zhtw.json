@@ -320,5 +320,8 @@
   "survey.back": "確認返回",
   "survey.back.warring": "返回上一步將丟棄你的輸入",
   "survey.next": "下一步",
-  "survey.name.placeholder": "請輸入調研名字"
+  "survey.name.placeholder": "請輸入調研名字",
+  "survey.ok": "確定",
+  "survey.cancel": "取消"
+
 }

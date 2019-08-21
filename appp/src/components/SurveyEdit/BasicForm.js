@@ -56,6 +56,8 @@ class Index extends React.Component {
         const { getFieldProps, setFieldsValue, getFieldValue } = this.props.form;
         const { intl: { formatMessage }, unit} = this.props;
 
+        console.log('form props update!!!')
+
         const handleBucketSelect = (value)=>{
             setFieldsValue({bucket: value});
         }

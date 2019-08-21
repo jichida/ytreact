@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import {  NavBar, Icon } from 'antd-mobile';
+import {  NavBar, Icon, Modal } from 'antd-mobile';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import lodashSet from 'lodash.set'
@@ -17,13 +17,15 @@ import {callthen} from '../../sagas/pagination';
 
 import './index.less';
 
+const alert = Modal.alert
+
 class Index extends PureComponent{
 
     constructor(props) {
         super(props);
         this.state = {
             curTab: 'basic',// basic, install, water
-            survey: this.convertToUnit(this.props.survey)
+            survey: this.convertToUnit(JSON.parse(JSON.stringify(this.props.survey)))
         }
     }
 
@@ -115,7 +117,7 @@ class Index extends PureComponent{
 
             return {...survey, install}
         } else {
-            return survey
+            return {...survey}
         }
     }
 
@@ -159,28 +161,30 @@ class Index extends PureComponent{
         })
     }
 
-    // handleBack = () => {
-    //     const { intl: { formatMessage }, history } = this.props
-    //     if(this.state.name !== lodashGet(this.props, 'survey.name', '')) {
-    //         alert(`${formatMessage({id: 'survey.back'})}`, `${formatMessage({id: 'survey.back.warring'})}`, [
-    //             { text: 'Cancel', onPress: () => console.log('cancel') },
-    //             { text: 'Ok', onPress: () => history.goBack() },
-    //           ])
-    //     } else {
-    //         history.goBack()
-    //     }
-    // }
+    handleBack = () => {
+        const { intl: { formatMessage }, history } = this.props
+        if(JSON.stringify(this.state.survey) !== JSON.stringify(this.convertToUnit(this.props.survey))) {
+            alert(`${formatMessage({id: 'survey.back'})}`, `${formatMessage({id: 'survey.back.warring'})}`, [
+                { text: `${formatMessage({id: 'survey.cancel'})}`, onPress: () => console.log('cancel') },
+                { text: `${formatMessage({id: 'survey.ok'})}`, onPress: () => history.goBack() },
+              ])
+        } else {
+            history.goBack()
+        }
+    }
 
     render () {
-        const { history, dispatch, unit, intl }  = this.props;
+        const { dispatch, unit, intl }  = this.props;
         const { curTab } = this.state
+
+        console.log('Edit props update')
 
         return (
             <div className="sub_bg">
                 <NavBar
                     className="nav"
                     icon={<Icon type="left" />}
-                    onLeftClick={() => {history.goBack()}}
+                    onLeftClick={this.handleBack}
                     rightContent={<span onClick={this.handleSave}><FormattedMessage id="survey.save" /></span>}
                 >
                     <FormattedMessage id="device.tools.survey" />
@@ -211,7 +215,7 @@ class Index extends PureComponent{
                             <BasicForm 
                                 onSubmit={this.handleSubmit} 
                                 wrappedComponentRef={el => this.basicForm = el} 
-                                basicinfo={this.state.survey.basicinfo}
+                                basicinfo={JSON.parse(JSON.stringify(this.state.survey.basicinfo))}
                                 dispatch={dispatch}
                                 unit={unit}
                                 intl={intl}
@@ -221,7 +225,7 @@ class Index extends PureComponent{
                             <WaterForm
                                 onSubmit={this.handleSubmit} 
                                 wrappedComponentRef={el => this.waterForm = el} 
-                                usewater={this.state.survey.usewater}
+                                usewater={JSON.parse(JSON.stringify(this.state.survey.usewater))}
                                 dispatch={dispatch}
                                 intl={intl}
                             /> 
@@ -230,7 +234,7 @@ class Index extends PureComponent{
                             <InstallForm
                                 onSubmit={this.handleSubmit} 
                                 wrappedComponentRef={el => this.installForm = el} 
-                                install={this.state.survey.install}
+                                install={JSON.parse(JSON.stringify(this.state.survey.install))}
                                 dispatch={dispatch}
                                 intl={intl}
                             /> 
@@ -242,11 +246,13 @@ class Index extends PureComponent{
     }
 }
 
+
 const mapStateToProps =  ({app: {unit},surveys:{surveys}}, ownProps) => {
     const {match} = ownProps;
     let _id = lodashGet(match, 'params.id', '0')
     const survey = lodashGet(surveys,`${_id}`);
     console.log(survey);
+
     return {
         survey,
         unit

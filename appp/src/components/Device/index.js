@@ -32,9 +32,6 @@ class Device extends PureComponent{
 
     constructor(props) {
         super(props)
-        this.state = {
-            category: 'install'
-        }
     }
 
     showActionSheet = (title) => {
@@ -102,16 +99,11 @@ class Device extends PureComponent{
                 <WingBlank>
                     <div className="tools_title">
                         <div className="title"><FormattedMessage id="device.tools" /></div>
-                        <div 
-                            className={`category ${this.state.category === 'survey' ? 'selected' : ''}`} 
-                            onClick={() => this.setState({category: 'survey'})}><FormattedMessage id="device.tools.survey" /></div>
-                        <div 
-                            className={`category ${this.state.category === 'install' ? 'selected' : ''}`} 
-                            onClick={() => this.setState({category: 'install'})}><FormattedMessage id="device.tools.install" /></div>
+                        <div className= "category" onClick={() => history.push('/survey')}>
+                            <FormattedMessage id="device.tools.survey" />
+                        </div>
                     </div>
                     <div className="tools_bg">
-                        {
-                            this.state.category === 'install' && (
                                 <Flex wrap="wrap">
                                     <div className={`tools_con ${isNormal ? '' : 'disable'}`}>
                                         <div onClick={()=>{this.goTo('/setting')}}>
@@ -159,31 +151,6 @@ class Device extends PureComponent{
                                     }  */}
                                 </Flex>
                             )
-                        }
-                        {
-                            this.state.category === 'survey' && (
-                                <Flex wrap="wrap">
-                                    <div className="tools_con">
-                                        <div onClick={()=> {this.goTo('/surveybasic')}}>
-                                            <img src={basic_img} alt="" />
-                                            <p><FormattedMessage id="device.basic" /></p>
-                                        </div>
-                                    </div>
-                                    <div className="tools_con">
-                                        <div onClick={()=>{this.goTo('/surveywater')}}>
-                                            <img src={water_img} alt="" />
-                                            <p><FormattedMessage id="device.water" /></p>
-                                        </div>
-                                    </div>
-                                    <div className="tools_con">
-                                        <div onClick={()=>{this.goTo('/surveyinstall')}}>
-                                            <img src={install_img} alt="" />
-                                            <p><FormattedMessage id="device.install" /></p>
-                                        </div>
-                                    </div>
-                                </Flex>
-                            )
-                        }
                     </div>
                 </WingBlank>
                 { isDirect && (
@@ -191,7 +158,7 @@ class Device extends PureComponent{
                         <div className="tools_warring"><FormattedMessage id="device.warring.direct" /></div>
                     </WingBlank>
                 )}
-                { isNormal && !isGetDevice && this.state.category === 'install' && (
+                { isNormal && !isGetDevice && (
                     <WingBlank style={{marginTop: '20px'}}>
                         <div className="tools_warring"><FormattedMessage id="device.warring.device" /></div>
                     </WingBlank>

@@ -1,0 +1,56 @@
+@import '../common.less';
+
+.tab {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .tools_con {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 33.33%;
+    
+        div {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+
+            img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    
+        .tab-name {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            color: #ffffff;
+            text-align: center;
+        }
+    }
+
+    .disable {
+        img {
+            filter: gray;
+            filter: opacity(0.2);
+        }
+
+        .tab-name {
+            color: #808080;
+        }
+    }
+}
+
+.form-container {
+    height: calc(~"100vh - 136px");
+    overflow-y: auto;
+}
+
+
+
+
+
+
+
+

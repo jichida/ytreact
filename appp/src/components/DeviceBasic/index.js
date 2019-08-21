@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
-import {  NavBar, Icon, List, InputItem, Picker, Button } from 'antd-mobile';
+import {  NavBar, Icon, List, InputItem, Picker, Button, ActionSheet } from 'antd-mobile';
 import { connect } from 'react-redux';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
 import {common_err,ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
+import lodashmap from 'lodash.map'
 import { FormattedMessage, injectIntl } from 'react-intl';
 import Buckets from '../Buckets';
 
@@ -91,11 +92,6 @@ const RenderForm = createForm({
         setFieldsValue({bucket: value});
     }
 
-    const handleLoad = () => {
-        // 导入调研输入的数据
-    }
-
-
     const useproperty = [
         {
             label: intl.formatMessage({id:'const.select.useproperty0'}),
@@ -138,29 +134,17 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('username',{
-                                    rules: [{
-                                        required: true,
-                                    message: <FormattedMessage id="user.name" defaultMessage="用户名" />,
-                                    }],
-                                })}
+                                {...getFieldProps('username')}
                             />
                         </div>
                     </Brief>
                 </Item>
-                <Item className="extra-load"
-                    extra={<Button size="small" type="ghost" className="load-btn" onClick={handleLoad}><FormattedMessage id="form.load" /></Button>}
-                ><FormattedMessage id="user.phone" defaultMessage="联系方式" />
+                <Item><FormattedMessage id="user.phone" defaultMessage="联系方式" />
                     <Brief>
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('userphone',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="user.phone" defaultMessage="联系方式" />,
-                                    }],
-                                })}
+                                {...getFieldProps('userphone')}
                             />
                         </div>
                     </Brief>
@@ -170,12 +154,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('useraddress',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="user.address" defaultMessage="用户地址" />,
-                                    }],
-                                })}
+                                {...getFieldProps('useraddress')}
                             />
                         </div>
                     </Brief>
@@ -214,12 +193,7 @@ const RenderForm = createForm({
                             <InputItem
                                 type="digit"
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('floor',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="user.floor" defaultMessage="楼层高度" />,
-                                    }],
-                                })}
+                                {...getFieldProps('floor')}
                             />
                             </div>
                     </Brief>
@@ -295,6 +269,36 @@ class DeviceBasic extends PureComponent{
         dispatch(ui_setuserdevice_request({_id,data:{basicinfo:values}}));
     }
 
+    showLoad = () => {
+        const {intl, surveys} = this.props;
+        const list = []
+        lodashmap(surveys, (item) => {
+            list.push(item.name)
+        })
+        list.push(intl.formatMessage({id:'form.cancel'}))
+
+        const BUTTONS = list;
+        ActionSheet.showActionSheetWithOptions({
+          options: BUTTONS,
+          cancelButtonIndex: BUTTONS.length - 1,
+        //   destructiveButtonIndex: 1,
+          message: intl.formatMessage({id:`form.load`}),
+          maskClosable: true,
+          // wrapProps,
+        },
+        (buttonIndex) => {
+            if(buttonIndex!==BUTTONS.length -1){
+                this.handleLoad(surveys[buttonIndex])
+            }
+        });
+    }
+
+    handleLoad = (survey) => {
+        // 导入调研输入的数据
+        console.log(survey)
+    }
+
+
     render () {
         const { history,basicinfo,dispatch}  = this.props;
 
@@ -331,6 +335,7 @@ class DeviceBasic extends PureComponent{
                     className="nav"
                     icon={<Icon type="left" />}
                     onLeftClick={() => { window.innerHeight=initHeight; history.goBack()}}
+                    rightContent={<Button size="small" type="ghost" className="load-btn" onClick={this.showLoad}><FormattedMessage id="form.load" /></Button>}
                 >
                 <FormattedMessage id="device.basic" />
                 </NavBar>
@@ -344,7 +349,35 @@ class DeviceBasic extends PureComponent{
 }
 
 const mapStateToProps =  ({device:{basicinfo,_id}, app: { unit}}) =>{
-  return {basicinfo,_id, unit};
+    const surveys = [{
+        _id: '1',
+        name: '1'
+    },{
+        _id: '2',
+        name: '2'
+    },{
+        _id: '3',
+        name: '3'
+    },{
+        _id: '4',
+        name: '4'
+    },{
+        _id: '5',
+        name: '5'
+    },{
+        _id: '6',
+        name: '6'
+    },{
+        _id: '7',
+        name: '7'
+    },{
+        _id: '8',
+        name: '8'
+    },{
+        _id: '9',
+        name: '9'
+    }] 
+    return {basicinfo,_id, unit, surveys};
 };
 DeviceBasic = connect(mapStateToProps)(DeviceBasic);
-export default withRouter(DeviceBasic);
+export default withRouter(injectIntl(DeviceBasic));

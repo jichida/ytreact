@@ -1,4 +1,4 @@
-const islocalhost = false;
+const islocalhost = true;
 const serverurl = islocalhost?'http://localhost:4101':'http://api.hydronovation.com.cn:4101';
 const serverurlrestful = islocalhost?`${serverurl}/api`:`${serverurl}/api`;
 const wspath = islocalhost?'/socket.io':'/socket.io';
@@ -11,7 +11,7 @@ let config = {
     serverurl:`${serverurl}`,
     wspath:`${wspath}`,
     requesttimeout:5000,
-    appversion:'1.0.0(build0812)',
+    appversion:'1.0.0(build0821)',
     sendlocationinterval:20000,
     softmode:'appp'
 };

@@ -314,6 +314,14 @@
   "equipment.triplet": "Tee",
   "equipment.silkpair": "Silk pair",
   "equipment.silkspin": "Silk spin",
-  "equipment.fillin": "Fill in"
+  "equipment.fillin": "Fill in",
+  "survey.new": "New",
+  "survey.edit": "Edit",
+  "survey.delete": "Delete",
+  "survey.save": "Save",
+  "survey.back": "Confirm",
+  "survey.back.warring": "Returning to the previous step will discard your input.",
+  "survey.next": "Next",
+  "survey.name.placeholder": "Please enter the name of the survey."
 
 }

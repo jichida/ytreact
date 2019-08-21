@@ -312,5 +312,13 @@
   "equipment.triplet": "三通",
   "equipment.silkpair": "對絲",
   "equipment.silkspin": "絲轉",
-  "equipment.fillin": "去填寫"
+  "equipment.fillin": "去填寫",
+  "survey.new": "新建",
+  "survey.edit": "編輯",
+  "survey.delete": "刪除",
+  "survey.save": "保存",
+  "survey.back": "確認返回",
+  "survey.back.warring": "返回上一步將丟棄你的輸入",
+  "survey.next": "下一步",
+  "survey.name.placeholder": "請輸入調研名字"
 }

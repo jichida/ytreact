@@ -22,7 +22,7 @@ class Index extends PureComponent{
         super(props);
         this.state = {
             curTab: 'basic',// basic, install, water
-            survey: this.convertToUnit(this.props.survey)
+            survey: this.convertToUnit(JSON.parse(JSON.stringify(this.props.survey)))
         }
     }
 
@@ -105,7 +105,7 @@ class Index extends PureComponent{
 
             return {...survey, install}
         } else {
-            return survey
+            return {...survey}
         }
     }
 
@@ -162,8 +162,10 @@ class Index extends PureComponent{
     }
 
     render () {
-        const { history, dispatch, unit, intl }  = this.props;
+        const { dispatch, unit, intl }  = this.props;
         const { curTab } = this.state
+
+        console.log('Edit props update')
 
         return (
             <div className="sub_bg">
@@ -201,7 +203,7 @@ class Index extends PureComponent{
                             <BasicForm 
                                 onSubmit={this.handleSubmit} 
                                 wrappedComponentRef={el => this.basicForm = el} 
-                                basicinfo={this.state.survey.basicinfo}
+                                basicinfo={JSON.parse(JSON.stringify(this.state.survey.basicinfo))}
                                 dispatch={dispatch}
                                 unit={unit}
                                 intl={intl}
@@ -211,7 +213,7 @@ class Index extends PureComponent{
                             <WaterForm
                                 onSubmit={this.handleSubmit} 
                                 wrappedComponentRef={el => this.waterForm = el} 
-                                usewater={this.state.survey.usewater}
+                                usewater={JSON.parse(JSON.stringify(this.state.survey.usewater))}
                                 dispatch={dispatch}
                                 intl={intl}
                             /> 
@@ -220,7 +222,7 @@ class Index extends PureComponent{
                             <InstallForm
                                 onSubmit={this.handleSubmit} 
                                 wrappedComponentRef={el => this.installForm = el} 
-                                install={this.state.survey.install}
+                                install={JSON.parse(JSON.stringify(this.state.survey.install))}
                                 dispatch={dispatch}
                                 intl={intl}
                             /> 

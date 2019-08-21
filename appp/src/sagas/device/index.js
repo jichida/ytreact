@@ -1,9 +1,7 @@
 import {select,takeLatest,put} from 'redux-saga/effects';
 import {
   set_weui,
-  ui_setsurvey_request,
   ui_setuserdevice_request,
-  savesurvey_request,
   setuserdevice_request,
   setuserdevice_result,
   getdevice_result,
@@ -72,15 +70,7 @@ export function* deviceflow(){//仅执行一次
     }
   });
 
-  yield takeLatest(`${ui_setsurvey_request}`, function*(action) {
-    try{
-      const {payload:{userphonekey,data}} = action;
-      yield put(savesurvey_request({userphonekey,data}));
-    }
-    catch(e){
-      console.log(e);
-    }
-  });
+
 
   // ui_setsurvey_request
 }

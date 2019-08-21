@@ -11,6 +11,9 @@ import install_img from '../../assets/sy4.png';
 import BasicForm from './BasicForm';
 import WaterForm from './WaterForm'
 import InstallForm from './InstallForm'
+import lodashGet from 'lodash.get'
+import {savesurvey_request,savesurvey_result} from '../../actions';
+import {callthen} from '../../sagas/pagination';
 
 import './index.less';
 
@@ -27,6 +30,15 @@ class Index extends PureComponent{
     handleSave = () => {
         this.saveCurrent(this.state.curTab)
         console.log('保存调研数据', this.state.survey)
+        const {  match, history} = this.props
+
+        let _id = lodashGet(match, 'params.id', '0')
+        this.props.dispatch(callthen(savesurvey_request,savesurvey_result,{_id,data:this.state.survey})).then((surveynew)=>{
+            history.push(`/survey`);
+        }).catch((e)=>{
+            console.log(e);
+        })
+
         //dispatch save
     }
 
@@ -230,15 +242,11 @@ class Index extends PureComponent{
     }
 }
 
-const mapStateToProps =  ({app: { unit}}, ownProps) => {
-    const survey = {
-        _id: '1',
-        name: '1',
-        basicinfo: {},
-        usewater: {},
-        install: {}
-    }
-
+const mapStateToProps =  ({app: {unit},surveys:{surveys}}, ownProps) => {
+    const {match} = ownProps;
+    let _id = lodashGet(match, 'params.id', '0')
+    const survey = lodashGet(surveys,`${_id}`);
+    console.log(survey);
     return {
         survey,
         unit

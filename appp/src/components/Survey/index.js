@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import lodashmap from 'lodash.map'
 import { FormattedMessage, injectIntl } from 'react-intl';
-
+import {getsurvey_request,getsurvey_result} from '../../actions';
+import {callthen} from '../../sagas/pagination';
 import './index.less';
 
 const SurveyItem = ({ survey, onSelect, onDelete, formatMessage}) => {
@@ -38,8 +39,17 @@ class Index extends PureComponent{
 
     constructor(props) {
         super(props);
+        this.state = {
+            surveys: []
+        }
     }
-
+    componentDidMount(){
+        this.props.dispatch(callthen(getsurvey_request,getsurvey_result,{})).then((list)=>{
+            this.setState({surveys:[...list]});
+        }).catch((e)=>{
+            console.log(e);
+        });
+    }
     handleSelect = (_id) => {
         this.props.history.push(`/surveyname/${_id}`)
     }
@@ -49,8 +59,8 @@ class Index extends PureComponent{
     }
 
     render () {
-        const { history, surveys, intl: { formatMessage }}  = this.props;
-
+        const { history,intl: { formatMessage }}  = this.props;
+        const {surveys} = this.state;
         return (
             <div className="sub_bg">
                 <NavBar
@@ -81,21 +91,6 @@ class Index extends PureComponent{
 }
 
 
-const mapStateToProps =  (state, ownProps) => {
-    const surveys = [{
-        _id: '1',
-        name: '1'
-    },{
-        _id: '2',
-        name: '2'
-    },{
-        _id: '3',
-        name: '3'
-    }]
 
-    return {
-        surveys
-    }
-}
 
-export default connect(mapStateToProps)(withRouter(injectIntl(Index)))
+export default connect()(withRouter(injectIntl(Index)))

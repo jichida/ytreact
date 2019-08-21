@@ -51,11 +51,11 @@ class EquipmentList extends PureComponent{
                     <List className="equipment-list">
                         <Item extra={loadshGet(filterData, 'prev0.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.PP" values={{value: loadshGet(filterData, 'prev0.life', [0])[0]}} />}>{EquipmentPer['prev0']}</Item>
                         <Item extra={loadshGet(filterData, 'prev1.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.carbon" values={{value: loadshGet(filterData, 'prev1.life', [0])[0]}} />}>{EquipmentPer['prev1']}</Item>
-                        <Item extra={loadshGet(filterData, 'prev2.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.TAC" values={{value: loadshGet(filterData, 'prev2.life', [0])[0]}} />}>{EquipmentPer['prev2']}</Item>
+                        <Item extra={loadshGet(filterData, 'prev2.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.FOF" values={{value: loadshGet(filterData, 'prev2.life', [0])[0]}} />}>{EquipmentPer['prev2']}</Item>
                         <Item extra={`${loadshGet(devicelist, 'host', '')}`}>{EquipmentPer['host']}</Item>
-                        <Item extra={loadshGet(filterData, 'post0.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.LED" values={{value: loadshGet(filterData, 'post0.life', [0])[0]}} />}>{EquipmentPer['post0']}</Item>
-                        <Item extra={loadshGet(filterData, 'post1.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.AFC" values={{value: loadshGet(filterData, 'post1.life', [0])[0]}} />}>{EquipmentPer['post1']}</Item>
-                        <Item extra={loadshGet(filterData, 'post2.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.AFC" values={{value: loadshGet(filterData, 'post2.life', [0])[0]}} />}>{EquipmentPer['post2']}</Item>
+                        <Item extra={loadshGet(filterData, 'post0.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.AFC" values={{value: loadshGet(filterData, 'post0.life', [0])[0]}} />}>{EquipmentPer['post0']}</Item>
+                        <Item extra={loadshGet(filterData, 'post1.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.DCF" values={{value: loadshGet(filterData, 'post1.life', [0])[0]}} />}>{EquipmentPer['post1']}</Item>
+                        <Item extra={loadshGet(filterData, 'post2.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.LED" values={{value: loadshGet(filterData, 'post2.life', [0])[0]}} />}>{EquipmentPer['post2']}</Item>
                         <Item extra={EquipmentPer[loadshGet(devicelist, 'configuration', 'none')]}>{EquipmentPer['configuration']}</Item>
                         <Item extra={EquipmentPer[loadshGet(devicelist, 'materials', 'none')]}>{EquipmentPer['materials']}</Item>
                     </List>

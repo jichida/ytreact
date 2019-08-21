@@ -5,7 +5,7 @@ import HomeChart from '../HomeChart';
 import monitorBg from '../../assets/zhuye_an.png';
 import lodashmap from 'lodash.map';
 import lodashget from 'lodash.get';
-import { injectIntl } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import Refresh from '../Controls/Refresh';
 // import Waterwave from './waterwave.js';
 import config from './config';
@@ -496,6 +496,9 @@ class Home extends PureComponent{
                             </Flex>
                             <WhiteSpace style={{height: '2px', backgroundColor: '#333', margin: '15px auto'}} />
                             {showco}
+                            <WhiteSpace size="lg" />
+                            <div className="tools_warring"><FormattedMessage id="home.show.fitertip" /></div>
+                            <WhiteSpace size="lg" />
                         </div>
                     </Flex>
 

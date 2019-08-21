@@ -319,17 +319,17 @@ const TopChart = injectIntl((props)=>{
               lifewarring: posfilter2_leftday.warring,
               ishave: posfilter2_flow.ishave
           },
-          // {
-          //     title:  `${formatMessage({id: 'machine.data.afterfilter3'})}`,
-          //     unit: `${formatMessage({id: 'machine.data.flow'})}`,
-          //     // data: posfilter3_flow.value,
-          //     flow: posfilter3_flow.percent,
-          //     flowwarring: posfilter3_flow.warring,
-          //     life: posfilter3_leftday.percent,
-          //     data: posfilter3_leftday.value,
-          //     lifewarring: posfilter3_leftday.warring,
-          //     ishave: posfilter3_flow.ishave
-          // }
+          {
+              title:  `${formatMessage({id: 'machine.data.afterfilter3'})}`,
+              unit: `${formatMessage({id: 'machine.data.flow'})}`,
+              // data: posfilter3_flow.value,
+              flow: posfilter3_flow.percent,
+              flowwarring: posfilter3_flow.warring,
+              life: posfilter3_leftday.percent,
+              data: posfilter3_leftday.value,
+              lifewarring: posfilter3_leftday.warring,
+              ishave: posfilter3_flow.ishave
+          }
       ]
 
       uvfilter = {

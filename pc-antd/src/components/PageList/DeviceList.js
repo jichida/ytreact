@@ -50,6 +50,12 @@ class DeviceList extends React.Component {
   componentDidMount() {
   }
   onItemConvert(iteminput){
+    /*
+    判断逻辑:
+    1、正常运行:【iserr为false,最新数据datasrv_updated_at在1小时之内】
+    2、异常运行:【仅判断iserr为true】
+    3、未联网:【未收到数据 或者 最新数据datasrv_updated_at在1小时以前】
+    */
     console.log(iteminput);
     const installdate = lodashget(iteminput,'syssettings.installdate');
     if(iteminput.hasOwnProperty('srvdata')){

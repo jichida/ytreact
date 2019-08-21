@@ -28,7 +28,7 @@ const model = [
 
 
 
-class Index extends React.Component {
+class Index extends React.PureComponent {
     constructor(props) {
         super(props)
     }

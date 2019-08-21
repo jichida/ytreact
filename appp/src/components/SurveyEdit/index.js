@@ -216,7 +216,7 @@ class Index extends PureComponent{
                             <BasicForm 
                                 onSubmit={this.handleSubmit} 
                                 wrappedComponentRef={el => this.basicForm = el} 
-                                basicinfo={JSON.parse(JSON.stringify(this.state.survey.basicinfo))}
+                                basicinfo={lodashget(this.state, 'survey.basicinfo', {})}
                                 dispatch={dispatch}
                                 unit={unit}
                                 intl={intl}
@@ -226,7 +226,7 @@ class Index extends PureComponent{
                             <WaterForm
                                 onSubmit={this.handleSubmit} 
                                 wrappedComponentRef={el => this.waterForm = el} 
-                                usewater={JSON.parse(JSON.stringify(this.state.survey.usewater))}
+                                usewater={lodashget(this.state, 'survey.usewater', {})}
                                 dispatch={dispatch}
                                 intl={intl}
                             /> 
@@ -235,7 +235,7 @@ class Index extends PureComponent{
                             <InstallForm
                                 onSubmit={this.handleSubmit} 
                                 wrappedComponentRef={el => this.installForm = el} 
-                                install={JSON.parse(JSON.stringify(this.state.survey.install))}
+                                install={lodashget(this.state, 'survey.install', {})}
                                 dispatch={dispatch}
                                 intl={intl}
                             /> 

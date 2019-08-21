@@ -10,7 +10,7 @@ import './index.less';
 const Item = List.Item;
 const Brief = Item.Brief;
 
-class Index extends React.Component {
+class Index extends React.PureComponent {
     constructor(props) {
         super(props)
     }

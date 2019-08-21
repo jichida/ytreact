@@ -50,6 +50,8 @@ class Index extends PureComponent{
     }
 
     handleSubmit = (id, values) => {
+        console.log('submit id:', id)
+        console.log('submit value:', values)
         this.saveToState(id, values)        
     }
 
@@ -178,7 +180,7 @@ class Index extends PureComponent{
         const { dispatch, unit, intl }  = this.props;
         const { curTab } = this.state
 
-        console.log('Edit props update')
+        console.log('survey in state:', this.state.survey);
 
         return (
             <div className="sub_bg">
@@ -251,13 +253,11 @@ class Index extends PureComponent{
 const mapStateToProps =  ({app: {unit},surveys:{surveys}}, ownProps) => {
     const {match} = ownProps;
     let _id = lodashGet(match, 'params.id', '0')
-    console.log('survery id:', _id)
     let survey = lodashGet(surveys,`${_id}`);
     
     if(!survey.basicinfo) {
         survey = { ...survey, basicinfo: {}}
     }
-    console.log('survey', survey);
 
     return {
         survey,

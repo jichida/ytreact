@@ -20,6 +20,7 @@ const FilterPer = {
 }
 
 const Index = (props) => {
+    console.log('form props:', props)
     return (
         <React.Fragment>
         <form>

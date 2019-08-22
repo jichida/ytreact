@@ -210,7 +210,7 @@ const filterindextovalue = (idname,index)=>{
       return 30;
     }
     if(index === 2){
-      return 80;
+      return 90;
     }
     if(index === 3){
       return 180;

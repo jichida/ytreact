@@ -83,10 +83,10 @@ export const post1Options = [
     label: <FormattedMessage key={0} id="form.equip.nonefilter" values={{value: '0'}} />,
     value: '0'
   },
-  {
-      label: <FormattedMessage key={1} id="setting.system.DCF" values={{value: '180'}} />,
-      value: '180'
-  },
+  // {
+  //     label: <FormattedMessage key={1} id="setting.system.DCF" values={{value: '180'}} />,
+  //     value: '180'
+  // },
   {
       label: <FormattedMessage key={2} id="setting.system.DCF" values={{value: '270'}} />,
       value: '270'

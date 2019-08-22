@@ -30,6 +30,10 @@ const Brief = Item.Brief;
 
 class Device extends PureComponent{
 
+    constructor(props) {
+        super(props)
+    }
+
     showActionSheet = (title) => {
         const BUTTONS = ['XXX服务商名称', 'YYY服务商名称', 'ZZZ服务商名称', '取消'];
         ActionSheet.showActionSheetWithOptions({
@@ -62,7 +66,7 @@ class Device extends PureComponent{
 
     render () {
         console.log(window.innerHeight);
-        const { distributor, isGetDevice ,isDirect,isNormal} = this.props;
+        const { distributor, isGetDevice ,isDirect,isNormal, history} = this.props;
         // const { intl: { formatMessage }} = this.props;
         // const title = formatMessage({id: "device.privider.select"})
 
@@ -93,54 +97,60 @@ class Device extends PureComponent{
                     </Item>
                 </List>
                 <WingBlank>
-                    <p className="tools_title"><FormattedMessage id="device.tools" /></p>
+                    <div className="tools_title">
+                        <div className="title"><FormattedMessage id="device.tools" /></div>
+                        <div className= "category" onClick={() => history.push('/survey')}>
+                            <FormattedMessage id="device.tools.survey" />
+                        </div>
+                    </div>
                     <div className="tools_bg">
-                        <Flex wrap="wrap">
-                            <div className={`tools_con ${isNormal ? '' : 'disable'}`}>
-                                <div onClick={()=>{this.goTo('/setting')}}>
-                                    <img src={system_img} alt="" />
-                                    <p><FormattedMessage id="device.setting" defaultMessage="设备设置" /></p>
-                                </div>
-                            </div>
-                            <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
-                                <div onClick={()=>{this.gotoInfo('/basic')}}>
-                                    <img src={basic_img} alt="" />
-                                    <p><FormattedMessage id="device.basic" /></p>
-                                </div>
-                            </div>
-                            <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
-                                <div onClick={()=>{this.gotoInfo('/water')}}>
-                                    <img src={water_img} alt="" />
-                                    <p><FormattedMessage id="device.water" /></p>
-                                </div>
-                            </div>
-                            <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
-                                <div onClick={()=>{this.gotoInfo('/install')}}>
-                                    <img src={install_img} alt="" />
-                                    <p><FormattedMessage id="device.install" /></p>
-                                </div>
-                            </div>
-                            <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
-                                <div onClick={()=>{this.gotoInfo('/checklist')}}>
-                                    <img src={table_img} alt="" />
-                                    <p><FormattedMessage id="setting.checklist" defaultMessage="安装检查表" /></p>
-                                </div>
-                            </div>
-                            <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
-                                 <div onClick={()=>{this.gotoInfo('/equipmentlist')}}>
-                                    <img src={list_img} alt="" />
-                                    <p><FormattedMessage id="device.equipmentlist" defaultMessage="设备清单" /></p>
-                                </div>
-                             </div>
+                                <Flex wrap="wrap">
+                                    <div className={`tools_con ${isNormal ? '' : 'disable'}`}>
+                                        <div onClick={()=>{this.goTo('/setting')}}>
+                                            <img src={system_img} alt="" />
+                                            <p><FormattedMessage id="device.setting" defaultMessage="设备设置" /></p>
+                                        </div>
+                                    </div>
+                                    <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
+                                        <div onClick={()=>{this.gotoInfo('/basic')}}>
+                                            <img src={basic_img} alt="" />
+                                            <p><FormattedMessage id="device.basic" /></p>
+                                        </div>
+                                    </div>
+                                    <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
+                                        <div onClick={()=>{this.gotoInfo('/water')}}>
+                                            <img src={water_img} alt="" />
+                                            <p><FormattedMessage id="device.water" /></p>
+                                        </div>
+                                    </div>
+                                    <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
+                                        <div onClick={()=>{this.gotoInfo('/install')}}>
+                                            <img src={install_img} alt="" />
+                                            <p><FormattedMessage id="device.install" /></p>
+                                        </div>
+                                    </div>
+                                    <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
+                                        <div onClick={()=>{this.gotoInfo('/checklist')}}>
+                                            <img src={table_img} alt="" />
+                                            <p><FormattedMessage id="setting.checklist" defaultMessage="安装检查表" /></p>
+                                        </div>
+                                    </div>
+                                    <div className={`tools_con ${isNormal&&isGetDevice ? '' : 'disable'}`}>
+                                        <div onClick={()=>{this.gotoInfo('/equipmentlist')}}>
+                                            <img src={list_img} alt="" />
+                                            <p><FormattedMessage id="device.equipmentlist" defaultMessage="设备清单" /></p>
+                                        </div>
+                                    </div>
 
-                            {/* { isNormal&&
-                             <div className="tools_con">
-                                 <Link to="/inlet"><div><img src={waterset_img} alt="" />
-                                     <p><FormattedMessage id="setting.water.quality" defaultMessage="进水水质" /></p></div>
-                                 </Link>
-                             </div>
-                             }  */}
-                        </Flex>
+                                    {/* { isNormal&&
+                                    <div className="tools_con">
+                                        <Link to="/inlet"><div><img src={waterset_img} alt="" />
+                                            <p><FormattedMessage id="setting.water.quality" defaultMessage="进水水质" /></p></div>
+                                        </Link>
+                                    </div>
+                                    }  */}
+                                </Flex>
+                            )
                     </div>
                 </WingBlank>
                 { isDirect && (

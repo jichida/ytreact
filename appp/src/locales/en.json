@@ -116,6 +116,7 @@
   "form.ok": "OK",
   "form.confirm": "Confirm",
   "form.reset": "reset",
+  "form.load": "Load",
   "device": "Device Information",
   "device.distributor": "Distributor",
   "device.phone": "Phone",
@@ -123,6 +124,8 @@
   "device.warring.device": "Scan the two-dimensional code in the device settings to get device information!",
   "device.privider.select": "Select a service provider",
   "device.tools": "common tools",
+  "device.tools.survey": "Survey",
+  "device.tools.install": "Install",
   "device.basic": "Basic information",
   "device.water": "Water Information",
   "device.install": "Installation environment",
@@ -313,6 +316,17 @@
   "equipment.triplet": "Tee",
   "equipment.silkpair": "Silk pair",
   "equipment.silkspin": "Silk spin",
-  "equipment.fillin": "Fill in"
+  "equipment.fillin": "Fill in",
+  "survey.new": "New",
+  "survey.edit": "Edit",
+  "survey.delete": "Delete",
+  "survey.delete.warring": "Confirm to delete {value}?",
+  "survey.save": "Save",
+  "survey.back": "Confirm",
+  "survey.back.warring": "Returning to the previous step will discard your input.",
+  "survey.next": "Next",
+  "survey.name.placeholder": "Please enter the name of the survey.",
+  "survey.ok": "OK",
+  "survey.cancel": "Cancel"
 
 }

@@ -69,4 +69,8 @@ export function* deviceflow(){//仅执行一次
       console.log(e);
     }
   });
+
+
+
+  // ui_setsurvey_request
 }

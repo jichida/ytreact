@@ -135,7 +135,12 @@ const RenderForm = createForm({
                                 // type="money"
                                 type="digit"
                                 // extra= {<Icon type="right" />}
-                                {...getFieldProps('quantity')}
+                                {...getFieldProps('quantity',{
+                                    rules: [{
+                                        required: true,
+                                        message: <FormattedMessage id="water.quantity" defaultMessage="月用水量（吨）" />,
+                                    }],
+                                })}
                             />
                         </div>
                     </Brief>
@@ -148,7 +153,12 @@ const RenderForm = createForm({
                                 // type="money"
                                 type="digit"
                                 // extra= {<Icon type="right" />}
-                                {...getFieldProps('persons')}
+                                {...getFieldProps('persons',{
+                                    rules: [{
+                                        required: true,
+                                        message: <FormattedMessage id="water.persons" defaultMessage="用水人数（人）" />,
+                                    }],
+                                })}
                             />
                         </div>
                     </Brief>
@@ -161,7 +171,12 @@ const RenderForm = createForm({
                                 // type="money"
                                 type="digit"
                                 // extra= {<Icon type="right" />}
-                                {...getFieldProps('spot')}
+                                {...getFieldProps('spot',{
+                                    rules: [{
+                                        required: true,
+                                        message: <FormattedMessage id="water.spot" defaultMessage="直饮水点（个）" />,
+                                    }],
+                                })}
                             />
                         </div>
                     </Brief>
@@ -174,7 +189,12 @@ const RenderForm = createForm({
                                 // type="money"
                                 type="digit"
                                 // extra= {<Icon type="right" />}
-                                {...getFieldProps('watergage')}
+                                {...getFieldProps('watergage',{
+                                    rules: [{
+                                        required: true,
+                                        message: <FormattedMessage id="water.watergage" defaultMessage="水压" />,
+                                    }],
+                                })}
                             />
                         </div>
                     </Brief>
@@ -209,7 +229,12 @@ const RenderForm = createForm({
                                 type="digit"
                                 placeholder={formatMessage({id: "form.input"})}
                                 // extra= {<Icon type="right" />}
-                                {...getFieldProps('bathrooms')}
+                                {...getFieldProps('bathrooms',{
+                                    rules: [{
+                                        required: true,
+                                        message: <FormattedMessage id="water.bathrooms" defaultMessage="卫浴间数量" />,
+                                    }],
+                                })}
                             />
                         </div>
                     </Brief>
@@ -314,7 +339,12 @@ const RenderForm = createForm({
                                 type="digit"
                                 placeholder={formatMessage({id: "form.input"})}
                                 // extra= {<Icon type="right" />}
-                                {...getFieldProps('usertds')}
+                                {...getFieldProps('usertds',{
+                                    rules: [{
+                                        required: true,
+                                        message: <FormattedMessage id="water.usertds" defaultMessage="用户需求出水TDS值" />,
+                                    }],
+                                })}
                             />
                         </div>
                     </Brief>

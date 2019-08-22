@@ -14,6 +14,9 @@ import Home from './Layout';
 import BasicInfo from './DeviceBasic';
 import WaterInfo from './DeviceWater';
 import InstallInfo from './DeviceInstall';
+// import SurveyBasic from './DeviceSurveyBasic';
+// import SurveyWater from './DeviceSurveyWater';
+// import SurveyInstall from './DeviceSurveyInstall';
 import CheckList from './DeviceCheckList';
 import Setting from './DeviceSetting';
 import Inlet from './DeviceInlet';
@@ -23,6 +26,9 @@ import AfterFilter from './AfterFilter';
 import Login from './Login';
 import PipeFittings from './PipeFittings';
 import Distributor from './Distributor'
+import Survey from './Survey'
+import SurveyName from './SurveyName'
+import SurveyEdit from './SurveyEdit'
 
 // import TestCo from './SettingSystem/index_old';
 
@@ -64,6 +70,9 @@ class AppRoot extends React.Component {
               <Route exact path="/basic" component={requireAuthentication(BasicInfo)} />
               <Route exact path="/water" component={requireAuthentication(WaterInfo)} />
               <Route exact path="/install" component={requireAuthentication(InstallInfo)} />
+              <Route exact path="/survey" component={requireAuthentication(Survey)} />
+              <Route exact path="/surveyname/:id" component={requireAuthentication(SurveyName)} />
+              <Route exact path="/surveyedit/:id" component={requireAuthentication(SurveyEdit)} />
               <Route exact path="/checklist" component={requireAuthentication(CheckList)} />
               <Route exact path="/inlet" component={requireAuthentication(Inlet)} />
               <Route exact path="/setting" component={requireAuthentication(Setting)} />

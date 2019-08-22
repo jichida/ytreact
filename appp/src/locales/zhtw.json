@@ -116,6 +116,7 @@
   "form.ok": "OK",
   "form.confirm": "確認",
   "form.reset": "重置",
+  "form.load": "導入",
   "device": "設備信息",
   "device.distributor": "經銷商詳情",
   "device.phone": "電話",
@@ -123,6 +124,8 @@
   "device.warring.device": "請在設備設置中掃描二維碼，獲取設備資訊!",
   "device.privider.select": "選擇服務商",
   "device.tools": "常用工具",
+  "device.tools.survey": "調研",
+  "device.tools.install": "安裝",
   "device.basic": "基本信息",
   "device.water": "用水信息",
   "device.install": "安裝環境",
@@ -310,5 +313,17 @@
   "equipment.triplet": "三通",
   "equipment.silkpair": "對絲",
   "equipment.silkspin": "絲轉",
-  "equipment.fillin": "去填寫"
+  "equipment.fillin": "去填寫",
+  "survey.new": "新建",
+  "survey.edit": "編輯",
+  "survey.delete": "刪除",
+  "survey.delete.warring": "確認刪除{value}嗎?",
+    "survey.save": "保存",
+  "survey.back": "確認返回",
+  "survey.back.warring": "返回上一步將丟棄你的輸入",
+  "survey.next": "下一步",
+  "survey.name.placeholder": "請輸入調研名字",
+  "survey.ok": "確定",
+  "survey.cancel": "取消"
+
 }

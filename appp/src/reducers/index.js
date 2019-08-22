@@ -8,9 +8,11 @@ import device from './device';
 import wifi from './wifi';
 import devicedata from './devicedata';
 import newtopicfileupload from './newtopicfileupload';
+import surveys from './surveys';
 
 export default (history)=>combineReducers(
   {
+    surveys,
     newtopicfileupload,
     app,
     device,

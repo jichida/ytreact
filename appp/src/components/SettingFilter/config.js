@@ -83,10 +83,10 @@ export const post1Options = [
     label: <FormattedMessage key={0} id="form.equip.nonefilter" values={{value: '0'}} />,
     value: '0'
   },
-  {
-      label: <FormattedMessage key={1} id="setting.system.DCF" values={{value: '180'}} />,
-      value: '180'
-  },
+  // {
+  //     label: <FormattedMessage key={1} id="setting.system.DCF" values={{value: '180'}} />,
+  //     value: '180'
+  // },
   {
       label: <FormattedMessage key={2} id="setting.system.DCF" values={{value: '270'}} />,
       value: '270'
@@ -157,7 +157,7 @@ const filtervaluetoindex = (idname,life)=>{
     if(life === '0') {
       return 0;
     }
-    if(life === '18'){
+    if(life === '180'){
       return 1;
     }
     if(life === '360'){
@@ -171,7 +171,7 @@ const filtervaluetoindex = (idname,life)=>{
     if(life === '0') {
       return 0;
     }
-    if(life === '18'){
+    if(life === '180'){
       return 1;
     }
     if(life === '360'){
@@ -318,7 +318,7 @@ export const convertfilterlist = (filterlist)=>{
   let prev2 = filtervaluetoindex(filterlist['prev2'].idname, filterlist['prev2'].life[0]) || 0;
   let post0 = filtervaluetoindex(filterlist['post0'].idname, filterlist['post0'].life[0]) || 0;
   let post1 = filtervaluetoindex(filterlist['post1'].idname, filterlist['post1'].life[0]) || 0;
-  let post2 = filtervaluetoindex(filterlist['post2'].idname, filterlist['post1'].life[0]) || 0;
+  let post2 = filtervaluetoindex(filterlist['post2'].idname, filterlist['post2'].life[0]) || 0;
 
   return {prev0,prev1,prev2,post0,post1,post2};
 }

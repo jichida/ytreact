@@ -95,7 +95,7 @@ const Index = (props) => {
                         </div>
                     </Brief>
                 </Item>
-                {/* <Item className="item_switch"
+                <Item className="item_switch"
                     extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.onSelectFilter('post1')}} >
                                 <FormattedMessage id="setting.system.setup" defaultMessage="设置" />
@@ -108,7 +108,7 @@ const Index = (props) => {
                             {String(lodashGet(props, 'post1.life', [0])[0]) === '0' ? FilterPer['none'] : <FormattedMessage id="setting.system.DCF" values={{value: props.post1.life}} />}
                         </div>
                     </Brief>
-                </Item> */}
+                </Item>
                 <Item className="item_switch"
                     extra={<div className="add_btn" style={{width: '70px', display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.onSelectFilter('post2')}} >

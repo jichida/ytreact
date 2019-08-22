@@ -25,7 +25,7 @@ class Index extends PureComponent{
         super(props);
         this.state = {
             curTab: 'basic',// basic, install, water
-            survey: this.convertToUnit(JSON.parse(JSON.stringify(this.props.survey)))
+            survey: this.convertToUnit(this.props.survey)
         }
     }
 
@@ -97,6 +97,10 @@ class Index extends PureComponent{
 
     convertToUnit = (survey) => {
         const { unit } = this.props
+        let newsurvey = JSON.parse(JSON.stringify(survey))
+        if(!survey.basicinfo) {
+            newsurvey = { ...newsurvey, basicinfo: {}}
+        }
         const install = {...survey.install}
 
         if(unit === 'in') {
@@ -117,7 +121,7 @@ class Index extends PureComponent{
                 }
             }
 
-            return {...survey, install}
+            return {...newsurvey, install}
         } else {
             return {...survey}
         }
@@ -253,11 +257,7 @@ class Index extends PureComponent{
 const mapStateToProps =  ({app: {unit},surveys:{surveys}}, ownProps) => {
     const {match} = ownProps;
     let _id = lodashGet(match, 'params.id', '0')
-    let survey = lodashGet(surveys,`${_id}`);
-    
-    if(!survey.basicinfo) {
-        survey = { ...survey, basicinfo: {}}
-    }
+    const survey = lodashGet(surveys,`${_id}`);    
 
     return {
         survey,

@@ -308,16 +308,13 @@ class Home extends PureComponent{
         const devicelist_prev = [];
         const devicelist_post = [];
         lodashmap(devicelist,(dv)=>{
-          if(dv.isprev){
-          if(String(dv.life) !== '0'){
-              devicelist_prev.push(dv);
+          if(String(this.props.filterlist[dv.idname]) !== '0') {
+            if(dv.isprev){
+                devicelist_prev.push(dv);
             }
-
-          }
-          else{
-          if(String(dv.life) !== '0'){
-              devicelist_post.push(dv);
-            }
+            else {
+                devicelist_post.push(dv);
+              }
           }
         });
 
@@ -540,7 +537,10 @@ const mapStateToProps =  ({devicedata:{isgetdata,homedata,performancedata},devic
   initData['post1'] = {...initData['post1'], lastchangedate: post1lastchangedate }
   initData['post2'] = {...initData['post2'], lastchangedate: post2lastchangedate }
   const filter_list = filterlistConvertToArray(initData)
-  return {isgetdata,homedata,performancedata,devicelist:filter_list, locale};
+
+  console.log('filterlist:', filterlist)
+
+  return {isgetdata,homedata,performancedata,devicelist:filter_list, filterlist, locale};
 };
 Home = connect(mapStateToProps)(Home);
 export default injectIntl(Home);

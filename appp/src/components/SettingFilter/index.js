@@ -75,10 +75,10 @@ class Inlet extends PureComponent{
     handleSubmit = () => {
         // 发送至硬件并保存至reducer
         // const filterlist = dataOutput(this.state.formData)
-        // console.log('Submit DeviseList:', this.state.formData)
+        console.log('Submit DeviseList:', this.state.formData)
         // --->
         const payload = convertfilterlist(this.state.formData);
-        // console.log('Submit Paylaod:',payload);
+        console.log('Submit Paylaod:',payload);
         // this.props.dispatch(setfilterlist(payload));
 
         this.props.dispatch(wifi_sendcmd_request({cmd:`$filtertype ${payload.prev0}.${payload.prev1}.${payload.prev2}.${payload.post0}.${payload.post1}.${payload.post2}%`,

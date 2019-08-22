@@ -31,15 +31,18 @@ class Index extends PureComponent{
 
     handleSave = () => {
         this.saveCurrent(this.state.curTab)
-        console.log('保存调研数据', this.state.survey)
-        const {  match, history} = this.props
 
+        const {  match, history } = this.props
         let _id = lodashGet(match, 'params.id', '0')
-        this.props.dispatch(callthen(savesurvey_request,savesurvey_result,{_id,data:this.state.survey})).then((surveynew)=>{
-            history.push(`/survey`);
-        }).catch((e)=>{
-            console.log(e);
-        })
+        setTimeout(() => {
+            console.log('survey:', this.state.survey)
+            this.props.dispatch(callthen(savesurvey_request,savesurvey_result,{_id,data: this.convertFromUnit(this.state.survey)})).then((surveynew)=>{
+                history.push(`/survey`);
+            }).catch((e)=>{
+                console.log(e);
+            })
+        }, 300)
+        
 
         //dispatch save
     }
@@ -50,8 +53,6 @@ class Index extends PureComponent{
     }
 
     handleSubmit = (id, values) => {
-        console.log('submit id:', id)
-        console.log('submit value:', values)
         this.saveToState(id, values)        
     }
 
@@ -76,12 +77,14 @@ class Index extends PureComponent{
             this.setState({
                 survey: {...survey, basicinfo: values}
             })
+            return {...survey, basicinfo: values}
         }
         if(id === 'water') {
             values.source = values.source[0]
             this.setState({
                 survey: {...survey, usewater: values}
             })
+            return {...survey, usewater: values}
         }
         if(id === 'install') {
             values.position = values.position[0];
@@ -92,6 +95,7 @@ class Index extends PureComponent{
             this.setState({
                 survey: { ...survey, install: values }
             })
+            return { ...survey, install: values }
         }
     }
 
@@ -184,8 +188,6 @@ class Index extends PureComponent{
         const { dispatch, unit, intl }  = this.props;
         const { curTab } = this.state
 
-        console.log('survey in state:', this.state.survey);
-
         return (
             <div className="sub_bg">
                 <NavBar
@@ -234,6 +236,7 @@ class Index extends PureComponent{
                                 wrappedComponentRef={el => this.waterForm = el} 
                                 usewater={lodashget(this.state, 'survey.usewater', {})}
                                 dispatch={dispatch}
+                                unit={unit}
                                 intl={intl}
                             /> 
                         }
@@ -243,6 +246,7 @@ class Index extends PureComponent{
                                 wrappedComponentRef={el => this.installForm = el} 
                                 install={lodashget(this.state, 'survey.install', {})}
                                 dispatch={dispatch}
+                                unit={unit}
                                 intl={intl}
                             /> 
                         }

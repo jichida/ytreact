@@ -323,41 +323,78 @@ export const convertfilterlist = (filterlist)=>{
   return {prev0,prev1,prev2,post0,post1,post2};
 }
 
+// export const convertfromfilterlist  = ({prev0,prev1,prev2,post0,post1,post2})=>{
+//   let newlist = {}
+//   newlist['prev0'] = {
+//     idname:'prev0',
+//     isprev: true,
+//     life: prev0 === 0 ? [0] : [prev0Options[prev0-1].value],
+//   }
+//   newlist['prev1'] = {
+//     idname:'prev1',
+//     isprev: true,
+//     life: prev1 === 0 ? [0] : [prev1Options[prev1-1].value],
+//   }
+//   newlist['prev2'] = {
+//     idname:'prev2',
+//     isprev: true,
+//     life: prev2 === 0 ? [0] : [prev2Options[prev2-1].value],
+//   }
+//   newlist['post0'] = {
+//     idname:'post0',
+//     isprev: false,
+//     life: post0 === 0 ? [0] : [post0Options[post0-1].value],
+//   }
+//   newlist['post1'] = {
+//     idname:'post1',
+//     isprev: false,
+//     life: post1 === 0 ? [0] : [post1Options[post1-1].value],
+//   }
+//   newlist['post2'] = {
+//     idname:'post2',
+//     isprev: false,
+//     life: post2 === 0 ? [0] : [post2Options[post2-1].value],
+//   }
+//   console.log('newlist:', newlist)
+//   return newlist
+// }
+
 export const convertfromfilterlist  = ({prev0,prev1,prev2,post0,post1,post2})=>{
   let newlist = {}
   newlist['prev0'] = {
     idname:'prev0',
     isprev: true,
-    life: prev0 === 0 ? [0] : [prev0Options[prev0-1].value],
+    life: [prev0Options[prev0].value],
   }
   newlist['prev1'] = {
     idname:'prev1',
     isprev: true,
-    life: prev1 === 0 ? [0] : [prev1Options[prev1-1].value],
+    life: [prev1Options[prev1].value],
   }
   newlist['prev2'] = {
     idname:'prev2',
     isprev: true,
-    life: prev2 === 0 ? [0] : [prev2Options[prev2-1].value],
+    life: [prev2Options[prev2].value],
   }
   newlist['post0'] = {
     idname:'post0',
     isprev: false,
-    life: post0 === 0 ? [0] : [post0Options[post0-1].value],
+    life: [post0Options[post0].value],
   }
   newlist['post1'] = {
     idname:'post1',
     isprev: false,
-    life: post1 === 0 ? [0] : [post1Options[post1-1].value],
+    life: [post1Options[post1].value],
   }
   newlist['post2'] = {
     idname:'post2',
     isprev: false,
-    life: post2 === 0 ? [0] : [post2Options[post2-1].value],
+    life: [post2Options[post2].value],
   }
   console.log('newlist:', newlist)
   return newlist
 }
+
 
 export const mainconvertfromfilterlist  = ({prev0,prev1,prev2,post0,post1,post2})=>{
   let newlist = {}

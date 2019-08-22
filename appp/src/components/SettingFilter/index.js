@@ -154,7 +154,6 @@ class Inlet extends PureComponent{
     //     this.setState({ modalHost: false })
     // }
 
-
     render () {
 
         return (
@@ -253,7 +252,9 @@ class Inlet extends PureComponent{
 }
 
 const mapStateToProps =  ({devicedata}) =>{
+    console.log('setting filterlist:', devicedata.filterlist)
     const devicelist = convertfromfilterlist(devicedata.filterlist);
+    console.log('convert from fiterlist:', devicelist)
     return { devicelist };
 };
 

@@ -1,4 +1,4 @@
-const islocalhost = true;
+const islocalhost = false;
 const serverurl = islocalhost?'http://localhost:4101':'http://api.hydronovation.com.cn:4101';
 const serverurlrestful = islocalhost?`${serverurl}/api`:`${serverurl}/api`;
 const wspath = islocalhost?'/socket.io':'/socket.io';

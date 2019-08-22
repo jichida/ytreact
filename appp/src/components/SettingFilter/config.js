@@ -157,7 +157,7 @@ const filtervaluetoindex = (idname,life)=>{
     if(life === '0') {
       return 0;
     }
-    if(life === '18'){
+    if(life === '180'){
       return 1;
     }
     if(life === '360'){

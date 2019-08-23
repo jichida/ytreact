@@ -134,12 +134,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('username',{
-                                    rules: [{
-                                        required: true,
-                                    message: <FormattedMessage id="user.name" defaultMessage="用户名" />,
-                                    }],
-                                })}
+                                {...getFieldProps('username')}
                             />
                         </div>
                     </Brief>
@@ -149,12 +144,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('userphone',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="user.phone" defaultMessage="联系方式" />,
-                                    }],
-                                })}
+                                {...getFieldProps('userphone')}
                             />
                         </div>
                     </Brief>
@@ -164,12 +154,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('useraddress',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="user.address" defaultMessage="用户地址" />,
-                                    }],
-                                })}
+                                {...getFieldProps('useraddress')}
                             />
                         </div>
                     </Brief>
@@ -208,12 +193,7 @@ const RenderForm = createForm({
                             <InputItem
                                 type="digit"
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('floor',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="user.floor" defaultMessage="楼层高度" />,
-                                    }],
-                                })}
+                                {...getFieldProps('floor')}
                             />
                             </div>
                     </Brief>

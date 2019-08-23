@@ -172,13 +172,7 @@ class Index extends React.Component {
                         <InputItem
                             // editable={false}
                             placeholder={formatMessage({id: "form.input"})}
-                            {...getFieldProps('installer',{
-                                validateTrigger: 'onBlur',
-                                rules: [{
-                                    required: true,
-                                    message: <FormattedMessage id="setting.system.installer" defaultMessage="安装人员" />,
-                                }],
-                            })}
+                            {...getFieldProps('installer')}
                         ></InputItem>
                         </div>
                     </Brief>

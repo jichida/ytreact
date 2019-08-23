@@ -84,12 +84,7 @@ const RenderForm = createForm({
                             <InputItem
                                 editable={false}
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('ph',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="setting.water.ph" defaultMessage="ph值" />,
-                                    }],
-                                })}
+                                {...getFieldProps('ph')}
                             />
                         </div>
                     </Brief>
@@ -100,12 +95,7 @@ const RenderForm = createForm({
                             <InputItem
                                 editable={false}
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('conductivity',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="setting.water.conductivity" defaultMessage="进水导电率" />,
-                                    }],
-                                })}
+                                {...getFieldProps('conductivity')}
                             />
                         </div>
                     </Brief>
@@ -116,12 +106,7 @@ const RenderForm = createForm({
                             <InputItem
                                 editable={false}
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('tds',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="setting.water.tds" defaultMessage="进水TDS值" />,
-                                    }],
-                                })}
+                                {...getFieldProps('tds')}
                             />
                         </div>
                     </Brief>
@@ -132,12 +117,7 @@ const RenderForm = createForm({
                             <InputItem
                                 editable={false}
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('hardness',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="setting.water.hardness" defaultMessage="进水硬度" />,
-                                    }],
-                                })}
+                                {...getFieldProps('hardness')}
                             />
                         </div>
                     </Brief>
@@ -148,12 +128,7 @@ const RenderForm = createForm({
                             <InputItem
                                 editable={false}
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('alkalinity',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="setting.water.alkalinity" defaultMessage="进水碱度" />,
-                                    }],
-                                })}
+                                {...getFieldProps('alkalinity')}
                             />
                         </div>
                     </Brief>

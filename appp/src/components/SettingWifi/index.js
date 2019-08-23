@@ -118,12 +118,7 @@ const RenderForm = createForm({
                             <InputItem
                                 onClick={()=>showActionSheet(title)}
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('ssid',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="setting.wifi.ssid" defaultMessage="WIFI SSID" />,
-                                    }],
-                                })}
+                                {...getFieldProps('ssid')}
                             />
                         </div>
                     </Brief>
@@ -133,12 +128,7 @@ const RenderForm = createForm({
                         <div className="item_children">
                             <InputItem
                                 placeholder={formatMessage({id: "form.input"})}
-                                {...getFieldProps('password',{
-                                    rules: [{
-                                        required: true,
-                                        message: <FormattedMessage id="setting.wifi.password" defaultMessage="WIFI 密码" />,
-                                    }],
-                                })}
+                                {...getFieldProps('password')}
                             />
                         </div>
                     </Brief>

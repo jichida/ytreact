@@ -34,11 +34,14 @@ class Index extends PureComponent{
     handleNext = () => {
         const {  match, history} = this.props
         let _id = lodashGet(match, 'params.id', '0')
-        this.props.dispatch(callthen(savesurvey_request,savesurvey_result,{_id,data:{name:this.state.name}})).then((surveynew)=>{
-            history.push(`/surveyedit/${surveynew._id}`);
-        }).catch((e)=>{
-            console.log(e);
-        })
+        if(this.state.name.trim() !== '') {
+            this.props.dispatch(callthen(savesurvey_request,savesurvey_result,{_id,data:{name:this.state.name}})).then((surveynew)=>{
+                history.push(`/surveyedit/${surveynew._id}`);
+            }).catch((e)=>{
+                console.log(e);
+            })
+        }
+        
     }
 
     render () {
@@ -50,7 +53,7 @@ class Index extends PureComponent{
                     className="nav"
                     icon={<Icon type="left" />}
                     onLeftClick={this.handleBack}
-                    rightContent={<span onClick={this.handleNext}><FormattedMessage id="survey.next" /></span>}
+                    rightContent={<span style={{color: `${this.state.name.trim() !== '' ? '#fff' : '#666'}`}} onClick={this.handleNext}><FormattedMessage id="survey.next" /></span>}
                 >
                 <FormattedMessage id="device.tools.survey" />
                 </NavBar>

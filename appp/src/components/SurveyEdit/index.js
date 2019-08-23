@@ -199,7 +199,7 @@ class Index extends PureComponent{
                     <FormattedMessage id="device.tools.survey" />
                 </NavBar>
                 <div className="sub_device_bg">
-                    <div className="tab">
+                    <div className="survery-edit-tab">
                         <div className={`tools_con ${curTab === 'basic' ? '' : 'disable'}`}>
                             <div onClick={()=>{this.handleTabSelect('basic')}}>
                                 <img src={basic_img} alt="" />
@@ -219,7 +219,7 @@ class Index extends PureComponent{
                             </div>
                         </div>
                     </div>
-                    <div className="form-container">
+                    <div className="survery-edit-form-container">
                         { curTab === 'basic' && 
                             <BasicForm 
                                 onSubmit={this.handleSubmit} 

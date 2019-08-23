@@ -152,10 +152,12 @@ const emptyFilter = {
 const TopChart = injectIntl((props)=>{
     const { srvdata, intl, curdevice} = props;
     const filterlist = lodashget(curdevice, 'appdata.filterlist', {})
+    console.log('filterlist:', filterlist)
     const { formatMessage } = intl;
     // const filterlist2 = lodashget(curdevice, 'devicedata.filterlist', {})
     const initData = mainconvertfromfilterlist(filterlist)
     const filter_list = filterlistConvertToArray(initData)
+    console.log('filter_list:', filter_list)
     let chartData = []
     let uvfilter = {}
 
@@ -172,7 +174,9 @@ const TopChart = injectIntl((props)=>{
       const { MODLife, Pre_filter1, Pre_filter2, Pre_filter3, Post_filter1, Post_filter2, Post_filter3 } = srvdata
       console.log('srvdata:', srvdata)
       const modlife_lefeday = getPercent('filterelements_modlife_leftday', MODLife)
+      console.log('prev0:', String(lodashget(filterlist, 'prev0', '0')) !== '0')
       const prefilter1_leftday = String(lodashget(filterlist, 'prev0', '0')) !== '0' ? getPercent('filterelements_prefilter1_leftday', Pre_filter1, filter_list[0].life) : emptyFilter
+      console.log('prev0 leftday:', prefilter1_leftday)
       const prefilter2_leftday = String(lodashget(filterlist, 'prev1', '0')) !== '0' ? getPercent('filterelements_prefilter2_leftday', Pre_filter2, filter_list[1].life) : emptyFilter
       const prefilter3_leftday = String(lodashget(filterlist, 'prev2', '0')) !== '0' ? getPercent('filterelements_prefilter3_leftday', Pre_filter3, filter_list[2].life) : emptyFilter
       const posfilter1_leftday = String(lodashget(filterlist, 'post0', '0')) !== '0' ? getPercent('filterelements_posfilter1_leftday', Post_filter1, filter_list[3].life) : emptyFilter
@@ -183,6 +187,7 @@ const TopChart = injectIntl((props)=>{
       // const outwater_quality = getPercent('main_outwater_quality', homedata.main_outwater_quality);
       const modlife_flow = getPercent('filterelements_modlife_flow', MODLifePercent);
       const prefilter1_flow = String(lodashget(filterlist, 'prev0', '0')) !== '0' ? getPercent('filterelements_prefilter1_flow', Pre_filter1_percent) : emptyFilter;
+      console.log('prev0 flow:', prefilter1_flow)
       const prefilter2_flow = String(lodashget(filterlist, 'prev1', '0')) !== '0' ? getPercent('filterelements_prefilter2_flow', Pre_filter2_percent) : emptyFilter;
       const prefilter3_flow = String(lodashget(filterlist, 'prev2', '0')) !== '0' ? getPercent('filterelements_prefilter3_flow', Pre_filter3_percent) : emptyFilter;
       const posfilter1_flow = String(lodashget(filterlist, 'post0', '0')) !== '0' ? getPercent('filterelements_posfilter1_flow', Pos_filter1_percent) : emptyFilter;
@@ -273,7 +278,7 @@ const TopChart = injectIntl((props)=>{
               life: prefilter1_leftday.percent,
               data: prefilter1_leftday.value,
               lifewarring: prefilter1_leftday.warring,
-              ishave: posfilter1_flow.ishave
+              ishave: prefilter1_flow.ishave
           },
           {
               title: `${formatMessage({id: 'machine.data.frontfilter2'})}`,
@@ -360,7 +365,10 @@ const TopChart = injectIntl((props)=>{
                 {
                   !!srvdata ? (
                      _.map(chartData, (item, index)=>{
+                        console.log('chat item:', item)
                         if(item.ishave) {
+                          
+
                           return (
                             <Chart {...item} {...props} key={index} />
                           )

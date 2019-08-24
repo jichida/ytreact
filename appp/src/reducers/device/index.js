@@ -3,6 +3,7 @@ import {
   importsurvey,
   adddevice_result,
   getdevice_result,
+  getdevice_request,
   setuserdevice_result,
   setdatatarget
   // ui_setcurwifi
@@ -146,6 +147,14 @@ const device = createReducer({
     },
     [adddevice_result]: (state, payload) => {
         return { ...state, ...payload };
+    },
+    [getdevice_request]: (state, payload) => {
+      //syssettings.deviceid
+      let {syssettings} = state;
+      if(!!payload['syssettings.deviceid']){
+        syssettings = {...syssettings,deviceid:payload['syssettings.deviceid']};
+      }
+      return { ...state, syssettings };
     },
     // [ui_setcurwifi]: (state, payload) => {
     //     const {wifissid,wifipassword} = payload;

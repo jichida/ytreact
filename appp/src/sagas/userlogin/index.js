@@ -130,12 +130,14 @@ export function* userloginflow() {
   yield takeLatest(`${common_err}`, function*(action) {
         const {payload:result} = action;
         console.log(result.errmsg);
-        yield put(set_weui({
-          toast:{
-          text:result.errmsg,
-          show: true,
-          type:'warning'
-        }}));
+        if(!result.ishide){
+          yield put(set_weui({
+            toast:{
+            text:result.errmsg,
+            show: true,
+            type:'warning'
+          }}));
+        }
   });
 
 }

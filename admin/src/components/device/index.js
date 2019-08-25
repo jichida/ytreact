@@ -15,7 +15,7 @@ import {
   Filter,
   ReferenceInput,
   ReferenceField,
-
+  
 } from 'react-admin';
 import TextFieldBool from '../controls/TextFieldBool';
 import ImageArrayField from '../controls/imagearrayfield';

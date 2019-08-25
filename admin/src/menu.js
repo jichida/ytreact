@@ -24,7 +24,8 @@ import Caddressconst from '@material-ui/icons/Domain' //省市区地址
 // import Ccomments from '@material-ui/icons/Comment' //评论
 import Cuser from '@material-ui/icons/Group' //用户
 import Cdevice from '@material-ui/icons/DevicesOther' //设备
-// import Cabout from '@material-ui/icons/Announcement' //关于
+import Cdevicehistory from '@material-ui/icons/DevicesOther' //设备
+import Csurvey from '@material-ui/icons/Headset' //关于
 // import Ctag from '@material-ui/icons/Announcement' //关于
 
 const items = [
@@ -33,7 +34,8 @@ const items = [
     { name: 'distributor', icon: <Cshop /> },
     { name: 'installer', icon: <Cuser /> },
     { name: 'addressconst', icon: <Caddressconst /> },
-    { name: 'devicedatahistory', icon: <Cuser /> },
+    { name: 'devicedatahistory', icon: <Cdevicehistory /> },
+    { name: 'survey', icon: <Csurvey /> },
 ];
 
 const Menu = ({ onMenuClick, translate, logout }) => (

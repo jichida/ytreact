@@ -226,7 +226,7 @@ const RenderForm = createForm({
                               // "message": "扫描结果/失败原因"
                               // }
                               if(result.code == 0){
-                                setFieldsValue({deviceid:result.data})
+                                // setFieldsValue({deviceid:result.data})
                                 dispatch(getdevice_request({'syssettings.deviceid':result.data}));
                               }
                               //  alert(JSON.stringify(result));//<---这里判断code是否为0，如果为0，表示成功；去取data的值

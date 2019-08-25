@@ -9,6 +9,9 @@ export default {
     },
   },
   resources: {
+    survey:{
+      name:'调研 |||| 调研',
+    },
     deviceuser:{
       name:'用户设备 |||| 用户设备',
     },

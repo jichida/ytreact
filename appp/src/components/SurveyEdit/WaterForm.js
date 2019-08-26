@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, InputItem, Button, Switch, Picker } from 'antd-mobile';
+import { List, InputItem, Switch, Picker } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import {common_err,ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
@@ -55,7 +55,7 @@ class Index extends React.PureComponent {
                             <div className="item_children">
                                 <InputItem
                                     placeholder={formatMessage({id: "form.input"})}
-                                    type="digit"
+                                    // type="digit"
                                     {...getFieldProps('quantity')}
                                 />
                             </div>
@@ -66,7 +66,7 @@ class Index extends React.PureComponent {
                             <div className="item_children">
                                 <InputItem
                                     placeholder={formatMessage({id: "form.input"})}
-                                    type="digit"
+                                    // type="digit"
                                     {...getFieldProps('persons')}
                                 />
                             </div>
@@ -77,7 +77,7 @@ class Index extends React.PureComponent {
                             <div className="item_children">
                                 <InputItem
                                     placeholder={formatMessage({id: "form.input"})}
-                                    type="digit"
+                                    // type="digit"
                                     {...getFieldProps('spot')}
                                 />
                             </div>
@@ -88,7 +88,7 @@ class Index extends React.PureComponent {
                             <div className="item_children">
                                 <InputItem
                                     placeholder={formatMessage({id: "form.input"})}
-                                    type="digit"
+                                    // type="digit"
                                     {...getFieldProps('watergage')}
                                 />
                             </div>
@@ -120,7 +120,7 @@ class Index extends React.PureComponent {
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    type="digit"
+                                    // type="digit"
                                     placeholder={formatMessage({id: "form.input"})}
                                     {...getFieldProps('bathrooms')}
                                 />
@@ -138,7 +138,7 @@ class Index extends React.PureComponent {
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    type="digit"
+                                    // type="digit"
                                     placeholder={formatMessage({id: "form.input"})}
                                     {...getFieldProps('usertds')}
                                 />

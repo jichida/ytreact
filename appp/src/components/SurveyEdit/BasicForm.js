@@ -3,7 +3,7 @@ import {  List, InputItem, Picker } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import {common_err,ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Buckets from '../Buckets';
 
 import './index.less';
@@ -161,7 +161,7 @@ class Index extends React.PureComponent {
                         <Brief>
                             <div className="item_children">
                                 <InputItem
-                                    type="digit"
+                                    // type="digit"
                                     placeholder={formatMessage({id: "form.input"})}
                                     {...getFieldProps('floor')}
                                 />

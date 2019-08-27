@@ -305,6 +305,7 @@ class DeviceBasic extends PureComponent{
     handleLoad = (survey) => {
         // 导入调研输入的数据
         console.log(survey)
+        //这里要加一个确认弹框？确认内容为：你确实需要导入xx调研吗？导入后会覆盖当前的数据,并且不能恢复。点击确认导入。
         this.props.dispatch(importsurvey(survey));
     }
 

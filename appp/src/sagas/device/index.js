@@ -5,7 +5,8 @@ import {
   setuserdevice_request,
   setuserdevice_result,
   getdevice_result,
-  adddevice_request
+  adddevice_request,
+  importsurvey
 } from '../../actions';
 import lodashget from 'lodash.get';
 import { intl } from '../../util/globalIntl';
@@ -70,7 +71,32 @@ export function* deviceflow(){//仅执行一次
     }
   });
 
-
-
-  // ui_setsurvey_request
+  // importsurvey
+  yield takeLatest(`${importsurvey}`, function*(action) {
+    try{
+      const {installerid,distributorid} = yield select((state)=>{
+        const distributorid = state.userlogin.distributor._id;
+        const installerid = state.userlogin._id;
+        return {installerid,distributorid};
+      });
+      const _id = yield select((state)=>{
+        // debugger;
+        return state.device._id;
+      });
+      const {basicinfo:basicinfonew, usewater:usewaternew,install:installnew}= action.payload;
+      // debugger;
+      // {_id,data:{basicinfo:values}
+      let data = {
+        basicinfo:basicinfonew, 
+        usewater:usewaternew,
+        install:installnew
+      };
+      data.distributorid = distributorid;
+      data.installerid = installerid;
+      yield put(setuserdevice_request({_id,data}));
+    }
+    catch(e){
+      console.log(e);
+    }
+  });
 }

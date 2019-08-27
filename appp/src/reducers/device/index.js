@@ -1,6 +1,6 @@
 import { createReducer } from 'redux-act';
 import {
-  importsurvey,
+  // importsurvey,
   adddevice_result,
   getdevice_result,
   getdevice_request,
@@ -191,20 +191,20 @@ const device = createReducer({
       }
       return { ...state, basicinfo,usewater,install,syssettings,wifisettings,checklist,_id,devicelist };
     },
-    [importsurvey]: (state, payload) => {
-      const {basicinfo:basicinfonew, usewater:usewaternew,install:installnew}= payload;
-      let {basicinfo,usewater,install} = state;
-      if(!!basicinfonew){
-        basicinfo = {...basicinfonew};
-      }
-      if(!!usewaternew){
-        usewater = {...usewaternew};
-      }
-      if(!!installnew){
-        install = {...installnew};
-      }
-      return { ...state, basicinfo,usewater,install};
-    },
+    // [importsurvey]: (state, payload) => {
+    //   const {basicinfo:basicinfonew, usewater:usewaternew,install:installnew}= payload;
+    //   let {basicinfo,usewater,install} = state;
+    //   if(!!basicinfonew){
+    //     basicinfo = {...basicinfonew};
+    //   }
+    //   if(!!usewaternew){
+    //     usewater = {...usewaternew};
+    //   }
+    //   if(!!installnew){
+    //     install = {...installnew};
+    //   }
+    //   return { ...state, basicinfo,usewater,install};
+    // },
     [setuserdevice_result]: (state, payload) => {
         const {basicinfo:basicinfonew, usewater:usewaternew,install:installnew,
           syssettings:syssettingsnew,wifisettings:wifisettingsnew,

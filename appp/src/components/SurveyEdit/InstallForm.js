@@ -239,7 +239,7 @@ class Index extends React.PureComponent {
                             <Brief>
                                 <div className="item_children">
                                     <InputItem
-                                        // type="digit"
+                                        type="digit"
                                         placeholder={formatMessage({id: "form.input"})}
                                         {...getFieldProps('drainage')}
                                     />

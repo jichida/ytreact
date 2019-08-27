@@ -118,6 +118,8 @@
   "form.reset": "重置",
   "form.load": "導入",
   "device": "設備信息",
+  "device.import.confirm": "確認導入調研？",
+  "device.import.warring": "導入後會覆蓋當前資料，並且不能恢復",
   "device.distributor": "經銷商詳情",
   "device.phone": "電話",
   "device.warring.direct": "當前處於直連模式下，請切換到上網模式後再使用這些功能!",

@@ -119,6 +119,8 @@
   "form.equip.postfilter3": "后置滤芯3",
   "form.equip.nonefilter": "无",
   "device": "设备信息",
+  "device.import.confirm": "确认导入调研？",
+  "device.import.warring": "导入后会覆盖当前数据，并且不能恢复",
   "device.distributor": "经销商详情",
   "device.phone": "电话",
   "device.warring.direct": "当前处于直连模式下，请切换到上网模式后再使用这些功能!",

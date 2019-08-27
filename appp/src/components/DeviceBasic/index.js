@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import {  NavBar, Icon, List, InputItem, Picker, Button, ActionSheet } from 'antd-mobile';
+import {  NavBar, Icon, List, InputItem, Picker, Button, ActionSheet, Modal } from 'antd-mobile';
 import { connect } from 'react-redux';
 import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
@@ -13,6 +13,7 @@ import {callthen} from '../../sagas/pagination';
 import {importsurvey} from '../../actions';
 import './index.less';
 
+const alert = Modal.alert
 const Item = List.Item;
 const Brief = Item.Brief;
 let initHeight;
@@ -303,10 +304,14 @@ class DeviceBasic extends PureComponent{
     }
 
     handleLoad = (survey) => {
+        const { intl: { formatMessage }} = this.props
         // 导入调研输入的数据
         console.log(survey)
         //这里要加一个确认弹框？确认内容为：你确实需要导入xx调研吗？导入后会覆盖当前的数据,并且不能恢复。点击确认导入。
-        this.props.dispatch(importsurvey(survey));
+        alert(formatMessage({id: 'device.import.confirm'}), formatMessage({id: 'device.import.warring'}), [
+            { text: formatMessage({id: 'form.cancel'}), onPress: () => console.log('cancel') },
+            { text: formatMessage({id: 'form.ok'}), onPress: () => this.props.dispatch(importsurvey(survey)) },
+        ])
     }
 
 

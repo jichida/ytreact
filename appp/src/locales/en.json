@@ -118,6 +118,8 @@
   "form.reset": "reset",
   "form.load": "Load",
   "device": "Device Information",
+  "device.import.confirm": "Confirm import？",
+  "device.import.warring": "When imported, the current data is overwritten and cannot be restored.",
   "device.distributor": "Distributor",
   "device.phone": "Phone",
   "device.warring.direct": "Currently in direct connection mode, please switch to online mode and use these functions again!",

@@ -72,6 +72,7 @@ const mapStateToProps =  ({device:{syssettings,_id},app:{locale},userlogin:{user
   if(!syssettings.installer || syssettings.installer === ''){
     syssettings.installer = username;
   }
+
   // debugger;
   return {locale,syssettings,_id};
 };

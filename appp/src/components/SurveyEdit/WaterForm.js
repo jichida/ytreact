@@ -6,6 +6,7 @@ import lodashget from 'lodash.get';
 import { FormattedMessage } from 'react-intl';
 // import { pageInputScroll } from '../../util/pageInputScroll';
 import './index.less';
+import PopoverInput from '../Controls/popoverInput'
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -96,11 +97,12 @@ class Index extends React.PureComponent {
                     </Item>
                     <List.Item
                         className="item_switch"
-                        extra={<Switch
-                            {...getFieldProps('booster', {
-                                valuePropName: 'checked',
-                            })}
-                        />}
+                        // extra={<Switch
+                        //     {...getFieldProps('booster', {
+                        //         valuePropName: 'checked',
+                        //     })}
+                        // />}
+                        extra={<PopoverInput type="1" {...getFieldProps('booster')} />}
                     ><FormattedMessage id="water.booster" defaultMessage="是否需装增压泵" /></List.Item>
                     <Item><FormattedMessage id="water.source" defaultMessage="进水水源" />
                         <Brief>
@@ -128,11 +130,12 @@ class Index extends React.PureComponent {
                         </Brief>
                     </Item>
                     <List.Item className="item_switch"
-                        extra={<Switch
-                            {...getFieldProps('shunt', {
-                                valuePropName: 'checked',
-                            })}
-                        />}
+                        // extra={<Switch
+                        //     {...getFieldProps('shunt', {
+                        //         valuePropName: 'checked',
+                        //     })}
+                        // />}
+                        extra={<PopoverInput type="1" {...getFieldProps('shunt')} />}
                     ><FormattedMessage id="water.shunt" defaultMessage="是否分流" /></List.Item>
                     <Item><FormattedMessage id="water.usertds" defaultMessage="用户需求出水TDS值" />
                         <Brief>

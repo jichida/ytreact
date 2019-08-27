@@ -6,6 +6,7 @@ import lodashget from 'lodash.get';
 import { FormattedMessage } from 'react-intl';
 import  SpaceInput from '../SpaceInput';
 import PickerAndInput from '../PickerAndInpput';
+import PopoverInput from '../Controls/popoverInput'
 
 import './index.less';
 
@@ -175,11 +176,12 @@ class Index extends React.PureComponent {
                         </Brief>
                     </Item>
                     <List.Item className="item_switch"
-                        extra={<Switch
-                            {...getFieldProps('avoidlight', {
-                                valuePropName: 'checked',
-                            })}
-                        />}
+                        // extra={<Switch
+                        //     {...getFieldProps('avoidlight', {
+                        //         valuePropName: 'checked',
+                        //     })}
+                        // />}
+                        extra={<PopoverInput type="1" {...getFieldProps('avoidlight')} />}
                     ><FormattedMessage id="install.avoidlight" defaultMessage="是否避光" /></List.Item>
                     <Item><FormattedMessage id="install.wall" defaultMessage="墙体材料" />
                         <Brief>
@@ -261,18 +263,20 @@ class Index extends React.PureComponent {
                         </Brief>
                     </Item>
                     <List.Item className="item_switch"
-                        extra={<Switch
-                            {...getFieldProps('wifi', {
-                                valuePropName: 'checked',
-                            })}
-                        />}
+                        // extra={<Switch
+                        //     {...getFieldProps('wifi', {
+                        //         valuePropName: 'checked',
+                        //     })}
+                        // />}
+                        extra={<PopoverInput type="2" up={true} {...getFieldProps('avoidlight')} />}
                     ><FormattedMessage id="install.wifi" defaultMessage="有无WIFI" /></List.Item>
                     <List.Item className="item_switch"
-                        extra={<Switch
-                            {...getFieldProps('power', {
-                                valuePropName: 'checked',
-                            })}
-                        />}
+                        // extra={<Switch
+                        //     {...getFieldProps('power', {
+                        //         valuePropName: 'checked',
+                        //     })}
+                        // />}
+                        extra={<PopoverInput type="2" up={true} {...getFieldProps('power')} />}
                     ><FormattedMessage id="install.power" defaultMessage="有无电源" /></List.Item>
                 </List>
             </form>

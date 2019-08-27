@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import {common_err,ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
+import PopoverInput from '../Controls/popoverInput'
 // import { pageInputScroll } from '../../util/pageInputScroll';
 import './index.less';
 
@@ -181,11 +182,16 @@ const RenderForm = createForm({
                 </Item>
                 <List.Item
                     className="item_switch"
-                    extra={<Switch
-                        {...getFieldProps('booster', {
-                            valuePropName: 'checked',
-                        })}
-                    />}
+                    extra={
+                        <PopoverInput type="1" 
+                            {...getFieldProps('booster')}
+                        />
+                        // <Switch
+                        //     {...getFieldProps('booster', {
+                        //         valuePropName: 'checked',
+                        //     })}
+                        // />
+                    }
                 ><FormattedMessage id="water.booster" defaultMessage="是否需装增压泵" /></List.Item>
                 <Item><FormattedMessage id="water.source" defaultMessage="进水水源" />
                     <Brief>
@@ -215,11 +221,16 @@ const RenderForm = createForm({
                     </Brief>
                 </Item>
                 <List.Item className="item_switch"
-                    extra={<Switch
-                        {...getFieldProps('shunt', {
-                            valuePropName: 'checked',
-                        })}
-                    />}
+                    extra={
+                        // <Switch
+                        //     {...getFieldProps('shunt', {
+                        //         valuePropName: 'checked',
+                        //     })}
+                        // />
+                        <PopoverInput type="1" 
+                            {...getFieldProps('shunt')}
+                        />
+                    }
                 ><FormattedMessage id="water.shunt" defaultMessage="是否分流" /></List.Item>
                 {/* <Item><FormattedMessage id="water.tds" defaultMessage="原水TDS值" />
                     <Brief>

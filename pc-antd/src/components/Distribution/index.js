@@ -24,6 +24,13 @@ class Distribution extends React.PureComponent {
     };
   }
 
+  componentWillMount() {
+    const { userlogin: { is_admin, level1address = '' }, history } = this.props
+    if(!is_admin) {
+      history.push(`/regional/${level1address}`)
+    }
+  }
+
   componentDidMount(){
     this.props.dispatch(callthen(getdevicecount_request,getdevicecount_result,{})).then((result) => {
       console.log(result);
@@ -87,14 +94,17 @@ class Distribution extends React.PureComponent {
     }
 }
 
-const mapStateToProps =  ({addressconst:{addressconsts}}) =>{
+const mapStateToProps =  ({addressconst:{addressconsts}, userlogin}) =>{
   let level1address = [];
   lodashmap(addressconsts,(v,k)=>{
     if(config.rootaddressconst === v.parent_id){
       level1address.push(v);
     }
   });
-  return {level1address};
+  return {
+    level1address,
+    userlogin
+  };
 };
 Distribution = connect(mapStateToProps)(Distribution);
 export default withRouter(injectIntl(Distribution));

@@ -71,7 +71,7 @@ class SearchForm extends React.PureComponent{
     // }
     componentDidMount(){
       const {searchquery,addresslevel1,addresslevel2} = this.props;
-      if(addresslevel1.length === 0 || addresslevel2.length ===  0){
+      if(lodashget(addresslevel1, 'length', 0) === 0 || lodashget(addresslevel2, 'length', 0) ===  0){
         this.setAreasOption(searchquery.selectedCountry);
         this.setDistributorOption(searchquery.selectedCountry,searchquery.selectedArea);
       }
@@ -223,6 +223,13 @@ class SearchForm extends React.PureComponent{
                             initialValue: searchquery.customerName,
                         })(<Input size="large" placeholder={formatMessage({id: 'app.search.curstomer.input'})} />)}
                     </Form.Item>
+                    <Form.Item {...formItemLayout} label={formatMessage({id: 'machine.id'})}>
+                        {getFieldDecorator('device', 
+                        // {
+                        //     initialValue: searchquery.customerName,
+                        // }
+                        )(<Input size="large" placeholder={formatMessage({id: 'machine.id'})} />)}
+                    </Form.Item>
                     <Form.Item {...tailFormItemLayout}>
                         <Button type="primary" onClick={onValidateForm} size="large" className="search_btn" style={{width: '100%'}}>{formatMessage({id: 'app.search'})}</Button>
                     </Form.Item>
@@ -283,7 +290,7 @@ const mapStateToProps =  ({addressconst:{addressconsts},searchquery,userlogin}) 
   }
   else{
     searchquery.selectedCountry = addresslevel1;//固定一级区域
-    if(addresslevel2.length === 0){
+    if(lodashget(addresslevel2, 'length', 0) === 0){
       //一级区域总部
       lodashmap(addressconsts,(v,k)=>{
         if(k === addresslevel1){

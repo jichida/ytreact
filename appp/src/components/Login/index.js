@@ -108,6 +108,7 @@ class Login extends PureComponent{
                             <Flex.Item className="itemTitle"><span><FormattedMessage id="login.account" defaultMessage="账号" /></span></Flex.Item>
                             <Flex.Item className="itemContent">
                                 <InputItem
+                                    type="digit"
                                     className="input"
                                     placeholder={intl.formatMessage({id:`login.inputaccount`})}
                                     value={this.state.name}

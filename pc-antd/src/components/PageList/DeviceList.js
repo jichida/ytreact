@@ -58,6 +58,7 @@ class DeviceList extends React.Component {
     */
     console.log(iteminput);
     const installdate = lodashget(iteminput,'syssettings.installdate');
+    const isinstalled = lodashget(iteminput,'distributorid','') !== '';
     if(iteminput.hasOwnProperty('srvdata')){
       return {
               isgetsrvdata:true,
@@ -65,7 +66,7 @@ class DeviceList extends React.Component {
               iswarr: !installdate,
               isoffline: !!iteminput.datasrv_updated_at ? moment(iteminput.datasrv_updated_at).isBefore(moment().subtract(1,'hours')) : true,
               address: lodashget(iteminput,'basicinfo.username',''),
-              reportdate: !!installdate ? moment(installdate).format('YYYYMMDD'): <FormattedMessage id="machine.notinstall" />,
+              reportdate: isinstalled ? moment(installdate).format('YYYYMMDD'): <FormattedMessage id="machine.notinstall" />,
               id:lodashget(iteminput,'syssettings.deviceid','') || lodashget(iteminput,'deviceid'),
               name: lodashget(iteminput,'basicinfo.model',''),
               runtime:moment(lodashget(iteminput,'datasrv_updated_at')).format('YYYYMMDD HH:mm:ss'),
@@ -79,7 +80,7 @@ class DeviceList extends React.Component {
             iswarr: true,
             isoffline: true,
             address: lodashget(iteminput,'basicinfo.username',''),
-            reportdate: !!installdate ? moment(installdate).format('YYYYMMDD'): <FormattedMessage id="machine.notinstall" />,
+            reportdate: isinstalled ? moment(installdate).format('YYYYMMDD'): <FormattedMessage id="machine.notinstall" />,
             id:lodashget(iteminput,'syssettings.deviceid',''),
             name: lodashget(iteminput,'basicinfo.model',''),
             runtime:lodashget(iteminput,'srvdata.currentstate',''),

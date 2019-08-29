@@ -12,7 +12,7 @@ const config = {
     serverurl:`${serverurl}`,
     wspath:`${wspath}`,
     requesttimeout:5000,
-    appversion:'1.0.0(build0825)',
+    appversion:'1.0.0(build0829)',
     sendlocationinterval:20000,
     softmode:'pc'
 };

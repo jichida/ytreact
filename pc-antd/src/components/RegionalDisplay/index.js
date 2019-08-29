@@ -88,7 +88,7 @@ class RegionalDisplay extends React.PureComponent {
                 <Row style={{marginBottom: 30}} className="title">
                     <Col span={24}>
                         <img src={sb_icon} alt="" /><span><FormattedMessage id={`${regionalname}`} /></span>
-                        <div className="right-Link" onClick={()=>{history.goBack()}}>&lt; <FormattedMessage id="app.return" /></div>
+                        {this.props.userlogin.is_admin && <div className="right-Link" onClick={()=>{history.goBack()}}>&lt;  <FormattedMessage id="app.return" /></div>}
                     </Col>
                 </Row>
                 <List
@@ -111,14 +111,14 @@ class RegionalDisplay extends React.PureComponent {
         )
     }
 }
-const mapStateToProps =  ({addressconst:{addressconsts}}) =>{
+const mapStateToProps =  ({addressconst:{addressconsts},userlogin}) =>{
   let mapaddress = {};
   // console.log(JSON.stringify(mapaddress));
   lodashmap(addressconsts,(v,k)=>{
     mapaddress[k] = v.name;
   });
   console.log(JSON.stringify(mapaddress));
-  return {mapaddress};
+  return {mapaddress,userlogin};
 };
 
 RegionalDisplay = connect(mapStateToProps)(RegionalDisplay);

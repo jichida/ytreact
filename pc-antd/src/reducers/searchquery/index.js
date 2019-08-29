@@ -7,6 +7,7 @@ const initial = {
         selectedArea: '',
         selectDistributor:'',
         customerName:'',
+        deviceid:'',
         areasOptions:[],
         distributorOptions: [],
         query:{},

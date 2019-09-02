@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
-import {  List, Button, WingBlank, Switch, WhiteSpace,  } from 'antd-mobile';
+import {  List, Button, WingBlank, Switch, WhiteSpace, Checkbox  } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import {wifi_sendcmd_request} from '../../actions';
@@ -11,6 +11,8 @@ import PicturesWall  from './PicturesWall';
 import PopoverInput from '../Controls/popoverInput'
 import './index.less';
 import {getintlmessage} from '../../util/globalIntl';
+
+const CheckboxItem = Checkbox.CheckboxItem
 
 const RenderCheckForm = createForm({
     mapPropsToFields(props) {
@@ -60,54 +62,72 @@ const RenderCheckForm = createForm({
         <React.Fragment>
         <form>
             <List>
-                <List.Item className="item_switch"
+                {/* <List.Item className="item_switch"
                     // extra={<Switch
                     //     {...getFieldProps('washed', {
                     //         valuePropName: 'checked',
                     //     })}
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('washed')} />}
-                ><FormattedMessage id="setting.checklist.washed" defaultMessage="滤芯已冲洗" /></List.Item>
-                <List.Item className="item_switch"
+                ><FormattedMessage id="setting.checklist.washed" defaultMessage="滤芯已冲洗" /></List.Item> */}
+                <CheckboxItem className="check-item" {...getFieldProps('washed')}>
+                    <FormattedMessage id="setting.checklist.washed" defaultMessage="滤芯已冲洗" />
+                </CheckboxItem>
+                {/* <List.Item className="item_switch"
                     // extra={<Switch
                     //     {...getFieldProps('uptostandard', {
                     //         valuePropName: 'checked',
                     //     })}
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('uptostandard')} />}
-                ><FormattedMessage id="setting.checklist.uptostandard" defaultMessage="进水压力已符合标准" /></List.Item>
-                <List.Item className="item_switch"
+                ><FormattedMessage id="setting.checklist.uptostandard" defaultMessage="进水压力已符合标准" /></List.Item> */}
+                <CheckboxItem className="check-item" {...getFieldProps('uptostandard')}>
+                    <FormattedMessage id="setting.checklist.uptostandard" defaultMessage="进水压力已符合标准" />
+                </CheckboxItem>
+                {/* <List.Item className="item_switch"
                     // extra={<Switch
                     //     {...getFieldProps('bypassclosed', {
                     //         valuePropName: 'checked',
                     //     })}
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('bypassclosed')} />}
-                ><FormattedMessage id="setting.checklist.bypassclosed" defaultMessage="旁通已关闭" /></List.Item>
-                <List.Item className="item_switch"
+                ><FormattedMessage id="setting.checklist.bypassclosed" defaultMessage="旁通已关闭" /></List.Item> */}
+                <CheckboxItem className="check-item" {...getFieldProps('bypassclosed')}>
+                    <FormattedMessage id="setting.checklist.bypassclosed" defaultMessage="旁通已关闭" />
+                </CheckboxItem>
+                {/* <List.Item className="item_switch"
                     // extra={<Switch
                     //     {...getFieldProps('noleakage', {
                     //         valuePropName: 'checked',
                     //     })}
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('noleakage')} />}
-                ><FormattedMessage id="setting.checklist.noleakage" defaultMessage="系统无泄漏" /></List.Item>
-                <List.Item className="item_switch"
+                ><FormattedMessage id="setting.checklist.noleakage" defaultMessage="系统无泄漏" /></List.Item> */}
+                <CheckboxItem className="check-item" {...getFieldProps('noleakage')}>
+                    <FormattedMessage id="setting.checklist.noleakage" defaultMessage="系统无泄漏" />
+                </CheckboxItem>
+                {/* <List.Item className="item_switch"
                     // extra={<Switch
                     //     {...getFieldProps('wificonnected', {
                     //         valuePropName: 'checked',
                     //     })}
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('wificonnected')} />}
-                ><FormattedMessage id="setting.checklist.wificonnected" defaultMessage="WIFI已连接" /></List.Item>
-                <List.Item className="item_switch"
+                ><FormattedMessage id="setting.checklist.wificonnected" defaultMessage="WIFI已连接" /></List.Item> */}
+                <CheckboxItem className="check-item" {...getFieldProps('wificonnected')}>
+                    <FormattedMessage id="setting.checklist.wificonnected" defaultMessage="WIFI已连接" />
+                </CheckboxItem>
+                {/* <List.Item className="item_switch"
                     // extra={<Switch
                     //     {...getFieldProps('appset', {
                     //         valuePropName: 'checked',
                     //     })}
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('appset')} />}
-                ><FormattedMessage id="setting.checklist.appset" defaultMessage="APP已设置" /></List.Item>
+                ><FormattedMessage id="setting.checklist.appset" defaultMessage="APP已设置" /></List.Item> */}
+                <CheckboxItem className="check-item" {...getFieldProps('appset')}>
+                    <FormattedMessage id="setting.checklist.appset" defaultMessage="APP已设置" />
+                </CheckboxItem>
             </List>
         </form>
         <div className="submit_zone" style={{margin: 0,padding: '5px 10px 20px 10px' }}>
@@ -208,38 +228,50 @@ const RenderResultForm = createForm({
         <React.Fragment>
         <form>
             <List>
-                <List.Item className="item_switch"
+                {/* <List.Item className="item_switch"
                     // extra={<Switch
                     //     {...getFieldProps('discharge', {
                     //         valuePropName: 'checked',
                     //     })}
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('discharge')} />}
-                ><FormattedMessage id="setting.checklist.discharge" /></List.Item>
-                <List.Item className="item_switch"
+                ><FormattedMessage id="setting.checklist.discharge" /></List.Item> */}
+                <CheckboxItem className="check-item" {...getFieldProps('discharge')}>
+                    <FormattedMessage id="setting.checklist.discharge" />
+                </CheckboxItem>
+                {/* <List.Item className="item_switch"
                     // extra={<Switch
                     //     {...getFieldProps('debugged', {
                     //         valuePropName: 'checked',
                     //     })}
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('debugged')} />}
-                ><FormattedMessage id="setting.checklist.debugged" /></List.Item>
-                <List.Item className="item_switch"
+                ><FormattedMessage id="setting.checklist.debugged" /></List.Item> */}
+                <CheckboxItem className="check-item" {...getFieldProps('debugged')}>
+                    <FormattedMessage id="setting.checklist.debugged" />
+                </CheckboxItem>
+                {/* <List.Item className="item_switch"
                     // extra={<Switch
                     //     {...getFieldProps('quality', {
                     //         valuePropName: 'checked',
                     //     })}
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('quality')} />}
-                ><FormattedMessage id="setting.checklist.quality" /></List.Item>
-                <List.Item className="item_switch"
+                ><FormattedMessage id="setting.checklist.quality" /></List.Item> */}
+                <CheckboxItem className="check-item" {...getFieldProps('quality')}>
+                    <FormattedMessage id="setting.checklist.quality" />
+                </CheckboxItem>
+                {/* <List.Item className="item_switch"
                     // extra={<Switch
                     //     {...getFieldProps('delivered', {
                     //         valuePropName: 'checked',
                     //     })}
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('delivered')} />}
-                ><FormattedMessage id="setting.checklist.delivered" /></List.Item>
+                ><FormattedMessage id="setting.checklist.delivered" /></List.Item> */}
+                <CheckboxItem className="check-item" {...getFieldProps('delivered')}>
+                    <FormattedMessage id="setting.checklist.delivered" />
+                </CheckboxItem>
                 <List.Item><FormattedMessage id="setting.checklist.pictures" defaultMessage="拍摄安装图，用于备份存档（至少上传四张）" />
                     <List.Item.Brief style={{whiteSpace: 'normal'}}>
                         <div className="item_children">

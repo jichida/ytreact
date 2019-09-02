@@ -9,7 +9,32 @@
 
     form {
         flex: 1;
+
+        .check-item {
+            flex-direction: row-reverse;
+
+            :global(.am-list-thumb) {
+                .am-checkbox {
+                    position: relative !important;
+    
+                    .am-checkbox-inner {
+                        left: initial;
+                        top: initial;
+                        border-radius: 5px;
+                    }
+                }
+
+                // .am-checkbox-checked {
+                //     .am-checkbox-inner {
+                //         border-color: #ffffff;
+                //         background: transparent;
+                //     }
+                // }
+            }
+        }
     }
+
+    
 
 
     .submit_zone {

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {ui_setuserdevice_request} from '../../actions';
+import {ui_setuserdevice_request,setdevice_distributorid} from '../../actions';
 import lodashget from 'lodash.get';
 import {  List, Button, WingBlank, Switch, WhiteSpace, Checkbox  } from 'antd-mobile';
 import { createForm, createFormField } from 'rc-form';
@@ -326,7 +326,7 @@ class SettingChecklist extends PureComponent{
         // values.quality = false;
         // values.delivered = false;
         // values.pictures= [];
-        // dispatch(ui_setuserdevice_request({_id,data:{checklist:values}}));
+        dispatch(setdevice_distributorid({}));
       }
       else{
         //提示：需要全部检查完毕才能启用

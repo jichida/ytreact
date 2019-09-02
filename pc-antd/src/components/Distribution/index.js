@@ -25,9 +25,10 @@ class Distribution extends React.PureComponent {
   }
 
   componentWillMount() {
-    const { userlogin: { is_admin, level1address = '' }, history } = this.props
+    const { userlogin: { is_admin, addresslevel1 }, history } = this.props
     if(!is_admin) {
-      history.push(`/regional/${level1address}`)
+      debugger;
+      history.push(`/regional/${addresslevel1}`)
     }
   }
 

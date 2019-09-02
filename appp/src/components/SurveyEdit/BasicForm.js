@@ -210,7 +210,7 @@ const createFormOptions = {
           useproperty: createFormField({value: [lodashget(basicinfo,'useproperty','商用')]}),
           building: createFormField({value: [lodashget(basicinfo,'building','')]}),
           floor: createFormField({value: lodashget(basicinfo,'floor','')}),
-          model: createFormField({value: [lodashget(basicinfo,'model','HYDRODI-250')]}),
+          model: createFormField({value: [lodashget(basicinfo,'model','HYDRODI-G2') === '' ? 'HYDRODI-G2' : lodashget(basicinfo,'model','HYDRODI-G2')]}),
           bucket: createFormField({value: lodashget(basicinfo,'bucket','50gal')}),
         };
     }

@@ -338,14 +338,15 @@ class DeviceBasic extends PureComponent{
                  value: lodashget(basicinfo,'floor',''),
              },
              model: { //预装型号
-                 value: [lodashget(basicinfo,'model','XXX')],
+                 value: [lodashget(basicinfo,'model','HYDRODI-G2') === '' ? 'HYDRODI-G2' : lodashget(basicinfo,'model','HYDRODI-G2')],
              },
              bucket: {
                 value:lodashget(basicinfo,'bucket','50gal'),
              },
          }
          console.log(basicData);
-        return (
+
+         return (
             <div className="sub_bg">
                 <NavBar
                     className="nav"

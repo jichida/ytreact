@@ -50,7 +50,7 @@ class SettingSystem extends PureComponent{
                 value: lodashget(syssettings,'installer',''),
             },
             timezone: {
-                value: [timezone]
+                value: ['PRC']
             },
             sdate: {
                 value: stringtodate(lodashget(syssettings,'sdate',new Date())),

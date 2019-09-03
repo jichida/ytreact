@@ -15,35 +15,35 @@ const Item = List.Item;
 const Brief = Item.Brief;
 
 const basicData = {
-    prev0: {
-        isprev: true,
-        idname: 'prev0',
-        life: [0],
-    },
-    prev1: {
-        isprev: true,
-        idname: 'prev1',
-        life: [0],
-    },
-    prev2: {
-        isprev: true,
-        idname: 'prev2',
-        life: [0],
-    },
-    post0: {
-        isprev: false,
-        idname: 'post0',
-        life: [0],
-    },
-    post1: {
-        isprev: false,
-        idname: 'post1',
-    },
-    post2: {
-        isprev: false,
-        idname: 'post2',
-        life: [0],
-    },
+    // prev0: {
+    //     isprev: true,
+    //     idname: 'prev0',
+    //     life: [0],
+    // },
+    // prev1: {
+    //     isprev: true,
+    //     idname: 'prev1',
+    //     life: [0],
+    // },
+    // prev2: {
+    //     isprev: true,
+    //     idname: 'prev2',
+    //     life: [0],
+    // },
+    // post0: {
+    //     isprev: false,
+    //     idname: 'post0',
+    //     life: [0],
+    // },
+    // post1: {
+    //     isprev: false,
+    //     idname: 'post1',
+    // },
+    // post2: {
+    //     isprev: false,
+    //     idname: 'post2',
+    //     life: [0],
+    // },
     host: '', //主机
     configuration: [], //其他配置
     materials: [], // 管路材质
@@ -174,6 +174,9 @@ class EquipmentList extends React.Component{
     render () {
         const { filterlist,history } = this.props;
         const initData = convertfromfilterlist(filterlist);
+
+        console.log('devicelist:', this.props.devicelist)
+        console.log('initData', initData)
 
         return (
             <div className="fp_container black_bg">

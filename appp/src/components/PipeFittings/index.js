@@ -32,13 +32,13 @@ const basicData = {
 const RenderForm = createForm({
     mapPropsToFields(props) {
         return {
-          valve: createFormField({value: props.valve}),
-          connection: createFormField({value: props.connection}),
-          elbow: createFormField({value: props.elbow}),
-          triplet: createFormField({value: props.triplet}),
-          silkpair: createFormField({value: props.silkpair}),
-          silkspin: createFormField({value: props.silkspin}),
-          others: createFormField({value: props.others})
+          valve: createFormField({value: typeof(props.valve) === 'string' ? props.valve : ''}),
+          connection: createFormField({value: typeof(props.connection) === 'string' ? props.connection : ''}),
+          elbow: createFormField({value: typeof(props.elbow) === 'string' ? props.elbow : ''}),
+          triplet: createFormField({value: typeof(props.triplet) === 'string' ? props.triplet : ''}),
+          silkpair: createFormField({value: typeof(props.silkpair) === 'string' ? props.silkpair : ''}),
+          silkspin: createFormField({value: typeof(props.silkspin) === 'string' ? props.silkspin : ''}),
+          others: createFormField({value: typeof(props.others) === 'string' ? props.others : ''})
         };
     }
 })(injectIntl((props)=>{
@@ -155,8 +155,13 @@ const RenderForm = createForm({
             </List>
         </form>
         <div className="submit_zone">
-            <div className="add_btn" >
+            {/* <div className="add_btn" >
                 <Button type="gconnection" className="btn" onClick={handleSubmit}>
+                    <FormattedMessage id="form.save" defaultMessage="保存" />
+                </Button>
+            </div> */}
+            <div className="add_btn" >
+                <Button type="ghost" className="btn" onClick={handleSubmit}>
                     <FormattedMessage id="form.save" defaultMessage="保存" />
                 </Button>
             </div>

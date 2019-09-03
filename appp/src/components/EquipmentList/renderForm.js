@@ -238,7 +238,7 @@ const createFormOption = {
           configuration: createFormField({value: [props.configuration]}),
           materials: createFormField({value: [props.materials]}),
           pipefittings: createFormField({value: props.pipefittings}),
-          others: createFormField({value: props.others})
+          others: createFormField({value: typeof(props.others) === 'string' ? props.others : ''})
         };
     }
 }

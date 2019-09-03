@@ -23,13 +23,10 @@ class Machines extends React.PureComponent {
                     query={{
                       $or:[
                         {iserr:true},//999状态
-                        {'syssettings.installdate':{
-                          $exists:false,
-                        }},//尚未安装
+                        {datasrv_updated_at:{$exists:false}},
                         {datasrv_updated_at:{
-                          $exists:true,
                           $lte:moment().subtract(1,'hours').format()
-                        }}//离线机器
+                        }}
                       ]
                     }}
                 />

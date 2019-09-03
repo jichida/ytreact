@@ -47,9 +47,9 @@ class Distribution extends React.PureComponent {
     } else {
       this.props.dispatch(search_setquery({query: {
         $or:[
-          {iserr:true},
+          {iserr:true},//999状态
+          {datasrv_updated_at:{$exists:false}},
           {datasrv_updated_at:{
-            $exists:true,
             $lte:moment().subtract(1,'hours').format()
           }}
         ]

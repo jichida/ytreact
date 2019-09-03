@@ -13,7 +13,7 @@ import './index.less';
 import sb_icon from '../../assets/dq_icon.png';
 import sb_err from '../../assets/sb_yc.png';
 import sb_normal from '../../assets/sb_zc.png';
-import sb_off from '../../assets/sb_wlw.png';
+import sb_off from '../../assets/sb_lx.png';
 
 
 const RegionalItem = withRouter(injectIntl((props)=>{

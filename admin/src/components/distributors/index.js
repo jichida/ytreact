@@ -31,10 +31,22 @@ export const UserFilter = props => (
     </Filter>
 );
 
+const validateCreation = (values) => {
+  const errors = {};
+  debugger;
+  if (!values.password) {
+    errors.password = ['密码必填'];
+  }
+  if (!values.addresslevel1) {
+      errors.addresslevel1 = ['所属区域必选'];
+  }
+  return errors
+};
+
 
 const DistributorCreate = (props) => {
       return (<Create {...props} >
-           <SimpleForm redirect="list">
+           <SimpleForm redirect="list" validate={validateCreation}>
              <TextInput label="登录名" source="username" validation={{ required: true }}/>
              <TextInput label="名字" source="name" validation={{ required: true }}/>
              <TextInput label="初始密码" source="password" validation={{ required: true }}/>
@@ -59,8 +71,8 @@ const DistributorCreate = (props) => {
 };
 
 const DistributorEdit = (props) => {
-      return (<Edit {...props}>
-        <TabbedForm>
+      return (<Edit {...props} >
+        <TabbedForm validate={validateCreation}>
           <FormTab label="基本信息">
             <TextInput label="登录名" source="username" validation={{ required: true }}/>
             <TextInput label="手机" source="phone" validation={{ required: true }}/>

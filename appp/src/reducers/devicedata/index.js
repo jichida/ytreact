@@ -136,11 +136,11 @@ const initial = {
           language:'zh-cn'
       },
       filterlist:{
-        prev0:1,
-        prev1:1,
-        prev2:1,
-        post0:1,
-        post1:1,
+        prev0:0,
+        prev1:0,
+        prev2:0,
+        post0:0,
+        post1:0,
         post2:0,
       },
     },

@@ -4,7 +4,7 @@ import {
   common_err,
   md_login_result,
   login_result,
-
+  logout_result,
   set_weui,
   findpwd_result,
 } from '../../actions';
@@ -103,4 +103,7 @@ export function* userloginflow() {
         }}));
   });
 
+  yield takeLatest(`${logout_result}`, function*(action) {
+    yield put(replace('/'));
+  });
 }

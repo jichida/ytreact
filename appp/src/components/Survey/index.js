@@ -6,6 +6,7 @@ import lodashmap from 'lodash.map'
 import { FormattedMessage, injectIntl } from 'react-intl';
 import {getsurvey_request,getsurvey_result} from '../../actions';
 import {deletesurvey_request,deletesurvey_result} from '../../actions';
+import PopoverMenu from '../Controls/popoverMenu'
 
 import {callthen} from '../../sagas/pagination';
 import './index.less';
@@ -100,13 +101,19 @@ class Index extends PureComponent{
                     <div className="list-content">
                         <List>
                             { lodashmap(surveys, (item, index) => (
-                                <SurveyItem key={index} 
-                                    survey={item} 
-                                    onSelect={this.handleSelect} 
-                                    onDelete={this.handleDelete} 
-                                    formatMessage={formatMessage} 
-                                />
+                                // <SurveyItem key={index} 
+                                //     survey={item} 
+                                //     onSelect={this.handleSelect} 
+                                //     onDelete={this.handleDelete} 
+                                //     formatMessage={formatMessage} 
+                                // />
+                                <List.Item key={index}
+                                    extra={<PopoverMenu survey={item} up={index > 6 ? true : false} onEdit={this.handleSelect} onDelete={this.handleDelete} />}
+                                >
+                                    {item.name}
+                                </List.Item>
                             ))}
+                            
                         </List>
                     </div>
                 </div>

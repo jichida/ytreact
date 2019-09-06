@@ -110,7 +110,7 @@ class Home extends PureComponent{
         return (
             <div className="home">
                 <NavBar
-                    className={`nav ${locale === 'en' ? 'en-font' : ''}`}
+                    className={`home-nav ${locale === 'en' ? 'en-font' : ''}`}
                     leftContent={
                         <Popover mask
                           visible={this.state.visible}

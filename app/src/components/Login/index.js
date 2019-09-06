@@ -136,13 +136,13 @@ class Login extends PureComponent{
                                     onChange={this.handlePasswordChange}
                                 />
                             </div>
-                            <div className="itemPassword">
+                            {/* <div className="itemPassword">
                                 <div className="forget_btn">
                                     <Button className="btn" type="ghost" size="small" onClick={()=>{history.push('/forget')}}>
                                         <FormattedMessage id="login.forget" defaultMessage="忘记密码" />
                                     </Button>
                                 </div>
-                            </div>
+                            </div> */}
                         </Flex>
                         <WhiteSpace size="xl" style={{ marginBottom: 30}} />
                         <div className="add_btn" >

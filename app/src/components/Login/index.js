@@ -115,7 +115,7 @@ class Login extends PureComponent{
                             <div className="itemTitle">
                                 <span><FormattedMessage id="login.deviceid" defaultMessage="设备编号" /></span>
                             </div>
-                            <div className="itmeContent">
+                            <div className="itemContent">
                                 <InputItem
                                     className="input"
                                     placeholder={intl.formatMessage({id:`login.inputaccount`})}

@@ -18,7 +18,7 @@ import {
 import TextFieldBool from '../controls/TextFieldBool';
 import ImageArrayField from '../controls/imagearrayfield';
 import InputSpaceField from '../controls/InputSpaceField';
-import DeviceShow from './deviceshow';
+import ResestPassword from './resetpassword';
 import moment from 'moment';
 import _ from 'lodash';
 
@@ -195,6 +195,7 @@ const DeviceuserList = (props) => (//
               <TextField source="name" />
           </ReferenceField>
           <TextField label="用户名" source="basicinfo.username" />
+          <ResestPassword />
           <EditButton />
           </Datagrid>
     </List>

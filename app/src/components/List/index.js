@@ -52,7 +52,7 @@ class EquipmentList extends PureComponent{
                         <Item extra={loadshGet(filterData, 'prev0.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.PP" values={{value: loadshGet(filterData, 'prev0.life', [0])[0]}} />}>{EquipmentPer['prev0']}</Item>
                         <Item extra={loadshGet(filterData, 'prev1.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.carbon" values={{value: loadshGet(filterData, 'prev1.life', [0])[0]}} />}>{EquipmentPer['prev1']}</Item>
                         <Item extra={loadshGet(filterData, 'prev2.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.FOF" values={{value: loadshGet(filterData, 'prev2.life', [0])[0]}} />}>{EquipmentPer['prev2']}</Item>
-                        <Item extra={`${loadshGet(devicelist, 'host', '')}`}>{EquipmentPer['host']}</Item>
+                        <Item extra={`${typeof(loadshGet(devicelist, 'host', '')) === 'string' ? loadshGet(devicelist, 'host', '') : '' }`}>{EquipmentPer['host']}</Item>
                         <Item extra={loadshGet(filterData, 'post0.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.AFC" values={{value: loadshGet(filterData, 'post0.life', [0])[0]}} />}>{EquipmentPer['post0']}</Item>
                         <Item extra={loadshGet(filterData, 'post1.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.DCF" values={{value: loadshGet(filterData, 'post1.life', [0])[0]}} />}>{EquipmentPer['post1']}</Item>
                         <Item extra={loadshGet(filterData, 'post2.life', [0])[0] === 0 ? '无' : <FormattedMessage id="setting.system.LED" values={{value: loadshGet(filterData, 'post2.life', [0])[0]}} />}>{EquipmentPer['post2']}</Item>
@@ -98,7 +98,7 @@ class EquipmentList extends PureComponent{
                 </div>
                 <div className="equipment">
                     <List className="equipment-list">
-                        <Item>{EquipmentPer['others']}<Brief>{`${loadshGet(devicelist, 'others', '')}`}</Brief></Item>
+                        <Item>{EquipmentPer['others']}<Brief>{`${typeof(loadshGet(devicelist, 'others', '')) === 'string' ? loadshGet(devicelist, 'others', '') : '' }`}</Brief></Item>
                     </List>
                 </div>
                 </div>
@@ -123,6 +123,7 @@ const mapStateToProps = ({ device: { devicelist }, devicedata:{ filterlist }}) =
 
     const filterData = convertfromfilterlist(filterlist)
     console.log('Filter List:', filterData)
+    console.log('devicelist:', devicelist)
 
     return {
         filterData,

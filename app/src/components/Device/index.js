@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import lodashGet from 'lodash.get'
 import { Flex, NavBar, Icon, List, ActionSheet, WingBlank } from 'antd-mobile';
 import { Link, withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -70,8 +71,8 @@ class Device extends PureComponent{
                             <span style={{color: "#ffffff"}} 
                                     // onClick={()=>{ sCallPhone(distributor.username);}}
                             >
-                            {`${distributor.name}`}
-                            <Brief style={{color: "#ffffff"}}>{`TEL:${distributor.phone}`}</Brief>
+                            {`${lodashGet(distributor, 'name', '')}`}
+                            <Brief style={{color: "#ffffff"}}>{`TEL:${lodashGet(distributor, 'phone', '')}`}</Brief>
                             </span>
                         </Item>
                     </List>  

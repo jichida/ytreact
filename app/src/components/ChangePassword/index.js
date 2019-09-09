@@ -124,12 +124,12 @@ class ChangePassword extends PureComponent{
                                                 message: <FormattedMessage id="login.inputoldpassword" />,
                                             }],
                                         })}
-                                        extra={<div className="add_btn" style={{width: 90, display: 'inline-block', padding:5}} >
-                                                <Button size="small" type="ghost" className="btn" onClick={()=>{history.push('/forget')}}>
-                                                    <FormattedMessage id="login.forget" />
-                                                </Button>
-                                            </div>
-                                        }
+                                        // extra={<div className="add_btn" style={{width: 90, display: 'inline-block', padding:5}} >
+                                        //         <Button size="small" type="ghost" className="btn" onClick={()=>{history.push('/forget')}}>
+                                        //             <FormattedMessage id="login.forget" />
+                                        //         </Button>
+                                        //     </div>
+                                        // }
                                     />
                                 </div>
                             </Brief>

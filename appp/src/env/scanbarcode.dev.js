@@ -3,7 +3,7 @@ export const scanbarcode=(fncallback)=>{
       fncallback({
         "code": 0,
         // "data": "GHCA0488",
-        "data": "GHDD1203"
+        "data": "GHDD1301"
       })
     },0);
 };

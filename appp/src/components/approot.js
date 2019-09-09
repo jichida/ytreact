@@ -49,6 +49,11 @@ import gobal_bg from '../assets/electricbg.png';
 // import mgb from '../assets/ljimgb.png';
 
 class AppRoot extends React.Component {
+  componentDidMount() {
+    document.addEventListener('contextmenu', function(e){
+      e.preventDefault()
+    })
+  }
     componentWillMount() {
 
     }

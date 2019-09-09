@@ -1,4 +1,5 @@
 import React from 'react';
+import lodashGet from 'lodash.get'
 import { connect } from 'react-redux';
 import {  NavBar, Icon } from 'antd-mobile';
 import Markdown from 'react-markdown'
@@ -48,8 +49,8 @@ class Index extends React.Component{
 
 
 const mapStateToProps =  ({userlogin}) =>{
-    const content = userlogin.distributor.intro;
-    const phone = userlogin.distributor.phone;
+    const content = lodashGet(userlogin, 'distributor.intro', '');
+    const phone = lodashGet(userlogin, 'distributor.phone', '');
     return { content, phone };
 };
 

@@ -806,6 +806,7 @@ export function* wififlow() {
                   if(!!payload.target){
                     yield put(setdatatarget(payload.target));
                   }
+                }
                   yield put(set_weui({
                     toast:{
                     text:intl.formatMessage({id:'constsaga.msg.senddeviceok'},{value:`${payload.cmdstring}`}),
@@ -813,13 +814,14 @@ export function* wififlow() {
                     type:'success'
                   }}));
                 }
-              }
+              
             }
             else{
               if(`${payload.cmd}` !== '$data%'){
                 if(!!payload.target){
                   yield put(setdatatarget(payload.target));
                 }
+              }
                 yield put(set_weui({
                   toast:{
                   text:intl.formatMessage({id:'constsaga.msg.senddeviceok'},{value:`${payload.cmdstring}`}),
@@ -827,7 +829,7 @@ export function* wififlow() {
                   type:'success'
                 }}));
               }
-            }
+           
       }
       catch(e){
         console.log(e);

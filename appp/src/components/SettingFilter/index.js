@@ -61,7 +61,8 @@ class Inlet extends PureComponent{
             formData: {
                 // ...basicData,
                 // ...this.props.devicelist,
-                ...this.props.devicelist,
+                ...convertfromfilterlist(this.props.devicedata.filterlist)
+                // ...this.props.devicelist,
                 // host: lodashGet(this.props.basicinfo, 'model', '')
             }
         }
@@ -252,10 +253,10 @@ class Inlet extends PureComponent{
 }
 
 const mapStateToProps =  ({devicedata}) =>{
-    console.log('setting filterlist:', devicedata.filterlist)
-    const devicelist = convertfromfilterlist(devicedata.filterlist);
-    console.log('convert from fiterlist:', devicelist)
-    return { devicelist };
+    // console.log('setting filterlist:', devicedata.filterlist)
+    // const devicelist = convertfromfilterlist(devicedata.filterlist);
+    // console.log('convert from fiterlist:', devicelist)devicelist, 
+    return { devicedata };
 };
 
 Inlet = connect(mapStateToProps)(Inlet);

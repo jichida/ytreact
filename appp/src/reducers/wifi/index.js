@@ -12,6 +12,7 @@ import {
     ui_setcurwifi,
 } from '../../actions/index.js';
 import lodashget from 'lodash.get';
+
 const initial = {
     wifi: {
         wifissid:'',
@@ -30,7 +31,12 @@ const wifi = createReducer({
     },
     [wifi_setcurwifi_result]: (state, payload) => {
         const {wifiStatus} = payload;
-        return { ...state,wifiStatus};
+        console.log(wifiStatus);
+        if(wifiStatus !== undefined){
+            return { ...state,wifiStatus};
+        }
+        return state;
+        
     },
     [wifi_setstatus]: (state, payload) => {
         const {wifiStatus,wifiInfo} = payload;

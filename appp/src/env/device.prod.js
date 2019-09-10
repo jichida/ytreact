@@ -29,6 +29,8 @@ const openwifi =  ()=>{
   window.wifistatuscallback = (result)=>{
     // alert(`${JSON.stringify(result)}`)
     const data = result.data;
+    console.log(`======window.wifistatuscallback======`);
+    console.log(data);
     store.dispatch(wifi_setstatus(data));
   }
   const xviewData = {

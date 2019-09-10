@@ -31,15 +31,22 @@ const wifi = createReducer({
     },
     [wifi_setcurwifi_result]: (state, payload) => {
         const {wifiStatus} = payload;
+        console.log('wifi_setcurwifi_result');
         console.log(wifiStatus);
-        if(wifiStatus !== undefined){
-            return { ...state,wifiStatus};
+        if(wifiStatus === undefined){
+            return state;
         }
-        return state;
+        return { ...state,wifiStatus};
+        
         
     },
     [wifi_setstatus]: (state, payload) => {
         const {wifiStatus,wifiInfo} = payload;
+        console.log('wifi_setstatus');
+        console.log(wifiStatus);
+        if(wifiStatus === undefined){
+            return state;
+        }
         let wifissid = state.wifissid;
         if(wifiStatus === 1){
           wifissid = lodashget(wifiInfo,'ssid',wifissid);

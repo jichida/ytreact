@@ -16,31 +16,14 @@ const CheckboxItem = Checkbox.CheckboxItem
 
 const RenderCheckForm = createForm({
     mapPropsToFields(props) {
+        const {washed, uptostandard, bypassclosed, noleakage, wificonnected, appset} = props
         return {
-          washed: createFormField({
-            ...props.washed,
-            value: props.washed.value,
-          }),
-          uptostandard: createFormField({
-            ...props.uptostandard,
-            value: props.uptostandard.value,
-          }),
-          bypassclosed: createFormField({
-            ...props.bypassclosed,
-            value: props.bypassclosed.value,
-          }),
-          noleakage: createFormField({
-            ...props.noleakage,
-            value: props.noleakage.value,
-          }),
-          wificonnected: createFormField({
-            ...props.wificonnected,
-            value: props.wificonnected.value,
-          }),
-          appset: createFormField({
-            ...props.appset,
-            value: props.appset.value,
-          }),
+          washed: createFormField({value: washed}),
+          uptostandard: createFormField({value: uptostandard}),
+          bypassclosed: createFormField({value: bypassclosed}),
+          noleakage: createFormField({value: noleakage}),
+          wificonnected: createFormField({value: wificonnected}),
+          appset: createFormField({value: appset}),
         };
     }
 })((props)=>{
@@ -70,7 +53,9 @@ const RenderCheckForm = createForm({
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('washed')} />}
                 ><FormattedMessage id="setting.checklist.washed" defaultMessage="滤芯已冲洗" /></List.Item> */}
-                <CheckboxItem className="check-item" {...getFieldProps('washed')}>
+                <CheckboxItem className="check-item" {...getFieldProps('washed', {
+                    valuePropName: 'checked'
+                })}>
                     <FormattedMessage id="setting.checklist.washed" defaultMessage="滤芯已冲洗" />
                 </CheckboxItem>
                 {/* <List.Item className="item_switch"
@@ -81,7 +66,9 @@ const RenderCheckForm = createForm({
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('uptostandard')} />}
                 ><FormattedMessage id="setting.checklist.uptostandard" defaultMessage="进水压力已符合标准" /></List.Item> */}
-                <CheckboxItem className="check-item" {...getFieldProps('uptostandard')}>
+                <CheckboxItem className="check-item" {...getFieldProps('uptostandard', {
+                    valuePropName: 'checked'
+                })}>
                     <FormattedMessage id="setting.checklist.uptostandard" defaultMessage="进水压力已符合标准" />
                 </CheckboxItem>
                 {/* <List.Item className="item_switch"
@@ -92,7 +79,9 @@ const RenderCheckForm = createForm({
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('bypassclosed')} />}
                 ><FormattedMessage id="setting.checklist.bypassclosed" defaultMessage="旁通已关闭" /></List.Item> */}
-                <CheckboxItem className="check-item" {...getFieldProps('bypassclosed')}>
+                <CheckboxItem className="check-item" {...getFieldProps('bypassclosed', {
+                    valuePropName: 'checked'
+                })}>
                     <FormattedMessage id="setting.checklist.bypassclosed" defaultMessage="旁通已关闭" />
                 </CheckboxItem>
                 {/* <List.Item className="item_switch"
@@ -103,7 +92,9 @@ const RenderCheckForm = createForm({
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('noleakage')} />}
                 ><FormattedMessage id="setting.checklist.noleakage" defaultMessage="系统无泄漏" /></List.Item> */}
-                <CheckboxItem className="check-item" {...getFieldProps('noleakage')}>
+                <CheckboxItem className="check-item" {...getFieldProps('noleakage', {
+                    valuePropName: 'checked'
+                })}>
                     <FormattedMessage id="setting.checklist.noleakage" defaultMessage="系统无泄漏" />
                 </CheckboxItem>
                 {/* <List.Item className="item_switch"
@@ -114,7 +105,9 @@ const RenderCheckForm = createForm({
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('wificonnected')} />}
                 ><FormattedMessage id="setting.checklist.wificonnected" defaultMessage="WIFI已连接" /></List.Item> */}
-                <CheckboxItem className="check-item" {...getFieldProps('wificonnected')}>
+                <CheckboxItem className="check-item" {...getFieldProps('wificonnected', {
+                    valuePropName: 'checked'
+                })}>
                     <FormattedMessage id="setting.checklist.wificonnected" defaultMessage="WIFI已连接" />
                 </CheckboxItem>
                 {/* <List.Item className="item_switch"
@@ -125,7 +118,9 @@ const RenderCheckForm = createForm({
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('appset')} />}
                 ><FormattedMessage id="setting.checklist.appset" defaultMessage="APP已设置" /></List.Item> */}
-                <CheckboxItem className="check-item" {...getFieldProps('appset')}>
+                <CheckboxItem className="check-item" {...getFieldProps('appset', {
+                    valuePropName: 'checked'
+                })}>
                     <FormattedMessage id="setting.checklist.appset" defaultMessage="APP已设置" />
                 </CheckboxItem>
             </List>
@@ -185,28 +180,13 @@ const RenderCheckForm = createForm({
 
 
 const RenderResultForm = createForm({
-    mapPropsToFields(props) {
+    mapPropsToFields({discharge, debugged, quality, delivered, pictures}) {
         return {
-          discharge: createFormField({
-            ...props.discharge,
-            value: props.discharge.value,
-          }),
-          debugged: createFormField({
-            ...props.debugged,
-            value: props.debugged.value,
-          }),
-          quality: createFormField({
-            ...props.quality,
-            value: props.quality.value,
-          }),
-          delivered: createFormField({
-            ...props.delivered,
-            value: props.delivered.value,
-          }),
-          pictures: createFormField({
-            ...props.pictures,
-            value: props.pictures.value,
-          }),
+          discharge: createFormField({value: discharge}),
+          debugged: createFormField({value: debugged}),
+          quality: createFormField({value: quality}),
+          delivered: createFormField({value: delivered}),
+          pictures: createFormField({value: pictures}),
         };
     }
 })((props)=>{
@@ -236,7 +216,9 @@ const RenderResultForm = createForm({
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('discharge')} />}
                 ><FormattedMessage id="setting.checklist.discharge" /></List.Item> */}
-                <CheckboxItem className="check-item" {...getFieldProps('discharge')}>
+                <CheckboxItem className="check-item" {...getFieldProps('discharge', {
+                    valuePropName: 'checked'
+                })}>
                     <FormattedMessage id="setting.checklist.discharge" />
                 </CheckboxItem>
                 {/* <List.Item className="item_switch"
@@ -247,7 +229,9 @@ const RenderResultForm = createForm({
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('debugged')} />}
                 ><FormattedMessage id="setting.checklist.debugged" /></List.Item> */}
-                <CheckboxItem className="check-item" {...getFieldProps('debugged')}>
+                <CheckboxItem className="check-item" {...getFieldProps('debugged', {
+                    valuePropName: 'checked'
+                })}>
                     <FormattedMessage id="setting.checklist.debugged" />
                 </CheckboxItem>
                 {/* <List.Item className="item_switch"
@@ -258,7 +242,9 @@ const RenderResultForm = createForm({
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('quality')} />}
                 ><FormattedMessage id="setting.checklist.quality" /></List.Item> */}
-                <CheckboxItem className="check-item" {...getFieldProps('quality')}>
+                <CheckboxItem className="check-item" {...getFieldProps('quality', {
+                    valuePropName: 'checked'
+                })}>
                     <FormattedMessage id="setting.checklist.quality" />
                 </CheckboxItem>
                 {/* <List.Item className="item_switch"
@@ -269,7 +255,9 @@ const RenderResultForm = createForm({
                     // />}
                     extra={<PopoverInput type="1" {...getFieldProps('delivered')} />}
                 ><FormattedMessage id="setting.checklist.delivered" /></List.Item> */}
-                <CheckboxItem className="check-item" {...getFieldProps('delivered')}>
+                <CheckboxItem className="check-item" {...getFieldProps('delivered', {
+                    valuePropName: 'checked'
+                })}>
                     <FormattedMessage id="setting.checklist.delivered" />
                 </CheckboxItem>
                 <List.Item><FormattedMessage id="setting.checklist.pictures" defaultMessage="拍摄安装图，用于备份存档（至少上传四张）" />
@@ -295,7 +283,7 @@ const RenderResultForm = createForm({
 class SettingChecklist extends PureComponent{
 
     state = {
-        checked: false,
+        checked: false//this.props.checklist.washed || this.props.checklist.uptostandard || this.props.checklist.bypassclosed || this.props.checklist.noleakage || this.props.checklist.wificonnected || this.props.checklist.appset,
     }
 
     handleSubmit = (values)=>{
@@ -357,45 +345,23 @@ class SettingChecklist extends PureComponent{
      // APP已设置		appset
 
      const checkData = {
-         washed: {
-             value: lodashget(checklist,'washed',false),
-         },
-         uptostandard: {
-             value: lodashget(checklist,'uptostandard',false),
-         },
-         bypassclosed: {
-             value:  lodashget(checklist,'bypassclosed',false),
-         },
-         noleakage: {
-             value:  lodashget(checklist,'noleakage',false),
-         },
-         wificonnected: {
-             value: lodashget(checklist,'wificonnected',false),
-         },
-         appset: {
-             value: lodashget(checklist,'appset',false),
-         },
+         washed: lodashget(checklist,'washed',false),
+         uptostandard: lodashget(checklist,'uptostandard',false),
+         bypassclosed: lodashget(checklist,'bypassclosed',false),
+         noleakage: lodashget(checklist,'noleakage',false),
+         wificonnected: lodashget(checklist,'wificonnected',false),
+         appset: lodashget(checklist,'appset',false),
      }
 
      const resultData = {
-         discharge: {
-             value: lodashget(checklist,'discharge',false),
-         },
-         debugged: {
-             value: lodashget(checklist,'debugged',false),
-         },
-         quality: {
-             value: lodashget(checklist,'quality',false),
-         },
-         delivered: {
-             value: lodashget(checklist,'delivered',false),
-         },
-         pictures: {
-             value: lodashget(checklist,'pictures',[]),
-         },
+         discharge: lodashget(checklist,'discharge',false),
+         debugged: lodashget(checklist,'debugged',false),
+         quality: lodashget(checklist,'quality',false),
+         delivered: lodashget(checklist,'delivered',false),
+         pictures: lodashget(checklist,'pictures',[]),
      }
 
-        const isEnableBtnVisible = true;
+     const isEnableBtnVisible = true;
         return (
             <div className="checklist_bg">
                 { this.state.checked ?

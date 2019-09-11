@@ -151,7 +151,7 @@
   "setting.system.modlife": "Mod",
   "setting.system.PP": "PP Filter（{value} days）",
   "setting.system.carbon": "Carbon fibre（{value} days）",
-  "setting.system.FOF": "FOF Filter（{value}天）",
+  "setting.system.FOF": "FOF Filter（{value} days）",
   "setting.system.DCF": "dual-channel Filter（{value} days）",
   "setting.system.LED": "LED UVC（{value} days）",
   "setting.system.AFC": "AFC Filter（{value} days）",

@@ -40,11 +40,11 @@ class Index extends React.PureComponent {
         const source = [
             {
                 label: formatMessage({id: 'water.source.municipal' }),
-                value: formatMessage({id: 'water.source.municipal' }),
+                value: 'municipal',
             },
             {
                 label: formatMessage({id: 'water.source.ground' }),
-                value: formatMessage({id: 'water.source.ground' }),
+                value: 'ground',
             },
         ]
 

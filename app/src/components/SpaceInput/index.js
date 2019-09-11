@@ -1,5 +1,6 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
+import { convertDecimal } from '../../util/convertDecimal'
 import './index.less'
 
 class SpaceInput extends React.Component {
@@ -14,9 +15,9 @@ class SpaceInput extends React.Component {
         const { value, unit } = this.props; 
 
         const convertValue = unit === 'cm' ? value : {
-            length: Math.round(value.length * 0.3937008),
-            width: Math.round(value.width * 0.3937008),
-            height: Math.round(value.height * 0.3937008)
+            length: convertDecimal(value.length * 0.3937008),
+            width: convertDecimal(value.width * 0.3937008),
+            height: convertDecimal(value.height * 0.3937008)
         }
 
         return (

@@ -78,71 +78,71 @@ class Index extends React.PureComponent {
         const positionOptions = [
             {
                 label: formatMessage({id: 'install.position.equip'}),
-                value: formatMessage({id: 'install.position.equip'}),
+                value: 'equip',
             },
             {
                 label: formatMessage({id: 'install.position.in'}),
-                value: formatMessage({id: 'install.position.in'}),
+                value: 'in',
             },
             {
                 label: formatMessage({id: 'install.position.out'}),
-                value: formatMessage({id: 'install.position.out'}),
+                value: 'out',
             },
         ]
         
         const wallOptions = [
             {
                 label: formatMessage({id: 'install.wall.cement' }),
-                value: formatMessage({id: 'install.wall.cement' }),
+                value: 'cement',
             },
             {
                 label: formatMessage({id: 'install.wall.hollowbrick' }),
-                value: formatMessage({id: 'install.wall.hollowbrick' }),
+                value: 'hollowbrick',
             },
             {
                 label: formatMessage({id: 'install.wall.clapboard' }),
-                value: formatMessage({id: 'install.wall.clapboard' }),
+                value: 'clapboard',
             },
         ]
         
         const methodOptions = [
             {
                 label: formatMessage({id: 'install.method.toground' }),
-                value: formatMessage({id: 'install.method.toground' }),
+                value: 'toground',
             },
             {
                 label: formatMessage({id: 'install.method.wallhanging' }),
-                value: formatMessage({id: 'install.method.wallhanging' }),
+                value: 'wallhanging',
             },
         ]
         
         const pipeOptions = [
             {
                 label: formatMessage({id: 'install.pipe.inch' }),
-                value: formatMessage({id: 'install.pipe.inch' }),
+                value: 'inch',
             },
             {
                 label: formatMessage({id: 'install.pipe.sixbranch' }),
-                value: formatMessage({id: 'install.pipe.sixbranch' }),
+                value: 'sixbranch',
             },
             {
                 label: formatMessage({id: 'install.pipe.fourbranch' }),
-                value: formatMessage({id: 'install.pipe.fourbranch' }),
+                value: 'fourbranch',
             },
             {
                 label: formatMessage({id: 'install.pipe.others' }),
-                value: formatMessage({id: 'install.pipe.others' }),
+                value: 'others',
             },
         ]
         
         const pipematerialsOptions = [
             {
                 label: formatMessage({id: 'install.pipematerials.galvanized' }),
-                value: formatMessage({id: 'install.pipematerials.galvanized' }),
+                value: 'galvanized',
             },
             {
                 label: formatMessage({id: 'install.pipematerials.stainless' }),
-                value: formatMessage({id: 'install.pipematerials.stainless' }),
+                value: 'stainless',
             },
             {
                 label: 'PPR',
@@ -154,7 +154,7 @@ class Index extends React.PureComponent {
             },
             {
                 label: formatMessage({id: 'install.pipematerials.others' }),
-                value: formatMessage({id: 'install.pipematerials.others' }),
+                value: 'others',
             },
         ]
 

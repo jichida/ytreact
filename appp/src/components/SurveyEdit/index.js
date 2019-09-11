@@ -14,6 +14,7 @@ import InstallForm from './InstallForm'
 import lodashGet from 'lodash.get'
 import {savesurvey_request,savesurvey_result} from '../../actions';
 import {callthen} from '../../sagas/pagination';
+import { convertDecimal } from '../../util/convertDecimal'
 
 import './index.less';
 
@@ -110,18 +111,18 @@ class Index extends PureComponent{
 
         if(unit === 'in') {
             if(!!survey.install.drainage) {
-                lodashSet(install, 'drainage', Math.round(lodashget(survey,'install.drainage','') * 0.3937008))
+                lodashSet(install, 'drainage', convertDecimal(lodashget(survey,'install.drainage','') * 0.3937008))
             }
 
             if(!!survey.install.space) {
                 if(!!survey.install.space.length) {
-                    lodashSet(install, 'space.length', Math.round(lodashget(survey,'install.space','').length * 0.3937008))
+                    lodashSet(install, 'space.length', convertDecimal(lodashget(survey,'install.space','').length * 0.3937008))
                 }
                 if(!!survey.install.space.width) {
-                    lodashSet(install, 'space.width', Math.round(lodashget(survey,'install.space','').width * 0.3937008))
+                    lodashSet(install, 'space.width', convertDecimal(lodashget(survey,'install.space','').width * 0.3937008))
                 }
                 if(!!survey.install.space.height) {
-                    lodashSet(install, 'space.height', Math.round(lodashget(survey,'install.space','').height * 0.3937008))
+                    lodashSet(install, 'space.height', convertDecimal(lodashget(survey,'install.space','').height * 0.3937008))
                 }
             }
 
@@ -136,18 +137,18 @@ class Index extends PureComponent{
         const install = { ...survey.install }
         if(unit === 'in') {
             if(!!install.drainage) {
-                install.drainage = Math.round(install.drainage * 2.54)
+                install.drainage = convertDecimal(install.drainage * 2.54)
             }
 
             if(!!install.space) {
                 if(!!install.space.length) {
-                    install.space.length = Math.round(install.space.length * 2.54)
+                    install.space.length = convertDecimal(install.space.length * 2.54)
                 }
                 if(!!install.space.width) {
-                    install.space.width = Math.round(install.space.width * 2.54)
+                    install.space.width = convertDecimal(install.space.width * 2.54)
                 }
                 if(!!install.space.height) {
-                    install.space.height = Math.round(install.space.height * 2.54)
+                    install.space.height = convertDecimal(install.space.height * 2.54)
                 }
             }
             return { ...survey, install}

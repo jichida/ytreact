@@ -7,6 +7,7 @@ import {setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import SpaceInput from '../SpaceInput'
+import { convertDecimal } from '../../util/convertDecimal'
 
 import './index.less';
 
@@ -207,7 +208,7 @@ class DeviceInstall extends PureComponent{
            },
            drainage: {
                value: this.props.unit === 'cm' ? lodashget(install,'drainage', '') 
-                : Math.round(lodashget(install,'drainage', 0) * 0.3937008) === 0 ? '' : Math.round(lodashget(install,'drainage', 0) * 0.3937008),
+                : convertDecimal(lodashget(install,'drainage', 0) * 0.3937008) === 0 ? '' : convertDecimal(lodashget(install,'drainage', 0) * 0.3937008),
            },
            pipematerials: {
                value: lodashget(install,'pipematerials',''),

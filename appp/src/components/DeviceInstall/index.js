@@ -9,6 +9,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import  SpaceInput from '../SpaceInput';
 import PickerAndInput from '../PickerAndInpput';
 import PopoverInput from '../Controls/popoverInput'
+import { convertDecimal } from '../../util/convertDecimal'
 
 import './index.less';
 
@@ -116,71 +117,71 @@ const RenderForm = createForm({
     const positionOptions = [
         {
             label: formatMessage({id: 'install.position.equip'}),
-            value: formatMessage({id: 'install.position.equip'}),
+            value: 'equip',
         },
         {
             label: formatMessage({id: 'install.position.in'}),
-            value: formatMessage({id: 'install.position.in'}),
+            value: 'in',
         },
         {
             label: formatMessage({id: 'install.position.out'}),
-            value: formatMessage({id: 'install.position.out'}),
+            value: 'out',
         },
     ]
 
     const wallOptions = [
         {
             label: formatMessage({id: 'install.wall.cement' }),
-            value: formatMessage({id: 'install.wall.cement' }),
+            value: 'cement',
         },
         {
             label: formatMessage({id: 'install.wall.hollowbrick' }),
-            value: formatMessage({id: 'install.wall.hollowbrick' }),
+            value: 'hollowbrick',
         },
         {
             label: formatMessage({id: 'install.wall.clapboard' }),
-            value: formatMessage({id: 'install.wall.clapboard' }),
+            value: 'clapboard',
         },
     ]
     
     const methodOptions = [
         {
             label: formatMessage({id: 'install.method.toground' }),
-            value: formatMessage({id: 'install.method.toground' }),
+            value: 'toground',
         },
         {
             label: formatMessage({id: 'install.method.wallhanging' }),
-            value: formatMessage({id: 'install.method.wallhanging' }),
+            value: 'wallhanging',
         },
     ]
     
     const pipeOptions = [
         {
             label: formatMessage({id: 'install.pipe.inch' }),
-            value: formatMessage({id: 'install.pipe.inch' }),
+            value: 'inch',
         },
         {
             label: formatMessage({id: 'install.pipe.sixbranch' }),
-            value: formatMessage({id: 'install.pipe.sixbranch' }),
+            value: 'sixbranch',
         },
         {
             label: formatMessage({id: 'install.pipe.fourbranch' }),
-            value: formatMessage({id: 'install.pipe.fourbranch' }),
+            value: 'fourbranch',
         },
         {
             label: formatMessage({id: 'install.pipe.others' }),
-            value: formatMessage({id: 'install.pipe.others' }),
+            value: 'others',
         },
     ]
     
     const pipematerialsOptions = [
         {
             label: formatMessage({id: 'install.pipematerials.galvanized' }),
-            value: formatMessage({id: 'install.pipematerials.galvanized' }),
+            value: 'galvanized',
         },
         {
             label: formatMessage({id: 'install.pipematerials.stainless' }),
-            value: formatMessage({id: 'install.pipematerials.stainless' }),
+            value: 'stainless',
         },
         {
             label: 'PPR',
@@ -192,7 +193,7 @@ const RenderForm = createForm({
         },
         {
             label: formatMessage({id: 'install.pipematerials.others' }),
-            value: formatMessage({id: 'install.pipematerials.others' }),
+            value: 'others',
         },
     ]
 
@@ -207,18 +208,18 @@ const RenderForm = createForm({
                 if(unit === 'in') {
                     console.log('Submit Values:', values)
                     if(!!values.drainage) {
-                        values.drainage = Math.round(values.drainage * 2.54)
+                        values.drainage = convertDecimal(values.drainage * 2.54)
                     }
 
                     if(!!values.space) {
                         if(!!values.space.length) {
-                            values.space.length = Math.round(values.space.length * 2.54)
+                            values.space.length = convertDecimal(values.space.length * 2.54)
                         }
                         if(!!values.space.width) {
-                            values.space.width = Math.round(values.space.width * 2.54)
+                            values.space.width = convertDecimal(values.space.width * 2.54)
                         }
                         if(!!values.space.height) {
-                            values.space.height = Math.round(values.space.height * 2.54)
+                            values.space.height = convertDecimal(values.space.height * 2.54)
                         }
                     }
                 }
@@ -484,19 +485,19 @@ class DeviceInstall extends PureComponent{
         if(this.props.unit === 'in') {
             
             if(!!basicData.drainage) {
-                basicData.drainage.value = Math.round(lodashget(install,'drainage','') * 0.3937008)
+                basicData.drainage.value = convertDecimal(lodashget(install,'drainage','') * 0.3937008)
             }
 
             if(!!basicData.space) {
                 console.log('space')
                 if(!!basicData.space.value.length) {
-                    basicData.space.value.length = Math.round(lodashget(install,'space','').length * 0.3937008)
+                    basicData.space.value.length = convertDecimal(lodashget(install,'space','').length * 0.3937008)
                 }
                 if(!!basicData.space.value.width) {
-                    basicData.space.value.width = Math.round(lodashget(install,'space','').width * 0.3937008)
+                    basicData.space.value.width = convertDecimal(lodashget(install,'space','').width * 0.3937008)
                 }
                 if(!!basicData.space.value.height) {
-                    basicData.space.value.height = Math.round(lodashget(install,'space','').height * 0.3937008)
+                    basicData.space.value.height = convertDecimal(lodashget(install,'space','').height * 0.3937008)
                 }
             }
         }

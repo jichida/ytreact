@@ -74,19 +74,26 @@ export function* deviceflow(){//仅执行一次
 
   yield takeLatest(`${setdevice_distributorid}`,function*(action){
     try{
-      const {distributorid} = yield select((state)=>{
+      const {distributorid,checklist,_id} = yield select((state)=>{
         const distributorid = state.userlogin.distributor._id;
         const installerid = state.userlogin._id;
-        return {installerid,distributorid};
+        const checklist = state.device.checklist;
+        const _id = state.device._id;
+        return {_id,checklist,distributorid};
       });
-      const _id = yield select((state)=>{
-        // debugger;
-        return state.device._id;
-      });
+
       // debugger;
       // {_id,data:{basicinfo:values}
       let data = {};
       // data.distributorid = distributorid;
+      checklist.washed = true;
+      checklist.uptostandard= true;
+      checklist.bypassclosed= true;
+      checklist.noleakage= true;
+      checklist.wificonnected= true;
+      checklist.appset= true;
+
+      data.checklist = checklist;
       data.distributorid = distributorid;
       yield put(setuserdevice_request({_id,data}));
     }

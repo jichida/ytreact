@@ -50,6 +50,7 @@ class Index extends PureComponent{
     handleTabSelect = (curTab) => {
         this.saveCurrent(this.state.curTab)
         this.setState({curTab})
+        this.formcontainer.scrollTop = 0
     }
 
     handleSubmit = (id, values) => {
@@ -219,7 +220,7 @@ class Index extends PureComponent{
                             </div>
                         </div>
                     </div>
-                    <div className="survery-edit-form-container">
+                    <div ref={el => this.formcontainer = el} className="survery-edit-form-container">
                         { curTab === 'basic' && 
                             <BasicForm 
                                 onSubmit={this.handleSubmit} 

@@ -110,19 +110,18 @@ class Index extends PureComponent{
 
         if(unit === 'in') {
             if(!!survey.install.drainage) {
-                lodashSet(install, 'drainage.value', Math.round(lodashget(survey,'install.drainage','') * 0.3937008))
+                lodashSet(install, 'drainage', Math.round(lodashget(survey,'install.drainage','') * 0.3937008))
             }
 
             if(!!survey.install.space) {
-                console.log('space')
-                if(!!survey.install.space.value.length) {
-                    lodashSet(install, 'space.value.length', Math.round(lodashget(survey,'install.space','').length * 0.3937008))
+                if(!!survey.install.space.length) {
+                    lodashSet(install, 'space.length', Math.round(lodashget(survey,'install.space','').length * 0.3937008))
                 }
-                if(!!survey.install.space.value.width) {
-                    lodashSet(install, 'space.value.width', Math.round(lodashget(survey,'install.space','').width * 0.3937008))
+                if(!!survey.install.space.width) {
+                    lodashSet(install, 'space.width', Math.round(lodashget(survey,'install.space','').width * 0.3937008))
                 }
-                if(!!survey.install.space.value.height) {
-                    lodashSet(install, 'space.value.height', Math.round(lodashget(survey,'install.space','').height * 0.3937008))
+                if(!!survey.install.space.height) {
+                    lodashSet(install, 'space.height', Math.round(lodashget(survey,'install.space','').height * 0.3937008))
                 }
             }
 

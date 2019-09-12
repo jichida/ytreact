@@ -17,9 +17,12 @@ class Index extends React.PureComponent {
     }
 
     handleSubmit = (e)=>{
-        const { form: { validateFields }, dispatch, onSubmit} = this.props;
+        const { form: { validateFields }, dispatch, onSubmit, locale} = this.props;
         validateFields((err, values)=>{
             if(!err){
+                if(locale === 'en') {
+                    values.quantity = Math.round(values.quantity/264)
+                }
                 onSubmit('water', values);
             }
             else{
@@ -155,9 +158,9 @@ class Index extends React.PureComponent {
 }
 
 const createFormOptions = {
-    mapPropsToFields({usewater}) {
+    mapPropsToFields({usewater, locale}) {
         return {
-            quantity: createFormField({value: lodashget(usewater,'quantity','')}),
+            quantity: createFormField({value: locale === 'en' ? lodashget(usewater,'quantity','')*264 : lodashget(usewater,'quantity','')}),
             persons: createFormField({value: lodashget(usewater,'persons','')}),
             spot: createFormField({value: lodashget(usewater,'spot','')}),
             watergage: createFormField({value: lodashget(usewater,'watergage','')}),

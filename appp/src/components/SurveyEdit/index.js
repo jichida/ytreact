@@ -186,7 +186,7 @@ class Index extends PureComponent{
     }
 
     render () {
-        const { dispatch, unit, intl }  = this.props;
+        const { dispatch, unit, locale, intl }  = this.props;
         const { curTab } = this.state
 
         return (
@@ -239,6 +239,7 @@ class Index extends PureComponent{
                                 dispatch={dispatch}
                                 unit={unit}
                                 intl={intl}
+                                locale={locale}
                             /> 
                         }
                         { curTab === 'install' && 
@@ -259,14 +260,15 @@ class Index extends PureComponent{
 }
 
 
-const mapStateToProps =  ({app: {unit},surveys:{surveys}}, ownProps) => {
+const mapStateToProps =  ({app: {unit, locale},surveys:{surveys}}, ownProps) => {
     const {match} = ownProps;
     let _id = lodashGet(match, 'params.id', '0')
     const survey = lodashGet(surveys,`${_id}`);    
 
     return {
         survey,
-        unit
+        unit,
+        locale
     }
 }
 

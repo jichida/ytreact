@@ -102,15 +102,15 @@ const TopMonitor = injectIntl((props)=>{
 
     const topList = _.map(topData, (item, index)=>{
         return (
-            <Col key={index} className="number-info">
-                <div className="number-info-item">
+            <div key={index} className="number-info">
+                <div className="number-info-item-title">
                     <div className="title">{item.title}</div>
                 </div>
                 <div className="number-info-item">
                     <div className="unit">{item.unit}</div>
                     <div className="data">{item.data}</div>
                 </div>
-            </Col>
+            </div>
             // <div key={index}>
             //     <div className="number-info">
             //         <span className="title">{item.title}</span>

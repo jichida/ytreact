@@ -78,12 +78,12 @@ class SearchForm extends React.PureComponent{
     }
 
     setAreasOption = (country)=> {
-        const { dispatch } = this.props;
+        const { dispatch, intl: { formatMessage } } = this.props;
         let areasOptions = [];
 
         areasOptions.push({
           _id:'',
-          name:'全部'
+          name: `${formatMessage({id: 'app.all'})}`
         });
         lodashmap(this.props.areas, (v, k)=>{
             if(v.parent_id === country) {
@@ -94,7 +94,7 @@ class SearchForm extends React.PureComponent{
     }
 
     setDistributorOption = (country, area) => {
-        const { dispatch,searchquery,is_admin } = this.props;
+        const { dispatch,searchquery,is_admin, intl: { formatMessage } } = this.props;
         let query = {};
         if(area === ''){
           if(country !== ''){
@@ -110,7 +110,7 @@ class SearchForm extends React.PureComponent{
             if(is_admin){
               distributorOptions.push({
                 _id:'',
-                name:'全部'
+                name:`${formatMessage({id: 'app.all'})}`
               });
             }
             lodashmap(resultdata, (item)=>{
@@ -239,7 +239,7 @@ class SearchForm extends React.PureComponent{
     }
 }
 
-const mapStateToProps =  ({addressconst:{addressconsts},searchquery,userlogin}) =>{
+const mapStateToProps =  ({addressconst:{addressconsts},searchquery,userlogin}, { intl: { formatMessage}}) =>{
   let mapaddress = {};
   let provinces = [];
   let areas = [];
@@ -250,9 +250,9 @@ const mapStateToProps =  ({addressconst:{addressconsts},searchquery,userlogin}) 
     //所有
     provinces.push({
       _id:'',
-      name:'全部'
+      name:`${formatMessage({id: 'app.all'})}`
     });
-    mapaddress[''] = '全部';
+    mapaddress[''] = `${formatMessage({id: 'app.all'})}`;
 
     lodashmap(addressconsts,(v,k)=>{
       if(v.parent_id === config.rootaddressconst){
@@ -332,8 +332,8 @@ const mapStateToProps =  ({addressconst:{addressconsts},searchquery,userlogin}) 
   return {mapaddress,provinces, areas,searchquery,addresslevel1,addresslevel2,is_admin};
 };
 
-SearchForm = Form.create(createFormOption)(injectIntl(SearchForm));
-export default connect(mapStateToProps)(SearchForm);
+SearchForm = Form.create(createFormOption)(SearchForm);
+export default injectIntl(connect(mapStateToProps)(SearchForm));
 
 
 // SearchForm = connect(mapStateToProps)(SearchForm);

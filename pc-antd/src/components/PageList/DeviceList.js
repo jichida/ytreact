@@ -63,7 +63,7 @@ class DeviceList extends React.Component {
       return {
               isgetsrvdata:true,
               iserr: lodashget(iteminput,'iserr',true),
-              iswarr: !installdate,
+              iswarr: !isinstalled,
               isoffline: !!iteminput.datasrv_updated_at ? moment(iteminput.datasrv_updated_at).isBefore(moment().subtract(1,'hours')) : true,
               address: lodashget(iteminput,'basicinfo.username',''),
               reportdate: isinstalled ? moment(installdate).format('YYYYMMDD'): <FormattedMessage id="machine.notinstall" />,

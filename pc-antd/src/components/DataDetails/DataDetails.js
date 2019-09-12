@@ -102,26 +102,28 @@ const TopMonitor = injectIntl((props)=>{
 
     const topList = _.map(topData, (item, index)=>{
         return (
-            // <Col span={4} key={item.title}>
+            <Col key={index} className="number-info">
+                <div className="number-info-item">
+                    <div className="title">{item.title}</div>
+                </div>
+                <div className="number-info-item">
+                    <div className="unit">{item.unit}</div>
+                    <div className="data">{item.data}</div>
+                </div>
+            </Col>
+            // <div key={index}>
             //     <div className="number-info">
             //         <span className="title">{item.title}</span>
             //         <span className="unit">{item.unit}</span>
             //         <span className="data">{item.data}</span>
-            //     </div>
-            // </Col>
-            <div key={index}>
-                <div className="number-info">
-                    <span className="title">{item.title}</span>
-                    <span className="unit">{item.unit}</span>
-                    <span className="data">{item.data}</span>
 
-                </div>
-            </div>
+            //     </div>
+            // </div>
         )
     })
 
     return (
-        <Row style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Row gutter={48} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
             { !!srvdata ? topList : `${intl.formatMessage({id: 'app.nodata'})}` }
         </Row>
     )

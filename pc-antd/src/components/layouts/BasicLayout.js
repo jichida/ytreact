@@ -147,7 +147,7 @@ class BasicLayout extends React.PureComponent {
         <Layout
           style={{
             minHeight: '100vh',
-            minWidth: '1400px'
+            minWidth: '1366px'
           }}
         >
           <Header

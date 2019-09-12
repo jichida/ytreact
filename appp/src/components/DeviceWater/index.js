@@ -367,8 +367,11 @@ class DeviceWater extends PureComponent{
 
     handleSubmit = (values)=>{
         console.log(values);
-        const {dispatch,_id} = this.props;
+        const {dispatch,_id, app} = this.props;
         values.source = values.source[0];
+        if(app.locale === 'en') {
+            values.quantity = Math.round(values.quantity/264)
+        }
         // values.useproperty = values.useproperty[0];
         // values.building = values.building[0];
         // values.model = values.model[0];
@@ -389,11 +392,11 @@ class DeviceWater extends PureComponent{
     // }
 
     render () {
-        const { history,usewater,dispatch } = this.props;
+        const { history,usewater,dispatch, app } = this.props;
 
         const basicData = {
             quantity: {
-                value: lodashget(usewater,'quantity',''),
+                value: app.locale === 'en' ? lodashget(usewater,'quantity','')*264 : lodashget(usewater,'quantity',''),
             },
             persons: {
                 value: lodashget(usewater,'persons',''),
@@ -451,8 +454,8 @@ class DeviceWater extends PureComponent{
         )
     }
 }
-const mapStateToProps =  ({device:{usewater,_id}}) =>{
-  return {usewater,_id};
+const mapStateToProps =  ({device:{usewater,_id}, app}) =>{
+  return {usewater,_id, app};
 };
 DeviceWater = connect(mapStateToProps)(DeviceWater);
 export default withRouter(DeviceWater);

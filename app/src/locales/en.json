@@ -217,7 +217,7 @@
   "install.pipematerials": "pipeline material",
   "install.wifi": "With or without WIFI",
   "install.power": "There is no power supply",
-  "water.quantity": "monthly water consumption (tons)",
+  "water.quantity": "monthly water consumption (Gal)",
   "water.persons": "Number of people using water (person)",
   "water.spot": "Direct drinking point (a)",
   "water.watergage": "water pressure",

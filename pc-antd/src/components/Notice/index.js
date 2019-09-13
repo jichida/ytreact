@@ -145,9 +145,13 @@ class Notice extends React.PureComponent {
 }
 const mapStateToProps =  ({addressconst:{addressconsts},userlogin}) =>{
   let isshownewbtn = false;
-  const addresslevel1 = lodashget(userlogin,'addresslevel1','');
-  const addresslevel2 = lodashget(userlogin,'addresslevel2','');
-  if(addresslevel1.length === 0 || addresslevel2.length === 0){
+  const addresslevel1 = lodashget(userlogin,'addresslevel1', '');
+  const addresslevel2 = lodashget(userlogin,'addresslevel2', '');
+  console.log('userlogin:', userlogin)
+  console.log('addresslevel1:', addresslevel1)
+  console.log('addresslevel2:', addresslevel2)
+  if(!!addresslevel1 || !!addresslevel2) {
+  // if(addresslevel1.length === 0 || addresslevel2.length === 0){
     isshownewbtn = true;
   }
   return {isshownewbtn};

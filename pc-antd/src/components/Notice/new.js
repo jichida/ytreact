@@ -191,11 +191,23 @@ const mapStateToProps =  ({addressconst:{addressconsts},userlogin}) =>{
   const addresslevel1 = lodashget(userlogin,'addresslevel1','');
   const addresslevel2 = lodashget(userlogin,'addresslevel2','');
   let distributorquery = {};
-  if(addresslevel1.length === 0){
-    //全部
+//   if(addresslevel1.length === 0){
+//     //全部
+//   }
+//   else{
+//     if(addresslevel2.length === 0){
+//       distributorquery = {addresslevel1};//固定一级区域
+//     }
+//     else{
+//       //无权限啊,怎么进来的
+//       distributorquery = {addresslevel1,addresslevel2};
+//     }
+//   }
+  if(!!addresslevel1) {
+      //全部
   }
   else{
-    if(addresslevel2.length === 0){
+    if(!!addresslevel2){
       distributorquery = {addresslevel1};//固定一级区域
     }
     else{

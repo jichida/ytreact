@@ -5,6 +5,7 @@ import { createForm, createFormField } from 'rc-form';
 import { withRouter } from 'react-router-dom';
 import {common_err,ui_setuserdevice_request} from '../../actions';
 import lodashget from 'lodash.get';
+import lodashset from 'lodash.set'
 import { FormattedMessage, injectIntl } from 'react-intl';
 import  SpaceInput from '../SpaceInput';
 import PickerAndInput from '../PickerAndInpput';
@@ -16,54 +17,6 @@ import './index.less';
 const Item = List.Item;
 const Brief = Item.Brief;
 let initHeight;
-
-
-
-
-
-// 安装地点		position
-// 是否避光		avoidlight
-// 墙体材料		wall
-// 主机安装方式	method
-// 安装空间		space
-// 进水管径大小	pipe
-// 排水距离		drainage
-// 管路材质		pipematerials
-// 有无WIFI		wifi
-// 有无电源		power
-//
-// const basicData = {
-//     position: {
-//         value: '',
-//     },
-//     avoidlight: {
-//         value: '',
-//     },
-//     wall: {
-//         value: '',
-//     },
-//     method: {
-//         value: '',
-//     },
-//     space: {
-//         value: '',
-//     },
-//     pipe: {
-//         value: '',
-//     },
-//     drainage: {
-//         value: '',
-//     },
-//     pipematerials: {
-//         value: '',
-//     },
-//     wifi: {
-//         value: '',
-//     },
-//     power: {
-//         value: '',
-//     },
-// }
 
 const RenderForm = createForm({
     mapPropsToFields(props) {
@@ -205,24 +158,42 @@ const RenderForm = createForm({
         //e.preventDefault();
         validateFields((err, values)=>{
             if(!err){
+                console.log('befor:', values)
+                const space_cn = {}
+                const space_en = {}
                 if(unit === 'in') {
-                    console.log('Submit Values:', values)
                     if(!!values.drainage) {
-                        values.drainage = convertDecimal(values.drainage * 2.54)
+                        values['drainage_en'] = values.drainage
+                        values['drainage_cn'] = convertDecimal(values.drainage * 2.54)
                     }
 
                     if(!!values.space) {
-                        if(!!values.space.length) {
-                            values.space.length = convertDecimal(values.space.length * 2.54)
-                        }
-                        if(!!values.space.width) {
-                            values.space.width = convertDecimal(values.space.width * 2.54)
-                        }
-                        if(!!values.space.height) {
-                            values.space.height = convertDecimal(values.space.height * 2.54)
-                        }
+                        space_en['length'] = lodashget(values, 'space.length', '') === '' ? '' : convertDecimal(lodashget(values, 'space.length', 0))
+                        space_cn['length'] = lodashget(values, 'space.length', '') === '' ? '' : convertDecimal(lodashget(values, 'space.length', 0)* 2.54)
+                        space_en['width'] = lodashget(values, 'space.width', '') === '' ? '' : convertDecimal(lodashget(values, 'space.width', 0))
+                        space_cn['width'] = lodashget(values, 'space.width', '') === '' ? '' : convertDecimal(lodashget(values, 'space.width', 0)* 2.54)
+                        space_en['height'] = lodashget(values, 'space.height', '') === '' ? '' : convertDecimal(lodashget(values, 'space.height', 0))
+                        space_cn['height'] = lodashget(values, 'space.height', '') === '' ? '' : convertDecimal(lodashget(values, 'space.height', 0)* 2.54)
                     }
                 }
+                if(unit === 'cm') {
+                    if(!!values.drainage) {
+                        values['drainage_cn'] = values.drainage
+                        values['drainage_en'] = convertDecimal(values.drainage * 0.3937008)
+                    }
+
+                    if(!!values.space) {
+                        space_cn['length'] = lodashget(values, 'space.length', '') === '' ? '' : convertDecimal(lodashget(values, 'space.length', 0))
+                        space_en['length'] = lodashget(values, 'space.length', '') === '' ? '' : convertDecimal(lodashget(values, 'space.length', 0)* 0.3937008)
+                        space_cn['width'] = lodashget(values, 'space.width', '') === '' ? '' : convertDecimal(lodashget(values, 'space.width', 0))
+                        space_en['width'] = lodashget(values, 'space.width', '') === '' ? '' : convertDecimal(lodashget(values, 'space.width', 0)* 0.3937008)
+                        space_cn['height'] = lodashget(values, 'space.height', '') === '' ? '' : convertDecimal(lodashget(values, 'space.height', 0))
+                        space_en['height'] = lodashget(values, 'space.height', '') === '' ? '' : convertDecimal(lodashget(values, 'space.height', 0)* 0.3937008)
+                    }
+                }
+                values['space_cn'] = space_cn
+                values['space_en'] = space_en
+                // delete values.space
                 console.log(values)
                 props.onSubmit(values);
             }
@@ -447,7 +418,7 @@ class DeviceInstall extends PureComponent{
 
     render () {
 
-        const { history, install, dispatch }  = this.props;
+        const { history, install, dispatch, unit }  = this.props;
 
         const basicData = {
            position: {
@@ -463,13 +434,13 @@ class DeviceInstall extends PureComponent{
                value: [lodashget(install,'method','')],
            },
            space: {
-               value: {...lodashget(install,'space', {})},
+               value: unit === 'cm' ? {...lodashget(install,'space_cn', {})} : {...lodashget(install,'space_en', {})},
            },
            pipe: {
                value: [lodashget(install,'pipe','')],
            },
            drainage: {
-               value: lodashget(install,'drainage',''),
+               value: unit === 'cm' ? lodashget(install,'drainage_cn','') : lodashget(install,'drainage_en',''),
            },
            pipematerials: {
                value: [lodashget(install,'pipematerials','')],
@@ -482,25 +453,25 @@ class DeviceInstall extends PureComponent{
            },
         }
         
-        if(this.props.unit === 'in') {
+        // if(this.props.unit === 'in') {
             
-            if(!!basicData.drainage) {
-                basicData.drainage.value = convertDecimal(lodashget(install,'drainage','') * 0.3937008)
-            }
+        //     if(!!basicData.drainage) {
+        //         basicData.drainage.value = convertDecimal(lodashget(install,'drainage','') * 0.3937008)
+        //     }
 
-            if(!!basicData.space) {
-                console.log('space')
-                if(!!basicData.space.value.length) {
-                    basicData.space.value.length = convertDecimal(lodashget(install,'space','').length * 0.3937008)
-                }
-                if(!!basicData.space.value.width) {
-                    basicData.space.value.width = convertDecimal(lodashget(install,'space','').width * 0.3937008)
-                }
-                if(!!basicData.space.value.height) {
-                    basicData.space.value.height = convertDecimal(lodashget(install,'space','').height * 0.3937008)
-                }
-            }
-        }
+        //     if(!!basicData.space) {
+        //         console.log('space')
+        //         if(!!basicData.space.value.length) {
+        //             basicData.space.value.length = convertDecimal(lodashget(install,'space','').length * 0.3937008)
+        //         }
+        //         if(!!basicData.space.value.width) {
+        //             basicData.space.value.width = convertDecimal(lodashget(install,'space','').width * 0.3937008)
+        //         }
+        //         if(!!basicData.space.value.height) {
+        //             basicData.space.value.height = convertDecimal(lodashget(install,'space','').height * 0.3937008)
+        //         }
+        //     }
+        // }
 
         return (
             <div className="fp_container sub_bg">

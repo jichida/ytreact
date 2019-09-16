@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import  SpaceInput from '../SpaceInput';
 import PickerAndInput from '../PickerAndInpput';
 import PopoverInput from '../Controls/popoverInput'
+import { convertDecimal } from '../../util/convertDecimal'
 
 import './index.less';
 
@@ -42,7 +43,42 @@ class Index extends React.PureComponent {
                 //         }
                 //     }
                 // }
-                console.log(values)
+                const space_cn = {}
+                const space_en = {}
+                if(unit === 'in') {
+                    if(!!values.drainage) {
+                        values['drainage_en'] = values.drainage
+                        values['drainage_cn'] = convertDecimal(values.drainage * 2.54)
+                    }
+
+                    if(!!values.space) {
+                        space_en['length'] = lodashget(values, 'space.length', '') === '' ? '' : convertDecimal(lodashget(values, 'space.length', 0))
+                        space_cn['length'] = lodashget(values, 'space.length', '') === '' ? '' : convertDecimal(lodashget(values, 'space.length', 0)* 2.54)
+                        space_en['width'] = lodashget(values, 'space.width', '') === '' ? '' : convertDecimal(lodashget(values, 'space.width', 0))
+                        space_cn['width'] = lodashget(values, 'space.width', '') === '' ? '' : convertDecimal(lodashget(values, 'space.width', 0)* 2.54)
+                        space_en['height'] = lodashget(values, 'space.height', '') === '' ? '' : convertDecimal(lodashget(values, 'space.height', 0))
+                        space_cn['height'] = lodashget(values, 'space.height', '') === '' ? '' : convertDecimal(lodashget(values, 'space.height', 0)* 2.54)
+                    }
+                }
+                if(unit === 'cm') {
+                    if(!!values.drainage) {
+                        values['drainage_cn'] = values.drainage
+                        values['drainage_en'] = convertDecimal(values.drainage * 0.3937008)
+                    }
+
+                    if(!!values.space) {
+                        space_cn['length'] = lodashget(values, 'space.length', '') === '' ? '' : convertDecimal(lodashget(values, 'space.length', 0))
+                        space_en['length'] = lodashget(values, 'space.length', '') === '' ? '' : convertDecimal(lodashget(values, 'space.length', 0)* 0.3937008)
+                        space_cn['width'] = lodashget(values, 'space.width', '') === '' ? '' : convertDecimal(lodashget(values, 'space.width', 0))
+                        space_en['width'] = lodashget(values, 'space.width', '') === '' ? '' : convertDecimal(lodashget(values, 'space.width', 0)* 0.3937008)
+                        space_cn['height'] = lodashget(values, 'space.height', '') === '' ? '' : convertDecimal(lodashget(values, 'space.height', 0))
+                        space_en['height'] = lodashget(values, 'space.height', '') === '' ? '' : convertDecimal(lodashget(values, 'space.height', 0)* 0.3937008)
+                    }
+                }
+                values['space_cn'] = space_cn
+                values['space_en'] = space_en
+                // delete values.space
+                console.log('install form:', values)
                 this.props.onSubmit('install', values);
             }
             else{
@@ -286,15 +322,15 @@ class Index extends React.PureComponent {
 }
 
 const createFormOptions = {
-    mapPropsToFields({install}) {
+    mapPropsToFields({install, unit}) {
         return {
           position: createFormField({value: [lodashget(install,'position','')]}),
           avoidlight: createFormField({value: lodashget(install,'avoidlight',false)}),
           wall: createFormField({value: [lodashget(install,'wall','')]}),
           method: createFormField({value: [lodashget(install,'method','')]}),
-          space: createFormField({value: lodashget(install,'space', {})}),
+          space: createFormField({value: unit === 'cm' ? lodashget(install,'space_cn', {}) : lodashget(install,'space_en', {})}),
           pipe: createFormField({value: [lodashget(install,'pipe','')]}),
-          drainage: createFormField({value: lodashget(install,'drainage','')}),
+          drainage: createFormField({value: unit === 'cm' ? lodashget(install,'drainage_cn','') : lodashget(install,'drainage_en','')}),
           pipematerials: createFormField({value: [lodashget(install,'pipematerials','')]}),
           wifi: createFormField({value: lodashget(install,'wifi',false)}),
           power: createFormField({value: lodashget(install,'power',false)}),
@@ -303,88 +339,3 @@ const createFormOptions = {
 }
 
 export default createForm(createFormOptions)(Index)
-
-// handleSubmit = (values)=>{
-//     values.position = values.position[0];
-//     values.wall = values.wall[0];
-//     values.method = values.method[0];
-//     values.pipe = values.pipe[0];
-//     values.pipematerials = values.pipematerials[0];
-//     const {dispatch,_id} = this.props;
-//     dispatch(ui_setuserdevice_request({_id,data:{install:values}}));
-// }
-
-
-
-// class DeviceInstall extends PureComponent{
-
-//     constructor(props) {
-//         super(props);
-//         initHeight = window.innerHeight;
-//     }
-
-//     componentDidMount() {
-//         window.addEventListener('resize', () => {
-//             const activeElement = document.activeElement
-//             if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
-//                 setTimeout(() => {
-//                     if(!!activeElement.scrollIntoViewIfNeeded) {
-//                         activeElement.scrollIntoViewIfNeeded(true)
-//                     } else {
-//                         activeElement.scrollIntoView(false)
-//                     }
-//                 }, 100)
-//             }
-//         })
-//     }
-
-
-//     render () {
-
-//         const { history, install, dispatch }  = this.props;
-
-        
-        
-//         if(this.props.unit === 'in') {
-            
-//             if(!!basicData.drainage) {
-//                 basicData.drainage.value = Math.round(lodashget(install,'drainage','') * 0.3937008)
-//             }
-
-//             if(!!basicData.space) {
-//                 console.log('space')
-//                 if(!!basicData.space.value.length) {
-//                     basicData.space.value.length = Math.round(lodashget(install,'space','').length * 0.3937008)
-//                 }
-//                 if(!!basicData.space.value.width) {
-//                     basicData.space.value.width = Math.round(lodashget(install,'space','').width * 0.3937008)
-//                 }
-//                 if(!!basicData.space.value.height) {
-//                     basicData.space.value.height = Math.round(lodashget(install,'space','').height * 0.3937008)
-//                 }
-//             }
-//         }
-
-//         return (
-//             <div className="fp_container sub_bg">
-//                 <NavBar
-//                     className="nav"
-//                     icon={<Icon type="left" />}
-//                     onLeftClick={() => { window.innerHeight=initHeight; history.goBack()}}
-//                 >
-//                     <FormattedMessage id="device.install" />
-//                 </NavBar>
-//                 <div className="sub_device_bg">
-//                     <RenderForm {...basicData} unit={this.props.unit} onSubmit={this.handleSubmit} dispatch={dispatch}/>
-//                 </div>
-                
-//             </div>
-//         )
-//     }
-// }
-// const mapStateToProps =  ({device:{install,_id}, app: { unit }}) =>{
-//     console.log('mstp install:', install)
-//   return {install,_id, unit};
-// };
-// DeviceInstall = connect(mapStateToProps)(DeviceInstall);
-// export default withRouter(DeviceInstall);

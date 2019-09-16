@@ -132,6 +132,10 @@ const typeAction = [
         label: <FormattedMessage id="machine.report.pressure" />,
         value: 'Pressure1',//Pressure1 压力1 d[y]
     },
+    {//6日用水量
+        label: <FormattedMessage id="machine.report.dailyvolume" />,
+        value: 'DailyVolume',//Daily Volume 今日用水量 d[q]
+    },
     {//4日废水量
         label: <FormattedMessage id="machine.report.drainage" />,
         value: 'WasteVolumeDaily',//Waste Volume Daily 今日废水量 d[r]
@@ -140,10 +144,10 @@ const typeAction = [
         label: <FormattedMessage id="machine.report.totalinlet" />,
         value: 'totalVol',//totalVol 总用水量 d[t]
     },
-    {//6日用水量
-        label: <FormattedMessage id="machine.report.dailyvolume" />,
-        value: 'DailyVolume',//Daily Volume 今日用水量 d[q]
-    },
+    // {//6日用水量
+    //     label: <FormattedMessage id="machine.report.dailyvolume" />,
+    //     value: 'DailyVolume',//Daily Volume 今日用水量 d[q]
+    // },
 ];
 
 

@@ -370,8 +370,13 @@ class DeviceWater extends PureComponent{
         const {dispatch,_id, app} = this.props;
         values.source = values.source[0];
         if(app.locale === 'en') {
-            values.quantity = Math.round(values.quantity/264)
+            values['quantity_en'] = values.quantity
+            values['quantity_cn'] = Math.round(values.quantity/264)
+        } else {
+            values['quantity_cn'] = values.quantity
+            values['quantity_en'] = Math.round(values.quantity*264)
         }
+
         // values.useproperty = values.useproperty[0];
         // values.building = values.building[0];
         // values.model = values.model[0];
@@ -396,7 +401,7 @@ class DeviceWater extends PureComponent{
 
         const basicData = {
             quantity: {
-                value: app.locale === 'en' ? lodashget(usewater,'quantity','')*264 : lodashget(usewater,'quantity',''),
+                value: app.locale === 'en' ? lodashget(usewater,'quantity_en','') : lodashget(usewater,'quantity_cn',''),
             },
             persons: {
                 value: lodashget(usewater,'persons',''),

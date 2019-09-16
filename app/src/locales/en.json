@@ -233,7 +233,7 @@
   "home": "Home",
   "home.show.title_main_outwater_quality":"Fluid water TDS {value}",
   "home.show.title_main_inwater_quality":"Inlet quality {value} ppm",
-  "home.show.title_main_totalwatervol": "Total yield {value} gal",
+  "home.show.title_main_totalwatervol": "Total volume {value} gal",
   "home.show.title_main_runtime": "Runtime {value} days",
   "home.show.title_main_outcwatervol": "Purification Rate {value} %",
   "home.show.title_main_filterelements_modlife": "Electro-ion membrane life",

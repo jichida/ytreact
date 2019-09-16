@@ -107,8 +107,8 @@ const TopMonitor = injectIntl((props)=>{
                     <div className="title">{item.title}</div>
                 </div>
                 <div className="number-info-item">
-                    <div className="unit">{item.unit}</div>
                     <div className="data">{item.data}</div>
+                    <div className="unit">{item.unit}</div>
                 </div>
             </div>
             // <div key={index}>

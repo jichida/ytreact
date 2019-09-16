@@ -21,7 +21,11 @@ class Index extends React.PureComponent {
         validateFields((err, values)=>{
             if(!err){
                 if(locale === 'en') {
-                    values.quantity = Math.round(values.quantity/264)
+                    values['quantity_en'] = Math.round(values.quantity)
+                    values['quantity_cn'] = Math.round(values.quantity/264)
+                } else {
+                    values['quantity_cn'] = Math.round(values.quantity)
+                    values['quantity_en'] = Math.round(values.quantity*264)
                 }
                 onSubmit('water', values);
             }
@@ -160,7 +164,7 @@ class Index extends React.PureComponent {
 const createFormOptions = {
     mapPropsToFields({usewater, locale}) {
         return {
-            quantity: createFormField({value: locale === 'en' ? lodashget(usewater,'quantity','')*264 : lodashget(usewater,'quantity','')}),
+            quantity: createFormField({value: locale === 'en' ? lodashget(usewater,'quantity_en','') : lodashget(usewater,'quantity_cn','')}),
             persons: createFormField({value: lodashget(usewater,'persons','')}),
             spot: createFormField({value: lodashget(usewater,'spot','')}),
             watergage: createFormField({value: lodashget(usewater,'watergage','')}),
@@ -174,49 +178,3 @@ const createFormOptions = {
 }
 
 export default createForm(createFormOptions)(Index)
-
-
-// class DeviceWater extends PureComponent{
-
-//     constructor(props) {
-//         super(props);
-//         this.initHeight = window.innerHeight;
-//     }
-
-
-//     handleSubmit = (values)=>{
-//         console.log(values);
-//         const {dispatch,_id} = this.props;
-//         values.source = values.source[0];
-//         // values.useproperty = values.useproperty[0];
-//         // values.building = values.building[0];
-//         // values.model = values.model[0];
-//         dispatch(ui_setuserdevice_request({_id,data:{usewater:values}}));
-
-//     }
-
-
-//     render () {
-//         const { history,usewater,dispatch } = this.props;
-
-
-//         return (
-//             <div className="fp_container sub_bg animated-router-forward-enter-done">
-//                 <NavBar
-//                     className="nav"
-//                     icon={<Icon type="left" />}
-//                     onLeftClick={() => { window.innerHeight=initHeight; history.goBack()}}
-//                 >
-//                 <FormattedMessage id="device.water" />
-//                 </NavBar>
-//                 <div className="sub_device_bg">{ <RenderForm {...basicData} onSubmit={this.handleSubmit} dispatch={dispatch} />}</div>
-                
-//             </div>
-//         )
-//     }
-// }
-// const mapStateToProps =  ({device:{usewater,_id}}) =>{
-//   return {usewater,_id};
-// };
-// DeviceWater = connect(mapStateToProps)(DeviceWater);
-// export default withRouter(DeviceWater);

@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { FormattedMessage } from 'react-intl'
 import './index.less'
 import { InputItem } from 'antd-mobile';
@@ -20,7 +21,7 @@ class SpaceInput extends React.Component {
     }
 
     render() {
-        const { value } = this.props; 
+        const { value, unit } = this.props; 
         return (
             <div className="space-input-container">
                 <div className="space-input-item">
@@ -43,4 +44,9 @@ class SpaceInput extends React.Component {
     }
 }
 
-export default SpaceInput
+const mapStateToProps = ({app: { unit }}) => ({
+    unit
+})
+
+
+export default connect(mapStateToProps)(SpaceInput) 

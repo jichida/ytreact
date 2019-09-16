@@ -14,7 +14,6 @@ import InstallForm from './InstallForm'
 import lodashGet from 'lodash.get'
 import {savesurvey_request,savesurvey_result} from '../../actions';
 import {callthen} from '../../sagas/pagination';
-import { convertDecimal } from '../../util/convertDecimal'
 
 import './index.less';
 
@@ -26,7 +25,7 @@ class Index extends PureComponent{
         super(props);
         this.state = {
             curTab: 'basic',// basic, install, water
-            survey: this.convertToUnit(this.props.survey)
+            survey: this.props.survey
         }
     }
 
@@ -37,7 +36,7 @@ class Index extends PureComponent{
         let _id = lodashGet(match, 'params.id', '0')
         setTimeout(() => {
             console.log('survey:', this.state.survey)
-            this.props.dispatch(callthen(savesurvey_request,savesurvey_result,{_id,data: this.convertFromUnit(this.state.survey)})).then((surveynew)=>{
+            this.props.dispatch(callthen(savesurvey_request,savesurvey_result,{_id,data: this.state.survey})).then((surveynew)=>{
                 history.push(`/survey`);
             }).catch((e)=>{
                 console.log(e);
@@ -101,61 +100,61 @@ class Index extends PureComponent{
         }
     }
 
-    convertToUnit = (survey) => {
-        const { unit } = this.props
-        let newsurvey = JSON.parse(JSON.stringify(survey))
-        if(!survey.basicinfo) {
-            newsurvey = { ...newsurvey, basicinfo: {}}
-        }
-        const install = {...survey.install}
+    // convertToUnit = (survey) => {
+    //     const { unit } = this.props
+    //     let newsurvey = JSON.parse(JSON.stringify(survey))
+    //     if(!survey.basicinfo) {
+    //         newsurvey = { ...newsurvey, basicinfo: {}}
+    //     }
+    //     const install = {...survey.install}
 
-        if(unit === 'in') {
-            if(!!survey.install.drainage) {
-                lodashSet(install, 'drainage', convertDecimal(lodashget(survey,'install.drainage','') * 0.3937008))
-            }
+    //     if(unit === 'in') {
+    //         if(!!survey.install.drainage) {
+    //             lodashSet(install, 'drainage', convertDecimal(lodashget(survey,'install.drainage','') * 0.3937008))
+    //         }
 
-            if(!!survey.install.space) {
-                if(!!survey.install.space.length) {
-                    lodashSet(install, 'space.length', convertDecimal(lodashget(survey,'install.space','').length * 0.3937008))
-                }
-                if(!!survey.install.space.width) {
-                    lodashSet(install, 'space.width', convertDecimal(lodashget(survey,'install.space','').width * 0.3937008))
-                }
-                if(!!survey.install.space.height) {
-                    lodashSet(install, 'space.height', convertDecimal(lodashget(survey,'install.space','').height * 0.3937008))
-                }
-            }
+    //         if(!!survey.install.space) {
+    //             if(!!survey.install.space.length) {
+    //                 lodashSet(install, 'space.length', convertDecimal(lodashget(survey,'install.space','').length * 0.3937008))
+    //             }
+    //             if(!!survey.install.space.width) {
+    //                 lodashSet(install, 'space.width', convertDecimal(lodashget(survey,'install.space','').width * 0.3937008))
+    //             }
+    //             if(!!survey.install.space.height) {
+    //                 lodashSet(install, 'space.height', convertDecimal(lodashget(survey,'install.space','').height * 0.3937008))
+    //             }
+    //         }
 
-            return {...newsurvey, install}
-        } else {
-            return {...survey}
-        }
-    }
+    //         return {...newsurvey, install}
+    //     } else {
+    //         return {...survey}
+    //     }
+    // }
 
-    convertFromUnit = (survey) => {
-        const { unit } = this.props
-        const install = { ...survey.install }
-        if(unit === 'in') {
-            if(!!install.drainage) {
-                install.drainage = convertDecimal(install.drainage * 2.54)
-            }
+    // convertFromUnit = (survey) => {
+    //     const { unit } = this.props
+    //     const install = { ...survey.install }
+    //     if(unit === 'in') {
+    //         if(!!install.drainage) {
+    //             install.drainage = convertDecimal(install.drainage * 2.54)
+    //         }
 
-            if(!!install.space) {
-                if(!!install.space.length) {
-                    install.space.length = convertDecimal(install.space.length * 2.54)
-                }
-                if(!!install.space.width) {
-                    install.space.width = convertDecimal(install.space.width * 2.54)
-                }
-                if(!!install.space.height) {
-                    install.space.height = convertDecimal(install.space.height * 2.54)
-                }
-            }
-            return { ...survey, install}
-        } else {
-            return survey
-        }
-    }
+    //         if(!!install.space) {
+    //             if(!!install.space.length) {
+    //                 install.space.length = convertDecimal(install.space.length * 2.54)
+    //             }
+    //             if(!!install.space.width) {
+    //                 install.space.width = convertDecimal(install.space.width * 2.54)
+    //             }
+    //             if(!!install.space.height) {
+    //                 install.space.height = convertDecimal(install.space.height * 2.54)
+    //             }
+    //         }
+    //         return { ...survey, install}
+    //     } else {
+    //         return survey
+    //     }
+    // }
 
     componentDidMount() {
         window.addEventListener('resize', () => {
@@ -175,7 +174,7 @@ class Index extends PureComponent{
     handleBack = () => {
         const { intl: { formatMessage }, history } = this.props
         this.saveCurrent(this.state.curTab)
-        if(JSON.stringify(this.state.survey) !== JSON.stringify(this.convertToUnit(this.props.survey))) {
+        if(JSON.stringify(this.state.survey) !== JSON.stringify(this.props.survey)) {
             alert(`${formatMessage({id: 'survey.back'})}`, `${formatMessage({id: 'survey.back.warring'})}`, [
                 { text: `${formatMessage({id: 'survey.cancel'})}`, onPress: () => console.log('cancel') },
                 { text: `${formatMessage({id: 'survey.ok'})}`, onPress: () => history.goBack() },
@@ -188,6 +187,8 @@ class Index extends PureComponent{
     render () {
         const { dispatch, unit, locale, intl }  = this.props;
         const { curTab } = this.state
+
+        console.log('survey:', this.state.survey)
 
         return (
             <div className="sub_bg">

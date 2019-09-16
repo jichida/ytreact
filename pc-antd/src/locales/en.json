@@ -57,7 +57,7 @@
 "machine.datedetail.ERROR": "ERROR",
 "machine.datedetail.disconnect": "disconnect",
 "machine.data.quality": "Inlet water quality",
-"machine.data.consumption": "Daily water consumption",
+"machine.data.consumption": "Daily water volume",
 "machine.data.runtime": "run time",
 "machine.data.runtime.day": "day",
 "machine.data.recovery": "recovery rate",

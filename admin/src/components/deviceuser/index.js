@@ -67,7 +67,8 @@ const DeviceuserEdit = (props) => {
             <TextInput label="储水桶型号" source="basicinfo.bucket"  />
           </FormTab>
           <FormTab label="用水信息">
-            <TextInput label="月用水量（吨）" source="usewater.quantity" />
+            <TextInput label="月用水量（吨）（中）" source="usewater.quantity_en" />
+            <TextInput label="月用水量（GAL）（英）" source="usewater.quantity_cn" />
             <TextInput label="用水人数（人）" source="usewater.persons" />
             <TextInput label="直饮水点（个）" source="usewater.spot"  />
             <TextInput label="水压" source="usewater.watergage"  />
@@ -92,7 +93,8 @@ const DeviceuserEdit = (props) => {
                 { id: true, name: '是' }            ]} />
             <TextInput label="墙体材料" source="install.wall"  />
             <TextInput label="主机安装方式" source="install.method"  />
-            <InputSpaceField label="安装空间" source="install.space"  />
+            <InputSpaceField label="安装空间(中)" source="install.space_cn"  />
+            <InputSpaceField label="安装空间(英)" source="install.space_en"  />
             <TextInput label="进水管径大小" source="install.pipe"  />
             <TextInput label="排水距离" source="install.drainage"  />
             <TextInput label="管路材质" source="install.pipematerials"  />

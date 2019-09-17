@@ -73,8 +73,8 @@ const SurveyEdit = (props) => {
                 { id: false, name: '不需要' },
                 { id: true, name: '需要' }            ]} />
             <SelectInput label="进水水源"  source="usewater.source" choices={[
-                { id: '地下水', name: '地下水' },
-                { id: '市政水', name: '市政水' },
+                { id: 'ground', name: '地下水' },
+                { id: 'municipal', name: '市政水' },
             ]} />
             <TextInput label="卫浴间数量" source="usewater.bathrooms"  />
             <SelectInput label="是否分流"  source="usewater.shunt" choices={[

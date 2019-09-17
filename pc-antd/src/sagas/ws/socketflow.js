@@ -4,6 +4,7 @@ import {
   getsystemconfig_request,
   loginwithtoken_request,
   getaddressconstlist_request,
+  logout_result
 } from '../../actions';
 import config from '../../env/config';
 
@@ -22,6 +23,9 @@ export function* socketflow(){//仅执行一次
         console.log(`notify_socket_connected==>${token}`);
         if (!!token) {
           yield put(loginwithtoken_request({token}));
+        }
+        else{//不然一直处于login等待状态
+          yield put(logout_result({}));
         }
       }
     });

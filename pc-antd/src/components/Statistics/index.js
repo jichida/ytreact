@@ -495,10 +495,6 @@ class Statistics extends React.PureComponent {
                             <div className="left-title">
                                 <div><img src={sb_icon} alt="" /></div>
                                 <div className="left-item">
-                                    <FormattedMessage id="machine.name" />
-                                    <span>{`:${lodashget(curdevice, 'basicinfo.model', '')}`}</span>
-                                </div>
-                                <div className="left-item">
                                     <FormattedMessage id="machine.id" />
                                     <span>{`:${lodashget(curdevice, 'deviceid', '')}`}</span>
                                 </div>

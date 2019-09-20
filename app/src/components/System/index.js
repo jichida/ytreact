@@ -115,7 +115,7 @@ const RenderForm = createForm({
                         }
                 ><FormattedMessage id="setting.system.quality" defaultMessage="出水水质（ppm）" /></List.Item>
 
-                <List.Item className="item_switch"
+                {/* <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn"  onClick={()=>{
                               onClickCmd(`$decpression%`,`${intl.formatMessage({id: 'setting.system.decompression'})}`);//20	废水阀泄压	整机泄压	$decpression%
@@ -134,7 +134,7 @@ const RenderForm = createForm({
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.system.exhaustwash" defaultMessage="排气冲洗" /></List.Item>
+                ><FormattedMessage id="setting.system.exhaustwash" defaultMessage="排气冲洗" /></List.Item> */}
                 <List.Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{

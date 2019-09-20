@@ -23,10 +23,10 @@ let initHeight;
 // 进水水源  source
 // 卫浴间数量 (个）	bathrooms
 // 是否分流		shunt
-// 原水TDS值(mg/l)	tds
-// 原水导电率(us/cm)	conductivity
-// 原水硬度(ppm)	hardness
-// 原水碱度(ppm)	alkalinity
+// 进水TDS值(mg/l)	tds
+// 进水导电率(us/cm)	conductivity
+// 进水硬度(ppm)	hardness
+// 进水碱度(ppm)	alkalinity
 // ph值		ph
 // 用户需求出水TDS值	usertds
 
@@ -246,7 +246,7 @@ const RenderForm = createForm({
                         })}
                     />}
                 ><FormattedMessage id="water.shunt" defaultMessage="是否分流" /></List.Item>
-                {/* <Item><FormattedMessage id="water.tds" defaultMessage="原水TDS值" />
+                {/* <Item><FormattedMessage id="water.tds" defaultMessage="进水TDS值" />
                     <Brief>
                         <div className="item_children">
                             <InputItem
@@ -256,14 +256,14 @@ const RenderForm = createForm({
                                 {...getFieldProps('tds',{
                                     rules: [{
                                         required: true,
-                                        message: <FormattedMessage id="water.tds" defaultMessage="原水TDS值" />,
+                                        message: <FormattedMessage id="water.tds" defaultMessage="进水TDS值" />,
                                     }],
                                 })}
                             />
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="water.conductivity" defaultMessage="原水导电率" />
+                <Item><FormattedMessage id="water.conductivity" defaultMessage="进水导电率" />
                     <Brief>
                         <div className="item_children">
                             <InputItem
@@ -273,14 +273,14 @@ const RenderForm = createForm({
                                 {...getFieldProps('conductivity',{
                                     rules: [{
                                         required: true,
-                                        message: <FormattedMessage id="water.conductivity" defaultMessage="原水导电率" />,
+                                        message: <FormattedMessage id="water.conductivity" defaultMessage="进水导电率" />,
                                     }],
                                 })}
                             />
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="water.hardness" defaultMessage="原水硬度(ppm)" />
+                <Item><FormattedMessage id="water.hardness" defaultMessage="进水硬度(ppm)" />
                     <Brief>
                         <div className="item_children">
                             <InputItem
@@ -290,14 +290,14 @@ const RenderForm = createForm({
                                 {...getFieldProps('hardness',{
                                     rules: [{
                                         required: true,
-                                        message: <FormattedMessage id="water.hardness" defaultMessage="原水硬度(ppm)" />,
+                                        message: <FormattedMessage id="water.hardness" defaultMessage="进水硬度(ppm)" />,
                                     }],
                                 })}
                             />
                         </div>
                     </Brief>
                 </Item>
-                <Item><FormattedMessage id="water.alkalinity" defaultMessage="原水碱度(ppm)" />
+                <Item><FormattedMessage id="water.alkalinity" defaultMessage="进水碱度(ppm)" />
                     <Brief>
                         <div className="item_children">
                             <InputItem
@@ -307,7 +307,7 @@ const RenderForm = createForm({
                                 {...getFieldProps('alkalinity',{
                                     rules: [{
                                         required: true,
-                                        message: <FormattedMessage id="water.alkalinity" defaultMessage="原水碱度(ppm)" />,
+                                        message: <FormattedMessage id="water.alkalinity" defaultMessage="进水碱度(ppm)" />,
                                     }],
                                 })}
                             />

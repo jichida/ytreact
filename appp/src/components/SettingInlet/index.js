@@ -151,7 +151,7 @@ const RenderForm = createForm({
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.water.rawph" defaultMessage="原水PH值" /><Brief>{rawph.value}</Brief></Item>
+                ><FormattedMessage id="setting.water.rawph" defaultMessage="进水PH值" /><Brief>{rawph.value}</Brief></Item>
                 <Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.showModal('modalrawConductivity')}} >
@@ -159,7 +159,7 @@ const RenderForm = createForm({
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.water.rawconductivity" defaultMessage="原水导电率" /><Brief>{rawconductivity.value}</Brief></Item>
+                ><FormattedMessage id="setting.water.rawconductivity" defaultMessage="进水导电率" /><Brief>{rawconductivity.value}</Brief></Item>
                 <Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.showModal('modalrawTDS')}} >
@@ -167,7 +167,7 @@ const RenderForm = createForm({
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.water.rawtds" defaultMessage="原水TDS值" /><Brief>{rawtds.value}</Brief></Item>
+                ><FormattedMessage id="setting.water.rawtds" defaultMessage="进水TDS值" /><Brief>{rawtds.value}</Brief></Item>
                 <Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.showModal('modalrawHardness')}} >
@@ -175,7 +175,7 @@ const RenderForm = createForm({
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.water.rawhardness" defaultMessage="原水硬度" /><Brief>{rawhardness.value}</Brief></Item>
+                ><FormattedMessage id="setting.water.rawhardness" defaultMessage="进水硬度" /><Brief>{rawhardness.value}</Brief></Item>
                 <Item className="item_switch"
                     extra={<div className="add_btn" style={{width: 65, display: 'inline-block'}} >
                             <Button size="small" type="ghost" className="btn" onClick={()=>{props.showModal('modalrawAlkalinity')}} >
@@ -183,7 +183,7 @@ const RenderForm = createForm({
                             </Button>
                             </div>
                         }
-                ><FormattedMessage id="setting.water.rawalkalinity" defaultMessage="原水碱度" /><Brief>{rawalkalinity.value}</Brief></Item> */}
+                ><FormattedMessage id="setting.water.rawalkalinity" defaultMessage="进水碱度" /><Brief>{rawalkalinity.value}</Brief></Item> */}
                 {/* <Item><FormattedMessage id="setting.water.bucket" defaultMessage="储水桶型号" />
                     <Brief>
                         <div className="item_children">
@@ -450,8 +450,8 @@ class Inlet extends PureComponent{
     //     }
 
     //     if(isvalid){
-    //       const cmd = `$feedph ${iph}%`; // 原水ph 命令
-    //       dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置原水PH',target:{
+    //       const cmd = `$feedph ${iph}%`; // 进水ph 命令
+    //       dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置进水PH',target:{
     //         fieldname:'inwatersettings.rawph',
     //         value:`${this.state.rawph}`
     //       }}));
@@ -460,7 +460,7 @@ class Inlet extends PureComponent{
     //     else{
     //       dispatch(set_weui({
     //         toast:{
-    //         text:'请输入正确的原水ph值',
+    //         text:'请输入正确的进水ph值',
     //         show: true,
     //         type:'warning'
     //       }}));
@@ -470,8 +470,8 @@ class Inlet extends PureComponent{
     //     console.log(this.state.rawconductivity);
     //     const {dispatch} = this.props;
     //     if(this.state.rawconductivity.length > 0){
-    //       const cmd = `$feedcon ${this.state.rawconductivity}%`; // 原水导电率 命令
-    //       dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置原水导电率值',target:{
+    //       const cmd = `$feedcon ${this.state.rawconductivity}%`; // 进水导电率 命令
+    //       dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置进水导电率值',target:{
     //         fieldname:'inwatersettings.rawconductivity',
     //         value:`${this.state.rawconductivity}`
     //       }}));
@@ -480,7 +480,7 @@ class Inlet extends PureComponent{
     //     else{
     //       dispatch(set_weui({
     //         toast:{
-    //         text:'请输入原水导电率值',
+    //         text:'请输入进水导电率值',
     //         show: true,
     //         type:'warning'
     //       }}));
@@ -490,8 +490,8 @@ class Inlet extends PureComponent{
     //     console.log(this.state.rawtds);
     //     const {dispatch} = this.props;
     //     if(this.state.rawtds.length > 0){
-    //       const cmd = `$feedtds ${this.state.rawtds}%`;// 原水tds 命令
-    //       dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置原水TDS值',target:{
+    //       const cmd = `$feedtds ${this.state.rawtds}%`;// 进水tds 命令
+    //       dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置进水TDS值',target:{
     //         fieldname:'inwatersettings.rawtds',
     //         value:`${this.state.rawtds}`
     //       }}));
@@ -500,7 +500,7 @@ class Inlet extends PureComponent{
     //     else{
     //       dispatch(set_weui({
     //         toast:{
-    //         text:'请输入原水TDS值',
+    //         text:'请输入进水TDS值',
     //         show: true,
     //         type:'warning'
     //       }}));
@@ -510,8 +510,8 @@ class Inlet extends PureComponent{
     //     console.log(this.state.rawhardness);
     //     const {dispatch} = this.props;
     //     if(this.state.rawhardness.length > 0){
-    //       const cmd = `$feedca ${this.state.rawhardness}%`; // 原水硬度值 命令
-    //       dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置原水硬度值',target:{
+    //       const cmd = `$feedca ${this.state.rawhardness}%`; // 进水硬度值 命令
+    //       dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置进水硬度值',target:{
     //         fieldname:'inwatersettings.rawhardness',
     //         value:`${this.state.rawhardness}`
     //       }}));
@@ -520,7 +520,7 @@ class Inlet extends PureComponent{
     //     else{
     //       dispatch(set_weui({
     //         toast:{
-    //         text:'请原水硬度值',
+    //         text:'请进水硬度值',
     //         show: true,
     //         type:'warning'
     //       }}));
@@ -530,8 +530,8 @@ class Inlet extends PureComponent{
     //     console.log(this.state.rawalkalinity);
     //     const {dispatch} = this.props;
     //     if(this.state.rawalkalinity.length > 0){
-    //       const cmd = `$feedalk ${this.state.rawalkalinity}%`;// 原水咸度值 命令
-    //       dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置原水咸度值',target:{
+    //       const cmd = `$feedalk ${this.state.rawalkalinity}%`;// 进水咸度值 命令
+    //       dispatch(wifi_sendcmd_request({cmd,cmdstring:'设置进水咸度值',target:{
     //         fieldname:'inwatersettings.rawalkalinity',
     //         value:`${this.state.rawalkalinity}`
     //       }}));
@@ -540,7 +540,7 @@ class Inlet extends PureComponent{
     //     else{
     //       dispatch(set_weui({
     //         toast:{
-    //         text:'请原水咸度值',
+    //         text:'请进水咸度值',
     //         show: true,
     //         type:'warning'
     //       }}));

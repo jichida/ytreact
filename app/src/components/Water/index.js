@@ -19,10 +19,10 @@ const Brief = Item.Brief;
 // 需装增压泵 	booster
 // 卫浴间数量 (个）	bathrooms
 // 是否分流		shunt
-// 原水TDS值(mg/l)	tds
-// 原水导电率(us/cm)	conductivity
-// 原水硬度(ppm)	hardness
-// 原水碱度(ppm)	alkalinity
+// 进水TDS值(mg/l)	tds
+// 进水导电率(us/cm)	conductivity
+// 进水硬度(ppm)	hardness
+// 进水碱度(ppm)	alkalinity
 // ph值		ph
 // 出水TDS值	usertds
 
@@ -136,25 +136,25 @@ const RenderForm = createForm({
                     editable={false}
                     extra="mg/l"
                     {...getFieldProps('tds')}
-                ><FormattedMessage id="water.tds" defaultMessage="原水TDS值" /></InputItem>
+                ><FormattedMessage id="water.tds" defaultMessage="进水TDS值" /></InputItem>
                 <InputItem
                     className="right-input"
                     editable={false}
                     extra="uS/cm"
                     {...getFieldProps('conductivity')}
-                ><FormattedMessage id="water.conductivity" defaultMessage="原水导电率" /></InputItem>
+                ><FormattedMessage id="water.conductivity" defaultMessage="进水导电率" /></InputItem>
                 <InputItem
                     className="right-input"
                     editable={false}
                     extra="ppm"
                     {...getFieldProps('hardness')}
-                ><FormattedMessage id="water.hardness" defaultMessage="原水硬度(ppm)" /></InputItem>
+                ><FormattedMessage id="water.hardness" defaultMessage="进水硬度(ppm)" /></InputItem>
                 <InputItem
                     className="right-input"
                     editable={false}
                     extra="ppm"
                     {...getFieldProps('alkalinity')}
-                ><FormattedMessage id="water.alkalinity" defaultMessage="原水碱度(ppm)" /></InputItem>
+                ><FormattedMessage id="water.alkalinity" defaultMessage="进水碱度(ppm)" /></InputItem>
                 <InputItem
                     className="right-input"
                     editable={false}

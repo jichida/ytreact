@@ -259,7 +259,7 @@
   "water.source.ground": "Ground Water",
   "water.bathrooms": "The number of bathrooms",
   "water.shunt": "Whether to divert",
-  "water.tds": "Original water TDS value",
+  "water.tds": "Inlet water TDS value",
   "water.conductivity": "Inlet water conductivity",
   "water.hardness": "Inlet water hardness (ppm)",
   "water.alkalinity": "Inlet water alkalinity (ppm)",

@@ -229,7 +229,7 @@
   "water.hardness": "Inlet water hardness (ppm)",
   "water.alkalinity": "Inlet water alkalinity (ppm)",
   "water.ph": "PH value",
-  "water.usertds": "Effluent TDS value(mg/l)",
+  "water.usertds": "Effluent TDS value(ppm)",
   "home": "Home",
   "home.show.title_main_outwater_quality":"Fluid water TDS {value}",
   "home.show.title_main_inwater_quality":"Inlet quality {value} ppm",

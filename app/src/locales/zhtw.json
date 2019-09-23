@@ -227,7 +227,7 @@
   "water.hardness": "進水硬度（ppm）",
   "water.alkalinity": "進水鹼度（ppm）",
   "water.ph": "PH值",
-  "water.usertds": "出水TDS值設定值(mg/l)",
+  "water.usertds": "出水TDS值設定值(ppm)",
   "home": "主頁",
   "home.show.title_main_outwater_quality":"出水水質 {value} ppm",
   "home.show.title_main_inwater_quality":"進水水質 {value} ppm",

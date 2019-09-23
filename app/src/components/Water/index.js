@@ -134,7 +134,7 @@ const RenderForm = createForm({
                 <InputItem
                     className="right-input"
                     editable={false}
-                    extra="mg/l"
+                    extra="ppm"
                     {...getFieldProps('tds')}
                 ><FormattedMessage id="water.tds" defaultMessage="进水TDS值" /></InputItem>
                 <InputItem
@@ -163,9 +163,9 @@ const RenderForm = createForm({
                 <InputItem
                     className="right-input"
                     editable={false}
-                    extra="mg/l"
+                    extra="ppm"
                     {...getFieldProps('usertds')}
-                ><FormattedMessage id="water.usertds" defaultMessage="出水TDS值(mg/l)" /></InputItem>
+                ><FormattedMessage id="water.usertds" defaultMessage="出水TDS值(ppm)" /></InputItem>
             </List>
         </form>
         </React.Fragment>

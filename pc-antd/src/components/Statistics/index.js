@@ -12,8 +12,10 @@ import GridContent from '../GridContent';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import './index.less';
+// import lodashget from 'lodash.get'
+import { callthen } from '../../sagas/pagination'
+import { page_getdevice_request, page_getdevice_result} from '../../actions'
 import {getdevicestat_request,getdevicestat_result} from '../../actions';
-import {callthen} from '../../sagas/pagination';
 import sb_icon from '../../assets/sj_icon.png';
 
 const CheckboxGroup = Checkbox.Group
@@ -156,6 +158,7 @@ class Statistics extends React.PureComponent {
     constructor(props) {
       super(props);
       this.state = {
+          curdevice:{},
           cycle: 'hour',
           type: ['ModInOut'],
           rangeDate: [moment().subtract(1, 'days'), moment()],
@@ -175,7 +178,15 @@ class Statistics extends React.PureComponent {
       }
     }
     componentDidMount(){
-      this.onClickQuery();
+        const id = this.props.match.params.id;
+        this.props.dispatch(callthen(page_getdevice_request,page_getdevice_result,{query:{_id:`${id}`}}))
+        .then((result) => {
+            console.log('Get Result:', lodashget(result, 'result.docs[0]', {}))
+            const curdevice = lodashget(result, 'result.docs[0]', {});
+            this.setState({curdevice});
+            this.onClickQuery();
+        })
+
     }
     onClickQuery = (data = {
         cycle:this.state.cycle,
@@ -184,7 +195,7 @@ class Statistics extends React.PureComponent {
         rangeDate:this.state.rangeDate
     })=>{
       data.typelist = ['ModInOut','srvdata.Pressure1','srvdata.WasteVolumeDaily','srvdata.totalVol','srvdata.DailyVolume']
-      const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid') || lodashget(this,'props.curdevice.deviceid');
+      const deviceid = lodashget(this,'state.curdevice.syssettings.deviceid') || lodashget(this,'state.curdevice.deviceid');
       if(!!deviceid){
         console.log('Query:', {deviceid, data})
         this.props.dispatch(callthen(getdevicestat_request,getdevicestat_result,{
@@ -471,8 +482,8 @@ class Statistics extends React.PureComponent {
 
 
     render() {
-        const { history, curdevice } = this.props;
-
+        const { history,  } = this.props;
+        const {curdevice} = this.state;
         const cycles = (
                 _.map(cycleAction, (item, key)=>(
                     <Radio.Button key={key} value={item.action}>{item.name}</Radio.Button>
@@ -549,10 +560,10 @@ class Statistics extends React.PureComponent {
         )
     }
 }
-const mapStateToProps =  ({device:{devices}},props) =>{
-  const curdevice = lodashget(devices,`${props.match.params.id}`,{});
-  console.log(curdevice)
-  return {curdevice};
-};
-Statistics = connect(mapStateToProps)(Statistics);
+// const mapStateToProps =  ({device:{devices}},props) =>{
+//   const curdevice = lodashget(devices,`${props.match.params.id}`,{});
+//   console.log(curdevice)
+//   return {curdevice};
+// };
+Statistics = connect()(Statistics);
 export default withRouter(injectIntl(Statistics));

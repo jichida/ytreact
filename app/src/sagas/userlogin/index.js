@@ -1,4 +1,5 @@
 import { put,takeLatest,select,} from 'redux-saga/effects';
+import lodashMap from 'lodash.map'
 // import {delay} from 'redux-saga';
 import {
   common_err,
@@ -102,9 +103,26 @@ export function* userloginflow() {
                 localStorage.setItem(`ytreact_${config.softmode}_token`,result.token);
 
                 if(config.softmode === 'app'){
+                    let history = []
+                    if(!!localStorage.getItem('login_history')) {
+                      history = JSON.parse(localStorage.getItem('login_history'))
+                      let isLogined = false
+                      lodashMap(history, (item) => {
+                        if(item.username === username) {
+                          isLogined = true
+                        }
+                      })
+                      if(!isLogined) {
+                        history.push({username, password})
+                      }
+                    } else {
+                      history.push({username, password})
+                    }
+                    localStorage.setItem('login_history', JSON.stringify(history))
+
           					if(!!result._id){
           					  //get device
-          					  yield put(getdevice_request({'_id':result._id}));
+                      yield put(getdevice_request({'_id':result._id}));
           					}
                     yield put(app_sendcmd_request({cmd:`$data%`,cmdstring:getintlmessage('constcmd.cmdstring.data')}));
                 }

@@ -286,5 +286,6 @@
   "equipment.elbow": "Elbow",
   "equipment.triplet": "Tee",
   "equipment.silkpair": "Silk pair",
-  "equipment.silkspin": "Silk spin"
+  "equipment.silkspin": "Silk spin",
+  "login.history": "Device Login History"
 }

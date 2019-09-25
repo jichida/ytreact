@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
-import { Flex, WhiteSpace, Button, WingBlank, InputItem, ActionSheet } from 'antd-mobile';
+import { Flex, WhiteSpace, Button, WingBlank, InputItem, ActionSheet, Icon } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import lodashMap from 'lodash.map'
 import { injectIntl, FormattedMessage } from 'react-intl';
 import './index.less';
 import config from '../../env/config';
@@ -39,6 +40,7 @@ class Login extends PureComponent{
       this.state = {
           name: props.username,
           password: props.password,
+          loginHistory: JSON.parse(localStorage.getItem('login_history'))
       };
       // console.log(this.state);
   }
@@ -90,6 +92,36 @@ class Login extends PureComponent{
         });
     }
 
+    showLoginHistory = () => {
+        const { intl } = this.props
+        const { loginHistory } = this.state
+        const loginNames = []
+        lodashMap(loginHistory, (item) => {
+            loginNames.push(item.username)
+        })
+        loginNames.push(intl.formatMessage({id:'form.cancel'}))
+
+        const BUTTONS = loginNames
+
+        ActionSheet.showActionSheetWithOptions({
+          options: BUTTONS,
+          cancelButtonIndex: BUTTONS.length - 1,
+          destructiveButtonIndex: 1,
+          message: intl.formatMessage({id:`login.history`}),
+          maskClosable: true,
+          // wrapProps,
+        },
+        (buttonIndex) => {
+            if(buttonIndex!==BUTTONS.length -1){
+                const { username, password } = loginHistory[buttonIndex]
+                this.setState({
+                    name: username,
+                    password: password
+                })
+            }
+        });
+    }
+
     componentDidMount(){
         console.log(`componentDidMount 账号：${this.state.name}，密码：${this.state.password}`);
 
@@ -123,6 +155,8 @@ class Login extends PureComponent{
                                     onChange={this.handleNameChange}
                                 />
                             </div>
+                            {!!this.state.loginHistory&&<div className="login-load"><Icon type="down" size="large" style={{color: '#fff'}} onClick={this.showLoginHistory} /></div>}
+                            
                         </Flex>
                         <WhiteSpace size="xl" />
                         <Flex justify="start" className="loginform">

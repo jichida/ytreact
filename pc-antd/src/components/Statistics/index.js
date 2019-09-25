@@ -367,6 +367,7 @@ class Statistics extends React.PureComponent {
     getOption = (data)=> {
         const xdata = data.x;
         return ({
+            animation:false,
             title: {
                text: `${data.title}${this.props.intl.formatMessage({id: 'machine.statistic'})}`,// title 数据统计类目
                left: 'center'

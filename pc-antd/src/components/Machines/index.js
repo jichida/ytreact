@@ -35,16 +35,30 @@ class Machines extends React.PureComponent {
                 <Row style={{marginBottom: 5}}>
                     <Col span={24} className="title">
                         <div><img src={sb_icon} alt="" /><span>{this.props.intl.formatMessage({id: 'machine.all'})}</span></div>
-                        <div style={{marginLeft: '10px'}}>
-                            <Popover placement="right" 
-                                content={<div className="show-expire">
-                                    <Button onClick={this.handleShowExpire} className="btn">{this.props.intl.formatMessage({id: 'machine.expire.equip'})}</Button>
-                                </div>}  
-                                trigger="click"
-                            >
-                                <Icon type="down" />
-                            </Popover>
-                        </div>
+                        {JSON.stringify(this.state.query) === '{}' ? 
+                            <div style={{marginLeft: '10px'}}>
+                                <Popover placement="right" 
+                                    content={<div className="show-expire">
+                                        <Button onClick={this.handleShowExpire} className="btn">{this.props.intl.formatMessage({id: 'machine.expire.equip'})}</Button>
+                                    </div>}  
+                                    trigger="hover"
+                                >
+                                    <Icon type="down" />
+                                </Popover>
+                            </div>
+                            :
+                            <div style={{marginLeft: '10px'}}>
+                                <Popover placement="right" 
+                                    content={<div className="show-expire">
+                                        <Button onClick={this.handleShowAll} className="btn">{this.props.intl.formatMessage({id: 'machine.all'})}</Button>
+                                    </div>}  
+                                    trigger="hover"
+                                >
+                                    <Icon type="down" />
+                                </Popover>
+                            </div>
+                        }
+                        
                     </Col>
                 </Row>
                 <DeviceList

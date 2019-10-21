@@ -5,7 +5,8 @@ const config = {
         warringPercent: 10,
     },
     'filterelements_modlife_leftday':{
-        value: 720,
+        // value: 720,
+        value: 180,
         fullPercent: 95,
         warringPercent: 10,
     },

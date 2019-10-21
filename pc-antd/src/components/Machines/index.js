@@ -10,9 +10,22 @@ import sb_icon from '../../assets/sb_icon.png';
 
 class Machines extends React.PureComponent {
 
+    state = {
+        query: {},
+    }
+    
     handleShowExpire = () => {
         // 显示滤芯到期设备
-        console.log('expire')
+       this.setState({
+        query:{isexp:true}
+       })
+    }
+
+    handleShowAll = () => {
+        // 显示滤芯到期设备
+        this.setState({
+            query:{}
+           });
     }
 
     render() {
@@ -35,7 +48,7 @@ class Machines extends React.PureComponent {
                     </Col>
                 </Row>
                 <DeviceList
-                    query={{}}
+                    query={this.state.query}
                 />
                 </Card>
             </GridContent>

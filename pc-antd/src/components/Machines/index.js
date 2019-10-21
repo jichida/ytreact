@@ -26,7 +26,6 @@ class Machines extends React.PureComponent {
                             <Popover placement="right" 
                                 content={<div className="show-expire">
                                     <Button onClick={this.handleShowExpire} className="btn">{this.props.intl.formatMessage({id: 'machine.expire.equip'})}</Button>
-                                    {/* {this.props.intl.formatMessage({id: 'machine.expire.equip'})} */}
                                 </div>}  
                                 trigger="click"
                             >

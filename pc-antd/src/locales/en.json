@@ -32,6 +32,7 @@
 "app.search.curstomer": "Customer Name",
 "app.search.curstomer.input": "Please enter a customer name",
 "app.nodata": "No Data",
+"machine.expire.equip": "Filter expiration",
 "machine.abnormal": "Abnormal",
 "machine.all": "All Devices",
 "machine.all.normal": "all normal devices",

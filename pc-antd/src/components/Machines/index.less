@@ -44,6 +44,9 @@
     padding: 10px 26px;
     background-color: #f4f4f4;
     height: 60px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 
     img {
         margin-right: 10px;
@@ -57,5 +60,15 @@
         display: 'inline-block'; 
         color: '#333333';
         vertical-align: middle;
+    }
+}
+
+.show-expire {
+    &:hover {
+        cursor: pointer;
+    }
+
+    .btn {
+        border: 0;
     }
 }

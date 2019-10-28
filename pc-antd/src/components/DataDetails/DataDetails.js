@@ -73,7 +73,7 @@ const TopMonitor = injectIntl((props)=>{
           {
               title: `${formatMessage({id: 'machine.data.consumption'})}`,//consumption
               unit: 'Gal',
-              data: `${DailyVolume}`,
+              data: `${DailyVolume/1000}`,
           },
           {
               title: `${formatMessage({id: 'machine.data.recovery'})}`,//recovery
@@ -948,11 +948,11 @@ class DataDetails extends React.PureComponent {
             dataIndex: 'Pos_filter3_percent',
             key: 'Pos_filter3_percent',
           },
-          {
-            title: <FormattedMessage id="table.UV" />,
-            dataIndex: 'UV',
-            key: 'UV',
-          },
+          // {
+          //   title: <FormattedMessage id="table.UV" />,
+          //   dataIndex: 'UV',
+          //   key: 'UV',
+          // },
           {
             title: <FormattedMessage id="table.created_at" />,
             dataIndex: 'updated_at',

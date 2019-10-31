@@ -1,5 +1,5 @@
 ﻿import React, { PureComponent } from 'react';
-import { Flex, WingBlank, WhiteSpace } from 'antd-mobile';
+import { Flex, WingBlank, WhiteSpace, Checkbox, Modal } from 'antd-mobile';
 import { connect } from 'react-redux';
 import HomeChart from '../HomeChart';
 import monitorBg from '../../assets/zhuye_an.png';
@@ -20,6 +20,9 @@ import {intl,getintlmessage} from '../../util/globalIntl';
 const CRed = '#ff2728';
 const CGreen = '#3eef7d';
 const CBlue = '#38b4f2';
+
+const AlowItem = Checkbox.CheckboxItem
+const alert = Modal.alert
 
 const getPercent = (id, value, full) => {
     let cf = config[id];
@@ -44,6 +47,13 @@ const getPercent = (id, value, full) => {
 
 class Home extends PureComponent{
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      resetAllow: false
+    }
+  }
+
     handleRefresh = ()=> {
         // refresh
         const cmd = `$data%`;
@@ -54,16 +64,50 @@ class Home extends PureComponent{
     }
 
     onClickCmd = (cmd,cmdstring='设置')=>{
-      const { dispatch, intl } = this.props;
-      dispatch(set_confirm({
-        title: `${intl.formatMessage({id: 'form.confirm'})}`,
-        message: `${cmdstring}?`,
-        text: [`${intl.formatMessage({id: 'form.cancel'})}`, `${intl.formatMessage({id: 'form.ok'})}`],
-        command: wifi_sendcmd_request({cmd,cmdstring})
-      }))
+      const { intl } = this.props;
+      const header = 
+        <div className="reset-alert">
+          <div className="title">{`${intl.formatMessage({id: 'form.confirm'})}`}</div>
+          <div className="allow">
+            <AlowItem
+              className="allow-item" 
+              onChange={() => {
+                console.log('allow:', this.state.resetAllow)
+                this.setState({resetAllow: !this.state.resetAllow})
+              }} 
+            />
+          </div>
+        </div>
 
-      // dispatch(wifi_sendcmd_request({cmd,cmdstring}));
-  }
+      alert(header, `${cmdstring}?`, [
+        {
+          text: `${intl.formatMessage({id: 'form.cancel'})}`,
+          onPress: () => {
+            console.log('cancel')
+          }
+        },
+        {
+          text: `${intl.formatMessage({id: 'form.ok'})}`,
+          onPress: () => {
+            if(this.state.resetAllow) {
+              this.sendCommand(cmd, cmdstring)
+            }
+          }
+        }
+      ])
+    }
+
+  //   onClickCmd = (cmd,cmdstring='设置')=>{
+  //     const { dispatch, intl } = this.props;
+  //     dispatch(set_confirm({
+  //       title: `${intl.formatMessage({id: 'form.confirm'})}`,
+  //       message: `${cmdstring}?`,
+  //       text: [`${intl.formatMessage({id: 'form.cancel'})}`, `${intl.formatMessage({id: 'form.ok'})}`],
+  //       command: wifi_sendcmd_request({cmd,cmdstring})
+  //     }))
+
+  //     // dispatch(wifi_sendcmd_request({cmd,cmdstring}));
+  // }
 
     render () {
       const {intl,homedata,performancedata,isgetdata,devicelist, locale} = this.props;

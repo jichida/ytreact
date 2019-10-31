@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Flex, WingBlank, WhiteSpace, Checkbox, Modal } from 'antd-mobile';
+import { Flex, WingBlank, WhiteSpace } from 'antd-mobile';
 import { connect } from 'react-redux';
 import HomeChart from '../HomeChart';
 // import monitorBg from '../../assets/zhuye_an.png';
@@ -19,9 +19,7 @@ import {getFilterLabel} from '../EquipmentList/config.js';
 import { mainconvertfromfilterlist, filterlistConvertToArray } from '../SettingFilter/config'
 import {getintlmessage} from '../../util/globalIntl';
 import { resolve } from 'path';
-
-const AlowItem = Checkbox.CheckboxItem
-const alert = Modal.alert
+import CustomModal from '../Controls/CustomModal/customHeader'
 
 const CRed = '#ff2728';
 const CGreen = '#3eef7d';
@@ -55,7 +53,8 @@ class Home extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      resetAllow: false
+      resetAllow: false,
+      confirm: false
     }
   }
 
@@ -69,37 +68,49 @@ class Home extends PureComponent {
     }
 
     onClickCmd = (cmd,cmdstring='设置')=>{
-      const { intl } = this.props;
-      const header = 
-        <div className="reset-alert">
-          <div className="title">{`${intl.formatMessage({id: 'form.confirm'})}`}</div>
-          <div className="allow">
-            <AlowItem
-              className="allow-item" 
-              onChange={() => {
-                console.log('allow:', this.state.resetAllow)
-                this.setState({resetAllow: !this.state.resetAllow})
-              }} 
-            />
-          </div>
-        </div>
+      this.setState({
+        cmd,
+        cmdstring,
+        confirm: true
+      })
+      // const { intl } = this.props;
+      // const header = 
+      //   <div className="reset-alert">
+      //     <div className="title">{`${intl.formatMessage({id: 'form.confirm'})}`}</div>
+      //     <div className="allow">
+      //       <AlowItem
+      //         className="allow-item" 
+      //         onChange={() => {
+      //           console.log('allow:', this.state.resetAllow)
+      //           this.setState({resetAllow: !this.state.resetAllow})
+      //         }} 
+      //       />
+      //     </div>
+      //   </div>
+      
+      // const fullcmds = [
+      //       {
+      //         text: `${intl.formatMessage({id: 'form.cancel'})}`,
+      //         onPress: () => {
+      //           console.log('cancel')
+      //         }
+      //       },
+      //       {
+      //         text: `${intl.formatMessage({id: 'form.ok'})}`,
+      //         onPress: () => {
+      //           if(this.state.resetAllow) {
+      //             this.sendCommand(cmd, cmdstring)
+      //           }
+      //         }
+      //       }
+      //     ]
 
-      alert(header, `${cmdstring}?`, [
-        {
-          text: `${intl.formatMessage({id: 'form.cancel'})}`,
-          onPress: () => {
-            console.log('cancel')
-          }
-        },
-        {
-          text: `${intl.formatMessage({id: 'form.ok'})}`,
-          onPress: () => {
-            if(this.state.resetAllow) {
-              this.sendCommand(cmd, cmdstring)
-            }
-          }
-        }
-      ])
+      // alert(header, `${cmdstring}?`, fullcmds)
+    }
+
+    handleConfirm = () => {
+      this.setState({confirm: false})
+      this.sendCommand(this.state.cmd, this.state.cmdstring)
     }
 
     sendCommand = (cmd, cmdstring) => {
@@ -560,7 +571,14 @@ class Home extends PureComponent {
                         </div>
                         
                     </Flex>
-
+                    <CustomModal
+                      title={`${intl.formatMessage({id: 'form.confirm'})}`}
+                      className="confirm"
+                      visible={this.state.confirm}
+                      onCancel={() => this.setState({confirm: false})}
+                      onClose={() => this.setState({confirm: false})}
+                      onSubmit={this.handleConfirm}
+                    >{`${this.state.cmdstring}?`}</CustomModal>
             </React.Fragment>
         )
     }

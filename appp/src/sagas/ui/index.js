@@ -5,6 +5,7 @@ import 'antd-mobile/lib/toast/style/css';        // 加载 CSS
 import Modal from 'antd-mobile/lib/modal';
 import 'antd-mobile/lib/modal/style/css';
 
+
 const alert = Modal.alert;
 
 const popdialog = ({text,type,value})=>{

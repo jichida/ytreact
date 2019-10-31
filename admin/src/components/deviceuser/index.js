@@ -124,31 +124,38 @@ const DeviceuserEdit = (props) => {
           <SelectInput label="前置滤芯1"  source="appdata.filterlist.prev0" choices={[
                 { id: 0, name: '无' },
                 { id: 1, name: 'PP滤芯(30天)' },
-                { id: 2, name: 'PP滤芯(60天)' },
-                { id: 3, name: 'PP滤芯(90天)' }
+                { id: 2, name: 'PP滤芯(90天)' },
+                { id: 3, name: 'PP滤芯(180天)' }
             ]} />
              <SelectInput label="前置滤芯2"  source="appdata.filterlist.prev1" choices={[
                 { id: 0, name: '无' },
-                { id: 1, name: '活性炭(30天)' },
-                { id: 2, name: '活性炭(60天)' }
+                { id: 1, name: '超滤/碳纤维（180天）' },
+                { id: 2, name: '超滤/碳纤维（360天）' },
+                { id: 3, name: '超滤/碳纤维（540天）' }
             ]} />
              <SelectInput label="前置滤芯3"  source="appdata.filterlist.prev2" choices={[
                 { id: 0, name: '无' },
-                { id: 1, name: 'TAC滤芯(180天)' },
-                { id: 2, name: 'TAC滤芯(360天)' }
+                { id: 1, name: 'FOF滤芯（180天）' },
+                { id: 2, name: 'FOF滤芯（360天）' },
+                { id: 3, name: 'FOF滤芯（540天）' },
             ]} />
            <SelectInput label="后置滤芯1"  source="appdata.filterlist.post0" choices={[
                 { id: 0, name: '无' },
-                { id: 1, name: 'LED UVC(180天)' },
-                { id: 2, name: 'LED UVC(360天)' },
-                { id: 3, name: 'LED UVC(540天)' }
+                { id: 1, name: 'AFC滤芯（180天）' },
+                { id: 2, name: 'AFC滤芯（270天）' },
+                { id: 3, name: 'AFC滤芯（360天）' },
             ]} />
             <SelectInput label="后置滤芯2"  source="appdata.filterlist.post1" choices={[
                 { id: 0, name: '无' },
-                { id: 1, name: 'AFC滤芯(180天)' }
+                { id: 1, name: '双道滤芯（180天）' },
+                { id: 2, name: '双道滤芯（270天）' },
+                { id: 3, name: '双道滤芯（360天）' },
             ]} />
              <SelectInput label="后置滤芯3"  source="appdata.filterlist.post2" choices={[
-                { id: 0, name: '无' }
+                { id: 0, name: '无' },
+                { id: 1, name: 'LED UVC（360天）' },
+                { id: 2, name: 'LED UVC（720天）' },
+                { id: 3, name: 'LED UVC（1080天）' }
             ]} />
           <DateInput label="前置1安装日期" source="devicelist.prev0lastchangedate"  />
           <DateInput label="前置2安装日期" source="devicelist.prev1lastchangedate"  />

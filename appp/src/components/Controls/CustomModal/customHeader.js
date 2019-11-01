@@ -31,6 +31,7 @@ const Index = ({visible, className, onClose, onCancel, onSubmit, title, children
 
     const handleSubmit = () => {
         if(allow) {
+            setAllow(false)
             onSubmit()
         }
     }

@@ -35,6 +35,11 @@ const Index = ({visible, className, onClose, onCancel, onSubmit, title, children
         }
     }
 
+    const handleCancel = () => {
+      setAllow(false)
+      onCancel()
+    }
+
     const header = 
         <div className="reset-alert">
           <div className="title">{`${intl.formatMessage({id: 'form.confirm'})}`}</div>
@@ -49,7 +54,7 @@ const Index = ({visible, className, onClose, onCancel, onSubmit, title, children
         </div>
 
     const defaultFooter = [
-      { text: `${footer ? footer[0] : intl.formatMessage({id: 'form.cancel'})}`, onPress: () => { onCancel() } },
+      { text: `${footer ? footer[0] : intl.formatMessage({id: 'form.cancel'})}`, onPress: () => { handleCancel() } },
       { text: `${footer ? footer[1] : intl.formatMessage({id: 'form.ok'})}`, onPress: () => { handleSubmit() } }
     ]
 

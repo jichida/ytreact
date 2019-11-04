@@ -8,6 +8,7 @@ import lodashget from 'lodash.get';
 import lodashmap from 'lodash.map'
 import { FormattedMessage, injectIntl } from 'react-intl';
 import Buckets from '../Buckets';
+import CustomModal from '../Controls/CustomModal/customHeader'
 import {getsurvey_request,getsurvey_result} from '../../actions';
 import {callthen} from '../../sagas/pagination';
 import {importsurvey} from '../../actions';
@@ -246,6 +247,9 @@ class DeviceBasic extends PureComponent{
     constructor(props) {
         super(props);
         initHeight = window.innerHeight;
+        this.state = {
+            confirm: false
+        }
     }
 
     componentDidMount() {
@@ -304,19 +308,28 @@ class DeviceBasic extends PureComponent{
     }
 
     handleLoad = (survey) => {
-        const { intl: { formatMessage }} = this.props
+        // const { intl: { formatMessage }} = this.props
         // 导入调研输入的数据
         console.log(survey)
         //这里要加一个确认弹框？确认内容为：你确实需要导入xx调研吗？导入后会覆盖当前的数据,并且不能恢复。点击确认导入。
-        alert(formatMessage({id: 'device.import.confirm'}), formatMessage({id: 'device.import.warring'}), [
-            { text: formatMessage({id: 'form.cancel'}), onPress: () => console.log('cancel') },
-            { text: formatMessage({id: 'form.ok'}), onPress: () => this.props.dispatch(importsurvey(survey)) },
-        ])
+        // alert(formatMessage({id: 'device.import.confirm'}), formatMessage({id: 'device.import.warring'}), [
+        //     { text: formatMessage({id: 'form.cancel'}), onPress: () => console.log('cancel') },
+        //     { text: formatMessage({id: 'form.ok'}), onPress: () => this.props.dispatch(importsurvey(survey)) },
+        // ])
+        this.setState({
+            survey,
+            confirm: true
+        })
+    }
+
+    handleConfirm = () => {
+        this.setState({confirm: false})
+        this.props.dispatch(importsurvey(this.state.survey))
     }
 
 
     render () {
-        const { history,basicinfo,dispatch}  = this.props;
+        const { history,basicinfo,dispatch, intl: { formatMessage }}  = this.props;
 
         const basicData = {
              username: {
@@ -356,6 +369,14 @@ class DeviceBasic extends PureComponent{
                 >
                 <FormattedMessage id="device.basic" />
                 </NavBar>
+                <CustomModal
+                    title={`${formatMessage({id: 'device.import.confirm'})}`}
+                    className="confirm"
+                    visible={this.state.confirm}
+                    onCancel={() => this.setState({confirm: false})}
+                    onClose={() => this.setState({confirm: false})}
+                    onSubmit={this.handleConfirm}
+                >{`${formatMessage({id: 'device.import.warring'})}?`}</CustomModal>
                 <div className="sub_device_bg">
                     { <RenderForm {...basicData} unit={this.props.unit} onSubmit={this.handleSubmit} dispatch={dispatch}/>}
                 </div>

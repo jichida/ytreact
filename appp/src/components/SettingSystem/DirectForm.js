@@ -7,6 +7,7 @@ import 'moment-timezone';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { common_err, wifi_sendcmd_request, set_confirm } from '../../actions';
 import {getintlmessage,intl} from '../../util/globalIntl';
+import CustomModal from '../Controls/CustomModal/customHeader'
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -102,6 +103,13 @@ const formOptions = {
 
 class Index extends React.Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      confirm: false
+    }
+  }
+
     handleSubmit = (e)=>{
         const { validateFields } = this.props.form;
         validateFields((err, values)=>{
@@ -135,16 +143,33 @@ class Index extends React.Component {
     }
 
     onClickCmd = (cmd,cmdstring='设置',target)=>{
-        const { dispatch, intl } = this.props;
-        const reqobj = !!target ? {cmd,cmdstring,target}:{cmd,cmdstring};
-        dispatch(set_confirm({
-          title: `${intl.formatMessage({id: 'form.confirm'})}`,
-          message: `${cmdstring}?`,
-          text: [`${intl.formatMessage({id: 'form.cancel'})}`, `${intl.formatMessage({id: 'form.ok'})}`],
-          command: wifi_sendcmd_request(reqobj)
-        }))
+      this.setState({
+        cmd,
+        cmdstring,
+        target,
+        confirm: true
+      })
+        // const { dispatch, intl } = this.props;
+        // const reqobj = !!target ? {cmd,cmdstring,target}:{cmd,cmdstring};
+        // dispatch(set_confirm({
+        //   title: `${intl.formatMessage({id: 'form.confirm'})}`,
+        //   message: `${cmdstring}?`,
+        //   text: [`${intl.formatMessage({id: 'form.cancel'})}`, `${intl.formatMessage({id: 'form.ok'})}`],
+        //   command: wifi_sendcmd_request(reqobj)
+        // }))
 
         // dispatch(wifi_sendcmd_request({cmd,cmdstring}));
+    }
+
+    handleConfirm = () => {
+      this.setState({confirm: false})
+      this.sendCommand(this.state.cmd, this.state.cmdstring, this.state.target)
+    }
+
+    sendCommand = (cmd, cmdstring, target) => {
+      const { dispatch } = this.props;
+      const reqobj = !!target ? {cmd,cmdstring,target}:{cmd,cmdstring};
+      dispatch(wifi_sendcmd_request(reqobj));
     }
 
     render () {
@@ -153,6 +178,14 @@ class Index extends React.Component {
 
         return (
         <React.Fragment>
+        <CustomModal
+          title={`${intl.formatMessage({id: 'form.confirm'})}`}
+          className="confirm"
+          visible={this.state.confirm}
+          onCancel={() => this.setState({confirm: false})}
+          onClose={() => this.setState({confirm: false})}
+          onSubmit={this.handleConfirm}
+        >{`${this.state.cmdstring}?`}</CustomModal>
         <form>
             <List>
                 <List.Item className="item_switch"

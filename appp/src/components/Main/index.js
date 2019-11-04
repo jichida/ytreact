@@ -53,7 +53,6 @@ class Home extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      resetAllow: false,
       confirm: false
     }
   }

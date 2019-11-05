@@ -108,7 +108,7 @@ class Index extends React.Component {
         <React.Fragment>
         <form>
             <List>
-                <Item arrow="horizontal"><FormattedMessage id="setting.system.deviceid" defaultMessage="设备编号" />
+                <Item><FormattedMessage id="setting.system.deviceid" defaultMessage="设备编号" />
                     <Brief>
                         <div className="item_children">
                         <InputItem

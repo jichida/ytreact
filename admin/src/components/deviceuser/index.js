@@ -25,7 +25,10 @@ import _ from 'lodash';
 export const DeviceFilter = props => (
     <Filter {...props}>
         <TextInput label="搜索设备id" source="deviceid_q" />
-        <ReferenceInput label="用户" source="creator" reference="user" addLabel={false}>
+        <ReferenceInput label="经销商" source="distributorid" reference="distributor" allowEmpty>
+                <SelectInput optionText="name" />
+        </ReferenceInput>
+        <ReferenceInput label="安装人员" source="installerid" reference="installer" allowEmpty>
            <SelectInput optionText="username" />
        </ReferenceInput>
     </Filter>

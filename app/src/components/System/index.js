@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {  List, InputItem, Button, WingBlank, Switch, Picker, Modal, WhiteSpace } from 'antd-mobile';
+import {  List, InputItem, Button, WingBlank, Switch, Picker, Modal, WhiteSpace, Toast } from 'antd-mobile';
 import { withRouter } from 'react-router-dom';
 import { createForm, createFormField } from 'rc-form';
 import moment from 'moment';
@@ -291,11 +291,16 @@ class SettingSystem extends PureComponent{
         })
     }
 
-    onQualityChange = (val) => {
+    handleQualityChange = (val) => {
         console.log(val);
-        this.setState({
-            quality: val,
-        })
+        if(val < 70) {
+            Toast.fail(`${this.props.intl.formatMessage({id: 'setting.system.minquality'})}`, 1)
+            this.setState({quality: 70})
+        } else {
+            this.setState({
+                quality: val,
+            })
+        }
     }
 
     onQualityClick = () =>{
@@ -303,13 +308,18 @@ class SettingSystem extends PureComponent{
         console.log(this.state.quality);
         //
         if(this.state.quality.length > 0){
-          const {dispatch} = this.props;
-          const cmd = `$sysprodtrigger ${this.state.quality}%`;
-          dispatch(wifi_sendcmd_request({cmd,cmdstring:getintlmessage('constcmd.cmdstring.sysprodtrigger'),target:{
-            fieldname:'syssettings.quality',
-            value:this.state.quality
-          }}));
-          this.onCloseQuality();
+            if(this.state.quality < 70) {
+                Toast.fail(`${this.props.intl.formatMessage({id: 'setting.system.minquality'})}`, 1)
+                this.setState({quality: 70})
+            } else{
+                const {dispatch} = this.props;
+                const cmd = `$sysprodtrigger ${this.state.quality}%`;
+                dispatch(wifi_sendcmd_request({cmd,cmdstring:getintlmessage('constcmd.cmdstring.sysprodtrigger'),target:{
+                    fieldname:'syssettings.quality',
+                    value:this.state.quality
+                }}));
+                this.onCloseQuality();
+            }
         }
     }
 

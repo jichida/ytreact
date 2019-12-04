@@ -141,6 +141,7 @@
   "setting.system.sdate": "Select date",
   "setting.system.stime": "Select time",
   "setting.system.quality": "Water quality (ppm)",
+  "setting.system.minquality": "The minimum quality is 70",
   "setting.system.qualitysetup": "Setup Quality",
   "setting.system.frontfilter1": "Pre-filter 1",
   "setting.system.frontfilter2": "Pre-filter 2",

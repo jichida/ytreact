@@ -141,6 +141,7 @@
   "setting.system.sdate": "选择日期",
   "setting.system.stime": "选择时间",
   "setting.system.quality": "出水水质（ppm)",
+  "setting.system.minquality": "最小出水水质为70",
   "setting.system.qualitysetup": "设置出水水质",
   "setting.system.frontfilter1": "前置滤芯1",
   "setting.system.frontfilter2": "前置滤芯2",

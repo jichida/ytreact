@@ -1039,8 +1039,8 @@ class DataDetails extends React.PureComponent {
 }
 const mapStateToProps =  ({devicedetail:{srvdata, data_spot, dataMode}, userlogin: { is_admin }}, { curdevice}) =>{
   // const curdevice = lodashget(devices,`${props.match.params.id}`,{});
-  console.log(curdevice)
-
+  console.log('curdevice:', curdevice)
+  console.log('srvdata:', srvdata)
   return {curdevice,srvdata, data_spot,dataMode, is_admin};
 };
 DataDetails = connect(mapStateToProps)(DataDetails);

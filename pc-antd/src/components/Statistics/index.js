@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import lodashget from 'lodash.get';
 import lodashmap from 'lodash.map'
+import lodashsoftby from 'lodash.sortby'
 import { Card, Row, Col, DatePicker, Radio, Button, Checkbox } from 'antd';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import ReactEcharts from 'echarts-for-react';
@@ -205,14 +206,33 @@ class Statistics extends React.PureComponent {
             //实时数据，对应this.state.homedata
             // this.setState({homedata:result.homedata});
             this.setState({isGetData: true})
-            console.log(result);
-            let chart = this.converData(result)
-            this.setState({chart, result})
+            console.log('result:', result);
+            const softResult = this.resultParse(result)
+            console.log('soft result:', softResult)
+            let chart = this.converData(softResult)
+            this.setState({chart, result: softResult})
             console.log('Chart:', chart)
         }).catch((err) => {
           console.log(err);
         })
       }
+    }
+
+    resultParse = (result) => {
+        let newResult = []
+        lodashmap(result, (item) => {
+            newResult.push({...item, _id: this.idParse(item._id)})
+        })
+        return lodashsoftby(newResult, item => item._id)
+    }
+
+    idParse = (id) => {
+        let ids = id.split(' ')
+        if(ids[1].length === 1) {
+            return ids[0] + ' ' + '0' + ids[1]
+        } else {
+            return id
+        }
     }
 
 

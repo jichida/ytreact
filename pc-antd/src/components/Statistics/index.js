@@ -227,12 +227,25 @@ class Statistics extends React.PureComponent {
     }
 
     idParse = (id) => {
-        let ids = id.split(' ')
-        if(ids[1].length === 1) {
-            return ids[0] + ' ' + '0' + ids[1]
-        } else {
-            return id
-        }
+		try{		
+			const idsz = id.split(' ');
+			const yymmdd = idsz[0];
+			const hour = idsz.length > 0 ? idsz[1]:'';
+			const yymmddsz = yymmdd.split('-');
+			const yy = yymmddsz.length > 0 ? yymmddsz[0]:'';
+			const mm = yymmddsz.length > 1 ? yymmddsz[1]:'';
+			const dd = yymmddsz.length > 2 ? yymmddsz[2]:'';
+			const yy2 = yy.length > 1?yy:`0${yy}`;
+			const mm2 = mm.length > 1?mm:`0${mm}`;
+			const dd2 = dd.length > 1?dd:`0${dd}`;
+			const hour2 = hour.length > 1?hour:`0${hour}`;
+			return `${yy2}-${mm2}-${dd2} ${hour2}`
+		}
+		catch(e){
+			console.log(e);
+			return id;
+		}
+		
     }
 
 

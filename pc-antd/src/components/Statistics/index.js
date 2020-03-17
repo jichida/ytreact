@@ -238,8 +238,10 @@ class Statistics extends React.PureComponent {
 			const yy2 = yy.length > 1?yy:`0${yy}`;
 			const mm2 = mm.length > 1?mm:`0${mm}`;
 			const dd2 = dd.length > 1?dd:`0${dd}`;
-			const hour2 = hour.length > 1?hour:`0${hour}`;
-			return `${yy2}-${mm2}-${dd2} ${hour2}`
+            const hour2 = hour.length > 1?hour:`0${hour}`;
+            // debugger;
+            const curmoment = moment.tz(`${yy2}-${mm2}-${dd2} ${hour2}:00:00`,'Africa/Abidjan');
+			return curmoment.format('YYYY-MM-DD HH');//`${yy2}-${mm2}-${dd2} ${hour2}`
 		}
 		catch(e){
 			console.log(e);

@@ -157,5 +157,21 @@
 "table.Pos_filter1_percent": "Pos_filter1(%)",
 "table.Pos_filter2_percent": "Pos_filter2(%)",
 "table.Pos_filter3_percent": "Pos_filter3(%)",
-"table.UV": "UV"
+"table.UV": "UV",
+"table.ModRes": "ModRes",
+"table.solredCurrent": "solred Current",
+"table.totalONtime": "total ONtime",
+"table.cYield":"cYield",
+"table.cWasteVolumeDaily":"cWaste Volume Daily",
+"table.IONvol": "IONvol",
+"table.IXMLife": "IXMLife",
+"table.SedimentFilter": "Sediment Filter",
+"table.temp1":"temp 1",
+"table.p1mA": "p1(mA)",
+"table.p2mA": "p2(mA)",
+"table.looptime": "looptime",
+"table.PostFilter": "PostFilter",
+"table.UVFilter": "UVFilter",
+"table.SysPressure": "SysPressure"
+
 }

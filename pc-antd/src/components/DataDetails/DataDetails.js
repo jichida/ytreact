@@ -6,6 +6,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import _ from 'lodash';
 import lodashget from 'lodash.get';
 import lodashmap from 'lodash.map'
+import lodashstartswith from 'lodash.startswith'
 import moment from 'moment';
 import 'moment-timezone';
 import GridContent from '../GridContent';
@@ -567,6 +568,7 @@ class DataDetails extends React.PureComponent {
         const { history, curdevice, is_admin, filterlist } = this.props;
         const { formatMessage } = this.props.intl;
         const tzs = timezoneOption();
+        const deviceid = lodashget(this,'props.curdevice.syssettings.deviceid') || lodashget(this,'props.curdevice.deviceid');
 
         const tzOptions = _.map(tzs, (item,key)=>{
             return (
@@ -948,11 +950,6 @@ class DataDetails extends React.PureComponent {
             dataIndex: 'Pos_filter3_percent',
             key: 'Pos_filter3_percent',
           },
-          // {
-          //   title: <FormattedMessage id="table.UV" />,
-          //   dataIndex: 'UV',
-          //   key: 'UV',
-          // },
           {
             title: <FormattedMessage id="table.created_at" />,
             dataIndex: 'updated_at',
@@ -963,6 +960,200 @@ class DataDetails extends React.PureComponent {
             }
           }
         ]
+
+        const oldColumns = [
+          {
+              title: <FormattedMessage id="table.created_at" />,
+              dataIndex: 'created_at',
+              key: 'created_at'
+            },
+          {
+            title: <FormattedMessage id="table.systime" />,
+            dataIndex: 'systime',
+            key: 'systime'
+          },
+          {
+            title: <FormattedMessage id="table.currentstate" />,
+            dataIndex: 'currentstate',
+            key: 'currentstate'
+          },
+          {
+            title: <FormattedMessage id="table.ModIn" />,
+            dataIndex: 'ModIn',
+            key: 'ModIn'
+          },
+          {
+            title: <FormattedMessage id="table.Concentration" />,
+            dataIndex: 'Concentration',
+            key: 'Concentration'
+          },
+          {
+            title: <FormattedMessage id="table.ModOut" />,
+            dataIndex: 'ModOut',
+            key: 'ModOut'
+          },
+          {
+              title: <FormattedMessage id="table.Ieff" />,
+              dataIndex: 'Ieff',
+              key: 'Ieff'
+          },
+          {
+              title: <FormattedMessage id="table.ModRes" />,
+              dataIndex: 'ModRes',
+              key: 'ModRes'
+          },
+          {
+              title: <FormattedMessage id="table.cutAbs" />,
+              dataIndex: 'cutAbs',
+              key: 'cutAbs'
+          },
+          {
+              title: <FormattedMessage id="table.cutPer" />,
+              dataIndex: 'cutPer',
+              key: 'cutPer'
+          },
+          {
+              title: <FormattedMessage id="table.ModCurrent" />,
+              dataIndex: 'ModCurrent',
+              key: 'ModCurrent'
+          },
+          {
+              title: <FormattedMessage id="table.ModVoltage" />,
+              dataIndex: 'ModVoltage',
+              key: 'ModVoltage'
+          },
+          {
+              title: <FormattedMessage id="table.solredCurrent" />,
+              dataIndex: 'solredCurrent',
+              key: 'solredCurrent'
+          },
+          {
+              title: <FormattedMessage id="table.ProductQualityAverage" />,
+              dataIndex: 'ProductQualityAverage',
+              key: 'ProductQualityAverage'
+          },
+          {
+              title: <FormattedMessage id="table.ONtime" />,
+              dataIndex: 'ONtime',
+              key: 'ONtime'
+          },
+          {
+              title: <FormattedMessage id="table.totalONtime" />,
+              dataIndex: 'totalONtime',
+              key: 'totalONtime'
+          },
+          {
+              title: <FormattedMessage id="table.MODLife" />,
+              dataIndex: 'MODLife',
+              key: 'MODLife'
+          },
+          {
+              title: <FormattedMessage id="table.productDvol" />,
+              dataIndex: 'productDvol',
+              key: 'productDvol'
+          },
+          {
+              title: <FormattedMessage id="table.wasteDvol" />,
+              dataIndex: 'wasteDvol',
+              key: 'wasteDvol'
+          },
+          {
+              title: <FormattedMessage id="table.cYield" />,
+              dataIndex: 'cYield',
+              key: 'cYield'
+          },
+          {
+              title: <FormattedMessage id="table.DailyVolume" />,
+              dataIndex: 'DailyVolume',
+              key: 'DailyVolume'
+          },
+          {
+              title: <FormattedMessage id="table.FeedVolumeDaily" />,
+              dataIndex: 'FeedVolumeDaily',
+              key: 'FeedVolumeDaily'
+          },
+          {
+              title: <FormattedMessage id="table.WasteVolumeDaily" />,
+              dataIndex: 'WasteVolumeDaily',
+              key: 'WasteVolumeDaily'
+          },
+          {
+              title: <FormattedMessage id="table.cWasteVolumeDaily" />,
+              dataIndex: 'cWasteVolumeDaily',
+              key: 'cWasteVolumeDaily'
+          },
+          {
+              title: <FormattedMessage id="table.IONvol" />,
+              dataIndex: 'IONvol',
+              key: 'IONvol'
+          },
+          {
+              title: <FormattedMessage id="table.IXMLife" />,
+              dataIndex: 'IXMLife',
+              key: 'IXMLife'
+          },
+          {
+              title: <FormattedMessage id="table.SedimentFilter" />,
+              dataIndex: 'SedimentFilter',
+              key: 'SedimentFilter'
+          },
+          {
+              title: <FormattedMessage id="table.totalVol" />,
+              dataIndex: 'totalVol',
+              key: 'totalVol'
+          },
+          {
+              title: <FormattedMessage id="table.mYield" />,
+              dataIndex: 'mYield',
+              key: 'mYield'
+          },
+          {
+              title: <FormattedMessage id="table.temp1" />,
+              dataIndex: 'temp1',
+              key: 'temp1'
+          },
+          {
+              title: <FormattedMessage id="table.p1mA" />,
+              dataIndex: 'p1mA',
+              key: 'p1mA'
+          },
+          {
+              title: <FormattedMessage id="table.p2mA" />,
+              dataIndex: 'p2mA',
+              key: 'p2mA'
+          },
+          {
+              title: <FormattedMessage id="table.looptime" />,
+              dataIndex: 'looptime',
+              key: 'looptime'
+          },
+          {
+              title: <FormattedMessage id="table.PostFilter" />,
+              dataIndex: 'PostFilter',
+              key: 'PostFilter'
+          },
+          {
+              title: <FormattedMessage id="table.UVFilter" />,
+              dataIndex: 'UVFilter',
+              key: 'UVFilter'
+          },
+          {
+              title: <FormattedMessage id="table.SysPressure" />,
+              dataIndex: 'SysPressure',
+              key: 'SysPressure'
+          },
+          {
+              title: <FormattedMessage id="table.tmpt2" />,
+              dataIndex: 'tempt2',
+              key: 'tempt2'
+          },
+          {
+              title: <FormattedMessage id="table.tmpt3" />,
+              dataIndex: 'tempt3',
+              key: 'tempt3'
+          }
+      ]
+
         return (
             <GridContent>
                 <Card bordered={false} className="main-card">
@@ -1029,7 +1220,7 @@ class DataDetails extends React.PureComponent {
                 </Row>
                 <Row style={{marginTop: 30, padding: '0 26px'}}>
                     <Col span={24} style={{margin: '0 auto'}}>
-                        <Table columns={is_admin ? adminColumns : customColumns} dataSource={data_spot} scroll={{x: true}} className="data-table-list" pagination={false} />
+                        <Table columns={lodashstartswith(deviceid, 'G1') ? oldColumns : is_admin ? adminColumns : customColumns} dataSource={data_spot} scroll={{x: true}} className="data-table-list" pagination={false} />
                     </Col>
                 </Row>
                 </Card>

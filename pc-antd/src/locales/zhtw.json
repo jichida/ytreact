@@ -157,5 +157,20 @@
 "table.Pos_filter1_percent": "後置1剩餘流量(%)",
 "table.Pos_filter2_percent": "後置2剩餘流量(%)",
 "table.Pos_filter3_percent": "後置3剩餘流量(%)",
-"table.UV": "UV"
+"table.UV": "UV",
+"table.ModRes": "膜電阻",
+"table.solredCurrent": "系統電流",
+"table.totalONtime": "總造水時間",
+"table.cYield":"回收率",
+"table.cWasteVolumeDaily":"今日廢水量",
+"table.IONvol": "REM的流量壽命",
+"table.IXMLife": "REM壽命",
+"table.SedimentFilter": "前置濾芯壽命",
+"table.temp1":"溫度1",
+"table.p1mA": "pump1電流(mA)",
+"table.p2mA": "pump2電流(mA)",
+"table.looptime": "迴圈時間",
+"table.PostFilter": "後置濾芯壽命",
+"table.UVFilter": "UV殺菌壽命",
+"table.SysPressure": "系統壓力"
 }

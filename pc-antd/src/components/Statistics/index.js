@@ -288,6 +288,9 @@ class Statistics extends React.PureComponent {
                 })
             }
         })
+        console.log('data:', data)
+        console.log('type:', type)
+        console.log('result:', chart)
         return chart
     }
 

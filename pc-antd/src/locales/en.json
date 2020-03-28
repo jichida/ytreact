@@ -172,6 +172,10 @@
 "table.looptime": "looptime",
 "table.PostFilter": "PostFilter",
 "table.UVFilter": "UVFilter",
-"table.SysPressure": "SysPressure"
-
+"table.SysPressure": "SysPressure",
+"table.ModIn.G1":"ModIn uS",
+"table.ProductUS":"Product uS",
+"table.ModOut.G1":"ModOut uS",
+"table.T_OPEN":"T_OPEN",
+"table.T_close":"T_close"
 }

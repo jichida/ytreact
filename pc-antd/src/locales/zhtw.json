@@ -172,5 +172,10 @@
 "table.looptime": "迴圈時間",
 "table.PostFilter": "後置濾芯壽命",
 "table.UVFilter": "UV殺菌壽命",
-"table.SysPressure": "系統壓力"
+"table.SysPressure": "系統壓力",
+"table.ModIn.G1":"膜進水口水質",
+"table.ProductUS":"出水水質",
+"table.ModOut.G1":"膜出水口水質",
+"table.T_OPEN":"廢水閥打開時間",
+"table.T_close":"废水阀关闭时间"
 }

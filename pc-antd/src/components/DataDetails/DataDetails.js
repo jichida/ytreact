@@ -649,12 +649,12 @@ class DataDetails extends React.PureComponent {
 
         const customColumns = [
         {
-          title: <FormattedMessage id="table.ModIn" />,
+          title: <FormattedMessage id={curdevice.devicelist&&curdevice.devicelist.host ==='G1'?'table.ModIn.G1':'table.ModIn' }  />,
           dataIndex: 'ModIn',
           key: 'ModIn'
         },
         {
-          title: <FormattedMessage id="table.ModOut" />,
+          title: <FormattedMessage id={curdevice.devicelist&&curdevice.devicelist.host ==='G1'?'table.ModOut.G1':'table.ModOut' } />,
           dataIndex: 'ModOut',
           key: 'ModOut'
         },
@@ -699,7 +699,7 @@ class DataDetails extends React.PureComponent {
           key: 'totalVol'
         },
         {
-          title: <FormattedMessage id="table.Pressure" />,
+          title: <FormattedMessage id={curdevice.devicelist&&curdevice.devicelist.host ==='G1'?'table.SysPressure':'table.Pressure1' } />,
           dataIndex: 'Pressure1',
           key: 'Pressure1'
         },
@@ -731,17 +731,17 @@ class DataDetails extends React.PureComponent {
             key: 'currentstate'
           },
           {
-            title: <FormattedMessage id="table.ModIn" />,
+            title: <FormattedMessage id={curdevice.devicelist&&curdevice.devicelist.host ==='G1'?'table.ModIn.G1':'table.ModIn' } />,
             dataIndex: 'ModIn',
             key: 'ModIn'
           },
           {
-            title: <FormattedMessage id="table.Concentration" />,
+            title: <FormattedMessage id={curdevice.devicelist&&curdevice.devicelist.host ==='G1'?'table.ProductUS':'table.Concentration' } />,
             dataIndex: 'Concentration',
             key: 'Concentration'
           },
           {
-            title: <FormattedMessage id="table.ModOut" />,
+            title: <FormattedMessage id={curdevice.devicelist&&curdevice.devicelist.host ==='G1'?'table.ModOut.G1':'table.ModOut' } />,
             dataIndex: 'ModOut',
             key: 'ModOut'
           },
@@ -841,7 +841,7 @@ class DataDetails extends React.PureComponent {
             key: 'Energy'
           },
           {
-            title: <FormattedMessage id="table.Pressure1" />,
+            title: <FormattedMessage  id={curdevice.devicelist&&curdevice.devicelist.host ==='G1'?'table.SysPressure':'table.Pressure1' } />,
             dataIndex: 'Pressure1',
             key: 'Pressure1'
           },
@@ -886,12 +886,12 @@ class DataDetails extends React.PureComponent {
             key: 'MODLife'
           },
           {
-            title: <FormattedMessage id="table.Pre_filter1" />,
+            title: <FormattedMessage id={curdevice.devicelist&&curdevice.devicelist.host ==='G1'?'table.SedimentFilter':'table.Pre_filter1' } />,
             dataIndex: 'Pre_filter1',
             key: 'Pre_filter1'
           },
           {
-            title: <FormattedMessage id="table.Pre_filter2" />,
+            title: <FormattedMessage id={curdevice.devicelist&&curdevice.devicelist.host ==='G1'?'table.IXMLife':'table.Pre_filter2' } />,
             dataIndex: 'Pre_filter2',
             key: 'Pre_filter2'
           },
@@ -901,12 +901,12 @@ class DataDetails extends React.PureComponent {
             key: 'Pre_filter3'
           },
           {
-            title: <FormattedMessage id="table.Post_filter1" />,
+            title: <FormattedMessage id={curdevice.devicelist&&curdevice.devicelist.host ==='G1'?'table.T_OPEN':'table.Post_filter1' } />,
             dataIndex: 'Post_filter1',
             key: 'Post_filter1'
           },
           {
-            title: <FormattedMessage id="table.Post_filter2" />,
+            title: <FormattedMessage id={curdevice.devicelist&&curdevice.devicelist.host ==='G1'?'table.T_close':'table.Post_filter2' } />,
             dataIndex: 'Post_filter2',
             key: 'Post_filter2'
           },
@@ -978,17 +978,17 @@ class DataDetails extends React.PureComponent {
             key: 'currentstate'
           },
           {
-            title: <FormattedMessage id="table.ModIn" />,
+            title: <FormattedMessage id={curdevice.devicelist&&curdevice.devicelist.host ==='G1'?'table.ModIn.G1':'table.ModIn' } />,
             dataIndex: 'ModIn',
             key: 'ModIn'
           },
           {
-            title: <FormattedMessage id="table.Concentration" />,
+            title: <FormattedMessage  id={curdevice.devicelist&&curdevice.devicelist.host ==='G1'?'table.ProductUS':'table.Concentration' } />,
             dataIndex: 'Concentration',
             key: 'Concentration'
           },
           {
-            title: <FormattedMessage id="table.ModOut" />,
+            title: <FormattedMessage id={curdevice.devicelist&&curdevice.devicelist.host ==='G1'?'table.ModOut.G1':'table.ModOut' }  />,
             dataIndex: 'ModOut',
             key: 'ModOut'
           },

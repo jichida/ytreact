@@ -1220,7 +1220,7 @@ class DataDetails extends React.PureComponent {
                 </Row>
                 <Row style={{marginTop: 30, padding: '0 26px'}}>
                     <Col span={24} style={{margin: '0 auto'}}>
-                        <Table columns={lodashstartswith(deviceid, 'G1') ? oldColumns : customColumns} dataSource={data_spot} scroll={{x: true}} className="data-table-list" pagination={false} />
+                        <Table columns={lodashstartswith(deviceid, 'G1') ? oldColumns : is_admin ? adminColumns : customColumns} dataSource={data_spot} scroll={{x: true}} className="data-table-list" pagination={false} />
                         {/* <Table columns={lodashstartswith(deviceid, 'G1') ? oldColumns : is_admin ? adminColumns : customColumns} dataSource={data_spot} scroll={{x: true}} className="data-table-list" pagination={false} /> */}
                     </Col>
                 </Row>

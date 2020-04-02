@@ -225,7 +225,11 @@ class Statistics extends React.PureComponent {
             let date = new Date(id);
             newResult.push({...item, _id: this.idParse(item._id), _date: date})
         })
-        return lodashsoftby(newResult, item => item._date)
+        if(newResult[0]._date.length>10){
+          return lodashsoftby(newResult, item => item._date)
+        }else{
+          return lodashsoftby(newResult, item => item._id)
+        }
     }
 
     idParse = (id) => {

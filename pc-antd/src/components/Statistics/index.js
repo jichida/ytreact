@@ -222,10 +222,11 @@ class Statistics extends React.PureComponent {
         let newResult = []
         lodashmap(result, (item) => {
             let id = this.idParse(item._id);
-            let date = new Date(id);
+            let date = new Date(id).getTime();
             newResult.push({...item, _id: this.idParse(item._id), _date: date})
         })
-        if(newResult[0]._date.length>10){
+        // 根据id判断是不是日报
+        if(newResult[0]._id.length<10){
           return lodashsoftby(newResult, item => item._date)
         }else{
           return lodashsoftby(newResult, item => item._id)

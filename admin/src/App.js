@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Admin, Resource, ListGuesser } from "react-admin";
+import { Admin, Resource, ListGuesser, Login } from "react-admin";
 
 import dataProvider from './dataProvider.js';
 import authProvider from './authProvider.js';
@@ -35,6 +35,13 @@ import  {SurveyList,SurveyEdit} from './components/survey/index';
 
 const i18nProvider = locale => translations[locale];
 
+const MyLoginPage = () => (
+    <Login
+        // A random image that changes everyday
+        backgroundImage="none"
+        title = "溢泰管理后台"
+    />
+);
 
 class App extends Component {
   render() {
@@ -52,6 +59,7 @@ class App extends Component {
       dashboard = {Dashboard}
       locale = "cn"
       i18nProvider = {i18nProvider}
+      loginPage={MyLoginPage}
       >
       {
         permissions =>{
